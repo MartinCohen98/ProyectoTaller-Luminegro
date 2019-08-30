@@ -1,14 +1,13 @@
 #ifndef SRC_VENTANADEJUEGO_H_
 #define SRC_VENTANADEJUEGO_H_
 
-#include "Renderizador.h"
+#include "Textura.h"
 #include <iostream>
 
 class VentanaDeJuego {
 
 private:
-	int anchoPantalla;
-	int altoPantalla;
+	SDL_Window* ventana;
 
 public:
 	VentanaDeJuego();

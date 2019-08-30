@@ -10,6 +10,8 @@ private:
 
 public:
 	Renderizador(SDL_Window* ventana);
+	SDL_Renderer* get();
+	void renderizar();
 	virtual ~Renderizador();
 };
 
