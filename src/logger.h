@@ -1,3 +1,6 @@
+#ifndef SRC_LOGGER_
+#define SRC_LOGGER_
+
 #include <string>
 
 namespace Logger{
@@ -6,7 +9,6 @@ using namespace std;
 	enum class Severidad{
 		DEBUG,
 		INFO,
-		WARNING,
 		ERROR
 	};
 
@@ -19,11 +21,11 @@ using namespace std;
 		Severidad severidadMinima;
 		string pathLoggeo;
 	public:
-		//Log(Severidad severidadMin, string path);
 		Log(Severidad severidadMin);
 		void Info(string mensaje);
 		void Debug(string mensaje);
-		void Warning(string mensaje);
 		void Error(string mensaje);
 	};
 }
+
+#endif /*SRC_LOGGER_*/
