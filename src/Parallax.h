@@ -21,10 +21,11 @@ class Parallax {
 
     public:
 	   Parallax(Renderizador *renderizador);
-	   int Actualizar(Renderizador *renderizador);
-	   int CargarCapas(const char *path1, const char *path2, const char *path3);
-	   bool ConsultarFin();
-	   void CambiarLimite(int nuevoLimite);
+	   int actualizar(Renderizador *renderizador);
+	   void mover();
+	   int cargarCapas(const char *path1, const char *path2, const char *path3);
+	   bool consultarFin();
+	   void cambiarLimite(int nuevoLimite);
 	   virtual ~Parallax();
 
 };

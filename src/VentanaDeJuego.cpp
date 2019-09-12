@@ -4,7 +4,7 @@ VentanaDeJuego::VentanaDeJuego() {
 	ventana = SDL_CreateWindow("Parallax",
 								SDL_WINDOWPOS_CENTERED,
 								SDL_WINDOWPOS_CENTERED,
-								640, 480,
+								800, 600,
 								0);
 }
 

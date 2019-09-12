@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "VentanaDeJuego.h"
 #include "Renderizador.h"
-#include "Parallax.h"
 #include "Protagonista.h"
 #include <SDL2/SDL.h>
 
@@ -25,30 +24,31 @@ int main () {
 		retorno = ventana.Abrir(&renderizador);
 
 		if(i == 0) {
-			parallax.CargarCapas("assets/images/backgrounds/clouds.bmp",
+			parallax.cargarCapas("assets/images/backgrounds/clouds.bmp",
 								"assets/images/backgrounds/buildings.bmp",
 								"assets/images/backgrounds/terrain.bmp");
-			parallax.CambiarLimite(2442);
+			parallax.cambiarLimite(2442);
 		};
 
 		if(i == 1) {
-			parallax.CargarCapas("assets/images/backgrounds/clouds.bmp",
+			parallax.cargarCapas("assets/images/backgrounds/clouds.bmp",
 								"assets/images/backgrounds/buildings.bmp",
 								"assets/images/backgrounds/terrain2.bmp");
-			parallax.CambiarLimite(1809);
+			parallax.cambiarLimite(1809);
 		};
 
+		parallax.actualizar(&renderizador);
 		while (!salir) {
 			SDL_PollEvent(&evento);
 			switch (evento.type){
 				case SDL_KEYDOWN:
 					switch (evento.key.keysym.sym){
 						case SDLK_RIGHT:
-							parallax.Actualizar(&renderizador);
-							protagonista.CambiarPosicion(&renderizador,5,1);
+							protagonista.avanzar(&parallax);
 							break;
 						case SDLK_LEFT:
 							//Atras
+							protagonista.retroceder();
 							break;
 						case SDLK_UP:
 							//Arriba
@@ -67,8 +67,10 @@ int main () {
 				default:
 					break;
 			}
+			parallax.actualizar(&renderizador);
+			protagonista.actualizar(&renderizador);
 			renderizador.renderizar();
-			salir=parallax.ConsultarFin();
+			salir=parallax.consultarFin();
 			SDL_Delay(16);
 		}
 	}

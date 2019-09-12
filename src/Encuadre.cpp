@@ -11,7 +11,7 @@ SDL_Rect Encuadre::get() {
 	return encuadre;
 }
 
-int Encuadre::Modificar(int desplazamientoX, int desplazamientoY,
+int Encuadre::modificar(int desplazamientoX, int desplazamientoY,
 						int resolucionX, int resolucionY){
 	encuadre = {desplazamientoX, desplazamientoY, resolucionX, resolucionY};
 	return 0;

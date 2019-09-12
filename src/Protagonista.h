@@ -1,10 +1,3 @@
-/*
- * Protagonista.h
- *
- *  Created on: 11 sep. 2019
- *      Author: julio
- */
-
 #ifndef PROTAGONISTA_H_
 #define PROTAGONISTA_H_
 
@@ -12,19 +5,28 @@
 #include "Encuadre.h"
 #include "Textura.h"
 #include "Renderizador.h"
+#include "Parallax.h"
 
 class Protagonista {
 private:
-       int posicionX;
-       int posicionY;
-       Imagen sprite;
-       Encuadre frameActual;
-       Encuadre insercion;
-       Textura textura;
+	int posicionX;
+	int posicionY;
+	int ancho;
+	int alto;
+	Imagen sprite;
+	Encuadre frameActual;
+	Encuadre insercion;
+	Textura textura;
 public:
-       Protagonista(Renderizador *renderizador);
-       int CambiarPosicion(Renderizador *renderizador, int nuevoX, int nuevoY);
-       virtual ~Protagonista();
+	Protagonista(Renderizador *renderizador);
+	int avanzar(Parallax *parallax);
+	void retroceder();
+	int moverEnY(int nuevoY);
+	void actualizar(Renderizador *renderizador);
+	virtual ~Protagonista();
+
+private:
+	void moverEnX(int movimiento);
 };
 
 
