@@ -13,7 +13,7 @@ Protagonista::Protagonista(Renderizador *renderizador){
 	posicionY=120;
 	int resultado = sprite.cargar("assets/images/sprites/jake.bmp");
 	frameActual.Modificar(0,-100,140,300);
-	insercion.Modificar(posicionX,posicionY,140,250);
+	insercion.Modificar(posicionX,posicionY,50,74);
 	textura.texturizar(renderizador,sprite);
 	textura.copiarseEn(renderizador,frameActual,insercion);
 }
