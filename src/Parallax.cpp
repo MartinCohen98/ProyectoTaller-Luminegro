@@ -22,9 +22,9 @@ Parallax::Parallax(Renderizador *renderizador){
 	desplazamientos[0]=0;
 	desplazamientos[1]=0;
 	desplazamientos[2]=0;
-	capas[0].cargar("assets/images/load.png");
-	capas[1].cargar("assets/images/load.png");
-	capas[2].cargar("assets/images/load.png");
+	capas[0].cargar("assets/images/general/load.png");
+	capas[1].cargar("assets/images/general/load.png");
+	capas[2].cargar("assets/images/general/load.png");
 	encuadres[0].Modificar(0,0,resolucionX,resolucionY);
 	encuadres[1].Modificar(0,0,resolucionX,resolucionY);
 	encuadres[2].Modificar(0,0,resolucionX,resolucionY);
