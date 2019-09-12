@@ -11,12 +11,11 @@
 Protagonista::Protagonista(Renderizador *renderizador){
 	posicionX=0;
 	posicionY=120;
-	int result=sprite.cargar("assets/images/sprites/jake.bmp");
+	int resultado = sprite.cargar("assets/images/sprites/jake.bmp");
 	frameActual.Modificar(0,-100,140,300);
 	insercion.Modificar(posicionX,posicionY,140,250);
 	textura.texturizar(renderizador,sprite);
 	textura.copiarseEn(renderizador,frameActual,insercion);
-	renderizador->renderizar();
 }
 
 int Protagonista::CambiarPosicion(Renderizador *renderizador, int nuevoX, int nuevoY){

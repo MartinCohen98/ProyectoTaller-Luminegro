@@ -29,10 +29,10 @@ int main () {
 
 	   VentanaDeJuego ventana;
 	   Renderizador renderizador(ventana.Get());
-	   retorno = ventana.Abrir(&renderizador);
        salir=false;
 	   Parallax parallax(&renderizador);
 	   Protagonista protagonista(&renderizador);
+	   retorno = ventana.Abrir(&renderizador);
 
 
 		   if(i==0) {
@@ -51,14 +51,14 @@ int main () {
 
 
 	   while (!salir) {
-	          SDL_WaitEvent(&evento);
+	          SDL_PollEvent(&evento);
 	          switch (evento.type){
 	               case SDL_KEYDOWN:
 	                	 switch (evento.key.keysym.sym){
 	                         case SDLK_RIGHT:
-	                            parallax.Actualizar(&renderizador);
-	                            protagonista.CambiarPosicion(&renderizador,5,1);
-	                            break;
+	                             parallax.Actualizar(&renderizador);
+	                             protagonista.CambiarPosicion(&renderizador,5,1);
+	                             break;
 	                         case SDLK_LEFT:
 	                        	 //Atras
 	                        	 break;
@@ -74,10 +74,14 @@ int main () {
 	                         case SDLK_x:
 	                        	 //Agacharse
 	                        	 break;
-	                       }
+	                     }
+	                 	 break;
+	                 default:
+	                	 break;
 	           }
 	        renderizador.renderizar();
 	        salir=parallax.ConsultarFin();
+	        SDL_Delay(16);
 	   }
 
 	}

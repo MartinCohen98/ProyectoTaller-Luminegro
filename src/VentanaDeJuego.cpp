@@ -18,9 +18,6 @@ int VentanaDeJuego::Abrir(Renderizador *renderizador) {
         std::cout << "No se pudo crear una ventana\n";
         return -1;
 	}
-
-    bool salir = false;
-    SDL_Event evento;
     renderizador->renderizar();
 
     return 0;
