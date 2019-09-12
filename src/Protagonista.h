@@ -23,7 +23,7 @@ private:
        Textura textura;
 public:
        Protagonista(Renderizador *renderizador);
-       int CambiarPosicion(Renderizador *renderizador,int nuevoX, int nuevoY);
+       int CambiarPosicion(Renderizador *renderizador, int nuevoX, int nuevoY);
        virtual ~Protagonista();
 };
 

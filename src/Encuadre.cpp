@@ -7,23 +7,21 @@
 
 #include "Encuadre.h"
 
-Encuadre::Encuadre(){
+Encuadre::Encuadre() {}
 
+Encuadre::Encuadre(int desplazamientoX, int desplazamientoY,
+				   int resolucionX, int resolucionY){
+	encuadre = {desplazamientoX, desplazamientoY, resolucionX, resolucionY};
 }
 
-Encuadre::Encuadre(int desplazamientoX, int desplazamientoY, int resolucionX, int resolucionY){
-	encuadre = {desplazamientoX,desplazamientoY,resolucionX,resolucionY};
-}
-
-SDL_Rect Encuadre::get(){
+SDL_Rect Encuadre::get() {
 	return encuadre;
 }
 
-int Encuadre::Modificar(int desplazamientoX, int desplazamientoY, int resolucionX, int resolucionY){
-	encuadre = {desplazamientoX,desplazamientoY,resolucionX,resolucionY};
+int Encuadre::Modificar(int desplazamientoX, int desplazamientoY,
+						int resolucionX, int resolucionY){
+	encuadre = {desplazamientoX, desplazamientoY, resolucionX, resolucionY};
 	return 0;
 }
 
-Encuadre::~Encuadre(){
-
-}
+Encuadre::~Encuadre() {}
