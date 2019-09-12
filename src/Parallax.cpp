@@ -1,10 +1,3 @@
-/*
- * Parallax.cpp
- *
- *  Created on: 4 sep. 2019
- *      Author: julio
- */
-
 #include "Parallax.h"
 #include "Textura.h"
 #include "Renderizador.h"

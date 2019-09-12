@@ -1,10 +1,3 @@
-/*
- * Encuadre.h
- *
- *  Created on: 10 sep. 2019
- *      Author: julio
- */
-
 #ifndef ENCUADRE_H_
 #define ENCUADRE_H_
 #include <SDL2/SDL.h>

@@ -23,6 +23,7 @@ int Textura::texturizar(Renderizador* renderizador,Imagen imagen) {
 
 
 Textura::~Textura() {
-	SDL_DestroyTexture(textura);
+	if (textura != NULL)
+		SDL_DestroyTexture(textura);
 }
 

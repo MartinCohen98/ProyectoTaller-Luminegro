@@ -1,10 +1,3 @@
-/*
- * Encuadre.cpp
- *
- *  Created on: 10 sep. 2019
- *      Author: julio
- */
-
 #include "Encuadre.h"
 
 Encuadre::Encuadre() {}

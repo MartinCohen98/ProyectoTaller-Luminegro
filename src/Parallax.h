@@ -1,10 +1,3 @@
-/*
- * Parallax.h
- *
- *  Created on: 4 sep. 2019
- *      Author: julio
- */
-
 #ifndef PARALLAX_H_
 #define PARALLAX_H_
 #include "VentanaDeJuego.h"

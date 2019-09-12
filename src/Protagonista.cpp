@@ -1,10 +1,3 @@
-/*
- * Protagonista.cpp
- *
- *  Created on: 11 sep. 2019
- *      Author: julio
- */
-
 #include "Protagonista.h"
 
 
