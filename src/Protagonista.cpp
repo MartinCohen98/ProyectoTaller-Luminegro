@@ -6,21 +6,26 @@ Protagonista::Protagonista(Renderizador *renderizador){
 	posicionY = 200;
 	ancho = 175;
 	alto = 273;
-	sprite.cargar("assets/images/sprites/jake.bmp");
-	frameActual.modificar(0, 0, 50, 78);
+	estado = new EstadoJugadorFrenado();
+	sprite.cargar("assets/images/sprites/cody.bmp");
 	insercion.modificar(posicionX, posicionY, ancho, alto);
 	textura.texturizar(renderizador, sprite);
-	textura.copiarseEn(renderizador, frameActual, insercion);
+	textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
 }
 
 int Protagonista::avanzar(Parallax *parallax) {
 	int error = 0;
+	estado = estado->avanzar();
 	if (posicionX < 500) {
 		moverEnX(10);
 	} else {
 		parallax->mover();
 	}
 	return error;
+}
+
+void Protagonista::parar() {
+	estado = estado->parar();
 }
 
 void Protagonista::retroceder() {
@@ -37,8 +42,7 @@ int Protagonista::moverEnY(int nuevoY) {
 
 void Protagonista::actualizar(Renderizador *renderizador) {
 	insercion.modificar(posicionX, posicionY, ancho, alto);
-	textura.texturizar(renderizador, sprite);
-	textura.copiarseEn(renderizador, frameActual, insercion);
+	textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
 }
 
 void Protagonista::moverEnX(int movimiento) {
@@ -46,5 +50,5 @@ void Protagonista::moverEnX(int movimiento) {
 }
 
 Protagonista::~Protagonista(){
-
+	delete estado;
 }

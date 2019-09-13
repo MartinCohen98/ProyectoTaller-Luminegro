@@ -65,6 +65,7 @@ int main () {
 					}
 					break;
 				default:
+					protagonista.parar();
 					break;
 			}
 			parallax.actualizar(&renderizador);
