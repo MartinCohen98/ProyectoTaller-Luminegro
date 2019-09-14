@@ -83,7 +83,7 @@ int main () {
 			protagonista.actualizar(&renderizador);
 			renderizador.renderizar();
 			if (!salir)
-				salir = parallax.consultarFin();
+				salir = protagonista.llegoAlFin(&parallax);
 			SDL_Delay(16);
 		}
 	}

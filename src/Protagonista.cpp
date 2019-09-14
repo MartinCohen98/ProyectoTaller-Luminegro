@@ -3,7 +3,7 @@
 
 Protagonista::Protagonista(Renderizador *renderizador){
 	posicionX = 0;
-	posicionY = 200;
+	posicionY = 250;
 	ancho = 140;
 	alto = 280;
 	estado = new EstadoJugadorFrenado();
@@ -21,7 +21,12 @@ int Protagonista::avanzar(Parallax *parallax) {
 	if (posicionX < 500) {
 		moverEnX(10);
 	} else {
-		parallax->mover();
+		if (!parallax->consultarFin()) {
+			parallax->mover();
+		} else {
+			if (posicionX < (800 - ancho))
+				moverEnX(10);
+		}
 	}
 	return error;
 }
@@ -60,6 +65,10 @@ void Protagonista::actualizar(Renderizador *renderizador) {
 
 void Protagonista::moverEnX(int movimiento) {
 	posicionX = posicionX + movimiento;
+}
+
+bool Protagonista::llegoAlFin(Parallax *parallax) {
+	return (parallax->consultarFin() && (posicionX == (800 - ancho)));
 }
 
 Protagonista::~Protagonista(){

@@ -27,6 +27,7 @@ public:
 	void agacharse();
 	int moverEnY(int nuevoY);
 	void actualizar(Renderizador *renderizador);
+	bool llegoAlFin(Parallax *parallax);
 	virtual ~Protagonista();
 
 private:
