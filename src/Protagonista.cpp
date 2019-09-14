@@ -37,9 +37,11 @@ void Protagonista::parar() {
 
 void Protagonista::retroceder() {
 	dadoVuelta = true;
-	estado = estado->avanzar();
 	if (posicionX > 0) {
+		estado = estado->avanzar();
 		moverEnX(-10);
+	} else {
+		estado = estado->parar();
 	}
 }
 
