@@ -14,10 +14,9 @@ int main () {
 	bool salir;
 	SDL_Event evento;
 	int retorno;
+	VentanaDeJuego ventana;
+	Renderizador renderizador(ventana.Get());
 	for (int i = 0; i < 2; i++){
-
-		VentanaDeJuego ventana;
-		Renderizador renderizador(ventana.Get());
 		salir = false;
 		Parallax parallax(&renderizador);
 		Protagonista protagonista(&renderizador);
@@ -79,9 +78,6 @@ int main () {
 				case SDL_QUIT:
 					salir = true;
 					break;
-//				default:
-//					protagonista.parar();
-//					break;
 			}
 			parallax.actualizar(&renderizador);
 			protagonista.actualizar(&renderizador);
