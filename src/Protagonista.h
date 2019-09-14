@@ -25,13 +25,15 @@ public:
 	void parar();
 	void retroceder();
 	void agacharse();
-	int moverEnY(int nuevoY);
+	void subir();
+	void bajar();
 	void actualizar(Renderizador *renderizador);
 	bool llegoAlFin(Parallax *parallax);
 	virtual ~Protagonista();
 
 private:
 	void moverEnX(int movimiento);
+	int moverEnY(int nuevoY);
 };
 
 

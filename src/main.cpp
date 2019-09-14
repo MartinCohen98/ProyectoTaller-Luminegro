@@ -25,14 +25,16 @@ int main () {
 		if(i == 0) {
 			parallax.cargarCapas("assets/images/backgrounds/clouds.bmp",
 								"assets/images/backgrounds/buildings.bmp",
-								"assets/images/backgrounds/terrain.bmp");
+								"assets/images/backgrounds/terrain.bmp",
+								&renderizador);
 			parallax.cambiarLimite(992);
 		};
 
 		if(i == 1) {
 			parallax.cargarCapas("assets/images/backgrounds/clouds.bmp",
 								"assets/images/backgrounds/buildings.bmp",
-								"assets/images/backgrounds/terrain2.bmp");
+								"assets/images/backgrounds/terrain2.bmp",
+								&renderizador);
 			parallax.cambiarLimite(735);
 		};
 
@@ -52,9 +54,11 @@ int main () {
 							break;
 						case SDLK_UP:
 							//Arriba
+							protagonista.subir();
 							break;
 						case SDLK_DOWN:
 							//Abajo
+							protagonista.bajar();
 							break;
 						case SDLK_z:
 							//Saltar
