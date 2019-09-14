@@ -45,6 +45,24 @@ void Protagonista::retroceder() {
 	}
 }
 
+void Protagonista::subir() {
+	if (posicionY > 180) {
+		estado = estado->avanzar();
+		moverEnY(-5);
+	} else {
+		estado = estado->parar();
+	}
+}
+
+void Protagonista::bajar() {
+	if (posicionY < 320) {
+		estado = estado->avanzar();
+		moverEnY(5);
+	} else {
+		estado = estado->parar();
+	}
+}
+
 void Protagonista::agacharse() {
 	estado = estado->agacharse();
 }

@@ -31,7 +31,7 @@ Parallax::Parallax(Renderizador *renderizador) {
 }
 
 int Parallax::actualizar(Renderizador *renderizador) {
-	for (int i=0;i<=2;i++) {
+	for (int i = 0; i <= 2; i++) {
 	    encuadres[i].modificar(desplazamientos[i], 0, 260, 195);
 	    texturas[i].texturizar(renderizador, capas[i]);
         texturas[i].copiarseEn(renderizador, encuadres[i], encuadreFijo);
@@ -40,7 +40,7 @@ int Parallax::actualizar(Renderizador *renderizador) {
 }
 
 void Parallax::mover() {
-	for (int i=0;i<=2;i++) {
+	for (int i = 0; i <= 2; i++) {
 		if (desplazamientos[i] < (limite - 260)) {
 			desplazamientos[i] = desplazamientos[i] + velocidades[i];
 		} else {
@@ -49,10 +49,14 @@ void Parallax::mover() {
 	}
 }
 
-int Parallax::cargarCapas(const char *path1, const char *path2, const char *path3) {
+int Parallax::cargarCapas(const char *path1, const char *path2,
+						const char *path3, Renderizador* renderizador) {
 	capas[0].cargar(path1);
 	capas[1].cargar(path2);
 	capas[2].cargar(path3);
+	for (int i = 0; i <= 2; i++) {
+	    texturas[i].texturizar(renderizador, capas[i]);
+	}
 	return 0;
 }
 
