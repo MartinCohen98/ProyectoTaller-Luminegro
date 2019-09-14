@@ -9,9 +9,9 @@ Parallax::Parallax(Renderizador *renderizador) {
 	resolucionX = 800;
 	resolucionY = 600;
 	limite = 0;
-	velocidades[0] = 2;
-	velocidades[1] = 3;
-	velocidades[2] = 7;
+	velocidades[0] = 1;
+	velocidades[1] = 2;
+	velocidades[2] = 4;
 	desplazamientos[0] = 0;
 	desplazamientos[1] = 0;
 	desplazamientos[2] = 0;
