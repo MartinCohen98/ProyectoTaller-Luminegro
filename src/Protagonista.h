@@ -14,6 +14,7 @@ private:
 	int posicionY;
 	int ancho;
 	int alto;
+	bool dadoVuelta;
 	EstadoJugador* estado;
 	Imagen sprite;
 	Encuadre insercion;
@@ -23,6 +24,7 @@ public:
 	int avanzar(Parallax *parallax);
 	void parar();
 	void retroceder();
+	void agacharse();
 	int moverEnY(int nuevoY);
 	void actualizar(Renderizador *renderizador);
 	virtual ~Protagonista();

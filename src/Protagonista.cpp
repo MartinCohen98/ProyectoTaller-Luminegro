@@ -4,9 +4,10 @@
 Protagonista::Protagonista(Renderizador *renderizador){
 	posicionX = 0;
 	posicionY = 200;
-	ancho = 175;
-	alto = 273;
+	ancho = 140;
+	alto = 280;
 	estado = new EstadoJugadorFrenado();
+	dadoVuelta = false;
 	sprite.cargar("assets/images/sprites/cody.bmp");
 	insercion.modificar(posicionX, posicionY, ancho, alto);
 	textura.texturizar(renderizador, sprite);
@@ -14,6 +15,7 @@ Protagonista::Protagonista(Renderizador *renderizador){
 }
 
 int Protagonista::avanzar(Parallax *parallax) {
+	dadoVuelta = false;
 	int error = 0;
 	estado = estado->avanzar();
 	if (posicionX < 500) {
@@ -29,9 +31,15 @@ void Protagonista::parar() {
 }
 
 void Protagonista::retroceder() {
+	dadoVuelta = true;
+	estado = estado->avanzar();
 	if (posicionX > 0) {
 		moverEnX(-10);
 	}
+}
+
+void Protagonista::agacharse() {
+	estado = estado->agacharse();
 }
 
 int Protagonista::moverEnY(int nuevoY) {
@@ -42,7 +50,12 @@ int Protagonista::moverEnY(int nuevoY) {
 
 void Protagonista::actualizar(Renderizador *renderizador) {
 	insercion.modificar(posicionX, posicionY, ancho, alto);
-	textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
+	if (!dadoVuelta) {
+		textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
+	} else {
+		textura.copiarseInvertidoEn(renderizador,
+					estado->obtenerSprite(), insercion);
+	}
 }
 
 void Protagonista::moverEnX(int movimiento) {

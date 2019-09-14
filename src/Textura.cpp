@@ -8,11 +8,21 @@ Textura::Textura(Renderizador* renderizador, Imagen imagen) {
 				textura = SDL_CreateTextureFromSurface(renderizador->get(), imagen.get());
 }
 
-void Textura::copiarseEn(Renderizador* renderizador,Encuadre encuadre,Encuadre encuadreFijo) {
+void Textura::copiarseEn(Renderizador* renderizador, Encuadre encuadre,
+						Encuadre encuadreFijo) {
 	SDL_Rect e,ef;
 	e = encuadre.get();
 	ef = encuadreFijo.get();
-	SDL_RenderCopy(renderizador->get(),textura,&e,&ef);
+	SDL_RenderCopy(renderizador->get(), textura, &e, &ef);
+}
+
+void Textura::copiarseInvertidoEn(Renderizador* renderizador, Encuadre encuadre,
+									Encuadre encuadreFijo) {
+	SDL_Rect e,ef;
+	e = encuadre.get();
+	ef = encuadreFijo.get();
+	SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
+	SDL_RenderCopyEx(renderizador->get(), textura, &e, &ef, 0, NULL, flip);
 }
 
 int Textura::texturizar(Renderizador* renderizador,Imagen imagen) {

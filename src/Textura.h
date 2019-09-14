@@ -15,7 +15,10 @@ private:
 public:
 	Textura();
 	Textura(Renderizador* renderizador, Imagen imagen);
-	void copiarseEn(Renderizador* renderizador,Encuadre encuadre,Encuadre encuadreFijo );
+	void copiarseEn(Renderizador* renderizador, Encuadre encuadre,
+					Encuadre encuadreFijo);
+	void copiarseInvertidoEn(Renderizador* renderizador, Encuadre encuadre,
+							Encuadre encuadreFijo);
 	int texturizar(Renderizador* renderizador, Imagen imagen);
 	virtual ~Textura();
 };

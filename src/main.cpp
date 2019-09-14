@@ -18,7 +18,7 @@ int main () {
 
 		VentanaDeJuego ventana;
 		Renderizador renderizador(ventana.Get());
-		salir=false;
+		salir = false;
 		Parallax parallax(&renderizador);
 		Protagonista protagonista(&renderizador);
 		retorno = ventana.Abrir(&renderizador);
@@ -27,14 +27,14 @@ int main () {
 			parallax.cargarCapas("assets/images/backgrounds/clouds.bmp",
 								"assets/images/backgrounds/buildings.bmp",
 								"assets/images/backgrounds/terrain.bmp");
-			parallax.cambiarLimite(2442);
+			parallax.cambiarLimite(992);
 		};
 
 		if(i == 1) {
 			parallax.cargarCapas("assets/images/backgrounds/clouds.bmp",
 								"assets/images/backgrounds/buildings.bmp",
 								"assets/images/backgrounds/terrain2.bmp");
-			parallax.cambiarLimite(1809);
+			parallax.cambiarLimite(735);
 		};
 
 		parallax.actualizar(&renderizador);
@@ -44,6 +44,7 @@ int main () {
 				case SDL_KEYDOWN:
 					switch (evento.key.keysym.sym){
 						case SDLK_RIGHT:
+							//Avanzar
 							protagonista.avanzar(&parallax);
 							break;
 						case SDLK_LEFT:
@@ -61,17 +62,32 @@ int main () {
 							break;
 						case SDLK_x:
 							//Agacharse
+							protagonista.agacharse();
+							break;
+						case SDLK_c:
+							//Pegar
+							break;
+						case SDLK_ESCAPE:
+							//Salir
+							salir = true;
 							break;
 					}
 					break;
-				default:
+				case SDL_KEYUP:
 					protagonista.parar();
 					break;
+				case SDL_QUIT:
+					salir = true;
+					break;
+//				default:
+//					protagonista.parar();
+//					break;
 			}
 			parallax.actualizar(&renderizador);
 			protagonista.actualizar(&renderizador);
 			renderizador.renderizar();
-			salir=parallax.consultarFin();
+			if (!salir)
+				salir = parallax.consultarFin();
 			SDL_Delay(16);
 		}
 	}

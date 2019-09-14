@@ -20,6 +20,11 @@ EstadoJugador* EstadoJugadorAvanzando::avanzar() {
 	return (this);
 }
 
+EstadoJugador* EstadoJugadorAvanzando::agacharse() {
+	delete this;
+	return (new EstadoJugadorAgachado());
+}
+
 void EstadoJugadorAvanzando::cambiarFrame() {
 	if (numeroDeFrame == 5) {
 		numeroDeFrame = 0;

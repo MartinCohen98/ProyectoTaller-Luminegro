@@ -14,4 +14,8 @@ EstadoJugador* EstadoJugador::parar() {
 	return NULL;
 }
 
+EstadoJugador* EstadoJugador::agacharse() {
+	return NULL;
+}
+
 EstadoJugador::~EstadoJugador() {}
