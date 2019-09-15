@@ -16,7 +16,7 @@ int main () {
 	int retorno;
 	VentanaDeJuego ventana;
 	Renderizador renderizador(ventana.Get());
-	for (int i = 0; i < 1; i++){
+	for (int i = 0; i < 2; i++){
 		salir = false;
 		Parallax parallax(&renderizador);
 		Protagonista protagonista(&renderizador);

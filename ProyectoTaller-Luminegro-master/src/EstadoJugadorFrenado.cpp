@@ -13,5 +13,10 @@ EstadoJugador* EstadoJugadorFrenado::avanzar() {
 	return (new EstadoJugadorAvanzando());
 }
 
+EstadoJugador* EstadoJugadorFrenado::agacharse() {
+	delete this;
+	return (new EstadoJugadorAgachado());
+}
+
 EstadoJugadorFrenado::~EstadoJugadorFrenado() {}
 

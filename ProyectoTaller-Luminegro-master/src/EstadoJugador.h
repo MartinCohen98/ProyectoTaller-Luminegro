@@ -10,6 +10,7 @@ public:
 	Encuadre obtenerSprite();
 	virtual EstadoJugador* avanzar();
 	virtual EstadoJugador* parar();
+	virtual EstadoJugador* agacharse();
 	virtual ~EstadoJugador();
 
 protected:
