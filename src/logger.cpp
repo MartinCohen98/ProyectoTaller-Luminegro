@@ -27,11 +27,6 @@ namespace Logger{
 			this->loggear(mensaje, "INFO");
 	}
 
-	void Log::Warning(string mensaje){
-		if(this->severidadMinima <= Severidad::WARNING)
-			this->loggear(mensaje, "WARNING");
-	}
-
 	void Log::Error(string mensaje){
 		if(this->severidadMinima <= Severidad::ERROR)
 			this->loggear(mensaje, "ERROR");

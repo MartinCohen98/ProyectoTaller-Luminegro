@@ -6,11 +6,10 @@ using namespace std;
 	enum class Severidad{
 		DEBUG,
 		INFO,
-		WARNING,
 		ERROR
 	};
 
-	//static const char* SeveridadStr[] = {"DEBUG", "INFO", "WARNING","ERROR"};
+	//static const char* SeveridadStr[] = {"DEBUG", "INFO", "ERROR"};
 
 
 	class Log{
@@ -23,7 +22,6 @@ using namespace std;
 		Log(Severidad severidadMin);
 		void Info(string mensaje);
 		void Debug(string mensaje);
-		void Warning(string mensaje);
 		void Error(string mensaje);
 	};
 }
