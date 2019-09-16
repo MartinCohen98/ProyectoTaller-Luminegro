@@ -7,6 +7,7 @@
 #include "Parallax.h"
 #include "EstadoJugador.h"
 #include "EstadoJugadorFrenado.h"
+#include "../lib/pugixml/pugixml.hpp"
 
 class Protagonista {
 private:
@@ -19,8 +20,10 @@ private:
 	Imagen sprite;
 	Encuadre insercion;
 	Textura textura;
+    pugi::xml_document *archiConfig;
+
 public:
-	Protagonista(Renderizador *renderizador);
+	Protagonista(Renderizador *renderizador, pugi::xml_document *archiConfig);
 	int avanzar(Parallax *parallax);
 	void parar();
 	void retroceder();

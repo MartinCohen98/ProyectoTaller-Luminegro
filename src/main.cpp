@@ -39,7 +39,7 @@ int main () {
 	for (int i = 1; i <= 2; i++){
 		salir = false;
 		Parallax parallax(&renderizador);
-		Protagonista protagonista(&renderizador);
+		Protagonista protagonista(&renderizador, &archiConfig);
 		retorno = ventana.Abrir(&renderizador);
 
         std::string nivelNodeName = "nivel";

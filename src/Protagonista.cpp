@@ -1,17 +1,24 @@
 #include "Protagonista.h"
 
 
-Protagonista::Protagonista(Renderizador *renderizador){
+Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archiConfig){
 	posicionX = 0;
 	posicionY = 250;
 	ancho = 140;
 	alto = 280;
 	estado = new EstadoJugadorFrenado();
 	dadoVuelta = false;
-	sprite.cargar("assets/images/sprites/cody.bmp");
+
+	// Leo del XML la ubicación del BMP del protagonista
+    std::string protagonistaBMPPath = archiConfig->child("configuracion").child("escenario")
+            .child("protagonista").child_value("imagen");
+
+	sprite.cargar( protagonistaBMPPath.data() );
+
 	insercion.modificar(posicionX, posicionY, ancho, alto);
 	textura.texturizar(renderizador, sprite);
 	textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
+	this->archiConfig = archiConfig;
 }
 
 int Protagonista::avanzar(Parallax *parallax) {
