@@ -1,3 +1,6 @@
+#ifndef SRC_LOGGER_H_
+#define SRC_LOGGER_H_
+
 #include <string>
 
 namespace Logger{
@@ -25,3 +28,5 @@ using namespace std;
 		void Error(string mensaje);
 	};
 }
+
+#endif /* SRC_LOGGER_H_ */
