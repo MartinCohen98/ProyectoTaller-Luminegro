@@ -3,19 +3,39 @@
 #include "Renderizador.h"
 #include "Protagonista.h"
 #include <SDL2/SDL.h>
-
+#include "../lib/pugixml/pugixml.hpp"
+#include <iostream>
+#include "logger.h"
 
 
 int main () {
-	if(SDL_Init(SDL_INIT_VIDEO) < 0) {
-		std::cout << "No se pudo iniciar SDL2 correctamente\n";
-		return -1;
-	}
-	bool salir;
+    // Cargar un archivo de configuración específico
+    pugi::xml_document archiConfig;
+    pugi::xml_parse_result archiConfigCarga = archiConfig.load_file("config/repiola.xml");
+
+    // Si no pudo cargar el archivo específico, cargar el predeterminado
+    if (archiConfigCarga.status != 0) {
+        pugi::xml_parse_result archiConfigCarga = archiConfig.load_file("config/default.xml");
+    }
+
+    // Leer el nivel de logueo
+    std::string logLevel = archiConfig.child("configuracion").child("log").child_value("level");
+
+    Logger::Log logueador(logLevel);
+
+    if(SDL_Init(SDL_INIT_VIDEO) < 0) {
+        logueador.Error("No se pudo iniciar SDL2 correctamente");
+        return -1;
+    }
+
+    logueador.Info("Ejecutando el main.cpp");
+
+    bool salir;
 	SDL_Event evento;
 	int retorno;
 	VentanaDeJuego ventana;
 	Renderizador renderizador(ventana.Get());
+
 	for (int i = 0; i < 2; i++){
 		salir = false;
 		Parallax parallax(&renderizador);
