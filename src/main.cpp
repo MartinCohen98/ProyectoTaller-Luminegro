@@ -45,13 +45,14 @@ int main () {
         std::string nivelNodeName = "nivel";
         nivelNodeName.append( std::to_string(i) );
 
-        std::string nubesPath = archiConfig.child("configuracion").child("escenario")
+        // Leo del XML la ubicación de los BMPs de los fondos y el ancho del terreno
+        std::string nubesBMPPath = archiConfig.child("configuracion").child("escenario")
                 .child("niveles").child( nivelNodeName.data() ).child_value("nubes");
 
-        std::string edificiosPath = archiConfig.child("configuracion").child("escenario")
+        std::string edificiosBMPPath = archiConfig.child("configuracion").child("escenario")
                 .child("niveles").child( nivelNodeName.data() ).child_value("edificios");
 
-        std::string terrenoPath = archiConfig.child("configuracion").child("escenario")
+        std::string terrenoBMPPath = archiConfig.child("configuracion").child("escenario")
                 .child("niveles").child( nivelNodeName.data() ).child_value("terreno");
 
         std::string terrenoWidthString = archiConfig.child("configuracion").child("escenario")
@@ -59,9 +60,9 @@ int main () {
 
         int terrenoWidth = std::stoi(terrenoWidthString);
 
-        parallax.cargarCapas(nubesPath.data(),
-                             edificiosPath.data(),
-                             terrenoPath.data(),
+        parallax.cargarCapas(nubesBMPPath.data(),
+                             edificiosBMPPath.data(),
+                             terrenoBMPPath.data(),
                              &renderizador);
 
         parallax.cambiarLimite(terrenoWidth);
