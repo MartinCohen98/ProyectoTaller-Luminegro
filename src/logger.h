@@ -19,7 +19,7 @@ using namespace std;
 		string pathLoggeo;
 	public:
 		//Log(Severidad severidadMin, string path);
-		Log(Severidad severidadMin);
+		Log(const string severidadMin);
 		void Info(string mensaje);
 		void Debug(string mensaje);
 		void Error(string mensaje);
