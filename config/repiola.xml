@@ -1,7 +1,7 @@
 <configuracion>
-    <debug>
-        <level>ERROR</level>
-    </debug>
+    <log>
+        <level>DEBUG</level>
+    </log>
     <escenario>
         <protagonista>
             <imagen>assets/images/sprites/cody.bmp</imagen>
