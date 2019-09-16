@@ -36,6 +36,7 @@
                 <nubes>assets/images/backgrounds/clouds.bmp</nubes>
                 <edificios>assets/images/backgrounds/buildings.bmp</edificios>
                 <terreno>assets/images/backgrounds/terrain.bmp</terreno>
+                <terrenoWidth>992</terrenoWidth>
                 <objeto>
                     <tipo>barril</tipo>
                     <cantidad>3</cantidad>
@@ -57,6 +58,7 @@
                 <nubes>assets/images/backgrounds/clouds.bmp</nubes>
                 <edificios>assets/images/backgrounds/buildings.bmp</edificios>
                 <terreno>assets/images/backgrounds/terrain2.bmp</terreno>
+                <terrenoWidth>735</terrenoWidth>
                 <objeto>
                     <tipo>barril</tipo>
                     <cantidad>2</cantidad>

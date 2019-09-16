@@ -15,7 +15,7 @@ int main () {
 
     // Si no pudo cargar el archivo específico, cargar el predeterminado
     if (archiConfigCarga.status != 0) {
-        pugi::xml_parse_result archiConfigCarga = archiConfig.load_file("config/default.xml");
+        archiConfigCarga = archiConfig.load_file("config/default.xml");
     }
 
     // Leer el nivel de logueo
@@ -36,29 +36,38 @@ int main () {
 	VentanaDeJuego ventana;
 	Renderizador renderizador(ventana.Get());
 
-	for (int i = 0; i < 2; i++){
+	for (int i = 1; i <= 2; i++){
 		salir = false;
 		Parallax parallax(&renderizador);
 		Protagonista protagonista(&renderizador);
 		retorno = ventana.Abrir(&renderizador);
 
-		if(i == 0) {
-			parallax.cargarCapas("assets/images/backgrounds/clouds.bmp",
-								"assets/images/backgrounds/buildings.bmp",
-								"assets/images/backgrounds/terrain.bmp",
-								&renderizador);
-			parallax.cambiarLimite(992);
-		};
+        std::string nivelNodeName = "nivel";
+        nivelNodeName.append( std::to_string(i) );
 
-		if(i == 1) {
-			parallax.cargarCapas("assets/images/backgrounds/clouds.bmp",
-								"assets/images/backgrounds/buildings.bmp",
-								"assets/images/backgrounds/terrain2.bmp",
-								&renderizador);
-			parallax.cambiarLimite(735);
-		};
+        std::string nubesPath = archiConfig.child("configuracion").child("escenario")
+                .child("niveles").child( nivelNodeName.data() ).child_value("nubes");
+
+        std::string edificiosPath = archiConfig.child("configuracion").child("escenario")
+                .child("niveles").child( nivelNodeName.data() ).child_value("edificios");
+
+        std::string terrenoPath = archiConfig.child("configuracion").child("escenario")
+                .child("niveles").child( nivelNodeName.data() ).child_value("terreno");
+
+        std::string terrenoWidthString = archiConfig.child("configuracion").child("escenario")
+                .child("niveles").child( nivelNodeName.data() ).child_value("terrenoWidth");
+
+        int terrenoWidth = std::stoi(terrenoWidthString);
+
+        parallax.cargarCapas(nubesPath.data(),
+                             edificiosPath.data(),
+                             terrenoPath.data(),
+                             &renderizador);
+
+        parallax.cambiarLimite(terrenoWidth);
 
 		parallax.actualizar(&renderizador);
+
 		while (!salir) {
 			SDL_PollEvent(&evento);
 			switch (evento.type){
