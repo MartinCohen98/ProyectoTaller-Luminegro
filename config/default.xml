@@ -33,9 +33,9 @@
         </objetos>
         <niveles>
             <nivel1>
-                <fondo1>assets/images/backgrounds/clouds.bmp</fondo1>
-                <fondo2>assets/images/backgrounds/buildings.bmp</fondo2>
-                <fondo3>assets/images/backgrounds/terrain.bmp</fondo3>
+                <nubes>assets/images/backgrounds/clouds.bmp</nubes>
+                <edificios>assets/images/backgrounds/buildings.bmp</edificios>
+                <terreno>assets/images/backgrounds/terrain.bmp</terreno>
                 <objeto>
                     <tipo>barril</tipo>
                     <cantidad>3</cantidad>
@@ -54,9 +54,9 @@
                 </objeto>
             </nivel1>
             <nivel2>
-                <fondo1>assets/images/backgrounds/clouds.bmp</fondo1>
-                <fondo2>assets/images/backgrounds/buildings.bmp</fondo2>
-                <fondo3>assets/images/backgrounds/terrain2.bmp</fondo3>
+                <nubes>assets/images/backgrounds/clouds.bmp</nubes>
+                <edificios>assets/images/backgrounds/buildings.bmp</edificios>
+                <terreno>assets/images/backgrounds/terrain2.bmp</terreno>
                 <objeto>
                     <tipo>barril</tipo>
                     <cantidad>1</cantidad>
