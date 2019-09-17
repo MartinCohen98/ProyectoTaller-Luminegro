@@ -3,7 +3,9 @@
 EstadoJugadorAvanzando::EstadoJugadorAvanzando() {
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;
-	frameActual.modificar(0, 0, 50, 100);
+	alto = 100;
+	ancho = 50;
+	frameActual.modificar(0, 0, ancho, alto);
 }
 
 EstadoJugador* EstadoJugadorAvanzando::parar() {
@@ -36,9 +38,8 @@ void EstadoJugadorAvanzando::cambiarFrame() {
 	} else {
 		numeroDeFrame++;
 	}
-	frameActual.modificar((50 * numeroDeFrame), 0, 50, 100);
+	frameActual.modificar((50 * numeroDeFrame), 0, ancho, alto);
 }
 
-EstadoJugadorAvanzando::~EstadoJugadorAvanzando() {
-}
+EstadoJugadorAvanzando::~EstadoJugadorAvanzando() {}
 

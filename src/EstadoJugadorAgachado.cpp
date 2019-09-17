@@ -1,7 +1,9 @@
 #include "EstadoJugadorAgachado.h"
 
 EstadoJugadorAgachado::EstadoJugadorAgachado() {
-	frameActual.modificar(100, 100, 50, 100);
+	alto = 100;
+	ancho = 50;
+	frameActual.modificar(100, 100, ancho, alto);
 }
 
 EstadoJugador* EstadoJugadorAgachado::parar() {

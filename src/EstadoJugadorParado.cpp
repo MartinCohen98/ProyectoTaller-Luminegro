@@ -1,7 +1,9 @@
 #include "EstadoJugadorParado.h"
 
 EstadoJugadorParado::EstadoJugadorParado() {
-	frameActual.modificar(0, 100, 50, 100);
+	alto = 100;
+	ancho = 50;
+	frameActual.modificar(0, 100, ancho, alto);
 }
 
 EstadoJugador* EstadoJugadorParado::parar() {
@@ -20,7 +22,7 @@ EstadoJugador* EstadoJugadorParado::agacharse() {
 
 EstadoJugador* EstadoJugadorParado::pegar() {
 	delete this;
-	return (new EstadoJugadorParado());
+	return (new EstadoJugadorPegando());
 }
 
 EstadoJugadorParado::~EstadoJugadorParado() {}

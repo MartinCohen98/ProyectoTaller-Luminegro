@@ -4,8 +4,7 @@
 Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archiConfig){
 	posicionX = 0;
 	posicionY = 250;
-	ancho = 140;
-	alto = 280;
+	escalado = 3;
 	estado = new EstadoJugadorParado();
 	dadoVuelta = false;
 
@@ -15,7 +14,9 @@ Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archi
 
 	sprite.cargar( protagonistaBMPPath.data() );
 
-	insercion.modificar(posicionX, posicionY, ancho, alto);
+	insercion.modificar(posicionX, posicionY,
+			(estado->obtenerAncho() * escalado),
+			(estado->obtenerAlto() * escalado));
 	textura.texturizar(renderizador, sprite);
 	textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
 	this->archiConfig = archiConfig;
@@ -31,7 +32,7 @@ int Protagonista::avanzar(Parallax *parallax) {
 		if (!parallax->consultarFin()) {
 			parallax->mover();
 		} else {
-			if (posicionX < (800 - ancho))
+			if (posicionX < (800 - (estado->obtenerAncho() * escalado)))
 				moverEnX(10);
 		}
 	}
@@ -53,7 +54,7 @@ void Protagonista::retroceder() {
 }
 
 void Protagonista::subir() {
-	if (posicionY > 180) {
+	if (posicionY > 170) {
 		estado = estado->avanzar();
 		moverEnY(-5);
 	} else {
@@ -62,7 +63,7 @@ void Protagonista::subir() {
 }
 
 void Protagonista::bajar() {
-	if (posicionY < 320) {
+	if (posicionY < 300) {
 		estado = estado->avanzar();
 		moverEnY(5);
 	} else {
@@ -75,7 +76,7 @@ void Protagonista::agacharse() {
 }
 
 void Protagonista::pegar() {
-
+	estado = estado->pegar();
 }
 
 int Protagonista::moverEnY(int nuevoY) {
@@ -85,7 +86,9 @@ int Protagonista::moverEnY(int nuevoY) {
 }
 
 void Protagonista::actualizar(Renderizador *renderizador) {
-	insercion.modificar(posicionX, posicionY, ancho, alto);
+	insercion.modificar(posicionX, posicionY,
+			(estado->obtenerAncho() * escalado),
+			(estado->obtenerAlto() * escalado));
 	if (!dadoVuelta) {
 		textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
 	} else {
@@ -99,7 +102,8 @@ void Protagonista::moverEnX(int movimiento) {
 }
 
 bool Protagonista::llegoAlFin(Parallax *parallax) {
-	return (parallax->consultarFin() && (posicionX == (800 - ancho)));
+	return (parallax->consultarFin() &&
+			(posicionX == (800 - (estado->obtenerAncho() * escalado))));
 }
 
 Protagonista::~Protagonista(){

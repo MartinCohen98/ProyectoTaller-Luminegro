@@ -13,8 +13,7 @@ class Protagonista {
 private:
 	int posicionX;
 	int posicionY;
-	int ancho;
-	int alto;
+	int escalado;
 	bool dadoVuelta;
 	EstadoJugador* estado;
 	Imagen sprite;

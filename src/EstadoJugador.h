@@ -12,10 +12,14 @@ public:
 	virtual EstadoJugador* parar();
 	virtual EstadoJugador* agacharse();
 	virtual EstadoJugador* pegar();
+	virtual int obtenerAlto();
+	virtual int obtenerAncho();
 	virtual ~EstadoJugador();
 
 protected:
 	Encuadre frameActual;
+	int alto;
+	int ancho;
 };
 
 #endif /* SRC_ESTADOJUGADOR_H_ */

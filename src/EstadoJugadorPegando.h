@@ -6,6 +6,11 @@
 
 class EstadoJugadorPegando: public EstadoJugador {
 
+private:
+	int framesTranscurridas;
+	int numeroDeFrame;
+	bool golpeTerminado;
+
 public:
 
 	EstadoJugadorPegando();
@@ -15,6 +20,9 @@ public:
 	EstadoJugador* pegar();
 	bool terminado();
 	virtual ~EstadoJugadorPegando();
+
+private:
+	void cambiarFrame();
 };
 
 #endif /* SRC_ESTADOJUGADORPEGANDO_H_ */
