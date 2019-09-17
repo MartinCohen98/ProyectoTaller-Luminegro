@@ -33,4 +33,8 @@ int EstadoJugador::obtenerAncho() {
 	return ancho;
 }
 
+bool EstadoJugador::puedeMoverse() {
+	return true;
+}
+
 EstadoJugador::~EstadoJugador() {}

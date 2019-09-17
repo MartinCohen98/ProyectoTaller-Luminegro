@@ -10,7 +10,6 @@ class Parallax {
     private:
 	   int velocidades[3];
 	   int desplazamientos[3];
-       Imagen capas[3];
        Encuadre encuadres[3];
        Textura texturas[3];
        int limite;

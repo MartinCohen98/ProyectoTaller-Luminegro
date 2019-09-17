@@ -13,7 +13,7 @@ class Protagonista {
 private:
 	int posicionX;
 	int posicionY;
-	int escalado;
+	int escaladoDeSprite;
 	bool dadoVuelta;
 	EstadoJugador* estado;
 	EstadoJugadorParado* estadoOriginal;
@@ -23,7 +23,7 @@ private:
 
 public:
 	Protagonista(Renderizador *renderizador, pugi::xml_document *archiConfig);
-	int avanzar(Parallax *parallax);
+	void avanzar(Parallax *parallax);
 	void parar();
 	void retroceder();
 	void agacharse();

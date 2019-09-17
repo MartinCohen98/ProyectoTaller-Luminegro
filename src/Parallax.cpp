@@ -15,6 +15,7 @@ Parallax::Parallax(Renderizador *renderizador) {
 	desplazamientos[0] = 0;
 	desplazamientos[1] = 0;
 	desplazamientos[2] = 0;
+    Imagen capas[3];
 	capas[0].cargar("assets/images/general/load.png");
 	capas[1].cargar("assets/images/general/load.png");
 	capas[2].cargar("assets/images/general/load.png");
@@ -50,6 +51,7 @@ void Parallax::mover() {
 
 int Parallax::cargarCapas(const char *path1, const char *path2,
 						const char *path3, Renderizador* renderizador) {
+    Imagen capas[3];
 	capas[0].cargar(path1);
 	capas[1].cargar(path2);
 	capas[2].cargar(path3);

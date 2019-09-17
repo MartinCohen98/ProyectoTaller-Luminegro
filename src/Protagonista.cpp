@@ -4,7 +4,7 @@
 Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archiConfig){
 	posicionX = 0;
 	posicionY = 250;
-	escalado = 3;
+	escaladoDeSprite = 3;
 	estado = new EstadoJugadorParado();
 	estadoOriginal = new EstadoJugadorParado();
 	dadoVuelta = false;
@@ -17,28 +17,23 @@ Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archi
 	sprite.cargar( protagonistaBMPPath.data() );
 
 	insercion.modificar(posicionX, posicionY,
-			(estado->obtenerAncho() * escalado),
-			(estado->obtenerAlto() * escalado));
+			(estado->obtenerAncho() * escaladoDeSprite),
+			(estado->obtenerAlto() * escaladoDeSprite));
 	textura.texturizar(renderizador, sprite);
 	textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
 	this->archiConfig = archiConfig;
 }
 
-int Protagonista::avanzar(Parallax *parallax) {
+void Protagonista::avanzar(Parallax *parallax) {
 	dadoVuelta = false;
-	int error = 0;
 	estado = estado->avanzar();
-	if (posicionX < 500) {
-		moverEnX(10);
-	} else {
-		if (!parallax->consultarFin()) {
-			parallax->mover();
+	if (estado->puedeMoverse()) {
+		if ((posicionX < 500) || parallax->consultarFin()) {
+			moverEnX(10);
 		} else {
-			if (posicionX < (800 - escalar(estado->obtenerAncho())))
-				moverEnX(10);
+			parallax->mover();
 		}
 	}
-	return error;
 }
 
 void Protagonista::parar() {
@@ -47,7 +42,7 @@ void Protagonista::parar() {
 
 void Protagonista::retroceder() {
 	dadoVuelta = true;
-	if (posicionX > 0) {
+	if ((posicionX > 0) && estado->puedeMoverse()) {
 		estado = estado->avanzar();
 		moverEnX(-10);
 	} else {
@@ -56,7 +51,7 @@ void Protagonista::retroceder() {
 }
 
 void Protagonista::subir() {
-	if (posicionY > 170) {
+	if ((posicionY > 170) && estado->puedeMoverse()) {
 		estado = estado->avanzar();
 		moverEnY(-5);
 	} else {
@@ -65,7 +60,7 @@ void Protagonista::subir() {
 }
 
 void Protagonista::bajar() {
-	if (posicionY < 300) {
+	if ((posicionY < 300) && estado->puedeMoverse()) {
 		estado = estado->avanzar();
 		moverEnY(5);
 	} else {
@@ -106,7 +101,7 @@ void Protagonista::moverEnX(int movimiento) {
 }
 
 int Protagonista::escalar(int tamanio) {
-	return (tamanio * escalado);
+	return (tamanio * escaladoDeSprite);
 }
 
 bool Protagonista::llegoAlFin(Parallax *parallax) {

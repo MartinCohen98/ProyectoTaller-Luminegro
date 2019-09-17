@@ -18,6 +18,7 @@ public:
 	EstadoJugador* parar();
 	EstadoJugador* agacharse();
 	EstadoJugador* pegar();
+	bool puedeMoverse();
 	bool terminado();
 	virtual ~EstadoJugadorPegando();
 

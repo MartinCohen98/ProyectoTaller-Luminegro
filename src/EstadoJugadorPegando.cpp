@@ -35,6 +35,10 @@ EstadoJugador* EstadoJugadorPegando::pegar() {
 	}
 }
 
+bool EstadoJugadorPegando::puedeMoverse() {
+	return false;
+}
+
 bool EstadoJugadorPegando::terminado() {
 	return ((numeroDeFrame == 0) && (framesTranscurridas == 1) && golpeTerminado);
 }

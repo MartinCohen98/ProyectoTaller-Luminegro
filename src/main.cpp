@@ -119,7 +119,7 @@ int main () {
 			renderizador.renderizar();
 			if (!salir)
 				salir = protagonista.llegoAlFin(&parallax);
-			SDL_Delay(16);
+			SDL_Delay(25);
 		}
 	}
 	return retorno;
