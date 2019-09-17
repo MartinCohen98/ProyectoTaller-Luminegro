@@ -25,6 +25,14 @@ EstadoJugador* EstadoJugador::pegar() {
 	return NULL;
 }
 
+EstadoJugador* EstadoJugador::saltar() {
+	return NULL;
+}
+
+int EstadoJugador::obtenerElevacion() {
+	return 0;
+}
+
 int EstadoJugador::obtenerAlto() {
 	return alto;
 }

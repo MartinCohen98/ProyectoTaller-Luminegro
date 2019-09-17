@@ -1,30 +1,28 @@
-#ifndef SRC_ESTADOJUGADORPEGANDO_H_
-#define SRC_ESTADOJUGADORPEGANDO_H_
+#ifndef SRC_ESTADOJUGADORSALTANDO_H_
+#define SRC_ESTADOJUGADORSALTANDO_H_
 
 #include "EstadoJugador.h"
 #include "EstadoJugadorParado.h"
 
-class EstadoJugadorPegando: public EstadoJugador {
+class EstadoJugadorSaltando: public EstadoJugador {
 
 private:
 	int framesTranscurridas;
 	int numeroDeFrame;
-	bool golpeTerminado;
+	int elevacion;
 
 public:
-
-	EstadoJugadorPegando();
+	EstadoJugadorSaltando();
 	EstadoJugador* avanzar();
 	EstadoJugador* parar();
 	EstadoJugador* agacharse();
 	EstadoJugador* pegar();
 	EstadoJugador* saltar();
-	bool puedeMoverse();
-	bool terminado();
-	virtual ~EstadoJugadorPegando();
+	int obtenerElevacion();
+	virtual ~EstadoJugadorSaltando();
 
 private:
 	void cambiarFrame();
 };
 
-#endif /* SRC_ESTADOJUGADORPEGANDO_H_ */
+#endif /* SRC_ESTADOJUGADORSALTANDO_H_ */

@@ -25,5 +25,10 @@ EstadoJugador* EstadoJugadorAgachado::pegar() {
 	return (new EstadoJugadorPegando());
 }
 
+EstadoJugador* EstadoJugadorAgachado::saltar() {
+	delete this;
+	return (new EstadoJugadorSaltando());
+}
+
 EstadoJugadorAgachado::~EstadoJugadorAgachado() {}
 

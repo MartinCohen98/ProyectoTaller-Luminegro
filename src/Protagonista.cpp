@@ -76,6 +76,10 @@ void Protagonista::pegar() {
 	estado = estado->pegar();
 }
 
+void Protagonista::saltar() {
+	estado = estado->saltar();
+}
+
 int Protagonista::moverEnY(int nuevoY) {
 	int error = 0;
 	posicionY = posicionY + nuevoY;
@@ -84,12 +88,13 @@ int Protagonista::moverEnY(int nuevoY) {
 
 void Protagonista::actualizar(Renderizador *renderizador) {
 	if (!dadoVuelta) {
-		insercion.modificar(posicionX, posicionY,
+		insercion.modificar(posicionX, posicionY - estado->obtenerElevacion(),
 				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
 		textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
 	} else {
 		insercion.modificar(posicionX - escalar(estado->obtenerAncho()) +
-				escalar(estadoOriginal->obtenerAncho()), posicionY,
+				escalar(estadoOriginal->obtenerAncho()),
+				posicionY - estado->obtenerElevacion(),
 				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
 		textura.copiarseInvertidoEn(renderizador,
 					estado->obtenerSprite(), insercion);

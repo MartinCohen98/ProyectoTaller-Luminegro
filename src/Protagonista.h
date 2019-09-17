@@ -30,6 +30,7 @@ public:
 	void subir();
 	void bajar();
 	void pegar();
+	void saltar();
 	void actualizar(Renderizador *renderizador);
 	bool llegoAlFin(Parallax *parallax);
 	virtual ~Protagonista();
