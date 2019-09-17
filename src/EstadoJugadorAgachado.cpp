@@ -1,12 +1,14 @@
 #include "EstadoJugadorAgachado.h"
 
 EstadoJugadorAgachado::EstadoJugadorAgachado() {
-	frameActual.modificar(100, 100, 50, 100);
+	alto = 100;
+	ancho = 50;
+	frameActual.modificar(100, 100, ancho, alto);
 }
 
 EstadoJugador* EstadoJugadorAgachado::parar() {
 	delete this;
-	return (new EstadoJugadorFrenado());
+	return (new EstadoJugadorParado());
 }
 
 EstadoJugador* EstadoJugadorAgachado::avanzar() {
@@ -16,6 +18,11 @@ EstadoJugador* EstadoJugadorAgachado::avanzar() {
 
 EstadoJugador* EstadoJugadorAgachado::agacharse() {
 	return this;
+}
+
+EstadoJugador* EstadoJugadorAgachado::pegar() {
+	delete this;
+	return (new EstadoJugadorPegando());
 }
 
 EstadoJugadorAgachado::~EstadoJugadorAgachado() {}

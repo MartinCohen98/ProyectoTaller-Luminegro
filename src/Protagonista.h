@@ -6,27 +6,30 @@
 #include "Renderizador.h"
 #include "Parallax.h"
 #include "EstadoJugador.h"
-#include "EstadoJugadorFrenado.h"
+#include "../lib/pugixml/pugixml.hpp"
+#include "EstadoJugadorParado.h"
 
 class Protagonista {
 private:
 	int posicionX;
 	int posicionY;
-	int ancho;
-	int alto;
+	int escaladoDeSprite;
 	bool dadoVuelta;
 	EstadoJugador* estado;
-	Imagen sprite;
+	EstadoJugadorParado* estadoOriginal;
 	Encuadre insercion;
 	Textura textura;
+    pugi::xml_document *archiConfig;
+
 public:
-	Protagonista(Renderizador *renderizador);
-	int avanzar(Parallax *parallax);
+	Protagonista(Renderizador *renderizador, pugi::xml_document *archiConfig);
+	void avanzar(Parallax *parallax);
 	void parar();
 	void retroceder();
 	void agacharse();
 	void subir();
 	void bajar();
+	void pegar();
 	void actualizar(Renderizador *renderizador);
 	bool llegoAlFin(Parallax *parallax);
 	virtual ~Protagonista();
@@ -34,6 +37,7 @@ public:
 private:
 	void moverEnX(int movimiento);
 	int moverEnY(int nuevoY);
+	int escalar(int tamanio);
 };
 
 

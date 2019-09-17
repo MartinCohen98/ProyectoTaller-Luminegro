@@ -1,3 +1,6 @@
+#ifndef SRC_LOGGER_H_
+#define SRC_LOGGER_H_
+
 #include <string>
 
 namespace Logger{
@@ -6,11 +9,10 @@ using namespace std;
 	enum class Severidad{
 		DEBUG,
 		INFO,
-		WARNING,
 		ERROR
 	};
 
-	//static const char* SeveridadStr[] = {"DEBUG", "INFO", "WARNING","ERROR"};
+	//static const char* SeveridadStr[] = {"DEBUG", "INFO", "ERROR"};
 
 
 	class Log{
@@ -20,10 +22,11 @@ using namespace std;
 		string pathLoggeo;
 	public:
 		//Log(Severidad severidadMin, string path);
-		Log(Severidad severidadMin);
+		Log(const string severidadMin);
 		void Info(string mensaje);
 		void Debug(string mensaje);
-		void Warning(string mensaje);
 		void Error(string mensaje);
 	};
 }
+
+#endif /* SRC_LOGGER_H_ */

@@ -1,34 +1,39 @@
 #include "Protagonista.h"
 
 
-Protagonista::Protagonista(Renderizador *renderizador){
+Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archiConfig){
 	posicionX = 0;
 	posicionY = 250;
-	ancho = 140;
-	alto = 280;
-	estado = new EstadoJugadorFrenado();
+	escaladoDeSprite = 3;
+	estado = new EstadoJugadorParado();
+	estadoOriginal = new EstadoJugadorParado();
 	dadoVuelta = false;
-	sprite.cargar("assets/images/sprites/cody.bmp");
-	insercion.modificar(posicionX, posicionY, ancho, alto);
+
+	// Leo del XML la ubicación del BMP del protagonista
+    std::string protagonistaBMPPath = archiConfig->child("configuracion").child("escenario")
+            .child("protagonista").child_value("imagen");
+
+    Imagen sprite;
+	sprite.cargar( protagonistaBMPPath.data() );
+
+	insercion.modificar(posicionX, posicionY,
+			(estado->obtenerAncho() * escaladoDeSprite),
+			(estado->obtenerAlto() * escaladoDeSprite));
 	textura.texturizar(renderizador, sprite);
 	textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
+	this->archiConfig = archiConfig;
 }
 
-int Protagonista::avanzar(Parallax *parallax) {
+void Protagonista::avanzar(Parallax *parallax) {
 	dadoVuelta = false;
-	int error = 0;
 	estado = estado->avanzar();
-	if (posicionX < 500) {
-		moverEnX(10);
-	} else {
-		if (!parallax->consultarFin()) {
-			parallax->mover();
+	if (estado->puedeMoverse()) {
+		if ((posicionX < 500) || parallax->consultarFin()) {
+			moverEnX(10);
 		} else {
-			if (posicionX < (800 - ancho))
-				moverEnX(10);
+			parallax->mover();
 		}
 	}
-	return error;
 }
 
 void Protagonista::parar() {
@@ -37,7 +42,7 @@ void Protagonista::parar() {
 
 void Protagonista::retroceder() {
 	dadoVuelta = true;
-	if (posicionX > 0) {
+	if ((posicionX > 0) && estado->puedeMoverse()) {
 		estado = estado->avanzar();
 		moverEnX(-10);
 	} else {
@@ -46,7 +51,7 @@ void Protagonista::retroceder() {
 }
 
 void Protagonista::subir() {
-	if (posicionY > 180) {
+	if ((posicionY > 170) && estado->puedeMoverse()) {
 		estado = estado->avanzar();
 		moverEnY(-5);
 	} else {
@@ -55,7 +60,7 @@ void Protagonista::subir() {
 }
 
 void Protagonista::bajar() {
-	if (posicionY < 320) {
+	if ((posicionY < 300) && estado->puedeMoverse()) {
 		estado = estado->avanzar();
 		moverEnY(5);
 	} else {
@@ -67,6 +72,10 @@ void Protagonista::agacharse() {
 	estado = estado->agacharse();
 }
 
+void Protagonista::pegar() {
+	estado = estado->pegar();
+}
+
 int Protagonista::moverEnY(int nuevoY) {
 	int error = 0;
 	posicionY = posicionY + nuevoY;
@@ -74,10 +83,14 @@ int Protagonista::moverEnY(int nuevoY) {
 }
 
 void Protagonista::actualizar(Renderizador *renderizador) {
-	insercion.modificar(posicionX, posicionY, ancho, alto);
 	if (!dadoVuelta) {
+		insercion.modificar(posicionX, posicionY,
+				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
 		textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
 	} else {
+		insercion.modificar(posicionX - escalar(estado->obtenerAncho()) +
+				escalar(estadoOriginal->obtenerAncho()), posicionY,
+				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
 		textura.copiarseInvertidoEn(renderizador,
 					estado->obtenerSprite(), insercion);
 	}
@@ -87,8 +100,13 @@ void Protagonista::moverEnX(int movimiento) {
 	posicionX = posicionX + movimiento;
 }
 
+int Protagonista::escalar(int tamanio) {
+	return (tamanio * escaladoDeSprite);
+}
+
 bool Protagonista::llegoAlFin(Parallax *parallax) {
-	return (parallax->consultarFin() && (posicionX == (800 - ancho)));
+	return (parallax->consultarFin() &&
+			(posicionX == (800 - escalar(estado->obtenerAncho()))));
 }
 
 Protagonista::~Protagonista(){
