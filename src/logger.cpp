@@ -53,8 +53,8 @@ namespace Logger{
 		//Carga en buffer la fecha pero le faltan los milisegundos
 		strftime (buffer,MAX_LENGTH_BUFFER_FECHA,"%Y-%m-%d %R.",localtime(&now));
 		archivoLog << buffer << now %1000;
-		archivoLog << "," << severidad;
-		archivoLog << "," << mensaje << endl;
+		archivoLog << ", " << severidad;
+		archivoLog << ", " << mensaje << endl;
 		archivoLog.close();
 	}
 }
