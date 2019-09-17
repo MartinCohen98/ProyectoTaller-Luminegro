@@ -33,7 +33,6 @@ Parallax::Parallax(Renderizador *renderizador) {
 int Parallax::actualizar(Renderizador *renderizador) {
 	for (int i = 0; i <= 2; i++) {
 	    encuadres[i].modificar(desplazamientos[i], 0, 260, 195);
-	    texturas[i].texturizar(renderizador, capas[i]);
         texturas[i].copiarseEn(renderizador, encuadres[i], encuadreFijo);
 	}
 	return 0;
