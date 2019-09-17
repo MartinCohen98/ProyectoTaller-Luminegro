@@ -35,6 +35,10 @@ EstadoJugador* EstadoJugadorPegando::pegar() {
 	}
 }
 
+EstadoJugador* EstadoJugadorPegando::saltar() {
+	return (pegar());
+}
+
 bool EstadoJugadorPegando::puedeMoverse() {
 	return false;
 }

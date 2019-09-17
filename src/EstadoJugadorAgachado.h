@@ -5,6 +5,7 @@
 #include "EstadoJugadorAvanzando.h"
 #include "EstadoJugadorParado.h"
 #include "EstadoJugadorPegando.h"
+#include "EstadoJugadorSaltando.h"
 
 class EstadoJugadorAgachado: public EstadoJugador {
 
@@ -14,6 +15,7 @@ public:
 	EstadoJugador* avanzar();
 	EstadoJugador* agacharse();
 	EstadoJugador* pegar();
+	EstadoJugador* saltar();
 	virtual ~EstadoJugadorAgachado();
 };
 

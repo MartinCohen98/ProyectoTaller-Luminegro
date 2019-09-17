@@ -12,9 +12,11 @@ public:
 	virtual EstadoJugador* parar();
 	virtual EstadoJugador* agacharse();
 	virtual EstadoJugador* pegar();
-	virtual int obtenerAlto();
-	virtual int obtenerAncho();
+	virtual EstadoJugador* saltar();
 	virtual bool puedeMoverse();
+	virtual int obtenerElevacion();
+	int obtenerAlto();
+	int obtenerAncho();
 	virtual ~EstadoJugador();
 
 protected:

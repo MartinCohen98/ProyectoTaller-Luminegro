@@ -92,6 +92,7 @@ int main () {
 							break;
 						case SDLK_z:
 							//Saltar
+							protagonista.saltar();
 							break;
 						case SDLK_x:
 							//Agacharse

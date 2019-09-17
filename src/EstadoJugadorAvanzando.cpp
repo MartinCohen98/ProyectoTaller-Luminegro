@@ -32,13 +32,18 @@ EstadoJugador* EstadoJugadorAvanzando::pegar() {
 	return (new EstadoJugadorPegando());
 }
 
+EstadoJugador* EstadoJugadorAvanzando::saltar() {
+	delete this;
+	return (new EstadoJugadorSaltando());
+}
+
 void EstadoJugadorAvanzando::cambiarFrame() {
 	if (numeroDeFrame == 5) {
 		numeroDeFrame = 0;
 	} else {
 		numeroDeFrame++;
 	}
-	frameActual.modificar((50 * numeroDeFrame), 0, ancho, alto);
+	frameActual.modificar((ancho * numeroDeFrame), 0, ancho, alto);
 }
 
 EstadoJugadorAvanzando::~EstadoJugadorAvanzando() {}
