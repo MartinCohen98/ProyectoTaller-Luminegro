@@ -16,7 +16,7 @@ private:
 	int escalado;
 	bool dadoVuelta;
 	EstadoJugador* estado;
-	Imagen sprite;
+	EstadoJugadorParado* estadoOriginal;
 	Encuadre insercion;
 	Textura textura;
     pugi::xml_document *archiConfig;
@@ -37,6 +37,7 @@ public:
 private:
 	void moverEnX(int movimiento);
 	int moverEnY(int nuevoY);
+	int escalar(int tamanio);
 };
 
 
