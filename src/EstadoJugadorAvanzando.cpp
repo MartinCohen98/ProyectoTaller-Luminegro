@@ -8,7 +8,7 @@ EstadoJugadorAvanzando::EstadoJugadorAvanzando() {
 
 EstadoJugador* EstadoJugadorAvanzando::parar() {
 	delete this;
-	return (new EstadoJugadorFrenado());
+	return (new EstadoJugadorParado());
 }
 
 EstadoJugador* EstadoJugadorAvanzando::avanzar() {
@@ -23,6 +23,11 @@ EstadoJugador* EstadoJugadorAvanzando::avanzar() {
 EstadoJugador* EstadoJugadorAvanzando::agacharse() {
 	delete this;
 	return (new EstadoJugadorAgachado());
+}
+
+EstadoJugador* EstadoJugadorAvanzando::pegar() {
+	delete this;
+	return (new EstadoJugadorPegando());
 }
 
 void EstadoJugadorAvanzando::cambiarFrame() {

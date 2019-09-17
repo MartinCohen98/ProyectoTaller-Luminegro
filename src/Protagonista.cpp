@@ -6,7 +6,7 @@ Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archi
 	posicionY = 250;
 	ancho = 140;
 	alto = 280;
-	estado = new EstadoJugadorFrenado();
+	estado = new EstadoJugadorParado();
 	dadoVuelta = false;
 
 	// Leo del XML la ubicación del BMP del protagonista
@@ -72,6 +72,10 @@ void Protagonista::bajar() {
 
 void Protagonista::agacharse() {
 	estado = estado->agacharse();
+}
+
+void Protagonista::pegar() {
+
 }
 
 int Protagonista::moverEnY(int nuevoY) {

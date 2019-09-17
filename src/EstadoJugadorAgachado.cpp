@@ -6,7 +6,7 @@ EstadoJugadorAgachado::EstadoJugadorAgachado() {
 
 EstadoJugador* EstadoJugadorAgachado::parar() {
 	delete this;
-	return (new EstadoJugadorFrenado());
+	return (new EstadoJugadorParado());
 }
 
 EstadoJugador* EstadoJugadorAgachado::avanzar() {
@@ -16,6 +16,11 @@ EstadoJugador* EstadoJugadorAgachado::avanzar() {
 
 EstadoJugador* EstadoJugadorAgachado::agacharse() {
 	return this;
+}
+
+EstadoJugador* EstadoJugadorAgachado::pegar() {
+	delete this;
+	return (new EstadoJugadorPegando());
 }
 
 EstadoJugadorAgachado::~EstadoJugadorAgachado() {}

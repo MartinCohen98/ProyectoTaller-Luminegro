@@ -99,6 +99,7 @@ int main () {
 							break;
 						case SDLK_c:
 							//Pegar
+							protagonista.pegar();
 							break;
 						case SDLK_ESCAPE:
 							//Salir

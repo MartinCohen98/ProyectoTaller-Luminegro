@@ -11,6 +11,7 @@ public:
 	virtual EstadoJugador* avanzar();
 	virtual EstadoJugador* parar();
 	virtual EstadoJugador* agacharse();
+	virtual EstadoJugador* pegar();
 	virtual ~EstadoJugador();
 
 protected:

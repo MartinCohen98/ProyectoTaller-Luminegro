@@ -18,4 +18,8 @@ EstadoJugador* EstadoJugador::agacharse() {
 	return NULL;
 }
 
+EstadoJugador* EstadoJugador::pegar() {
+	return NULL;
+}
+
 EstadoJugador::~EstadoJugador() {}

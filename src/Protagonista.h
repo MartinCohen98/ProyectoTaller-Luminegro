@@ -6,8 +6,8 @@
 #include "Renderizador.h"
 #include "Parallax.h"
 #include "EstadoJugador.h"
-#include "EstadoJugadorFrenado.h"
 #include "../lib/pugixml/pugixml.hpp"
+#include "EstadoJugadorParado.h"
 
 class Protagonista {
 private:
@@ -30,6 +30,7 @@ public:
 	void agacharse();
 	void subir();
 	void bajar();
+	void pegar();
 	void actualizar(Renderizador *renderizador);
 	bool llegoAlFin(Parallax *parallax);
 	virtual ~Protagonista();
