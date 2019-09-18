@@ -5,29 +5,29 @@
  *      Author: julio
  */
 
-#include "EstadoEnemigoFrenado.h"
+#include "EstadoEnemigoParado.h"
 
 
-EstadoEnemigoFrenado::EstadoEnemigoFrenado(int x, int y, int ancho, int alto) {
+EstadoEnemigoParado::EstadoEnemigoParado(int x, int y, int ancho, int alto) {
 	frameActual.modificar(x,y,ancho,alto);
 }
 
-EstadoJugador* EstadoEnemigoFrenado::parar() {
+EstadoJugador* EstadoEnemigoParado::parar() {
 	return (this);
 }
 
-EstadoJugador* EstadoEnemigoFrenado::avanzar() {
+EstadoJugador* EstadoEnemigoParado::avanzar() {
 	delete this;
 	return (new EstadoEnemigoAvanzando());
 }
 
-EstadoJugador* EstadoEnemigoFrenado::agacharse() {
+EstadoJugador* EstadoEnemigoParado::agacharse() {
 	delete this;
 	return (new EstadoJugadorAgachado());
 }
 
 
-EstadoEnemigoFrenado::~EstadoEnemigoFrenado() {
+EstadoEnemigoParado::~EstadoEnemigoParado() {
 	// TODO Auto-generated destructor stub
 }
 

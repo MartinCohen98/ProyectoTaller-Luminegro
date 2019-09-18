@@ -8,12 +8,12 @@
 #ifndef ENEMIGO_H_
 #define ENEMIGO_H_
 
+#include "EstadoEnemigoParado.h"
 #include "Imagen.h"
 #include "Textura.h"
 #include "Renderizador.h"
 #include "Parallax.h"
 #include "EstadoJugador.h"
-#include "EstadoEnemigoFrenado.h"
 
 class Enemigo {
 private:

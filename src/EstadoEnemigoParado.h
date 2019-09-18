@@ -5,21 +5,21 @@
  *      Author: julio
  */
 
-#ifndef SRC_ESTADOENEMIGOFRENADO_H_
-#define SRC_ESTADOENEMIGOFRENADO_H_
+#ifndef SRC_ESTADOENEMIGOPARADO_H_
+#define SRC_ESTADOENEMIGOPARADO_H_
 
 
 #include "EstadoJugador.h"
 #include "EstadoEnemigoAvanzando.h"
 #include "EstadoJugadorAgachado.h"
 
-class EstadoEnemigoFrenado: public EstadoJugador {
+class EstadoEnemigoParado: public EstadoJugador {
 public:
-	EstadoEnemigoFrenado(int x, int y, int ancho, int alto);
+	EstadoEnemigoParado(int x, int y, int ancho, int alto);
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();
 	EstadoJugador* agacharse();
-	virtual ~EstadoEnemigoFrenado();
+	virtual ~EstadoEnemigoParado();
 };
 
-#endif /* SRC_ESTADOENEMIGOFRENADO_H_ */
+#endif /* SRC_ESTADOENEMIGOPARADO_H_ */

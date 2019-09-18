@@ -12,7 +12,7 @@ Enemigo::Enemigo(Renderizador *renderizador, int posXinicial, int posYinicial, c
 	posicionY = posYinicial;
 	ancho = 120;
 	alto = 240;
-	estado = new EstadoEnemigoFrenado(0,0,47,78);
+	estado = new EstadoEnemigoParado(0,0,47,78);
 	dadoVuelta = false;
 	contactoVisual = false;
 	modoBusqueda = false;
