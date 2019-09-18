@@ -9,7 +9,7 @@
 #define SRC_ESTADOENEMIGOAVANZANDO_H_
 
 #include "EstadoJugador.h"
-#include "EstadoJugadorFrenado.h"
+#include "EstadoJugadorParado.h"
 #include "EstadoJugadorAgachado.h"
 
 class EstadoEnemigoAvanzando: public EstadoJugador {

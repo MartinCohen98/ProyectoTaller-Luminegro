@@ -1,10 +1,3 @@
-/*
- * EstadoEnemigoAvanzando.cpp
- *
- *  Created on: 16 sep. 2019
- *      Author: julio
- */
-
 #include "EstadoEnemigoAvanzando.h"
 
 EstadoEnemigoAvanzando::EstadoEnemigoAvanzando() {
@@ -22,7 +15,7 @@ EstadoEnemigoAvanzando::EstadoEnemigoAvanzando(int x, int y, int ancho, int alto
 
 EstadoJugador* EstadoEnemigoAvanzando::parar() {
 	delete this;
-	return (new EstadoJugadorFrenado());
+	return (new EstadoJugadorParado());
 }
 
 EstadoJugador* EstadoEnemigoAvanzando::avanzar() {
