@@ -17,9 +17,9 @@ namespace Logger{
         } else if (severidadMin == "INFO") {
             this->severidadMinima = Severidad::INFO;
 
-        } else if (severidadMin == "ERROR") {
+        } else
             this->severidadMinima = Severidad::ERROR;
-        }
+
 
 		//Obtención del día para crear el archivo
 		//TO DO: Que se elija donde generar el archivo y qué formato
