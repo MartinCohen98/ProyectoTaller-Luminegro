@@ -26,6 +26,8 @@ void Textura::copiarseInvertidoEn(Renderizador* renderizador, Encuadre encuadre,
 }
 
 int Textura::texturizar(Renderizador* renderizador,Imagen imagen) {
+	if (textura != NULL)
+		SDL_DestroyTexture(textura);
 	textura = SDL_CreateTextureFromSurface(renderizador->get(), imagen.get());
 	return 0;
 

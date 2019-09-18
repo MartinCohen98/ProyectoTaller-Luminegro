@@ -3,42 +3,72 @@
 #include "Renderizador.h"
 #include "Protagonista.h"
 #include <SDL2/SDL.h>
-
+#include "../lib/pugixml/pugixml.hpp"
+#include <iostream>
+#include "logger.h"
 
 
 int main () {
-	if(SDL_Init(SDL_INIT_VIDEO) < 0) {
-		std::cout << "No se pudo iniciar SDL2 correctamente\n";
-		return -1;
-	}
-	bool salir;
+    // Cargar un archivo de configuración específico
+    pugi::xml_document archiConfig;
+    pugi::xml_parse_result archiConfigCarga = archiConfig.load_file("config/repiola.xml");
+
+    // Si no pudo cargar el archivo específico, cargar el predeterminado
+    if (archiConfigCarga.status != 0) {
+        archiConfigCarga = archiConfig.load_file("config/default.xml");
+    }
+
+    // Leer el nivel de logueo
+    std::string logLevel = archiConfig.child("configuracion").child("log").child_value("level");
+
+    Logger::Log logueador(logLevel);
+
+    if(SDL_Init(SDL_INIT_VIDEO) < 0) {
+        logueador.Error("No se pudo iniciar SDL2 correctamente");
+        return -1;
+    }
+
+    logueador.Info("Ejecutando el main.cpp");
+
+    bool salir;
 	SDL_Event evento;
 	int retorno;
 	VentanaDeJuego ventana;
 	Renderizador renderizador(ventana.Get());
-	for (int i = 0; i < 1; i++){
+
+	for (int i = 1; i <= 2; i++){
 		salir = false;
 		Parallax parallax(&renderizador);
-		Protagonista protagonista(&renderizador);
+		Protagonista protagonista(&renderizador, &archiConfig);
 		retorno = ventana.Abrir(&renderizador);
 
-		if(i == 0) {
-			parallax.cargarCapas("assets/images/backgrounds/clouds.bmp",
-								"assets/images/backgrounds/buildings.bmp",
-								"assets/images/backgrounds/terrain.bmp",
-								&renderizador);
-			parallax.cambiarLimite(992);
-		};
+        std::string nivelNodeName = "nivel";
+        nivelNodeName.append( std::to_string(i) );
 
-		if(i == 1) {
-			parallax.cargarCapas("assets/images/backgrounds/clouds.bmp",
-								"assets/images/backgrounds/buildings.bmp",
-								"assets/images/backgrounds/terrain2.bmp",
-								&renderizador);
-			parallax.cambiarLimite(735);
-		};
+        // Leo del XML la ubicación de los BMPs de los fondos y el ancho del terreno
+        std::string nubesBMPPath = archiConfig.child("configuracion").child("escenario")
+                .child("niveles").child( nivelNodeName.data() ).child_value("nubes");
+
+        std::string edificiosBMPPath = archiConfig.child("configuracion").child("escenario")
+                .child("niveles").child( nivelNodeName.data() ).child_value("edificios");
+
+        std::string terrenoBMPPath = archiConfig.child("configuracion").child("escenario")
+                .child("niveles").child( nivelNodeName.data() ).child_value("terreno");
+
+        std::string terrenoWidthString = archiConfig.child("configuracion").child("escenario")
+                .child("niveles").child( nivelNodeName.data() ).child_value("terrenoWidth");
+
+        int terrenoWidth = std::stoi(terrenoWidthString);
+
+        parallax.cargarCapas(nubesBMPPath.data(),
+                             edificiosBMPPath.data(),
+                             terrenoBMPPath.data(),
+                             &renderizador);
+
+        parallax.cambiarLimite(terrenoWidth);
 
 		parallax.actualizar(&renderizador);
+
 		while (!salir) {
 			SDL_PollEvent(&evento);
 			switch (evento.type){
@@ -62,6 +92,7 @@ int main () {
 							break;
 						case SDLK_z:
 							//Saltar
+							protagonista.saltar();
 							break;
 						case SDLK_x:
 							//Agacharse
@@ -69,6 +100,7 @@ int main () {
 							break;
 						case SDLK_c:
 							//Pegar
+							protagonista.pegar();
 							break;
 						case SDLK_ESCAPE:
 							//Salir
@@ -88,7 +120,7 @@ int main () {
 			renderizador.renderizar();
 			if (!salir)
 				salir = protagonista.llegoAlFin(&parallax);
-			SDL_Delay(16);
+			SDL_Delay(25);
 		}
 	}
 	return retorno;

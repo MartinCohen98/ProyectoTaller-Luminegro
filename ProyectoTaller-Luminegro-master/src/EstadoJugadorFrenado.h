@@ -9,6 +9,7 @@ class EstadoJugadorFrenado: public EstadoJugador {
 
 public:
 	EstadoJugadorFrenado();
+	EstadoJugadorFrenado(int x, int y, int ancho, int alto);
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();
 	EstadoJugador* agacharse();

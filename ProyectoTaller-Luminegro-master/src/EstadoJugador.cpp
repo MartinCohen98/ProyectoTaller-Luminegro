@@ -1,6 +1,9 @@
 #include "EstadoJugador.h"
 
-EstadoJugador::EstadoJugador() {}
+EstadoJugador::EstadoJugador() {
+	alto = 0;
+	ancho = 0;
+}
 
 Encuadre EstadoJugador::obtenerSprite() {
 	return frameActual;
@@ -16,6 +19,30 @@ EstadoJugador* EstadoJugador::parar() {
 
 EstadoJugador* EstadoJugador::agacharse() {
 	return NULL;
+}
+
+EstadoJugador* EstadoJugador::pegar() {
+	return NULL;
+}
+
+EstadoJugador* EstadoJugador::saltar() {
+	return NULL;
+}
+
+int EstadoJugador::obtenerElevacion() {
+	return 0;
+}
+
+int EstadoJugador::obtenerAlto() {
+	return alto;
+}
+
+int EstadoJugador::obtenerAncho() {
+	return ancho;
+}
+
+bool EstadoJugador::puedeMoverse() {
+	return true;
 }
 
 EstadoJugador::~EstadoJugador() {}

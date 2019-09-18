@@ -3,12 +3,24 @@
 #include <fstream>
 #include <ctime>
 #include <sstream>
+#include <iostream>
 
 namespace Logger{
 	const int MAX_LENGTH_BUFFER_FECHA = 30;
 
-	Log::Log(Severidad severidadMin){
-		this->severidadMinima = severidadMin;
+	Log::Log(const string severidadMin) {
+
+	    // Convierto el string que lee del XML a el enum correspondiente
+	    if (severidadMin == "DEBUG") {
+            this->severidadMinima = Severidad::DEBUG;
+
+        } else if (severidadMin == "INFO") {
+            this->severidadMinima = Severidad::INFO;
+
+        } else if (severidadMin == "ERROR") {
+            this->severidadMinima = Severidad::ERROR;
+        }
+
 		//Obtención del día para crear el archivo
 		//TO DO: Que se elija donde generar el archivo y qué formato
 		time_t now = time(0);
@@ -27,11 +39,6 @@ namespace Logger{
 			this->loggear(mensaje, "INFO");
 	}
 
-	void Log::Warning(string mensaje){
-		if(this->severidadMinima <= Severidad::WARNING)
-			this->loggear(mensaje, "WARNING");
-	}
-
 	void Log::Error(string mensaje){
 		if(this->severidadMinima <= Severidad::ERROR)
 			this->loggear(mensaje, "ERROR");
@@ -46,8 +53,8 @@ namespace Logger{
 		//Carga en buffer la fecha pero le faltan los milisegundos
 		strftime (buffer,MAX_LENGTH_BUFFER_FECHA,"%Y-%m-%d %R.",localtime(&now));
 		archivoLog << buffer << now %1000;
-		archivoLog << "," << severidad;
-		archivoLog << "," << mensaje << endl;
+		archivoLog << ", " << severidad;
+		archivoLog << ", " << mensaje << endl;
 		archivoLog.close();
 	}
 }

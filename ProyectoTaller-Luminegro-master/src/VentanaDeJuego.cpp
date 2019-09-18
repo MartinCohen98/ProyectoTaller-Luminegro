@@ -18,8 +18,6 @@ int VentanaDeJuego::Abrir(Renderizador *renderizador) {
         std::cout << "No se pudo crear una ventana\n";
         return -1;
 	}
-    renderizador->renderizar();
-
     return 0;
 }
 
