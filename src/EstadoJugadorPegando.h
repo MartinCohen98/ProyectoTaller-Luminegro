@@ -1,7 +1,6 @@
 #ifndef SRC_ESTADOJUGADORPEGANDO_H_
 #define SRC_ESTADOJUGADORPEGANDO_H_
 
-#include "EstadoJugador.h"
 #include "EstadoJugadorParado.h"
 
 class EstadoJugadorPegando: public EstadoJugador {

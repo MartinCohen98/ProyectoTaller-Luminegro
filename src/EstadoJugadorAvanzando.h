@@ -1,10 +1,7 @@
 #ifndef SRC_ESTADOJUGADORAVANZANDO_H_
 #define SRC_ESTADOJUGADORAVANZANDO_H_
 
-#include "EstadoJugador.h"
-#include "EstadoJugadorAgachado.h"
 #include "EstadoJugadorParado.h"
-#include "EstadoJugadorPegando.h"
 
 class EstadoJugadorAvanzando: public EstadoJugador {
 
