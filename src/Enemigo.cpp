@@ -22,20 +22,20 @@ Enemigo::Enemigo(Renderizador *renderizador, int posXinicial, int posYinicial, c
 	textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
 }
 
-int Enemigo::avanzar(Parallax *parallax) {
+int Enemigo::avanzar() {
 	dadoVuelta = false;
 	int error = 0;
 	estado = estado->avanzar();
-	if (posicionX < 500) {
+	/*if (posicionX < 500) {*/
 		moverEnX(5);
-	} else {
+	/*} else {
 		if (!parallax->consultarFin()) {
 			parallax->mover();
 		} else {
 			if (posicionX < (800 - ancho))
 				moverEnX(5);
 		}
-	}
+	}*/
 	return error;
 }
 

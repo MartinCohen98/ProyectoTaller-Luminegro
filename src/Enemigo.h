@@ -31,7 +31,7 @@ private:
 
 public:
 	Enemigo(Renderizador *renderizador, int posXinicial, int posYinicial, const char* path);
-	int avanzar(Parallax *parallax);
+	int avanzar();
 	void parar();
 	void retroceder();
 	void agacharse();

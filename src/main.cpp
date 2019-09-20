@@ -2,6 +2,7 @@
 #include "VentanaDeJuego.h"
 #include "Renderizador.h"
 #include "Protagonista.h"
+#include "Enemigo.h"
 #include <SDL2/SDL.h>
 #include "../lib/pugixml/pugixml.hpp"
 #include <iostream>
@@ -40,6 +41,16 @@ int main () {
 		salir = false;
 		Parallax parallax(&renderizador);
 		Protagonista protagonista(&renderizador, &archiConfig);
+		Enemigo enemigo1(&renderizador, 650, 220, "assets/images/sprites/bred.bmp");
+		Enemigo enemigo2(&renderizador, 300, 350, "assets/images/sprites/dug.bmp");
+		Enemigo enemigo3(&renderizador, 1700, 220, "assets/images/sprites/jake.bmp");
+		Enemigo enemigo4(&renderizador, -500, 350, "assets/images/sprites/jake.bmp");
+		Enemigo enemigo5(&renderizador, 2500, 220, "assets/images/sprites/dug.bmp");
+		enemigo1.retroceder();
+		enemigo2.avanzar();
+		enemigo3.retroceder();
+		enemigo4.avanzar();
+		enemigo5.retroceder();
 		retorno = ventana.Abrir(&renderizador);
 
         std::string nivelNodeName = "nivel";
@@ -116,7 +127,17 @@ int main () {
 					break;
 			}
 			parallax.actualizar(&renderizador);
+			enemigo1.retroceder();
+			enemigo1.actualizar(&renderizador);
+			enemigo3.retroceder();
+			enemigo3.actualizar(&renderizador);
+			enemigo5.retroceder();
+			enemigo5.actualizar(&renderizador);
 			protagonista.actualizar(&renderizador);
+			enemigo2.avanzar();
+			enemigo2.actualizar(&renderizador);
+			enemigo4.avanzar();
+			enemigo4.actualizar(&renderizador);
 			renderizador.renderizar();
 			if (!salir)
 				salir = protagonista.llegoAlFin(&parallax);
