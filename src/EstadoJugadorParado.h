@@ -6,6 +6,7 @@
 #include "EstadoJugadorAgachado.h"
 #include "EstadoJugadorPegando.h"
 #include "EstadoJugadorSaltando.h"
+#include "EstadoJugadorPateando.h"
 
 class EstadoJugadorParado: public EstadoJugador {
 

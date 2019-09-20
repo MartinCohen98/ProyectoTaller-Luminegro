@@ -22,7 +22,10 @@ EstadoJugador* EstadoJugadorSaltando::agacharse() {
 }
 
 EstadoJugador* EstadoJugadorSaltando::pegar() {
-	return saltar();
+	EstadoJugadorPateando* nuevoEstado = new EstadoJugadorPateando(numeroDeFrame,
+			framesTranscurridas, elevacion);
+	delete this;
+	return nuevoEstado;
 }
 
 EstadoJugador* EstadoJugadorSaltando::saltar() {
