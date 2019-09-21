@@ -8,13 +8,13 @@
         </protagonista>
         <enemigos>
             <bred>
-                <imagen>assets/images/sprites/bred.bmp</imagen>
+                <imagen url="assets/images/sprites/bred.bmp" />
             </bred>
             <dug>
-                <imagen>assets/images/sprites/dug.bmp</imagen>
+                <imagen url="assets/images/sprites/dug.bmp" />
             </dug>
             <jake>
-                <imagen>assets/images/sprites/jake.bmp</imagen>
+                <imagen url="assets/images/sprites/jake.bmp" />
             </jake>
         </enemigos>
         <objetos>

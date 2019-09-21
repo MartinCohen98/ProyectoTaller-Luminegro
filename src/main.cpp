@@ -46,21 +46,31 @@ int main () {
 		salir = false;
 		Parallax parallax(&renderizador);
 		Protagonista protagonista(&renderizador, &archiConfig);
-		Enemigo enemigo1(&renderizador, 650, 220, "assets/images/sprites/bred.bmp");
-		Enemigo enemigo2(&renderizador, 300, 350, "assets/images/sprites/dug.bmp");
-		Enemigo enemigo3(&renderizador, 1700, 220, "assets/images/sprites/jake.bmp");
-		Enemigo enemigo4(&renderizador, -500, 350, "assets/images/sprites/jake.bmp");
-		Enemigo enemigo5(&renderizador, 2500, 220, "assets/images/sprites/dug.bmp");
+
+        const char* enemigoBredBMPPath = archiConfig.child("configuracion").child("escenario")
+                .child("enemigos").child("bred").child("imagen").attribute("url").value();
+
+        const char* enemigoDugBMPPath = archiConfig.child("configuracion").child("escenario")
+                .child("enemigos").child("dug").child("imagen").attribute("url").value();
+
+        const char* enemigoJakeBMPPath = archiConfig.child("configuracion").child("escenario")
+                .child("enemigos").child("jake").child("imagen").attribute("url").value();
+
+        Enemigo enemigo1(&renderizador, 650, 220, enemigoBredBMPPath);
+		Enemigo enemigo2(&renderizador, 300, 350, enemigoDugBMPPath);
+		Enemigo enemigo3(&renderizador, 1700, 220, enemigoJakeBMPPath);
+		Enemigo enemigo4(&renderizador, -500, 350, enemigoJakeBMPPath);
+		Enemigo enemigo5(&renderizador, 2500, 220, enemigoDugBMPPath);
 		enemigo1.retroceder();
 		enemigo2.avanzar();
 		enemigo3.retroceder();
 		enemigo4.avanzar();
 		enemigo5.retroceder();
 		ControlObjetos controlObjetos;
-		Barril barril(&renderizador,150,350);
-		Caja caja(&renderizador, 300, 350);
-		Cuchillo cuchillo(&renderizador, 450, 450);
-		Tubo tubo(&renderizador, 550,450);
+		Barril barril(&renderizador,150,350, &archiConfig);
+		Caja caja(&renderizador, 300, 350, &archiConfig);
+		Cuchillo cuchillo(&renderizador, 450, 450, &archiConfig);
+		Tubo tubo(&renderizador, 550,450, &archiConfig);
 		retorno = ventana.Abrir(&renderizador);
 
         std::string nivelNodeName = "nivel";

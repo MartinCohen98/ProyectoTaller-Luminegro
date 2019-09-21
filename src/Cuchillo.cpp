@@ -7,14 +7,19 @@
 
 #include "Cuchillo.h"
 
-Cuchillo::Cuchillo(Renderizador *renderizador, int posXinicial, int posYinicial) {
+Cuchillo::Cuchillo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
 	// TODO Auto-generated constructor stub
 	posicionX = posXinicial;
 	posicionY = posYinicial;
 	ancho=66;
 	alto=21;
 	escaladoDeSprite = 3;
-	sprite.cargar ("assets/images/objects/knife.bmp");
+
+    std::string cuchilloBMPPath = archiConfig->child("configuracion").child("escenario")
+            .child("objetos").child("cuchillo").child_value("imagen");
+
+    sprite.cargar ( cuchilloBMPPath.data() );
+
 	encuadre.modificar(0,0,66,21);
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);
 	textura.texturizar(renderizador, sprite);

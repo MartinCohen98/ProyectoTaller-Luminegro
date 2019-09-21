@@ -13,6 +13,7 @@
 #include "Textura.h"
 #include "Renderizador.h"
 #include "Encuadre.h"
+#include "../lib/pugixml/pugixml.hpp"
 
 class Barril {
 private:
@@ -26,7 +27,7 @@ private:
 	Encuadre insercion;
 	Textura textura;
 public:
-	Barril(Renderizador *renderizador, int posXinicial, int posYinicial);
+	Barril(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig);
 	void actualizar(Renderizador *renderizador);
 	void refrescar(Renderizador *renderizador);
 	virtual ~Barril();

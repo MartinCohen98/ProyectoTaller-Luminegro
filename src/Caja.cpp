@@ -7,14 +7,19 @@
 
 #include "Caja.h"
 
-Caja::Caja(Renderizador *renderizador, int posXinicial, int posYinicial) {
+Caja::Caja(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
 	// TODO Auto-generated constructor stub
 	posicionX = posXinicial;
 	posicionY = posYinicial;
 	ancho=96;
 	alto=160;
 	escaladoDeSprite = 3;
-	sprite.cargar ("assets/images/objects/box.bmp");
+
+    std::string cajaBMPPath = archiConfig->child("configuracion").child("escenario")
+            .child("objetos").child("caja").child_value("imagen");
+
+    sprite.cargar ( cajaBMPPath.data() );
+
 	encuadre.modificar(0,0,96,160);
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);
 	textura.texturizar(renderizador, sprite);

@@ -7,14 +7,19 @@
 
 #include "Tubo.h"
 
-Tubo::Tubo(Renderizador *renderizador, int posXinicial, int posYinicial) {
+Tubo::Tubo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
 	// TODO Auto-generated constructor stub
 	posicionX = posXinicial;
 	posicionY = posYinicial;
 	ancho=144;
 	alto=24;
 	escaladoDeSprite = 3;
-	sprite.cargar ("assets/images/objects/metalTube.bmp");
+
+    std::string tuboBMPPath = archiConfig->child("configuracion").child("escenario")
+            .child("objetos").child("tuboMetalico").child_value("imagen");
+
+    sprite.cargar ( tuboBMPPath.data() );
+
 	encuadre.modificar(0,0,24,144);
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);
 	textura.texturizar(renderizador, sprite);
