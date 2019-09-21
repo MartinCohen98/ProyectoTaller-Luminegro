@@ -9,6 +9,7 @@ namespace Logger{
 	const int MAX_LENGTH_BUFFER_FECHA = 30;
 
 	Log::Log(const string severidadMin) {
+        bool severidadBienIngresada = true;
 
 	    // Convierto el string que lee del XML a el enum correspondiente
 	    if (severidadMin == "DEBUG") {
@@ -17,8 +18,12 @@ namespace Logger{
         } else if (severidadMin == "INFO") {
             this->severidadMinima = Severidad::INFO;
 
-        } else
+        } else if (severidadMin == "ERROR") {
             this->severidadMinima = Severidad::ERROR;
+        } else {
+            this->severidadMinima = Severidad::ERROR;
+            severidadBienIngresada = false;
+	    }
 
 
 		//Obtención del día para crear el archivo
@@ -27,6 +32,11 @@ namespace Logger{
 	    char nombreArchivo[MAX_LENGTH_BUFFER_FECHA];
 	    strftime (nombreArchivo,MAX_LENGTH_BUFFER_FECHA,"%Y-%m-%d.log",localtime(&now));
 	    this->pathLoggeo = nombreArchivo;
+
+	    if (!severidadBienIngresada) {
+            this->Error("Nivel de logueo incorrectamente ingresado.");
+            exit(EXIT_FAILURE);
+        }
 	}
 
 	void Log::Debug(string mensaje){
