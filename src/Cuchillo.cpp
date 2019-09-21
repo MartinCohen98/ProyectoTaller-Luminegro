@@ -22,6 +22,12 @@ Cuchillo::Cuchillo(Renderizador *renderizador, int posXinicial, int posYinicial)
 }
 
 void Cuchillo::actualizar(Renderizador *renderizador) {
+	posicionX=posicionX-12;
+	insercion.modificar(posicionX,posicionY,ancho,alto);
+	textura.copiarseEn(renderizador, encuadre, insercion);
+}
+
+void Cuchillo::refrescar(Renderizador *renderizador) {
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 

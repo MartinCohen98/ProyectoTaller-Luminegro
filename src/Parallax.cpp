@@ -65,6 +65,10 @@ bool Parallax::consultarFin() {
 	return fin;
 }
 
+int Parallax::consultarAvance(){
+	return desplazamientos[2];
+}
+
 void Parallax::cambiarLimite(int nuevoLimite) {
 	limite = nuevoLimite;
 }

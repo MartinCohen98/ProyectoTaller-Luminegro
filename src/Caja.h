@@ -28,6 +28,7 @@ private:
 public:
 	Caja(Renderizador *renderizador, int posXinicial, int posYinicial);
 	void actualizar(Renderizador *renderizador);
+	void refrescar(Renderizador *renderizador);
 	virtual ~Caja();
 };
 
