@@ -19,7 +19,12 @@ Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archi
     Imagen sprite;
 	sprite.cargar( protagonistaBMPPath.data() );
 
-	insercion.modificar(posicionX, posicionY,
+    std::string margenWidthString = archiConfig->child("configuracion").child("escenario").
+            child_value("margenWidth");
+
+    this->posicionXMaxima = 800 - std::stoi(margenWidthString);
+
+    insercion.modificar(posicionX, posicionY,
 			(estado->obtenerAncho() * escaladoDeSprite),
 			(estado->obtenerAlto() * escaladoDeSprite));
 	textura.texturizar(renderizador, sprite);
@@ -129,7 +134,7 @@ bool Protagonista::moverEnX(Parallax* parallax) {
 	bool seMovio = false;
 	if (movimientoEnX > 0) {
 		dadoVuelta = false;
-		if ((posicionX < 500) || parallax->consultarFin()) {
+		if (posicionX < this->posicionXMaxima || parallax->consultarFin()) {
 			posicionX = posicionX + movimientoEnX;
 		} else {
 			parallax->mover();

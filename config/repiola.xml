@@ -77,5 +77,6 @@
                 </objeto>
             </nivel2>
         </niveles>
+        <margenWidth>300</margenWidth>
     </escenario>
 </configuracion>
