@@ -4,10 +4,13 @@
 Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archiConfig){
 	posicionX = 0;
 	posicionY = 250;
+	movimientoEnX = 0;
+	movimientoEnY = 0;
 	escaladoDeSprite = 3;
 	estado = new EstadoJugadorParado();
 	estadoOriginal = new EstadoJugadorParado();
 	dadoVuelta = false;
+	agachado = false;
 
 	// Leo del XML la ubicación del BMP del protagonista
     std::string protagonistaBMPPath = archiConfig->child("configuracion").child("escenario")
@@ -24,52 +27,45 @@ Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archi
 	this->archiConfig = archiConfig;
 }
 
-void Protagonista::avanzar(Parallax *parallax) {
-	dadoVuelta = false;
-	estado = estado->avanzar();
-	if (estado->puedeMoverse()) {
-		if ((posicionX < 500) || parallax->consultarFin()) {
-			moverEnX(10);
-		} else {
-			parallax->mover();
-		}
-	}
+void Protagonista::avanzar() {
+	movimientoEnX = 10;
 }
 
-void Protagonista::parar() {
-	estado = estado->parar();
+void Protagonista::dejarDeAvanzar() {
+	movimientoEnX = 0;
 }
 
 void Protagonista::retroceder() {
-	dadoVuelta = true;
-	if ((posicionX > 0) && estado->puedeMoverse()) {
-		estado = estado->avanzar();
-		moverEnX(-10);
-	} else {
-		estado = estado->parar();
-	}
+	movimientoEnX = -10;
+}
+
+void Protagonista::dejarDeRetroceder() {
+	movimientoEnX = 0;
 }
 
 void Protagonista::subir() {
-	if ((posicionY > 170) && estado->puedeMoverse()) {
-		estado = estado->avanzar();
-		moverEnY(-5);
-	} else {
-		estado = estado->parar();
-	}
+	movimientoEnY = -5;
+}
+
+void Protagonista::dejarDeSubir() {
+	movimientoEnY = 0;
 }
 
 void Protagonista::bajar() {
-	if ((posicionY < 300) && estado->puedeMoverse()) {
-		estado = estado->avanzar();
-		moverEnY(5);
-	} else {
-		estado = estado->parar();
-	}
+	movimientoEnY = 5;
+}
+
+void Protagonista::dejarDeBajar() {
+	movimientoEnY = 0;
 }
 
 void Protagonista::agacharse() {
 	estado = estado->agacharse();
+	agachado = true;
+}
+
+void Protagonista::dejarDeAgacharse() {
+	agachado = false;
 }
 
 void Protagonista::pegar() {
@@ -80,13 +76,27 @@ void Protagonista::saltar() {
 	estado = estado->saltar();
 }
 
-int Protagonista::moverEnY(int nuevoY) {
-	int error = 0;
-	posicionY = posicionY + nuevoY;
-	return error;
+bool Protagonista::moverEnY() {
+	bool seMovio = false;
+	if (((posicionY > 170) && (movimientoEnY < 0)) ||
+		((posicionY < 300) && (movimientoEnY > 0))) {
+		posicionY = posicionY + movimientoEnY;
+		seMovio = true;
+	}
+	return seMovio;
 }
 
-void Protagonista::actualizar(Renderizador *renderizador) {
+void Protagonista::actualizar(Renderizador *renderizador,
+							Parallax* parallax) {
+	if (estado->puedeMoverse()) {
+		actualizarPosicion(parallax);
+	} else {
+		if (agachado) {
+			estado = estado->agacharse();
+		} else {
+			estado = estado->parar();
+		}
+	}
 	if (!dadoVuelta) {
 		insercion.modificar(posicionX, posicionY - estado->obtenerElevacion(),
 				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
@@ -101,8 +111,37 @@ void Protagonista::actualizar(Renderizador *renderizador) {
 	}
 }
 
-void Protagonista::moverEnX(int movimiento) {
-	posicionX = posicionX + movimiento;
+void Protagonista::actualizarPosicion(Parallax* parallax) {
+	bool seMovioEnX = moverEnX(parallax);
+	bool seMovioEnY = moverEnY();
+	if (seMovioEnX || seMovioEnY) {
+		estado = estado->avanzar();
+	} else {
+		if (agachado) {
+			estado = estado->agacharse();
+		} else {
+			estado = estado->parar();
+		}
+	}
+}
+
+bool Protagonista::moverEnX(Parallax* parallax) {
+	bool seMovio = false;
+	if (movimientoEnX > 0) {
+		dadoVuelta = false;
+		if ((posicionX < 500) || parallax->consultarFin()) {
+			posicionX = posicionX + movimientoEnX;
+		} else {
+			parallax->mover();
+		}
+		seMovio = true;
+	}
+	if	((posicionX > 0) && (movimientoEnX < 0)) {
+		dadoVuelta = true;
+		posicionX = posicionX + movimientoEnX;
+		seMovio = true;
+	}
+	return seMovio;
 }
 
 int Protagonista::escalar(int tamanio) {

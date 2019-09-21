@@ -84,10 +84,11 @@ int main () {
 			SDL_PollEvent(&evento);
 			switch (evento.type){
 				case SDL_KEYDOWN:
+					if (evento.key.repeat == 0)
 					switch (evento.key.keysym.sym){
 						case SDLK_RIGHT:
 							//Avanzar
-							protagonista.avanzar(&parallax);
+							protagonista.avanzar();
 							break;
 						case SDLK_LEFT:
 							//Atras
@@ -120,7 +121,28 @@ int main () {
 					}
 					break;
 				case SDL_KEYUP:
-					protagonista.parar();
+					if (evento.key.repeat == 0)
+					switch (evento.key.keysym.sym){
+						case SDLK_RIGHT:
+							//Avanzar
+							protagonista.dejarDeAvanzar();
+							break;
+						case SDLK_LEFT:
+							//Atras
+							protagonista.dejarDeRetroceder();
+							break;
+						case SDLK_UP:
+							//Arriba
+							protagonista.dejarDeSubir();
+							break;
+						case SDLK_DOWN:
+							//Abajo
+							protagonista.dejarDeBajar();
+							break;
+						case SDLK_x:
+							protagonista.dejarDeAgacharse();
+							break;
+					}
 					break;
 				case SDL_QUIT:
 					salir = true;
@@ -133,7 +155,7 @@ int main () {
 			enemigo3.actualizar(&renderizador);
 			enemigo5.retroceder();
 			enemigo5.actualizar(&renderizador);
-			protagonista.actualizar(&renderizador);
+			protagonista.actualizar(&renderizador, &parallax);
 			enemigo2.avanzar();
 			enemigo2.actualizar(&renderizador);
 			enemigo4.avanzar();

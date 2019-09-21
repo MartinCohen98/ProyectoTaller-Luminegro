@@ -14,7 +14,10 @@ private:
 	int posicionX;
 	int posicionY;
 	int escaladoDeSprite;
+	int movimientoEnX;
+	int movimientoEnY;
 	bool dadoVuelta;
+	bool agachado;
 	EstadoJugador* estado;
 	EstadoJugadorParado* estadoOriginal;
 	Encuadre insercion;
@@ -23,21 +26,26 @@ private:
 
 public:
 	Protagonista(Renderizador *renderizador, pugi::xml_document *archiConfig);
-	void avanzar(Parallax *parallax);
-	void parar();
+	void avanzar();
+	void dejarDeAvanzar();
 	void retroceder();
+	void dejarDeRetroceder();
 	void agacharse();
+	void dejarDeAgacharse();
 	void subir();
+	void dejarDeSubir();
 	void bajar();
+	void dejarDeBajar();
 	void pegar();
 	void saltar();
-	void actualizar(Renderizador *renderizador);
+	void actualizar(Renderizador *renderizador, Parallax* parallax);
 	bool llegoAlFin(Parallax *parallax);
 	virtual ~Protagonista();
 
 private:
-	void moverEnX(int movimiento);
-	int moverEnY(int nuevoY);
+	void actualizarPosicion(Parallax* parallax);
+	bool moverEnX(Parallax* parallax);
+	bool moverEnY();
 	int escalar(int tamanio);
 };
 

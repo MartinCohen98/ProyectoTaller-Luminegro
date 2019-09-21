@@ -12,8 +12,7 @@ EstadoJugador* EstadoJugadorAgachado::parar() {
 }
 
 EstadoJugador* EstadoJugadorAgachado::avanzar() {
-	delete this;
-	return (new EstadoJugadorAvanzando());
+	return this;
 }
 
 EstadoJugador* EstadoJugadorAgachado::agacharse() {
@@ -28,6 +27,10 @@ EstadoJugador* EstadoJugadorAgachado::pegar() {
 EstadoJugador* EstadoJugadorAgachado::saltar() {
 	delete this;
 	return (new EstadoJugadorSaltando());
+}
+
+bool EstadoJugadorAgachado::puedeMoverse() {
+	return false;
 }
 
 EstadoJugadorAgachado::~EstadoJugadorAgachado() {}
