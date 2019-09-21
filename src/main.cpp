@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include "VentanaDeJuego.h"
 #include "Renderizador.h"
@@ -14,18 +15,40 @@
 #include "logger.h"
 
 
-int main () {
-    // Cargar un archivo de configuración específico
-    pugi::xml_document archiConfig;
-    pugi::xml_parse_result archiConfigCarga = archiConfig.load_file("config/repiola.xml");
+int main (int argc, char** argv) {
 
-    // Si no pudo cargar el archivo específico, cargar el predeterminado
-    if (archiConfigCarga.status != 0) {
-        archiConfigCarga = archiConfig.load_file("config/default.xml");
+    // Archivo de configuración
+    std::string archiConfigPath;
+    pugi::xml_document archiConfig;
+    pugi::xml_parse_result archiConfigCarga;
+
+    // Envió por parámetro la ubicación del archivo?
+    if (argc >= 2) {
+        // Si
+        archiConfigPath = argv[1];
+        archiConfigCarga = archiConfig.load_file( archiConfigPath.data() );
     }
 
-    // Leer el nivel de logueo
-    std::string logLevel = archiConfig.child("configuracion").child("log").child_value("level");
+    // Si no pudo cargar el archivo solicitado, cargar el predeterminado
+    if (archiConfigCarga.status != 0) {
+        archiConfigCarga = archiConfig.load_file("config/default.xml");
+        if (archiConfigCarga.status != 0) {
+            std::cout << "ERROR: no se puede encontrar ningún archivo de configuración." << std::endl;;
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    // Nivel de logueo
+    std::string logLevel;
+
+    // Lo envió por parámetro?
+    if (argc >= 3) {
+        // Si
+        logLevel = argv[2];
+    } else {
+        // No, leo del XML
+        logLevel = archiConfig.child("configuracion").child("log").child_value("level");
+    }
 
     Logger::Log logueador(logLevel);
 
@@ -66,7 +89,7 @@ int main () {
 		enemigo3.retroceder();
 		enemigo4.avanzar();
 		enemigo5.retroceder();
-		ControlObjetos controlObjetos;
+		ControlObjetos controlObjetos(&renderizador,&archiConfig);
 		Barril barril(&renderizador,150,350, &archiConfig);
 		Caja caja(&renderizador, 300, 350, &archiConfig);
 		Cuchillo cuchillo(&renderizador, 450, 450, &archiConfig);
@@ -207,5 +230,6 @@ int main () {
 	}
 	return retorno;
 }
+
 
 

@@ -27,6 +27,7 @@ private:
 	Encuadre insercion;
 	Textura textura;
 public:
+	Barril();
 	Barril(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig);
 	void actualizar(Renderizador *renderizador);
 	void refrescar(Renderizador *renderizador);

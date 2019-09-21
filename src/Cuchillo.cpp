@@ -7,6 +7,10 @@
 
 #include "Cuchillo.h"
 
+Cuchillo::Cuchillo(){
+
+}
+
 Cuchillo::Cuchillo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
 	// TODO Auto-generated constructor stub
 	posicionX = posXinicial;

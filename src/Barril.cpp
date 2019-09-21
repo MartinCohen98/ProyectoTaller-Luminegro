@@ -7,6 +7,10 @@
 
 #include "Barril.h"
 
+Barril::Barril(){
+
+}
+
 Barril::Barril(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
 	// TODO Auto-generated constructor stub
 	posicionX = posXinicial;

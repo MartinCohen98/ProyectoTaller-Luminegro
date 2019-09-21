@@ -7,6 +7,10 @@
 
 #include "Caja.h"
 
+Caja::Caja(){
+
+}
+
 Caja::Caja(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
 	// TODO Auto-generated constructor stub
 	posicionX = posXinicial;
