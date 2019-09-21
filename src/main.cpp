@@ -3,6 +3,11 @@
 #include "Renderizador.h"
 #include "Protagonista.h"
 #include "Enemigo.h"
+#include "Barril.h"
+#include "Caja.h"
+#include "Cuchillo.h"
+#include "Tubo.h"
+#include "ControlObjetos.h"
 #include <SDL2/SDL.h>
 #include "../lib/pugixml/pugixml.hpp"
 #include <iostream>
@@ -51,6 +56,11 @@ int main () {
 		enemigo3.retroceder();
 		enemigo4.avanzar();
 		enemigo5.retroceder();
+		ControlObjetos controlObjetos;
+		Barril barril(&renderizador,150,350);
+		Caja caja(&renderizador, 300, 350);
+		Cuchillo cuchillo(&renderizador, 450, 450);
+		Tubo tubo(&renderizador, 550,450);
 		retorno = ventana.Abrir(&renderizador);
 
         std::string nivelNodeName = "nivel";
@@ -149,8 +159,27 @@ int main () {
 					break;
 			}
 			parallax.actualizar(&renderizador);
+
+		    bool aux;
+		    int avance;
+		    avance=parallax.consultarAvance();
+			aux=controlObjetos.Actualizar(&renderizador,avance);
+				if (aux){
+				    barril.actualizar(&renderizador);
+				    caja.actualizar(&renderizador);
+				    cuchillo.actualizar(&renderizador);
+				    tubo.actualizar(&renderizador);
+			}
+				else{
+					barril.refrescar(&renderizador);
+					caja.refrescar(&renderizador);
+					cuchillo.refrescar(&renderizador);
+					tubo.refrescar(&renderizador);
+				}
+
 			enemigo1.retroceder();
 			enemigo1.actualizar(&renderizador);
+
 			enemigo3.retroceder();
 			enemigo3.actualizar(&renderizador);
 			enemigo5.retroceder();

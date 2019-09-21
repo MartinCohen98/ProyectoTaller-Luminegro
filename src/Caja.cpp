@@ -22,6 +22,12 @@ Caja::Caja(Renderizador *renderizador, int posXinicial, int posYinicial) {
 }
 
 void Caja::actualizar(Renderizador *renderizador) {
+	posicionX=posicionX-12;
+	insercion.modificar(posicionX,posicionY,ancho,alto);
+	textura.copiarseEn(renderizador, encuadre, insercion);
+}
+
+void Caja::refrescar(Renderizador *renderizador) {
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 

@@ -22,8 +22,15 @@ Barril::Barril(Renderizador *renderizador, int posXinicial, int posYinicial) {
 }
 
 void Barril::actualizar(Renderizador *renderizador) {
+	posicionX=posicionX-12;
+	insercion.modificar(posicionX,posicionY,ancho,alto);
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
+
+void Barril::refrescar(Renderizador *renderizador) {
+	textura.copiarseEn(renderizador, encuadre, insercion);
+}
+
 
 Barril::~Barril() {
 	// TODO Auto-generated destructor stub
