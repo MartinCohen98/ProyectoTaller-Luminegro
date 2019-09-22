@@ -19,10 +19,10 @@
 class ControlObjetos {
 private:
 	int desplazamiento;
-	int cantBarriles;
-	int cantCajas;
-	int cantCuchillos;
-	int cantTubos;
+	int barrilesCantidad;
+	int cajasCantidad;
+	int cuchillosCantidad;
+	int tubosMetalicosCantidad;
 	Barril barriles[10];
 	Caja cajas[10];
 	Cuchillo cuchillos[10];

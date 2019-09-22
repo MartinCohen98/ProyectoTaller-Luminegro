@@ -37,44 +37,36 @@
                 <edificios>assets/images/backgrounds/buildings.bmp</edificios>
                 <terreno>assets/images/backgrounds/terrain.bmp</terreno>
                 <terrenoWidth>1920</terrenoWidth>
-                <objeto>
-                    <tipo>barril</tipo>
+                <barril>
                     <cantidad>3</cantidad>
-                </objeto>
-                <objeto>
-                    <tipo>caja</tipo>
-                    <cantidad>3</cantidad>
-                </objeto>
-                <objeto>
-                    <tipo>cuchillo</tipo>
-                    <cantidad>5</cantidad>
-                </objeto>
-                <objeto>
-                    <tipo>tuboMetalico</tipo>
-                    <cantidad>5</cantidad>
-                </objeto>
+                </barril>
+                <caja>
+                    <cantidad>2</cantidad>
+                </caja>
+                <cuchillo>
+                    <cantidad>4</cantidad>
+                </cuchillo>
+                <tuboMetalico>
+                    <cantidad>1</cantidad>
+                </tuboMetalico>
             </nivel1>
             <nivel2>
                 <nubes>assets/images/backgrounds/clouds.bmp</nubes>
                 <edificios>assets/images/backgrounds/buildings.bmp</edificios>
                 <terreno>assets/images/backgrounds/terrain2.bmp</terreno>
                 <terrenoWidth>1470</terrenoWidth>
-                <objeto>
-                    <tipo>barril</tipo>
+                <barril>
+                    <cantidad>5</cantidad>
+                </barril>
+                <caja>
+                    <cantidad>1</cantidad>
+                </caja>
+                <cuchillo>
                     <cantidad>2</cantidad>
-                </objeto>
-                <objeto>
-                    <tipo>caja</tipo>
-                    <cantidad>2</cantidad>
-                </objeto>
-                <objeto>
-                    <tipo>cuchillo</tipo>
-                    <cantidad>4</cantidad>
-                </objeto>
-                <objeto>
-                    <tipo>tuboMetalico</tipo>
-                    <cantidad>4</cantidad>
-                </objeto>
+                </cuchillo>
+                <tuboMetalico>
+                    <cantidad>3</cantidad>
+                </tuboMetalico>
             </nivel2>
         </niveles>
         <margenWidth>300</margenWidth>
