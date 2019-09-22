@@ -96,6 +96,7 @@ int main (int argc, char** argv) {
 		enemigo4.avanzar();
 		enemigo5.retroceder();
         logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
+
         //TODO Leer desde xml cantidad de objetos y randomizarlos
 		ControlObjetos controlObjetos(&renderizador,&archiConfig);
 		Barril barril(&renderizador,150,350, &archiConfig);
@@ -208,22 +209,21 @@ int main (int argc, char** argv) {
 			}
 			parallax.actualizar(&renderizador);
 
-		    bool aux;
-		    int avance;
-		    avance=parallax.consultarAvance();
-			aux=controlObjetos.Actualizar(&renderizador,avance);
-				if (aux){
-				    barril.actualizar(&renderizador);
-				    caja.actualizar(&renderizador);
-				    cuchillo.actualizar(&renderizador);
-				    tubo.actualizar(&renderizador);
-			}
-				else{
-					barril.refrescar(&renderizador);
-					caja.refrescar(&renderizador);
-					cuchillo.refrescar(&renderizador);
-					tubo.refrescar(&renderizador);
-				}
+		    int avance = parallax.consultarAvance();
+			bool aux = controlObjetos.Actualizar(&renderizador,avance);
+
+            if (aux) {
+                barril.actualizar(&renderizador);
+                caja.actualizar(&renderizador);
+                cuchillo.actualizar(&renderizador);
+                tubo.actualizar(&renderizador);
+
+            } else {
+                barril.refrescar(&renderizador);
+                caja.refrescar(&renderizador);
+                cuchillo.refrescar(&renderizador);
+                tubo.refrescar(&renderizador);
+            }
 
 			enemigo1.retroceder();
 			enemigo1.actualizar(&renderizador);
