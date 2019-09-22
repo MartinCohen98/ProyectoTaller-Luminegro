@@ -12,7 +12,7 @@
 #include <SDL2/SDL.h>
 #include "../lib/pugixml/pugixml.hpp"
 #include <iostream>
-#include "logger.h"
+#include "Logger.h"
 
 
 int main (int argc, char** argv) {
@@ -50,14 +50,15 @@ int main (int argc, char** argv) {
         logLevel = archiConfig.child("configuracion").child("log").child_value("level");
     }
 
-    Logger::Log logueador(logLevel);
+    Logger::Log::InicializarLog(logLevel, "");
+    Logger::Log  *logueador  =  Logger::Log::ObtenerInstancia();
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
-        logueador.Error("No se pudo iniciar SDL2 correctamente");
+        logueador->Error("No se pudo iniciar SDL2 correctamente");
         return -1;
     }
 
-    logueador.Info("Ejecutando el main.cpp");
+    logueador->Debug("Ejecutando el main.cpp");
 
     bool salir;
 	SDL_Event evento;
@@ -83,7 +84,7 @@ int main (int argc, char** argv) {
 		Enemigo enemigo2(&renderizador, 300, 350, enemigoDugBMPPath);
 		Enemigo enemigo3(&renderizador, 1700, 220, enemigoJakeBMPPath);
 		Enemigo enemigo4(&renderizador, -500, 350, enemigoJakeBMPPath);
-		Enemigo enemigo5(&renderizador, 2500, 220, enemigoDugBMPPath);
+ 		Enemigo enemigo5(&renderizador, 2500, 220, enemigoDugBMPPath);
 		enemigo1.retroceder();
 		enemigo2.avanzar();
 		enemigo3.retroceder();
