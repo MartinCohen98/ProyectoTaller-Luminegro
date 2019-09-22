@@ -22,6 +22,8 @@ Log *Log::ObtenerInstancia() {
     return instancia;
 }
 
+//Se puede inicializar una sola vez en toda la aplicación, y ya deja creada la instancia.
+
 bool Log::InicializarLog(string severidadMinima, string rutaArchivo, char caracterSeparador) {
     if(instancia)
         return false;

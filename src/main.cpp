@@ -14,6 +14,7 @@
 #include <iostream>
 #include "Logger.h"
 
+using namespace Logger;
 
 int main (int argc, char** argv) {
 
@@ -33,7 +34,7 @@ int main (int argc, char** argv) {
     if (archiConfigCarga.status != 0) {
         archiConfigCarga = archiConfig.load_file("config/default.xml");
         if (archiConfigCarga.status != 0) {
-            std::cout << "ERROR: no se puede encontrar ningún archivo de configuración." << std::endl;;
+            Log::ObtenerInstancia()->Error("No se puede encontrar ningún archivo de configuración.");
             exit(EXIT_FAILURE);
         }
     }
@@ -50,8 +51,10 @@ int main (int argc, char** argv) {
         logLevel = archiConfig.child("configuracion").child("log").child_value("level");
     }
 
-    Logger::Log::InicializarLog(logLevel, "");
-    Logger::Log  *logueador  =  Logger::Log::ObtenerInstancia();
+    //Se inicializa el Logger acá y así queda para el resto de la aplicación.
+    Log::InicializarLog(logLevel, "");
+    //En cualquier clase que haya que utilizar el logger, se lo instancia así
+    Log  *logueador  =  Logger::Log::ObtenerInstancia();
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         logueador->Error("No se pudo iniciar SDL2 correctamente");
@@ -65,6 +68,7 @@ int main (int argc, char** argv) {
 	int retorno;
 	VentanaDeJuego ventana;
 	Renderizador renderizador(ventana.Get());
+
 
 	for (int i = 1; i <= 2; i++){
 		salir = false;
@@ -80,6 +84,7 @@ int main (int argc, char** argv) {
         const char* enemigoJakeBMPPath = archiConfig.child("configuracion").child("escenario")
                 .child("enemigos").child("jake").child("imagen").attribute("url").value();
 
+        logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
         Enemigo enemigo1(&renderizador, 650, 220, enemigoBredBMPPath);
 		Enemigo enemigo2(&renderizador, 300, 350, enemigoDugBMPPath);
 		Enemigo enemigo3(&renderizador, 1700, 220, enemigoJakeBMPPath);
@@ -90,6 +95,8 @@ int main (int argc, char** argv) {
 		enemigo3.retroceder();
 		enemigo4.avanzar();
 		enemigo5.retroceder();
+        logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
+        //TODO Leer desde xml cantidad de objetos y randomizarlos
 		ControlObjetos controlObjetos(&renderizador,&archiConfig);
 		Barril barril(&renderizador,150,350, &archiConfig);
 		Caja caja(&renderizador, 300, 350, &archiConfig);
@@ -99,8 +106,10 @@ int main (int argc, char** argv) {
 
         std::string nivelNodeName = "nivel";
         nivelNodeName.append( std::to_string(i) );
+        logueador->Debug("Nivel: "+ nivelNodeName);
 
-        // Leo del XML la ubicación de los BMPs de los fondos y el ancho del terreno
+        logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
+
         std::string nubesBMPPath = archiConfig.child("configuracion").child("escenario")
                 .child("niveles").child( nivelNodeName.data() ).child_value("nubes");
 
@@ -113,8 +122,13 @@ int main (int argc, char** argv) {
         std::string terrenoWidthString = archiConfig.child("configuracion").child("escenario")
                 .child("niveles").child( nivelNodeName.data() ).child_value("terrenoWidth");
 
+        logueador->Debug("nubesBMPPath: " + nubesBMPPath);
+        logueador->Debug("edificiosBMPPath: " + edificiosBMPPath);
+        logueador->Debug("terrenoBMPPath: " + terrenoBMPPath + " terrenoBMPPath: " + terrenoBMPPath);
+
         int terrenoWidth = std::stoi(terrenoWidthString);
 
+        logueador->Debug("Carga capas en el Parallax");
         parallax.cargarCapas(nubesBMPPath.data(),
                              edificiosBMPPath.data(),
                              terrenoBMPPath.data(),
@@ -228,7 +242,9 @@ int main (int argc, char** argv) {
 				salir = protagonista.llegoAlFin(&parallax);
 			SDL_Delay(25);
 		}
+        logueador->Debug("Fin de nivel " +  nivelNodeName);
 	}
+    logueador->Debug("Fin del juego");
 	return retorno;
 }
 
