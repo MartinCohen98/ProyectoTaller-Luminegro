@@ -11,6 +11,7 @@
 #include "Enemigo.h"
 #include "Renderizador.h"
 #include "Parallax.h"
+#include "../lib/pugixml/pugixml.hpp"
 
 
 class ControlEnemigos {
@@ -18,7 +19,7 @@ private: Enemigo *enemigos;
          int enemigosCantidad;
 public:
     ControlEnemigos();
-	ControlEnemigos(Renderizador *renderizador);
+	ControlEnemigos(Renderizador *renderizador, pugi::xml_document *archiConfig);
 	int InsertarEnEscenario(Renderizador *renderizador);
 	int ActualizarEnPantalla(Renderizador *renderizador);
 	virtual ~ControlEnemigos();

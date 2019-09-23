@@ -87,7 +87,7 @@ int main (int argc, char** argv) {
 
         logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
 
-        ControlEnemigos controlEnemigos(&renderizador);
+        ControlEnemigos controlEnemigos(&renderizador, &archiConfig);
 
         Enemigo enemigo1(&renderizador, 650, 220, enemigoBredBMPPath);
 		Enemigo enemigo2(&renderizador, 300, 350, enemigoDugBMPPath);
