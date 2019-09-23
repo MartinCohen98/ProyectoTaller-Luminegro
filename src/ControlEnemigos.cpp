@@ -12,13 +12,15 @@ ControlEnemigos::ControlEnemigos(){
 
 }
 
-/*ControlEnemigos::ControlEnemigos(Renderizador *renderizador) {
+ControlEnemigos::ControlEnemigos(Renderizador *renderizador) {
 	// TODO Auto-generated constructor stub
-	Enemigo enemigos[0](renderizador, 650, 220, "assets/images/sprites/bred.bmp");
-	enemigos[1](renderizador, 0, 280, "assets/images/sprites/dug.bmp");
-    enemigos[2](renderizador, 1500, 220, "assets/images/sprites/jake.bmp");
-	enemigos[3](renderizador, 1800, 220, "assets/images/sprites/jake.bmp")
-}*/
+	enemigosCantidad=5;
+	enemigos = new Enemigo[enemigosCantidad];
+	enemigos[0]=Enemigo(renderizador, 650, 220, "assets/images/sprites/bred.bmp");
+	enemigos[1]=Enemigo(renderizador, 0, 280, "assets/images/sprites/dug.bmp");
+    enemigos[2]=Enemigo(renderizador, 1500, 220, "assets/images/sprites/jake.bmp");
+	enemigos[3]=Enemigo(renderizador, 1800, 220, "assets/images/sprites/jake.bmp");
+};
 
 int ControlEnemigos::InsertarEnEscenario(Renderizador *renderizador){
 	;

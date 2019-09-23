@@ -7,6 +7,10 @@
 
 #include "Enemigo.h"
 
+Enemigo::Enemigo(){
+
+}
+
 Enemigo::Enemigo(Renderizador *renderizador, int posXinicial, int posYinicial, const char* path){
 	posicionX = posXinicial;
 	posicionY = posYinicial;

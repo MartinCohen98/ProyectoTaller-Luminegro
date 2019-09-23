@@ -14,10 +14,11 @@
 
 
 class ControlEnemigos {
-/*private: Enemigo enemigos[4];*/
+private: Enemigo *enemigos;
+         int enemigosCantidad;
 public:
     ControlEnemigos();
-	/*ControlEnemigos(Renderizador *renderizador)*/
+	ControlEnemigos(Renderizador *renderizador);
 	int InsertarEnEscenario(Renderizador *renderizador);
 	int ActualizarEnPantalla(Parallax *parallax, Renderizador *renderizador);
 	virtual ~ControlEnemigos();

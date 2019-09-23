@@ -30,6 +30,7 @@ private:
 	Textura textura;
 
 public:
+	Enemigo();
 	Enemigo(Renderizador *renderizador, int posXinicial, int posYinicial, const char* path);
 	int avanzar();
 	void parar();
