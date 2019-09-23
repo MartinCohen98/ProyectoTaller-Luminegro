@@ -20,7 +20,7 @@ public:
     ControlEnemigos();
 	ControlEnemigos(Renderizador *renderizador);
 	int InsertarEnEscenario(Renderizador *renderizador);
-	int ActualizarEnPantalla(Parallax *parallax, Renderizador *renderizador);
+	int ActualizarEnPantalla(Renderizador *renderizador);
 	virtual ~ControlEnemigos();
 };
 

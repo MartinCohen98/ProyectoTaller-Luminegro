@@ -26,15 +26,15 @@ int ControlEnemigos::InsertarEnEscenario(Renderizador *renderizador){
 	;
 	}
 
-int ControlEnemigos::ActualizarEnPantalla(Parallax *parallax,Renderizador *renderizador){
-/*	enemigos[0].retroceder();
-	enemigos[1].avanzar(parallax);
+int ControlEnemigos::ActualizarEnPantalla(Renderizador *renderizador){
+	enemigos[0].retroceder();
+	enemigos[1].avanzar();
 	enemigos[2].retroceder();
-	enemigos[3].avanzar(parallax);
+	enemigos[3].avanzar();
 	enemigos[0].actualizar(renderizador);
 	enemigos[1].actualizar(renderizador);
 	enemigos[2].actualizar(renderizador);
-	enemigos[3].actualizar(renderizador);*/
+	enemigos[3].actualizar(renderizador);
 }
 
 ControlEnemigos::~ControlEnemigos() {

@@ -49,12 +49,12 @@ void Enemigo::parar() {
 
 void Enemigo::retroceder() {
 	dadoVuelta = true;
-	if (posicionX > 0) {
+	/*if (posicionX > 0) {*/
 		estado = estado->avanzar();
 		moverEnX(-5);
-	} else {
+	/*} else {
 		estado = estado->parar();
-	}
+	}*/
 }
 
 void Enemigo::subir() {

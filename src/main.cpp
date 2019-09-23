@@ -9,6 +9,7 @@
 #include "Cuchillo.h"
 #include "Tubo.h"
 #include "ControlObjetos.h"
+#include "ControlEnemigos.h"
 #include <SDL2/SDL.h>
 #include "../lib/pugixml/pugixml.hpp"
 #include <iostream>
@@ -85,6 +86,9 @@ int main (int argc, char** argv) {
                 .child("enemigos").child("jake").child("imagen").attribute("url").value();
 
         logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
+
+        ControlEnemigos controlEnemigos(&renderizador);
+
         Enemigo enemigo1(&renderizador, 650, 220, enemigoBredBMPPath);
 		Enemigo enemigo2(&renderizador, 300, 350, enemigoDugBMPPath);
 		Enemigo enemigo3(&renderizador, 1700, 220, enemigoJakeBMPPath);
@@ -225,9 +229,10 @@ int main (int argc, char** argv) {
                 tubo.refrescar(&renderizador);
             }
 
+            /*controlEnemigos.ActualizarEnPantalla(&renderizador);*/
+
 			enemigo1.retroceder();
 			enemigo1.actualizar(&renderizador);
-
 			enemigo3.retroceder();
 			enemigo3.actualizar(&renderizador);
 			enemigo5.retroceder();
