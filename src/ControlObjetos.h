@@ -23,10 +23,10 @@ private:
 	int cajasCantidad;
 	int cuchillosCantidad;
 	int tubosMetalicosCantidad;
-	Barril barriles[10];
-	Caja cajas[10];
-	Cuchillo cuchillos[10];
-	Tubo tubos[10];
+	Barril *barriles;
+	Caja *cajas;
+	Cuchillo *cuchillos;
+	Tubo *tubos;
 public:
 	ControlObjetos();
 	ControlObjetos(Renderizador *renderizador, pugi::xml_document *archiConfig);
