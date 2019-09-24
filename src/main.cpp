@@ -70,7 +70,7 @@ int main (int argc, char** argv) {
 	VentanaDeJuego ventana;
 	Renderizador renderizador(ventana.Get());
 
-	for (int i = 1; i <= 2; i++) {
+	for (int nivel = 1; nivel <= 2; nivel++) {
 		salir = false;
 		Parallax parallax(&renderizador);
 		Protagonista protagonista(&renderizador, &archiConfig);
@@ -131,25 +131,25 @@ int main (int argc, char** argv) {
 		Cuchillo *cuchillos[cuchillosCantidad];
 		Tubo *tubos[tubosMetalicosCantidad];
 
-        for (i = 0; i < barrilesCantidad; i++) {
+        for (int i = 0; i < barrilesCantidad; i++) {
             int distrX = i * 700 + 100;
             int distrY = i * 5 + 400;
             barriles[i] = new Barril(&renderizador, distrX, distrY, &archiConfig);
         }
 
-        for (i = 0; i < cajasCantidad; i++) {
+        for (int i = 0; i < cajasCantidad; i++) {
 			int distrX = i * 700 + 400;
 			int distrY = i * 5 + 400;
 			cajas[i] = new Caja(&renderizador, distrX, distrY, &archiConfig);
         }
 
-        for (i = 0; i < cuchillosCantidad; i++) {
+        for (int i = 0; i < cuchillosCantidad; i++) {
             int distrX = i * 700 + 700;
             int distrY = i * 5 + 500;
             cuchillos[i] = new Cuchillo(&renderizador, distrX, distrY, &archiConfig);
         }
 
-		for (i = 0; i < tubosMetalicosCantidad; i++) {
+		for (int i = 0; i < tubosMetalicosCantidad; i++) {
 			int distrX = i * 700 + 1000;
 			int distrY = i * 5 + 500;
 			tubos[i] = new Tubo(&renderizador, distrX, distrY, &archiConfig);
@@ -158,7 +158,7 @@ int main (int argc, char** argv) {
 		retorno = ventana.Abrir(&renderizador);
 
         std::string nivelNodeName = "nivel";
-        nivelNodeName.append( std::to_string(i) );
+        nivelNodeName.append( std::to_string(nivel) );
 
         logueador->Debug("Nivel: "+ nivelNodeName);
         logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
@@ -271,37 +271,37 @@ int main (int argc, char** argv) {
 			bool aux = controlObjetos.Actualizar(&renderizador,avance);
 
             if (aux) {
-                for (i = 0; i < barrilesCantidad; i++) {
+                for (int i = 0; i < barrilesCantidad; i++) {
             		barriles[i]->actualizar(&renderizador);
             	}
 
-            	for (i = 0; i < cajasCantidad; i++) {
+            	for (int i = 0; i < cajasCantidad; i++) {
             		cajas[i]->actualizar(&renderizador);
             	}
 
-            	for (i = 0; i < cuchillosCantidad; i++) {
+            	for (int i = 0; i < cuchillosCantidad; i++) {
             		cuchillos[i]->actualizar(&renderizador);
             	}
 
-            	for (i = 0; i < tubosMetalicosCantidad; i++) {
+            	for (int i = 0; i < tubosMetalicosCantidad; i++) {
                     tubos[i]->actualizar(&renderizador);
                 }
 
             } else {
 
-                for (i = 0; i < barrilesCantidad; i++) {
+                for (int i = 0; i < barrilesCantidad; i++) {
             	    barriles[i]->refrescar(&renderizador);
             	}
 
-                for (i = 0; i < cajasCantidad; i++) {
+                for (int i = 0; i < cajasCantidad; i++) {
                    cajas[i]->refrescar(&renderizador);
                 }
 
-                for (i = 0; i < cuchillosCantidad; i++) {
+                for (int i = 0; i < cuchillosCantidad; i++) {
                    cuchillos[i]->refrescar(&renderizador);
                 }
 
-                for (i = 0; i < tubosMetalicosCantidad; i++) {
+                for (int i = 0; i < tubosMetalicosCantidad; i++) {
                    tubos[i]->refrescar(&renderizador);
                 }
 
@@ -330,7 +330,7 @@ int main (int argc, char** argv) {
 
         logueador->Debug("Fin de nivel " +  nivelNodeName);
 
-		if (i=2) {
+		if (nivel == 2) {
             salir = true;
         }
 	}
