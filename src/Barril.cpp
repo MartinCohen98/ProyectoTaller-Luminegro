@@ -6,6 +6,7 @@
  */
 
 #include "Barril.h"
+#include "Imagen.h"
 
 Barril::Barril(){
 
@@ -22,7 +23,7 @@ Barril::Barril(Renderizador *renderizador, int posXinicial, int posYinicial, pug
     std::string barrilBMPPath = archiConfig->child("configuracion").child("escenario")
             .child("objetos").child("barril").child_value("imagen");
 
-	sprite.cargar ( barrilBMPPath.data() );
+	sprite.cargar( barrilBMPPath.data(), Imagen::TIPO_OBJETO);
 
 	encuadre.modificar(0,0,30,32);
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);

@@ -6,6 +6,7 @@
  */
 
 #include "Caja.h"
+#include "Imagen.h"
 
 Caja::Caja(){
 
@@ -22,7 +23,7 @@ Caja::Caja(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::x
     std::string cajaBMPPath = archiConfig->child("configuracion").child("escenario")
             .child("objetos").child("caja").child_value("imagen");
 
-    sprite.cargar ( cajaBMPPath.data() );
+    sprite.cargar (cajaBMPPath.data(), Imagen::TIPO_OBJETO);
 
 	encuadre.modificar(0,0,96,160);
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);

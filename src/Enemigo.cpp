@@ -20,7 +20,7 @@ Enemigo::Enemigo(Renderizador *renderizador, int posXinicial, int posYinicial, c
 	dadoVuelta = false;
 	contactoVisual = false;
 	modoBusqueda = false;
-	sprite.cargar(path);
+	sprite.cargar(path, Imagen::TIPO_PERSONAJE);
 	insercion.modificar(posicionX, posicionY, ancho, alto);
 	textura.texturizar(renderizador, sprite);
 	textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);

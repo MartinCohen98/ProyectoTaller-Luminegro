@@ -16,9 +16,9 @@ Parallax::Parallax(Renderizador *renderizador) {
 	desplazamientos[1] = 0;
 	desplazamientos[2] = 0;
     Imagen capas[3];
-	capas[0].cargar("assets/images/general/load.png");
-	capas[1].cargar("assets/images/general/load.png");
-	capas[2].cargar("assets/images/general/load.png");
+	capas[0].cargar("assets/images/general/load.png", Imagen::TIPO_FONDO);
+	capas[1].cargar("assets/images/general/load.png", Imagen::TIPO_FONDO);
+	capas[2].cargar("assets/images/general/load.png", Imagen::TIPO_FONDO);
 	encuadres[0].modificar(0, 0, 260, 195);
 	encuadres[1].modificar(0, 0, 260, 195);
 	encuadres[2].modificar(0, 0, 260, 195);
@@ -52,9 +52,9 @@ void Parallax::mover() {
 int Parallax::cargarCapas(const char *path1, const char *path2,
 						const char *path3, Renderizador* renderizador) {
     Imagen capas[3];
-	capas[0].cargar(path1);
-	capas[1].cargar(path2);
-	capas[2].cargar(path3);
+    capas[0].cargar(path1, Imagen::TIPO_FONDO);
+    capas[1].cargar(path2, Imagen::TIPO_FONDO);
+    capas[2].cargar(path3, Imagen::TIPO_FONDO);
 	for (int i = 0; i <= 2; i++) {
 	    texturas[i].texturizar(renderizador, capas[i]);
 	}

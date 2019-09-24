@@ -22,7 +22,7 @@ Tubo::Tubo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::x
     std::string tuboBMPPath = archiConfig->child("configuracion").child("escenario")
             .child("objetos").child("tuboMetalico").child_value("imagen");
 
-    sprite.cargar ( tuboBMPPath.data() );
+    sprite.cargar( tuboBMPPath.data(), Imagen::TIPO_OBJETO);
 
 	encuadre.modificar(0,0,24,144);
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);

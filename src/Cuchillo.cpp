@@ -6,6 +6,7 @@
  */
 
 #include "Cuchillo.h"
+#include "Imagen.h"
 
 Cuchillo::Cuchillo(){
 
@@ -22,7 +23,7 @@ Cuchillo::Cuchillo(Renderizador *renderizador, int posXinicial, int posYinicial,
     std::string cuchilloBMPPath = archiConfig->child("configuracion").child("escenario")
             .child("objetos").child("cuchillo").child_value("imagen");
 
-    sprite.cargar ( cuchilloBMPPath.data() );
+    sprite.cargar( cuchilloBMPPath.data(), Imagen::TIPO_OBJETO);
 
 	encuadre.modificar(0,0,66,21);
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);

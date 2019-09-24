@@ -17,7 +17,7 @@ Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archi
             .child("protagonista").child_value("imagen");
 
     Imagen sprite;
-	sprite.cargar( protagonistaBMPPath.data() );
+	sprite.cargar( protagonistaBMPPath.data(), Imagen::TIPO_PERSONAJE );
 
     std::string margenWidthString = archiConfig->child("configuracion").child("escenario").
             child_value("margenWidth");
