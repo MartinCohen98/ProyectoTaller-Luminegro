@@ -70,8 +70,7 @@ int main (int argc, char** argv) {
 	VentanaDeJuego ventana;
 	Renderizador renderizador(ventana.Get());
 
-
-	for (int i = 1; i <= 2; i++){
+	for (int i = 1; i <= 2; i++) {
 		salir = false;
 		Parallax parallax(&renderizador);
 		Protagonista protagonista(&renderizador, &archiConfig);
@@ -87,31 +86,28 @@ int main (int argc, char** argv) {
 
         logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
 
-       /* ControlEnemigos controlEnemigos(&renderizador, &archiConfig);*/
+        /* ControlEnemigos controlEnemigos(&renderizador, &archiConfig);*/
 
         Enemigo enemigo1(&renderizador, 650, 220, enemigoBredBMPPath);
 		Enemigo enemigo2(&renderizador, 300, 350, enemigoDugBMPPath);
 		Enemigo enemigo3(&renderizador, 1700, 220, enemigoJakeBMPPath);
 		Enemigo enemigo4(&renderizador, -500, 350, enemigoJakeBMPPath);
  		Enemigo enemigo5(&renderizador, 2500, 220, enemigoDugBMPPath);
+
 		enemigo1.retroceder();
 		enemigo2.avanzar();
 		enemigo3.retroceder();
 		enemigo4.avanzar();
 		enemigo5.retroceder();
+
         logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 
-        //TODO Leer desde xml cantidad de objetos y randomizarlos
-		ControlObjetos controlObjetos(&renderizador,&archiConfig);
+        ControlObjetos controlObjetos(&renderizador,&archiConfig);
 
 		int barrilesCantidad;
 	    int cajasCantidad;
 	    int cuchillosCantidad;
 		int tubosMetalicosCantidad;
-	/*	Barril *barriles;
-		Caja *cajas;
-		Cuchillo *cuchillos;
-		Tubo *tubos;*/
 
 		std::string barrilesCantidadString = archiConfig.child("configuracion").child("escenario")
 			            .child("niveles").child("nivel1").child("barril").child_value("cantidad");
@@ -130,47 +126,41 @@ int main (int argc, char** argv) {
 		cuchillosCantidad = std::stoi(cuchillosCantidadString);
 		tubosMetalicosCantidad = std::stoi(tubosMetalicosCantidadString);
 
-		Barril *barriles[barrilesCantidad]/* = new Barril[barrilesCantidad]*/;
-		Caja *cajas[cajasCantidad]/* = new Caja[cajasCantidad]*/;
-		Cuchillo *cuchillos[cuchillosCantidad]/* = new Cuchillo[cuchillosCantidad]*/;
-		Tubo *tubos[tubosMetalicosCantidad]/* = new Tubo[tubosMetalicosCantidad]*/;
-		/*barriles=new Barril[barrilesCantidad];
-			cajas=new Caja[cajasCantidad];
-			cuchillos=new Cuchillo[cuchillosCantidad];
-			tubos=new Tubo[tubosMetalicosCantidad];*/
+		Barril *barriles[barrilesCantidad];
+		Caja *cajas[cajasCantidad];
+		Cuchillo *cuchillos[cuchillosCantidad];
+		Tubo *tubos[tubosMetalicosCantidad];
 
-			for(i=0;i<barrilesCantidad;i++){
-				int distrX=i*700+100;
-				int distrY=i*5+400;
-			    barriles[i] = new Barril(&renderizador, distrX, distrY, &archiConfig);
-			}
-			for(i=0;i<cajasCantidad;i++){
-				int distrX=i*700+400;
-				int distrY=i*5+400;
-				cajas[i] = new Caja(&renderizador, distrX, distrY, &archiConfig);
-				}
-			for(i=0;i<cuchillosCantidad;i++){
-				int distrX=i*700+700;
-				int distrY=i*5+500;
-				cuchillos[i] = new Cuchillo(&renderizador, distrX, distrY, &archiConfig);
-				}
-			for(i=0;i<tubosMetalicosCantidad;i++){
-				int distrX=i*700+1000;
-				int distrY=i*5+500;
-				tubos[i] = new Tubo(&renderizador, distrX, distrY, &archiConfig);
-				}
+        for (i = 0; i < barrilesCantidad; i++) {
+            int distrX = i * 700 + 100;
+            int distrY = i * 5 + 400;
+            barriles[i] = new Barril(&renderizador, distrX, distrY, &archiConfig);
+        }
 
+        for (i = 0; i < cajasCantidad; i++) {
+			int distrX = i * 700 + 400;
+			int distrY = i * 5 + 400;
+			cajas[i] = new Caja(&renderizador, distrX, distrY, &archiConfig);
+        }
 
-	/*	Barril barril(&renderizador,150,350, &archiConfig);
-		Caja caja(&renderizador, 300, 350, &archiConfig);
-		Cuchillo cuchillo(&renderizador, 450, 450, &archiConfig);
-		Tubo tubo(&renderizador, 550,450, &archiConfig);*/
+        for (i = 0; i < cuchillosCantidad; i++) {
+            int distrX = i * 700 + 700;
+            int distrY = i * 5 + 500;
+            cuchillos[i] = new Cuchillo(&renderizador, distrX, distrY, &archiConfig);
+        }
+
+		for (i = 0; i < tubosMetalicosCantidad; i++) {
+			int distrX = i * 700 + 1000;
+			int distrY = i * 5 + 500;
+			tubos[i] = new Tubo(&renderizador, distrX, distrY, &archiConfig);
+		}
+
 		retorno = ventana.Abrir(&renderizador);
 
         std::string nivelNodeName = "nivel";
         nivelNodeName.append( std::to_string(i) );
-        logueador->Debug("Nivel: "+ nivelNodeName);
 
+        logueador->Debug("Nivel: "+ nivelNodeName);
         logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
 
         std::string nubesBMPPath = archiConfig.child("configuracion").child("escenario")
@@ -192,156 +182,160 @@ int main (int argc, char** argv) {
         int terrenoWidth = std::stoi(terrenoWidthString);
 
         logueador->Debug("Carga capas en el Parallax");
+
         parallax.cargarCapas(nubesBMPPath.data(),
                              edificiosBMPPath.data(),
                              terrenoBMPPath.data(),
                              &renderizador);
 
         parallax.cambiarLimite(terrenoWidth);
-
 		parallax.actualizar(&renderizador);
 
 		while (!salir) {
 			SDL_PollEvent(&evento);
-			switch (evento.type){
+
+			switch (evento.type) {
 				case SDL_KEYDOWN:
-					if (evento.key.repeat == 0)
-					switch (evento.key.keysym.sym){
-						case SDLK_RIGHT:
-							//Avanzar
-							protagonista.avanzar();
-							break;
-						case SDLK_LEFT:
-							//Atras
-							protagonista.retroceder();
-							break;
-						case SDLK_UP:
-							//Arriba
-							protagonista.subir();
-							break;
-						case SDLK_DOWN:
-							//Abajo
-							protagonista.bajar();
-							break;
-						case SDLK_z:
-							//Saltar
-							protagonista.saltar();
-							break;
-						case SDLK_x:
-							//Agacharse
-							protagonista.agacharse();
-							break;
-						case SDLK_c:
-							//Pegar
-							protagonista.pegar();
-							break;
-						case SDLK_ESCAPE:
-							//Salir
-							salir = true;
-							break;
-					}
-					break;
+					if (evento.key.repeat == 0) {
+                        switch (evento.key.keysym.sym) {
+                            case SDLK_RIGHT:
+                                //Avanzar
+                                protagonista.avanzar();
+                                break;
+                            case SDLK_LEFT:
+                                //Atras
+                                protagonista.retroceder();
+                                break;
+                            case SDLK_UP:
+                                //Arriba
+                                protagonista.subir();
+                                break;
+                            case SDLK_DOWN:
+                                //Abajo
+                                protagonista.bajar();
+                                break;
+                            case SDLK_z:
+                                //Saltar
+                                protagonista.saltar();
+                                break;
+                            case SDLK_x:
+                                //Agacharse
+                                protagonista.agacharse();
+                                break;
+                            case SDLK_c:
+                                //Pegar
+                                protagonista.pegar();
+                                break;
+                            case SDLK_ESCAPE:
+                                //Salir
+                                salir = true;
+                                break;
+                        }
+                    }
+                    break;
+
 				case SDL_KEYUP:
-					if (evento.key.repeat == 0)
-					switch (evento.key.keysym.sym){
-						case SDLK_RIGHT:
-							//Avanzar
-							protagonista.dejarDeAvanzar();
-							break;
-						case SDLK_LEFT:
-							//Atras
-							protagonista.dejarDeRetroceder();
-							break;
-						case SDLK_UP:
-							//Arriba
-							protagonista.dejarDeSubir();
-							break;
-						case SDLK_DOWN:
-							//Abajo
-							protagonista.dejarDeBajar();
-							break;
-						case SDLK_x:
-							protagonista.dejarDeAgacharse();
-							break;
-					}
+					if (evento.key.repeat == 0) {
+                        switch (evento.key.keysym.sym) {
+                            case SDLK_RIGHT:
+                                //Avanzar
+                                protagonista.dejarDeAvanzar();
+                                break;
+                            case SDLK_LEFT:
+                                //Atras
+                                protagonista.dejarDeRetroceder();
+                                break;
+                            case SDLK_UP:
+                                //Arriba
+                                protagonista.dejarDeSubir();
+                                break;
+                            case SDLK_DOWN:
+                                //Abajo
+                                protagonista.dejarDeBajar();
+                                break;
+                            case SDLK_x:
+                                protagonista.dejarDeAgacharse();
+                                break;
+                        }
+                    }
 					break;
+
 				case SDL_QUIT:
 					salir = true;
 					break;
 			}
+
 			parallax.actualizar(&renderizador);
 
 		    int avance = parallax.consultarAvance();
 			bool aux = controlObjetos.Actualizar(&renderizador,avance);
 
             if (aux) {
-               /* barril.actualizar(&renderizador);
-                caja.actualizar(&renderizador);
-                cuchillo.actualizar(&renderizador);
-                tubo.actualizar(&renderizador);*/
+                for (i = 0; i < barrilesCantidad; i++) {
+            		barriles[i]->actualizar(&renderizador);
+            	}
 
-            	for(i=0;i<barrilesCantidad;i++){
-            		      barriles[i]->actualizar(&renderizador);
-            		    }
-            		 for(i=0;i<cajasCantidad;i++){
-            		 	  cajas[i]->actualizar(&renderizador);
-            		 	}
-            		 for(i=0;i<cuchillosCantidad;i++){
-            		 	  cuchillos[i]->actualizar(&renderizador);
-            		    }
-            		 for(i=0;i<tubosMetalicosCantidad;i++){
-            		 	  tubos[i]->actualizar(&renderizador);
-            		 	}
-            }
+            	for (i = 0; i < cajasCantidad; i++) {
+            		cajas[i]->actualizar(&renderizador);
+            	}
 
-            else {
-             /*   barril->refrescar(&renderizador);
-                caja.refrescar(&renderizador);
-                cuchillo.refrescar(&renderizador);
-                tubo.refrescar(&renderizador);*/
+            	for (i = 0; i < cuchillosCantidad; i++) {
+            		cuchillos[i]->actualizar(&renderizador);
+            	}
 
-            	for(i=0;i<barrilesCantidad;i++){
-            		       barriles[i]->refrescar(&renderizador);
-            		    }
-            		 for(i=0;i<cajasCantidad;i++){
-            		 	   cajas[i]->refrescar(&renderizador);
-            		    }
-            		 for(i=0;i<cuchillosCantidad;i++){
-            		 	   cuchillos[i]->refrescar(&renderizador);
-            		    }
-            		 for(i=0;i<tubosMetalicosCantidad;i++){
-            		 	   tubos[i]->refrescar(&renderizador);
-            		    }
+            	for (i = 0; i < tubosMetalicosCantidad; i++) {
+                    tubos[i]->actualizar(&renderizador);
+                }
+
+            } else {
+
+                for (i = 0; i < barrilesCantidad; i++) {
+            	    barriles[i]->refrescar(&renderizador);
+            	}
+
+                for (i = 0; i < cajasCantidad; i++) {
+                   cajas[i]->refrescar(&renderizador);
+                }
+
+                for (i = 0; i < cuchillosCantidad; i++) {
+                   cuchillos[i]->refrescar(&renderizador);
+                }
+
+                for (i = 0; i < tubosMetalicosCantidad; i++) {
+                   tubos[i]->refrescar(&renderizador);
+                }
 
             }
 
-            /*controlEnemigos.ActualizarEnPantalla(&renderizador);*/
-
-			enemigo1.retroceder();
+            enemigo1.retroceder();
 			enemigo1.actualizar(&renderizador);
 			enemigo3.retroceder();
 			enemigo3.actualizar(&renderizador);
 			enemigo5.retroceder();
 			enemigo5.actualizar(&renderizador);
+
 			protagonista.actualizar(&renderizador, &parallax);
+
 			enemigo2.avanzar();
 			enemigo2.actualizar(&renderizador);
 			enemigo4.avanzar();
 			enemigo4.actualizar(&renderizador);
 			renderizador.renderizar();
-			if (!salir)
-				salir = protagonista.llegoAlFin(&parallax);
+
+			if (!salir) {
+                salir = protagonista.llegoAlFin(&parallax);
+            }
 			SDL_Delay(25);
 		}
+
         logueador->Debug("Fin de nivel " +  nivelNodeName);
-        if (i=2)
-        	salir=true;
+
+		if (i=2) {
+            salir = true;
+        }
 	}
+
     logueador->Debug("Fin del juego");
 
 	return retorno;
-
 }
-
-
-
