@@ -71,7 +71,11 @@ int main (int argc, char** argv) {
 	Renderizador renderizador(ventana.Get());
 
 	for (int nivel = 1; nivel <= 2; nivel++) {
-		salir = false;
+
+        std::string nivelNodeName = "nivel";
+        nivelNodeName.append( std::to_string(nivel) );
+
+        salir = false;
 		Parallax parallax(&renderizador);
 		Protagonista protagonista(&renderizador, &archiConfig);
 
@@ -110,16 +114,16 @@ int main (int argc, char** argv) {
 		int tubosMetalicosCantidad;
 
 		std::string barrilesCantidadString = archiConfig.child("configuracion").child("escenario")
-			            .child("niveles").child("nivel1").child("barril").child_value("cantidad");
+			            .child("niveles").child( nivelNodeName.data() ).child("barril").child_value("cantidad");
 
 	    std::string cajasCantidadString = archiConfig.child("configuracion").child("escenario")
-			            .child("niveles").child("nivel1").child("caja").child_value("cantidad");
+			            .child("niveles").child( nivelNodeName.data() ).child("caja").child_value("cantidad");
 
 	    std::string cuchillosCantidadString = archiConfig.child("configuracion").child("escenario")
-			            .child("niveles").child("nivel1").child("cuchillo").child_value("cantidad");
+			            .child("niveles").child( nivelNodeName.data() ).child("cuchillo").child_value("cantidad");
 
 	    std::string tubosMetalicosCantidadString = archiConfig.child("configuracion").child("escenario")
-			            .child("niveles").child("nivel1").child("tuboMetalico").child_value("cantidad");
+			            .child("niveles").child( nivelNodeName.data() ).child("tuboMetalico").child_value("cantidad");
 
 		barrilesCantidad = std::stoi(barrilesCantidadString);
 		cajasCantidad = std::stoi(cajasCantidadString);
@@ -156,9 +160,6 @@ int main (int argc, char** argv) {
 		}
 
 		retorno = ventana.Abrir(&renderizador);
-
-        std::string nivelNodeName = "nivel";
-        nivelNodeName.append( std::to_string(nivel) );
 
         logueador->Debug("Nivel: "+ nivelNodeName);
         logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
