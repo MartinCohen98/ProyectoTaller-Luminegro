@@ -87,7 +87,7 @@ int main (int argc, char** argv) {
 
         logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
 
-        ControlEnemigos controlEnemigos(&renderizador, &archiConfig);
+       /* ControlEnemigos controlEnemigos(&renderizador, &archiConfig);*/
 
         Enemigo enemigo1(&renderizador, 650, 220, enemigoBredBMPPath);
 		Enemigo enemigo2(&renderizador, 300, 350, enemigoDugBMPPath);
@@ -103,10 +103,68 @@ int main (int argc, char** argv) {
 
         //TODO Leer desde xml cantidad de objetos y randomizarlos
 		ControlObjetos controlObjetos(&renderizador,&archiConfig);
-		Barril barril(&renderizador,150,350, &archiConfig);
+
+		int barrilesCantidad;
+	    int cajasCantidad;
+	    int cuchillosCantidad;
+		int tubosMetalicosCantidad;
+	/*	Barril *barriles;
+		Caja *cajas;
+		Cuchillo *cuchillos;
+		Tubo *tubos;*/
+
+		std::string barrilesCantidadString = archiConfig.child("configuracion").child("escenario")
+			            .child("niveles").child("nivel1").child("barril").child_value("cantidad");
+
+	    std::string cajasCantidadString = archiConfig.child("configuracion").child("escenario")
+			            .child("niveles").child("nivel1").child("caja").child_value("cantidad");
+
+	    std::string cuchillosCantidadString = archiConfig.child("configuracion").child("escenario")
+			            .child("niveles").child("nivel1").child("cuchillo").child_value("cantidad");
+
+	    std::string tubosMetalicosCantidadString = archiConfig.child("configuracion").child("escenario")
+			            .child("niveles").child("nivel1").child("tuboMetalico").child_value("cantidad");
+
+		barrilesCantidad = std::stoi(barrilesCantidadString);
+		cajasCantidad = std::stoi(cajasCantidadString);
+		cuchillosCantidad = std::stoi(cuchillosCantidadString);
+		tubosMetalicosCantidad = std::stoi(tubosMetalicosCantidadString);
+
+		Barril *barriles[barrilesCantidad]/* = new Barril[barrilesCantidad]*/;
+		Caja *cajas[cajasCantidad]/* = new Caja[cajasCantidad]*/;
+		Cuchillo *cuchillos[cuchillosCantidad]/* = new Cuchillo[cuchillosCantidad]*/;
+		Tubo *tubos[tubosMetalicosCantidad]/* = new Tubo[tubosMetalicosCantidad]*/;
+		/*barriles=new Barril[barrilesCantidad];
+			cajas=new Caja[cajasCantidad];
+			cuchillos=new Cuchillo[cuchillosCantidad];
+			tubos=new Tubo[tubosMetalicosCantidad];*/
+
+			for(i=0;i<barrilesCantidad;i++){
+				int distrX=i*700+100;
+				int distrY=i*5+400;
+			    barriles[i] = new Barril(&renderizador, distrX, distrY, &archiConfig);
+			}
+			for(i=0;i<cajasCantidad;i++){
+				int distrX=i*700+400;
+				int distrY=i*5+400;
+				cajas[i] = new Caja(&renderizador, distrX, distrY, &archiConfig);
+				}
+			for(i=0;i<cuchillosCantidad;i++){
+				int distrX=i*700+700;
+				int distrY=i*5+500;
+				cuchillos[i] = new Cuchillo(&renderizador, distrX, distrY, &archiConfig);
+				}
+			for(i=0;i<tubosMetalicosCantidad;i++){
+				int distrX=i*700+1000;
+				int distrY=i*5+500;
+				tubos[i] = new Tubo(&renderizador, distrX, distrY, &archiConfig);
+				}
+
+
+	/*	Barril barril(&renderizador,150,350, &archiConfig);
 		Caja caja(&renderizador, 300, 350, &archiConfig);
 		Cuchillo cuchillo(&renderizador, 450, 450, &archiConfig);
-		Tubo tubo(&renderizador, 550,450, &archiConfig);
+		Tubo tubo(&renderizador, 550,450, &archiConfig);*/
 		retorno = ventana.Abrir(&renderizador);
 
         std::string nivelNodeName = "nivel";
@@ -217,16 +275,44 @@ int main (int argc, char** argv) {
 			bool aux = controlObjetos.Actualizar(&renderizador,avance);
 
             if (aux) {
-                barril.actualizar(&renderizador);
+               /* barril.actualizar(&renderizador);
                 caja.actualizar(&renderizador);
                 cuchillo.actualizar(&renderizador);
-                tubo.actualizar(&renderizador);
+                tubo.actualizar(&renderizador);*/
 
-            } else {
-                barril.refrescar(&renderizador);
+            	for(i=0;i<barrilesCantidad;i++){
+            		      barriles[i]->actualizar(&renderizador);
+            		    }
+            		 for(i=0;i<cajasCantidad;i++){
+            		 	  cajas[i]->actualizar(&renderizador);
+            		 	}
+            		 for(i=0;i<cuchillosCantidad;i++){
+            		 	  cuchillos[i]->actualizar(&renderizador);
+            		    }
+            		 for(i=0;i<tubosMetalicosCantidad;i++){
+            		 	  tubos[i]->actualizar(&renderizador);
+            		 	}
+            }
+
+            else {
+             /*   barril->refrescar(&renderizador);
                 caja.refrescar(&renderizador);
                 cuchillo.refrescar(&renderizador);
-                tubo.refrescar(&renderizador);
+                tubo.refrescar(&renderizador);*/
+
+            	for(i=0;i<barrilesCantidad;i++){
+            		       barriles[i]->refrescar(&renderizador);
+            		    }
+            		 for(i=0;i<cajasCantidad;i++){
+            		 	   cajas[i]->refrescar(&renderizador);
+            		    }
+            		 for(i=0;i<cuchillosCantidad;i++){
+            		 	   cuchillos[i]->refrescar(&renderizador);
+            		    }
+            		 for(i=0;i<tubosMetalicosCantidad;i++){
+            		 	   tubos[i]->refrescar(&renderizador);
+            		    }
+
             }
 
             /*controlEnemigos.ActualizarEnPantalla(&renderizador);*/
@@ -248,9 +334,13 @@ int main (int argc, char** argv) {
 			SDL_Delay(25);
 		}
         logueador->Debug("Fin de nivel " +  nivelNodeName);
+        if (i=2)
+        	salir=true;
 	}
     logueador->Debug("Fin del juego");
+
 	return retorno;
+
 }
 
 
