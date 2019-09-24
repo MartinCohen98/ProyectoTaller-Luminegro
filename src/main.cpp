@@ -106,6 +106,31 @@ int main (int argc, char** argv) {
 
         logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 
+
+
+		retorno = ventana.Abrir(&renderizador);
+
+        logueador->Debug("Nivel: "+ nivelNodeName);
+        logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
+
+        std::string nubesBMPPath = archiConfig.child("configuracion").child("escenario")
+                .child("niveles").child( nivelNodeName.data() ).child_value("nubes");
+
+        std::string edificiosBMPPath = archiConfig.child("configuracion").child("escenario")
+                .child("niveles").child( nivelNodeName.data() ).child_value("edificios");
+
+        std::string terrenoBMPPath = archiConfig.child("configuracion").child("escenario")
+                .child("niveles").child( nivelNodeName.data() ).child_value("terreno");
+
+        std::string terrenoWidthString = archiConfig.child("configuracion").child("escenario")
+                .child("niveles").child( nivelNodeName.data() ).child_value("terrenoWidth");
+
+        logueador->Debug("nubesBMPPath: " + nubesBMPPath);
+        logueador->Debug("edificiosBMPPath: " + edificiosBMPPath);
+        logueador->Debug("terrenoBMPPath: " + terrenoBMPPath + " terrenoBMPPath: " + terrenoBMPPath);
+
+        int terrenoWidth = std::stoi(terrenoWidthString);
+
         ControlObjetos controlObjetos(&renderizador,&archiConfig);
 
 		int barrilesCantidad;
@@ -136,51 +161,28 @@ int main (int argc, char** argv) {
 		Tubo *tubos[tubosMetalicosCantidad];
 
         for (int i = 0; i < barrilesCantidad; i++) {
-            int distrX = i * 700 + 100;
+            int distrX = i * (terrenoWidth*3/barrilesCantidad) + 300;
             int distrY = i * 5 + 400;
             barriles[i] = new Barril(&renderizador, distrX, distrY, &archiConfig);
         }
 
         for (int i = 0; i < cajasCantidad; i++) {
-			int distrX = i * 700 + 400;
+			int distrX = i * (terrenoWidth*3/cajasCantidad) + 500;
 			int distrY = i * 5 + 400;
 			cajas[i] = new Caja(&renderizador, distrX, distrY, &archiConfig);
         }
 
         for (int i = 0; i < cuchillosCantidad; i++) {
-            int distrX = i * 700 + 700;
+            int distrX = i * (terrenoWidth*3/cuchillosCantidad) + 700;
             int distrY = i * 5 + 500;
             cuchillos[i] = new Cuchillo(&renderizador, distrX, distrY, &archiConfig);
         }
 
 		for (int i = 0; i < tubosMetalicosCantidad; i++) {
-			int distrX = i * 700 + 1000;
+			int distrX = i * (terrenoWidth*3/tubosMetalicosCantidad) + 900;
 			int distrY = i * 5 + 500;
 			tubos[i] = new Tubo(&renderizador, distrX, distrY, &archiConfig);
 		}
-
-		retorno = ventana.Abrir(&renderizador);
-
-        logueador->Debug("Nivel: "+ nivelNodeName);
-        logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
-
-        std::string nubesBMPPath = archiConfig.child("configuracion").child("escenario")
-                .child("niveles").child( nivelNodeName.data() ).child_value("nubes");
-
-        std::string edificiosBMPPath = archiConfig.child("configuracion").child("escenario")
-                .child("niveles").child( nivelNodeName.data() ).child_value("edificios");
-
-        std::string terrenoBMPPath = archiConfig.child("configuracion").child("escenario")
-                .child("niveles").child( nivelNodeName.data() ).child_value("terreno");
-
-        std::string terrenoWidthString = archiConfig.child("configuracion").child("escenario")
-                .child("niveles").child( nivelNodeName.data() ).child_value("terrenoWidth");
-
-        logueador->Debug("nubesBMPPath: " + nubesBMPPath);
-        logueador->Debug("edificiosBMPPath: " + edificiosBMPPath);
-        logueador->Debug("terrenoBMPPath: " + terrenoBMPPath + " terrenoBMPPath: " + terrenoBMPPath);
-
-        int terrenoWidth = std::stoi(terrenoWidthString);
 
         logueador->Debug("Carga capas en el Parallax");
 
