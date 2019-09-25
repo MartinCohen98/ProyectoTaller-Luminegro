@@ -62,28 +62,12 @@ void Fondo::mover() {
 	}
 }
 
-int Fondo::cargarCapas(const char *path1, const char *path2,
-						const char *path3, Renderizador* renderizador) {
-    Imagen capas[3];
-    capas[0].cargar(path1, Imagen::TIPO_FONDO);
-    capas[1].cargar(path2, Imagen::TIPO_FONDO);
-    capas[2].cargar(path3, Imagen::TIPO_FONDO);
-	for (int i = 0; i <= 2; i++) {
-	    texturas[i].texturizar(renderizador, capas[i]);
-	}
-	return 0;
-}
-
 bool Fondo::consultarFin() {
 	return fin;
 }
 
 int Fondo::consultarAvance(){
 	return desplazamientos[2];
-}
-
-void Fondo::cambiarLimite(int nuevoLimite) {
-	limite = nuevoLimite;
 }
 
 int Fondo::obtenerAncho() {

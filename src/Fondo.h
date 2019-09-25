@@ -25,12 +25,9 @@ class Fondo {
 			   pugi::xml_document* archiConfig, int nivel);
 	   int actualizar(Renderizador *renderizador);
 	   void mover();
-	   int cargarCapas(const char *path1, const char *path2,
-			   	   	   const char *path3, Renderizador* renderizador);
 	   bool consultarFin();
 	   int consultarAvance();
 	   int obtenerAncho();
-	   void cambiarLimite(int nuevoLimite);
 	   virtual ~Fondo();
 
 };
