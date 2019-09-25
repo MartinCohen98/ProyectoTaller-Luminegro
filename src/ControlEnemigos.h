@@ -3,8 +3,8 @@
 
 #include "Enemigo.h"
 #include "Renderizador.h"
-#include "Parallax.h"
 #include "../lib/pugixml/pugixml.hpp"
+#include "Fondo.h"
 
 
 class ControlEnemigos {

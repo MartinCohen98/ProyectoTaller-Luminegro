@@ -92,9 +92,9 @@ bool Protagonista::moverEnY() {
 }
 
 void Protagonista::actualizar(Renderizador *renderizador,
-							Parallax* parallax) {
+							Fondo* fondo) {
 	if (estado->puedeMoverse()) {
-		actualizarPosicion(parallax);
+		actualizarPosicion(fondo);
 	} else {
 		if (agachado) {
 			estado = estado->agacharse();
@@ -116,8 +116,8 @@ void Protagonista::actualizar(Renderizador *renderizador,
 	}
 }
 
-void Protagonista::actualizarPosicion(Parallax* parallax) {
-	bool seMovioEnX = moverEnX(parallax);
+void Protagonista::actualizarPosicion(Fondo* fondo) {
+	bool seMovioEnX = moverEnX(fondo);
 	bool seMovioEnY = moverEnY();
 	if (seMovioEnX || seMovioEnY) {
 		estado = estado->avanzar();
@@ -130,14 +130,14 @@ void Protagonista::actualizarPosicion(Parallax* parallax) {
 	}
 }
 
-bool Protagonista::moverEnX(Parallax* parallax) {
+bool Protagonista::moverEnX(Fondo* fondo) {
 	bool seMovio = false;
 	if (movimientoEnX > 0) {
 		dadoVuelta = false;
-		if (posicionX < this->posicionXMaxima || parallax->consultarFin()) {
+		if (posicionX < this->posicionXMaxima || fondo->consultarFin()) {
 			posicionX = posicionX + movimientoEnX;
 		} else {
-			parallax->mover();
+			fondo->mover();
 		}
 		seMovio = true;
 	}
@@ -153,8 +153,8 @@ int Protagonista::escalar(int tamanio) {
 	return (tamanio * escaladoDeSprite);
 }
 
-bool Protagonista::llegoAlFin(Parallax *parallax) {
-	return (parallax->consultarFin() &&
+bool Protagonista::llegoAlFin(Fondo *fondo) {
+	return (fondo->consultarFin() &&
 			(posicionX == (800 - escalar(estado->obtenerAncho()))));
 }
 

@@ -7,8 +7,6 @@
 #include "ControlObjetos.h"
 #include "ControlEnemigos.h"
 #include <SDL2/SDL.h>
-#include "../lib/pugixml/pugixml.hpp"
-#include <iostream>
 #include "Logger.h"
 
 class VentanaDeJuego {

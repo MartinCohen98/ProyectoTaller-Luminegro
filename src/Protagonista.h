@@ -1,13 +1,13 @@
 #ifndef PROTAGONISTA_H_
 #define PROTAGONISTA_H_
 
-#include "Parallax.h"
 #include "Imagen.h"
 #include "Textura.h"
 #include "Renderizador.h"
 #include "EstadoJugador.h"
 #include "../lib/pugixml/pugixml.hpp"
 #include "EstadoJugadorParado.h"
+#include "Fondo.h"
 
 class Protagonista {
 private:
@@ -39,13 +39,13 @@ public:
 	void dejarDeBajar();
 	void pegar();
 	void saltar();
-	void actualizar(Renderizador *renderizador, Parallax* parallax);
-	bool llegoAlFin(Parallax *parallax);
+	void actualizar(Renderizador *renderizador, Fondo* fondo);
+	bool llegoAlFin(Fondo *fondo);
 	virtual ~Protagonista();
 
 private:
-	void actualizarPosicion(Parallax* parallax);
-	bool moverEnX(Parallax* parallax);
+	void actualizarPosicion(Fondo* fondo);
+	bool moverEnX(Fondo* fondo);
 	bool moverEnY();
 	int escalar(int tamanio);
 };

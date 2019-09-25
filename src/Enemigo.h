@@ -5,8 +5,8 @@
 #include "Imagen.h"
 #include "Textura.h"
 #include "Renderizador.h"
-#include "Parallax.h"
 #include "EstadoJugador.h"
+#include "Fondo.h"
 
 class Enemigo {
 

@@ -1,13 +1,14 @@
-#ifndef PARALLAX_H_
-#define PARALLAX_H_
+#ifndef FONDO_H_
+#define FONDO_H_
 
 #include "Textura.h"
 #include "Renderizador.h"
 #include "Imagen.h"
 #include "Encuadre.h"
-#include <stdio.h>
+#include "../lib/pugixml/pugixml.hpp"
+#include <iostream>
 
-class Parallax {
+class Fondo {
     private:
 	   int velocidades[3];
 	   int desplazamientos[3];
@@ -20,15 +21,17 @@ class Parallax {
        bool fin;
 
     public:
-	   Parallax(Renderizador *renderizador);
+	   Fondo(Renderizador *renderizador,
+			   pugi::xml_document* archiConfig, int nivel);
 	   int actualizar(Renderizador *renderizador);
 	   void mover();
 	   int cargarCapas(const char *path1, const char *path2,
 			   	   	   const char *path3, Renderizador* renderizador);
 	   bool consultarFin();
 	   int consultarAvance();
+	   int obtenerAncho();
 	   void cambiarLimite(int nuevoLimite);
-	   virtual ~Parallax();
+	   virtual ~Fondo();
 
 };
 
