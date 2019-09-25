@@ -132,12 +132,9 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
 			controlEnemigos.actualizarFrente(&renderizador);
 			renderizador.renderizar();
 
-			if (!salir) {
-                salir = protagonista.llegoAlFin(&fondo);
-            }
+            salir = protagonista.llegoAlFin(&fondo);
 			SDL_Delay(25);
 		}
-
         logueador->Debug("Fin de nivel " +  nivelNodeName);
     }
 
