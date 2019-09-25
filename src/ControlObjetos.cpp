@@ -90,14 +90,29 @@ bool ControlObjetos::Actualizar(Renderizador *renderizador, int avance){
 
 
 ControlObjetos::~ControlObjetos() {
-	if (barriles != NULL)
+	if (barriles != NULL) {
+		for(int i = 0; i < barrilesCantidad; i++)
+			delete barriles[i];
 		delete[] barriles;
-	if (cajas != NULL)
+	}
+
+	if (cajas != NULL) {
+		for(int i = 0; i < cajasCantidad; i++)
+			delete cajas[i];
 		delete[] cajas;
-	if (cuchillos != NULL)
+	}
+
+	if (cuchillos != NULL) {
+		for(int i = 0; i < cuchillosCantidad; i++)
+			delete cuchillos[i];
 		delete[] cuchillos;
-	if (tubos != NULL)
+	}
+
+	if (tubos != NULL) {
+		for(int i = 0; i < tubosMetalicosCantidad; i++)
+			delete tubos[i];
 		delete[] tubos;
+	}
 
 }
 
