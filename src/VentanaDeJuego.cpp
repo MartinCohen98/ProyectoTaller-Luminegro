@@ -1,5 +1,7 @@
 #include "VentanaDeJuego.h"
 
+using namespace std;
+
 VentanaDeJuego::VentanaDeJuego() {
 	ventana = SDL_CreateWindow("Parallax",
 								SDL_WINDOWPOS_CENTERED,
@@ -23,8 +25,8 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
 
 	for (int nivel = 1; nivel <= 2; nivel++) {
 
-		std::string nivelNodeName = "nivel";
-		nivelNodeName.append( std::to_string(nivel) );
+        string nivelNodeName = "nivel";
+        nivelNodeName.append( to_string(nivel) );
 
 		salir = false;
 
@@ -40,12 +42,12 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
 		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 		ControlObjetos controlObjetos(&renderizador, archiConfig, fondo.obtenerAncho());
 
-		while (!salir) {
-			SDL_PollEvent(&evento);
+        while (!salir) {
+            SDL_PollEvent(&evento);
 
-			switch (evento.type) {
-				case SDL_KEYDOWN:
-					if (evento.key.repeat == 0) {
+            switch (evento.type) {
+                case SDL_KEYDOWN:
+                    if (evento.key.repeat == 0) {
                         switch (evento.key.keysym.sym) {
                             case SDLK_RIGHT:
                                 //Avanzar
@@ -83,8 +85,8 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
                     }
                     break;
 
-				case SDL_KEYUP:
-					if (evento.key.repeat == 0) {
+                case SDL_KEYUP:
+                    if (evento.key.repeat == 0) {
                         switch (evento.key.keysym.sym) {
                             case SDLK_RIGHT:
                                 //Avanzar
@@ -107,12 +109,12 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
                                 break;
                         }
                     }
-					break;
+                    break;
 
-				case SDL_QUIT:
-					salir = true;
-					break;
-			}
+                case SDL_QUIT:
+                    logueador->Info("Se seleccionó salir");
+                    return 0;
+            }
 
 			protagonista.realizarMovimientos(&fondo);
 			controlEnemigos.realizarMovimientos();
@@ -136,11 +138,8 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
 		}
 
         logueador->Debug("Fin de nivel " +  nivelNodeName);
+    }
 
-		if (nivel == 2) {
-            salir = true;
-        }
-	}
     return 0;
 }
 
