@@ -17,7 +17,7 @@ int Imagen::cargar(const char* path, const int tipo) {
 
 	// Se encontró la imagen?
 	if (imagen == NULL) {
-		std::string mensajeError = "No se encontro la imagen: ";
+		std::string mensajeError = "No se encontró la imagen: ";
 		mensajeError.append(path);
 		Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
 		logueador->Error(mensajeError);
