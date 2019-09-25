@@ -9,12 +9,15 @@
 
 class ControlEnemigos {
 
-private: Enemigo *enemigos;
+private: Enemigo **enemigos;
          int enemigosCantidad;
 
 public:
 	ControlEnemigos(Renderizador *renderizador, pugi::xml_document *archiConfig);
-	int ActualizarEnPantalla(Renderizador *renderizador);
+	void realizarMovimientos();
+	void movidaDePantalla();
+	void actualizarFondo(Renderizador* renderizador);
+	void actualizarFrente(Renderizador* renderizador);
 	virtual ~ControlEnemigos();
 };
 

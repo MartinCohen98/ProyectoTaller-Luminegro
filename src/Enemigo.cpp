@@ -1,13 +1,4 @@
-/*
- * Enemigo.cpp
- *
- *  Created on: 15 sep. 2019
- *      Author: julio
- */
-
 #include "Enemigo.h"
-
-Enemigo::Enemigo() {}
 
 Enemigo::Enemigo(Renderizador *renderizador, int posXinicial, int posYinicial, const char* path){
 	posicionX = posXinicial;
@@ -80,7 +71,7 @@ void Enemigo::actualizar(Renderizador *renderizador) {
 	}
 }
 
-void Enemigo::actualizarRetroceso(Renderizador *renderizador) {
+void Enemigo::actualizarRetroceso() {
 	posicionX = posicionX - 12;
 }
 

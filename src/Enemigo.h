@@ -1,10 +1,3 @@
-/*
- * Enemigo.h
- *
- *  Created on: 15 sep. 2019
- *      Author: julio
- */
-
 #ifndef ENEMIGO_H_
 #define ENEMIGO_H_
 
@@ -31,7 +24,6 @@ private:
 	Textura textura;
 
 public:
-	Enemigo();
 	Enemigo(Renderizador *renderizador, int posXinicial, int posYinicial, const char* path);
 	int avanzar();
 	void parar();
@@ -40,7 +32,7 @@ public:
 	void subir();
 	void bajar();
 	void actualizar(Renderizador *renderizador);
-	void actualizarRetroceso(Renderizador *renderizador);
+	void actualizarRetroceso();
 	int cambiarFrameInicial(int x,int y,int ancho,int alto);
 	virtual ~Enemigo();
 

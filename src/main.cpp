@@ -56,7 +56,7 @@ int main (int argc, char** argv) {
         return -1;
     }
 
-    logueador->Debug("Ejecutando el main.cpp");
+    logueador->Debug("SDL inicio correctamente, ejecutando...");
 
     bool salir;
 	SDL_Event evento;
@@ -73,34 +73,11 @@ int main (int argc, char** argv) {
 		Parallax parallax(&renderizador);
 		Protagonista protagonista(&renderizador, &archiConfig);
 
-        const char* enemigoBredBMPPath = archiConfig.child("configuracion").child("escenario")
-                .child("enemigos").child("bred").child("imagen").attribute("url").value();
-
-        const char* enemigoDugBMPPath = archiConfig.child("configuracion").child("escenario")
-                .child("enemigos").child("dug").child("imagen").attribute("url").value();
-
-        const char* enemigoJakeBMPPath = archiConfig.child("configuracion").child("escenario")
-                .child("enemigos").child("jake").child("imagen").attribute("url").value();
-
         logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
 
-        /* ControlEnemigos controlEnemigos(&renderizador, &archiConfig);*/
-
-        Enemigo enemigo1(&renderizador, 750, 220, enemigoBredBMPPath);
-		Enemigo enemigo2(&renderizador, 700, 350, enemigoDugBMPPath);
-		Enemigo enemigo3(&renderizador, 3000, 220, enemigoJakeBMPPath);
-		Enemigo enemigo4(&renderizador, -500, 350, enemigoJakeBMPPath);
- 		Enemigo enemigo5(&renderizador, 5500, 220, enemigoDugBMPPath);
-
-		enemigo1.retroceder();
-		enemigo2.avanzar();
-		enemigo3.retroceder();
-		enemigo4.avanzar();
-		enemigo5.retroceder();
+        ControlEnemigos controlEnemigos(&renderizador, &archiConfig);
 
         logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
-
-
 
 		retorno = ventana.Abrir(&renderizador);
 
@@ -284,11 +261,7 @@ int main (int argc, char** argv) {
                     tubos[i]->actualizar(&renderizador);
                 }
 
-            	enemigo1.actualizarRetroceso(&renderizador);
-            	enemigo2.actualizarRetroceso(&renderizador);
-            	enemigo3.actualizarRetroceso(&renderizador);
-            	enemigo4.actualizarRetroceso(&renderizador);
-            	enemigo5.actualizarRetroceso(&renderizador);
+            	controlEnemigos.movidaDePantalla();
 
             } else {
 
@@ -307,22 +280,16 @@ int main (int argc, char** argv) {
                 for (int i = 0; i < tubosMetalicosCantidad; i++) {
                    tubos[i]->refrescar(&renderizador);
                 }
-
             }
 
-            enemigo1.retroceder();
-			enemigo1.actualizar(&renderizador);
-			enemigo3.retroceder();
-			enemigo3.actualizar(&renderizador);
-			enemigo5.retroceder();
-			enemigo5.actualizar(&renderizador);
+            controlEnemigos.realizarMovimientos();
+
+            controlEnemigos.actualizarFondo(&renderizador);
 
 			protagonista.actualizar(&renderizador, &parallax);
 
-			enemigo2.avanzar();
-			enemigo2.actualizar(&renderizador);
-			enemigo4.avanzar();
-			enemigo4.actualizar(&renderizador);
+			controlEnemigos.actualizarFrente(&renderizador);
+
 			renderizador.renderizar();
 
 			if (!salir) {
