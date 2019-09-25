@@ -25,7 +25,8 @@ private:
 public:
 	ControlObjetos(Renderizador *renderizador,
 			pugi::xml_document *archiConfig, int terrenoWidth);
-	bool Actualizar(Renderizador *renderizador,int avance);
+	void movidaDePantalla();
+	void actualizar(Renderizador *renderizador);
 	virtual ~ControlObjetos();
 };
 

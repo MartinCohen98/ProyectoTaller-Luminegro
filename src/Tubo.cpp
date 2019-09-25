@@ -3,8 +3,8 @@
 Tubo::Tubo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
-	ancho=144;
-	alto=24;
+	ancho = 144;
+	alto = 24;
 	escaladoDeSprite = 3;
 
     std::string tuboBMPPath = archiConfig->child("configuracion").child("escenario")
@@ -18,13 +18,12 @@ Tubo::Tubo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::x
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
-void Tubo::actualizar(Renderizador *renderizador) {
-	posicionX = posicionX -12;
-	insercion.modificar(posicionX,posicionY,ancho,alto);
-	textura.copiarseEn(renderizador, encuadre, insercion);
+void Tubo::movidaDePantalla() {
+	posicionX = posicionX - 12;
+	insercion.modificar(posicionX, posicionY, ancho, alto);
 }
 
-void Tubo::refrescar(Renderizador *renderizador) {
+void Tubo::actualizar(Renderizador *renderizador) {
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 

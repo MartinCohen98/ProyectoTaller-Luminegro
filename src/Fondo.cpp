@@ -9,6 +9,7 @@ Fondo::Fondo(Renderizador *renderizador, pugi::xml_document* archiConfig, int ni
 	desplazamientos[0] = 0;
 	desplazamientos[1] = 0;
 	desplazamientos[2] = 0;
+	movido = false;
     Imagen capas[3];
 
     std::string nivelNodeName = "nivel";
@@ -49,6 +50,7 @@ int Fondo::actualizar(Renderizador *renderizador) {
 	    encuadres[i].modificar(desplazamientos[i], 0, 260, 195);
         texturas[i].copiarseEn(renderizador, encuadres[i], encuadreFijo);
 	}
+	movido = false;
 	return 0;
 }
 
@@ -60,10 +62,15 @@ void Fondo::mover() {
 			fin = true;
 		}
 	}
+	movido = true;
 }
 
 bool Fondo::consultarFin() {
 	return fin;
+}
+
+bool Fondo::seMovio() {
+	return movido;
 }
 
 int Fondo::consultarAvance(){

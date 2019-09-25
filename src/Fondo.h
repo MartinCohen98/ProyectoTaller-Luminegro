@@ -18,6 +18,7 @@ class Fondo {
        int resolucionX;
        int resolucionY;
        Encuadre encuadreFijo;
+       bool movido;
        bool fin;
 
     public:
@@ -26,6 +27,7 @@ class Fondo {
 	   int actualizar(Renderizador *renderizador);
 	   void mover();
 	   bool consultarFin();
+	   bool seMovio();
 	   int consultarAvance();
 	   int obtenerAncho();
 	   virtual ~Fondo();

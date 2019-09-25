@@ -13,19 +13,18 @@ Caja::Caja(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::x
 
     sprite.cargar (cajaBMPPath.data(), Imagen::TIPO_OBJETO);
 
-	encuadre.modificar(0,0,96,160);
+	encuadre.modificar(0, 0, 96, 160);
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);
 	textura.texturizar(renderizador, sprite);
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
-void Caja::actualizar(Renderizador *renderizador) {
-	posicionX=posicionX-12;
-	insercion.modificar(posicionX,posicionY,ancho,alto);
-	textura.copiarseEn(renderizador, encuadre, insercion);
+void Caja::movidaDePantalla() {
+	posicionX = posicionX - 12;
+	insercion.modificar(posicionX, posicionY, ancho, alto);
 }
 
-void Caja::refrescar(Renderizador *renderizador) {
+void Caja::actualizar(Renderizador *renderizador) {
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 

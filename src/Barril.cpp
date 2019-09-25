@@ -5,8 +5,8 @@
 Barril::Barril(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
-	ancho=90;
-	alto=96;
+	ancho = 90;
+	alto = 96;
 	escaladoDeSprite = 3;
 
     std::string barrilBMPPath = archiConfig->child("configuracion").child("escenario")
@@ -14,19 +14,18 @@ Barril::Barril(Renderizador *renderizador, int posXinicial, int posYinicial, pug
 
 	sprite.cargar( barrilBMPPath.data(), Imagen::TIPO_OBJETO);
 
-	encuadre.modificar(0,0,30,32);
+	encuadre.modificar(0, 0, 30, 32);
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);
 	textura.texturizar(renderizador, sprite);
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
-void Barril::actualizar(Renderizador *renderizador) {
-	posicionX = posicionX -12;
+void Barril::movidaDePantalla() {
+	posicionX = posicionX - 12;
 	insercion.modificar(posicionX,posicionY,ancho,alto);
-	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
-void Barril::refrescar(Renderizador *renderizador) {
+void Barril::actualizar(Renderizador *renderizador) {
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 

@@ -23,8 +23,8 @@ private:
 
 public:
 	Barril(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig);
+	void movidaDePantalla();
 	void actualizar(Renderizador *renderizador);
-	void refrescar(Renderizador *renderizador);
 	virtual ~Barril();
 };
 

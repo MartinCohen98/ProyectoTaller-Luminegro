@@ -114,18 +114,18 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
 					break;
 			}
 
+			protagonista.realizarMovimientos(&fondo);
+			controlEnemigos.realizarMovimientos();
+
+			if (fondo.seMovio()) {
+				controlEnemigos.movidaDePantalla();
+				controlObjetos.movidaDePantalla();
+			}
+
 			fondo.actualizar(&renderizador);
-
-			int avance = fondo.consultarAvance();
-			bool aux = controlObjetos.Actualizar(&renderizador,avance);
-
-            if (aux) {
-            	controlEnemigos.movidaDePantalla();
-            }
-
-            controlEnemigos.realizarMovimientos();
-            controlEnemigos.actualizarFondo(&renderizador);
-			protagonista.actualizar(&renderizador, &fondo);
+			controlObjetos.actualizar(&renderizador);
+			controlEnemigos.actualizarFondo(&renderizador);
+			protagonista.actualizar(&renderizador);
 			controlEnemigos.actualizarFrente(&renderizador);
 			renderizador.renderizar();
 

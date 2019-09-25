@@ -91,8 +91,7 @@ bool Protagonista::moverEnY() {
 	return seMovio;
 }
 
-void Protagonista::actualizar(Renderizador *renderizador,
-							Fondo* fondo) {
+void Protagonista::realizarMovimientos(Fondo* fondo) {
 	if (estado->puedeMoverse()) {
 		actualizarPosicion(fondo);
 	} else {
@@ -102,6 +101,9 @@ void Protagonista::actualizar(Renderizador *renderizador,
 			estado = estado->parar();
 		}
 	}
+}
+
+void Protagonista::actualizar(Renderizador *renderizador) {
 	if (!dadoVuelta) {
 		insercion.modificar(posicionX, posicionY - estado->obtenerElevacion(),
 				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));

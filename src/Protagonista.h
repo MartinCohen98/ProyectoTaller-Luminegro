@@ -39,7 +39,8 @@ public:
 	void dejarDeBajar();
 	void pegar();
 	void saltar();
-	void actualizar(Renderizador *renderizador, Fondo* fondo);
+	void realizarMovimientos(Fondo* fondo);
+	void actualizar(Renderizador *renderizador);
 	bool llegoAlFin(Fondo *fondo);
 	virtual ~Protagonista();
 

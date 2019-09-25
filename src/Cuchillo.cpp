@@ -4,8 +4,8 @@
 Cuchillo::Cuchillo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
-	ancho=66;
-	alto=21;
+	ancho = 66;
+	alto = 21;
 	escaladoDeSprite = 3;
 
     std::string cuchilloBMPPath = archiConfig->child("configuracion").child("escenario")
@@ -19,13 +19,12 @@ Cuchillo::Cuchillo(Renderizador *renderizador, int posXinicial, int posYinicial,
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
-void Cuchillo::actualizar(Renderizador *renderizador) {
-	posicionX=posicionX-12;
-	insercion.modificar(posicionX,posicionY,ancho,alto);
-	textura.copiarseEn(renderizador, encuadre, insercion);
+void Cuchillo::movidaDePantalla() {
+	posicionX = posicionX - 12;
+	insercion.modificar(posicionX, posicionY, ancho, alto);
 }
 
-void Cuchillo::refrescar(Renderizador *renderizador) {
+void Cuchillo::actualizar(Renderizador *renderizador) {
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
