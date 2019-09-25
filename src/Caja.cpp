@@ -1,20 +1,5 @@
-/*
- * Caja.cpp
- *
- *  Created on: 18 sep. 2019
- *      Author: julio
- */
-
 #include "Caja.h"
 #include "Imagen.h"
-
-Caja::Caja() {
-	posicionX = 0;
-	posicionY = 0;
-	ancho = 0;
-	alto = 0;
-	escaladoDeSprite = 0;
-}
 
 Caja::Caja(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
 	posicionX = posXinicial;

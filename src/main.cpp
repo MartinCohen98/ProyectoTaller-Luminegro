@@ -102,58 +102,7 @@ int main (int argc, char** argv) {
 
         int terrenoWidth = std::stoi(terrenoWidthString);
 
-        ControlObjetos controlObjetos(&renderizador,&archiConfig);
-
-		int barrilesCantidad;
-	    int cajasCantidad;
-	    int cuchillosCantidad;
-		int tubosMetalicosCantidad;
-
-		std::string barrilesCantidadString = archiConfig.child("configuracion").child("escenario")
-			            .child("niveles").child( nivelNodeName.data() ).child("barril").child_value("cantidad");
-
-	    std::string cajasCantidadString = archiConfig.child("configuracion").child("escenario")
-			            .child("niveles").child( nivelNodeName.data() ).child("caja").child_value("cantidad");
-
-	    std::string cuchillosCantidadString = archiConfig.child("configuracion").child("escenario")
-			            .child("niveles").child( nivelNodeName.data() ).child("cuchillo").child_value("cantidad");
-
-	    std::string tubosMetalicosCantidadString = archiConfig.child("configuracion").child("escenario")
-			            .child("niveles").child( nivelNodeName.data() ).child("tuboMetalico").child_value("cantidad");
-
-		barrilesCantidad = std::stoi(barrilesCantidadString);
-		cajasCantidad = std::stoi(cajasCantidadString);
-		cuchillosCantidad = std::stoi(cuchillosCantidadString);
-		tubosMetalicosCantidad = std::stoi(tubosMetalicosCantidadString);
-
-		Barril *barriles[barrilesCantidad];
-		Caja *cajas[cajasCantidad];
-		Cuchillo *cuchillos[cuchillosCantidad];
-		Tubo *tubos[tubosMetalicosCantidad];
-
-        for (int i = 0; i < barrilesCantidad; i++) {
-            int distrX = i * (terrenoWidth*3/barrilesCantidad) + 300;
-            int distrY = i * 5 + 400;
-            barriles[i] = new Barril(&renderizador, distrX, distrY, &archiConfig);
-        }
-
-        for (int i = 0; i < cajasCantidad; i++) {
-			int distrX = i * (terrenoWidth*3/cajasCantidad) + 500;
-			int distrY = i * 5 + 400;
-			cajas[i] = new Caja(&renderizador, distrX, distrY, &archiConfig);
-        }
-
-        for (int i = 0; i < cuchillosCantidad; i++) {
-            int distrX = i * (terrenoWidth*3/cuchillosCantidad) + 700;
-            int distrY = i * 5 + 500;
-            cuchillos[i] = new Cuchillo(&renderizador, distrX, distrY, &archiConfig);
-        }
-
-		for (int i = 0; i < tubosMetalicosCantidad; i++) {
-			int distrX = i * (terrenoWidth*3/tubosMetalicosCantidad) + 900;
-			int distrY = i * 5 + 500;
-			tubos[i] = new Tubo(&renderizador, distrX, distrY, &archiConfig);
-		}
+        ControlObjetos controlObjetos(&renderizador,&archiConfig, terrenoWidth);
 
         logueador->Debug("Carga capas en el Parallax");
 
@@ -245,51 +194,13 @@ int main (int argc, char** argv) {
 			bool aux = controlObjetos.Actualizar(&renderizador,avance);
 
             if (aux) {
-                for (int i = 0; i < barrilesCantidad; i++) {
-            		barriles[i]->actualizar(&renderizador);
-            	}
-
-            	for (int i = 0; i < cajasCantidad; i++) {
-            		cajas[i]->actualizar(&renderizador);
-            	}
-
-            	for (int i = 0; i < cuchillosCantidad; i++) {
-            		cuchillos[i]->actualizar(&renderizador);
-            	}
-
-            	for (int i = 0; i < tubosMetalicosCantidad; i++) {
-                    tubos[i]->actualizar(&renderizador);
-                }
-
             	controlEnemigos.movidaDePantalla();
-
-            } else {
-
-                for (int i = 0; i < barrilesCantidad; i++) {
-            	    barriles[i]->refrescar(&renderizador);
-            	}
-
-                for (int i = 0; i < cajasCantidad; i++) {
-                   cajas[i]->refrescar(&renderizador);
-                }
-
-                for (int i = 0; i < cuchillosCantidad; i++) {
-                   cuchillos[i]->refrescar(&renderizador);
-                }
-
-                for (int i = 0; i < tubosMetalicosCantidad; i++) {
-                   tubos[i]->refrescar(&renderizador);
-                }
             }
 
             controlEnemigos.realizarMovimientos();
-
             controlEnemigos.actualizarFondo(&renderizador);
-
 			protagonista.actualizar(&renderizador, &parallax);
-
 			controlEnemigos.actualizarFrente(&renderizador);
-
 			renderizador.renderizar();
 
 			if (!salir) {

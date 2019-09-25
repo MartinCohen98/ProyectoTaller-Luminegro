@@ -1,6 +1,7 @@
 #include "ControlObjetos.h"
 
-ControlObjetos::ControlObjetos(Renderizador *renderizador, pugi::xml_document *archiConfig) {
+ControlObjetos::ControlObjetos(Renderizador *renderizador,
+			pugi::xml_document *archiConfig, int terrenoWidth) {
 	desplazamiento = 0;
 	std::string barrilesCantidadString = archiConfig->child("configuracion").child("escenario")
 	            .child("niveles").child("nivel1").child("barril").child_value("cantidad");
@@ -19,44 +20,38 @@ ControlObjetos::ControlObjetos(Renderizador *renderizador, pugi::xml_document *a
 	    cuchillosCantidad = std::stoi(cuchillosCantidadString);
 	    tubosMetalicosCantidad = std::stoi(tubosMetalicosCantidadString);
 	int i;
-	barriles = new Barril[barrilesCantidad];
-	cajas = new Caja[cajasCantidad];
-	cuchillos = new Cuchillo[cuchillosCantidad];
-	tubos = new Tubo[tubosMetalicosCantidad];
-	for(i=0;i<barrilesCantidad;i++){
-		int distrX=i*400+100;
-		int distrY=i*5+450;
-	    barriles[i] = Barril(renderizador, distrX, distrY, archiConfig);
+	barriles = new Barril*[barrilesCantidad];
+	cajas = new Caja*[cajasCantidad];
+	cuchillos = new Cuchillo*[cuchillosCantidad];
+	tubos = new Tubo*[tubosMetalicosCantidad];
+
+	for(i = 0; i < barrilesCantidad; i++){
+		int distrX = i * (terrenoWidth*3/cajasCantidad) + 500;
+		int distrY = i * 5 + 400;
+	    barriles[i] = new Barril(renderizador, distrX, distrY, archiConfig);
+	    barriles[i]->refrescar(renderizador);
 	}
-	for(i=0;i<cajasCantidad;i++){
-		int distrX=i*400+300;
-		int distrY=i*5+450;
-		cajas[i] = Caja(renderizador, distrX, distrY, archiConfig);
-		}
+
+	for(i = 0; i < cajasCantidad; i++){
+		int distrX = i * (terrenoWidth*3/cajasCantidad) + 500;
+		int distrY = i * 5 + 400;
+		cajas[i] = new Caja(renderizador, distrX, distrY, archiConfig);
+		cajas[i]->refrescar(renderizador);
+	}
+
 	for(i=0;i<cuchillosCantidad;i++){
-		int distrX=i*400+500;
-		int distrY=i*5+450;
-		cuchillos[i] = Cuchillo(renderizador, distrX, distrY, archiConfig);
-		}
+		int distrX = i * (terrenoWidth*3/cuchillosCantidad) + 700;
+		int distrY = i * 5 + 500;
+		cuchillos[i] = new Cuchillo(renderizador, distrX, distrY, archiConfig);
+		cuchillos[i]->refrescar(renderizador);
+	}
+
 	for(i=0;i<tubosMetalicosCantidad;i++){
-		int distrX=i*400+700;
-		int distrY=i*5+450;
-		tubos[i] = Tubo(renderizador, distrX, distrY, archiConfig);
-		}
-
-	     for(i=0;i<barrilesCantidad;i++){
-		       barriles[i].refrescar(renderizador);
-		    }
-		 for(i=0;i<cajasCantidad;i++){
-		 	   cajas[i].refrescar(renderizador);
-		    }
-		 for(i=0;i<cuchillosCantidad;i++){
-		 	   cuchillos[i].refrescar(renderizador);
-		    }
-		 for(i=0;i<tubosMetalicosCantidad;i++){
-		 	   tubos[i].refrescar(renderizador);
-		    }
-
+		int distrX = i * (terrenoWidth*3/tubosMetalicosCantidad) + 900;
+		int distrY = i * 5 + 500;
+		tubos[i] = new Tubo(renderizador, distrX, distrY, archiConfig);
+		tubos[i]->refrescar(renderizador);
+	}
 }
 
 bool ControlObjetos::Actualizar(Renderizador *renderizador, int avance){
@@ -64,32 +59,30 @@ bool ControlObjetos::Actualizar(Renderizador *renderizador, int avance){
  if (avance > desplazamiento){
 	 desplazamiento = avance;
 	 for(i=0;i<barrilesCantidad;i++){
-	      barriles[i].actualizar(renderizador);
+	      barriles[i]->actualizar(renderizador);
 	    }
 	 for(i=0;i<cajasCantidad;i++){
-	 	  cajas[i].actualizar(renderizador);
+	 	  cajas[i]->actualizar(renderizador);
 	 	}
 	 for(i=0;i<cuchillosCantidad;i++){
-	 	  cuchillos[i].actualizar(renderizador);
+	 	  cuchillos[i]->actualizar(renderizador);
 	    }
 	 for(i=0;i<tubosMetalicosCantidad;i++){
-	 	  tubos[i].actualizar(renderizador);
+	 	  tubos[i]->actualizar(renderizador);
 	 	}
 	 return true;
-    }
-
- else{
+    } else {
 	 for(i=0;i<barrilesCantidad;i++){
-	       barriles[i].refrescar(renderizador);
+	       barriles[i]->refrescar(renderizador);
 	    }
 	 for(i=0;i<cajasCantidad;i++){
-	 	   cajas[i].refrescar(renderizador);
+	 	   cajas[i]->refrescar(renderizador);
 	    }
 	 for(i=0;i<cuchillosCantidad;i++){
-	 	   cuchillos[i].refrescar(renderizador);
+	 	   cuchillos[i]->refrescar(renderizador);
 	    }
 	 for(i=0;i<tubosMetalicosCantidad;i++){
-	 	   tubos[i].refrescar(renderizador);
+	 	   tubos[i]->refrescar(renderizador);
 	    }
 	 return false;
     }

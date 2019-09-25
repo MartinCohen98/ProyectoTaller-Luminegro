@@ -1,10 +1,3 @@
-/*
- * Barril.h
- *
- *  Created on: 18 sep. 2019
- *      Author: julio
- */
-
 #ifndef BARRIL_H_
 #define BARRIL_H_
 
@@ -29,7 +22,6 @@ private:
 	Textura textura;
 
 public:
-	Barril();
 	Barril(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig);
 	void actualizar(Renderizador *renderizador);
 	void refrescar(Renderizador *renderizador);

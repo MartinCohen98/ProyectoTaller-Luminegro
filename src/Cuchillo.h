@@ -1,10 +1,3 @@
-/*
- * Cuchillo.h
- *
- *  Created on: 18 sep. 2019
- *      Author: julio
- */
-
 #ifndef SRC_CUCHILLO_H_
 #define SRC_CUCHILLO_H_
 
@@ -29,7 +22,6 @@ private:
 	Textura textura;
 
 public:
-	Cuchillo();
 	Cuchillo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig);
 	void actualizar(Renderizador *renderizador);
 	void refrescar(Renderizador *renderizador);

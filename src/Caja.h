@@ -1,10 +1,3 @@
-/*
- * Caja.h
- *
- *  Created on: 18 sep. 2019
- *      Author: julio
- */
-
 #ifndef SRC_CAJA_H_
 #define SRC_CAJA_H_
 
@@ -29,7 +22,6 @@ private:
 	Textura textura;
 
 public:
-	Caja();
 	Caja(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig);
 	void actualizar(Renderizador *renderizador);
 	void refrescar(Renderizador *renderizador);

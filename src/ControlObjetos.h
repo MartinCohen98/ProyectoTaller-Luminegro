@@ -17,13 +17,14 @@ private:
 	int cajasCantidad;
 	int cuchillosCantidad;
 	int tubosMetalicosCantidad;
-	Barril *barriles;
-	Caja *cajas;
-	Cuchillo *cuchillos;
-	Tubo *tubos;
+	Barril **barriles;
+	Caja **cajas;
+	Cuchillo **cuchillos;
+	Tubo **tubos;
 
 public:
-	ControlObjetos(Renderizador *renderizador, pugi::xml_document *archiConfig);
+	ControlObjetos(Renderizador *renderizador,
+			pugi::xml_document *archiConfig, int terrenoWidth);
 	bool Actualizar(Renderizador *renderizador,int avance);
 	virtual ~ControlObjetos();
 };
