@@ -9,22 +9,35 @@ int main (int argc, char** argv) {
     string archiConfigPath;
     pugi::xml_document archiConfig;
     pugi::xml_parse_result archiConfigCarga;
+    bool cargarArchivoConfigPorDefecto = true;
 
     // Envió por parámetro la ubicación del archivo?
     if (argc >= 2) {
         // Si
         archiConfigPath = argv[1];
-    }else{
-        // Si no pudo cargar el archivo solicitado, cargar el predeterminado
-        archiConfigPath = "config/default.xml";
+        archiConfigCarga = archiConfig.load_file( archiConfigPath.data());
+        if (archiConfigCarga.status == 0) {
+            //Cargó bien el config por parámetro, no busca el config default
+            cargarArchivoConfigPorDefecto = false;
+        } else{
+            //No cargó bien el config por parámetro, buscará el config default
+            Log::ObtenerInstancia()->Error("No se pudo abrir el archivo de configuración \"" + archiConfigPath + "\"."
+                                           + " Se detectó el problema en el byte " + to_string(archiConfigCarga.offset)
+                                           + ". Mensaje de error: " + archiConfigCarga.description());
+        }
     }
-    //Trata de cargar el archivo de configuración. Si no puede, loguea el error, indicando el byte donde lo detectó
-    archiConfigCarga = archiConfig.load_file( archiConfigPath.data());
-    if (archiConfigCarga.status != 0) {
-        Log::ObtenerInstancia()->Error("No se pudo abrir el archivo de configuración \"" +  archiConfigPath + "\"."
-                                    + " Se detectó el problema en el byte " + to_string(archiConfigCarga.offset)
-                                    + ". Mensaje de error: "+ archiConfigCarga.description());
-        exit(EXIT_FAILURE);
+
+    //Ve si tiene que buscar el config por defecto
+    if(cargarArchivoConfigPorDefecto) {
+        archiConfigPath = "config/default.xml";
+        archiConfigCarga = archiConfig.load_file(archiConfigPath.data());
+        if (archiConfigCarga.status != 0) {
+            //Rompió hasta el config por defecto, más no se puede hacer
+            Log::ObtenerInstancia()->Error("No se pudo abrir el archivo de configuración por defecto: \"" + archiConfigPath + "\"."
+                                           + " Se detectó el problema en el byte " + to_string(archiConfigCarga.offset)
+                                           + ". Mensaje de error: " + archiConfigCarga.description());
+            return EXIT_FAILURE;
+        }
     }
 
     // Nivel de logueo
