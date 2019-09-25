@@ -86,11 +86,11 @@ int main (int argc, char** argv) {
 
         /* ControlEnemigos controlEnemigos(&renderizador, &archiConfig);*/
 
-        Enemigo enemigo1(&renderizador, 650, 220, enemigoBredBMPPath);
-		Enemigo enemigo2(&renderizador, 300, 350, enemigoDugBMPPath);
-		Enemigo enemigo3(&renderizador, 1700, 220, enemigoJakeBMPPath);
+        Enemigo enemigo1(&renderizador, 750, 220, enemigoBredBMPPath);
+		Enemigo enemigo2(&renderizador, 700, 350, enemigoDugBMPPath);
+		Enemigo enemigo3(&renderizador, 3000, 220, enemigoJakeBMPPath);
 		Enemigo enemigo4(&renderizador, -500, 350, enemigoJakeBMPPath);
- 		Enemigo enemigo5(&renderizador, 2500, 220, enemigoDugBMPPath);
+ 		Enemigo enemigo5(&renderizador, 5500, 220, enemigoDugBMPPath);
 
 		enemigo1.retroceder();
 		enemigo2.avanzar();
@@ -283,6 +283,10 @@ int main (int argc, char** argv) {
             	for (int i = 0; i < tubosMetalicosCantidad; i++) {
                     tubos[i]->actualizar(&renderizador);
                 }
+
+            	enemigo1.actualizarRetroceso(&renderizador);
+            	enemigo3.actualizarRetroceso(&renderizador);
+            	enemigo5.actualizarRetroceso(&renderizador);
 
             } else {
 
