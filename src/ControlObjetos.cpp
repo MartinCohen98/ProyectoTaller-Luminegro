@@ -1,19 +1,7 @@
-/*
- * ControlObjetos.cpp
- *
- *  Created on: 19 sep. 2019
- *      Author: julio
- */
-
 #include "ControlObjetos.h"
 
-ControlObjetos::ControlObjetos(){
-
-}
-
 ControlObjetos::ControlObjetos(Renderizador *renderizador, pugi::xml_document *archiConfig) {
-	// TODO Auto-generated constructor stub
-	desplazamiento=0;
+	desplazamiento = 0;
 	std::string barrilesCantidadString = archiConfig->child("configuracion").child("escenario")
 	            .child("niveles").child("nivel1").child("barril").child_value("cantidad");
 
@@ -31,10 +19,10 @@ ControlObjetos::ControlObjetos(Renderizador *renderizador, pugi::xml_document *a
 	    cuchillosCantidad = std::stoi(cuchillosCantidadString);
 	    tubosMetalicosCantidad = std::stoi(tubosMetalicosCantidadString);
 	int i;
-	barriles=new Barril[barrilesCantidad];
-	cajas=new Caja[cajasCantidad];
-	cuchillos=new Cuchillo[cuchillosCantidad];
-	tubos=new Tubo[tubosMetalicosCantidad];
+	barriles = new Barril[barrilesCantidad];
+	cajas = new Caja[cajasCantidad];
+	cuchillos = new Cuchillo[cuchillosCantidad];
+	tubos = new Tubo[tubosMetalicosCantidad];
 	for(i=0;i<barrilesCantidad;i++){
 		int distrX=i*400+100;
 		int distrY=i*5+450;
@@ -71,10 +59,10 @@ ControlObjetos::ControlObjetos(Renderizador *renderizador, pugi::xml_document *a
 
 }
 
-bool ControlObjetos::Actualizar(Renderizador *renderizador,int avance){
+bool ControlObjetos::Actualizar(Renderizador *renderizador, int avance){
  int i;
- if (avance>desplazamiento){
-	 desplazamiento=avance;
+ if (avance > desplazamiento){
+	 desplazamiento = avance;
 	 for(i=0;i<barrilesCantidad;i++){
 	      barriles[i].actualizar(renderizador);
 	    }
@@ -109,6 +97,14 @@ bool ControlObjetos::Actualizar(Renderizador *renderizador,int avance){
 
 
 ControlObjetos::~ControlObjetos() {
-	// TODO Auto-generated destructor stub
+	if (barriles != NULL)
+		delete[] barriles;
+	if (cajas != NULL)
+		delete[] cajas;
+	if (cuchillos != NULL)
+		delete[] cuchillos;
+	if (tubos != NULL)
+		delete[] tubos;
+
 }
 

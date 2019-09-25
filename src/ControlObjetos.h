@@ -1,10 +1,3 @@
-/*
- * ControlObjetos.h
- *
- *  Created on: 19 sep. 2019
- *      Author: julio
- */
-
 #ifndef SRC_CONTROLOBJETOS_H_
 #define SRC_CONTROLOBJETOS_H_
 
@@ -17,6 +10,7 @@
 #include "../lib/pugixml/pugixml.hpp"
 
 class ControlObjetos {
+
 private:
 	int desplazamiento;
 	int barrilesCantidad;
@@ -27,8 +21,8 @@ private:
 	Caja *cajas;
 	Cuchillo *cuchillos;
 	Tubo *tubos;
+
 public:
-	ControlObjetos();
 	ControlObjetos(Renderizador *renderizador, pugi::xml_document *archiConfig);
 	bool Actualizar(Renderizador *renderizador,int avance);
 	virtual ~ControlObjetos();
