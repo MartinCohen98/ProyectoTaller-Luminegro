@@ -49,13 +49,13 @@ int main (int argc, char** argv) {
         return -1;
     }
 
-    logueador->Debug("SDL inicio correctamente, ejecutando...");
+    logueador->Info("SDL inicio correctamente, ejecutando...");
 
 	VentanaDeJuego ventana;
 
 	int retorno = ventana.abrir(&archiConfig);
 
-    logueador->Debug("Fin del juego");
+    logueador->Info("Fin del juego");
 
 	return retorno;
 }

@@ -30,7 +30,7 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
 
 		salir = false;
 
-		logueador->Debug("Nivel: "+ nivelNodeName);
+		logueador->Info("Iniciando nivel: "+ nivelNodeName);
 		logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
 		Fondo fondo(&renderizador, archiConfig, nivel);
 
@@ -135,7 +135,7 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
             salir = protagonista.llegoAlFin(&fondo);
 			SDL_Delay(25);
 		}
-        logueador->Debug("Fin de nivel " +  nivelNodeName);
+        logueador->Info("Fin de nivel: " +  nivelNodeName);
     }
 
     return 0;
