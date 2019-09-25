@@ -13,7 +13,7 @@ private: Enemigo **enemigos;
          int enemigosCantidad;
 
 public:
-	ControlEnemigos(Renderizador *renderizador, pugi::xml_document *archiConfig);
+	ControlEnemigos(Renderizador *renderizador, pugi::xml_document *archiConfig, int nivel);
 	void realizarMovimientos();
 	void movidaDePantalla();
 	void actualizarFondo(Renderizador* renderizador);

@@ -37,7 +37,7 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
 		Protagonista protagonista(&renderizador, archiConfig);
 
 		logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
-		ControlEnemigos controlEnemigos(&renderizador, archiConfig);
+		ControlEnemigos controlEnemigos(&renderizador, archiConfig, nivel);
 
 		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 		ControlObjetos controlObjetos(&renderizador, archiConfig, fondo.obtenerAncho());
