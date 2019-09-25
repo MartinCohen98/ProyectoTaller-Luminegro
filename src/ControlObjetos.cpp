@@ -26,15 +26,15 @@ ControlObjetos::ControlObjetos(Renderizador *renderizador,
 	tubos = new Tubo*[tubosMetalicosCantidad];
 
 	for(i = 0; i < barrilesCantidad; i++){
-		int distrX = i * (terrenoWidth*3/cajasCantidad) + 500;
-		int distrY = i * 5 + 400;
+		int distrX = i * (terrenoWidth*3/barrilesCantidad) + 200;
+		int distrY = i * 5 + 480;
 	    barriles[i] = new Barril(renderizador, distrX, distrY, archiConfig);
 	    barriles[i]->actualizar(renderizador);
 	}
 
 	for(i = 0; i < cajasCantidad; i++){
 		int distrX = i * (terrenoWidth*3/cajasCantidad) + 500;
-		int distrY = i * 5 + 400;
+		int distrY = i * 5 + 420;
 		cajas[i] = new Caja(renderizador, distrX, distrY, archiConfig);
 		cajas[i]->actualizar(renderizador);
 	}
@@ -73,19 +73,21 @@ void ControlObjetos::movidaDePantalla() {
 }
 
 void ControlObjetos::actualizar(Renderizador *renderizador) {
+	for(int i = 0; i < cuchillosCantidad; i++){
+		cuchillos[i]->actualizar(renderizador);
+	}
+	for(int i = 0; i < tubosMetalicosCantidad; i++){
+		tubos[i]->actualizar(renderizador);
+	}
+}
+
+void ControlObjetos::actualizarFrente(Renderizador* renderizador) {
 	for(int i = 0; i < barrilesCantidad; i++){
 		barriles[i]->actualizar(renderizador);
 	}
 
 	for(int i = 0; i < cajasCantidad; i++){
 		cajas[i]->actualizar(renderizador);
-	}
-
-	for(int i = 0; i < cuchillosCantidad; i++){
-		cuchillos[i]->actualizar(renderizador);
-	}
-	for(int i = 0; i < tubosMetalicosCantidad; i++){
-		tubos[i]->actualizar(renderizador);
 	}
 }
 

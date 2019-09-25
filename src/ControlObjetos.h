@@ -27,6 +27,7 @@ public:
 			pugi::xml_document *archiConfig, int terrenoWidth);
 	void movidaDePantalla();
 	void actualizar(Renderizador *renderizador);
+	void actualizarFrente(Renderizador* renderizador);
 	virtual ~ControlObjetos();
 };
 

@@ -128,6 +128,7 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
 			controlEnemigos.actualizarFondo(&renderizador);
 			controlObjetos.actualizar(&renderizador);
 			protagonista.actualizar(&renderizador);
+			controlObjetos.actualizarFrente(&renderizador);
 			controlEnemigos.actualizarFrente(&renderizador);
 			renderizador.renderizar();
 
