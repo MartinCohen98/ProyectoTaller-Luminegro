@@ -13,8 +13,8 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
 	Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
 
 	if(!ventana) {
-        logueador->Error("No se pudo crear la ventana");
-        return -1;
+		logueador->Error("No se pudo crear la ventana");
+		return -1;
 	}
 
     bool salir;
