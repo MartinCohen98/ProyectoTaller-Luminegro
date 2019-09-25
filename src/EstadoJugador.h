@@ -14,6 +14,7 @@ public:
 	virtual EstadoJugador* pegar();
 	virtual EstadoJugador* saltar();
 	virtual bool puedeMoverse();
+	virtual bool estaSaltando();
 	virtual int obtenerElevacion();
 	int obtenerAlto();
 	int obtenerAncho();

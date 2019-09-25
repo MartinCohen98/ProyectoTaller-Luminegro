@@ -29,6 +29,10 @@ EstadoJugador* EstadoJugador::saltar() {
 	return NULL;
 }
 
+bool EstadoJugador::estaSaltando() {
+	return false;
+}
+
 int EstadoJugador::obtenerElevacion() {
 	return 0;
 }

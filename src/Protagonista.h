@@ -16,6 +16,8 @@ private:
 	int escaladoDeSprite;
 	int movimientoEnX;
 	int movimientoEnY;
+	int movimientoAlSaltarEnX;
+	int movimientoAlSaltarEnY;
 	int posicionXMaxima;
 	bool dadoVuelta;
 	bool agachado;

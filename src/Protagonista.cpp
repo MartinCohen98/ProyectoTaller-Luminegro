@@ -6,6 +6,8 @@ Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archi
 	posicionY = 250;
 	movimientoEnX = 0;
 	movimientoEnY = 0;
+	movimientoAlSaltarEnX = 0;
+	movimientoAlSaltarEnY = 0;
 	escaladoDeSprite = 3;
 	estado = new EstadoJugadorParado();
 	estadoOriginal = new EstadoJugadorParado();
@@ -78,14 +80,21 @@ void Protagonista::pegar() {
 }
 
 void Protagonista::saltar() {
+	if (!estado->estaSaltando()) {
+		movimientoAlSaltarEnX = movimientoEnX;
+		movimientoAlSaltarEnY = movimientoEnY;
+	}
 	estado = estado->saltar();
 }
 
 bool Protagonista::moverEnY() {
 	bool seMovio = false;
-	if (((posicionY > 170) && (movimientoEnY < 0)) ||
-		((posicionY < 300) && (movimientoEnY > 0))) {
-		posicionY = posicionY + movimientoEnY;
+	int movimiento = movimientoEnY;
+	if (estado->estaSaltando())
+		movimiento = movimientoAlSaltarEnY;
+	if (((posicionY > 170) && (movimiento < 0)) ||
+		((posicionY < 300) && (movimiento > 0))) {
+		posicionY = posicionY + movimiento;
 		seMovio = true;
 	}
 	return seMovio;
@@ -134,18 +143,21 @@ void Protagonista::actualizarPosicion(Fondo* fondo) {
 
 bool Protagonista::moverEnX(Fondo* fondo) {
 	bool seMovio = false;
-	if (movimientoEnX > 0) {
+	int movimiento = movimientoEnX;
+	if (estado->estaSaltando())
+		movimiento = movimientoAlSaltarEnX;
+	if (movimiento > 0) {
 		dadoVuelta = false;
-		if (posicionX < this->posicionXMaxima || fondo->consultarFin()) {
-			posicionX = posicionX + movimientoEnX;
+		if ((posicionX < posicionXMaxima) || fondo->consultarFin()) {
+			posicionX = posicionX + movimiento;
 		} else {
 			fondo->mover();
 		}
 		seMovio = true;
 	}
-	if	((posicionX > 0) && (movimientoEnX < 0)) {
+	if	((posicionX > 0) && (movimiento < 0)) {
 		dadoVuelta = true;
-		posicionX = posicionX + movimientoEnX;
+		posicionX = posicionX + movimiento;
 		seMovio = true;
 	}
 	return seMovio;

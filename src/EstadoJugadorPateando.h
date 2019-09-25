@@ -20,6 +20,7 @@ public:
 	EstadoJugador* pegar();
 	EstadoJugador* saltar();
 	int obtenerElevacion();
+	bool estaSaltando();
 	virtual ~EstadoJugadorPateando();
 
 private:

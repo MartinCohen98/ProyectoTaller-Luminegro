@@ -54,5 +54,9 @@ int EstadoJugadorPateando::obtenerElevacion() {
 	return elevacion;
 }
 
+bool EstadoJugadorPateando::estaSaltando() {
+	return true;
+}
+
 EstadoJugadorPateando::~EstadoJugadorPateando() {}
 

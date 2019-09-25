@@ -47,6 +47,10 @@ int EstadoJugadorSaltando::obtenerElevacion() {
 	return elevacion;
 }
 
+bool EstadoJugadorSaltando::estaSaltando() {
+	return true;
+}
+
 void EstadoJugadorSaltando::cambiarFrame() {
 	numeroDeFrame++;
 	if (numeroDeFrame < 8) {
