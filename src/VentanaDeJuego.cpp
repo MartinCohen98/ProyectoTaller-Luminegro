@@ -79,8 +79,8 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
                                 break;
                             case SDLK_ESCAPE:
                                 //Salir
-                                salir = true;
-                                break;
+                                logueador->Info("Se seleccionó salir");
+                                return 0;
                         }
                     }
                     break;
