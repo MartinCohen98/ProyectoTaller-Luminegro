@@ -285,7 +285,9 @@ int main (int argc, char** argv) {
                 }
 
             	enemigo1.actualizarRetroceso(&renderizador);
+            	enemigo2.actualizarRetroceso(&renderizador);
             	enemigo3.actualizarRetroceso(&renderizador);
+            	enemigo4.actualizarRetroceso(&renderizador);
             	enemigo5.actualizarRetroceso(&renderizador);
 
             } else {

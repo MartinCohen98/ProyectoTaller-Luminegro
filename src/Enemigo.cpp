@@ -7,9 +7,7 @@
 
 #include "Enemigo.h"
 
-Enemigo::Enemigo(){
-
-}
+Enemigo::Enemigo() {}
 
 Enemigo::Enemigo(Renderizador *renderizador, int posXinicial, int posYinicial, const char* path){
 	posicionX = posXinicial;
@@ -30,16 +28,7 @@ int Enemigo::avanzar() {
 	dadoVuelta = false;
 	int error = 0;
 	estado = estado->avanzar();
-	/*if (posicionX < 500) {*/
-		moverEnX(5);
-	/*} else {
-		if (!parallax->consultarFin()) {
-			parallax->mover();
-		} else {
-			if (posicionX < (800 - ancho))
-				moverEnX(5);
-		}
-	}*/
+	moverEnX(5);
 	return error;
 }
 
@@ -49,12 +38,8 @@ void Enemigo::parar() {
 
 void Enemigo::retroceder() {
 	dadoVuelta = true;
-	/*if (posicionX > 0) {*/
-		estado = estado->avanzar();
-		moverEnX(-5);
-	/*} else {
-		estado = estado->parar();
-	}*/
+	estado = estado->avanzar();
+	moverEnX(-5);
 }
 
 void Enemigo::subir() {
@@ -96,17 +81,11 @@ void Enemigo::actualizar(Renderizador *renderizador) {
 }
 
 void Enemigo::actualizarRetroceso(Renderizador *renderizador) {
-	posicionX=posicionX-12;
-	insercion.modificar(posicionX,posicionY,ancho,alto);
-	textura.copiarseInvertidoEn(renderizador, estado->obtenerSprite(), insercion);
+	posicionX = posicionX - 12;
 }
 
 void Enemigo::moverEnX(int movimiento) {
 	posicionX = posicionX + movimiento;
-}
-
-bool Enemigo::llegoAlFin(Parallax *parallax) {
-	return (parallax->consultarFin() && (posicionX == (800 - ancho)));
 }
 
 int Enemigo::cambiarFrameInicial(int x,int y,int ancho,int alto){

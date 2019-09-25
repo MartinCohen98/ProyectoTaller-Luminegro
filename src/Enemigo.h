@@ -16,6 +16,7 @@
 #include "EstadoJugador.h"
 
 class Enemigo {
+
 private:
 	int posicionX;
 	int posicionY;
@@ -40,7 +41,6 @@ public:
 	void bajar();
 	void actualizar(Renderizador *renderizador);
 	void actualizarRetroceso(Renderizador *renderizador);
-	bool llegoAlFin(Parallax *parallax);
 	int cambiarFrameInicial(int x,int y,int ancho,int alto);
 	virtual ~Enemigo();
 
