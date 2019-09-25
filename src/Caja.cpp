@@ -8,12 +8,15 @@
 #include "Caja.h"
 #include "Imagen.h"
 
-Caja::Caja(){
-
+Caja::Caja() {
+	posicionX = 0;
+	posicionY = 0;
+	ancho = 0;
+	alto = 0;
+	escaladoDeSprite = 0;
 }
 
 Caja::Caja(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
-	// TODO Auto-generated constructor stub
 	posicionX = posXinicial;
 	posicionY = posYinicial;
 	ancho=96;
@@ -41,7 +44,5 @@ void Caja::refrescar(Renderizador *renderizador) {
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
-Caja::~Caja() {
-	// TODO Auto-generated destructor stub
-}
+Caja::~Caja() {}
 

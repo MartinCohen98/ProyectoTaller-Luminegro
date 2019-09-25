@@ -7,12 +7,15 @@
 
 #include "Tubo.h"
 
-Tubo::Tubo(){
-
+Tubo::Tubo() {
+	posicionX = 0;
+	posicionY = 0;
+	ancho = 0;
+	alto = 0;
+	escaladoDeSprite = 0;
 }
 
 Tubo::Tubo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
-	// TODO Auto-generated constructor stub
 	posicionX = posXinicial;
 	posicionY = posYinicial;
 	ancho=144;
@@ -31,7 +34,7 @@ Tubo::Tubo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::x
 }
 
 void Tubo::actualizar(Renderizador *renderizador) {
-	posicionX=posicionX-12;
+	posicionX = posicionX -12;
 	insercion.modificar(posicionX,posicionY,ancho,alto);
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
@@ -40,7 +43,5 @@ void Tubo::refrescar(Renderizador *renderizador) {
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
-Tubo::~Tubo() {
-	// TODO Auto-generated destructor stub
-}
+Tubo::~Tubo() {}
 

@@ -5,7 +5,7 @@ Textura::Textura(){
 }
 
 Textura::Textura(Renderizador* renderizador, Imagen imagen) {
-				textura = SDL_CreateTextureFromSurface(renderizador->get(), imagen.get());
+	textura = SDL_CreateTextureFromSurface(renderizador->get(), imagen.get());
 }
 
 void Textura::copiarseEn(Renderizador* renderizador, Encuadre encuadre,

@@ -8,12 +8,16 @@
 #include "Cuchillo.h"
 #include "Imagen.h"
 
-Cuchillo::Cuchillo(){
-
+Cuchillo::Cuchillo() {
+	posicionX = 0;
+	posicionY = 0;
+	ancho = 0;
+	alto = 0;
+	escaladoDeSprite = 0;
 }
 
+
 Cuchillo::Cuchillo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
-	// TODO Auto-generated constructor stub
 	posicionX = posXinicial;
 	posicionY = posYinicial;
 	ancho=66;
@@ -41,7 +45,5 @@ void Cuchillo::refrescar(Renderizador *renderizador) {
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
-Cuchillo::~Cuchillo() {
-	// TODO Auto-generated destructor stub
-}
+Cuchillo::~Cuchillo() {}
 

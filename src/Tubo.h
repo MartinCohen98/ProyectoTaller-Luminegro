@@ -16,6 +16,7 @@
 #include "../lib/pugixml/pugixml.hpp"
 
 class Tubo {
+
 private:
 	int posicionX;
 	int posicionY;
@@ -26,6 +27,7 @@ private:
 	Encuadre encuadre;
 	Encuadre insercion;
 	Textura textura;
+
 public:
 	Tubo();
 	Tubo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig);

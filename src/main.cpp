@@ -1,13 +1,7 @@
-
 #include <stdio.h>
 #include "VentanaDeJuego.h"
 #include "Renderizador.h"
 #include "Protagonista.h"
-#include "Enemigo.h"
-#include "Barril.h"
-#include "Caja.h"
-#include "Cuchillo.h"
-#include "Tubo.h"
 #include "ControlObjetos.h"
 #include "ControlEnemigos.h"
 #include <SDL2/SDL.h>
@@ -55,7 +49,7 @@ int main (int argc, char** argv) {
     //Se inicializa el Logger acá y así queda para el resto de la aplicación.
     Log::InicializarLog(logLevel, "");
     //En cualquier clase que haya que utilizar el logger, se lo instancia así
-    Log  *logueador  =  Logger::Log::ObtenerInstancia();
+    Log *logueador  =  Logger::Log::ObtenerInstancia();
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         logueador->Error("No se pudo iniciar SDL2 correctamente");

@@ -8,12 +8,15 @@
 #include "Barril.h"
 #include "Imagen.h"
 
-Barril::Barril(){
-
+Barril::Barril() {
+	posicionX = 0;
+	posicionY = 0;
+	ancho = 0;
+	alto = 0;
+	escaladoDeSprite = 0;
 }
 
 Barril::Barril(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
-	// TODO Auto-generated constructor stub
 	posicionX = posXinicial;
 	posicionY = posYinicial;
 	ancho=90;
@@ -32,7 +35,7 @@ Barril::Barril(Renderizador *renderizador, int posXinicial, int posYinicial, pug
 }
 
 void Barril::actualizar(Renderizador *renderizador) {
-	posicionX=posicionX-12;
+	posicionX = posicionX -12;
 	insercion.modificar(posicionX,posicionY,ancho,alto);
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
@@ -42,7 +45,5 @@ void Barril::refrescar(Renderizador *renderizador) {
 }
 
 
-Barril::~Barril() {
-	// TODO Auto-generated destructor stub
-}
+Barril::~Barril() {}
 
