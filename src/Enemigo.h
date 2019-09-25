@@ -39,6 +39,7 @@ public:
 	void subir();
 	void bajar();
 	void actualizar(Renderizador *renderizador);
+	void actualizarRetroceso(Renderizador *renderizador);
 	bool llegoAlFin(Parallax *parallax);
 	int cambiarFrameInicial(int x,int y,int ancho,int alto);
 	virtual ~Enemigo();

@@ -95,6 +95,12 @@ void Enemigo::actualizar(Renderizador *renderizador) {
 	}
 }
 
+void Enemigo::actualizarRetroceso(Renderizador *renderizador) {
+	posicionX=posicionX-12;
+	insercion.modificar(posicionX,posicionY,ancho,alto);
+	textura.copiarseInvertidoEn(renderizador, estado->obtenerSprite(), insercion);
+}
+
 void Enemigo::moverEnX(int movimiento) {
 	posicionX = posicionX + movimiento;
 }
