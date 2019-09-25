@@ -1,9 +1,15 @@
 #ifndef SRC_VENTANADEJUEGO_H_
 #define SRC_VENTANADEJUEGO_H_
 
-#include "Textura.h"
 #include <iostream>
 #include "Renderizador.h"
+#include "Protagonista.h"
+#include "ControlObjetos.h"
+#include "ControlEnemigos.h"
+#include <SDL2/SDL.h>
+#include "../lib/pugixml/pugixml.hpp"
+#include <iostream>
+#include "Logger.h"
 
 class VentanaDeJuego {
 
@@ -12,8 +18,7 @@ private:
 
 public:
 	VentanaDeJuego();
-	int Abrir(Renderizador *renderizador);
-	SDL_Window* Get();
+	int abrir(pugi::xml_document* archiConfig);
 	virtual ~VentanaDeJuego();
 };
 

@@ -1,10 +1,10 @@
 #ifndef PROTAGONISTA_H_
 #define PROTAGONISTA_H_
 
+#include "Parallax.h"
 #include "Imagen.h"
 #include "Textura.h"
 #include "Renderizador.h"
-#include "Parallax.h"
 #include "EstadoJugador.h"
 #include "../lib/pugixml/pugixml.hpp"
 #include "EstadoJugadorParado.h"

@@ -1,6 +1,7 @@
 #ifndef PARALLAX_H_
 #define PARALLAX_H_
-#include "VentanaDeJuego.h"
+
+#include "Textura.h"
 #include "Renderizador.h"
 #include "Imagen.h"
 #include "Encuadre.h"
