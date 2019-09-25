@@ -53,7 +53,10 @@ int main (int argc, char** argv) {
     }
 
     //Se inicializa el Logger acá y así queda para el resto de la aplicación.
-    Log::InicializarLog(logLevel, "");
+    if(!Log::InicializarLog(logLevel, "")) {
+        //Si ya se había inicializado el logger (por error en apertura de config) al menos le setea el nivel de log
+        Log::ObtenerInstancia()->SetSeveridadMinima(logLevel);
+    }
     //En cualquier clase que haya que utilizar el logger, se lo instancia así
     Log *logueador  =  Logger::Log::ObtenerInstancia();
 

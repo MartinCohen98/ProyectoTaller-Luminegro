@@ -36,14 +36,7 @@ Log::Log(string severidadMinima, string rutaArchivo, char caracterSeparador) {
     //Carga por defecto como caracter separador la coma
     this->caracterSeparador = caracterSeparador;
     //Inicializa severidad mínima (si no hay coincidencia, por defecto severidad ERROR)
-    if (severidadMinima == "DEBUG") {
-        this->severidadMinima = Severidad::DEBUG;
-
-    } else if (severidadMinima == "INFO") {
-        this->severidadMinima = Severidad::INFO;
-
-    } else
-        this->severidadMinima = Severidad::ERROR;
+    this->SetSeveridadMinima(severidadMinima);
 
     //Genera el id de sesión
     this->idSesion = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
@@ -78,12 +71,25 @@ void Log::escribirLog(string mensaje, string severidad) {
     time_t hoy = time(0);
     //Carga en buffer la fecha y luego los milisegundos, luego la severidad, el id de ejecución y por último el mensaje
     strftime (buffer,MAX_LENGTH_BUFFER_FECHA,"%Y-%m-%d %R.",localtime(&hoy));
-    archivoLog << buffer << hoy % 1000;
-    archivoLog << this->caracterSeparador << severidad;
+    string milisegundos = to_string(hoy % 1000);
+    archivoLog << buffer << string(3 - milisegundos.length(), '0').append(milisegundos);
     archivoLog << this->caracterSeparador<< this->idSesion;
+    archivoLog << this->caracterSeparador << severidad;
     archivoLog << this->caracterSeparador << mensaje << endl;
     //Se asegura de enviar al archivo lo que cargó en el buffer
     this->archivoLog.flush();
+}
+
+void Log::SetSeveridadMinima(string severidad) {
+    //Inicializa severidad mínima (si no hay coincidencia, por defecto severidad ERROR)
+    if (severidad == "DEBUG") {
+        this->severidadMinima = Severidad::DEBUG;
+
+    } else if (severidad == "INFO") {
+        this->severidadMinima = Severidad::INFO;
+
+    } else
+        this->severidadMinima = Severidad::ERROR;
 }
 
 

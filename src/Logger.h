@@ -7,7 +7,6 @@
 namespace Logger {
 
 
-
 using namespace std;
     enum class Severidad {
         DEBUG,
@@ -22,7 +21,7 @@ using namespace std;
         void Info(string mensaje);
         void Debug(string mensaje);
         void Error(string mensaje);
-
+        void SetSeveridadMinima(string severidad);
     private:
         Log(string severidadMinima, string rutaArchivo, char caracterSeparador = ',');
         static Log *instancia;
