@@ -25,29 +25,31 @@ ControlObjetos::ControlObjetos(Renderizador *renderizador,
 	cuchillos = new Cuchillo*[cuchillosCantidad];
 	tubos = new Tubo*[tubosMetalicosCantidad];
 
+	srand (time(NULL));
+
 	for(i = 0; i < barrilesCantidad; i++){
-		int distrX = i * (terrenoWidth*3/barrilesCantidad) + 200;
+		int distrX = rand() % (terrenoWidth * 3) - 90;
 		int distrY = i * 5 + 480;
 	    barriles[i] = new Barril(renderizador, distrX, distrY, archiConfig);
 	    barriles[i]->actualizar(renderizador);
 	}
 
 	for(i = 0; i < cajasCantidad; i++){
-		int distrX = i * (terrenoWidth*3/cajasCantidad) + 500;
+		int distrX = rand() % (terrenoWidth * 3) - 96;
 		int distrY = i * 5 + 420;
 		cajas[i] = new Caja(renderizador, distrX, distrY, archiConfig);
 		cajas[i]->actualizar(renderizador);
 	}
 
 	for(i = 0; i < cuchillosCantidad; i++){
-		int distrX = i * (terrenoWidth*3/cuchillosCantidad) + 700;
+		int distrX = rand() % (terrenoWidth * 3) - 66;
 		int distrY = i * 5 + 500;
 		cuchillos[i] = new Cuchillo(renderizador, distrX, distrY, archiConfig);
 		cuchillos[i]->actualizar(renderizador);
 	}
 
 	for(i = 0; i < tubosMetalicosCantidad; i++){
-		int distrX = i * (terrenoWidth*3/tubosMetalicosCantidad) + 900;
+		int distrX = rand() % (terrenoWidth * 3) - 144;
 		int distrY = i * 5 + 500;
 		tubos[i] = new Tubo(renderizador, distrX, distrY, archiConfig);
 		tubos[i]->actualizar(renderizador);

@@ -8,6 +8,8 @@
 #include "Tubo.h"
 #include "../lib/pugixml/pugixml.hpp"
 #include "Fondo.h"
+#include <stdlib.h>
+#include <time.h>
 
 class ControlObjetos {
 

@@ -4,8 +4,8 @@
 Caja::Caja(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
-	ancho=96;
-	alto=160;
+	ancho = 96;
+	alto = 160;
 	escaladoDeSprite = 3;
 
     std::string cajaBMPPath = archiConfig->child("configuracion").child("escenario")
