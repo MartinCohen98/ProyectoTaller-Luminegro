@@ -15,10 +15,11 @@ int main (int argc, char** argv) {
         // Si
         archiConfigPath = argv[1];
     }else{
+        // Si no pudo cargar el archivo solicitado, cargar el predeterminado
         archiConfigPath = "config/default.xml";
     }
+    //Trata de cargar el archivo de configuración. Si no puede, loguea el error, indicando el byte donde lo detectó
     archiConfigCarga = archiConfig.load_file( archiConfigPath.data());
-    // Si no pudo cargar el archivo solicitado, cargar el predeterminado
     if (archiConfigCarga.status != 0) {
         Log::ObtenerInstancia()->Error("No se pudo abrir el archivo de configuración \"" +  archiConfigPath + "\"."
                                     + " Se detectó el problema en el byte " + to_string(archiConfigCarga.offset)

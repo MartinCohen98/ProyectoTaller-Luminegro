@@ -3,7 +3,7 @@
 using namespace std;
 
 VentanaDeJuego::VentanaDeJuego() {
-	ventana = SDL_CreateWindow("Parallax",
+	ventana = SDL_CreateWindow("Final Luminegro Fight",
 								SDL_WINDOWPOS_CENTERED,
 								SDL_WINDOWPOS_CENTERED,
 								800, 600,
