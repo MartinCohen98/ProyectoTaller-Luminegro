@@ -40,7 +40,7 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
 		ControlEnemigos controlEnemigos(&renderizador, archiConfig, nivel);
 
 		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
-		ControlObjetos controlObjetos(&renderizador, archiConfig, fondo.obtenerAncho());
+		ControlObjetos controlObjetos(&renderizador, archiConfig, fondo.obtenerAncho(), nivel);
 
         while (!salir) {
             SDL_PollEvent(&evento);

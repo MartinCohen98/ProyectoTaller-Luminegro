@@ -1,25 +1,31 @@
 #include "ControlObjetos.h"
 
 ControlObjetos::ControlObjetos(Renderizador *renderizador,
-			pugi::xml_document *archiConfig, int terrenoWidth) {
+			pugi::xml_document *archiConfig, int terrenoWidth, int nivel) {
 	desplazamiento = 0;
+
+    std::string nivelNodeName = "nivel";
+    nivelNodeName.append( std::to_string(nivel) );
+
 	std::string barrilesCantidadString = archiConfig->child("configuracion").child("escenario")
-	            .child("niveles").child("nivel1").child("barril").child_value("cantidad");
+            .child("niveles").child( nivelNodeName.data() ).child("barril").child_value("cantidad");
 
-	    std::string cajasCantidadString = archiConfig->child("configuracion").child("escenario")
-	            .child("niveles").child("nivel1").child("caja").child_value("cantidad");
+    std::string cajasCantidadString = archiConfig->child("configuracion").child("escenario")
+            .child("niveles").child( nivelNodeName.data() ).child("caja").child_value("cantidad");
 
-	    std::string cuchillosCantidadString = archiConfig->child("configuracion").child("escenario")
-	            .child("niveles").child("nivel1").child("cuchillo").child_value("cantidad");
+    std::string cuchillosCantidadString = archiConfig->child("configuracion").child("escenario")
+            .child("niveles").child( nivelNodeName.data() ).child("cuchillo").child_value("cantidad");
 
-	    std::string tubosMetalicosCantidadString = archiConfig->child("configuracion").child("escenario")
-	            .child("niveles").child("nivel1").child("tuboMetalico").child_value("cantidad");
+    std::string tubosMetalicosCantidadString = archiConfig->child("configuracion").child("escenario")
+            .child("niveles").child( nivelNodeName.data() ).child("tuboMetalico").child_value("cantidad");
 
-	    barrilesCantidad = std::stoi(barrilesCantidadString);
-	    cajasCantidad = std::stoi(cajasCantidadString);
-	    cuchillosCantidad = std::stoi(cuchillosCantidadString);
-	    tubosMetalicosCantidad = std::stoi(tubosMetalicosCantidadString);
+    barrilesCantidad = std::stoi(barrilesCantidadString);
+    cajasCantidad = std::stoi(cajasCantidadString);
+    cuchillosCantidad = std::stoi(cuchillosCantidadString);
+    tubosMetalicosCantidad = std::stoi(tubosMetalicosCantidadString);
+
 	int i;
+
 	barriles = new Barril*[barrilesCantidad];
 	cajas = new Caja*[cajasCantidad];
 	cuchillos = new Cuchillo*[cuchillosCantidad];
@@ -27,28 +33,28 @@ ControlObjetos::ControlObjetos(Renderizador *renderizador,
 
 	srand (time(NULL));
 
-	for(i = 0; i < barrilesCantidad; i++){
+	for(i = 0; i < barrilesCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 90;
 		int distrY = i * 5 + 480;
 	    barriles[i] = new Barril(renderizador, distrX, distrY, archiConfig);
 	    barriles[i]->actualizar(renderizador);
 	}
 
-	for(i = 0; i < cajasCantidad; i++){
+	for(i = 0; i < cajasCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 96;
 		int distrY = i * 5 + 420;
 		cajas[i] = new Caja(renderizador, distrX, distrY, archiConfig);
 		cajas[i]->actualizar(renderizador);
 	}
 
-	for(i = 0; i < cuchillosCantidad; i++){
+	for(i = 0; i < cuchillosCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 66;
 		int distrY = i * 5 + 500;
 		cuchillos[i] = new Cuchillo(renderizador, distrX, distrY, archiConfig);
 		cuchillos[i]->actualizar(renderizador);
 	}
 
-	for(i = 0; i < tubosMetalicosCantidad; i++){
+	for(i = 0; i < tubosMetalicosCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 144;
 		int distrY = i * 5 + 500;
 		tubos[i] = new Tubo(renderizador, distrX, distrY, archiConfig);

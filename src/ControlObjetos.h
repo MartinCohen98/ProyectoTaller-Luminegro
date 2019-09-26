@@ -25,8 +25,7 @@ private:
 	Tubo **tubos;
 
 public:
-	ControlObjetos(Renderizador *renderizador,
-			pugi::xml_document *archiConfig, int terrenoWidth);
+	ControlObjetos(Renderizador *renderizador, pugi::xml_document *archiConfig, int terrenoWidth, int nivel);
 	void movidaDePantalla();
 	void actualizar(Renderizador *renderizador);
 	void actualizarFrente(Renderizador* renderizador);
