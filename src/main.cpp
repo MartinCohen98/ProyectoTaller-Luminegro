@@ -58,7 +58,7 @@ int main (int argc, char** argv) {
         Log::ObtenerInstancia()->SetSeveridadMinima(logLevel);
     }
     //En cualquier clase que haya que utilizar el logger, se lo instancia así
-    Log *logueador  =  Logger::Log::ObtenerInstancia();
+    Log *logueador  =  Log::ObtenerInstancia();
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         logueador->Error("No se pudo iniciar SDL2 correctamente");

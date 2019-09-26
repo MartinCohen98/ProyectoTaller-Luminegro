@@ -37,6 +37,11 @@ int Imagen::cargar(const char* path, const int tipo) {
                 imagen = SDL_LoadBMP("assets/images/missingPictures/person.bmp");
                 break;
         }
+    } else {
+    	std::string mensajeCarga = "Se cargo la imagen: ";
+    	mensajeCarga.append(path);
+    	Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
+    	logueador->Debug(mensajeCarga);
     }
 
 	return 0;
