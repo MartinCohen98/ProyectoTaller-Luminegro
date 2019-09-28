@@ -47,7 +47,7 @@ EstadoJugador* EstadoJugadorPateando::saltar() {
 
 void EstadoJugadorPateando::cambiarFrame() {
 	frameCambiada = true;
-	frameActual.modificar(ancho, 320, ancho, alto);
+	frameActual.modificar(0, 320, ancho, alto);
 }
 
 int EstadoJugadorPateando::obtenerElevacion() {
