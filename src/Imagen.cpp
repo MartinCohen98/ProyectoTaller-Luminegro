@@ -24,7 +24,7 @@ int Imagen::cargar(const char* path, const int tipo) {
 	    // No che
 	    switch (tipo) {
             case TIPO_OBJETO:
-                // Reemplazamos por algo
+                // Reemplazamos por una caja
                 imagen = SDL_LoadBMP("assets/images/missingPictures/box.bmp");
                 break;
             case TIPO_FONDO:
@@ -33,7 +33,7 @@ int Imagen::cargar(const char* path, const int tipo) {
                 SDL_FillRect(imagen, NULL, SDL_MapRGB(imagen->format, 12, 183, 242));
                 break;
             case TIPO_PERSONAJE:
-                // Reemplazamos por algo
+                // Reemplazamos por un muñeco
                 imagen = SDL_LoadBMP("assets/images/missingPictures/person.bmp");
                 break;
         }
