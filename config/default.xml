@@ -2,10 +2,22 @@
     <log>
         <level>ERROR</level>
     </log>
+    <jugadoresCantidad>3</jugadoresCantidad>
     <escenario>
-        <protagonista>
-            <imagen>assets/images/sprites/cody.bmp</imagen>
-        </protagonista>
+        <protagonistas>
+            <protagonista1>
+                <imagen>assets/images/sprites/mariano.bmp</imagen>
+            </protagonista1>
+            <protagonista2>
+                <imagen>assets/images/sprites/martin.bmp</imagen>
+            </protagonista2>
+            <protagonista3>
+                <imagen>assets/images/sprites/nicolas.bmp</imagen>
+            </protagonista3>
+            <protagonista4>
+                <imagen>assets/images/sprites/julio.bmp</imagen>
+            </protagonista4>
+        </protagonistas>
         <enemigos>
             <bred>
                 <imagen url="assets/images/sprites/bred.bmp" />

@@ -16,7 +16,7 @@ Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archi
 
 	// Leo del XML la ubicación del BMP del protagonista
     std::string protagonistaBMPPath = archiConfig->child("configuracion").child("escenario")
-            .child("protagonista").child_value("imagen");
+            .child("protagonistas").child("protagonista1").child_value("imagen");
 
     Imagen sprite;
 	sprite.cargar( protagonistaBMPPath.data(), Imagen::TIPO_PERSONAJE );
