@@ -4,6 +4,8 @@
 
 using namespace Logger;
 
+#define CANTIDAD_MINIMA_PARAMETROS 3
+
 int main (int argc, char** argv) {
 
     /** Parámetros de línea de comandos para ejecutar el juego. Los que tienen asterisco son obligatorios.
@@ -21,6 +23,19 @@ int main (int argc, char** argv) {
      *      ./ProyectoTaller-Luminegro cliente 192.168.0.3:200 config/repiola.xml
      *
      **/
+
+    //Valida que tenga la cantidad mínima de parámetros
+    //TODO Separar toda la validación de parámetros de entrada del main
+    if(argc < CANTIDAD_MINIMA_PARAMETROS){
+        Log::ObtenerInstancia()->Error("Faltan parámetros de invocación");
+        cerr << "ERROR: Faltan parámetros de invocación." << endl;
+        cerr << "Para modo Servidor:" << endl;
+        cerr << "\t./<ejecutable> servidor <puerto> <(opcional)ruta config> <(opcional)nivel log>" << endl;
+        cerr << "Para modo Cliente:" << endl;
+        cerr << "\t./<ejecutable> cliente <ipServidor:puerto> <(opcional)ruta config> <(opcional)nivel logl>" << endl;
+        //cerr <<
+        return EXIT_FAILURE;
+    }
 
     // Archivo de configuración
     pugi::xml_document archiConfig;
