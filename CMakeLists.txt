@@ -56,10 +56,15 @@ add_executable(ProyectoTaller_Luminegro
         src/Protagonista.h
         src/Renderizador.cpp
         src/Renderizador.h
+        src/Socket.cpp
+        src/Socket.h
         src/Textura.cpp
         src/Textura.h
         src/Tubo.cpp
         src/Tubo.h
         src/VentanaDeJuego.cpp
-        src/VentanaDeJuego.h)
+        src/VentanaDeJuego.h
+        src/Socket.cpp
+        src/Socket.h)
+
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2_LIBRARIES})

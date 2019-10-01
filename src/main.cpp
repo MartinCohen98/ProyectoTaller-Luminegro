@@ -2,7 +2,6 @@
 #include "VentanaDeJuego.h"
 #include "Socket.h"
 
-
 using namespace Logger;
 
 int main (int argc, char** argv) {
@@ -16,8 +15,8 @@ int main (int argc, char** argv) {
      * 4: nivel mínimo de logueo (DEBUG, INFO o ERROR)
      *
      * Ejemplos (todavía no se si los puertos que están abajo no hacen conflicto con otra cosa):
-     *      ./ProyectoTaller-Luminegro servidor 100 config/repiola.xml DEBUG
-     *      ./ProyectoTaller-Luminegro servidor 200
+     *      ./ProyectoTaller-Luminegro servidor 2100 config/repiola.xml DEBUG
+     *      ./ProyectoTaller-Luminegro servidor 2101
      *      ./ProyectoTaller-Luminegro cliente 192.168.0.3:200
      *      ./ProyectoTaller-Luminegro cliente 192.168.0.3:200 config/repiola.xml
      *
@@ -89,6 +88,15 @@ int main (int argc, char** argv) {
     // Arrancamos...
     if (strcmp(argv[1], "servidor") == 0) {
         logueador->Info("Se inicia el juego en modo servidor");
+
+        Socket socketEsperando;
+        Socket socketConectado;
+
+        int resultado = socketEsperando.esperarYAceptarCliente(argv[2], &socketConectado);
+        if (resultado == 1) {
+            // Ya fue logueado en la clase
+            return 1;
+        }
 
     } else if (strcmp(argv[1], "cliente") == 0) {
         logueador->Info("Se inicia el juego en modo cliente");
