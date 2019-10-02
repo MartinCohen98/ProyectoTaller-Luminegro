@@ -20,15 +20,5 @@ Barril::Barril(Renderizador *renderizador, int posXinicial, int posYinicial, pug
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
-void Barril::movidaDePantalla() {
-	posicionX = posicionX - 12;
-	insercion.modificar(posicionX,posicionY,ancho,alto);
-}
-
-void Barril::actualizar(Renderizador *renderizador) {
-	textura.copiarseEn(renderizador, encuadre, insercion);
-}
-
-
 Barril::~Barril() {}
 

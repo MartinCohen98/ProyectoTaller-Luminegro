@@ -2,29 +2,22 @@
 #define PROTAGONISTA_H_
 
 #include "Imagen.h"
-#include "Textura.h"
 #include "Renderizador.h"
-#include "EstadoJugador.h"
 #include "../lib/pugixml/pugixml.hpp"
 #include "EstadoJugadorParado.h"
 #include "Fondo.h"
+#include "Persona.h"
 
-class Protagonista {
+class Protagonista: public Persona {
 private:
-	int posicionX;
-	int posicionY;
 	int escaladoDeSprite;
 	int movimientoEnX;
 	int movimientoEnY;
 	int movimientoAlSaltarEnX;
 	int movimientoAlSaltarEnY;
 	int posicionXMaxima;
-	bool dadoVuelta;
 	bool agachado;
-	EstadoJugador* estado;
 	EstadoJugadorParado* estadoOriginal;
-	Encuadre insercion;
-	Textura textura;
     pugi::xml_document *archiConfig;
 
 public:

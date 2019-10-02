@@ -15,12 +15,10 @@ Enemigo::Enemigo(Renderizador *renderizador, int posXinicial, int posYinicial, c
 	textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
 }
 
-int Enemigo::avanzar() {
+void Enemigo::avanzar() {
 	dadoVuelta = false;
-	int error = 0;
 	estado = estado->avanzar();
 	moverEnX(5);
-	return error;
 }
 
 void Enemigo::parar() {

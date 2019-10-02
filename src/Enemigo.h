@@ -7,25 +7,20 @@
 #include "Renderizador.h"
 #include "EstadoJugador.h"
 #include "Fondo.h"
+#include "Persona.h"
 
-class Enemigo {
+class Enemigo: public Persona {
 
 private:
-	int posicionX;
-	int posicionY;
 	int ancho;
 	int alto;
-	bool dadoVuelta;
 	bool contactoVisual;
 	bool modoBusqueda;
-	EstadoJugador* estado;
 	Imagen sprite;
-	Encuadre insercion;
-	Textura textura;
 
 public:
 	Enemigo(Renderizador *renderizador, int posXinicial, int posYinicial, const char* path);
-	int avanzar();
+	void avanzar();
 	void parar();
 	void retroceder();
 	void agacharse();

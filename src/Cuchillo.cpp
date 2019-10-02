@@ -19,14 +19,5 @@ Cuchillo::Cuchillo(Renderizador *renderizador, int posXinicial, int posYinicial,
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
-void Cuchillo::movidaDePantalla() {
-	posicionX = posicionX - 12;
-	insercion.modificar(posicionX, posicionY, ancho, alto);
-}
-
-void Cuchillo::actualizar(Renderizador *renderizador) {
-	textura.copiarseEn(renderizador, encuadre, insercion);
-}
-
 Cuchillo::~Cuchillo() {}
 

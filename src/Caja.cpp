@@ -19,14 +19,5 @@ Caja::Caja(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::x
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
-void Caja::movidaDePantalla() {
-	posicionX = posicionX - 12;
-	insercion.modificar(posicionX, posicionY, ancho, alto);
-}
-
-void Caja::actualizar(Renderizador *renderizador) {
-	textura.copiarseEn(renderizador, encuadre, insercion);
-}
-
 Caja::~Caja() {}
 
