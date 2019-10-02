@@ -4,8 +4,9 @@
 
 #include <string>
 #include <fstream>
-namespace Logger {
+#include <pthread.h>
 
+namespace Logger {
 
 using namespace std;
     enum class Severidad {
@@ -30,6 +31,7 @@ using namespace std;
         uint64_t idSesion;
         void escribirLog(string mensaje, string severidad);
         char caracterSeparador;
+        pthread_mutex_t mutexLogger;
     };
 
 }

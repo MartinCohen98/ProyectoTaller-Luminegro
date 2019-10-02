@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include "VentanaDeJuego.h"
 #include "Socket.h"
 
@@ -130,5 +130,14 @@ int main (int argc, char** argv) {
         logueador->Info("Fin del juego");
 
         return retorno;
+    }else{
+        logueador->Error("Paránetros incorrectos, no se inició ni en modo servidor ni en modo cliente");
+        cerr << "ERROR: Parámetros de invocación incorrectos" << endl;
+        cerr << "Para modo Servidor:" << endl;
+        cerr << "\t./<ejecutable> servidor <puerto> <(opcional)ruta config> <(opcional)nivel log>" << endl;
+        cerr << "Para modo Cliente:" << endl;
+        cerr << "\t./<ejecutable> cliente <ipServidor:puerto> <(opcional)ruta config> <(opcional)nivel logl>" << endl;
+        //cerr <<
+        return EXIT_FAILURE;
     }
 }
