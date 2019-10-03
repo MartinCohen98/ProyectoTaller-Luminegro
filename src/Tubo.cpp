@@ -18,14 +18,5 @@ Tubo::Tubo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::x
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
-void Tubo::movidaDePantalla() {
-	posicionX = posicionX - 12;
-	insercion.modificar(posicionX, posicionY, ancho, alto);
-}
-
-void Tubo::actualizar(Renderizador *renderizador) {
-	textura.copiarseEn(renderizador, encuadre, insercion);
-}
-
 Tubo::~Tubo() {}
 

@@ -35,7 +35,7 @@ ControlObjetos::ControlObjetos(Renderizador *renderizador,
 
 	for(i = 0; i < barrilesCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 90;
-		int distrY = i * 5 + 480;
+		int distrY = i * 1 + 450;
 	    barriles[i] = new Barril(renderizador, distrX, distrY, archiConfig);
 	    barriles[i]->actualizar(renderizador);
 	}
