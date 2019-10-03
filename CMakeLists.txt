@@ -64,6 +64,10 @@ add_executable(ProyectoTaller_Luminegro
         src/Tubo.h
         src/VentanaDeJuego.cpp
         src/VentanaDeJuego.h
+        src/VistaEnemigo.cpp
+        src/VistaEnemigo.h
+        src/VistaJugador.cpp
+        src/VistaJugador.h
         src/VistaObjeto.cpp
         src/VistaObjeto.h
         )
