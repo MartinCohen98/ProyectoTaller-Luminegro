@@ -123,9 +123,9 @@ int main (int argc, char** argv) {
             // Ya fue logueado en la clase
             return EXIT_FAILURE;
         }
-        socketConectado.cerrar();
         // (FIN) ESTO SE TIENE QUE LLAMAR CON UNA INSTANCIA NUEVA DE "Socket" POR CADA JUGADOR QUE SE NOS CONECTA
 
+        socketConectado.cerrar();
         socketEsperando.cerrar();
 
     } else if (strcmp(argv[1], "cliente") == 0) {
