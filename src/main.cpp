@@ -10,13 +10,14 @@ int main (int argc, char** argv) {
 
     /** Parámetros de línea de comandos para ejecutar el juego. Los que tienen asterisco son obligatorios.
      *
-     * 1*: modo de aplicación: "servidor" o "cliente"
+     * 1*: modo de aplicación: "servidor", "cliente" o "simple" (este último es temporario, para jugar de a uno sin red).
      * 2*: si el modo es del parámetro previo es "servidor", aquí en que puerto escuchará. Si es "cliente", a qué IP y
      *      puerto se conectará.
      * 3: ubicación del archivo de configuración
      * 4: nivel mínimo de logueo (DEBUG, INFO o ERROR)
      *
      * Ejemplos (todavía no se si los puertos que están abajo no hacen conflicto con otra cosa):
+     *      ./ProyectoTaller-Luminegro simple 2100 config/repiola.xml    <---- el modo "simple" es temporario
      *      ./ProyectoTaller-Luminegro servidor 2100 config/repiola.xml DEBUG
      *      ./ProyectoTaller-Luminegro servidor 2101
      *      ./ProyectoTaller-Luminegro cliente 192.168.0.3:200
@@ -24,9 +25,9 @@ int main (int argc, char** argv) {
      *
      **/
 
-    //Valida que tenga la cantidad mínima de parámetros
-    //TODO Separar toda la validación de parámetros de entrada del main
-    if(argc < CANTIDAD_MINIMA_PARAMETROS){
+    // Valida que tenga la cantidad mínima de parámetros
+    // TODO Separar toda la validación de parámetros de entrada del main
+    if (argc < CANTIDAD_MINIMA_PARAMETROS) {
         Log::ObtenerInstancia()->Error("Faltan parámetros de invocación");
         cerr << "ERROR: Faltan parámetros de invocación." << endl;
         cerr << "Para modo Servidor:" << endl;
@@ -110,15 +111,49 @@ int main (int argc, char** argv) {
         int resultado = socketEsperando.esperarYAceptarCliente(argv[2], &socketConectado);
         if (resultado == 1) {
             // Ya fue logueado en la clase
-            return 1;
+            return EXIT_FAILURE;
         }
 
     } else if (strcmp(argv[1], "cliente") == 0) {
+
         logueador->Info("Se inicia el juego en modo cliente");
+
+        Socket socketConectado;
+
+        // Desgloso IP y puerto del parámetro de entrada - INICIO
+        // TODO Englobar en una función
+        unsigned int i;
+
+        for (i = 0; i <= strlen(argv[2]); i++) {
+            if (argv[2][i] == ':') {
+                break;
+            }
+        }
+
+        unsigned int j = strlen(argv[2]);
+        char direccionIP[i + 1];
+        char puerto[j - i];
+        memcpy(direccionIP, &argv[2][0], i);
+        direccionIP[i] = '\0';
+        memcpy(puerto, &argv[2][i + 1], j);
+        puerto[j - i] = '\0';
+        // Desgloso IP y puerto del parámetro de entrada - FIN
+
+        int resultado = socketConectado.conectarConServidor(direccionIP, puerto);
+        if (resultado == 1) {
+            // Ya fue logueado en la clase
+            return EXIT_FAILURE;
+        }
+
+        return EXIT_SUCCESS;
+
+    } else if (strcmp(argv[1], "simple") == 0) {
+
+        logueador->Info("Se inicia el juego en modo simple (temporario)");
 
         if (SDL_Init(SDL_INIT_VIDEO) < 0) {
             logueador->Error("No se pudo iniciar SDL2 correctamente");
-            return -1;
+            return EXIT_FAILURE;
         }
 
         logueador->Info("SDL inicio correctamente, ejecutando...");
@@ -130,7 +165,9 @@ int main (int argc, char** argv) {
         logueador->Info("Fin del juego");
 
         return retorno;
-    }else{
+
+    } else {
+
         logueador->Error("Paránetros incorrectos, no se inició ni en modo servidor ni en modo cliente");
         cerr << "ERROR: Parámetros de invocación incorrectos" << endl;
         cerr << "Para modo Servidor:" << endl;
