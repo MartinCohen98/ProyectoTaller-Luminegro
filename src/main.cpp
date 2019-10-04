@@ -101,26 +101,41 @@ int main (int argc, char** argv) {
     Log *logueador  =  Log::ObtenerInstancia();
 
 
-    // Arrancamos...
+
     if (strcmp(argv[1], "servidor") == 0) {
+        // SERVIDOR
+
         logueador->Info("Se inicia el juego en modo servidor");
 
         Socket socketEsperando;
-        Socket socketConectado;
 
-        int resultado = socketEsperando.esperarYAceptarCliente(argv[2], &socketConectado);
-        if (resultado == 1) {
+        int resultadoAccion = socketEsperando.servidorInicializar(argv[2]);
+        if (resultadoAccion == 1) {
             // Ya fue logueado en la clase
             return EXIT_FAILURE;
         }
 
+        // (INICIO) ESTO SE TIENE QUE LLAMAR CON UNA INSTANCIA NUEVA DE "Socket" POR CADA JUGADOR QUE SE NOS CONECTA
+        Socket socketConectado;
+
+        resultadoAccion = socketEsperando.esperarYAceptarCliente(&socketConectado);
+        if (resultadoAccion == EXIT_FAILURE) {
+            // Ya fue logueado en la clase
+            return EXIT_FAILURE;
+        }
+        socketConectado.cerrar();
+        // (FIN) ESTO SE TIENE QUE LLAMAR CON UNA INSTANCIA NUEVA DE "Socket" POR CADA JUGADOR QUE SE NOS CONECTA
+
+        socketEsperando.cerrar();
+
     } else if (strcmp(argv[1], "cliente") == 0) {
+        // CLIENTE
 
         logueador->Info("Se inicia el juego en modo cliente");
 
         Socket socketConectado;
 
-        // Desgloso IP y puerto del parámetro de entrada - INICIO
+        // (INICIO) Desgloso IP y puerto del parámetro de entrada
         // TODO Englobar en una función
         unsigned int i;
 
@@ -137,17 +152,20 @@ int main (int argc, char** argv) {
         direccionIP[i] = '\0';
         memcpy(puerto, &argv[2][i + 1], j);
         puerto[j - i] = '\0';
-        // Desgloso IP y puerto del parámetro de entrada - FIN
+        // (FIN) Desgloso IP y puerto del parámetro de entrada
 
-        int resultado = socketConectado.conectarConServidor(direccionIP, puerto);
+        int resultado = socketConectado.conectarAUnServidor(direccionIP, puerto);
         if (resultado == 1) {
             // Ya fue logueado en la clase
             return EXIT_FAILURE;
         }
 
+        socketConectado.cerrar();
+
         return EXIT_SUCCESS;
 
     } else if (strcmp(argv[1], "simple") == 0) {
+        // MODO SIMPLE, TEMPORARIO
 
         logueador->Info("Se inicia el juego en modo simple (temporario)");
 

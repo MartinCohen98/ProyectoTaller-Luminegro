@@ -1,14 +1,8 @@
 #include "Socket.h"
 
-
-Socket::Socket() {
-
-}
-
-
-int Socket::esperarYAceptarCliente(char* puerto, Socket *socketConectado) {
+int Socket::servidorInicializar(char* puerto) {
     int resultadoAccion;
-    bool elSocketAceptadoEsValido = true;
+
     Logger::Log *logueador = Logger::Log::ObtenerInstancia();
 
     struct addrinfo hints;
@@ -85,6 +79,14 @@ int Socket::esperarYAceptarCliente(char* puerto, Socket *socketConectado) {
         return EXIT_FAILURE;
     }
 
+    return EXIT_SUCCESS;
+}
+
+
+int Socket::esperarYAceptarCliente(Socket *socketConectado) {
+    Logger::Log *logueador = Logger::Log::ObtenerInstancia();
+    bool elSocketAceptadoEsValido = true;
+
     // Aceptamos cliente
     socketConectado->numero = accept(numero, NULL, NULL);
 
@@ -98,7 +100,7 @@ int Socket::esperarYAceptarCliente(char* puerto, Socket *socketConectado) {
     }
 
     if (elSocketAceptadoEsValido) {
-        std::string mensajeError = "Clase Socket - Servidor conectado!";
+        std::string mensajeError = "Clase Socket - Servidor conectado";
         logueador->Info(mensajeError);
 
     } else {
@@ -111,7 +113,7 @@ int Socket::esperarYAceptarCliente(char* puerto, Socket *socketConectado) {
 }
 
 
-int Socket::conectarConServidor(char* direccionIP, char* puerto) {
+int Socket::conectarAUnServidor(char* direccionIP, char* puerto) {
     int resultadoAccion;
     bool estaConectado = false;
     Logger::Log *logueador = Logger::Log::ObtenerInstancia();
@@ -163,14 +165,85 @@ int Socket::conectarConServidor(char* direccionIP, char* puerto) {
     freeaddrinfo(result);
 
     if (estaConectado) {
-        std::string mensajeError = "Clase Socket - Cliente conectado!";
-        logueador->Info(mensajeError);
+        logueador->Info("Clase Socket - Cliente conectado.");
     } else {
-        std::string mensajeError = "Clase Socket - Error: se queda sin direcciones validas y se desconecta.";
-
-        logueador->Error(mensajeError);
+        logueador->Error("Clase Socket - Error: se queda sin direcciones validas y se desconecta.");
         return EXIT_FAILURE;
     }
+
+    return EXIT_SUCCESS;
+}
+
+
+int Socket::enviar(unsigned char* datos, int* cantidadDeBytes) {
+    Logger::Log *logueador = Logger::Log::ObtenerInstancia();
+
+    bool hayUnErrorDeSocket = false;
+    bool elSocketRemotoEstaCerrado = false;
+
+    int bytesEnviados = 0;
+    int resultadoAccion;
+
+    while (bytesEnviados < *cantidadDeBytes && !hayUnErrorDeSocket && !elSocketRemotoEstaCerrado) {
+
+        resultadoAccion = send(numero, &datos[bytesEnviados], *cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
+
+        if (resultadoAccion < 0) {
+            std::string mensajeError = "Clase Socket - Error: ";
+            mensajeError.append(strerror(errno));
+
+            logueador->Error(mensajeError);
+
+            hayUnErrorDeSocket = true;
+
+        } else if (resultadoAccion == 0) {
+            elSocketRemotoEstaCerrado = true;
+
+        } else {
+            bytesEnviados += resultadoAccion;
+        }
+    }
+
+    if (elSocketRemotoEstaCerrado || hayUnErrorDeSocket) {
+        cerrar();
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
+}
+
+
+int Socket::recibir(unsigned char(*datos), int* tamanoMaximo, bool* elSocketEsValido) {
+    Logger::Log *logueador = Logger::Log::ObtenerInstancia();
+
+    int recibido = 0;
+    int resultadoAccion = 0;
+
+    while (recibido < *tamanoMaximo && *elSocketEsValido) {
+        int bytesCantidadMaximaParaRecibir = *tamanoMaximo - recibido;
+
+        resultadoAccion = recv(numero, &datos[recibido], bytesCantidadMaximaParaRecibir,MSG_NOSIGNAL);
+
+        if (resultadoAccion == 0) {
+            // Nos cerraron el socket
+            *elSocketEsValido = false;
+
+        } else if (resultadoAccion < 0) {
+            // Hubo un error
+            logueador->Error("Clase Socket - Error al recibir.");
+            return EXIT_FAILURE;
+        } else {
+            recibido += resultadoAccion;
+        }
+    }
+
+    return recibido;
+}
+
+
+int Socket::cerrar() {
+    shutdown(numero, SHUT_RDWR);
+    close(numero);
 
     return EXIT_SUCCESS;
 }

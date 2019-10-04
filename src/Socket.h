@@ -13,10 +13,14 @@
 class Socket {
     private:
         int numero;
+
     public:
-        Socket();
-        int esperarYAceptarCliente(char* puerto, Socket *socketConectado);
-        int conectarConServidor(char* direccionIP, char* puerto);
+        int servidorInicializar(char* puerto);
+        int esperarYAceptarCliente(Socket *socketConectado);
+        int conectarAUnServidor(char* direccionIP, char* puerto);
+        int enviar(unsigned char* datos, int* cantidadDeBytes);
+        int recibir(unsigned char(*datos), int* tamanoMaximo, bool* elSocketEsValido);
+        int cerrar();
 };
 
 
