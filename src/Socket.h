@@ -19,7 +19,7 @@ class Socket {
         int esperarYAceptarCliente(Socket *socketConectado);
         int conectarAUnServidor(char* direccionIP, char* puerto);
         int enviar(unsigned char* datos, int* cantidadDeBytes);
-        int recibir(unsigned char(*datos), int* tamanoMaximo, bool* elSocketEsValido);
+        int recibir(unsigned char* datos, int* tamanoMaximo, bool* elSocketEsValido);
         int cerrar();
 };
 
