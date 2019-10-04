@@ -23,6 +23,8 @@ add_executable(ProyectoTaller_Luminegro
         src/ControlObjetos.h
         src/Cuchillo.cpp
         src/Cuchillo.h
+        src/Elemento.cpp
+        src/Elemento.h
         src/Encuadre.cpp
         src/Encuadre.h
         src/Enemigo.cpp
@@ -52,6 +54,8 @@ add_executable(ProyectoTaller_Luminegro
         src/Logger.cpp
         src/Logger.h
         src/main.cpp
+        src/Persona.cpp
+        src/Persona.h
         src/Protagonista.cpp
         src/Protagonista.h
         src/Renderizador.cpp
