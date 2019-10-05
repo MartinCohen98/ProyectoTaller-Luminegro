@@ -10,18 +10,18 @@ int main (int argc, char** argv) {
 
     /** Parámetros de línea de comandos para ejecutar el juego. Los que tienen asterisco son obligatorios.
      *
-     * 1*: modo de aplicación: "servidor", "cliente" o "simple" (este último es temporario, para jugar de a uno sin red).
+     * 1*: modo de aplicación: "servidor", "cliente" o "simple" (este último es temporario, para jugar de a uno sin red)
      * 2*: si el modo es del parámetro previo es "servidor", aquí en que puerto escuchará. Si es "cliente", a qué IP y
      *      puerto se conectará.
      * 3: ubicación del archivo de configuración
      * 4: nivel mínimo de logueo (DEBUG, INFO o ERROR)
      *
      * Ejemplos (todavía no se si los puertos que están abajo no hacen conflicto con otra cosa):
-     *      ./ProyectoTaller-Luminegro simple 2100 config/repiola.xml    <---- el modo "simple" es temporario
+     *      ./ProyectoTaller-Luminegro simple 2100 config/repiola.xml    <---- puerto acá no se lee pero debe estar
      *      ./ProyectoTaller-Luminegro servidor 2100 config/repiola.xml DEBUG
      *      ./ProyectoTaller-Luminegro servidor 2101
-     *      ./ProyectoTaller-Luminegro cliente 192.168.0.3:200
-     *      ./ProyectoTaller-Luminegro cliente 192.168.0.3:200 config/repiola.xml
+     *      ./ProyectoTaller-Luminegro cliente 192.168.0.3:2100
+     *      ./ProyectoTaller-Luminegro cliente 192.168.0.3:2100 config/repiola.xml
      *
      **/
 
