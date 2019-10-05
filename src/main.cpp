@@ -186,7 +186,7 @@ int main (int argc, char** argv) {
 
     } else {
 
-        logueador->Error("Paránetros incorrectos, no se inició ni en modo servidor ni en modo cliente");
+        logueador->Error("Parámetros incorrectos, no se inició ni en modo servidor ni en modo cliente");
         cerr << "ERROR: Parámetros de invocación incorrectos" << endl;
         cerr << "Para modo Servidor:" << endl;
         cerr << "\t./<ejecutable> servidor <puerto> <(opcional)ruta config> <(opcional)nivel log>" << endl;
