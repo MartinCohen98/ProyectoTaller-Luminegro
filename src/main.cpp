@@ -100,8 +100,6 @@ int main (int argc, char** argv) {
     // En cualquier clase que haya que utilizar el logger, se lo instancia así
     Log *logueador  =  Log::ObtenerInstancia();
 
-
-
     if (strcmp(argv[1], "servidor") == 0) {
         // SERVIDOR
 

@@ -23,6 +23,12 @@ int VentanaDeJuego::abrir(pugi::xml_document* archiConfig) {
 	SDL_Event evento;
 	Renderizador renderizador(ventana);
 
+	// Lee la cantidad de jugadores
+
+	std::string jugadoresCantidadString = archiConfig->child("configuracion").child_value("jugadoresCantidad");
+
+	int jugadoresCantidad = std::stoi(jugadoresCantidadString);
+
 	for (int nivel = 1; nivel <= 2; nivel++) {
 
         string nivelNodeName = "nivel";
