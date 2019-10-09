@@ -23,12 +23,11 @@ class Fondo {
 
     public:
 	   Fondo(Renderizador *renderizador,
-			   pugi::xml_document* archiConfig, int nivel);
+				pugi::xml_document* archiConfig, int nivel);
 	   int actualizar(Renderizador *renderizador);
 	   void mover();
 	   bool consultarFin();
 	   bool seMovio();
-	   int consultarAvance();
 	   int obtenerAncho();
 	   virtual ~Fondo();
 

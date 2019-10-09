@@ -1,14 +1,14 @@
-#ifndef PROTAGONISTA_H_
-#define PROTAGONISTA_H_
+#ifndef SRC_JUGADORMODELO_H_
+#define SRC_JUGADORMODELO_H_
 
-#include "Imagen.h"
-#include "Renderizador.h"
-#include "../lib/pugixml/pugixml.hpp"
 #include "EstadoJugadorParado.h"
-#include "Fondo.h"
 #include "Persona.h"
+#include "../lib/pugixml/pugixml.hpp"
+#include <string>
+#include "FondoModelo.h"
 
-class Protagonista: public Persona {
+class JugadorModelo: public Persona {
+
 private:
 	int escaladoDeSprite;
 	int movimientoEnX;
@@ -20,8 +20,7 @@ private:
 	EstadoJugadorParado* estadoOriginal;
 
 public:
-    Protagonista();
-	Protagonista(Renderizador *renderizador, pugi::xml_document *archiConfig);
+	JugadorModelo(pugi::xml_document *archiConfig);
 	void avanzar();
 	void dejarDeAvanzar();
 	void retroceder();
@@ -34,18 +33,16 @@ public:
 	void dejarDeBajar();
 	void pegar();
 	void saltar();
-	void realizarMovimientos(Fondo* fondo);
-	void actualizar(Renderizador *renderizador);
-	bool llegoAlFin(Fondo *fondo);
-	virtual ~Protagonista();
+	void realizarMovimientos(FondoModelo* fondo);
+	bool llegoAlFin(FondoModelo *fondo);
+	virtual ~JugadorModelo();
 
 private:
-	void actualizarPosicion(Fondo* fondo);
-	bool moverEnX(Fondo* fondo);
+	void actualizarPosicion(FondoModelo* fondo);
+	void actualizarInsercion();
+	bool moverEnX(FondoModelo* fondo);
 	bool moverEnY();
 	int escalar(int tamanio);
 };
 
-
-
-#endif /* PROTAGONISTA_H_ */
+#endif /* SRC_JUGADORMODELO_H_ */

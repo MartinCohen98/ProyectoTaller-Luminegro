@@ -13,7 +13,7 @@ Fondo::Fondo(Renderizador *renderizador, pugi::xml_document* archiConfig, int ni
     Imagen capas[3];
 
     std::string nivelNodeName = "nivel";
-    nivelNodeName.append( std::to_string(nivel) );
+    nivelNodeName.append(std::to_string(nivel));
 
     std::string nubesBMPPath = archiConfig->child("configuracion").child("escenario")
             .child("niveles").child( nivelNodeName.data() ).child_value("nubes");
@@ -71,10 +71,6 @@ bool Fondo::consultarFin() {
 
 bool Fondo::seMovio() {
 	return movido;
-}
-
-int Fondo::consultarAvance(){
-	return desplazamientos[2];
 }
 
 int Fondo::obtenerAncho() {

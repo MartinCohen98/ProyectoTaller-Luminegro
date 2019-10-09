@@ -1,10 +1,3 @@
-/*
- * Persona.h
- *
- *  Created on: 2 oct. 2019
- *      Author: julio
- */
-
 #ifndef SRC_PERSONA_H_
 #define SRC_PERSONA_H_
 
@@ -22,6 +15,7 @@ public:
 	virtual void bajar()=0;
 	virtual void actualizar(Renderizador *renderizador)=0;
 	virtual ~Persona();
+
 protected:
 	int posicionX;
 	int posicionY;
@@ -29,8 +23,6 @@ protected:
 	EstadoJugador* estado;
 	Encuadre insercion;
 	Textura textura;
-
-
 };
 
 #endif /* SRC_PERSONA_H_ */

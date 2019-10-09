@@ -1,8 +1,6 @@
-#include "Protagonista.h"
+#include "JugadorModelo.h"
 
-Protagonista::Protagonista(){}
-
-Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archiConfig){
+JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig) {
 	posicionX = 0;
 	posicionY = 250;
 	movimientoEnX = 0;
@@ -15,71 +13,61 @@ Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archi
 	dadoVuelta = false;
 	agachado = false;
 
-	// Leo del XML la ubicación del BMP del protagonista
-    std::string protagonistaBMPPath = archiConfig->child("configuracion").child("escenario")
-            .child("protagonistas").child("protagonista1").child_value("imagen");
-
-    Imagen sprite;
-	sprite.cargar( protagonistaBMPPath.data(), Imagen::TIPO_PERSONAJE );
-
     std::string margenWidthString = archiConfig->child("configuracion").child("escenario").
             child_value("margenWidth");
 
-    posicionXMaxima = 800 - std::stoi(margenWidthString);
-
-    insercion.modificar(posicionX, posicionY,
+	posicionXMaxima = 800 - std::stoi(margenWidthString);
+	insercion.modificar(posicionX, posicionY,
 			(estado->obtenerAncho() * escaladoDeSprite),
 			(estado->obtenerAlto() * escaladoDeSprite));
-	textura.texturizar(renderizador, sprite);
-	textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
 }
 
-void Protagonista::avanzar() {
+void JugadorModelo::avanzar() {
 	movimientoEnX = 10;
 }
 
-void Protagonista::dejarDeAvanzar() {
+void JugadorModelo::dejarDeAvanzar() {
 	movimientoEnX = 0;
 }
 
-void Protagonista::retroceder() {
+void JugadorModelo::retroceder() {
 	movimientoEnX = -10;
 }
 
-void Protagonista::dejarDeRetroceder() {
+void JugadorModelo::dejarDeRetroceder() {
 	movimientoEnX = 0;
 }
 
-void Protagonista::subir() {
+void JugadorModelo::subir() {
 	movimientoEnY = -5;
 }
 
-void Protagonista::dejarDeSubir() {
+void JugadorModelo::dejarDeSubir() {
 	movimientoEnY = 0;
 }
 
-void Protagonista::bajar() {
+void JugadorModelo::bajar() {
 	movimientoEnY = 5;
 }
 
-void Protagonista::dejarDeBajar() {
+void JugadorModelo::dejarDeBajar() {
 	movimientoEnY = 0;
 }
 
-void Protagonista::agacharse() {
+void JugadorModelo::agacharse() {
 	estado = estado->agacharse();
 	agachado = true;
 }
 
-void Protagonista::dejarDeAgacharse() {
+void JugadorModelo::dejarDeAgacharse() {
 	agachado = false;
 }
 
-void Protagonista::pegar() {
+void JugadorModelo::pegar() {
 	estado = estado->pegar();
 }
 
-void Protagonista::saltar() {
+void JugadorModelo::saltar() {
 	if (!estado->estaSaltando()) {
 		movimientoAlSaltarEnX = movimientoEnX;
 		movimientoAlSaltarEnY = movimientoEnY;
@@ -87,7 +75,7 @@ void Protagonista::saltar() {
 	estado = estado->saltar();
 }
 
-bool Protagonista::moverEnY() {
+bool JugadorModelo::moverEnY() {
 	bool seMovio = false;
 	int movimiento = movimientoEnY;
 	if (estado->estaSaltando())
@@ -100,7 +88,7 @@ bool Protagonista::moverEnY() {
 	return seMovio;
 }
 
-void Protagonista::realizarMovimientos(Fondo* fondo) {
+void JugadorModelo::realizarMovimientos(FondoModelo* fondo) {
 	if (estado->puedeMoverse()) {
 		actualizarPosicion(fondo);
 	} else {
@@ -112,22 +100,7 @@ void Protagonista::realizarMovimientos(Fondo* fondo) {
 	}
 }
 
-void Protagonista::actualizar(Renderizador *renderizador) {
-	if (!dadoVuelta) {
-		insercion.modificar(posicionX, posicionY - estado->obtenerElevacion(),
-				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
-		textura.copiarseEn(renderizador, estado->obtenerSprite(), insercion);
-	} else {
-		insercion.modificar(posicionX - escalar(estado->obtenerAncho()) +
-				escalar(estadoOriginal->obtenerAncho()),
-				posicionY - estado->obtenerElevacion(),
-				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
-		textura.copiarseInvertidoEn(renderizador,
-					estado->obtenerSprite(), insercion);
-	}
-}
-
-void Protagonista::actualizarPosicion(Fondo* fondo) {
+void JugadorModelo::actualizarPosicion(FondoModelo* fondo) {
 	bool seMovioEnX = moverEnX(fondo);
 	bool seMovioEnY = moverEnY();
 	if (seMovioEnX || seMovioEnY) {
@@ -139,9 +112,22 @@ void Protagonista::actualizarPosicion(Fondo* fondo) {
 			estado = estado->parar();
 		}
 	}
+	actualizarInsercion();
 }
 
-bool Protagonista::moverEnX(Fondo* fondo) {
+void JugadorModelo::actualizarInsercion() {
+	if (!dadoVuelta) {
+		insercion.modificar(posicionX, posicionY - estado->obtenerElevacion(),
+				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
+	} else {
+		insercion.modificar(posicionX - escalar(estado->obtenerAncho()) +
+				escalar(estadoOriginal->obtenerAncho()),
+				posicionY - estado->obtenerElevacion(),
+				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
+	}
+}
+
+bool JugadorModelo::moverEnX(FondoModelo* fondo) {
 	bool seMovio = false;
 	int movimiento = movimientoEnX;
 	if (estado->estaSaltando())
@@ -163,15 +149,15 @@ bool Protagonista::moverEnX(Fondo* fondo) {
 	return seMovio;
 }
 
-int Protagonista::escalar(int tamanio) {
+int JugadorModelo::escalar(int tamanio) {
 	return (tamanio * escaladoDeSprite);
 }
 
-bool Protagonista::llegoAlFin(Fondo *fondo) {
+bool JugadorModelo::llegoAlFin(FondoModelo *fondo) {
 	return (fondo->consultarFin() &&
 			(posicionX == (800 - escalar(estado->obtenerAncho()))));
 }
 
-Protagonista::~Protagonista(){
-	delete estado;
-}
+
+JugadorModelo::~JugadorModelo() {}
+

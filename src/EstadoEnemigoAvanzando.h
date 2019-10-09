@@ -1,10 +1,3 @@
-/*
- * EstadoEnemigoAvanzando.h
- *
- *  Created on: 16 sep. 2019
- *      Author: julio
- */
-
 #ifndef SRC_ESTADOENEMIGOAVANZANDO_H_
 #define SRC_ESTADOENEMIGOAVANZANDO_H_
 

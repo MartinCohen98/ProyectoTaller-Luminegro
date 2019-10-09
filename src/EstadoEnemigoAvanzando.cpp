@@ -1,7 +1,6 @@
 #include "EstadoEnemigoAvanzando.h"
 
 EstadoEnemigoAvanzando::EstadoEnemigoAvanzando() {
-	// TODO Auto-generated constructor stub
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;
 	frameActual.modificar(0, 0, 47, 78);
@@ -41,7 +40,5 @@ void EstadoEnemigoAvanzando::cambiarFrame() {
 	frameActual.modificar((47 * numeroDeFrame), 0, 47, 78);
 }
 
-EstadoEnemigoAvanzando::~EstadoEnemigoAvanzando() {
-	// TODO Auto-generated destructor stub
-}
+EstadoEnemigoAvanzando::~EstadoEnemigoAvanzando() {}
 
