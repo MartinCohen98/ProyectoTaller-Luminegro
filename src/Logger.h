@@ -29,7 +29,7 @@ using namespace std;
         ofstream archivoLog;
         Severidad severidadMinima;
         uint64_t idSesion;
-        void escribirLog(string mensaje, string severidad);
+        void escribirLog(const string& mensaje, string severidad);
         char caracterSeparador;
         pthread_mutex_t mutexLogger;
     };

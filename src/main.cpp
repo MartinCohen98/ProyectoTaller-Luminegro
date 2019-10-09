@@ -1,10 +1,10 @@
 #include <cstdio>
 #include "VentanaDeJuego.h"
 #include "Socket.h"
+#include "ConfigManager.h"
 
 using namespace Logger;
-
-#define CANTIDAD_MINIMA_PARAMETROS 3
+using namespace Common;
 
 int main (int argc, char** argv) {
 
@@ -25,79 +25,29 @@ int main (int argc, char** argv) {
      *
      **/
 
+    //Inicializo el controlador de parámetros
+    ConfigManager configManager = ConfigManager(argc, argv);
+    Estado estado;
+
     // Valida que tenga la cantidad mínima de parámetros
-    // TODO Separar toda la validación de parámetros de entrada del main
-    if (argc < CANTIDAD_MINIMA_PARAMETROS) {
-        Log::ObtenerInstancia()->Error("Faltan parámetros de invocación");
-        cerr << "ERROR: Faltan parámetros de invocación." << endl;
-        cerr << "Para modo Servidor:" << endl;
-        cerr << "\t./<ejecutable> servidor <puerto> <(opcional)ruta config> <(opcional)nivel log>" << endl;
-        cerr << "Para modo Cliente:" << endl;
-        cerr << "\t./<ejecutable> cliente <ipServidor:puerto> <(opcional)ruta config> <(opcional)nivel logl>" << endl;
-        //cerr <<
+    estado = configManager.ValidarParametros();
+    if (estado != Estado::OK) {
+        ConfigManager::MostrarError(estado);
+        ConfigManager::MostrarUsoPrograma();
         return EXIT_FAILURE;
     }
 
-    // Archivo de configuración
-    pugi::xml_document archiConfig;
-    pugi::xml_parse_result archiConfigCarga;
-    bool cargarArchivoConfigPorDefecto = true;
-
-    // Envió por parámetro la ubicación del archivo?
-    if (argc >= 4) {
-        // Si
-        archiConfigCarga = archiConfig.load_file(argv[3]);
-
-        if (archiConfigCarga.status == 0) {
-            // Cargó bien el config por parámetro, no busca el config default
-            cargarArchivoConfigPorDefecto = false;
-
-        } else {
-            // No cargó bien el config por parámetro, buscará el config default
-            string mensajeError = "No se pudo abrir el archivo de configuración \"";
-
-            mensajeError.append(argv[3]);
-            mensajeError.append("\". Se detectó el problema en el byte " + to_string(archiConfigCarga.offset)
-                                  + ". Mensaje de error: " + archiConfigCarga.description());
-
-            Log::ObtenerInstancia()->Error(mensajeError);
-        }
+    // Carga archivo de configuración
+    estado = configManager.CargarArchivoConfiguracion();
+    if (estado != Estado::OK) {
+        ConfigManager::MostrarError(estado);
+        ConfigManager::MostrarUsoPrograma();
+        return EXIT_FAILURE;
     }
 
-    // Ver si tiene que buscar el config por defecto
-    if (cargarArchivoConfigPorDefecto) {
-        archiConfigCarga = archiConfig.load_file("config/default.xml");
-
-        if (archiConfigCarga.status != 0) {
-            // Rompió hasta el config por defecto, más no se puede hacer
-            string mensajeError = "No se pudo abrir el archivo de configuración por defecto: \"";
-            mensajeError.append(argv[3]);
-            mensajeError.append("\". Se detectó el problema en el byte " + to_string(archiConfigCarga.offset)
-                                + ". Mensaje de error: " + archiConfigCarga.description());
-
-            Log::ObtenerInstancia()->Error(mensajeError);
-            return EXIT_FAILURE;
-        }
-    }
-
-    // Nivel de logueo
-    string logLevel;
-
-    // Lo envió por parámetro?
-    if (argc >= 5) {
-        // Si
-        logLevel = argv[4];
-    } else {
-        // No, leo del XML
-        logLevel = archiConfig.child("configuracion").child("log").child_value("level");
-    }
-
-    // Se inicializa el Logger acá y así queda para el resto de la aplicación.
-    if (!Log::InicializarLog(logLevel, "")) {
-        //Si ya se había inicializado el logger (por error en apertura de config) al menos le setea el nivel de log
-        Log::ObtenerInstancia()->SetSeveridadMinima(logLevel);
-    }
-    // En cualquier clase que haya que utilizar el logger, se lo instancia así
+    // Carga el nivel de logueo
+    configManager.ConfigurarLogger();
+    // En cualquier clase que haya que utilizar el logger, se lo instancia así (aunque no es necesario instanciarlo)
     Log *logueador  =  Log::ObtenerInstancia();
 
     if (strcmp(argv[1], "servidor") == 0) {
@@ -176,7 +126,7 @@ int main (int argc, char** argv) {
 
         VentanaDeJuego ventana;
 
-        int retorno = ventana.abrir(&archiConfig);
+        int retorno = ventana.abrir(&configManager.archivoConfig);
 
         logueador->Info("Fin del juego");
 

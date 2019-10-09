@@ -57,19 +57,19 @@ Log::Log(string severidadMinima, string rutaArchivo, char caracterSeparador) {
 
 void Log::Debug(string mensaje) {
     if(this->severidadMinima == Severidad::DEBUG)
-        escribirLog(mensaje, "DEBUG");
+        escribirLog(std::move(mensaje), "DEBUG");
 }
 
 void Log::Info(string mensaje) {
     if(this->severidadMinima <= Severidad::INFO)
-        escribirLog(mensaje, "INFO");
+        escribirLog(std::move(mensaje), "INFO");
 }
 
 void Log::Error(std::string mensaje) {
-    escribirLog(mensaje, "ERROR");
+    escribirLog(std::move(mensaje), "ERROR");
 }
 
-void Log::escribirLog(string mensaje, string severidad) {
+void Log::escribirLog(const string& mensaje, string severidad) {
     char buffer[MAX_LENGTH_BUFFER_FECHA];
 
     //Bloqueo el logger para que no haya otro hilo intentando escribir el archivo
@@ -85,6 +85,8 @@ void Log::escribirLog(string mensaje, string severidad) {
     archivoLog << this->caracterSeparador << mensaje << endl;
     //Se asegura de enviar al archivo lo que cargó en el buffer
     this->archivoLog.flush();
+
+    //Desbloqueo
     pthread_mutex_unlock(&this->mutexLogger);
 }
 

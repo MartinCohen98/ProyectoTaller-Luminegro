@@ -74,6 +74,8 @@ add_executable(ProyectoTaller_Luminegro
         src/Textura.h
         src/Tubo.cpp
         src/Tubo.h
+        src/ConfigManager.cpp
+        src/ConfigManager.h
         src/VentanaDeJuego.cpp
         src/VentanaDeJuego.h
         src/VistaEnemigo.cpp
@@ -83,7 +85,6 @@ add_executable(ProyectoTaller_Luminegro
         src/VistaJugador.cpp
         src/VistaJugador.h
         src/VistaObjeto.cpp
-        src/VistaObjeto.h
-        )
+        src/VistaObjeto.h)
 
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2_LIBRARIES})
