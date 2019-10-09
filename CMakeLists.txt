@@ -51,10 +51,14 @@ add_executable(ProyectoTaller_Luminegro
         src/EstadoJugadorSaltando.h
         src/Fondo.cpp
         src/Fondo.h
+        src/FondoModelo.cpp
+        src/FondoModelo.h
         src/Imagen.cpp
         src/Imagen.h
         src/Jugador.cpp
         src/Jugador.h
+        src/JugadorModelo.cpp
+        src/JugadorModelo.h
         src/Logger.cpp
         src/Logger.h
         src/main.cpp
