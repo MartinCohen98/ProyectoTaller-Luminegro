@@ -1,5 +1,8 @@
 #include "Protagonista.h"
 
+Protagonista::Protagonista(){
+
+}
 
 Protagonista::Protagonista(Renderizador *renderizador, pugi::xml_document *archiConfig){
 	posicionX = 0;

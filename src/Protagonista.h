@@ -21,6 +21,7 @@ private:
     pugi::xml_document *archiConfig;
 
 public:
+    Protagonista();
 	Protagonista(Renderizador *renderizador, pugi::xml_document *archiConfig);
 	void avanzar();
 	void dejarDeAvanzar();

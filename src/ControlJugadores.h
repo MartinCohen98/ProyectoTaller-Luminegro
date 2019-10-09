@@ -8,9 +8,13 @@
 #ifndef SRC_CONTROLJUGADORES_H_
 #define SRC_CONTROLJUGADORES_H_
 
+#include "Jugador.h"
+
 class ControlJugadores {
+private:
+    Jugador **jugadores;
 public:
-	ControlJugadores();
+	ControlJugadores(Renderizador *renderizador, pugi::xml_document *archiConfig);
 	virtual ~ControlJugadores();
 };
 

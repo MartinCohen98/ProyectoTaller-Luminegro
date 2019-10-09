@@ -7,7 +7,7 @@
 
 #include "ControlJugadores.h"
 
-ControlJugadores::ControlJugadores() {
+ControlJugadores::ControlJugadores(Renderizador *renderizador, pugi::xml_document *archiConfig) {
 	// TODO Auto-generated constructor stub
 
 }
