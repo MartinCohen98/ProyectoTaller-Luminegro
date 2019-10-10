@@ -139,7 +139,7 @@ int main (int argc, char** argv) {
         cerr << "Para modo Servidor:" << endl;
         cerr << "\t./<ejecutable> servidor <puerto> <(opcional)ruta config> <(opcional)nivel log>" << endl;
         cerr << "Para modo Cliente:" << endl;
-        cerr << "\t./<ejecutable> cliente <ipServidor:puerto> <(opcional)ruta config> <(opcional)nivel logl>" << endl;
+        cerr << "\t./<ejecutable> cliente <ipServidor:puerto> <(opcional)ruta config> <(opcional)nivel log>" << endl;
         //cerr <<
         return EXIT_FAILURE;
     }

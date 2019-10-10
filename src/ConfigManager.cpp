@@ -20,7 +20,7 @@ Estado ConfigManager::ValidarParametros() {
         return Estado::ErrorFaltanParametros;
     }
     //Validar acá que si viene en modo servidor o cliente, debe indicar para el primero el puerto y para el otro ip y puerto
-    if(strcmp(argv[1], "servidor") != 0 && strcmp(argv[1], "cliente") != 0) {
+    if(strcmp(argv[1], "servidor") != 0 && strcmp(argv[1], "cliente") != 0 && strcmp(argv[1], "simple") != 0) {
         Log::ObtenerInstancia()->Error("Parámetros incorrectos, no se inició ni en modo servidor ni en modo cliente");
         return Estado::ErrorParametrosIncorrectos;
     }
