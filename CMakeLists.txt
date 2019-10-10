@@ -31,6 +31,8 @@ add_executable(ProyectoTaller_Luminegro
         src/Encuadre.h
         src/Enemigo.cpp
         src/Enemigo.h
+        src/EnemigoModelo.cpp
+        src/EnemigoModelo.h
         src/EstadoEnemigoAvanzando.cpp
         src/EstadoEnemigoAvanzando.h
         src/EstadoEnemigoParado.cpp

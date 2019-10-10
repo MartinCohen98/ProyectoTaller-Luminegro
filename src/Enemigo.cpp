@@ -77,11 +77,6 @@ void Enemigo::moverEnX(int movimiento) {
 	posicionX = posicionX + movimiento;
 }
 
-int Enemigo::cambiarFrameInicial(int x,int y,int ancho,int alto){
-	(estado->obtenerSprite()).modificar(x,y,ancho,alto);
-	return 0;
-}
-
 Enemigo::~Enemigo(){
 	delete estado;
 }

@@ -1,16 +1,6 @@
-/*
- * Elemento.cpp
- *
- *  Created on: 2 oct. 2019
- *      Author: julio
- */
-
 #include "Elemento.h"
 
-Elemento::Elemento() {
-	// TODO Auto-generated constructor stub
-
-}
+Elemento::Elemento() {}
 
 void Elemento::movidaDePantalla() {
 	posicionX = posicionX - 12;
@@ -21,7 +11,5 @@ void Elemento::actualizar(Renderizador *renderizador) {
 	textura.copiarseEn(renderizador, encuadre, insercion);
 }
 
-Elemento::~Elemento() {
-	// TODO Auto-generated destructor stub
-}
+Elemento::~Elemento() {}
 

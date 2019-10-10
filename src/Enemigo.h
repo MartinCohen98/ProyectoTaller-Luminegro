@@ -28,7 +28,6 @@ public:
 	void bajar();
 	void actualizar(Renderizador *renderizador);
 	void actualizarRetroceso();
-	int cambiarFrameInicial(int x,int y,int ancho,int alto);
 	virtual ~Enemigo();
 
 private:
