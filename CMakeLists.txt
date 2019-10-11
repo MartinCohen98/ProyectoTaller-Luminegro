@@ -17,6 +17,8 @@ add_executable(ProyectoTaller_Luminegro
         src/Barril.h
         src/Caja.cpp
         src/Caja.h
+        src/Cliente.cpp
+        src/Cliente.h
         src/ControlEnemigos.cpp
         src/ControlEnemigos.h
         src/ControlJugadores.cpp
@@ -64,6 +66,8 @@ add_executable(ProyectoTaller_Luminegro
         src/Logger.cpp
         src/Logger.h
         src/main.cpp
+        src/MensajeCliente.cpp
+        Src/MensajeCliente.h
         src/Persona.cpp
         src/Persona.h
         src/Protagonista.cpp
@@ -78,6 +82,8 @@ add_executable(ProyectoTaller_Luminegro
         src/Tubo.h
         src/ConfigManager.cpp
         src/ConfigManager.h
+        src/VentanaCliente.cpp
+        src/VentanaCliente.h
         src/VentanaDeJuego.cpp
         src/VentanaDeJuego.h
         src/VistaEnemigo.cpp
