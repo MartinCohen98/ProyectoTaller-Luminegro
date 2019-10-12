@@ -67,13 +67,15 @@ add_executable(ProyectoTaller_Luminegro
         src/Logger.h
         src/main.cpp
         src/MensajeCliente.cpp
-        Src/MensajeCliente.h
+        src/MensajeCliente.h
         src/Persona.cpp
         src/Persona.h
         src/Protagonista.cpp
         src/Protagonista.h
         src/Renderizador.cpp
         src/Renderizador.h
+        src/Sesion.cpp
+        src/Sesion.h
         src/Socket.cpp
         src/Socket.h
         src/Textura.cpp
@@ -96,3 +98,5 @@ add_executable(ProyectoTaller_Luminegro
         src/VistaObjeto.h)
 
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2_LIBRARIES})
+target_link_libraries(ProyectoTaller_Luminegro ${SDL2TTF_LIBRARIES})
+

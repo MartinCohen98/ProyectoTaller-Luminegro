@@ -1,7 +1,8 @@
-#include <cstdio>
 #include "VentanaDeJuego.h"
 #include "Socket.h"
 #include "ConfigManager.h"
+#include "Sesion.h"
+
 
 using namespace Logger;
 using namespace Common;
@@ -78,8 +79,9 @@ int main (int argc, char** argv) {
 
     } else if (strcmp(argv[1], "cliente") == 0) {
         // CLIENTE
-
         logueador->Info("Se inicia el juego en modo cliente");
+
+        //Sesion sesion;
 
         Socket socketConectado;
 
