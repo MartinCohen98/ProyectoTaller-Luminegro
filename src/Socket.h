@@ -22,6 +22,7 @@ class Socket {
         int enviar(unsigned char* datos, int* cantidadDeBytes);
         int recibir(unsigned char* datos, int* tamanoMaximo, bool* elSocketEsValido);
         int cerrar();
+        ~Socket();
 };
 
 

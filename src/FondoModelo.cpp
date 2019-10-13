@@ -37,8 +37,16 @@ void FondoModelo::mover() {
 	movido = true;
 }
 
+bool FondoModelo::seMovio() {
+	return movido;
+}
+
 bool FondoModelo::consultarFin() {
 	return fin;
+}
+
+int FondoModelo::obtenerAncho() {
+	return limite;
 }
 
 FondoModelo::~FondoModelo() {}

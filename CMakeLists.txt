@@ -88,6 +88,8 @@ add_executable(ProyectoTaller_Luminegro
         src/Protagonista.h
         src/Renderizador.cpp
         src/Renderizador.h
+        src/Servidor.cpp
+        src/Servidor.h
         src/Sesion.cpp
         src/Sesion.h
         src/Socket.cpp

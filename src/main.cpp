@@ -1,5 +1,5 @@
 #include "VentanaDeJuego.h"
-#include "Socket.h"
+#include "Servidor.h"
 #include "ConfigManager.h"
 #include "Sesion.h"
 
@@ -56,26 +56,7 @@ int main (int argc, char** argv) {
 
         logueador->Info("Se inicia el juego en modo servidor");
 
-        Socket socketEsperando;
-
-        int resultadoAccion = socketEsperando.servidorInicializar(argv[2]);
-        if (resultadoAccion == 1) {
-            // Ya fue logueado en la clase
-            return EXIT_FAILURE;
-        }
-
-        // (INICIO) ESTO SE TIENE QUE LLAMAR CON UNA INSTANCIA NUEVA DE "Socket" POR CADA JUGADOR QUE SE NOS CONECTA
-        Socket socketConectado;
-
-        resultadoAccion = socketEsperando.esperarYAceptarCliente(&socketConectado);
-        if (resultadoAccion == EXIT_FAILURE) {
-            // Ya fue logueado en la clase
-            return EXIT_FAILURE;
-        }
-        // (FIN) ESTO SE TIENE QUE LLAMAR CON UNA INSTANCIA NUEVA DE "Socket" POR CADA JUGADOR QUE SE NOS CONECTA
-
-        socketConectado.cerrar();
-        socketEsperando.cerrar();
+        Servidor servidor(1, argv[2]);
 
     } else if (strcmp(argv[1], "cliente") == 0) {
         // CLIENTE

@@ -242,8 +242,15 @@ int Socket::recibir(unsigned char(*datos), int* tamanoMaximo, bool* elSocketEsVa
 
 
 int Socket::cerrar() {
-    shutdown(numero, SHUT_RDWR);
-    close(numero);
+	if (numero > 0) {
+		shutdown(numero, SHUT_RDWR);
+		close(numero);
+		numero = 0;
+	}
 
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
+}
+
+Socket::~Socket() {
+	cerrar();
 }

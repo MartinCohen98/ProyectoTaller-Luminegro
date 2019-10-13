@@ -169,7 +169,7 @@ int Protagonista::escalar(int tamanio) {
 
 bool Protagonista::llegoAlFin(Fondo *fondo) {
 	return (fondo->consultarFin() &&
-			(posicionX == (800 - escalar(estado->obtenerAncho()))));
+			(posicionX == 800));
 }
 
 Protagonista::~Protagonista(){

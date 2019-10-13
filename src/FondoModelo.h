@@ -20,6 +20,8 @@ private:
 public:
 	FondoModelo(pugi::xml_document* archiConfig, int nivel);
 	void mover();
+	int obtenerAncho();
+	bool seMovio();
 	bool consultarFin();
 	virtual ~FondoModelo();
 
