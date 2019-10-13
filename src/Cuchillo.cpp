@@ -6,7 +6,6 @@ Cuchillo::Cuchillo(Renderizador *renderizador, int posXinicial, int posYinicial,
 	posicionY = posYinicial;
 	ancho = 66;
 	alto = 21;
-	escaladoDeSprite = 3;
 
     std::string cuchilloBMPPath = archiConfig->child("configuracion").child("escenario")
             .child("objetos").child("cuchillo").child_value("imagen");

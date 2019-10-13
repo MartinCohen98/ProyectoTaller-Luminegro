@@ -1,9 +1,10 @@
 #include "Persona.h"
 
 Persona::Persona() {
-	posicionX=0;
-    posicionY=0;
-    dadoVuelta=false;
+	posicionX = 0;
+    posicionY = 0;
+    dadoVuelta = false;
+    estado = NULL;
 }
 
 void avanzar(){

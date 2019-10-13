@@ -14,7 +14,6 @@
 class ControlObjetos {
 
 private:
-	int desplazamiento;
 	int barrilesCantidad;
 	int cajasCantidad;
 	int cuchillosCantidad;

@@ -7,7 +7,6 @@ Barril::Barril(Renderizador *renderizador, int posXinicial, int posYinicial, pug
 	posicionY = posYinicial;
 	ancho = 90;
 	alto = 96;
-	escaladoDeSprite = 3;
 
     std::string barrilBMPPath = archiConfig->child("configuracion").child("escenario")
             .child("objetos").child("barril").child_value("imagen");

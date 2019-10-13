@@ -1,6 +1,11 @@
 #include "Elemento.h"
 
-Elemento::Elemento() {}
+Elemento::Elemento() {
+	posicionX = 0;
+	posicionY = 0;
+	alto = 0;
+	ancho = 0;
+}
 
 void Elemento::movidaDePantalla() {
 	posicionX = posicionX - 12;

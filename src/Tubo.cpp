@@ -5,7 +5,6 @@ Tubo::Tubo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::x
 	posicionY = posYinicial;
 	ancho = 144;
 	alto = 24;
-	escaladoDeSprite = 3;
 
     std::string tuboBMPPath = archiConfig->child("configuracion").child("escenario")
             .child("objetos").child("tuboMetalico").child_value("imagen");

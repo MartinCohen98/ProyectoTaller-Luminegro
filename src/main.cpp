@@ -81,7 +81,7 @@ int main (int argc, char** argv) {
         // CLIENTE
         logueador->Info("Se inicia el juego en modo cliente");
 
-        //Sesion sesion;
+        Sesion sesion;
 
         Socket socketConectado;
 

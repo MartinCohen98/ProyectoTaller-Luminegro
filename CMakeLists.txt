@@ -15,8 +15,12 @@ add_executable(ProyectoTaller_Luminegro
         lib/pugixml/pugixml.hpp
         src/Barril.cpp
         src/Barril.h
+        src/BarrilModelo.cpp
+        src/BarrilModelo.h
         src/Caja.cpp
         src/Caja.h
+        src/CajaModelo.cpp
+        src/CajaModelo.h
         src/Cliente.cpp
         src/Cliente.h
         src/ControlEnemigos.cpp
@@ -25,10 +29,16 @@ add_executable(ProyectoTaller_Luminegro
         src/ControlJugadores.h
         src/ControlObjetos.cpp
         src/ControlObjetos.h
+        src/ControlObjetosModelo.cpp
+        src/ControlObjetosModelo.h
         src/Cuchillo.cpp
         src/Cuchillo.h
+        src/CuchilloModelo.cpp
+        src/CuchilloModelo.h
         src/Elemento.cpp
         src/Elemento.h
+        src/ElementoModelo.cpp
+        src/ElementoModelo.h
         src/Encuadre.cpp
         src/Encuadre.h
         src/Enemigo.cpp
@@ -70,6 +80,8 @@ add_executable(ProyectoTaller_Luminegro
         src/MensajeCliente.h
         src/Persona.cpp
         src/Persona.h
+        src/PersonaModelo.cpp
+        src/PersonaModelo.h
         src/Protagonista.cpp
         src/Protagonista.h
         src/Renderizador.cpp
@@ -82,6 +94,8 @@ add_executable(ProyectoTaller_Luminegro
         src/Textura.h
         src/Tubo.cpp
         src/Tubo.h
+        src/TuboModelo.cpp
+        src/TuboModelo.h
         src/ConfigManager.cpp
         src/ConfigManager.h
         src/VentanaCliente.cpp

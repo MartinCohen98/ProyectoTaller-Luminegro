@@ -1,10 +1,10 @@
 #ifndef SRC_ENEMIGOMODELO_H_
 #define SRC_ENEMIGOMODELO_H_
 
-#include "Persona.h"
+#include "PersonaModelo.h"
 #include "EstadoEnemigoParado.h"
 
-class EnemigoModelo: public Persona {
+class EnemigoModelo: public PersonaModelo {
 
 private:
 	int ancho;

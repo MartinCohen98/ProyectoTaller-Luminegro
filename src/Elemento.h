@@ -18,7 +18,6 @@ protected:
 	int posicionY;
 	int ancho;
 	int alto;
-	int escaladoDeSprite;
 	Imagen sprite;
 	Encuadre encuadre;
 	Encuadre insercion;

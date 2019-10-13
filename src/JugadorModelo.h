@@ -2,12 +2,12 @@
 #define SRC_JUGADORMODELO_H_
 
 #include "EstadoJugadorParado.h"
-#include "Persona.h"
+#include "PersonaModelo.h"
 #include "../lib/pugixml/pugixml.hpp"
 #include <string>
 #include "FondoModelo.h"
 
-class JugadorModelo: public Persona {
+class JugadorModelo: public PersonaModelo {
 
 private:
 	int escaladoDeSprite;

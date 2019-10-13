@@ -6,7 +6,6 @@ Caja::Caja(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::x
 	posicionY = posYinicial;
 	ancho = 96;
 	alto = 160;
-	escaladoDeSprite = 3;
 
     std::string cajaBMPPath = archiConfig->child("configuracion").child("escenario")
             .child("objetos").child("caja").child_value("imagen");
