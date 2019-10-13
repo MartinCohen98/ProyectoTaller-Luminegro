@@ -9,8 +9,9 @@
 
 class ControlEnemigos {
 
-private: Enemigo **enemigos;
-         int enemigosCantidad;
+private:
+	Enemigo **enemigos;
+	int enemigosCantidad;
 
 public:
 	ControlEnemigos(Renderizador *renderizador, pugi::xml_document *archiConfig, int nivel);

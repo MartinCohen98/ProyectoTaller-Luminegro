@@ -1,6 +1,6 @@
 #include "EnemigoModelo.h"
 
-EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, const char* path) {
+EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
 	ancho = 120;
@@ -14,6 +14,7 @@ void EnemigoModelo::avanzar() {
 	dadoVuelta = false;
 	estado = estado->avanzar();
 	moverEnX(5);
+	actualizarInsercion();
 }
 
 void EnemigoModelo::parar() {
@@ -24,6 +25,7 @@ void EnemigoModelo::retroceder() {
 	dadoVuelta = true;
 	estado = estado->avanzar();
 	moverEnX(-5);
+	actualizarInsercion();
 }
 
 void EnemigoModelo::subir() {
@@ -33,6 +35,7 @@ void EnemigoModelo::subir() {
 	} else {
 		estado = estado->parar();
 	}
+	actualizarInsercion();
 }
 
 void EnemigoModelo::bajar() {
@@ -42,6 +45,7 @@ void EnemigoModelo::bajar() {
 	} else {
 		estado = estado->parar();
 	}
+	actualizarInsercion();
 }
 
 void EnemigoModelo::agacharse() {

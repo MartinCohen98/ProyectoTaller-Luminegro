@@ -25,6 +25,8 @@ add_executable(ProyectoTaller_Luminegro
         src/Cliente.h
         src/ControlEnemigos.cpp
         src/ControlEnemigos.h
+        src/ControlEnemigosModelo.cpp
+        src/ControlEnemigosModelo.h
         src/ControlJugadores.cpp
         src/ControlJugadores.h
         src/ControlObjetos.cpp

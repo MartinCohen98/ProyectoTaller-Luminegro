@@ -2,7 +2,7 @@
 
 
 ControlEnemigos::ControlEnemigos(Renderizador *renderizador, pugi::xml_document *archiConfig, int nivel) {
-	enemigosCantidad=6;
+	enemigosCantidad = 6;
 	const char* enemigoBredBMPPath = archiConfig->child("configuracion").child("escenario").
 			child("enemigos").child("bred").child("imagen").attribute("url").value();
 

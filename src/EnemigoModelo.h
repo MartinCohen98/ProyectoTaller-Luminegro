@@ -11,7 +11,7 @@ private:
 	int alto;
 
 public:
-	EnemigoModelo(int posXinicial, int posYinicial, const char* path);
+	EnemigoModelo(int posXinicial, int posYinicial);
 	void avanzar();
 	void parar();
 	void retroceder();
