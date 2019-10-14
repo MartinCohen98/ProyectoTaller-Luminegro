@@ -63,6 +63,10 @@ int main (int argc, char** argv) {
         logueador->Info("Se inicia el juego en modo cliente");
 
         Sesion sesion;
+        if (sesion.clienteIniciarSesion() == EXIT_FAILURE) {
+            return EXIT_FAILURE;
+        }
+        sesion.limpiarMemoria();
 
         Socket socketConectado;
 
@@ -86,7 +90,7 @@ int main (int argc, char** argv) {
         // (FIN) Desgloso IP y puerto del parámetro de entrada
 
         int resultado = socketConectado.conectarAUnServidor(direccionIP, puerto);
-        if (resultado == 1) {
+        if (resultado == EXIT_FAILURE) {
             // Ya fue logueado en la clase
             return EXIT_FAILURE;
         }
