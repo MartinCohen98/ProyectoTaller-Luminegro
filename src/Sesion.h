@@ -28,7 +28,7 @@ private:
     unsigned short int i = 0; // para conteos
     bool mostrarCursor = false; // Se muestra siempre, esta variable se usa en unos bucles
     bool buclearIngreUsuario();
-    void atenderMostradoDeCursor();
+    void atenderMostradoDeCursor(); // Se ocupa del cursor destellante que indica donde aparece lo que tecleás
 
 public:
     int clienteIniciarSesion(); // Le ofrece al cliente ingresar sus credenciales para conectarse

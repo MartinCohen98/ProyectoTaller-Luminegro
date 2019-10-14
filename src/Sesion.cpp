@@ -25,6 +25,7 @@ int Sesion::clienteIniciarSesion() {
         return EXIT_FAILURE;
     }
 
+    // Preparo textos fijos
     SDL_Color colorTxtFijo = { 138, 212, 207 };
     SDL_Surface *superficieTxtFijo = TTF_RenderText_Solid(fuente, "Nombre de usuario:", colorTxtFijo);
     texturaTxtFijo1 = SDL_CreateTextureFromSurface(renderizador, superficieTxtFijo);
@@ -34,6 +35,7 @@ int Sesion::clienteIniciarSesion() {
 
     SDL_FreeSurface(superficieTxtFijo);
 
+    // El usuario teclea sus credenciales...
     while (buclearIngreUsuario()) {
         SDL_Delay(10);
     }
@@ -43,6 +45,7 @@ int Sesion::clienteIniciarSesion() {
 
 
 bool Sesion::buclearIngreUsuario() {
+    // Rehago desde cero el renderizador
     SDL_SetRenderDrawColor(renderizador, 44, 60, 74, 255 );
     SDL_RenderClear(renderizador);
 
@@ -64,20 +67,26 @@ bool Sesion::buclearIngreUsuario() {
         }
     }
 
+    // Muestro lo que lleva ingresado
+
     atenderMostradoDeCursor();
 
-    superficieTxtIngre = TTF_RenderText_Solid(fuente, stringIngresadoConCursor.c_str(),
-                                                           colorTxtIngre);
-    rectanguloTxtIngre.x = 320 - (superficieTxtIngre->w / 2.0f);
-    rectanguloTxtIngre.w = superficieTxtIngre->w;
+    if (stringIngresadoConCursor.size() > 0) {
+        superficieTxtIngre = TTF_RenderText_Solid(fuente, stringIngresadoConCursor.c_str(),
+                                                  colorTxtIngre);
+        rectanguloTxtIngre.x = 320 - (superficieTxtIngre->w / 2.0f);
+        if (mostrarCursor) rectanguloTxtIngre.x += 5;
+        rectanguloTxtIngre.w = superficieTxtIngre->w;
 
-    texturaTxtIngre = SDL_CreateTextureFromSurface(renderizador, superficieTxtIngre);
+        texturaTxtIngre = SDL_CreateTextureFromSurface(renderizador, superficieTxtIngre);
 
-    SDL_RenderCopy(renderizador, texturaTxtIngre, NULL, &rectanguloTxtIngre);
-    SDL_DestroyTexture(texturaTxtIngre);
-    SDL_FreeSurface(superficieTxtIngre);
+        SDL_RenderCopy(renderizador, texturaTxtIngre, NULL, &rectanguloTxtIngre);
+        SDL_DestroyTexture(texturaTxtIngre);
+        SDL_FreeSurface(superficieTxtIngre);
+    }
 
-    // Actualizar ventana
+    // Actualizo ventana
+
     SDL_RenderPresent(renderizador);
 
     return true;
@@ -96,8 +105,6 @@ void Sesion::atenderMostradoDeCursor() {
 
     if (mostrarCursor) {
         stringIngresadoConCursor.append("|");
-    } else {
-        stringIngresadoConCursor.append(" ");
     }
 }
 
