@@ -16,7 +16,7 @@ void MensajeCliente::Codificar(enum teclas input){
 	datos = input;
 }
 
-int MensajeCliente::DarDatos(void){
+int MensajeCliente::get(void){
 	return datos;
 }
 

@@ -24,6 +24,7 @@ private:
 public:
 	VentanaCliente();
 	int abrir(pugi::xml_document* archiConfig);
+	SDL_Window* get();
 	virtual ~VentanaCliente();
 };
 

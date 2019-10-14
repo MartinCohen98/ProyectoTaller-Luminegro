@@ -147,6 +147,10 @@ int VentanaCliente::abrir(pugi::xml_document* archiConfig) {
     return 0;
 }
 
+SDL_Window* VentanaCliente::get(){
+	return ventana;
+}
+
 VentanaCliente::~VentanaCliente() {
 	if (ventana)
 		SDL_DestroyWindow(ventana);

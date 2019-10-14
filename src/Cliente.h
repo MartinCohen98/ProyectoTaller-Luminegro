@@ -19,18 +19,27 @@
 #include "Renderizador.h"
 #include "MensajeCliente.h"
 #include <pthread.h>
+#include <iostream>
+#include "Logger.h"
+#include "Protagonista.h"
+#include "ControlObjetos.h"
+#include "ControlEnemigos.h"
+#include "ControlJugadores.h"
+#include <SDL2/SDL.h>
+#include <string>
 
+using namespace std;
 
 class Cliente {
 private:
-	int puerto;
+	char *puerto;
 	int cantMaxDatos;
 	Socket socket;
 public:
-	 Cliente();
+	 Cliente(char* NumPuerto);
 	 int inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig);
 	 int conectar(char* direccionIP, char* puerto);
-	 int enviar(unsigned char* datos, int* cantidadDeBytes);
+	 int enviar(int* datos, int* cantidadDeBytes);
 	 int recibir(unsigned char* datos, int* cantMaxDatos, bool* elSocketEsValido);
 	 int cerrar();
 	 virtual ~Cliente();

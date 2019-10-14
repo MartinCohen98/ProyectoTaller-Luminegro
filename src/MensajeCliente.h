@@ -20,7 +20,7 @@ private:
 public:
 	MensajeCliente();
 	void Codificar(enum teclas input);
-	int DarDatos(void);
+	int get(void);
 	virtual ~MensajeCliente();
 };
 

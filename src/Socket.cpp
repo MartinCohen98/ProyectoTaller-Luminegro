@@ -175,7 +175,7 @@ int Socket::conectarAUnServidor(char* direccionIP, char* puerto) {
 }
 
 
-int Socket::enviar(unsigned char* datos, int* cantidadDeBytes) {
+int Socket::enviar(int* datos, int* cantidadDeBytes) {
     Logger::Log *logueador = Logger::Log::ObtenerInstancia();
 
     bool hayUnErrorDeSocket = false;
