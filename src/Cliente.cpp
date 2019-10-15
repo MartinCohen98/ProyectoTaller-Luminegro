@@ -22,7 +22,9 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	int resultado=conectar(direccionIP, puerto);
 
 	int retorno = ventana.abrir(archiConfig);
-
+	if (retorno=-1){
+	   logueador->Error("No se pudo crear la ventana");
+	   }
 	bool salir;
 		SDL_Event evento;
 		Renderizador renderizador(ventana.get());
@@ -119,9 +121,17 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	                	mensajeCliente.Codificar(Exit);
 
 	            }
-                int mensaje=mensajeCliente.get();
+
+	            int mensaje=mensajeCliente.get();
                 int bytes=1;
 	            enviar(&mensaje,&bytes);
+
+	            long int datosRecibidos;
+	            int maxDatos;
+	            bool socketValido;
+	            recibir(&datosRecibidos,&maxDatos,&socketValido);
+
+
 
 
 	/*
@@ -166,7 +176,11 @@ int Cliente::enviar(int* datos, int* cantidadDeBytes){
 
 }
 
-int Cliente::recibir(unsigned char* datos, int* cantMaxDatos, bool* elSocketEsValido){
+int Cliente::recibir(long int* datos, int* cantMaxDatos, bool* elSocketEsValido){
+
+}
+
+int Cliente::actualizar(long int* datosRecibidos,Protagonista *protagonista){
 
 }
 

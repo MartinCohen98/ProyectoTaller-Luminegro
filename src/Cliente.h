@@ -40,7 +40,8 @@ public:
 	 int inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig);
 	 int conectar(char* direccionIP, char* puerto);
 	 int enviar(int* datos, int* cantidadDeBytes);
-	 int recibir(unsigned char* datos, int* cantMaxDatos, bool* elSocketEsValido);
+	 int recibir(long int* datos, int* cantMaxDatos, bool* elSocketEsValido);
+	 int actualizar(long int *datosRecibidos, Protagonista* protagonista);
 	 int cerrar();
 	 virtual ~Cliente();
 };
