@@ -11,9 +11,9 @@ private:
 	SDL_Surface* imagen;
 
 public:
-    static const int TIPO_OBJETO;
-    static const int TIPO_FONDO;
-    static const int TIPO_PERSONAJE;
+    static const int TIPO_OBJETO = 1;
+    static const int TIPO_FONDO = 2;
+    static const int TIPO_PERSONAJE = 3;
 
 	Imagen();
 	SDL_Surface* get();

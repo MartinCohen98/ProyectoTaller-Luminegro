@@ -1,8 +1,5 @@
 #include "Imagen.h"
 
-const int Imagen::TIPO_OBJETO = 1;
-const int Imagen::TIPO_FONDO = 2;
-const int Imagen::TIPO_PERSONAJE = 3;
 
 Imagen::Imagen(){
 	imagen = NULL;
