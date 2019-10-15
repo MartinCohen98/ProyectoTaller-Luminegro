@@ -90,8 +90,8 @@ add_executable(ProyectoTaller_Luminegro
         src/Renderizador.h
         src/Servidor.cpp
         src/Servidor.h
-        src/Sesion.cpp
-        src/Sesion.h
+        src/VentanaConexionCliente.cpp
+        src/VentanaConexionCliente.h
         src/Socket.cpp
         src/Socket.h
         src/Textura.cpp

@@ -1,7 +1,7 @@
 #include "VentanaDeJuego.h"
 #include "Servidor.h"
 #include "ConfigManager.h"
-#include "Sesion.h"
+#include "VentanaConexionCliente.h"
 
 
 using namespace Logger;
@@ -62,11 +62,13 @@ int main (int argc, char** argv) {
         // CLIENTE
         logueador->Info("Se inicia el juego en modo cliente");
 
-        Sesion sesion;
-        if (sesion.clienteIniciarSesion() == EXIT_FAILURE) {
+        VentanaConexionCliente ventanaConexionCliente;
+        if (ventanaConexionCliente.pedirCredenciales() == EXIT_FAILURE) {
             return EXIT_FAILURE;
         }
-        sesion.limpiarMemoria();
+
+        string usuario = ventanaConexionCliente.getUsuario();
+        string clave = ventanaConexionCliente.getClave();
 
         Socket socketConectado;
 
@@ -94,6 +96,12 @@ int main (int argc, char** argv) {
             // Ya fue logueado en la clase
             return EXIT_FAILURE;
         }
+
+
+        // PROGRAMAR ACA EL ENVIO DE USUARIO Y CONTRASEÑA, SI ESTAN MANTECOL EL JUEGO ARRANCA, SINO MOSTRAR ERROR
+        // EN ventanaConexionCliente
+
+        ventanaConexionCliente.cerrar();
 
         socketConectado.cerrar();
 

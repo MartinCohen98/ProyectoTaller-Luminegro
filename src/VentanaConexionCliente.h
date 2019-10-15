@@ -1,5 +1,5 @@
-#ifndef PROYECTOTALLER_LUMINEGRO_SESION_H
-#define PROYECTOTALLER_LUMINEGRO_SESION_H
+#ifndef PROYECTOTALLER_LUMINEGRO_VENTANACONEXIONCLIENTE_H
+#define PROYECTOTALLER_LUMINEGRO_VENTANACONEXIONCLIENTE_H
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -8,9 +8,13 @@
 #include "Logger.h"
 
 
-class Sesion {
+class VentanaConexionCliente {
 
 private:
+    static const int ESTADO_INGRESANDO_USUARIO;
+    static const int ESTADO_INGRESANDO_CLAVE;
+    static const int ESTADO_CONECTANDO;
+
     SDL_Window* ventana;
     SDL_Renderer *renderizador;
     SDL_Texture *texturaTxtFijo1;
@@ -23,17 +27,25 @@ private:
     SDL_Rect rectanguloTxtIngre = { 0, 100, 250, 30 };
     SDL_Surface *superficieTxtIngre;
     SDL_Color colorTxtIngre = {100, 100, 100};
-    std::string stringIngresado;
-    std::string stringIngresadoConCursor;
+    std::string stringSiendoIngresado;
+    std::string stringSiendoIngresadoConCursor;
+    std::string stringIngresadoUsuario;
+    std::string stringIngresadoClave;
     unsigned short int i = 0; // para conteos
     bool mostrarCursor = false; // Se muestra siempre, esta variable se usa en unos bucles
-    bool buclearIngreUsuario();
+    int estado = ESTADO_INGRESANDO_USUARIO;
+    bool pasarAEstadoSiguiente = false;
+
+    bool buclearIngresoCredenciales();
     void atenderMostradoDeCursor(); // Se ocupa del cursor destellante que indica donde aparece lo que tecleás
+    void refrescarVentana();
 
 public:
-    int clienteIniciarSesion(); // Le ofrece al cliente ingresar sus credenciales para conectarse
-    void limpiarMemoria();
+    int pedirCredenciales(); // Le ofrece al cliente ingresar sus credenciales para conectarse
+    void cerrar();
+    std::string getUsuario();
+    std::string getClave();
 };
 
 
-#endif //PROYECTOTALLER_LUMINEGRO_SESION_H
+#endif //PROYECTOTALLER_LUMINEGRO_VENTANACONEXIONCLIENTE_H
