@@ -1,7 +1,7 @@
 #include "VentanaDeJuego.h"
 #include "Servidor.h"
 #include "ConfigManager.h"
-#include "VentanaConexionCliente.h"
+#include "VentanaClienteInicioSesion.h"
 
 
 using namespace Logger;
@@ -62,15 +62,15 @@ int main (int argc, char** argv) {
         // CLIENTE
         logueador->Info("Se inicia el juego en modo cliente");
 
-        VentanaConexionCliente ventanaConexionCliente;
-        if (ventanaConexionCliente.pedirCredenciales() == EXIT_FAILURE) {
+        VentanaClienteInicioSesion ventanaClienteInicioSesion;
+        if (ventanaClienteInicioSesion.pedirCredenciales() == EXIT_FAILURE) {
             return EXIT_FAILURE;
         }
 
-        ventanaConexionCliente.mostrarMensaje("Conectando...", VentanaConexionCliente::MENSAJE_TIPO_INFORMATIVO);
+        ventanaClienteInicioSesion.mostrarMensaje("Conectando...", VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
 
-        string usuario = ventanaConexionCliente.getUsuario();
-        string clave = ventanaConexionCliente.getClave();
+        string usuario = ventanaClienteInicioSesion.getUsuario();
+        string clave = ventanaClienteInicioSesion.getClave();
 
         Socket socketConectado;
 
@@ -101,13 +101,13 @@ int main (int argc, char** argv) {
 
 
         // PROGRAMAR ACA EL ENVIO DE USUARIO Y CONTRASEÑA, SI ESTAN MANTECOL EL JUEGO ARRANCA, SINO MOSTRAR ERROR
-        // EN ventanaConexionCliente
+        // EN ventanaClienteInicioSesion
 
         /* EJEMPLO DE MENSAJE DE ERROR:
-         * ventanaConexionCliente.mostrarMensaje("Error al bla bla bla...", VentanaConexionCliente::MENSAJE_TIPO_ERROR);
+         * ventanaClienteInicioSesion.mostrarMensaje("Error al bla bla bla...", VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
         **/
 
-        ventanaConexionCliente.cerrar();
+        ventanaClienteInicioSesion.cerrar();
 
         socketConectado.cerrar();
 

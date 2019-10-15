@@ -1,6 +1,6 @@
-#include "VentanaConexionCliente.h"
+#include "VentanaClienteInicioSesion.h"
 
-int VentanaConexionCliente::pedirCredenciales() {
+int VentanaClienteInicioSesion::pedirCredenciales() {
 
     Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
 
@@ -41,7 +41,7 @@ int VentanaConexionCliente::pedirCredenciales() {
 }
 
 
-bool VentanaConexionCliente::buclearIngresoCredenciales() {
+bool VentanaClienteInicioSesion::buclearIngresoCredenciales() {
     // Rehago desde cero el renderizador
     SDL_SetRenderDrawColor(renderizador, 44, 60, 74, 255 );
     SDL_RenderClear(renderizador);
@@ -89,7 +89,7 @@ bool VentanaConexionCliente::buclearIngresoCredenciales() {
 }
 
 
-void VentanaConexionCliente::atenderMostradoDeCursor() {
+void VentanaClienteInicioSesion::atenderMostradoDeCursor() {
     stringSiendoIngresadoConCursor = stringSiendoIngresado;
 
     mostrarCursor = (i < 50);
@@ -105,7 +105,7 @@ void VentanaConexionCliente::atenderMostradoDeCursor() {
 }
 
 
-void VentanaConexionCliente::refrescarVentana() {
+void VentanaClienteInicioSesion::refrescarVentana() {
     switch (estado) {
         case ESTADO_INGRESANDO_CLAVE:
             if (pasarAEstadoSiguiente) {
@@ -182,23 +182,23 @@ void VentanaConexionCliente::refrescarVentana() {
 }
 
 
-std::string VentanaConexionCliente::getUsuario() {
+std::string VentanaClienteInicioSesion::getUsuario() {
     return stringIngresadoUsuario;
 }
 
 
-std::string VentanaConexionCliente::getClave() {
+std::string VentanaClienteInicioSesion::getClave() {
     return stringIngresadoClave;
 }
 
 
-void VentanaConexionCliente::mostrarMensaje(const std::string mensaje, const int tipo) {
+void VentanaClienteInicioSesion::mostrarMensaje(const std::string mensaje, const int tipo) {
     mensajeInformativoString = mensaje;
     mensajeInformativoTipo = tipo;
     refrescarVentana();
 }
 
-void VentanaConexionCliente::cerrar() {
+void VentanaClienteInicioSesion::cerrar() {
     TTF_CloseFont(fuente);
     TTF_Quit();
     SDL_DestroyRenderer(renderizador);
