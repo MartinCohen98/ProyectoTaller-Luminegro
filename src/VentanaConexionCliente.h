@@ -11,9 +11,9 @@
 class VentanaConexionCliente {
 
 private:
-    static const int ESTADO_INGRESANDO_USUARIO;
-    static const int ESTADO_INGRESANDO_CLAVE;
-    static const int ESTADO_CONECTANDO;
+    static const int ESTADO_INGRESANDO_USUARIO = 1;
+    static const int ESTADO_INGRESANDO_CLAVE = 2;
+    static const int ESTADO_CONECTANDO = 3;
 
     SDL_Window* ventana;
     SDL_Renderer *renderizador;
@@ -24,13 +24,19 @@ private:
     SDL_Event evento;
     SDL_Rect rectanguloTxtFijoSuperior = { 200, 40, 250, 37 };
     SDL_Rect rectanguloTxtFijoInferior = { 270, 200, 100, 37 };
+    SDL_Rect rectanguloTxtFijoMensajes = { 270, 345, 100, 37 };
     SDL_Rect rectanguloTxtIngre = { 0, 100, 250, 30 };
-    SDL_Surface *superficieTxtIngre;
+    SDL_Surface *superficieTxt;
     SDL_Color colorTxtIngre = {100, 100, 100};
+    SDL_Color colorTxtNeutro = {51, 204, 0};
+    SDL_Color colorTxtError = {255, 26, 26};
+    SDL_Color colorMensajeInformativo;
     std::string stringSiendoIngresado;
     std::string stringSiendoIngresadoConCursor;
     std::string stringIngresadoUsuario;
     std::string stringIngresadoClave;
+    std::string mensajeInformativoString = "";
+    int mensajeInformativoTipo;
     unsigned short int i = 0; // para conteos
     bool mostrarCursor = false; // Se muestra siempre, esta variable se usa en unos bucles
     int estado = ESTADO_INGRESANDO_USUARIO;
@@ -41,10 +47,14 @@ private:
     void refrescarVentana();
 
 public:
+    static const int MENSAJE_TIPO_INFORMATIVO = 1;
+    static const int MENSAJE_TIPO_ERROR = 2;
+
     int pedirCredenciales(); // Le ofrece al cliente ingresar sus credenciales para conectarse
-    void cerrar();
     std::string getUsuario();
     std::string getClave();
+    void mostrarMensaje(const std::string mensaje, const int tipo);
+    void cerrar();
 };
 
 

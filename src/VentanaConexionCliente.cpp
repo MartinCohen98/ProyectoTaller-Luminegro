@@ -1,11 +1,5 @@
 #include "VentanaConexionCliente.h"
 
-
-const int VentanaConexionCliente::ESTADO_INGRESANDO_USUARIO = 1;
-const int VentanaConexionCliente::ESTADO_INGRESANDO_CLAVE = 2;
-const int VentanaConexionCliente::ESTADO_CONECTANDO = 3;
-
-
 int VentanaConexionCliente::pedirCredenciales() {
 
     Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
@@ -32,13 +26,11 @@ int VentanaConexionCliente::pedirCredenciales() {
 
     // Preparo textos fijos
     SDL_Color colorTxtFijo = { 138, 212, 207 };
-    SDL_Surface *superficieTxtFijo = TTF_RenderText_Solid(fuente, "Nombre de usuario:", colorTxtFijo);
-    texturaTxtFijo1 = SDL_CreateTextureFromSurface(renderizador, superficieTxtFijo);
+    superficieTxt = TTF_RenderText_Solid(fuente, "Nombre de usuario:", colorTxtFijo);
+    texturaTxtFijo1 = SDL_CreateTextureFromSurface(renderizador, superficieTxt);
 
-    superficieTxtFijo = TTF_RenderText_Solid(fuente, "Clave:", colorTxtFijo);
-    texturaTxtFijo2 = SDL_CreateTextureFromSurface(renderizador, superficieTxtFijo);
-
-    SDL_FreeSurface(superficieTxtFijo);
+    superficieTxt = TTF_RenderText_Solid(fuente, "Clave:", colorTxtFijo);
+    texturaTxtFijo2 = SDL_CreateTextureFromSurface(renderizador, superficieTxt);
 
     // El usuario teclea sus credenciales...
     while (buclearIngresoCredenciales() && estado != ESTADO_CONECTANDO) {
@@ -78,7 +70,9 @@ bool VentanaConexionCliente::buclearIngresoCredenciales() {
                     case SDLK_RETURN:
                     case SDLK_RETURN2:
                     case SDLK_KP_ENTER:
-                        pasarAEstadoSiguiente = true;
+                        if (stringSiendoIngresado.size() > 0) {
+                            pasarAEstadoSiguiente = true;
+                        }
                         break;
                 }
                 break;
@@ -135,31 +129,52 @@ void VentanaConexionCliente::refrescarVentana() {
     }
 
     if (stringIngresadoUsuario.size() > 0) {
-        superficieTxtIngre = TTF_RenderText_Solid(fuente, stringIngresadoUsuario.c_str(), colorTxtIngre);
-        rectanguloTxtIngre.x = 320 - (superficieTxtIngre->w / 2.0f);
+        superficieTxt = TTF_RenderText_Solid(fuente, stringIngresadoUsuario.c_str(), colorTxtIngre);
+        rectanguloTxtIngre.x = 320 - (superficieTxt->w / 2.0f);
         if (estado == ESTADO_INGRESANDO_USUARIO && mostrarCursor) rectanguloTxtIngre.x += 5;
-        rectanguloTxtIngre.w = superficieTxtIngre->w;
+        rectanguloTxtIngre.w = superficieTxt->w;
         rectanguloTxtIngre.y = 100;
 
-        texturaTxtIngre = SDL_CreateTextureFromSurface(renderizador, superficieTxtIngre);
+        texturaTxtIngre = SDL_CreateTextureFromSurface(renderizador, superficieTxt);
 
         SDL_RenderCopy(renderizador, texturaTxtIngre, NULL, &rectanguloTxtIngre);
         SDL_DestroyTexture(texturaTxtIngre);
-        SDL_FreeSurface(superficieTxtIngre);
+        SDL_FreeSurface(superficieTxt);
     }
 
     if (stringIngresadoClave.size() > 0) {
-        superficieTxtIngre = TTF_RenderText_Solid(fuente, stringIngresadoClave.c_str(), colorTxtIngre);
-        rectanguloTxtIngre.x = 320 - (superficieTxtIngre->w / 2.0f);
+        superficieTxt = TTF_RenderText_Solid(fuente, stringIngresadoClave.c_str(), colorTxtIngre);
+        rectanguloTxtIngre.x = 320 - (superficieTxt->w / 2.0f);
         if (estado == ESTADO_INGRESANDO_CLAVE && mostrarCursor) rectanguloTxtIngre.x += 5;
-        rectanguloTxtIngre.w = superficieTxtIngre->w;
+        rectanguloTxtIngre.w = superficieTxt->w;
         rectanguloTxtIngre.y = 260;
 
-        texturaTxtIngre = SDL_CreateTextureFromSurface(renderizador, superficieTxtIngre);
+        texturaTxtIngre = SDL_CreateTextureFromSurface(renderizador, superficieTxt);
 
         SDL_RenderCopy(renderizador, texturaTxtIngre, NULL, &rectanguloTxtIngre);
         SDL_DestroyTexture(texturaTxtIngre);
-        SDL_FreeSurface(superficieTxtIngre);
+        SDL_FreeSurface(superficieTxt);
+    }
+
+    if (mensajeInformativoString.size() > 0) {
+        switch (mensajeInformativoTipo) {
+            case MENSAJE_TIPO_INFORMATIVO:
+                colorMensajeInformativo = colorTxtNeutro;
+                break;
+            case MENSAJE_TIPO_ERROR:
+                colorMensajeInformativo = colorTxtError;
+                break;
+        }
+
+        superficieTxt = TTF_RenderText_Solid(fuente, mensajeInformativoString.c_str(),
+                colorMensajeInformativo);
+        rectanguloTxtFijoMensajes.x = 320 - (superficieTxt->w / 2.0f);
+        rectanguloTxtFijoMensajes.w = superficieTxt->w;
+
+        texturaTxtIngre = SDL_CreateTextureFromSurface(renderizador, superficieTxt);
+
+        SDL_RenderCopy(renderizador, texturaTxtIngre, NULL, &rectanguloTxtFijoMensajes);
+        SDL_DestroyTexture(texturaTxtIngre);
     }
 
     // Actualizo ventana
@@ -177,6 +192,12 @@ std::string VentanaConexionCliente::getClave() {
 }
 
 
+void VentanaConexionCliente::mostrarMensaje(const std::string mensaje, const int tipo) {
+    mensajeInformativoString = mensaje;
+    mensajeInformativoTipo = tipo;
+    refrescarVentana();
+}
+
 void VentanaConexionCliente::cerrar() {
     TTF_CloseFont(fuente);
     TTF_Quit();
@@ -184,5 +205,6 @@ void VentanaConexionCliente::cerrar() {
     SDL_DestroyWindow(ventana);
     SDL_DestroyTexture(texturaTxtFijo1);
     SDL_DestroyTexture(texturaTxtFijo2);
+    SDL_FreeSurface(superficieTxt);
     SDL_Quit();
 }

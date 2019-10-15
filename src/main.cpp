@@ -67,6 +67,8 @@ int main (int argc, char** argv) {
             return EXIT_FAILURE;
         }
 
+        ventanaConexionCliente.mostrarMensaje("Conectando...", VentanaConexionCliente::MENSAJE_TIPO_INFORMATIVO);
+
         string usuario = ventanaConexionCliente.getUsuario();
         string clave = ventanaConexionCliente.getClave();
 
@@ -100,6 +102,10 @@ int main (int argc, char** argv) {
 
         // PROGRAMAR ACA EL ENVIO DE USUARIO Y CONTRASEÑA, SI ESTAN MANTECOL EL JUEGO ARRANCA, SINO MOSTRAR ERROR
         // EN ventanaConexionCliente
+
+        /* EJEMPLO DE MENSAJE DE ERROR:
+         * ventanaConexionCliente.mostrarMensaje("Error al bla bla bla...", VentanaConexionCliente::MENSAJE_TIPO_ERROR);
+        **/
 
         ventanaConexionCliente.cerrar();
 
