@@ -131,11 +131,12 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	            bool socketValido;
 	            recibir(&datosRecibidos,&maxDatos,&socketValido);
 
+	            int accionRecibida;
 
+	            actualizar(accionRecibida, &protagonista);
 
-
+	            protagonista.realizarMovimientos(&fondo);
 	/*
-				protagonista.realizarMovimientos(&fondo);
 				controlEnemigos.realizarMovimientos();
 
 				if (fondo.seMovio()) {
@@ -180,8 +181,61 @@ int Cliente::recibir(long int* datos, int* cantMaxDatos, bool* elSocketEsValido)
 
 }
 
-int Cliente::actualizar(long int* datosRecibidos,Protagonista *protagonista){
-
+int Cliente::actualizar(int accionRecibida,Protagonista *protagonista){
+	 switch (accionRecibida) {
+	        case Right:
+	            //Avanzar
+	            protagonista->avanzar();
+	            break;
+	        case Left:
+	             //Atras
+	             protagonista->retroceder();
+	             break;
+	        case Up:
+	             //Arriba
+	             protagonista->subir();
+	             break;
+	        case Down:
+	             //Abajo
+	             protagonista->bajar();
+	             break;
+	        case Jump:
+	             //Saltar
+	             protagonista->saltar();
+	             break;
+	        case Crouch:
+	             //Agacharse
+	             protagonista->agacharse();
+	             break;
+	        case Hit:
+	             //Pegar
+	             protagonista->pegar();
+	             break;
+	        case Exit:
+	             //Salir
+	            // logueador->Info("Se seleccionó salir");
+	             return 0;
+	             break;
+	        case StopGoingRight:
+	             //Avanzar
+	             protagonista->dejarDeAvanzar();
+	             break;
+	        case StopGoingLeft:
+	             //Atras
+	             protagonista->dejarDeRetroceder();
+	             break;
+	        case StopGoingUp:
+	             //Arriba
+	             protagonista->dejarDeSubir();
+	             break;
+	        case StopGoingDown:
+	             //Abajo
+	             protagonista->dejarDeBajar();
+	             break;
+	        case Rise:
+	             protagonista->dejarDeAgacharse();
+	             break;
+	 }
 }
 
 int Cliente::cerrar(){
