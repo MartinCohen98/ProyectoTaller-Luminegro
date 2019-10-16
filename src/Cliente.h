@@ -1,10 +1,3 @@
-/*
- * Cliente.h
- *
- *  Created on: 8 oct. 2019
- *      Author: julio
- */
-
 #ifndef SRC_CLIENTE_H_
 #define SRC_CLIENTE_H_
 
@@ -35,15 +28,20 @@ private:
 	char *puerto;
 	int cantMaxDatos;
 	Socket socket;
+	SDL_Event evento;
+	MensajeCliente mensajeCliente;
+
 public:
 	 Cliente(char* NumPuerto);
 	 int inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig);
 	 int conectar(char* direccionIP, char* puerto);
-	 int enviar(int* datos, int* cantidadDeBytes);
 	 int recibir(long int* datos, int* cantMaxDatos, bool* elSocketEsValido);
-	 int actualizar(int accionRecibida, Protagonista* protagonista);
-	 int cerrar();
+	 void actualizar(int accionRecibida, Protagonista* protagonista);
+	 void cerrar();
 	 virtual ~Cliente();
+
+private:
+	 void enviarInput(MensajeCliente* mensaje);
 };
 
 #endif /* SRC_CLIENTE_H_ */

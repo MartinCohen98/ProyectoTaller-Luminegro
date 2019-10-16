@@ -9,6 +9,7 @@
 #include <errno.h>
 #include <string.h>
 #include <pthread.h>
+#include "MensajeCliente.h"
 
 
 class Socket {
@@ -20,7 +21,9 @@ class Socket {
         int esperarYAceptarCliente(Socket *socketConectado);
         int conectarAUnServidor(char* direccionIP, char* puerto);
         int enviar(int* datos, int* cantidadDeBytes);
+        int enviar(MensajeCliente* mensaje);
         int recibir(unsigned char* datos, int* tamanoMaximo, bool* elSocketEsValido);
+        int recibir(MensajeCliente* mensaje);
         int cerrar();
         ~Socket();
 };

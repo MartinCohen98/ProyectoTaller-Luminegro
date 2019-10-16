@@ -65,8 +65,65 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 	}
 }
 
-void Servidor::recibirInput(JugadorModelo* jugdor) {
-	//TODO
+void Servidor::recibirInput(JugadorModelo* jugador) {
+	socketsDeClientes[0].recibir(&mensajeCliente);
+
+	switch (mensajeCliente.get()) {
+        case Right:
+            //Avanzar
+            jugador->avanzar();
+            break;
+        case Left:
+            //Atras
+        	jugador->retroceder();
+            break;
+        case Up:
+            //Arriba
+        	jugador->subir();
+            break;
+        case Down:
+            //Abajo
+        	jugador->bajar();
+            break;
+        case Jump:
+            //Saltar
+        	jugador->saltar();
+            break;
+        case Crouch:
+            //Agacharse
+        	jugador->agacharse();
+            break;
+        case Hit:
+            //Pegar
+        	jugador->pegar();
+            break;
+        case Exit:
+            //Salir
+            // logueador->Info("Se seleccionó salir");
+            break;
+        case StopGoingRight:
+            //Avanzar
+        	jugador->dejarDeAvanzar();
+            break;
+        case StopGoingLeft:
+            //Atras
+        	jugador->dejarDeRetroceder();
+            break;
+        case StopGoingUp:
+            //Arriba
+        	jugador->dejarDeSubir();
+            break;
+        case StopGoingDown:
+            //Abajo
+        	jugador->dejarDeBajar();
+            break;
+        case Rise:
+        	jugador->dejarDeAgacharse();
+            break;
+        case Nothing:
+        	break;
+		}
+
 }
 
 void Servidor::enviarEncuadres(JugadorModelo* jugador,

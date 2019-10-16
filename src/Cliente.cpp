@@ -1,34 +1,23 @@
-/*
- * Cliente.cpp
- *
- *  Created on: 8 oct. 2019
- *      Author: julio
- */
-
 #include "Cliente.h"
 
 Cliente::Cliente(char* NumPuerto) {
-	// TODO Auto-generated constructor stub
-	puerto=NumPuerto;
-
+	puerto = NumPuerto;
 }
 
 int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig){
 
-	Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
+	Logger::Log *logueador = Logger::Log::ObtenerInstancia();
 
 	VentanaCliente ventana;
 
 	int resultado=conectar(direccionIP, puerto);
 
 	int retorno = ventana.abrir(archiConfig);
-	if (retorno=-1){
+	if (retorno == -1){
 	   logueador->Error("No se pudo crear la ventana");
-	   }
+	}
 	bool salir;
-		SDL_Event evento;
 		Renderizador renderizador(ventana.get());
-		MensajeCliente mensajeCliente;
 
 		for (int nivel = 1; nivel <= 2; nivel++) {
 
@@ -50,81 +39,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 			ControlObjetos controlObjetos(&renderizador, archiConfig, fondo.obtenerAncho(), nivel);
 
 	        while (!salir) {
-	            SDL_PollEvent(&evento);
-
-	            switch (evento.type) {
-	                case SDL_KEYDOWN:
-	                    if (evento.key.repeat == 0) {
-	                        switch (evento.key.keysym.sym) {
-	                            case SDLK_RIGHT:
-	                                //Avanzar
-	                            	mensajeCliente.Codificar(Right);
-	                                break;
-	                            case SDLK_LEFT:
-	                                //Atras
-	                            	mensajeCliente.Codificar(Left);
-	                                break;
-	                            case SDLK_UP:
-	                                //Arriba
-	                            	mensajeCliente.Codificar(Up);
-	                                break;
-	                            case SDLK_DOWN:
-	                                //Abajo
-	                            	mensajeCliente.Codificar(Down);
-	                                break;
-	                            case SDLK_z:
-	                                //Saltar
-	                            	mensajeCliente.Codificar(Jump);
-	                                break;
-	                            case SDLK_x:
-	                                //Agacharse
-	                            	mensajeCliente.Codificar(Crouch);
-	                                break;
-	                            case SDLK_c:
-	                                //Pegar
-	                            	mensajeCliente.Codificar(Hit);
-	                                break;
-	                            case SDLK_ESCAPE:
-	                                //Salir
-	                            	mensajeCliente.Codificar(Exit);
-	                        }
-	                    }
-	                    break;
-
-	                case SDL_KEYUP:
-	                    if (evento.key.repeat == 0) {
-	                        switch (evento.key.keysym.sym) {
-	                            case SDLK_RIGHT:
-	                                //Avanzar
-	                            	mensajeCliente.Codificar(StopGoingRight);
-	                                break;
-	                            case SDLK_LEFT:
-	                                //Atras
-	                            	mensajeCliente.Codificar(StopGoingLeft);
-	                                break;
-	                            case SDLK_UP:
-	                                //Arriba
-	                            	mensajeCliente.Codificar(StopGoingUp);
-	                                break;
-	                            case SDLK_DOWN:
-	                                //Abajo
-	                            	mensajeCliente.Codificar(StopGoingDown);
-	                                break;
-	                            case SDLK_x:
-	                            	mensajeCliente.Codificar(Rise);
-	                                break;
-	                        }
-	                    }
-	                    break;
-
-	                case SDL_QUIT:
-	                	mensajeCliente.Codificar(Exit);
-
-	            }
-
-	            int mensaje=mensajeCliente.get();
-                int bytes=1;
-	            enviar(&mensaje,&bytes);
+	        	enviarInput(&mensajeCliente);
 
 	            long int datosRecibidos;
 	            int maxDatos;
@@ -171,17 +86,88 @@ int Cliente::conectar(char* direccionIP, char* puerto){
 	return resultado;
 }
 
-int Cliente::enviar(int* datos, int* cantidadDeBytes){
+void Cliente::enviarInput(MensajeCliente* mensaje){
+	mensajeCliente.Codificar(Nothing);
 
-	socket.enviar(datos,cantidadDeBytes);
+    SDL_PollEvent(&evento);
 
+    switch (evento.type) {
+    	case SDL_KEYDOWN:
+    		if (evento.key.repeat == 0) {
+    			switch (evento.key.keysym.sym) {
+    				case SDLK_RIGHT:
+    					//Avanzar
+    					mensajeCliente.Codificar(Right);
+    					break;
+    				case SDLK_LEFT:
+    					//Atras
+    					mensajeCliente.Codificar(Left);
+    					break;
+    				case SDLK_UP:
+    					//Arriba
+    					mensajeCliente.Codificar(Up);
+    					break;
+    				case SDLK_DOWN:
+    					//Abajo
+    					mensajeCliente.Codificar(Down);
+    					break;
+    				case SDLK_z:
+    					//Saltar
+    					mensajeCliente.Codificar(Jump);
+    					break;
+    				case SDLK_x:
+    					//Agacharse
+    					mensajeCliente.Codificar(Crouch);
+    					break;
+    				case SDLK_c:
+    					//Pegar
+    					mensajeCliente.Codificar(Hit);
+    					break;
+    				case SDLK_ESCAPE:
+    					//Salir
+    					mensajeCliente.Codificar(Exit);
+    			}
+    		}
+    		break;
+
+    	case SDL_KEYUP:
+    		if (evento.key.repeat == 0) {
+    			switch (evento.key.keysym.sym) {
+    				case SDLK_RIGHT:
+    					//Avanzar
+    					mensajeCliente.Codificar(StopGoingRight);
+    					break;
+    				case SDLK_LEFT:
+    					//Atras
+    					mensajeCliente.Codificar(StopGoingLeft);
+    					break;
+    				case SDLK_UP:
+    					//Arriba
+    					mensajeCliente.Codificar(StopGoingUp);
+    					break;
+    				case SDLK_DOWN:
+    					//Abajo
+    					mensajeCliente.Codificar(StopGoingDown);
+    					break;
+    				case SDLK_x:
+    					mensajeCliente.Codificar(Rise);
+    					break;
+    			}
+    		}
+    		break;
+
+    	case SDL_QUIT:
+    		mensajeCliente.Codificar(Exit);
+    		break;
+	}
+	socket.enviar(mensaje);
 }
 
 int Cliente::recibir(long int* datos, int* cantMaxDatos, bool* elSocketEsValido){
 
 }
 
-int Cliente::actualizar(int accionRecibida,Protagonista *protagonista){
+void Cliente::actualizar(int accionRecibida,Protagonista *protagonista){
 	 switch (accionRecibida) {
 	        case Right:
 	            //Avanzar
@@ -214,7 +200,6 @@ int Cliente::actualizar(int accionRecibida,Protagonista *protagonista){
 	        case Exit:
 	             //Salir
 	            // logueador->Info("Se seleccionó salir");
-	             return 0;
 	             break;
 	        case StopGoingRight:
 	             //Avanzar
@@ -238,11 +223,7 @@ int Cliente::actualizar(int accionRecibida,Protagonista *protagonista){
 	 }
 }
 
-int Cliente::cerrar(){
+void Cliente::cerrar(){}
 
-}
-
-Cliente::~Cliente() {
-	// TODO Auto-generated destructor stub
-}
+Cliente::~Cliente() {}
 

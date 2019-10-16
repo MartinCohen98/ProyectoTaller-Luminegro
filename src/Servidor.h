@@ -5,11 +5,13 @@
 #include "JugadorModelo.h"
 #include "ControlEnemigosModelo.h"
 #include "ControlObjetosModelo.h"
+#include "MensajeCliente.h"
 
 class Servidor {
 
 private:
 	int jugadores;
+	MensajeCliente mensajeCliente;
 	Socket socketAceptador;
 	Socket* socketsDeClientes;
 
