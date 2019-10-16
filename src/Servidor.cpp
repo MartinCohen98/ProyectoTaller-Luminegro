@@ -123,7 +123,6 @@ void Servidor::recibirInput(JugadorModelo* jugador) {
         case Nothing:
         	break;
 		}
-
 }
 
 void Servidor::enviarEncuadres(JugadorModelo* jugador,
