@@ -80,9 +80,7 @@ bool VentanaClienteInicioSesion::buclearIngresoCredenciales() {
     }
 
     // Muestro lo que lleva ingresado
-
     atenderMostradoDeCursor();
-
     refrescarVentana();
 
     return true;
