@@ -250,6 +250,42 @@ int Socket::enviar(MensajeCliente* mensaje) {
 }
 
 
+int Socket::enviar(MensajeServidor* mensaje) {
+	Logger::Log *logueador = Logger::Log::ObtenerInstancia();
+
+    bool hayUnErrorDeSocket = false;
+    bool elSocketRemotoEstaCerrado = false;
+
+    char* datos = (char*) mensaje;
+    int bytesEnviados = 0;
+    int cantidadDeBytes = sizeof(MensajeServidor);
+    int resultadoAccion;
+
+    while (bytesEnviados < *cantidadDeBytes && !hayUnErrorDeSocket && !elSocketRemotoEstaCerrado) {
+
+        resultadoAccion = send(numero, &datos[bytesEnviados], cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
+
+        if (resultadoAccion < 0) {
+            std::string mensajeError = "Clase Socket - Error: ";
+            mensajeError.append(strerror(errno));
+            logueador->Error(mensajeError);
+
+            hayUnErrorDeSocket = true;
+
+        } else if (resultadoAccion == 0) {
+            elSocketRemotoEstaCerrado = true;
+
+        } else {
+            bytesEnviados += resultadoAccion;
+        }
+    }
+    if (elSocketRemotoEstaCerrado || hayUnErrorDeSocket) {
+        cerrar();
+        return EXIT_FAILURE;
+    }
+    return EXIT_SUCCESS;
+}
+
 int Socket::recibir(unsigned char(*datos), int* tamanoMaximo, bool* elSocketEsValido) {
     Logger::Log *logueador = Logger::Log::ObtenerInstancia();
 
@@ -276,12 +312,42 @@ int Socket::recibir(unsigned char(*datos), int* tamanoMaximo, bool* elSocketEsVa
     return recibido;
 }
 
+
 int Socket::recibir(MensajeCliente* mensaje) {
     Logger::Log *logueador = Logger::Log::ObtenerInstancia();
 
     int recibido = 0;
     int resultadoAccion = 0;
     int tamanoMaximo = sizeof(MensajeCliente);
+    char* datos = (char*) mensaje;
+
+    while (recibido < tamanoMaximo) {
+        int bytesCantidadMaximaParaRecibir = *tamanoMaximo - recibido;
+
+        resultadoAccion = recv(numero, &datos[recibido], bytesCantidadMaximaParaRecibir,MSG_NOSIGNAL);
+
+        if (resultadoAccion == 0) {
+            // Nos cerraron el socket
+            return EXIT_FAILURE;
+
+        } else if (resultadoAccion < 0) {
+            // Hubo un error
+            logueador->Error("Clase Socket - Error al recibir.");
+            return EXIT_FAILURE;
+        } else {
+            recibido += resultadoAccion;
+        }
+    }
+    return recibido;
+}
+
+
+int Socket::recibir(MensajeServidor* mensaje) {
+    Logger::Log *logueador = Logger::Log::ObtenerInstancia();
+
+    int recibido = 0;
+    int resultadoAccion = 0;
+    int tamanoMaximo = sizeof(MensajeServidor);
     char* datos = (char*) mensaje;
 
     while (recibido < tamanoMaximo) {

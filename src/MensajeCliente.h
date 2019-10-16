@@ -1,10 +1,3 @@
-/*
- * MensajeCliente.h
- *
- *  Created on: 9 oct. 2019
- *      Author: julio
- */
-
 #ifndef SRC_MENSAJECLIENTE_H_
 #define SRC_MENSAJECLIENTE_H_
 
@@ -15,8 +8,10 @@ enum teclas {Right,Left,Up,Down,
 		Rise,Nothing};
 
 class MensajeCliente {
+
 private:
 	int datos;
+
 public:
 	MensajeCliente();
 	void Codificar(enum teclas input);

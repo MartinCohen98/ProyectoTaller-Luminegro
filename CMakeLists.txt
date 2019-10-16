@@ -80,6 +80,8 @@ add_executable(ProyectoTaller_Luminegro
         src/main.cpp
         src/MensajeCliente.cpp
         src/MensajeCliente.h
+        src/MensajeServidor.cpp
+        src/MensajeServidor.h
         src/Persona.cpp
         src/Persona.h
         src/PersonaModelo.cpp

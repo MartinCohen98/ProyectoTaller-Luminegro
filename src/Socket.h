@@ -10,6 +10,7 @@
 #include <string.h>
 #include <pthread.h>
 #include "MensajeCliente.h"
+#include "MensajeServidor.h"
 
 
 class Socket {
@@ -22,8 +23,10 @@ class Socket {
         int conectarAUnServidor(char* direccionIP, char* puerto);
         int enviar(int* datos, int* cantidadDeBytes);
         int enviar(MensajeCliente* mensaje);
+        int enviar(MensajeServidor* mensaje);
         int recibir(unsigned char* datos, int* tamanoMaximo, bool* elSocketEsValido);
         int recibir(MensajeCliente* mensaje);
+        int recibir(MensajeServidor* mensaje);
         int cerrar();
         ~Socket();
 };
