@@ -10,6 +10,10 @@
 #include "Fondo.h"
 #include <stdlib.h>
 #include <time.h>
+#include "BarrilModelo.h"
+#include "CajaModelo.h"
+#include "CuchilloModelo.h"
+#include "TuboModelo.h"
 
 class ControlObjetos {
 
@@ -18,10 +22,10 @@ private:
 	int cajasCantidad;
 	int cuchillosCantidad;
 	int tubosMetalicosCantidad;
-	Barril **barriles;
-	Caja **cajas;
-	Cuchillo **cuchillos;
-	Tubo **tubos;
+	BarrilModelo **barriles;
+	CajaModelo **cajas;
+	CuchilloModelo **cuchillos;
+	TuboModelo **tubos;
 
 public:
 	ControlObjetos(Renderizador *renderizador, pugi::xml_document *archiConfig, int terrenoWidth, int nivel);

@@ -1,7 +1,6 @@
 #include "MensajeServidor.h"
 
-MensajeServidor::MensajeServidor(Encuadre* unFrame,
-						Encuadre* unaInsercion, sprite tipo) {
+MensajeServidor::MensajeServidor() {
 	frame = NULL;
 	insercion = NULL;
 	tipoDeSprite = Jugador1;

@@ -37,7 +37,6 @@ public:
 	 int conectar(char* direccionIP, char* puerto);
 	 int recibir(long int* datos, int* cantMaxDatos, bool* elSocketEsValido);
 	 void actualizar(int accionRecibida, Protagonista* protagonista);
-	 void cerrar();
 	 virtual ~Cliente();
 
 private:

@@ -1,5 +1,4 @@
 #include "Cola.h"
-#include <stdexcept>
 
 
 template <typename T>
@@ -36,11 +35,13 @@ void Cola<T>::encolar(T dato) {
 
 template<typename T>
 T Cola<T>::desencolar() {
-    if(!this->cantidadElementos)
-        throw std::out_of_range("La cola ya está vacía");
-    //Bloqueo modificaciones
+	//Bloqueo modificaciones
     pthread_mutex_lock(&this->mutexCola);
 
+    if(!this->cantidadElementos){
+    	pthread_mutex_unlock(&this->mutexCola);
+//        return nullptr;
+    }
     Nodo *nodo = this->primerNodo;
     T elemento = nodo->dato;
     this->primerNodo = nodo->siguienteNodo;
@@ -66,5 +67,5 @@ Cola<T>::~Cola() {
 
 
 // Definir acá para qué tipo de datos aplica esta Cola
-template class Cola<std::string>;
+//template class Cola<std::string>;
 template class Cola<int>;

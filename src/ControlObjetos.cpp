@@ -25,39 +25,39 @@ ControlObjetos::ControlObjetos(Renderizador *renderizador,
 
 	int i;
 
-	barriles = new Barril*[barrilesCantidad];
-	cajas = new Caja*[cajasCantidad];
-	cuchillos = new Cuchillo*[cuchillosCantidad];
-	tubos = new Tubo*[tubosMetalicosCantidad];
+	barriles = new BarrilModelo*[barrilesCantidad];
+	cajas = new CajaModelo*[cajasCantidad];
+	cuchillos = new CuchilloModelo*[cuchillosCantidad];
+	tubos = new TuboModelo*[tubosMetalicosCantidad];
 
 	srand (time(NULL));
 
 	for(i = 0; i < barrilesCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 90;
 		int distrY = i * 1 + 450;
-	    barriles[i] = new Barril(renderizador, distrX, distrY, archiConfig);
-	    barriles[i]->actualizar(renderizador);
+	    barriles[i] = new BarrilModelo(/*renderizador, */distrX, distrY/*, archiConfig*/);
+	    //barriles[i]->actualizar(renderizador);
 	}
 
 	for(i = 0; i < cajasCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 96;
 		int distrY = i * 5 + 420;
-		cajas[i] = new Caja(renderizador, distrX, distrY, archiConfig);
-		cajas[i]->actualizar(renderizador);
+		cajas[i] = new CajaModelo(/*renderizador, */distrX, distrY/*, archiConfig*/);
+		//cajas[i]->actualizar(renderizador);
 	}
 
 	for(i = 0; i < cuchillosCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 66;
 		int distrY = i * 5 + 500;
-		cuchillos[i] = new Cuchillo(renderizador, distrX, distrY, archiConfig);
-		cuchillos[i]->actualizar(renderizador);
+		cuchillos[i] = new CuchilloModelo(/*renderizador, */distrX, distrY/*, archiConfig*/);
+	//	cuchillos[i]->actualizar(renderizador);
 	}
 
 	for(i = 0; i < tubosMetalicosCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 144;
 		int distrY = i * 5 + 500;
-		tubos[i] = new Tubo(renderizador, distrX, distrY, archiConfig);
-		tubos[i]->actualizar(renderizador);
+		tubos[i] = new TuboModelo(/*renderizador, */distrX, distrY/*, archiConfig*/);
+		//tubos[i]->actualizar(renderizador);
 	}
 }
 
@@ -81,20 +81,20 @@ void ControlObjetos::movidaDePantalla() {
 
 void ControlObjetos::actualizar(Renderizador *renderizador) {
 	for(int i = 0; i < cuchillosCantidad; i++){
-		cuchillos[i]->actualizar(renderizador);
+		//cuchillos[i]->actualizar(renderizador);
 	}
 	for(int i = 0; i < tubosMetalicosCantidad; i++){
-		tubos[i]->actualizar(renderizador);
+		//tubos[i]->actualizar(renderizador);
 	}
 }
 
 void ControlObjetos::actualizarFrente(Renderizador* renderizador) {
 	for(int i = 0; i < barrilesCantidad; i++){
-		barriles[i]->actualizar(renderizador);
+		//barriles[i]->actualizar(renderizador);
 	}
 
 	for(int i = 0; i < cajasCantidad; i++){
-		cajas[i]->actualizar(renderizador);
+	//	cajas[i]->actualizar(renderizador);
 	}
 }
 

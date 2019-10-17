@@ -224,7 +224,7 @@ int Socket::enviar(MensajeCliente* mensaje) {
     int cantidadDeBytes = sizeof(MensajeCliente);
     int resultadoAccion;
 
-    while (bytesEnviados < *cantidadDeBytes && !hayUnErrorDeSocket && !elSocketRemotoEstaCerrado) {
+    while (bytesEnviados < cantidadDeBytes && !hayUnErrorDeSocket && !elSocketRemotoEstaCerrado) {
 
         resultadoAccion = send(numero, &datos[bytesEnviados], cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
 
@@ -261,7 +261,7 @@ int Socket::enviar(MensajeServidor* mensaje) {
     int cantidadDeBytes = sizeof(MensajeServidor);
     int resultadoAccion;
 
-    while (bytesEnviados < *cantidadDeBytes && !hayUnErrorDeSocket && !elSocketRemotoEstaCerrado) {
+    while (bytesEnviados < cantidadDeBytes && !hayUnErrorDeSocket && !elSocketRemotoEstaCerrado) {
 
         resultadoAccion = send(numero, &datos[bytesEnviados], cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
 
@@ -322,7 +322,7 @@ int Socket::recibir(MensajeCliente* mensaje) {
     char* datos = (char*) mensaje;
 
     while (recibido < tamanoMaximo) {
-        int bytesCantidadMaximaParaRecibir = *tamanoMaximo - recibido;
+        int bytesCantidadMaximaParaRecibir = tamanoMaximo - recibido;
 
         resultadoAccion = recv(numero, &datos[recibido], bytesCantidadMaximaParaRecibir,MSG_NOSIGNAL);
 
@@ -351,7 +351,7 @@ int Socket::recibir(MensajeServidor* mensaje) {
     char* datos = (char*) mensaje;
 
     while (recibido < tamanoMaximo) {
-        int bytesCantidadMaximaParaRecibir = *tamanoMaximo - recibido;
+        int bytesCantidadMaximaParaRecibir = tamanoMaximo - recibido;
 
         resultadoAccion = recv(numero, &datos[recibido], bytesCantidadMaximaParaRecibir,MSG_NOSIGNAL);
 

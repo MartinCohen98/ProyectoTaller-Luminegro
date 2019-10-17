@@ -51,7 +51,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	            actualizar(accionRecibida, &protagonista);
 
 	            protagonista.realizarMovimientos(&fondo);
-	/*
+
 				controlEnemigos.realizarMovimientos();
 
 				if (fondo.seMovio()) {
@@ -68,7 +68,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 				renderizador.renderizar();
 
 	            salir = protagonista.llegoAlFin(&fondo);
-				SDL_Delay(25);*/
+				SDL_Delay(25);
 			}
 	        logueador->Info("Fin de nivel: " +  nivelNodeName);
 	    }
@@ -223,7 +223,7 @@ void Cliente::actualizar(int accionRecibida,Protagonista *protagonista){
 	 }
 }
 
-void Cliente::cerrar(){}
-
-Cliente::~Cliente() {}
+Cliente::~Cliente() {
+	socket.cerrar();
+}
 

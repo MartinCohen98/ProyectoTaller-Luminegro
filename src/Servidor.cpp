@@ -61,6 +61,8 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 			enviarEncuadres(&protagonista, &controlEnemigos, &controlObjetos);
 
 			nivelTerminado = protagonista.llegoAlFin(&fondo);
+
+			SDL_Delay(25);
 		}
 	}
 }
