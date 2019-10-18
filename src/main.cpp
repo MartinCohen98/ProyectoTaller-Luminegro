@@ -118,13 +118,6 @@ int main (int argc, char** argv) {
             return EXIT_FAILURE;
         }
 
-        /*
-         * PROGRAMAR ACA EL ENVIO DE USUARIO Y CONTRASEÑA, SI ESTAN MANTECOL EL JUEGO ARRANCA, SINO MOSTRAR ERROR
-         * EN ventanaClienteInicioSesion. EJEMPLO:
-         * ventanaClienteInicioSesion.mostrarMensaje("Error al bla bla bla...",
-         * VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
-        **/
-
         ventanaClienteInicioSesion.cerrar();
         socketConectado.cerrar();
 
