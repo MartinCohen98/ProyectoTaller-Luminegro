@@ -11,10 +11,6 @@
 class VentanaClienteInicioSesion {
 
 private:
-    static const int ESTADO_INGRESANDO_USUARIO = 1;
-    static const int ESTADO_INGRESANDO_CLAVE = 2;
-    static const int ESTADO_CONECTANDO = 3;
-
     SDL_Window* ventana;
     SDL_Renderer *renderizador;
     SDL_Texture *texturaTxtFijo1;
@@ -42,18 +38,28 @@ private:
     int estado = ESTADO_INGRESANDO_USUARIO;
     bool pasarAEstadoSiguiente = false;
 
-    bool buclearIngresoCredenciales();
+    bool leerTeclado();
+    void actualizarVentana();
     void atenderMostradoDeCursor(); // Se ocupa del cursor destellante que indica donde aparece lo que tecleás
-    void refrescarVentana();
 
 public:
+    static const int ESTADO_INICIALIZANDO = 1;
+    static const int ESTADO_ERROR = 2;
+    static const int ESTADO_INGRESANDO_USUARIO = 3;
+    static const int ESTADO_INGRESANDO_CLAVE = 4;
+    static const int ESTADO_CONECTANDO = 5;
+
     static const int MENSAJE_TIPO_INFORMATIVO = 1;
     static const int MENSAJE_TIPO_ERROR = 2;
 
+    VentanaClienteInicioSesion();
+    int getEstado();
     int pedirCredenciales(); // Le ofrece al cliente ingresar sus credenciales para conectarse
     std::string getUsuario();
     std::string getClave();
     void mostrarMensaje(const std::string mensaje, const int tipo);
+    void demorar(Uint32 milisegundos);
+    void resetear();
     void cerrar();
 };
 

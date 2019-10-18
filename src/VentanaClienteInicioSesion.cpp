@@ -1,6 +1,6 @@
 #include "VentanaClienteInicioSesion.h"
 
-int VentanaClienteInicioSesion::pedirCredenciales() {
+VentanaClienteInicioSesion::VentanaClienteInicioSesion() {
 
     Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
 
@@ -8,10 +8,10 @@ int VentanaClienteInicioSesion::pedirCredenciales() {
     TTF_Init();
 
     ventana = SDL_CreateWindow("Luminegro Final Fight - Iniciar sesión",
-                                           SDL_WINDOWPOS_UNDEFINED,
-                                           SDL_WINDOWPOS_UNDEFINED,
-                                           640,
-                                           480, 0);
+                               SDL_WINDOWPOS_UNDEFINED,
+                               SDL_WINDOWPOS_UNDEFINED,
+                               640,
+                               480, 0);
 
     renderizador = SDL_CreateRenderer(ventana, -1, 0);
 
@@ -21,7 +21,7 @@ int VentanaClienteInicioSesion::pedirCredenciales() {
         std::string mensajeError = "TTF_OpenFont: ";
         mensajeError.append( TTF_GetError() );
         logueador->Error(mensajeError);
-        return EXIT_FAILURE;
+        estado = ESTADO_ERROR;
     }
 
     // Preparo textos fijos
@@ -31,24 +31,27 @@ int VentanaClienteInicioSesion::pedirCredenciales() {
 
     superficieTxt = TTF_RenderText_Solid(fuente, "Clave:", colorTxtFijo);
     texturaTxtFijo2 = SDL_CreateTextureFromSurface(renderizador, superficieTxt);
+}
 
-    // El usuario teclea sus credenciales...
-    while (buclearIngresoCredenciales() && estado != ESTADO_CONECTANDO) {
+
+int VentanaClienteInicioSesion::getEstado() {
+    return estado;
+}
+
+
+int VentanaClienteInicioSesion::pedirCredenciales() {
+
+    // BUCLE: el usuario teclea sus credenciales...
+    while (leerTeclado() && estado != ESTADO_CONECTANDO) {
         SDL_Delay(10);
-    }
+        actualizarVentana();
+    };
 
     return EXIT_SUCCESS;
 }
 
 
-bool VentanaClienteInicioSesion::buclearIngresoCredenciales() {
-    // Rehago desde cero el renderizador
-    SDL_SetRenderDrawColor(renderizador, 44, 60, 74, 255 );
-    SDL_RenderClear(renderizador);
-
-    SDL_RenderCopy(renderizador, texturaTxtFijo1, NULL, &rectanguloTxtFijoSuperior);
-    SDL_RenderCopy(renderizador, texturaTxtFijo2, NULL, &rectanguloTxtFijoInferior);
-
+bool VentanaClienteInicioSesion::leerTeclado() {
     while (SDL_PollEvent(&evento) != 0) {
         switch (evento.type) {
             case SDL_QUIT:
@@ -79,31 +82,20 @@ bool VentanaClienteInicioSesion::buclearIngresoCredenciales() {
         }
     }
 
-    // Muestro lo que lleva ingresado
-    atenderMostradoDeCursor();
-    refrescarVentana();
-
     return true;
 }
 
 
-void VentanaClienteInicioSesion::atenderMostradoDeCursor() {
-    stringSiendoIngresadoConCursor = stringSiendoIngresado;
+void VentanaClienteInicioSesion::actualizarVentana() {
+    // Muestro lo que lleva ingresado
+    // Rehago desde cero el renderizador
+    SDL_SetRenderDrawColor(renderizador, 44, 60, 74, 255 );
+    SDL_RenderClear(renderizador);
 
-    mostrarCursor = (i < 50);
-    if (i == 100) {
-        i = 0;
-    } else {
-        i++;
-    }
+    SDL_RenderCopy(renderizador, texturaTxtFijo1, NULL, &rectanguloTxtFijoSuperior);
+    SDL_RenderCopy(renderizador, texturaTxtFijo2, NULL, &rectanguloTxtFijoInferior);
 
-    if (mostrarCursor) {
-        stringSiendoIngresadoConCursor.append("|");
-    }
-}
-
-
-void VentanaClienteInicioSesion::refrescarVentana() {
+    atenderMostradoDeCursor();
     switch (estado) {
         case ESTADO_INGRESANDO_CLAVE:
             if (pasarAEstadoSiguiente) {
@@ -165,7 +157,7 @@ void VentanaClienteInicioSesion::refrescarVentana() {
         }
 
         superficieTxt = TTF_RenderText_Solid(fuente, mensajeInformativoString.c_str(),
-                colorMensajeInformativo);
+                                             colorMensajeInformativo);
         rectanguloTxtFijoMensajes.x = 320 - (superficieTxt->w / 2.0f);
         rectanguloTxtFijoMensajes.w = superficieTxt->w;
 
@@ -177,6 +169,22 @@ void VentanaClienteInicioSesion::refrescarVentana() {
 
     // Actualizo ventana
     SDL_RenderPresent(renderizador);
+}
+
+
+void VentanaClienteInicioSesion::atenderMostradoDeCursor() {
+    stringSiendoIngresadoConCursor = stringSiendoIngresado;
+
+    mostrarCursor = (i < 50);
+    if (i == 100) {
+        i = 0;
+    } else {
+        i++;
+    }
+
+    if (mostrarCursor) {
+        stringSiendoIngresadoConCursor.append("|");
+    }
 }
 
 
@@ -193,8 +201,24 @@ std::string VentanaClienteInicioSesion::getClave() {
 void VentanaClienteInicioSesion::mostrarMensaje(const std::string mensaje, const int tipo) {
     mensajeInformativoString = mensaje;
     mensajeInformativoTipo = tipo;
-    refrescarVentana();
+    actualizarVentana();
 }
+
+
+void VentanaClienteInicioSesion::demorar(Uint32 milisegundos) {
+    SDL_Delay(milisegundos);
+}
+
+
+void VentanaClienteInicioSesion::resetear() {
+    estado = ESTADO_INGRESANDO_USUARIO;
+    stringSiendoIngresado = "";
+    stringIngresadoUsuario = "";
+    stringIngresadoClave = "";
+    mensajeInformativoString = "";
+    actualizarVentana();
+}
+
 
 void VentanaClienteInicioSesion::cerrar() {
     TTF_CloseFont(fuente);

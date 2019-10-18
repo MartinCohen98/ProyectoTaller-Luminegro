@@ -63,12 +63,30 @@ int main (int argc, char** argv) {
         logueador->Info("Se inicia el juego en modo cliente");
 
         VentanaClienteInicioSesion ventanaClienteInicioSesion;
-        if (ventanaClienteInicioSesion.pedirCredenciales() == EXIT_FAILURE) {
+
+        if (ventanaClienteInicioSesion.getEstado() == VentanaClienteInicioSesion::ESTADO_ERROR) {
+            // Ya logueado en el objeto
             return EXIT_FAILURE;
         }
 
+        ventanaClienteInicioSesion.pedirCredenciales();
+
+        /* INICIO - La siguiente rutina simula cierta espera, da error de contraseña, pide credenciales nuevamente
+         * y finalmente conecta. */
         ventanaClienteInicioSesion.mostrarMensaje("Conectando...",
                 VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
+
+        ventanaClienteInicioSesion.demorar(2000);
+        ventanaClienteInicioSesion.mostrarMensaje("Error en clave, es usted hacker?",
+                                                  VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
+        ventanaClienteInicioSesion.demorar(3000);
+        ventanaClienteInicioSesion.resetear();
+        ventanaClienteInicioSesion.pedirCredenciales();
+        ventanaClienteInicioSesion.mostrarMensaje("Conectando...",
+                VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
+
+        ventanaClienteInicioSesion.demorar(2000);
+        /* FIN */
 
         string usuario = ventanaClienteInicioSesion.getUsuario();
         string clave = ventanaClienteInicioSesion.getClave();
