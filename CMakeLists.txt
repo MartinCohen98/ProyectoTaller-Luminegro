@@ -112,6 +112,12 @@ add_executable(ProyectoTaller_Luminegro
         src/VistaEnemigo.h
         src/VistaFondo.cpp
         src/VistaFondo.h
+        src/VistaFondoCielo.cpp
+        src/VistaFondoCielo.h
+        src/VistaFondoEdificios.cpp
+        src/VistaFondoEdificios.h
+        src/VistaFondoTerreno.cpp
+        src/VistaFondoTerreno.h
         src/VistaGeneral.cpp
         src/VistaGeneral.h
         src/VistaJugador.cpp
