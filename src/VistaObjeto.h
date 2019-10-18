@@ -1,10 +1,14 @@
 #ifndef SRC_VISTAOBJETO_H_
 #define SRC_VISTAOBJETO_H_
 
-class VistaObjeto {
+#include "VistaGeneral.h"
+#include "../lib/pugixml/pugixml.hpp"
+
+class VistaObjeto: public VistaGeneral {
 
 public:
-	VistaObjeto();
+	VistaObjeto(Renderizador* elRenderizador, pugi::xml_document *archiConfig,
+			sprite codigoObjeto);
 	virtual ~VistaObjeto();
 };
 

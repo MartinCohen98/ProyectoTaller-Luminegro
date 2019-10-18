@@ -1,9 +1,14 @@
 #ifndef SRC_VISTAENEMIGO_H_
 #define SRC_VISTAENEMIGO_H_
 
-class VistaEnemigo {
+#include "VistaGeneral.h"
+#include "../lib/pugixml/pugixml.hpp"
+
+class VistaEnemigo: public VistaGeneral {
+
 public:
-	VistaEnemigo();
+	VistaEnemigo(Renderizador* elRenderizador, pugi::xml_document *archiConfig,
+					sprite codigoEnemigo);
 	virtual ~VistaEnemigo();
 };
 

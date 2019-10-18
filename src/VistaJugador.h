@@ -1,9 +1,13 @@
 #ifndef SRC_VISTAJUGADOR_H_
 #define SRC_VISTAJUGADOR_H_
 
-class VistaJugador {
+#include "VistaGeneral.h"
+#include "../lib/pugixml/pugixml.hpp"
+
+class VistaJugador: public VistaGeneral {
+
 public:
-	VistaJugador();
+	VistaJugador(Renderizador* elRenderizador, pugi::xml_document *archiConfig);
 	virtual ~VistaJugador();
 };
 

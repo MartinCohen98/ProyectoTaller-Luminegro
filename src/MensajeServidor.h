@@ -21,6 +21,9 @@ public:
 	MensajeServidor();
 	void generarMensaje(Encuadre* unFrame, Encuadre* unaInsercion, sprite tipo);
 	void darVuelta();
+	Encuadre* obtenerFrame();
+	Encuadre* obtenerInsercion();
+	bool estaDadoVuelta();
 	std::string codificarMensaje(void);
 	void decodificar(std::string mensaje);
 	virtual ~MensajeServidor();

@@ -21,6 +21,18 @@ void MensajeServidor::darVuelta() {
 	dadoVuelta = true;
 }
 
+Encuadre* MensajeServidor::obtenerFrame() {
+	return &frame;
+}
+
+Encuadre* MensajeServidor::obtenerInsercion() {
+	return &insercion;
+}
+
+bool MensajeServidor::estaDadoVuelta() {
+	return dadoVuelta;
+}
+
 string MensajeServidor::codificarMensaje(void){
 	//Genera un string para enviar como datos al cliente
 
