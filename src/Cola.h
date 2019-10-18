@@ -6,6 +6,7 @@
 #define PROYECTOTALLER_LUMINEGRO_COLA_H
 
 #include "pthread.h"
+#include <string>
 
 template <typename T>
 class Cola

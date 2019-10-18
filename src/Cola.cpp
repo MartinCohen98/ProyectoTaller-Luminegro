@@ -40,7 +40,7 @@ T Cola<T>::desencolar() {
 
     if(!this->cantidadElementos){
     	pthread_mutex_unlock(&this->mutexCola);
-//        return nullptr;
+     //   return nullptr;
     }
     Nodo *nodo = this->primerNodo;
     T elemento = nodo->dato;
@@ -67,5 +67,5 @@ Cola<T>::~Cola() {
 
 
 // Definir acá para qué tipo de datos aplica esta Cola
-//template class Cola<std::string>;
+template class Cola<std::string>;
 template class Cola<int>;
