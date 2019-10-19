@@ -1,10 +1,3 @@
-/*
- * VentanaCliente.h
- *
- *  Created on: 9 oct. 2019
- *      Author: julio
- */
-
 #ifndef SRC_VENTANACLIENTE_H_
 #define SRC_VENTANACLIENTE_H_
 

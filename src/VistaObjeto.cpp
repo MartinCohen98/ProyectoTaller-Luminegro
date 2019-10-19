@@ -1,7 +1,7 @@
 #include "VistaObjeto.h"
 
 VistaObjeto::VistaObjeto(Renderizador* elRenderizador,
-		pugi::xml_document *archiConfig, sprite codigoObjeto) {
+		pugi::xml_document *archiConfig, tipoDeSprite codigoObjeto) {
 	std::string path;
 
 	switch (codigoObjeto) {

@@ -47,6 +47,8 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 		ControlObjetosModelo controlObjetos(archiConfig, fondo.obtenerAncho(), nivel);
 
+		enviarCantidadDeRecieves(&controlEnemigos, &controlObjetos);
+
 		while (!nivelTerminado) {
 			recibirInput(&protagonista);
 
@@ -61,6 +63,8 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 			enviarEncuadres(&protagonista, &controlEnemigos, &controlObjetos);
 
 			nivelTerminado = protagonista.llegoAlFin(&fondo);
+
+			enviarMensajeDeNivelTerminado(nivelTerminado);
 
 			SDL_Delay(25);
 		}
@@ -127,10 +131,26 @@ void Servidor::recibirInput(JugadorModelo* jugador) {
 		}
 }
 
+void Servidor::enviarCantidadDeRecieves(ControlEnemigosModelo* enemigos,
+							ControlObjetosModelo* objetos) {
+	socketsDeClientes[0].enviar(jugadores + objetos->obtenerCantidad()
+								+ enemigos->obtenerCantidad());
+}
+
 void Servidor::enviarEncuadres(JugadorModelo* jugador,
 		ControlEnemigosModelo* enemigos, ControlObjetosModelo* objetos) {
 	//TODO
 }
+
+
+void Servidor::enviarMensajeDeNivelTerminado(bool nivelTerminado) {
+	MensajeServidor mensaje;
+	if (nivelTerminado) {
+		mensaje.darVuelta();
+	}
+	socketsDeClientes[0].enviar(&mensaje);
+}
+
 
 Servidor::~Servidor() {
 	socketAceptador.cerrar();

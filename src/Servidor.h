@@ -18,10 +18,16 @@ private:
 public:
 	Servidor(int cantidadDeJugadores, char* puerto);
 	void correr(pugi::xml_document* archiConfig);
+
+	virtual ~Servidor();
+
+private:
 	void recibirInput(JugadorModelo* jugador);
+	void enviarCantidadDeRecieves(ControlEnemigosModelo* enemigos,
+							ControlObjetosModelo* objetos);
 	void enviarEncuadres(JugadorModelo* jugador, ControlEnemigosModelo* enemigos,
 							ControlObjetosModelo* objetos);
-	virtual ~Servidor();
+	void enviarMensajeDeNivelTerminado(bool nivelTerminado);
 };
 
 #endif /* SRC_SERVIDOR_H_ */

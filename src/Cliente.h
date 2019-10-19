@@ -11,6 +11,7 @@
 #include "ConfigManager.h"
 #include "Renderizador.h"
 #include "MensajeCliente.h"
+#include "MensajeServidor.h"
 #include <pthread.h>
 #include <iostream>
 #include "Logger.h"
@@ -27,20 +28,24 @@ class Cliente {
 private:
 	char *puerto;
 	int cantMaxDatos;
+	int cantidadDeRecieves;
 	Socket socket;
 	SDL_Event evento;
 	MensajeCliente mensajeCliente;
+	MensajeServidor mensajeServidor;
 
 public:
 	 Cliente(char* NumPuerto);
 	 int inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig);
 	 int conectar(char* direccionIP, char* puerto);
-	 int recibir(long int* datos, int* cantMaxDatos, bool* elSocketEsValido);
-	 void actualizar(int accionRecibida, Protagonista* protagonista);
 	 virtual ~Cliente();
 
 private:
+	 void recibirFondo(VistaFondo* fondo);
 	 void enviarInput(MensajeCliente* mensaje);
+	 void recibirCantidadDeRecieves();
+	 bool terminoElNivel();
+	 tipoDeSprite recibirMensaje();
 };
 
 #endif /* SRC_CLIENTE_H_ */

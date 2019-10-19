@@ -10,79 +10,96 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	VentanaCliente ventana;
 
-	int resultado=conectar(direccionIP, puerto);
+	int resultado = conectar(direccionIP, puerto);
 
 	int retorno = ventana.abrir(archiConfig);
 	if (retorno == -1){
 	   logueador->Error("No se pudo crear la ventana");
 	}
 	bool salir;
-		Renderizador renderizador(ventana.get());
 
-		for (int nivel = 1; nivel <= 2; nivel++) {
+	Renderizador renderizador(ventana.get());
 
-	        string nivelNodeName = "nivel";
-	        nivelNodeName.append( to_string(nivel) );
+	for (int nivel = 1; nivel <= 2; nivel++) {
 
-			salir = false;
+		string nivelNodeName = "nivel";
+		nivelNodeName.append( to_string(nivel) );
 
-			logueador->Info("Iniciando nivel: "+ nivelNodeName);
-			logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
-			Fondo fondo(&renderizador, archiConfig, nivel);
+		salir = false;
 
-			Protagonista protagonista(&renderizador, archiConfig);
+		logueador->Info("Iniciando nivel: "+ nivelNodeName);
+		logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
+		VistaFondo fondo(&renderizador, archiConfig, nivelNodeName);
 
-			logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
-			ControlEnemigos controlEnemigos(&renderizador, archiConfig, nivel);
+		VistaJugador jugador1(&renderizador, archiConfig, Jugador1);
+		VistaJugador jugador2(&renderizador, archiConfig, Jugador2);
+		VistaJugador jugador3(&renderizador, archiConfig, Jugador3);
+		VistaJugador jugador4(&renderizador, archiConfig, Jugador4);
 
-			logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
-			ControlObjetos controlObjetos(&renderizador, archiConfig, fondo.obtenerAncho(), nivel);
+		logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
+		VistaEnemigo enemigo1(&renderizador, archiConfig, Enemigo1);
+		VistaEnemigo enemigo2(&renderizador, archiConfig, Enemigo2);
+		VistaEnemigo enemigo3(&renderizador, archiConfig, Enemigo3);
 
-	        while (!salir) {
-	        	enviarInput(&mensajeCliente);
+		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
+		VistaObjeto barril(&renderizador, archiConfig, Barril);
+		VistaObjeto caja(&renderizador, archiConfig, Caja);
+		VistaObjeto cuchillo(&renderizador, archiConfig, Cuchillo);
+		VistaObjeto tubo(&renderizador, archiConfig, Tubo);
 
-	            long int datosRecibidos;
-	            int maxDatos;
-	            bool socketValido;
-	            recibir(&datosRecibidos,&maxDatos,&socketValido);
+		while (!salir) {
+	    	enviarInput(&mensajeCliente);
 
-	            int accionRecibida;
+	    	recibirFondo(&fondo);
 
-	            actualizar(accionRecibida, &protagonista);
-
-	            protagonista.realizarMovimientos(&fondo);
-
-				controlEnemigos.realizarMovimientos();
-
-				if (fondo.seMovio()) {
-					controlEnemigos.movidaDePantalla();
-					controlObjetos.movidaDePantalla();
-				}
-
-				fondo.actualizar(&renderizador);
-				controlEnemigos.actualizarFondo(&renderizador);
-				controlObjetos.actualizar(&renderizador);
-				protagonista.actualizar(&renderizador);
-				controlObjetos.actualizarFrente(&renderizador);
-				controlEnemigos.actualizarFrente(&renderizador);
-				renderizador.renderizar();
-
-	            salir = protagonista.llegoAlFin(&fondo);
-				SDL_Delay(25);
-			}
-	        logueador->Info("Fin de nivel: " +  nivelNodeName);
-	    }
-
-	    return 0;
-
-
-	return retorno;
-
+	        for (int i = 0; i < cantidadDeRecieves; i++) {
+	        	switch(recibirMensaje()) {
+	        		case Jugador1:
+	        			jugador1.renderizarConElMensaje(&mensajeServidor);
+	        			break;
+	        		case Jugador2:
+	        			jugador2.renderizarConElMensaje(&mensajeServidor);
+	        			break;
+	        		case Jugador3:
+	        			jugador3.renderizarConElMensaje(&mensajeServidor);
+	        			break;
+	        		case Jugador4:
+	        			jugador4.renderizarConElMensaje(&mensajeServidor);
+	        			break;
+	        		case Enemigo1:
+	        			enemigo1.renderizarConElMensaje(&mensajeServidor);
+	        			break;
+	        		case Enemigo2:
+	        			enemigo2.renderizarConElMensaje(&mensajeServidor);
+	        			break;
+	        		case Enemigo3:
+	        			enemigo3.renderizarConElMensaje(&mensajeServidor);
+	        			break;
+	        		case Barril:
+	        			barril.renderizarConElMensaje(&mensajeServidor);
+	        			break;
+	        		case Caja:
+	        			caja.renderizarConElMensaje(&mensajeServidor);
+	        			break;
+	        		case Cuchillo:
+	        			cuchillo.renderizarConElMensaje(&mensajeServidor);
+	        			break;
+	        		case Tubo:
+	        			tubo.renderizarConElMensaje(&mensajeServidor);
+	        			break;
+	        	}
+	        }
+	        if (terminoElNivel()) {
+	    		salir = true;
+	    	}
+		}
+		logueador->Info("Fin de nivel: " +  nivelNodeName);
+	}
+	return 0;
 }
 
 int Cliente::conectar(char* direccionIP, char* puerto){
-
-	int resultado=socket.conectarAUnServidor(direccionIP, puerto);
+	int resultado = socket.conectarAUnServidor(direccionIP, puerto);
 	return resultado;
 }
 
@@ -163,65 +180,34 @@ void Cliente::enviarInput(MensajeCliente* mensaje){
 	socket.enviar(mensaje);
 }
 
-int Cliente::recibir(long int* datos, int* cantMaxDatos, bool* elSocketEsValido){
 
+void Cliente::recibirFondo(VistaFondo* fondo) {
+	MensajeServidor cielo;
+	MensajeServidor edificios;
+	MensajeServidor terreno;
+	socket.recibir(&cielo);
+	socket.recibir(&edificios);
+	socket.recibir(&terreno);
+	fondo->renderizarConLosMensajes(&cielo, &edificios, &terreno);
 }
 
-void Cliente::actualizar(int accionRecibida,Protagonista *protagonista){
-	 switch (accionRecibida) {
-	        case Right:
-	            //Avanzar
-	            protagonista->avanzar();
-	            break;
-	        case Left:
-	             //Atras
-	             protagonista->retroceder();
-	             break;
-	        case Up:
-	             //Arriba
-	             protagonista->subir();
-	             break;
-	        case Down:
-	             //Abajo
-	             protagonista->bajar();
-	             break;
-	        case Jump:
-	             //Saltar
-	             protagonista->saltar();
-	             break;
-	        case Crouch:
-	             //Agacharse
-	             protagonista->agacharse();
-	             break;
-	        case Hit:
-	             //Pegar
-	             protagonista->pegar();
-	             break;
-	        case Exit:
-	             //Salir
-	            // logueador->Info("Se seleccionó salir");
-	             break;
-	        case StopGoingRight:
-	             //Avanzar
-	             protagonista->dejarDeAvanzar();
-	             break;
-	        case StopGoingLeft:
-	             //Atras
-	             protagonista->dejarDeRetroceder();
-	             break;
-	        case StopGoingUp:
-	             //Arriba
-	             protagonista->dejarDeSubir();
-	             break;
-	        case StopGoingDown:
-	             //Abajo
-	             protagonista->dejarDeBajar();
-	             break;
-	        case Rise:
-	             protagonista->dejarDeAgacharse();
-	             break;
-	 }
+
+void Cliente::recibirCantidadDeRecieves() {
+	socket.recibir(&cantidadDeRecieves);
 }
+
+
+bool Cliente::terminoElNivel() {
+	recibirMensaje();
+	return (mensajeServidor.estaDadoVuelta());
+}
+
+
+tipoDeSprite Cliente::recibirMensaje() {
+	socket.recibir(&mensajeServidor);
+	return (mensajeServidor.obtenerTipoDeSprite());
+}
+
 
 Cliente::~Cliente() {
 	socket.cerrar();

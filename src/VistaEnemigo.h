@@ -8,7 +8,7 @@ class VistaEnemigo: public VistaGeneral {
 
 public:
 	VistaEnemigo(Renderizador* elRenderizador, pugi::xml_document *archiConfig,
-					sprite codigoEnemigo);
+					tipoDeSprite codigoEnemigo);
 	virtual ~VistaEnemigo();
 };
 

@@ -21,14 +21,14 @@ ControlObjetosModelo::ControlObjetosModelo(pugi::xml_document *archiConfig,
     barrilesCantidad = std::stoi(barrilesCantidadString);
     cajasCantidad = std::stoi(cajasCantidadString);
     cuchillosCantidad = std::stoi(cuchillosCantidadString);
-    tubosMetalicosCantidad = std::stoi(tubosMetalicosCantidadString);
+    tubosCantidad = std::stoi(tubosMetalicosCantidadString);
 
 	int i;
 
 	barriles = new BarrilModelo*[barrilesCantidad];
 	cajas = new CajaModelo*[cajasCantidad];
 	cuchillos = new CuchilloModelo*[cuchillosCantidad];
-	tubos = new TuboModelo*[tubosMetalicosCantidad];
+	tubos = new TuboModelo*[tubosCantidad];
 
 	srand (time(NULL));
 
@@ -50,12 +50,18 @@ ControlObjetosModelo::ControlObjetosModelo(pugi::xml_document *archiConfig,
 		cuchillos[i] = new CuchilloModelo(distrX, distrY);
 	}
 
-	for(i = 0; i < tubosMetalicosCantidad; i++) {
+	for(i = 0; i < tubosCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 144;
 		int distrY = i * 5 + 500;
 		tubos[i] = new TuboModelo(distrX, distrY);
 	}
 }
+
+
+int ControlObjetosModelo::obtenerCantidad() {
+	return (barrilesCantidad + cajasCantidad + cuchillosCantidad + tubosCantidad);
+}
+
 
 void ControlObjetosModelo::movidaDePantalla() {
 	for(int i = 0; i < barrilesCantidad; i++){
@@ -70,7 +76,7 @@ void ControlObjetosModelo::movidaDePantalla() {
 		cuchillos[i]->movidaDePantalla();
 	}
 
-	for(int i = 0; i < tubosMetalicosCantidad; i++){
+	for(int i = 0; i < tubosCantidad; i++){
 		tubos[i]->movidaDePantalla();
 	}
 }
@@ -96,7 +102,7 @@ ControlObjetosModelo::~ControlObjetosModelo() {
 	}
 
 	if (tubos != NULL) {
-		for(int i = 0; i < tubosMetalicosCantidad; i++)
+		for(int i = 0; i < tubosCantidad; i++)
 			delete tubos[i];
 		delete[] tubos;
 	}

@@ -11,6 +11,7 @@ private:
 
 public:
 	ControlEnemigosModelo(int nivel);
+	int obtenerCantidad();
 	void realizarMovimientos();
 	void movidaDePantalla();
 	virtual ~ControlEnemigosModelo();

@@ -24,9 +24,11 @@ class Socket {
         int enviar(int* datos, int* cantidadDeBytes);
         int enviar(MensajeCliente* mensaje);
         int enviar(MensajeServidor* mensaje);
+        int enviar(int unNumero);
         int recibir(unsigned char* datos, int* tamanoMaximo, bool* elSocketEsValido);
         int recibir(MensajeCliente* mensaje);
         int recibir(MensajeServidor* mensaje);
+        int recibir(int* unNumero);
         int cerrar();
         ~Socket();
 };

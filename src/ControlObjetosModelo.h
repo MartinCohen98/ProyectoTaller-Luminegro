@@ -15,7 +15,7 @@ private:
 	int barrilesCantidad;
 	int cajasCantidad;
 	int cuchillosCantidad;
-	int tubosMetalicosCantidad;
+	int tubosCantidad;
 	BarrilModelo **barriles;
 	CajaModelo **cajas;
 	CuchilloModelo **cuchillos;
@@ -24,6 +24,7 @@ private:
 public:
 	ControlObjetosModelo(pugi::xml_document *archiConfig,
 								int terrenoWidth, int nivel);
+	int obtenerCantidad();
 	void movidaDePantalla();
 	virtual ~ControlObjetosModelo();
 };

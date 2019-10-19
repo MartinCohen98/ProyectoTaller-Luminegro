@@ -8,7 +8,7 @@ class VistaObjeto: public VistaGeneral {
 
 public:
 	VistaObjeto(Renderizador* elRenderizador, pugi::xml_document *archiConfig,
-			sprite codigoObjeto);
+			tipoDeSprite codigoObjeto);
 	virtual ~VistaObjeto();
 };
 

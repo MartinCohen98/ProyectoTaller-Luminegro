@@ -4,7 +4,7 @@
 #include "Encuadre.h"
 #include <string>
 
-enum sprite {Jugador1, Jugador2, Jugador3, Jugador4,
+enum tipoDeSprite {Jugador1, Jugador2, Jugador3, Jugador4,
 	Enemigo1, Enemigo2, Enemigo3, Barril, Caja,
 	Cuchillo, Tubo
 };
@@ -15,15 +15,16 @@ private:
 	Encuadre* frame;
 	Encuadre* insercion;
 	bool dadoVuelta;
-	sprite tipoDeSprite;
+	tipoDeSprite sprite;
 
 public:
 	MensajeServidor();
-	void generarMensaje(Encuadre* unFrame, Encuadre* unaInsercion, sprite tipo);
+	void generarMensaje(Encuadre* unFrame, Encuadre* unaInsercion, tipoDeSprite tipo);
 	void darVuelta();
 	Encuadre* obtenerFrame();
 	Encuadre* obtenerInsercion();
 	bool estaDadoVuelta();
+	tipoDeSprite obtenerTipoDeSprite();
 	std::string codificarMensaje(void);
 	void decodificar(std::string mensaje);
 	virtual ~MensajeServidor();

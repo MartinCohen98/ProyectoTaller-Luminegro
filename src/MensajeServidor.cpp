@@ -5,33 +5,43 @@ using namespace std;
 MensajeServidor::MensajeServidor() {
 	frame = NULL;
 	insercion = NULL;
-	tipoDeSprite = Jugador1;
+	sprite = Jugador1;
 	dadoVuelta = false;
 }
 
 void MensajeServidor::generarMensaje(Encuadre* unFrame,
-		Encuadre* unaInsercion, sprite tipo) {
+		Encuadre* unaInsercion, tipoDeSprite tipo) {
 	frame = unFrame;
 	insercion = unaInsercion;
-	tipoDeSprite = tipo;
+	sprite = tipo;
 	dadoVuelta = false;
 }
+
 
 void MensajeServidor::darVuelta() {
 	dadoVuelta = true;
 }
 
+
 Encuadre* MensajeServidor::obtenerFrame() {
-	return &frame;
+	return frame;
 }
 
+
 Encuadre* MensajeServidor::obtenerInsercion() {
-	return &insercion;
+	return insercion;
 }
+
+
+tipoDeSprite MensajeServidor::obtenerTipoDeSprite() {
+	return sprite;
+}
+
 
 bool MensajeServidor::estaDadoVuelta() {
 	return dadoVuelta;
 }
+
 
 string MensajeServidor::codificarMensaje(void){
 	//Genera un string para enviar como datos al cliente
@@ -46,7 +56,7 @@ string MensajeServidor::codificarMensaje(void){
     	dadovuelta="1";
     else
 	    dadovuelta="0";
-	mensaje=encuadre1+"-"+encuadre2+"-"+dadovuelta+"-"+to_string(tipoDeSprite);
+	mensaje=encuadre1+"-"+encuadre2+"-"+dadovuelta+"-"+to_string(sprite);
 	return mensaje;
 }
 
@@ -80,7 +90,7 @@ void MensajeServidor::decodificar(std::string mensaje){
 	else
 		dadoVuelta=false;
 
-	tipoDeSprite=static_cast<sprite>(cifras[9]);
+	sprite = static_cast<tipoDeSprite>(cifras[9]);
 }
 
 MensajeServidor::~MensajeServidor() {}

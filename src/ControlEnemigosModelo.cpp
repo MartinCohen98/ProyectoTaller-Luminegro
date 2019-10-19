@@ -24,6 +24,10 @@ ControlEnemigosModelo::ControlEnemigosModelo(int nivel) {
 	}
 }
 
+int ControlEnemigosModelo::obtenerCantidad() {
+	return enemigosCantidad;
+}
+
 void ControlEnemigosModelo::movidaDePantalla() {
 	for (int i = 0; i < enemigosCantidad; i++) {
 		enemigos[i]->retrocesoDePantalla();
