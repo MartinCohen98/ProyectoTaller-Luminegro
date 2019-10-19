@@ -3,16 +3,14 @@
 using namespace std;
 
 MensajeServidor::MensajeServidor() {
-	frame = NULL;
-	insercion = NULL;
 	sprite = Jugador1;
 	dadoVuelta = false;
 }
 
 void MensajeServidor::generarMensaje(Encuadre* unFrame,
 		Encuadre* unaInsercion, tipoDeSprite tipo) {
-	frame = unFrame;
-	insercion = unaInsercion;
+	frame = *unFrame;
+	insercion = *unaInsercion;
 	sprite = tipo;
 	dadoVuelta = false;
 }
@@ -24,12 +22,12 @@ void MensajeServidor::darVuelta() {
 
 
 Encuadre* MensajeServidor::obtenerFrame() {
-	return frame;
+	return &frame;
 }
 
 
 Encuadre* MensajeServidor::obtenerInsercion() {
-	return insercion;
+	return &insercion;
 }
 
 
@@ -50,8 +48,8 @@ string MensajeServidor::codificarMensaje(void){
 	string encuadre2;
 	string dadovuelta;
 	string mensaje;
-	encuadre1=(to_string(frame->getX()))+"-"+(to_string(frame->getY()))+"-"+(to_string(frame->getAncho()))+"-"+(to_string(frame->getAlto()));
-	encuadre2=(to_string(insercion->getX()))+"-"+(to_string(insercion->getY()))+"-"+(to_string(insercion->getAncho()))+"-"+(to_string(insercion->getAlto()));
+	encuadre1=(to_string(frame.getX()))+"-"+(to_string(frame.getY()))+"-"+(to_string(frame.getAncho()))+"-"+(to_string(frame.getAlto()));
+	encuadre2=(to_string(insercion.getX()))+"-"+(to_string(insercion.getY()))+"-"+(to_string(insercion.getAncho()))+"-"+(to_string(insercion.getAlto()));
     if (dadoVuelta)
     	dadovuelta="1";
     else
@@ -82,12 +80,12 @@ void MensajeServidor::decodificarMensaje(std::string mensaje){
 	y=cifras[1];
 	ancho=cifras[2];
 	alto=cifras[3];
-	frame->modificar(x,y,ancho,alto);
+	frame.modificar(x,y,ancho,alto);
 	x=cifras[4];
 	y=cifras[5];
 	ancho=cifras[6];
 	alto=cifras[7];
-	insercion->modificar(x,y,ancho,alto);
+	insercion.modificar(x,y,ancho,alto);
 
 	if (cifras[8]==1)
 	  dadoVuelta=true;

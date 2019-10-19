@@ -12,8 +12,8 @@ enum tipoDeSprite {Jugador1, Jugador2, Jugador3, Jugador4,
 class MensajeServidor {
 
 private:
-	Encuadre* frame;
-	Encuadre* insercion;
+	Encuadre frame;
+	Encuadre insercion;
 	bool dadoVuelta;
 	tipoDeSprite sprite;
 
