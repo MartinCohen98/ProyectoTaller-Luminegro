@@ -28,14 +28,15 @@ private:
     SDL_Color colorTxtError = {255, 26, 26};
     SDL_Color colorMensajeInformativo;
     std::string stringSiendoIngresado;
-    std::string stringSiendoIngresadoConCursor;
     std::string stringIngresadoUsuario;
     std::string stringIngresadoClave;
+    std::string stringIngresadoClaveConMascara;
+    std::string stringIngresadoClaveConMascaraYCursor;
     std::string mensajeInformativoString = "";
     int mensajeInformativoTipo;
     unsigned short int i = 0; // para conteos
     bool mostrarCursor = false; // Se muestra siempre, esta variable se usa en unos bucles
-    int estado = ESTADO_INGRESANDO_USUARIO;
+    int estado;
     bool pasarAEstadoSiguiente = false;
 
     bool leerTeclado();
@@ -43,7 +44,7 @@ private:
     void atenderMostradoDeCursor(); // Se ocupa del cursor destellante que indica donde aparece lo que tecleás
 
 public:
-    static const int ESTADO_INICIALIZANDO = 1;
+    static const int ESTADO_INICIALIZACION = 1;
     static const int ESTADO_ERROR = 2;
     static const int ESTADO_INGRESANDO_USUARIO = 3;
     static const int ESTADO_INGRESANDO_CLAVE = 4;

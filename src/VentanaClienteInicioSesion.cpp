@@ -1,6 +1,7 @@
 #include "VentanaClienteInicioSesion.h"
 
 VentanaClienteInicioSesion::VentanaClienteInicioSesion() {
+    estado = ESTADO_INICIALIZACION;
 
     Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
 
@@ -40,10 +41,11 @@ int VentanaClienteInicioSesion::getEstado() {
 
 
 int VentanaClienteInicioSesion::pedirCredenciales() {
+    estado = ESTADO_INGRESANDO_USUARIO;
 
     // BUCLE: el usuario teclea sus credenciales...
     while (leerTeclado() && estado != ESTADO_CONECTANDO) {
-        SDL_Delay(10);
+        SDL_Delay(40);
         actualizarVentana();
     };
 
@@ -58,6 +60,9 @@ bool VentanaClienteInicioSesion::leerTeclado() {
                 return false;
             case SDL_TEXTINPUT:
                 stringSiendoIngresado += evento.text.text;
+                if (estado == ESTADO_INGRESANDO_CLAVE) {
+                    stringIngresadoClaveConMascara += "*";
+                }
                 break;
             case SDL_KEYDOWN:
                 switch (evento.key.keysym.sym) {
@@ -96,24 +101,32 @@ void VentanaClienteInicioSesion::actualizarVentana() {
     SDL_RenderCopy(renderizador, texturaTxtFijo2, NULL, &rectanguloTxtFijoInferior);
 
     atenderMostradoDeCursor();
+
     switch (estado) {
+
         case ESTADO_INGRESANDO_CLAVE:
             if (pasarAEstadoSiguiente) {
-                stringIngresadoClave = stringSiendoIngresado;
                 pasarAEstadoSiguiente = false;
+                stringIngresadoClave = stringSiendoIngresado;
                 estado = ESTADO_CONECTANDO;
             } else {
-                stringIngresadoClave = stringSiendoIngresadoConCursor;
+                stringIngresadoClaveConMascaraYCursor = stringIngresadoClaveConMascara;
+                if (mostrarCursor) {
+                    stringIngresadoClaveConMascaraYCursor.append("|");
+                }
             }
             break;
+
         case ESTADO_INGRESANDO_USUARIO:
+            stringIngresadoUsuario = stringSiendoIngresado;
             if (pasarAEstadoSiguiente) {
-                stringIngresadoUsuario = stringSiendoIngresado;
                 estado = ESTADO_INGRESANDO_CLAVE;
                 pasarAEstadoSiguiente = false;
                 stringSiendoIngresado = "";
             } else {
-                stringIngresadoUsuario = stringSiendoIngresadoConCursor;
+                if (mostrarCursor) {
+                    stringIngresadoUsuario.append("|");
+                }
             }
             break;
     }
@@ -132,8 +145,9 @@ void VentanaClienteInicioSesion::actualizarVentana() {
         SDL_FreeSurface(superficieTxt);
     }
 
-    if (stringIngresadoClave.size() > 0) {
-        superficieTxt = TTF_RenderText_Solid(fuente, stringIngresadoClave.c_str(), colorTxtIngre);
+    if (stringIngresadoClaveConMascaraYCursor.size() > 0) {
+        superficieTxt = TTF_RenderText_Solid(fuente, stringIngresadoClaveConMascaraYCursor.c_str(),
+                colorTxtIngre);
         rectanguloTxtIngre.x = 320 - (superficieTxt->w / 2.0f);
         if (estado == ESTADO_INGRESANDO_CLAVE && mostrarCursor) rectanguloTxtIngre.x += 5;
         rectanguloTxtIngre.w = superficieTxt->w;
@@ -173,17 +187,11 @@ void VentanaClienteInicioSesion::actualizarVentana() {
 
 
 void VentanaClienteInicioSesion::atenderMostradoDeCursor() {
-    stringSiendoIngresadoConCursor = stringSiendoIngresado;
-
-    mostrarCursor = (i < 50);
-    if (i == 100) {
+    mostrarCursor = (i < 13);
+    if (i == 25) {
         i = 0;
     } else {
         i++;
-    }
-
-    if (mostrarCursor) {
-        stringSiendoIngresadoConCursor.append("|");
     }
 }
 
@@ -215,6 +223,8 @@ void VentanaClienteInicioSesion::resetear() {
     stringSiendoIngresado = "";
     stringIngresadoUsuario = "";
     stringIngresadoClave = "";
+    stringIngresadoClaveConMascara = "";
+    stringIngresadoClaveConMascaraYCursor = "";
     mensajeInformativoString = "";
     actualizarVentana();
 }
