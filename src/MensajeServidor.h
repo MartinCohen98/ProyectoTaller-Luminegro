@@ -26,7 +26,7 @@ public:
 	bool estaDadoVuelta();
 	tipoDeSprite obtenerTipoDeSprite();
 	std::string codificarMensaje(void);
-	void decodificar(std::string mensaje);
+	void decodificarMensaje(std::string mensaje);
 	virtual ~MensajeServidor();
 };
 

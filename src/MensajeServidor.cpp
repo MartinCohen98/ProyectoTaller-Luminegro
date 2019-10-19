@@ -60,20 +60,24 @@ string MensajeServidor::codificarMensaje(void){
 	return mensaje;
 }
 
-void MensajeServidor::decodificar(std::string mensaje){
+void MensajeServidor::decodificarMensaje(std::string mensaje){
 
 	int cifras[10];
-	size_t orden;
+	size_t posicion;
 	string dato;
 	int i=0;
 	int x,y,ancho,alto;
 
 	//Lee las cifras del string separadas por "-"
-	while ((orden=mensaje.find("-")) != string::npos) {
-		dato = mensaje.substr(0,orden);
-		cifras[i]=stoi(dato);
-	}
-   //Actualiza los encuadres de la clase MensajeServidor con los datos recibidos
+	while ((posicion=mensaje.find("-")) != string::npos) {
+	     dato = mensaje.substr(0,posicion);
+		 cifras[i]=stoi(dato);
+		 mensaje.erase(0,posicion+1);
+		 i++;
+		}
+	cifras[9]=stoi(mensaje);
+
+	//Actualiza los encuadres de la clase MensajeServidor con los datos recibidos
 	x=cifras[0];
 	y=cifras[1];
 	ancho=cifras[2];
@@ -86,9 +90,9 @@ void MensajeServidor::decodificar(std::string mensaje){
 	insercion->modificar(x,y,ancho,alto);
 
 	if (cifras[8]==1)
-		dadoVuelta=true;
+	  dadoVuelta=true;
 	else
-		dadoVuelta=false;
+	  dadoVuelta=false;
 
 	sprite = static_cast<tipoDeSprite>(cifras[9]);
 }
