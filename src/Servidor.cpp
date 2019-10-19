@@ -67,7 +67,7 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 
 			enviarMensajeDeNivelTerminado(nivelTerminado);
 
-			SDL_Delay(25);
+//			SDL_Delay(25);
 		}
 	}
 }
