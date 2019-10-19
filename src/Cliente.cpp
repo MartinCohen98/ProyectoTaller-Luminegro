@@ -89,6 +89,9 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	        			break;
 	        	}
 	        }
+
+	        renderizador.renderizar();
+
 	        if (terminoElNivel()) {
 	    		salir = true;
 	    	}
