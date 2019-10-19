@@ -82,6 +82,25 @@ void ControlObjetosModelo::movidaDePantalla() {
 }
 
 
+void ControlObjetosModelo::enviarEncuadres(Socket*& sockets, int cantidad) {
+	for(int i = 0; i < barrilesCantidad; i++){
+		barriles[i]->enviarEncuadres(sockets, cantidad);
+	}
+
+	for(int i = 0; i < cajasCantidad; i++){
+		cajas[i]->enviarEncuadres(sockets, cantidad);
+	}
+
+	for(int i = 0; i < cuchillosCantidad; i++){
+		cuchillos[i]->enviarEncuadres(sockets, cantidad);
+	}
+
+	for(int i = 0; i < tubosCantidad; i++){
+		tubos[i]->enviarEncuadres(sockets, cantidad);
+	}
+}
+
+
 ControlObjetosModelo::~ControlObjetosModelo() {
 	if (barriles != NULL) {
 		for(int i = 0; i < barrilesCantidad; i++)

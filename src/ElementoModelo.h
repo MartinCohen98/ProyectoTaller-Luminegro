@@ -2,6 +2,7 @@
 #define ELEMENTOMODELO_H_
 
 #include "Encuadre.h"
+#include "Socket.h"
 
 class ElementoModelo {
 
@@ -16,6 +17,7 @@ protected:
 public:
 	ElementoModelo();
 	void movidaDePantalla();
+	void enviarEncuadres(Socket*& sockets, int cantidad);
 	virtual ~ElementoModelo();
 };
 

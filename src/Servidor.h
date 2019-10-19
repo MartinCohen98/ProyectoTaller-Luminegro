@@ -12,6 +12,7 @@ class Servidor {
 private:
 	int jugadores;
 	MensajeCliente mensajeCliente;
+	MensajeServidor mensajeServidor;
 	Socket socketAceptador;
 	Socket* socketsDeClientes;
 

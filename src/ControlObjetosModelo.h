@@ -6,6 +6,7 @@
 #include "CajaModelo.h"
 #include "CuchilloModelo.h"
 #include "TuboModelo.h"
+#include "Socket.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -26,6 +27,7 @@ public:
 								int terrenoWidth, int nivel);
 	int obtenerCantidad();
 	void movidaDePantalla();
+	void enviarEncuadres(Socket*& sockets, int cantidad);
 	virtual ~ControlObjetosModelo();
 };
 

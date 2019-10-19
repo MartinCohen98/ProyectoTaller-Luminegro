@@ -34,6 +34,7 @@ void ControlEnemigosModelo::movidaDePantalla() {
 	}
 }
 
+
 void ControlEnemigosModelo::realizarMovimientos(){
 	enemigos[0]->retroceder();
 	enemigos[1]->avanzar();
@@ -42,6 +43,14 @@ void ControlEnemigosModelo::realizarMovimientos(){
 	enemigos[4]->retroceder();
 	enemigos[5]->retroceder();
 }
+
+
+void ControlEnemigosModelo::enviarEncuadres(Socket*& sockets, int cantidad) {
+	for(int i = 0; i < enemigosCantidad; i++) {
+		enemigos[i]->enviarEncuadres(sockets, cantidad);
+	}
+}
+
 
 ControlEnemigosModelo::~ControlEnemigosModelo() {
 	// TODO Auto-generated destructor stub

@@ -56,13 +56,28 @@ void EnemigoModelo::retrocesoDePantalla() {
 	posicionX = posicionX - 12;
 }
 
+
+void EnemigoModelo::enviarEncuadres(Socket*& sockets, int cantidad) {
+	MensajeServidor mensaje;
+	Encuadre sprite = estado->obtenerSprite();
+	mensaje.generarMensaje(&sprite, &insercion, Enemigo1);
+	if (dadoVuelta)
+		mensaje.darVuelta();
+	for (int i = 0; i < cantidad; i++) {
+		sockets[i].enviar(&mensaje);
+	}
+}
+
+
 void EnemigoModelo::actualizarInsercion() {
 	insercion.modificar(posicionX, posicionY, ancho, alto);
 }
 
+
 void EnemigoModelo::moverEnX(int movimiento) {
 	posicionX = posicionX + movimiento;
 }
+
 
 void EnemigoModelo::moverEnY(int movimiento) {
 	posicionY = posicionY + movimiento;

@@ -139,7 +139,9 @@ void Servidor::enviarCantidadDeRecieves(ControlEnemigosModelo* enemigos,
 
 void Servidor::enviarEncuadres(JugadorModelo* jugador,
 		ControlEnemigosModelo* enemigos, ControlObjetosModelo* objetos) {
-	//TODO
+	jugador->enviarEncuadres(socketsDeClientes, 1);
+	enemigos->enviarEncuadres(socketsDeClientes, 1);
+	objetos->enviarEncuadres(socketsDeClientes, 1);
 }
 
 

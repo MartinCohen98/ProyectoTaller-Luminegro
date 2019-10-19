@@ -4,6 +4,8 @@
 #include "EstadoJugadorParado.h"
 #include "PersonaModelo.h"
 #include "../lib/pugixml/pugixml.hpp"
+#include "Socket.h"
+#include "MensajeServidor.h"
 #include <string>
 #include "FondoModelo.h"
 
@@ -35,6 +37,7 @@ public:
 	void saltar();
 	void realizarMovimientos(FondoModelo* fondo);
 	bool llegoAlFin(FondoModelo *fondo);
+	void enviarEncuadres(Socket*& sockets, int cantidadDeSockets);
 	virtual ~JugadorModelo();
 
 private:

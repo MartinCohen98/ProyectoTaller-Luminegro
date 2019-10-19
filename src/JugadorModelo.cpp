@@ -59,13 +59,16 @@ void JugadorModelo::agacharse() {
 	agachado = true;
 }
 
+
 void JugadorModelo::dejarDeAgacharse() {
 	agachado = false;
 }
 
+
 void JugadorModelo::pegar() {
 	estado = estado->pegar();
 }
+
 
 void JugadorModelo::saltar() {
 	if (!estado->estaSaltando()) {
@@ -74,6 +77,7 @@ void JugadorModelo::saltar() {
 	}
 	estado = estado->saltar();
 }
+
 
 bool JugadorModelo::moverEnY() {
 	bool seMovio = false;
@@ -88,6 +92,7 @@ bool JugadorModelo::moverEnY() {
 	return seMovio;
 }
 
+
 void JugadorModelo::realizarMovimientos(FondoModelo* fondo) {
 	if (estado->puedeMoverse()) {
 		actualizarPosicion(fondo);
@@ -99,6 +104,7 @@ void JugadorModelo::realizarMovimientos(FondoModelo* fondo) {
 		}
 	}
 }
+
 
 void JugadorModelo::actualizarPosicion(FondoModelo* fondo) {
 	bool seMovioEnX = moverEnX(fondo);
@@ -114,6 +120,7 @@ void JugadorModelo::actualizarPosicion(FondoModelo* fondo) {
 	}
 	actualizarInsercion();
 }
+
 
 void JugadorModelo::actualizarInsercion() {
 	if (!dadoVuelta) {
@@ -149,13 +156,27 @@ bool JugadorModelo::moverEnX(FondoModelo* fondo) {
 	return seMovio;
 }
 
+
 int JugadorModelo::escalar(int tamanio) {
 	return (tamanio * escaladoDeSprite);
 }
 
+
 bool JugadorModelo::llegoAlFin(FondoModelo *fondo) {
 	return (fondo->consultarFin() &&
 			(posicionX == (800 - escalar(estado->obtenerAncho()))));
+}
+
+
+void JugadorModelo::enviarEncuadres(Socket*& sockets, int cantidadDeSockets) {
+	MensajeServidor mensaje;
+	Encuadre sprite = estado->obtenerSprite();
+	mensaje.generarMensaje(&sprite, &insercion, Jugador1);
+	if (dadoVuelta)
+		mensaje.darVuelta();
+	for (int i = 0; i < cantidadDeSockets; i++) {
+		sockets[i].enviar(&mensaje);
+	}
 }
 
 

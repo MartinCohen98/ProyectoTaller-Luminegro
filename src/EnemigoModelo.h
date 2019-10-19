@@ -3,6 +3,7 @@
 
 #include "PersonaModelo.h"
 #include "EstadoEnemigoParado.h"
+#include "Socket.h"
 
 class EnemigoModelo: public PersonaModelo {
 
@@ -19,6 +20,7 @@ public:
 	void subir();
 	void bajar();
 	void retrocesoDePantalla();
+	void enviarEncuadres(Socket*& sockets, int cantidad);
 	virtual ~EnemigoModelo();
 
 private:
