@@ -37,13 +37,27 @@ void FondoModelo::mover() {
 	movido = true;
 }
 
+
+void FondoModelo::enviarEncuadres(Socket*& sockets, int cantidad) {
+	MensajeServidor mensaje;
+	for (int j = 0; j < 3; j++) {
+		mensaje.generarMensaje(&encuadres[j], &encuadreFijo, Jugador1);
+		for (int i = 0; i < cantidad; i++) {
+			sockets[i].enviar(&mensaje);
+		}
+	}
+}
+
+
 bool FondoModelo::seMovio() {
 	return movido;
 }
 
+
 bool FondoModelo::consultarFin() {
 	return fin;
 }
+
 
 int FondoModelo::obtenerAncho() {
 	return limite;

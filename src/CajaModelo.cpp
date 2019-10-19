@@ -5,6 +5,7 @@ CajaModelo::CajaModelo(int posXinicial, int posYinicial) {
 	posicionY = posYinicial;
 	ancho = 96;
 	alto = 160;
+	sprite = Caja;
 
 	encuadre.modificar(0, 0, 96, 160);
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);

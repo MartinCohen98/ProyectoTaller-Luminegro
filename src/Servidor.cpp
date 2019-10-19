@@ -60,7 +60,8 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 				controlObjetos.movidaDePantalla();
 			}
 
-			enviarEncuadres(&protagonista, &controlEnemigos, &controlObjetos);
+			enviarEncuadres(&protagonista, &fondo,
+						&controlEnemigos, &controlObjetos);
 
 			nivelTerminado = protagonista.llegoAlFin(&fondo);
 
@@ -137,8 +138,9 @@ void Servidor::enviarCantidadDeRecieves(ControlEnemigosModelo* enemigos,
 								+ enemigos->obtenerCantidad());
 }
 
-void Servidor::enviarEncuadres(JugadorModelo* jugador,
+void Servidor::enviarEncuadres(JugadorModelo* jugador, FondoModelo* fondo,
 		ControlEnemigosModelo* enemigos, ControlObjetosModelo* objetos) {
+	fondo->enviarEncuadres(socketsDeClientes, 1);
 	jugador->enviarEncuadres(socketsDeClientes, 1);
 	enemigos->enviarEncuadres(socketsDeClientes, 1);
 	objetos->enviarEncuadres(socketsDeClientes, 1);

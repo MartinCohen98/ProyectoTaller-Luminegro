@@ -2,6 +2,7 @@
 #define SRC_FONDOMODELO_H_
 
 #include "Encuadre.h"
+#include "Socket.h"
 #include "../lib/pugixml/pugixml.hpp"
 
 class FondoModelo {
@@ -21,6 +22,7 @@ public:
 	FondoModelo(pugi::xml_document* archiConfig, int nivel);
 	void mover();
 	int obtenerAncho();
+	void enviarEncuadres(Socket*& sockets, int cantidad);
 	bool seMovio();
 	bool consultarFin();
 	virtual ~FondoModelo();

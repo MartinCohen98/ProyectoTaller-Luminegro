@@ -26,8 +26,8 @@ private:
 	void recibirInput(JugadorModelo* jugador);
 	void enviarCantidadDeRecieves(ControlEnemigosModelo* enemigos,
 							ControlObjetosModelo* objetos);
-	void enviarEncuadres(JugadorModelo* jugador, ControlEnemigosModelo* enemigos,
-							ControlObjetosModelo* objetos);
+	void enviarEncuadres(JugadorModelo* jugador, FondoModelo* fondo,
+			ControlEnemigosModelo* enemigos, ControlObjetosModelo* objetos);
 	void enviarMensajeDeNivelTerminado(bool nivelTerminado);
 };
 
