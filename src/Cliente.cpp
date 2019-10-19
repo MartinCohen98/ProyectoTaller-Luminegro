@@ -1,8 +1,6 @@
 #include "Cliente.h"
 
-Cliente::Cliente(char* NumPuerto) {
-	puerto = NumPuerto;
-}
+Cliente::Cliente() {}
 
 int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig){
 
@@ -46,6 +44,8 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 		VistaObjeto caja(&renderizador, archiConfig, Caja);
 		VistaObjeto cuchillo(&renderizador, archiConfig, Cuchillo);
 		VistaObjeto tubo(&renderizador, archiConfig, Tubo);
+
+		recibirCantidadDeRecieves();
 
 		while (!salir) {
 	    	enviarInput(&mensajeCliente);

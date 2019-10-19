@@ -1,5 +1,6 @@
 #include "VentanaDeJuego.h"
 #include "Servidor.h"
+#include "Cliente.h"
 #include "ConfigManager.h"
 #include "VentanaClienteInicioSesion.h"
 
@@ -58,6 +59,8 @@ int main (int argc, char** argv) {
 
         Servidor servidor(1, argv[2]);
 
+        servidor.correr(&configManager.archivoConfig);
+
     } else if (strcmp(argv[1], "cliente") == 0) {
         // CLIENTE
         logueador->Info("Se inicia el juego en modo cliente");
@@ -112,11 +115,8 @@ int main (int argc, char** argv) {
         puerto[j - i] = '\0';
         // (FIN) Desgloso IP y puerto del parámetro de entrada
 
-        int resultado = socketConectado.conectarAUnServidor(direccionIP, puerto);
-        if (resultado == EXIT_FAILURE) {
-            // Ya fue logueado en la clase
-            return EXIT_FAILURE;
-        }
+        Cliente cliente;
+        cliente.inicializar(direccionIP, puerto, &configManager.archivoConfig);
 
         ventanaClienteInicioSesion.cerrar();
         socketConectado.cerrar();

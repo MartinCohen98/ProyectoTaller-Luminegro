@@ -4,6 +4,8 @@ VistaEnemigo::VistaEnemigo(Renderizador* elRenderizador,
 		pugi::xml_document *archiConfig, tipoDeSprite codigoEnemigo) {
 	std::string path;
 
+	renderizador = elRenderizador;
+
 	switch (codigoEnemigo) {
 		case Enemigo1:	path = archiConfig->child("configuracion").child("escenario").
 						child("enemigos").child("bred").child("imagen").attribute("url").value();

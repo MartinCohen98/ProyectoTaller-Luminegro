@@ -4,6 +4,8 @@ VistaObjeto::VistaObjeto(Renderizador* elRenderizador,
 		pugi::xml_document *archiConfig, tipoDeSprite codigoObjeto) {
 	std::string path;
 
+	renderizador = elRenderizador;
+
 	switch (codigoObjeto) {
 		case Barril:	path = archiConfig->child("configuracion").child("escenario")
                     	.child("objetos").child("barril").child_value("imagen");

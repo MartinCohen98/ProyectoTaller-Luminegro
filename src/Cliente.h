@@ -26,7 +26,6 @@ using namespace std;
 
 class Cliente {
 private:
-	char *puerto;
 	int cantMaxDatos;
 	int cantidadDeRecieves;
 	Socket socket;
@@ -35,7 +34,7 @@ private:
 	MensajeServidor mensajeServidor;
 
 public:
-	 Cliente(char* NumPuerto);
+	 Cliente();
 	 int inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig);
 	 int conectar(char* direccionIP, char* puerto);
 	 virtual ~Cliente();
