@@ -27,7 +27,7 @@ using namespace std;
 class Cliente {
 private:
 	int cantMaxDatos;
-	int cantidadDeRecieves;
+	int cantidadDeReceives;
 	Socket socket;
 	SDL_Event evento;
 	MensajeCliente mensajeCliente;
@@ -42,7 +42,7 @@ public:
 private:
 	 void recibirFondo(VistaFondo* fondo);
 	 void enviarInput(MensajeCliente* mensaje);
-	 void recibirCantidadDeRecieves();
+	 void recibirCantidadDeReceives();
 	 bool terminoElNivel();
 	 tipoDeSprite recibirMensaje();
 };

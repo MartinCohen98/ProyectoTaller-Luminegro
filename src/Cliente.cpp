@@ -45,14 +45,14 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 		VistaObjeto cuchillo(&renderizador, archiConfig, Cuchillo);
 		VistaObjeto tubo(&renderizador, archiConfig, Tubo);
 
-		recibirCantidadDeRecieves();
+		recibirCantidadDeReceives();
 
 		while (!salir) {
 	    	enviarInput(&mensajeCliente);
 
 	    	recibirFondo(&fondo);
 
-	        for (int i = 0; i < cantidadDeRecieves; i++) {
+	        for (int i = 0; i < cantidadDeReceives; i++) {
 	        	switch(recibirMensaje()) {
 	        		case Jugador1:
 	        			jugador1.renderizarConElMensaje(&mensajeServidor);
@@ -195,8 +195,8 @@ void Cliente::recibirFondo(VistaFondo* fondo) {
 }
 
 
-void Cliente::recibirCantidadDeRecieves() {
-	socket.recibir(&cantidadDeRecieves);
+void Cliente::recibirCantidadDeReceives() {
+	socket.recibir(&cantidadDeReceives);
 }
 
 

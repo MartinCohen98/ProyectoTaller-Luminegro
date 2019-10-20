@@ -47,7 +47,7 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 		ControlObjetosModelo controlObjetos(archiConfig, fondo.obtenerAncho(), nivel);
 
-		enviarCantidadDeRecieves(&controlEnemigos, &controlObjetos);
+		enviarCantidadDeReceives(&controlEnemigos, &controlObjetos);
 
 		while (!nivelTerminado) {
 			recibirInput(&protagonista);
@@ -132,7 +132,7 @@ void Servidor::recibirInput(JugadorModelo* jugador) {
 		}
 }
 
-void Servidor::enviarCantidadDeRecieves(ControlEnemigosModelo* enemigos,
+void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 							ControlObjetosModelo* objetos) {
 	socketsDeClientes[0].enviar(jugadores + objetos->obtenerCantidad()
 								+ enemigos->obtenerCantidad());
