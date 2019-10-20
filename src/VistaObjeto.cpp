@@ -16,7 +16,7 @@ VistaObjeto::VistaObjeto(Renderizador* elRenderizador,
 		case Cuchillo:	path = archiConfig->child("configuracion").child("escenario")
                     	.child("objetos").child("cuchillo").child_value("imagen");
 						break;
-		case Tubo:		archiConfig->child("configuracion").child("escenario")
+		case Tubo:		path = archiConfig->child("configuracion").child("escenario")
                     	.child("objetos").child("tuboMetalico").child_value("imagen");
 						break;
 	}
