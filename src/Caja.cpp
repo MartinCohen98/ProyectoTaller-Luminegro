@@ -1,5 +1,4 @@
 #include "Caja.h"
-#include "Imagen.h"
 
 Caja::Caja(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
 	posicionX = posXinicial;

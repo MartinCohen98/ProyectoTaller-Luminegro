@@ -1,5 +1,4 @@
 #include "Cuchillo.h"
-#include "Imagen.h"
 
 Cuchillo::Cuchillo(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
 	posicionX = posXinicial;

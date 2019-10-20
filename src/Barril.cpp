@@ -1,5 +1,4 @@
 #include "Barril.h"
-#include "Imagen.h"
 
 
 Barril::Barril(Renderizador *renderizador, int posXinicial, int posYinicial, pugi::xml_document *archiConfig) {
