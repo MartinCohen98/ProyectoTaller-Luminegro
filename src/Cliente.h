@@ -6,7 +6,6 @@
 #include "VistaFondo.h"
 #include "VistaJugador.h"
 #include "VistaObjeto.h"
-#include "VentanaDeJuego.h"
 #include "VentanaCliente.h"
 #include "ConfigManager.h"
 #include "Renderizador.h"

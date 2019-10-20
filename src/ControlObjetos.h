@@ -2,10 +2,6 @@
 #define SRC_CONTROLOBJETOS_H_
 
 #include "Renderizador.h"
-#include "Barril.h"
-#include "Caja.h"
-#include "Cuchillo.h"
-#include "Tubo.h"
 #include "../lib/pugixml/pugixml.hpp"
 #include "Fondo.h"
 #include <stdlib.h>

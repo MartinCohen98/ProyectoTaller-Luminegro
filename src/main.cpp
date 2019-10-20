@@ -1,4 +1,3 @@
-#include "VentanaDeJuego.h"
 #include "Servidor.h"
 #include "Cliente.h"
 #include "ConfigManager.h"
@@ -12,14 +11,13 @@ int main (int argc, char** argv) {
 
     /** Parámetros de línea de comandos para ejecutar el juego. Los que tienen asterisco son obligatorios.
      *
-     * 1*: modo de aplicación: "servidor", "cliente" o "simple" (este último es temporario, para jugar de a uno sin red)
+     * 1*: modo de aplicación: "servidor" o "cliente"
      * 2*: si el modo es del parámetro previo es "servidor", aquí en que puerto escuchará. Si es "cliente", a qué IP y
      *      puerto se conectará.
      * 3: ubicación del archivo de configuración
      * 4: nivel mínimo de logueo (DEBUG, INFO o ERROR)
      *
      * Ejemplos (el puerto a usar debe estar libre):
-     *      ./ProyectoTaller-Luminegro simple 2100 config/repiola.xml    <---- puerto acá no se lee pero debe estar
      *      ./ProyectoTaller-Luminegro servidor 2100 config/repiola.xml DEBUG
      *      ./ProyectoTaller-Luminegro servidor 2101
      *      ./ProyectoTaller-Luminegro cliente 192.168.0.3:2100
@@ -74,10 +72,14 @@ int main (int argc, char** argv) {
 
         ventanaClienteInicioSesion.pedirCredenciales();
 
-        /* INICIO - La siguiente rutina simula cierta espera, da error de contraseña, pide credenciales nuevamente
-         * y finalmente conecta. */
+        // INICIO - CODIGO DE EJEMPLO: la siguiente rutina simula cierta espera, da error de contraseña, pide
+        // credenciales nuevamente y finalmente hace como que conecta. */
+        /*
         ventanaClienteInicioSesion.mostrarMensaje("Conectando...",
-                VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
+                                                  VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
+
+        string usuario = ventanaClienteInicioSesion.getUsuario();
+        string clave = ventanaClienteInicioSesion.getClave();
 
         ventanaClienteInicioSesion.demorar(2000);
         ventanaClienteInicioSesion.mostrarMensaje("Error en clave, es usted hacker?",
@@ -86,13 +88,14 @@ int main (int argc, char** argv) {
         ventanaClienteInicioSesion.resetear();
         ventanaClienteInicioSesion.pedirCredenciales();
         ventanaClienteInicioSesion.mostrarMensaje("Conectando...",
-                VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
+                                                   VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
+
+        usuario = ventanaClienteInicioSesion.getUsuario();
+        clave = ventanaClienteInicioSesion.getClave();
 
         ventanaClienteInicioSesion.demorar(2000);
-        /* FIN */
-
-        string usuario = ventanaClienteInicioSesion.getUsuario();
-        string clave = ventanaClienteInicioSesion.getClave();
+        */
+        // FIN - CODIGO DE EJEMPLO
 
         Socket socketConectado;
 
@@ -122,26 +125,6 @@ int main (int argc, char** argv) {
         socketConectado.cerrar();
 
         return EXIT_SUCCESS;
-
-    } else if (strcmp(argv[1], "simple") == 0) {
-        // MODO SIMPLE, TEMPORARIO
-
-        logueador->Info("Se inicia el juego en modo simple (temporario)");
-
-        if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-            logueador->Error("No se pudo iniciar SDL2 correctamente");
-            return EXIT_FAILURE;
-        }
-
-        logueador->Info("SDL inicio correctamente, ejecutando...");
-
-        VentanaDeJuego ventana;
-
-        int retorno = ventana.abrir(&configManager.archivoConfig);
-
-        logueador->Info("Fin del juego");
-
-        return retorno;
 
     } else {
 
