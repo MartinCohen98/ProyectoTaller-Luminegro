@@ -6,17 +6,14 @@
 #include "vistas/VistaFondo.h"
 #include "vistas/VistaJugador.h"
 #include "vistas/VistaObjeto.h"
-#include "VentanaCliente.h"
+#include "grafica/VentanaCliente.h"
 #include "ConfigManager.h"
-#include "Renderizador.h"
+#include "grafica/Renderizador.h"
 #include "MensajeCliente.h"
 #include "MensajeServidor.h"
 #include <pthread.h>
 #include <iostream>
 #include "Logger.h"
-#include "Protagonista.h"
-#include "ControlObjetos.h"
-#include "ControlJugadores.h"
 #include <SDL2/SDL.h>
 #include <string>
 

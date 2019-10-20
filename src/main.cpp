@@ -1,7 +1,7 @@
-#include "Servidor.h"
-#include "Cliente.h"
-#include "ConfigManager.h"
-#include "VentanaClienteInicioSesion.h"
+#include "varios/Servidor.h"
+#include "varios/Cliente.h"
+#include "varios/ConfigManager.h"
+#include "grafica/VentanaClienteInicioSesion.h"
 
 
 using namespace Logger;
@@ -70,7 +70,7 @@ int main (int argc, char** argv) {
             return EXIT_FAILURE;
         }
 
-        ventanaClienteInicioSesion.pedirCredenciales();
+        //ventanaClienteInicioSesion.pedirCredenciales();
 
         // INICIO - CODIGO DE EJEMPLO: la siguiente rutina simula cierta espera, da error de contraseña, pide
         // credenciales nuevamente y finalmente hace como que conecta. */

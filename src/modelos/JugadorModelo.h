@@ -4,8 +4,8 @@
 #include "estados/EstadoJugadorParado.h"
 #include "PersonaModelo.h"
 #include "pugixml.hpp"
-#include "Socket.h"
-#include "MensajeServidor.h"
+#include "varios/Socket.h"
+#include "varios/MensajeServidor.h"
 #include <string>
 #include "FondoModelo.h"
 

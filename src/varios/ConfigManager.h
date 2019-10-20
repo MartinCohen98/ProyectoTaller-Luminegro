@@ -5,7 +5,7 @@
 #ifndef PROYECTOTALLER_LUMINEGRO_CONFIGMANAGER_H
 #define PROYECTOTALLER_LUMINEGRO_CONFIGMANAGER_H
 
-#include "../lib/pugixml/pugixml.hpp"
+#include "pugixml.hpp"
 namespace Common{
 
     enum Estado{

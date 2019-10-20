@@ -3,7 +3,7 @@
 
 #include "Socket.h"
 #include "modelos/JugadorModelo.h"
-#include "ControlEnemigosModelo.h"
+#include "modelos/ControlEnemigosModelo.h"
 #include "modelos/ControlObjetosModelo.h"
 #include "MensajeCliente.h"
 

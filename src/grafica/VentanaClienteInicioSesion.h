@@ -5,7 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <string>
 
-#include "Logger.h"
+#include "varios/Logger.h"
 
 
 class VentanaClienteInicioSesion {

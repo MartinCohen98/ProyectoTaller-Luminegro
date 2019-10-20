@@ -3,12 +3,10 @@
 
 #include <iostream>
 #include "Renderizador.h"
-#include "Protagonista.h"
-#include "ControlObjetos.h"
-#include "ControlJugadores.h"
 #include <SDL2/SDL.h>
-#include "Logger.h"
-#include "MensajeCliente.h"
+#include "varios/Logger.h"
+#include "varios/MensajeCliente.h"
+#include "pugixml.hpp"
 
 class VentanaCliente {
 private:

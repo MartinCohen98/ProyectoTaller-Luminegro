@@ -1,8 +1,8 @@
 #ifndef ELEMENTOMODELO_H_
 #define ELEMENTOMODELO_H_
 
-#include "Encuadre.h"
-#include "Socket.h"
+#include "grafica/Encuadre.h"
+#include "varios/Socket.h"
 
 class ElementoModelo {
 

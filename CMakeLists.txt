@@ -10,33 +10,13 @@ find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 
 add_executable(ProyectoTaller_Luminegro
+
         lib/pugixml/pugiconfig.hpp
         lib/pugixml/pugixml.cpp
         lib/pugixml/pugixml.hpp
-        src/modelos/BarrilModelo.cpp
-        src/modelos/BarrilModelo.h
-        src/modelos/CajaModelo.cpp
-        src/modelos/CajaModelo.h
-        src/Cliente.cpp
-        src/Cliente.h
-        src/ControlEnemigosModelo.cpp
-        src/ControlEnemigosModelo.h
-        src/ControlJugadores.cpp
-        src/ControlJugadores.h
-        src/ControlObjetos.cpp
-        src/ControlObjetos.h
-        src/modelos/ControlObjetosModelo.cpp
-        src/modelos/ControlObjetosModelo.h
-        src/modelos/CuchilloModelo.cpp
-        src/modelos/CuchilloModelo.h
-        src/modelos/ElementoModelo.cpp
-        src/modelos/ElementoModelo.h
-        src/Encuadre.cpp
-        src/Encuadre.h
-        src/Enemigo.cpp
-        src/Enemigo.h
-        src/modelos/EnemigoModelo.cpp
-        src/modelos/EnemigoModelo.h
+
+        src/main.cpp
+
         src/estados/EstadoEnemigoAvanzando.cpp
         src/estados/EstadoEnemigoAvanzando.h
         src/estados/EstadoEnemigoParado.cpp
@@ -55,43 +35,60 @@ add_executable(ProyectoTaller_Luminegro
         src/estados/EstadoJugadorPegando.h
         src/estados/EstadoJugadorSaltando.cpp
         src/estados/EstadoJugadorSaltando.h
+
+        src/grafica/Encuadre.cpp
+        src/grafica/Encuadre.h
+        src/grafica/Imagen.cpp
+        src/grafica/Imagen.h
+        src/grafica/Renderizador.cpp
+        src/grafica/Renderizador.h
+        src/grafica/VentanaClienteInicioSesion.cpp
+        src/grafica/VentanaClienteInicioSesion.h
+        src/grafica/Textura.cpp
+        src/grafica/Textura.h
+        src/grafica/VentanaCliente.cpp
+        src/grafica/VentanaCliente.h
+
+        src/modelos/BarrilModelo.cpp
+        src/modelos/BarrilModelo.h
+        src/modelos/CajaModelo.cpp
+        src/modelos/CajaModelo.h
+        src/modelos/ControlEnemigosModelo.cpp
+        src/modelos/ControlEnemigosModelo.h
+        src/modelos/ControlObjetosModelo.cpp
+        src/modelos/ControlObjetosModelo.h
+        src/modelos/CuchilloModelo.cpp
+        src/modelos/CuchilloModelo.h
+        src/modelos/ElementoModelo.cpp
+        src/modelos/ElementoModelo.h
+        src/modelos/EnemigoModelo.cpp
+        src/modelos/EnemigoModelo.h
         src/modelos/FondoModelo.cpp
         src/modelos/FondoModelo.h
-        src/Imagen.cpp
-        src/Imagen.h
-        src/Jugador.cpp
-        src/Jugador.h
         src/modelos/JugadorModelo.cpp
         src/modelos/JugadorModelo.h
-        src/Logger.cpp
-        src/Logger.h
-        src/main.cpp
-        src/MensajeCliente.cpp
-        src/MensajeCliente.h
-        src/MensajeServidor.cpp
-        src/MensajeServidor.h
-        src/Persona.cpp
-        src/Persona.h
-        src/modelos/PersonaModelo.cpp
-        src/modelos/PersonaModelo.h
-        src/Protagonista.cpp
-        src/Protagonista.h
-        src/Renderizador.cpp
-        src/Renderizador.h
-        src/Servidor.cpp
-        src/Servidor.h
-        src/VentanaClienteInicioSesion.cpp
-        src/VentanaClienteInicioSesion.h
-        src/Socket.cpp
-        src/Socket.h
-        src/Textura.cpp
-        src/Textura.h
         src/modelos/TuboModelo.cpp
         src/modelos/TuboModelo.h
-        src/ConfigManager.cpp
-        src/ConfigManager.h
-        src/VentanaCliente.cpp
-        src/VentanaCliente.h
+        src/modelos/PersonaModelo.cpp
+        src/modelos/PersonaModelo.h
+
+        src/varios/Cliente.cpp
+        src/varios/Cliente.h
+        src/varios/Logger.cpp
+        src/varios/Logger.h
+        src/varios/MensajeCliente.cpp
+        src/varios/MensajeCliente.h
+        src/varios/MensajeServidor.cpp
+        src/varios/MensajeServidor.h
+        src/varios/Servidor.cpp
+        src/varios/Servidor.h
+        src/varios/Socket.cpp
+        src/varios/Socket.h
+        src/varios/ConfigManager.cpp
+        src/varios/ConfigManager.h
+        src/varios/Cola.cpp
+        src/varios/Cola.h
+
         src/vistas/VistaEnemigo.cpp
         src/vistas/VistaEnemigo.h
         src/vistas/VistaFondo.cpp
@@ -107,7 +104,9 @@ add_executable(ProyectoTaller_Luminegro
         src/vistas/VistaJugador.cpp
         src/vistas/VistaJugador.h
         src/vistas/VistaObjeto.cpp
-        src/vistas/VistaObjeto.h src/Cola.cpp src/Cola.h)
+        src/vistas/VistaObjeto.h
+        )
+
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2_LIBRARIES})
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2TTF_LIBRARIES})
 
