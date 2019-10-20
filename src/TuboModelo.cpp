@@ -7,7 +7,7 @@ TuboModelo::TuboModelo(int posXinicial, int posYinicial) {
 	alto = 24;
 	sprite = Tubo;
 
-	encuadre.modificar(0,0,24,144);
+	encuadre.modificar(0,0,144,24);
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);
 }
 
