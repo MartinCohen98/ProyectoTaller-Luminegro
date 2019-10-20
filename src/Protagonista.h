@@ -4,8 +4,7 @@
 #include "Imagen.h"
 #include "Renderizador.h"
 #include "../lib/pugixml/pugixml.hpp"
-#include "EstadoJugadorParado.h"
-#include "Fondo.h"
+#include "estados/EstadoJugadorParado.h"
 #include "Persona.h"
 
 class Protagonista: public Persona {
@@ -34,14 +33,10 @@ public:
 	void dejarDeBajar();
 	void pegar();
 	void saltar();
-	void realizarMovimientos(Fondo* fondo);
 	void actualizar(Renderizador *renderizador);
-	bool llegoAlFin(Fondo *fondo);
 	virtual ~Protagonista();
 
 private:
-	void actualizarPosicion(Fondo* fondo);
-	bool moverEnX(Fondo* fondo);
 	bool moverEnY();
 	int escalar(int tamanio);
 };

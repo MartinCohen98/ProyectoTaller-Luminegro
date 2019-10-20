@@ -1,9 +1,9 @@
 #ifndef SRC_JUGADORMODELO_H_
 #define SRC_JUGADORMODELO_H_
 
-#include "EstadoJugadorParado.h"
+#include "estados/EstadoJugadorParado.h"
 #include "PersonaModelo.h"
-#include "../lib/pugixml/pugixml.hpp"
+#include "pugixml.hpp"
 #include "Socket.h"
 #include "MensajeServidor.h"
 #include <string>

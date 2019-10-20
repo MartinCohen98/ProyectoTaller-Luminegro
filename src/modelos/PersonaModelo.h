@@ -2,7 +2,7 @@
 #define SRC_PERSONAMODELO_H_
 
 #include "Encuadre.h"
-#include "EstadoJugador.h"
+#include "estados/EstadoJugador.h"
 
 class PersonaModelo {
 

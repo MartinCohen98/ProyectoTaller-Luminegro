@@ -3,7 +3,7 @@
 
 #include "Encuadre.h"
 #include "Socket.h"
-#include "../lib/pugixml/pugixml.hpp"
+#include "pugixml.hpp"
 
 class FondoModelo {
 

@@ -2,10 +2,10 @@
 #define SRC_CLIENTE_H_
 
 #include "Socket.h"
-#include "VistaEnemigo.h"
-#include "VistaFondo.h"
-#include "VistaJugador.h"
-#include "VistaObjeto.h"
+#include "vistas/VistaEnemigo.h"
+#include "vistas/VistaFondo.h"
+#include "vistas/VistaJugador.h"
+#include "vistas/VistaObjeto.h"
 #include "VentanaCliente.h"
 #include "ConfigManager.h"
 #include "Renderizador.h"
@@ -16,7 +16,6 @@
 #include "Logger.h"
 #include "Protagonista.h"
 #include "ControlObjetos.h"
-#include "ControlEnemigos.h"
 #include "ControlJugadores.h"
 #include <SDL2/SDL.h>
 #include <string>

@@ -1,7 +1,7 @@
 #ifndef SRC_PERSONA_H_
 #define SRC_PERSONA_H_
 
-#include "EstadoJugador.h"
+#include "estados/EstadoJugador.h"
 #include "Textura.h"
 #include "Encuadre.h"
 

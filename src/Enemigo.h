@@ -1,12 +1,11 @@
 #ifndef ENEMIGO_H_
 #define ENEMIGO_H_
 
-#include "EstadoEnemigoParado.h"
+#include "estados/EstadoEnemigoParado.h"
 #include "Imagen.h"
 #include "Textura.h"
 #include "Renderizador.h"
-#include "EstadoJugador.h"
-#include "Fondo.h"
+#include "estados/EstadoJugador.h"
 #include "Persona.h"
 
 class Enemigo: public Persona {

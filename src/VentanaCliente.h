@@ -5,7 +5,6 @@
 #include "Renderizador.h"
 #include "Protagonista.h"
 #include "ControlObjetos.h"
-#include "ControlEnemigos.h"
 #include "ControlJugadores.h"
 #include <SDL2/SDL.h>
 #include "Logger.h"

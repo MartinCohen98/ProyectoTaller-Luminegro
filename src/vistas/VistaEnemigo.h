@@ -2,7 +2,7 @@
 #define SRC_VISTAENEMIGO_H_
 
 #include "VistaGeneral.h"
-#include "../lib/pugixml/pugixml.hpp"
+#include "pugixml.hpp"
 
 class VistaEnemigo: public VistaGeneral {
 

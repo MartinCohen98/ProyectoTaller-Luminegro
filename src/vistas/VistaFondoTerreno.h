@@ -2,7 +2,7 @@
 #define SRC_VISTAFONDOTERRENO_H_
 
 #include "VistaGeneral.h"
-#include "../lib/pugixml/pugixml.hpp"
+#include "pugixml.hpp"
 
 class VistaFondoTerreno: public VistaGeneral {
 public:

@@ -3,13 +3,12 @@
 
 #include "Renderizador.h"
 #include "../lib/pugixml/pugixml.hpp"
-#include "Fondo.h"
 #include <stdlib.h>
 #include <time.h>
-#include "BarrilModelo.h"
-#include "CajaModelo.h"
-#include "CuchilloModelo.h"
-#include "TuboModelo.h"
+#include "modelos/BarrilModelo.h"
+#include "modelos/CajaModelo.h"
+#include "modelos/CuchilloModelo.h"
+#include "modelos/TuboModelo.h"
 
 class ControlObjetos {
 

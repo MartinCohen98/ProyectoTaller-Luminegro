@@ -2,7 +2,7 @@
 #define SRC_ENEMIGOMODELO_H_
 
 #include "PersonaModelo.h"
-#include "EstadoEnemigoParado.h"
+#include "estados/EstadoEnemigoParado.h"
 #include "Socket.h"
 
 class EnemigoModelo: public PersonaModelo {

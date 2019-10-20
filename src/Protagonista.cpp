@@ -100,18 +100,6 @@ bool Protagonista::moverEnY() {
 	return seMovio;
 }
 
-void Protagonista::realizarMovimientos(Fondo* fondo) {
-	if (estado->puedeMoverse()) {
-		actualizarPosicion(fondo);
-	} else {
-		if (agachado) {
-			estado = estado->agacharse();
-		} else {
-			estado = estado->parar();
-		}
-	}
-}
-
 void Protagonista::actualizar(Renderizador *renderizador) {
 	if (!dadoVuelta) {
 		insercion.modificar(posicionX, posicionY - estado->obtenerElevacion(),
@@ -127,49 +115,8 @@ void Protagonista::actualizar(Renderizador *renderizador) {
 	}
 }
 
-void Protagonista::actualizarPosicion(Fondo* fondo) {
-	bool seMovioEnX = moverEnX(fondo);
-	bool seMovioEnY = moverEnY();
-	if (seMovioEnX || seMovioEnY) {
-		estado = estado->avanzar();
-	} else {
-		if (agachado) {
-			estado = estado->agacharse();
-		} else {
-			estado = estado->parar();
-		}
-	}
-}
-
-bool Protagonista::moverEnX(Fondo* fondo) {
-	bool seMovio = false;
-	int movimiento = movimientoEnX;
-	if (estado->estaSaltando())
-		movimiento = movimientoAlSaltarEnX;
-	if (movimiento > 0) {
-		dadoVuelta = false;
-		if ((posicionX < posicionXMaxima) || fondo->consultarFin()) {
-			posicionX = posicionX + movimiento;
-		} else {
-			fondo->mover();
-		}
-		seMovio = true;
-	}
-	if	((posicionX > 0) && (movimiento < 0)) {
-		dadoVuelta = true;
-		posicionX = posicionX + movimiento;
-		seMovio = true;
-	}
-	return seMovio;
-}
-
 int Protagonista::escalar(int tamanio) {
 	return (tamanio * escaladoDeSprite);
-}
-
-bool Protagonista::llegoAlFin(Fondo *fondo) {
-	return (fondo->consultarFin() &&
-			(posicionX == 800));
 }
 
 Protagonista::~Protagonista(){

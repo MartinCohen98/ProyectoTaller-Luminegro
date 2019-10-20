@@ -1,7 +1,7 @@
 #ifndef SRC_CONTROLOBJETOSMODELO_H_
 #define SRC_CONTROLOBJETOSMODELO_H_
 
-#include "../lib/pugixml/pugixml.hpp"
+#include "pugixml.hpp"
 #include "BarrilModelo.h"
 #include "CajaModelo.h"
 #include "CuchilloModelo.h"
