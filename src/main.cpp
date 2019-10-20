@@ -18,7 +18,7 @@ int main (int argc, char** argv) {
      * 3: ubicación del archivo de configuración
      * 4: nivel mínimo de logueo (DEBUG, INFO o ERROR)
      *
-     * Ejemplos (todavía no se si los puertos que están abajo no hacen conflicto con otra cosa):
+     * Ejemplos (el puerto a usar debe estar libre):
      *      ./ProyectoTaller-Luminegro simple 2100 config/repiola.xml    <---- puerto acá no se lee pero debe estar
      *      ./ProyectoTaller-Luminegro servidor 2100 config/repiola.xml DEBUG
      *      ./ProyectoTaller-Luminegro servidor 2101
