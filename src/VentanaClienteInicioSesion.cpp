@@ -71,6 +71,9 @@ bool VentanaClienteInicioSesion::leerTeclado() {
                         if (stringSiendoIngresado.size() > 0) {
                             stringSiendoIngresado.pop_back();
                         }
+                        if (estado == ESTADO_INGRESANDO_CLAVE && stringIngresadoClaveConMascara.size() > 0) {
+                            stringIngresadoClaveConMascara.pop_back();
+                        }
                         break;
                     case SDLK_ESCAPE:
                         return false;
