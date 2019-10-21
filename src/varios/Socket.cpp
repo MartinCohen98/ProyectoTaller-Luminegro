@@ -19,7 +19,7 @@ int Socket::servidorInicializar(char* puerto) {
     resultadoAccion = getaddrinfo(NULL, puerto, &hints, &ptr);
 
     if (resultadoAccion != 0) {
-        std::string mensajeError = "Clase socket - Error getaddrinfo: ";
+        std::string mensajeError = "Clase socket - Método servidorInicializar - Error en getaddrinfo(): ";
         mensajeError.append( gai_strerror(resultadoAccion) );
 
         logueador->Error(mensajeError);
@@ -29,7 +29,7 @@ int Socket::servidorInicializar(char* puerto) {
     numero = socket(ptr->ai_family, ptr->ai_socktype, ptr->ai_protocol);
 
     if (numero == -1) {
-        std::string mensajeError = "Clase Socket - Error: ";
+        std::string mensajeError = "Clase Socket - Método servidorInicializar - Error en socket(): ";
         mensajeError.append(strerror(errno));
 
         logueador->Error(mensajeError);
@@ -42,7 +42,7 @@ int Socket::servidorInicializar(char* puerto) {
     val = 1;
     resultadoAccion = setsockopt(numero, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
     if (resultadoAccion == -1) {
-        std::string mensajeError = "Clase Socket - Error: ";
+        std::string mensajeError = "Clase Socket - Método servidorInicializar - Error en setsockopt(): ";
         mensajeError.append(strerror(errno));
 
         logueador->Error(mensajeError);
@@ -56,7 +56,7 @@ int Socket::servidorInicializar(char* puerto) {
     // elegiría un puerto random y el cliente no sabría como conectarse.
     resultadoAccion = bind(numero, ptr->ai_addr, ptr->ai_addrlen);
     if (resultadoAccion == -1) {
-        std::string mensajeError = "Clase Socket - Error: ";
+        std::string mensajeError = "Clase Socket - Método servidorInicializar - Error en bind(): ";
         mensajeError.append(strerror(errno));
 
         logueador->Error(mensajeError);
@@ -71,7 +71,7 @@ int Socket::servidorInicializar(char* puerto) {
     // ¿Cuántos clientes podemos mantener en espera antes de poder acceptarlos?
     resultadoAccion = listen(numero, 20);
     if (resultadoAccion == -1) {
-        std::string mensajeError = "Clase Socket - Error: ";
+        std::string mensajeError = "Clase Socket - Método servidorInicializar - Error en listen(): ";
         mensajeError.append(strerror(errno));
 
         logueador->Error(mensajeError);
@@ -91,7 +91,7 @@ int Socket::esperarYAceptarCliente(Socket *socketConectado) {
     socketConectado->numero = accept(numero, NULL, NULL);
 
     if (socketConectado->numero == -1) {
-        std::string mensajeError = "Clase Socket - Error: ";
+        std::string mensajeError = "Clase Socket - Método esperarYAceptarCliente - Error en accept(): ";
         mensajeError.append(strerror(errno));
 
         logueador->Error(mensajeError);
@@ -132,7 +132,7 @@ int Socket::conectarAUnServidor(char* direccionIP, char* puerto) {
     resultadoAccion = getaddrinfo(direccionIP, puerto, &hints, &result);
 
     if (resultadoAccion != 0) {
-        std::string mensajeError = "Clase socket - Error getaddrinfo: ";
+        std::string mensajeError = "Clase Socket - Método conectarAUnServidor - Error en getaddrinfo(): ";
         mensajeError.append( gai_strerror(resultadoAccion) );
 
         logueador->Error(mensajeError);
@@ -145,14 +145,14 @@ int Socket::conectarAUnServidor(char* direccionIP, char* puerto) {
         numero = socket(ptr->ai_family, ptr->ai_socktype, ptr->ai_protocol);
 
         if (numero == -1) {
-            std::string mensajeError = "Clase Socket - Error: ";
+            std::string mensajeError = "Clase Socket - Método conectarAUnServidor - Error en socket(): ";
             mensajeError.append(strerror(errno));
 
             logueador->Error(mensajeError);
         } else {
             resultadoAccion = connect(numero, ptr->ai_addr, ptr->ai_addrlen);
             if (resultadoAccion == -1) {
-                std::string mensajeError = "Clase Socket - Error: ";
+                std::string mensajeError = "Clase Socket - Método conectarAUnServidor - Error en connect(): ";
                 mensajeError.append(strerror(errno));
 
                 logueador->Error(mensajeError);
@@ -167,7 +167,9 @@ int Socket::conectarAUnServidor(char* direccionIP, char* puerto) {
     if (estaConectado) {
         logueador->Info("Clase Socket - Cliente conectado.");
     } else {
-        logueador->Error("Clase Socket - Error: se queda sin direcciones validas y se desconecta.");
+        std::string error = "Clase Socket - Método conectarAUnServidor - se queda sin direcciones validas";
+        error.append(" y se desconecta.");
+        logueador->Error(error);
         return EXIT_FAILURE;
     }
 
@@ -189,7 +191,7 @@ int Socket::enviar(int* datos, int* cantidadDeBytes) {
         resultadoAccion = send(numero, &datos[bytesEnviados], *cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
 
         if (resultadoAccion < 0) {
-            std::string mensajeError = "Clase Socket - Error: ";
+            std::string mensajeError = "Clase Socket - Método enviar(int* datos ...) - Error en send(): ";
             mensajeError.append(strerror(errno));
 
             logueador->Error(mensajeError);
@@ -229,7 +231,7 @@ int Socket::enviar(MensajeCliente* mensaje) {
         resultadoAccion = send(numero, &datos[bytesEnviados], cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
 
         if (resultadoAccion < 0) {
-            std::string mensajeError = "Clase Socket - Error: ";
+            std::string mensajeError = "Clase Socket - Método enviar(MensajeCliente* mensaje) - Error en connect(): ";
             mensajeError.append(strerror(errno));
             logueador->Error(mensajeError);
 
@@ -266,7 +268,7 @@ int Socket::enviar(MensajeServidor* mensaje) {
         resultadoAccion = send(numero, &datos[bytesEnviados], cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
 
         if (resultadoAccion < 0) {
-            std::string mensajeError = "Clase Socket - Error: ";
+            std::string mensajeError = "Clase Socket - Método enviar(MensajeServidor* mensaje) - Error en send(): ";
             mensajeError.append(strerror(errno));
             logueador->Error(mensajeError);
 
@@ -302,7 +304,7 @@ int Socket::enviar(int unNumero) {
         resultadoAccion = send(numero, &datos[bytesEnviados], cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
 
         if (resultadoAccion < 0) {
-            std::string mensajeError = "Clase Socket - Error: ";
+            std::string mensajeError = "Clase Socket - Método enviar(int unNumero) - Error en send(): ";
             mensajeError.append(strerror(errno));
             logueador->Error(mensajeError);
 
@@ -339,7 +341,8 @@ int Socket::recibir(unsigned char(*datos), int* tamanoMaximo, bool* elSocketEsVa
 
         } else if (resultadoAccion < 0) {
             // Hubo un error
-            logueador->Error("Clase Socket - Error al recibir.");
+            std::string error = "Clase Socket - Método enviar(recibir(unsigned char(*datos), ...) - Error en recv()";
+            logueador->Error(error);
             return EXIT_FAILURE;
         } else {
             recibido += resultadoAccion;
@@ -368,7 +371,7 @@ int Socket::recibir(MensajeCliente* mensaje) {
 
         } else if (resultadoAccion < 0) {
             // Hubo un error
-            logueador->Error("Clase Socket - Error al recibir.");
+            logueador->Error("Clase Socket - Método recibir(MensajeCliente* mensaje) - Error en recv()");
             return EXIT_FAILURE;
         } else {
             recibido += resultadoAccion;
@@ -397,7 +400,7 @@ int Socket::recibir(MensajeServidor* mensaje) {
 
         } else if (resultadoAccion < 0) {
             // Hubo un error
-            logueador->Error("Clase Socket - Error al recibir.");
+            logueador->Error("Clase Socket - Método recibir(MensajeServidor* mensaje) - Error en recv()");
             return EXIT_FAILURE;
         } else {
             recibido += resultadoAccion;
@@ -426,7 +429,7 @@ int Socket::recibir(int* unNumero) {
 
         } else if (resultadoAccion < 0) {
             // Hubo un error
-            logueador->Error("Clase Socket - Error al recibir.");
+            logueador->Error("Clase Socket - Método recibir(int* unNumero) - Error en recv()");
             return EXIT_FAILURE;
         } else {
             recibido += resultadoAccion;
