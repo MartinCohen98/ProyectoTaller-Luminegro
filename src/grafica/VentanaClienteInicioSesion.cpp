@@ -145,7 +145,6 @@ void VentanaClienteInicioSesion::actualizarVentana() {
 
         SDL_RenderCopy(renderizador, texturaTxtIngre, NULL, &rectanguloTxtIngre);
         SDL_DestroyTexture(texturaTxtIngre);
-        SDL_FreeSurface(superficieTxt);
     }
 
     if (stringIngresadoClaveConMascaraYCursor.size() > 0) {
@@ -160,7 +159,6 @@ void VentanaClienteInicioSesion::actualizarVentana() {
 
         SDL_RenderCopy(renderizador, texturaTxtIngre, NULL, &rectanguloTxtIngre);
         SDL_DestroyTexture(texturaTxtIngre);
-        SDL_FreeSurface(superficieTxt);
     }
 
     if (mensajeInformativoString.size() > 0) {
@@ -236,10 +234,10 @@ void VentanaClienteInicioSesion::resetear() {
 void VentanaClienteInicioSesion::cerrar() {
     TTF_CloseFont(fuente);
     TTF_Quit();
+    SDL_FreeSurface(superficieTxt);
     SDL_DestroyRenderer(renderizador);
     SDL_DestroyWindow(ventana);
     SDL_DestroyTexture(texturaTxtFijo1);
     SDL_DestroyTexture(texturaTxtFijo2);
-    SDL_FreeSurface(superficieTxt);
     SDL_Quit();
 }

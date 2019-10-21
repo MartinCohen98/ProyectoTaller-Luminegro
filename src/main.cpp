@@ -118,10 +118,11 @@ int main (int argc, char** argv) {
         puerto[j - i] = '\0';
         // (FIN) Desgloso IP y puerto del parámetro de entrada
 
+        ventanaClienteInicioSesion.cerrar();
+
         Cliente cliente;
         cliente.inicializar(direccionIP, puerto, &configManager.archivoConfig);
 
-        ventanaClienteInicioSesion.cerrar();
         socketConectado.cerrar();
 
         return EXIT_SUCCESS;
