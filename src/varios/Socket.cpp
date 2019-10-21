@@ -231,7 +231,7 @@ int Socket::enviar(MensajeCliente* mensaje) {
         resultadoAccion = send(numero, &datos[bytesEnviados], cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
 
         if (resultadoAccion < 0) {
-            std::string mensajeError = "Clase Socket - Método enviar(MensajeCliente* mensaje) - Error en connect(): ";
+            std::string mensajeError = "Clase Socket - Método enviar(MensajeCliente* mensaje) - Error en send(): ";
             mensajeError.append(strerror(errno));
             logueador->Error(mensajeError);
 
@@ -341,7 +341,7 @@ int Socket::recibir(unsigned char(*datos), int* tamanoMaximo, bool* elSocketEsVa
 
         } else if (resultadoAccion < 0) {
             // Hubo un error
-            std::string error = "Clase Socket - Método enviar(recibir(unsigned char(*datos), ...) - Error en recv()";
+            std::string error = "Clase Socket - Método recibir(unsigned char(*datos), ...) - Error en recv()";
             logueador->Error(error);
             return EXIT_FAILURE;
         } else {
