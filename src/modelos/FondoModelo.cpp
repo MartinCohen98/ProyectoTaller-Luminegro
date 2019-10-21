@@ -38,7 +38,7 @@ void FondoModelo::mover() {
 }
 
 
-void FondoModelo::enviarEncuadres(Socket*& sockets, int cantidad) {
+void FondoModelo::enviarEncuadres(Socket *sockets, int cantidad) {
 	for (int i = 0; i <= 2; i++) {
 		encuadres[i].modificar(desplazamientos[i], 0, 260, 195);
 	}

@@ -15,7 +15,7 @@ void ElementoModelo::movidaDePantalla() {
 }
 
 
-void ElementoModelo::enviarEncuadres(Socket*& sockets, int cantidad) {
+void ElementoModelo::enviarEncuadres(Socket *sockets, int cantidad) {
 	MensajeServidor mensaje;
 	mensaje.generarMensaje(&encuadre, &insercion, sprite);
 	for (int i = 0; i < cantidad; i++) {

@@ -20,7 +20,7 @@ public:
 	void subir();
 	void bajar();
 	void retrocesoDePantalla();
-	void enviarEncuadres(Socket*& sockets, int cantidad);
+	void enviarEncuadres(Socket *sockets, int cantidad);
 	virtual ~EnemigoModelo();
 
 private:

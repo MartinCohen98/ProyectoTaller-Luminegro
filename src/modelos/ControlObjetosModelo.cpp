@@ -82,7 +82,7 @@ void ControlObjetosModelo::movidaDePantalla() {
 }
 
 
-void ControlObjetosModelo::enviarEncuadres(Socket*& sockets, int cantidad) {
+void ControlObjetosModelo::enviarEncuadres(Socket *sockets, int cantidad) {
 	for(int i = 0; i < barrilesCantidad; i++){
 		barriles[i]->enviarEncuadres(sockets, cantidad);
 	}
