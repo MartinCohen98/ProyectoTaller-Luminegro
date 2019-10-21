@@ -175,7 +175,9 @@ void JugadorModelo::enviarEncuadres(Socket *sockets, int cantidadDeSockets) {
 	if (dadoVuelta)
 		mensaje.darVuelta();
 	for (int i = 0; i < cantidadDeSockets; i++) {
-		sockets[i].enviar(&mensaje);
+        if (sockets[i].getEstado() == Socket::ESTADO_CONECTADO) {
+            sockets[i].enviar(&mensaje);
+        }
 	}
 }
 

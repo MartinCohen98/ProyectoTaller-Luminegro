@@ -152,7 +152,9 @@ void Servidor::enviarMensajeDeNivelTerminado(bool nivelTerminado) {
 	if (nivelTerminado) {
 		mensaje.darVuelta();
 	}
-	socketsDeClientes[0].enviar(&mensaje);
+    if (socketsDeClientes[0].getEstado() == Socket::ESTADO_CONECTADO) {
+        socketsDeClientes[0].enviar(&mensaje);
+    }
 }
 
 

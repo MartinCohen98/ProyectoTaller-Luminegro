@@ -16,8 +16,15 @@
 class Socket {
     private:
         int numero;
+        int estado = ESTADO_DESCONECTADO;
 
     public:
+        static const int ESTADO_CONECTADO = 1;
+        static const int ESTADO_DESCONECTADO = 2;
+
+        static const int ERROR_SOCKET_BROKEN_PIPE = 32;
+        static const int ERROR_SOCKET_OPERATION_ON_NO_SOCKET = 88;
+
         int servidorInicializar(char* puerto);
         int esperarYAceptarCliente(Socket *socketConectado);
         int conectarAUnServidor(char* direccionIP, char* puerto);
@@ -29,6 +36,7 @@ class Socket {
         int recibir(MensajeCliente* mensaje);
         int recibir(MensajeServidor* mensaje);
         int recibir(int* unNumero);
+        int getEstado();
         int cerrar();
         ~Socket();
 };

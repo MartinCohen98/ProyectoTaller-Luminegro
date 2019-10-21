@@ -47,7 +47,9 @@ void FondoModelo::enviarEncuadres(Socket *sockets, int cantidad) {
 	for (int j = 0; j < 3; j++) {
 		mensaje.generarMensaje(&encuadres[j], &encuadreFijo, Jugador1);
 		for (int i = 0; i < cantidad; i++) {
-			sockets[i].enviar(&mensaje);
+		    if (sockets[i].getEstado() == Socket::ESTADO_CONECTADO) {
+                sockets[i].enviar(&mensaje);
+            }
 		}
 	}
 }

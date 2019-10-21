@@ -64,7 +64,9 @@ void EnemigoModelo::enviarEncuadres(Socket *sockets, int cantidad) {
 	if (dadoVuelta)
 		mensaje.darVuelta();
 	for (int i = 0; i < cantidad; i++) {
-		sockets[i].enviar(&mensaje);
+        if (sockets[i].getEstado() == Socket::ESTADO_CONECTADO) {
+            sockets[i].enviar(&mensaje);
+        }
 	}
 }
 
