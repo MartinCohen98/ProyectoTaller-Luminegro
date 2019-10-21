@@ -37,8 +37,8 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 
 		logueador->Info("Iniciando nivel: "+ nivelNodeName);
 		logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
+		
 		FondoModelo fondo(archiConfig, nivel);
-
 		JugadorModelo protagonista(archiConfig);
 
 		logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
@@ -60,8 +60,7 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 				controlObjetos.movidaDePantalla();
 			}
 
-			enviarEncuadres(&protagonista, &fondo,
-						&controlEnemigos, &controlObjetos);
+			enviarEncuadres(&protagonista, &fondo, &controlEnemigos, &controlObjetos);
 
 			nivelTerminado = protagonista.llegoAlFin(&fondo);
 
@@ -140,6 +139,7 @@ void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 
 void Servidor::enviarEncuadres(JugadorModelo* jugador, FondoModelo* fondo,
 		ControlEnemigosModelo* enemigos, ControlObjetosModelo* objetos) {
+    
 	fondo->enviarEncuadres(socketsDeClientes, 1);
 	jugador->enviarEncuadres(socketsDeClientes, 1);
 	enemigos->enviarEncuadres(socketsDeClientes, 1);

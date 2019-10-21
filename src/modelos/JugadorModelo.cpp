@@ -168,7 +168,7 @@ bool JugadorModelo::llegoAlFin(FondoModelo *fondo) {
 }
 
 
-void JugadorModelo::enviarEncuadres(Socket*& sockets, int cantidadDeSockets) {
+void JugadorModelo::enviarEncuadres(Socket *sockets, int cantidadDeSockets) {
 	MensajeServidor mensaje;
 	Encuadre sprite = estado->obtenerSprite();
 	mensaje.generarMensaje(&sprite, &insercion, Jugador1);
