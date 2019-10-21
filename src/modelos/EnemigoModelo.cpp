@@ -57,15 +57,12 @@ void EnemigoModelo::retrocesoDePantalla() {
 }
 
 
-void EnemigoModelo::enviarEncuadres(Socket *sockets, int cantidad) {
-	MensajeServidor mensaje;
+void EnemigoModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual) {
 	Encuadre sprite = estado->obtenerSprite();
-	mensaje.generarMensaje(&sprite, &insercion, Enemigo1);
+	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, Enemigo1);
 	if (dadoVuelta)
-		mensaje.darVuelta();
-	for (int i = 0; i < cantidad; i++) {
-		sockets[i].enviar(&mensaje);
-	}
+		mensajes[*mensajeActual].darVuelta();
+	(*mensajeActual)++;
 }
 
 

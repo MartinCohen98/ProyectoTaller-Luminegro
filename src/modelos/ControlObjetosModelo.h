@@ -27,7 +27,7 @@ public:
 								int terrenoWidth, int nivel);
 	int obtenerCantidad();
 	void movidaDePantalla();
-	void enviarEncuadres(Socket *sockets, int cantidad);
+	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~ControlObjetosModelo();
 };
 

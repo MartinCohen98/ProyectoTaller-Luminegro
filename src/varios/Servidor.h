@@ -12,14 +12,14 @@ class Servidor {
 private:
 	int jugadores;
 	MensajeCliente mensajeCliente;
-	MensajeServidor mensajeServidor;
+	MensajeServidor* mensajesServidor;
+	int cantidadDeMensajes;
 	Socket socketAceptador;
 	Socket* socketsDeClientes;
 
 public:
 	Servidor(int cantidadDeJugadores, char* puerto);
 	void correr(pugi::xml_document* archiConfig);
-
 	virtual ~Servidor();
 
 private:
@@ -29,6 +29,7 @@ private:
 	void enviarEncuadres(JugadorModelo* jugador, FondoModelo* fondo,
 			ControlEnemigosModelo* enemigos, ControlObjetosModelo* objetos);
 	void enviarMensajeDeNivelTerminado(bool nivelTerminado);
+	void generarMensajesParaEnviar();
 };
 
 #endif /* SRC_SERVIDOR_H_ */

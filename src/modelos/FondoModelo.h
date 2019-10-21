@@ -22,7 +22,7 @@ public:
 	FondoModelo(pugi::xml_document* archiConfig, int nivel);
 	void mover();
 	int obtenerAncho();
-	void enviarEncuadres(Socket *sockets, int cantidad);
+	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
 	bool seMovio();
 	bool consultarFin();
 	virtual ~FondoModelo();

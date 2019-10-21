@@ -50,42 +50,44 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 		while (!salir) {
 	    	enviarInput(&mensajeCliente);
 
-	    	recibirFondo(&fondo);
+	    	recibirMensajes();
 
-	        for (int i = 0; i < cantidadDeReceives; i++) {
-	        	switch(recibirMensaje()) {
+	    	renderizarFondo(&fondo);
+
+	        for (int i = 3; i < cantidadDeReceives + 3; i++) {
+	        	switch(mensajesServidor[i].obtenerTipoDeSprite()) {
 	        		case Jugador1:
-	        			jugador1.renderizarConElMensaje(&mensajeServidor);
+	        			jugador1.renderizarConElMensaje(&mensajesServidor[i]);
 	        			break;
 	        		case Jugador2:
-	        			jugador2.renderizarConElMensaje(&mensajeServidor);
+	        			jugador2.renderizarConElMensaje(&mensajesServidor[i]);
 	        			break;
 	        		case Jugador3:
-	        			jugador3.renderizarConElMensaje(&mensajeServidor);
+	        			jugador3.renderizarConElMensaje(&mensajesServidor[i]);
 	        			break;
 	        		case Jugador4:
-	        			jugador4.renderizarConElMensaje(&mensajeServidor);
+	        			jugador4.renderizarConElMensaje(&mensajesServidor[i]);
 	        			break;
 	        		case Enemigo1:
-	        			enemigo1.renderizarConElMensaje(&mensajeServidor);
+	        			enemigo1.renderizarConElMensaje(&mensajesServidor[i]);
 	        			break;
 	        		case Enemigo2:
-	        			enemigo2.renderizarConElMensaje(&mensajeServidor);
+	        			enemigo2.renderizarConElMensaje(&mensajesServidor[i]);
 	        			break;
 	        		case Enemigo3:
-	        			enemigo3.renderizarConElMensaje(&mensajeServidor);
+	        			enemigo3.renderizarConElMensaje(&mensajesServidor[i]);
 	        			break;
 	        		case Barril:
-	        			barril.renderizarConElMensaje(&mensajeServidor);
+	        			barril.renderizarConElMensaje(&mensajesServidor[i]);
 	        			break;
 	        		case Caja:
-	        			caja.renderizarConElMensaje(&mensajeServidor);
+	        			caja.renderizarConElMensaje(&mensajesServidor[i]);
 	        			break;
 	        		case Cuchillo:
-	        			cuchillo.renderizarConElMensaje(&mensajeServidor);
+	        			cuchillo.renderizarConElMensaje(&mensajesServidor[i]);
 	        			break;
 	        		case Tubo:
-	        			tubo.renderizarConElMensaje(&mensajeServidor);
+	        			tubo.renderizarConElMensaje(&mensajesServidor[i]);
 	        			break;
 	        	}
 	        }
@@ -184,31 +186,26 @@ void Cliente::enviarInput(MensajeCliente* mensaje){
 }
 
 
-void Cliente::recibirFondo(VistaFondo* fondo) {
-	MensajeServidor cielo;
-	MensajeServidor edificios;
-	MensajeServidor terreno;
-	socket.recibir(&cielo);
-	socket.recibir(&edificios);
-	socket.recibir(&terreno);
-	fondo->renderizarConLosMensajes(&cielo, &edificios, &terreno);
+void Cliente::renderizarFondo(VistaFondo* fondo) {
+	fondo->renderizarConLosMensajes(&mensajesServidor[0],
+			&mensajesServidor[1], &mensajesServidor[2]);
 }
 
 
 void Cliente::recibirCantidadDeReceives() {
 	socket.recibir(&cantidadDeReceives);
+	mensajesServidor = new MensajeServidor[cantidadDeReceives + 3];
 }
 
 
 bool Cliente::terminoElNivel() {
-	recibirMensaje();
-	return (mensajeServidor.estaDadoVuelta());
+	socket.recibir(mensajesServidor, 1);
+	return (mensajesServidor->estaDadoVuelta());
 }
 
 
-tipoDeSprite Cliente::recibirMensaje() {
-	socket.recibir(&mensajeServidor);
-	return (mensajeServidor.obtenerTipoDeSprite());
+void Cliente::recibirMensajes() {
+	socket.recibir(mensajesServidor, cantidadDeReceives + 3);
 }
 
 

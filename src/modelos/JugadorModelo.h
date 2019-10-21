@@ -37,7 +37,7 @@ public:
 	void saltar();
 	void realizarMovimientos(FondoModelo* fondo);
 	bool llegoAlFin(FondoModelo *fondo);
-	void enviarEncuadres(Socket *sockets, int cantidadDeSockets);
+	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~JugadorModelo();
 
 private:

@@ -252,15 +252,15 @@ int Socket::enviar(MensajeCliente* mensaje) {
 }
 
 
-int Socket::enviar(MensajeServidor* mensaje) {
+int Socket::enviar(MensajeServidor* mensajes, int cantidad) {
 	Logger::Log *logueador = Logger::Log::ObtenerInstancia();
 
     bool hayUnErrorDeSocket = false;
     bool elSocketRemotoEstaCerrado = false;
 
-    char* datos = (char*) mensaje;
+    char* datos = (char*) mensajes;
     int bytesEnviados = 0;
-    int cantidadDeBytes = sizeof(MensajeServidor);
+    int cantidadDeBytes = (sizeof(MensajeServidor) * cantidad);
     int resultadoAccion;
 
     while (bytesEnviados < cantidadDeBytes && !hayUnErrorDeSocket && !elSocketRemotoEstaCerrado) {
@@ -381,12 +381,12 @@ int Socket::recibir(MensajeCliente* mensaje) {
 }
 
 
-int Socket::recibir(MensajeServidor* mensaje) {
+int Socket::recibir(MensajeServidor* mensaje, int cantidad) {
     Logger::Log *logueador = Logger::Log::ObtenerInstancia();
 
     int recibido = 0;
     int resultadoAccion = 0;
-    int tamanoMaximo = sizeof(MensajeServidor);
+    int tamanoMaximo = sizeof(MensajeServidor) * cantidad;
     char* datos = (char*) mensaje;
 
     while (recibido < tamanoMaximo) {

@@ -23,11 +23,11 @@ class Socket {
         int conectarAUnServidor(char* direccionIP, char* puerto);
         int enviar(int* datos, int* cantidadDeBytes);
         int enviar(MensajeCliente* mensaje);
-        int enviar(MensajeServidor* mensaje);
+        int enviar(MensajeServidor* mensajes, int cantidad);
         int enviar(int unNumero);
         int recibir(unsigned char* datos, int* tamanoMaximo, bool* elSocketEsValido);
         int recibir(MensajeCliente* mensaje);
-        int recibir(MensajeServidor* mensaje);
+        int recibir(MensajeServidor* mensaje, int cantidad);
         int recibir(int* unNumero);
         int cerrar();
         ~Socket();

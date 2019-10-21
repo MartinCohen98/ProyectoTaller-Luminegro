@@ -26,7 +26,7 @@ private:
 	Socket socket;
 	SDL_Event evento;
 	MensajeCliente mensajeCliente;
-	MensajeServidor mensajeServidor;
+	MensajeServidor* mensajesServidor;
 
 public:
 	 Cliente();
@@ -35,11 +35,11 @@ public:
 	 virtual ~Cliente();
 
 private:
-	 void recibirFondo(VistaFondo* fondo);
+	 void renderizarFondo(VistaFondo* fondo);
 	 void enviarInput(MensajeCliente* mensaje);
 	 void recibirCantidadDeReceives();
 	 bool terminoElNivel();
-	 tipoDeSprite recibirMensaje();
+	 void recibirMensajes();
 };
 
 #endif /* SRC_CLIENTE_H_ */

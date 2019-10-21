@@ -18,7 +18,7 @@ protected:
 public:
 	ElementoModelo();
 	void movidaDePantalla();
-	void enviarEncuadres(Socket *sockets, int cantidad);
+	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~ElementoModelo();
 };
 

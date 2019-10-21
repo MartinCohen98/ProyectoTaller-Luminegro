@@ -168,15 +168,13 @@ bool JugadorModelo::llegoAlFin(FondoModelo *fondo) {
 }
 
 
-void JugadorModelo::enviarEncuadres(Socket *sockets, int cantidadDeSockets) {
-	MensajeServidor mensaje;
+void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual) {
+
 	Encuadre sprite = estado->obtenerSprite();
-	mensaje.generarMensaje(&sprite, &insercion, Jugador1);
+	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, Jugador1);
 	if (dadoVuelta)
-		mensaje.darVuelta();
-	for (int i = 0; i < cantidadDeSockets; i++) {
-		sockets[i].enviar(&mensaje);
-	}
+		mensajes[*mensajeActual].darVuelta();
+	(*mensajeActual)++;
 }
 
 

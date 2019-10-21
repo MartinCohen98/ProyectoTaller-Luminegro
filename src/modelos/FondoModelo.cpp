@@ -38,17 +38,14 @@ void FondoModelo::mover() {
 }
 
 
-void FondoModelo::enviarEncuadres(Socket *sockets, int cantidad) {
+void FondoModelo::generarMensajes(MensajeServidor* mensajes, int* mensajeActual) {
 	for (int i = 0; i <= 2; i++) {
 		encuadres[i].modificar(desplazamientos[i], 0, 260, 195);
 	}
 	movido = false;
-	MensajeServidor mensaje;
-	for (int j = 0; j < 3; j++) {
-		mensaje.generarMensaje(&encuadres[j], &encuadreFijo, Jugador1);
-		for (int i = 0; i < cantidad; i++) {
-			sockets[i].enviar(&mensaje);
-		}
+	for ((*mensajeActual) = 0; (*mensajeActual) < 3; (*mensajeActual)++) {
+		mensajes[*mensajeActual].generarMensaje(&encuadres[*mensajeActual],
+					&encuadreFijo, Jugador1);
 	}
 }
 

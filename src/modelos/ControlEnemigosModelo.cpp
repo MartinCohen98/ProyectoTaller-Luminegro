@@ -45,9 +45,9 @@ void ControlEnemigosModelo::realizarMovimientos(){
 }
 
 
-void ControlEnemigosModelo::enviarEncuadres(Socket *sockets, int cantidad) {
+void ControlEnemigosModelo::generarMensajes(MensajeServidor* mensajes, int* mensajeActual) {
 	for(int i = 0; i < enemigosCantidad; i++) {
-		enemigos[i]->enviarEncuadres(sockets, cantidad);
+		enemigos[i]->generarMensaje(mensajes, mensajeActual);
 	}
 }
 

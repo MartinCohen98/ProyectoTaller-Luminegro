@@ -82,21 +82,21 @@ void ControlObjetosModelo::movidaDePantalla() {
 }
 
 
-void ControlObjetosModelo::enviarEncuadres(Socket *sockets, int cantidad) {
+void ControlObjetosModelo::generarMensajes(MensajeServidor* mensajes, int* mensajeActual) {
 	for(int i = 0; i < barrilesCantidad; i++){
-		barriles[i]->enviarEncuadres(sockets, cantidad);
+		barriles[i]->generarMensaje(mensajes, mensajeActual);
 	}
 
 	for(int i = 0; i < cajasCantidad; i++){
-		cajas[i]->enviarEncuadres(sockets, cantidad);
+		cajas[i]->generarMensaje(mensajes, mensajeActual);
 	}
 
 	for(int i = 0; i < cuchillosCantidad; i++){
-		cuchillos[i]->enviarEncuadres(sockets, cantidad);
+		cuchillos[i]->generarMensaje(mensajes, mensajeActual);
 	}
 
 	for(int i = 0; i < tubosCantidad; i++){
-		tubos[i]->enviarEncuadres(sockets, cantidad);
+		tubos[i]->generarMensaje(mensajes, mensajeActual);
 	}
 }
 

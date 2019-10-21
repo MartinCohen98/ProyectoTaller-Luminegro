@@ -20,6 +20,8 @@ Servidor::Servidor(int cantidadDeJugadores, char* puerto) {
 			return;
 		}
 	}
+	mensajesServidor = NULL;
+	cantidadDeMensajes = 0;
 }
 
 void Servidor::correr(pugi::xml_document* archiConfig) {
@@ -49,6 +51,8 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 
 		enviarCantidadDeReceives(&controlEnemigos, &controlObjetos);
 
+		generarMensajesParaEnviar();
+
 		while (!nivelTerminado) {
 			recibirInput(&protagonista);
 
@@ -66,7 +70,7 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 
 			enviarMensajeDeNivelTerminado(nivelTerminado);
 
-//			SDL_Delay(25);
+			SDL_Delay(25);
 		}
 	}
 }
@@ -133,17 +137,23 @@ void Servidor::recibirInput(JugadorModelo* jugador) {
 
 void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 							ControlObjetosModelo* objetos) {
-	socketsDeClientes[0].enviar(jugadores + objetos->obtenerCantidad()
-								+ enemigos->obtenerCantidad());
+	cantidadDeMensajes = jugadores + objetos->obtenerCantidad()
+					+ enemigos->obtenerCantidad();
+	socketsDeClientes[0].enviar(cantidadDeMensajes);
 }
 
 void Servidor::enviarEncuadres(JugadorModelo* jugador, FondoModelo* fondo,
 		ControlEnemigosModelo* enemigos, ControlObjetosModelo* objetos) {
     
-	fondo->enviarEncuadres(socketsDeClientes, 1);
-	jugador->enviarEncuadres(socketsDeClientes, 1);
-	enemigos->enviarEncuadres(socketsDeClientes, 1);
-	objetos->enviarEncuadres(socketsDeClientes, 1);
+	int mensajeActual = 0;
+
+	fondo->generarMensajes(mensajesServidor, &mensajeActual);
+	jugador->generarMensaje(mensajesServidor, &mensajeActual);
+	enemigos->generarMensajes(mensajesServidor, &mensajeActual);
+	objetos->generarMensajes(mensajesServidor, &mensajeActual);
+	for (int i = 0; i < jugadores; i++) {
+		socketsDeClientes[i].enviar(mensajesServidor, cantidadDeMensajes + 3);
+	}
 }
 
 
@@ -152,7 +162,13 @@ void Servidor::enviarMensajeDeNivelTerminado(bool nivelTerminado) {
 	if (nivelTerminado) {
 		mensaje.darVuelta();
 	}
-	socketsDeClientes[0].enviar(&mensaje);
+	socketsDeClientes[0].enviar(&mensaje, 1);
+}
+
+
+void Servidor::generarMensajesParaEnviar() {
+	//Los el valor de 3 son los mensajes de las capas del fondo
+	mensajesServidor = new MensajeServidor[cantidadDeMensajes + 3];
 }
 
 

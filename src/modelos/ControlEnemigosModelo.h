@@ -14,7 +14,7 @@ public:
 	int obtenerCantidad();
 	void realizarMovimientos();
 	void movidaDePantalla();
-	void enviarEncuadres(Socket *sockets, int cantidadDeSockets);
+	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~ControlEnemigosModelo();
 };
 
