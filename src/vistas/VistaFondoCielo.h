@@ -2,7 +2,7 @@
 #define SRC_VISTAFONDOCIELO_H_
 
 #include "VistaGeneral.h"
-#include "pugixml.hpp"
+#include "../../lib/pugixml/pugixml.hpp"
 
 class VistaFondoCielo: public VistaGeneral {
 

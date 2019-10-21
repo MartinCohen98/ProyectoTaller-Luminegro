@@ -2,7 +2,7 @@
 #define SRC_VISTAOBJETO_H_
 
 #include "VistaGeneral.h"
-#include "pugixml.hpp"
+#include "../../lib/pugixml/pugixml.hpp"
 
 class VistaObjeto: public VistaGeneral {
 

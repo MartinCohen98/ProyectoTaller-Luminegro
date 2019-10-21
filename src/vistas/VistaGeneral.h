@@ -1,8 +1,8 @@
 #ifndef SRC_VISTAGENERAL_H_
 #define SRC_VISTAGENERAL_H_
 
-#include "grafica/Textura.h"
-#include "varios/MensajeServidor.h"
+#include "../grafica/Textura.h"
+#include "../varios/MensajeServidor.h"
 
 class VistaGeneral {
 

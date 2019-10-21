@@ -2,9 +2,9 @@
 #define SRC_SERVIDOR_H_
 
 #include "Socket.h"
-#include "modelos/JugadorModelo.h"
-#include "modelos/ControlEnemigosModelo.h"
-#include "modelos/ControlObjetosModelo.h"
+#include "../modelos/JugadorModelo.h"
+#include "../modelos/ControlEnemigosModelo.h"
+#include "../modelos/ControlObjetosModelo.h"
 #include "MensajeCliente.h"
 
 class Servidor {

@@ -1,7 +1,7 @@
 #ifndef SRC_ESTADOJUGADOR_H_
 #define SRC_ESTADOJUGADOR_H_
 
-#include "grafica/Encuadre.h"
+#include "../grafica/Encuadre.h"
 
 class EstadoJugador {
 
