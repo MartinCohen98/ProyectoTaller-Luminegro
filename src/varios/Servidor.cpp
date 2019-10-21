@@ -152,7 +152,9 @@ void Servidor::enviarEncuadres(JugadorModelo* jugador, FondoModelo* fondo,
 	enemigos->generarMensajes(mensajesServidor, &mensajeActual);
 	objetos->generarMensajes(mensajesServidor, &mensajeActual);
 	for (int i = 0; i < jugadores; i++) {
-		socketsDeClientes[i].enviar(mensajesServidor, cantidadDeMensajes + 3);
+		if (socketsDeClientes[i].getEstado() == Socket::ESTADO_CONECTADO) {
+			socketsDeClientes[i].enviar(mensajesServidor, cantidadDeMensajes + 3);
+		}
 	}
 }
 
@@ -162,7 +164,9 @@ void Servidor::enviarMensajeDeNivelTerminado(bool nivelTerminado) {
 	if (nivelTerminado) {
 		mensaje.darVuelta();
 	}
-	socketsDeClientes[0].enviar(&mensaje, 1);
+	if (socketsDeClientes[0].getEstado() == Socket::ESTADO_CONECTADO) {
+    	socketsDeClientes[0].enviar(&mensaje,1);
+	}
 }
 
 

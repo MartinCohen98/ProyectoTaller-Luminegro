@@ -100,6 +100,7 @@ int Socket::esperarYAceptarCliente(Socket *socketConectado) {
     }
 
     if (elSocketAceptadoEsValido) {
+        socketConectado->estado = ESTADO_CONECTADO;
         std::string mensajeError = "Clase Socket - Servidor conectado";
         logueador->Info(mensajeError);
 
@@ -268,11 +269,16 @@ int Socket::enviar(MensajeServidor* mensajes, int cantidad) {
         resultadoAccion = send(numero, &datos[bytesEnviados], cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
 
         if (resultadoAccion < 0) {
+            hayUnErrorDeSocket = true;
+
+            if (errno == ERROR_SOCKET_OPERATION_ON_NO_SOCKET) {
+                elSocketRemotoEstaCerrado = true;
+                estado = ESTADO_DESCONECTADO;
+            }
+
             std::string mensajeError = "Clase Socket - Método enviar(MensajeServidor* mensaje) - Error en send(): ";
             mensajeError.append(strerror(errno));
             logueador->Error(mensajeError);
-
-            hayUnErrorDeSocket = true;
 
         } else if (resultadoAccion == 0) {
             elSocketRemotoEstaCerrado = true;
@@ -436,6 +442,11 @@ int Socket::recibir(int* unNumero) {
         }
     }
     return recibido;
+}
+
+
+int Socket::getEstado() {
+    return estado;
 }
 
 

@@ -15,6 +15,7 @@ void ElementoModelo::movidaDePantalla() {
 }
 
 
+
 void ElementoModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual) {
 	mensajes[*mensajeActual].generarMensaje(&encuadre, &insercion, sprite);
 	(*mensajeActual)++;
