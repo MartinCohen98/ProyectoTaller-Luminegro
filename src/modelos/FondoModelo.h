@@ -1,9 +1,9 @@
 #ifndef SRC_FONDOMODELO_H_
 #define SRC_FONDOMODELO_H_
 
-#include "grafica/Encuadre.h"
-#include "varios/Socket.h"
-#include "pugixml.hpp"
+#include "../grafica/Encuadre.h"
+#include "../varios/Socket.h"
+#include "../../lib/pugixml/pugixml.hpp"
 
 class FondoModelo {
 

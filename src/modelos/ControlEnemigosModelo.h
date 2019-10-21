@@ -1,7 +1,7 @@
 #ifndef SRC_CONTROLENEMIGOSMODELO_H_
 #define SRC_CONTROLENEMIGOSMODELO_H_
 
-#include "modelos/EnemigoModelo.h"
+#include "../modelos/EnemigoModelo.h"
 
 class ControlEnemigosModelo {
 

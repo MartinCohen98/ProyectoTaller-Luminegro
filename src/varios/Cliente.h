@@ -2,13 +2,13 @@
 #define SRC_CLIENTE_H_
 
 #include "Socket.h"
-#include "vistas/VistaEnemigo.h"
-#include "vistas/VistaFondo.h"
-#include "vistas/VistaJugador.h"
-#include "vistas/VistaObjeto.h"
-#include "grafica/VentanaCliente.h"
+#include "../vistas/VistaEnemigo.h"
+#include "../vistas/VistaFondo.h"
+#include "../vistas/VistaJugador.h"
+#include "../vistas/VistaObjeto.h"
+#include "../grafica/VentanaCliente.h"
 #include "ConfigManager.h"
-#include "grafica/Renderizador.h"
+#include "../grafica/Renderizador.h"
 #include "MensajeCliente.h"
 #include "MensajeServidor.h"
 #include <pthread.h>

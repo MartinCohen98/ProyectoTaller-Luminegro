@@ -1,12 +1,12 @@
 #ifndef SRC_CONTROLOBJETOSMODELO_H_
 #define SRC_CONTROLOBJETOSMODELO_H_
 
-#include "pugixml.hpp"
+#include "../../lib/pugixml/pugixml.hpp"
 #include "BarrilModelo.h"
 #include "CajaModelo.h"
 #include "CuchilloModelo.h"
 #include "TuboModelo.h"
-#include "varios/Socket.h"
+#include "../varios/Socket.h"
 #include <stdlib.h>
 #include <time.h>
 

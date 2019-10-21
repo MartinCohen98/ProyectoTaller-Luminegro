@@ -1,8 +1,8 @@
 #ifndef SRC_PERSONAMODELO_H_
 #define SRC_PERSONAMODELO_H_
 
-#include "grafica/Encuadre.h"
-#include "estados/EstadoJugador.h"
+#include "../grafica/Encuadre.h"
+#include "../estados/EstadoJugador.h"
 
 class PersonaModelo {
 

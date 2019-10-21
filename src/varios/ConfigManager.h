@@ -1,11 +1,7 @@
-//
-// Created by nico on 6/10/19.
-//
-
 #ifndef PROYECTOTALLER_LUMINEGRO_CONFIGMANAGER_H
 #define PROYECTOTALLER_LUMINEGRO_CONFIGMANAGER_H
 
-#include "pugixml.hpp"
+#include "../../lib/pugixml/pugixml.hpp"
 namespace Common{
 
     enum Estado{
