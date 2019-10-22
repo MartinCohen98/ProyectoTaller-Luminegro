@@ -98,6 +98,8 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/GestorThreads.h
         src/varios/RecibidorMensajesCliente.cpp
         src/varios/RecibidorMensajesCliente.h
+        src/varios/MensajeCredenciales.cpp
+        src/varios/MensajeCredenciales.h
 
         src/vistas/VistaEnemigo.cpp
         src/vistas/VistaEnemigo.h
