@@ -59,9 +59,11 @@ bool VentanaClienteInicioSesion::leerTeclado() {
             case SDL_QUIT:
                 return false;
             case SDL_TEXTINPUT:
-                stringSiendoIngresado += evento.text.text;
-                if (estado == ESTADO_INGRESANDO_CLAVE) {
-                    stringIngresadoClaveConMascara += "*";
+                if (stringSiendoIngresado.size() < 10) {
+                    stringSiendoIngresado += evento.text.text;
+                    if (estado == ESTADO_INGRESANDO_CLAVE) {
+                        stringIngresadoClaveConMascara += "*";
+                    }
                 }
                 break;
             case SDL_KEYDOWN:
