@@ -95,5 +95,13 @@ void MensajeServidor::decodificarMensaje(std::string mensaje){
 	sprite = static_cast<tipoDeSprite>(cifras[9]);
 }
 
+
+bool MensajeServidor::operator <(const MensajeServidor & mensaje) const {
+	return ((insercion.getY() + insercion.getAlto()) <
+			(mensaje.insercion.getY() +
+			mensaje.insercion.getAlto()));
+}
+
+
 MensajeServidor::~MensajeServidor() {}
 

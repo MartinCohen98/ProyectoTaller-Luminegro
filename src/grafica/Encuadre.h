@@ -10,9 +10,9 @@ class Encuadre {
 	       Encuadre(int desplazamientoX, int desplazamientoY, int resolucionX, int resolucionY);
 	       SDL_Rect get();
 	       int getX();
-	       int getY();
+	       int getY() const;
 	       int getAncho();
-	       int getAlto();
+	       int getAlto() const;
 	       int modificar(int desplazamientoX, int desplazamientoY, int resolucionX, int resolucioY);
 	       virtual ~Encuadre();
 };

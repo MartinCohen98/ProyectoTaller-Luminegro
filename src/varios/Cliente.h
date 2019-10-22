@@ -16,17 +16,18 @@
 #include "Logger.h"
 #include <SDL2/SDL.h>
 #include <string>
+#include <list>
 
 using namespace std;
 
 class Cliente {
 private:
-	int cantMaxDatos;
 	int cantidadDeReceives;
 	Socket socket;
 	SDL_Event evento;
 	MensajeCliente mensajeCliente;
 	MensajeServidor* mensajesServidor;
+	list<MensajeServidor> listaOrdenada;
 
 public:
 	 Cliente();
@@ -40,6 +41,7 @@ private:
 	 void recibirCantidadDeReceives();
 	 bool terminoElNivel();
 	 void recibirMensajes();
+	 void agregarMensajesALista();
 };
 
 #endif /* SRC_CLIENTE_H_ */

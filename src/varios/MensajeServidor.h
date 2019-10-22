@@ -27,6 +27,7 @@ public:
 	tipoDeSprite obtenerTipoDeSprite();
 	std::string codificarMensaje(void);
 	void decodificarMensaje(std::string mensaje);
+	bool operator <(const MensajeServidor & mensaje) const;
 	virtual ~MensajeServidor();
 };
 

@@ -1,6 +1,9 @@
 #include "Cliente.h"
 
-Cliente::Cliente() {}
+Cliente::Cliente() {
+	mensajesServidor = NULL;
+	cantidadDeReceives = 0;
+}
 
 int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig){
 
@@ -8,7 +11,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	VentanaCliente ventana;
 
-	int resultado = conectar(direccionIP, puerto);
+	conectar(direccionIP, puerto);
 
 	int retorno = ventana.abrir(archiConfig);
 	if (retorno == -1){
@@ -51,45 +54,48 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	    	enviarInput(&mensajeCliente);
 
 	    	recibirMensajes();
-
 	    	renderizarFondo(&fondo);
+	    	agregarMensajesALista();
 
-	        for (int i = 3; i < cantidadDeReceives + 3; i++) {
-	        	switch(mensajesServidor[i].obtenerTipoDeSprite()) {
+	        while (!listaOrdenada.empty()) {
+	        	MensajeServidor mensaje;
+	        	mensaje = listaOrdenada.front();
+	        	switch(mensaje.obtenerTipoDeSprite()) {
 	        		case Jugador1:
-	        			jugador1.renderizarConElMensaje(&mensajesServidor[i]);
+	        			jugador1.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Jugador2:
-	        			jugador2.renderizarConElMensaje(&mensajesServidor[i]);
+	        			jugador2.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Jugador3:
-	        			jugador3.renderizarConElMensaje(&mensajesServidor[i]);
+	        			jugador3.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Jugador4:
-	        			jugador4.renderizarConElMensaje(&mensajesServidor[i]);
+	        			jugador4.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Enemigo1:
-	        			enemigo1.renderizarConElMensaje(&mensajesServidor[i]);
+	        			enemigo1.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Enemigo2:
-	        			enemigo2.renderizarConElMensaje(&mensajesServidor[i]);
+	        			enemigo2.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Enemigo3:
-	        			enemigo3.renderizarConElMensaje(&mensajesServidor[i]);
+	        			enemigo3.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Barril:
-	        			barril.renderizarConElMensaje(&mensajesServidor[i]);
+	        			barril.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Caja:
-	        			caja.renderizarConElMensaje(&mensajesServidor[i]);
+	        			caja.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Cuchillo:
-	        			cuchillo.renderizarConElMensaje(&mensajesServidor[i]);
+	        			cuchillo.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Tubo:
-	        			tubo.renderizarConElMensaje(&mensajesServidor[i]);
+	        			tubo.renderizarConElMensaje(&mensaje);
 	        			break;
 	        	}
+	        	listaOrdenada.pop_front();
 	        }
 
 	        renderizador.renderizar();
@@ -206,6 +212,13 @@ bool Cliente::terminoElNivel() {
 
 void Cliente::recibirMensajes() {
 	socket.recibir(mensajesServidor, cantidadDeReceives + 3);
+}
+
+
+void Cliente::agregarMensajesALista() {
+	for (int i = 3; i < (cantidadDeReceives + 3); i++)
+		listaOrdenada.push_front(mensajesServidor[i]);
+	listaOrdenada.sort();
 }
 
 

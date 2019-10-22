@@ -15,7 +15,7 @@ int Encuadre::getX(){
 	return encuadre.x;
 }
 
-int Encuadre::getY(){
+int Encuadre::getY() const{
 	return encuadre.y;
 }
 
@@ -23,7 +23,7 @@ int Encuadre::getAncho(){
 	return encuadre.w;
 }
 
-int Encuadre::getAlto(){
+int Encuadre::getAlto() const{
 	return encuadre.h;
 }
 
