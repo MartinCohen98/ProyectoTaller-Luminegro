@@ -188,6 +188,7 @@ void Cliente::enviarInput(MensajeCliente* mensaje){
     		mensajeCliente.Codificar(Exit);
     		break;
 	}
+
 	socket.enviar(mensaje);
 }
 

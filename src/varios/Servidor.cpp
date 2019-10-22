@@ -76,11 +76,10 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 }
 
 void Servidor::recibirInput(JugadorModelo* jugador) {
-    if (socketsDeClientes->getEstado() == Socket::ESTADO_DESCONECTADO) {
-        return;
-    }
     for (int i = 0; i < jugadores; i++) {
-        socketsDeClientes[i].recibir(&mensajeCliente);
+        if (socketsDeClientes[i].getEstado() == Socket::ESTADO_CONECTADO) {
+            socketsDeClientes[i].recibir(&mensajeCliente);
+        }
     }
 
 	switch (mensajeCliente.get()) {
@@ -147,7 +146,9 @@ void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 					+ enemigos->obtenerCantidad();
 
 	for (int i = 0; i < jugadores; i++) {
-        socketsDeClientes[i].enviar(cantidadDeMensajes);
+        if (socketsDeClientes[i].getEstado() == Socket::ESTADO_CONECTADO) {
+            socketsDeClientes[i].enviar(cantidadDeMensajes);
+        }
     }
 }
 
