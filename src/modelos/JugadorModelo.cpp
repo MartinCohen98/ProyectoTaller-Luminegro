@@ -168,10 +168,43 @@ bool JugadorModelo::llegoAlFin(FondoModelo *fondo) {
 }
 
 
-void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual) {
+void JugadorModelo::movidaDePantalla(FondoModelo* fondo) {
+	if (!movioAlFondo(fondo)) {
+		posicionX = posicionX - 10;
+	}
+}
+
+
+bool JugadorModelo::movioAlFondo(FondoModelo* fondo) {
+	bool retorno = false;
+	int movimiento = movimientoEnX;
+	if (estado->estaSaltando()) {
+		movimiento = movimientoAlSaltarEnX;
+	}
+	if ((movimiento < 0) && (posicionX >= posicionXMaxima) &&
+				fondo->consultarFin()) {
+		retorno = true;
+	}
+	return retorno;
+}
+
+
+void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual,
+		int numeroSprite) {
 
 	Encuadre sprite = estado->obtenerSprite();
-	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, Jugador1);
+	tipoDeSprite tipo;
+	switch (numeroSprite) {
+		case 1:		tipo = Jugador1;
+					break;
+		case 2:		tipo = Jugador2;
+					break;
+		case 3:		tipo = Jugador3;
+					break;
+		case 4:		tipo = Jugador4;
+					break;
+	}
+	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, tipo);
 	if (dadoVuelta)
 		mensajes[*mensajeActual].darVuelta();
 	(*mensajeActual)++;

@@ -37,7 +37,9 @@ public:
 	void saltar();
 	void realizarMovimientos(FondoModelo* fondo);
 	bool llegoAlFin(FondoModelo *fondo);
-	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
+	void movidaDePantalla(FondoModelo* fondo);
+	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual,
+							int numeroSprite);
 	virtual ~JugadorModelo();
 
 private:
@@ -45,6 +47,7 @@ private:
 	void actualizarInsercion();
 	bool moverEnX(FondoModelo* fondo);
 	bool moverEnY();
+	bool movioAlFondo(FondoModelo* fondo);
 	int escalar(int tamanio);
 };
 

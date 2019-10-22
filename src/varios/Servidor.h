@@ -2,7 +2,7 @@
 #define SRC_SERVIDOR_H_
 
 #include "Socket.h"
-#include "../modelos/JugadorModelo.h"
+#include "../modelos/ControlJugadoresModelo.h"
 #include "../modelos/ControlEnemigosModelo.h"
 #include "../modelos/ControlObjetosModelo.h"
 #include "MensajeCliente.h"
@@ -23,10 +23,10 @@ public:
 	virtual ~Servidor();
 
 private:
-	void recibirInput(JugadorModelo* jugador);
+	void recibirInputs(ControlJugadoresModelo* protagonistas);
 	void enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 							ControlObjetosModelo* objetos);
-	void enviarEncuadres(JugadorModelo* jugador, FondoModelo* fondo,
+	void enviarEncuadres(ControlJugadoresModelo* protagonistas, FondoModelo* fondo,
 			ControlEnemigosModelo* enemigos, ControlObjetosModelo* objetos);
 	void enviarMensajeDeNivelTerminado(bool nivelTerminado);
 	void generarMensajesParaEnviar();

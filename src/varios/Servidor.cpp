@@ -41,7 +41,7 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 		logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
 		
 		FondoModelo fondo(archiConfig, nivel);
-		JugadorModelo protagonista(archiConfig);
+		ControlJugadoresModelo protagonistas(archiConfig, jugadores);
 
 		logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
 		ControlEnemigosModelo controlEnemigos(nivel);
@@ -54,9 +54,9 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 		generarMensajesParaEnviar();
 
 		while (!nivelTerminado) {
-			recibirInput(&protagonista);
+			recibirInputs(&protagonistas);
 
-			protagonista.realizarMovimientos(&fondo);
+			protagonistas.realizarMovimientos(&fondo);
 			controlEnemigos.realizarMovimientos();
 
 			if (fondo.seMovio()) {
@@ -64,9 +64,10 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 				controlObjetos.movidaDePantalla();
 			}
 
-			enviarEncuadres(&protagonista, &fondo, &controlEnemigos, &controlObjetos);
+			enviarEncuadres(&protagonistas, &fondo, &controlEnemigos,
+								&controlObjetos);
 
-			nivelTerminado = protagonista.llegoAlFin(&fondo);
+			nivelTerminado = protagonistas.llegaronAlFin(&fondo);
 
 			enviarMensajeDeNivelTerminado(nivelTerminado);
 
@@ -75,68 +76,13 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 	}
 }
 
-void Servidor::recibirInput(JugadorModelo* jugador) {
-    if (socketsDeClientes->getEstado() == Socket::ESTADO_DESCONECTADO) {
-        return;
-    }
-
-	socketsDeClientes[0].recibir(&mensajeCliente);
-
-	switch (mensajeCliente.get()) {
-        case Right:
-            //Avanzar
-            jugador->avanzar();
-            break;
-        case Left:
-            //Atras
-        	jugador->retroceder();
-            break;
-        case Up:
-            //Arriba
-        	jugador->subir();
-            break;
-        case Down:
-            //Abajo
-        	jugador->bajar();
-            break;
-        case Jump:
-            //Saltar
-        	jugador->saltar();
-            break;
-        case Crouch:
-            //Agacharse
-        	jugador->agacharse();
-            break;
-        case Hit:
-            //Pegar
-        	jugador->pegar();
-            break;
-        case Exit:
-            //Salir
-            // logueador->Info("Se seleccionó salir");
-            break;
-        case StopGoingRight:
-            //Avanzar
-        	jugador->dejarDeAvanzar();
-            break;
-        case StopGoingLeft:
-            //Atras
-        	jugador->dejarDeRetroceder();
-            break;
-        case StopGoingUp:
-            //Arriba
-        	jugador->dejarDeSubir();
-            break;
-        case StopGoingDown:
-            //Abajo
-        	jugador->dejarDeBajar();
-            break;
-        case Rise:
-        	jugador->dejarDeAgacharse();
-            break;
-        case Nothing:
-        	break;
-		}
+void Servidor::recibirInputs(ControlJugadoresModelo* protagonistas) {
+	for (int i = 0; i < jugadores; i++) {
+		if (socketsDeClientes[i].getEstado() == Socket::ESTADO_CONECTADO) {
+			socketsDeClientes[i].recibir(&mensajeCliente);
+			protagonistas->procesarInput(&mensajeCliente, i);
+	    }
+	}
 }
 
 void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
@@ -146,13 +92,14 @@ void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 	socketsDeClientes[0].enviar(cantidadDeMensajes);
 }
 
-void Servidor::enviarEncuadres(JugadorModelo* jugador, FondoModelo* fondo,
-		ControlEnemigosModelo* enemigos, ControlObjetosModelo* objetos) {
+void Servidor::enviarEncuadres(ControlJugadoresModelo* protagonistas,
+		FondoModelo* fondo, ControlEnemigosModelo* enemigos,
+		ControlObjetosModelo* objetos) {
     
 	int mensajeActual = 0;
 
 	fondo->generarMensajes(mensajesServidor, &mensajeActual);
-	jugador->generarMensaje(mensajesServidor, &mensajeActual);
+	protagonistas->generarMensajes(mensajesServidor, &mensajeActual);
 	enemigos->generarMensajes(mensajesServidor, &mensajeActual);
 	objetos->generarMensajes(mensajesServidor, &mensajeActual);
 	for (int i = 0; i < jugadores; i++) {

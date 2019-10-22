@@ -27,13 +27,14 @@ FondoModelo::FondoModelo(pugi::xml_document* archiConfig, int nivel) {
 }
 
 void FondoModelo::mover() {
-	for (int i = 0; i <= 2; i++) {
-		if (desplazamientos[i] < (limite - 260)) {
-			desplazamientos[i] = desplazamientos[i] + velocidades[i];
-		} else {
-			fin = true;
+	if (!movido)
+		for (int i = 0; i <= 2; i++) {
+			if (desplazamientos[i] < (limite - 260)) {
+				desplazamientos[i] = desplazamientos[i] + velocidades[i];
+			} else {
+				fin = true;
+			}
 		}
-	}
 	movido = true;
 }
 
@@ -56,7 +57,7 @@ bool FondoModelo::seMovio() {
 
 
 bool FondoModelo::consultarFin() {
-	return fin;
+	return (fin && !movido);
 }
 
 
