@@ -11,7 +11,7 @@ Servidor::Servidor(int cantidadDeJugadores, char* puerto) {
 		return;
 	}
 
-	// (INICIO) ESTO SE TIENE QUE LLAMAR CON UNA INSTANCIA NUEVA DE "Socket" POR CADA JUGADOR QUE SE NOS CONECTA
+	// ESTO SE LLAMA CON UNA INSTANCIA NUEVA DE "Socket" POR CADA JUGADOR QUE SE NOS CONECTA
 	for (int i = 0; i < jugadores; i++) {
 		resultadoAccion = socketAceptador.esperarYAceptarCliente(&socketsDeClientes[i]);
 		if (resultadoAccion == EXIT_FAILURE) {
