@@ -79,8 +79,9 @@ void Servidor::recibirInput(JugadorModelo* jugador) {
     if (socketsDeClientes->getEstado() == Socket::ESTADO_DESCONECTADO) {
         return;
     }
-
-	socketsDeClientes[0].recibir(&mensajeCliente);
+    for (int i = 0; i < jugadores; i++) {
+        socketsDeClientes[i].recibir(&mensajeCliente);
+    }
 
 	switch (mensajeCliente.get()) {
         case Right:
@@ -141,9 +142,13 @@ void Servidor::recibirInput(JugadorModelo* jugador) {
 
 void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 							ControlObjetosModelo* objetos) {
+
 	cantidadDeMensajes = jugadores + objetos->obtenerCantidad()
 					+ enemigos->obtenerCantidad();
-	socketsDeClientes[0].enviar(cantidadDeMensajes);
+
+	for (int i = 0; i < jugadores; i++) {
+        socketsDeClientes[i].enviar(cantidadDeMensajes);
+    }
 }
 
 void Servidor::enviarEncuadres(JugadorModelo* jugador, FondoModelo* fondo,
@@ -168,9 +173,11 @@ void Servidor::enviarMensajeDeNivelTerminado(bool nivelTerminado) {
 	if (nivelTerminado) {
 		mensaje.darVuelta();
 	}
-	if (socketsDeClientes[0].getEstado() == Socket::ESTADO_CONECTADO) {
-    	socketsDeClientes[0].enviar(&mensaje,1);
-	}
+    for (int i = 0; i < jugadores; i++) {
+        if (socketsDeClientes[i].getEstado() == Socket::ESTADO_CONECTADO) {
+            socketsDeClientes[i].enviar(&mensaje, 1);
+        }
+    }
 }
 
 
