@@ -5,7 +5,7 @@
 #include "../modelos/ControlJugadoresModelo.h"
 #include "../modelos/ControlEnemigosModelo.h"
 #include "../modelos/ControlObjetosModelo.h"
-#include "MensajeCliente.h"
+#include "GestorThreads.h"
 
 class Servidor {
 
@@ -23,7 +23,8 @@ public:
 	virtual ~Servidor();
 
 private:
-	void recibirInputs(ControlJugadoresModelo* protagonistas);
+	void recibirInputs(ControlJugadoresModelo* protagonistas,
+						GestorThreads* gestorThreads);
 	void enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 							ControlObjetosModelo* objetos);
 	void enviarEncuadres(ControlJugadoresModelo* protagonistas, FondoModelo* fondo,

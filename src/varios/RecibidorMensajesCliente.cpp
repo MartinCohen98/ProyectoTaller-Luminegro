@@ -8,7 +8,7 @@ RecibidorMensajesCliente::RecibidorMensajesCliente(Socket* unSocket,
 
 
 void RecibidorMensajesCliente::operator()() {
-	while(socket->getEstado() == socket->ESTADO_CONECTADO) {
+	while(socket->getEstado() == Socket::ESTADO_CONECTADO) {
 		socket->recibir(&mensaje);
 		if (mensaje.get() != Nothing)
 			cola->encolar(&mensaje);

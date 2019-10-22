@@ -14,6 +14,7 @@ private:
 public:
 	GestorThreads(int cantidadDeJugadores);
 	void agregarJugador(Socket* socket, int numero);
+	void recibirMensajeDeCliente(MensajeCliente* mensaje, int cliente);
 	virtual ~GestorThreads();
 };
 

@@ -16,6 +16,11 @@ void GestorThreads::agregarJugador(Socket* socket, int numero) {
 }
 
 
+void GestorThreads::recibirMensajeDeCliente(MensajeCliente* mensaje, int cliente) {
+	(*mensaje) = colas[cliente].desencolar();
+}
+
+
 GestorThreads::~GestorThreads() {
 	delete[] sockets;
 	delete[] colas;
