@@ -2,11 +2,13 @@ cmake_minimum_required(VERSION 3.14)
 project(ProyectoTaller_Luminegro)
 
 set(CMAKE_CXX_STANDARD 14)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
 
 include_directories(lib/pugixml)
 include_directories(src)
 
 find_package(SDL2 REQUIRED)
+find_package(Threads REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 
 add_executable(ProyectoTaller_Luminegro
@@ -117,4 +119,4 @@ add_executable(ProyectoTaller_Luminegro
 
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2_LIBRARIES})
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2TTF_LIBRARIES})
-
+target_link_libraries(ProyectoTaller_Luminegro Threads::Threads)
