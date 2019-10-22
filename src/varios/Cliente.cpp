@@ -201,7 +201,7 @@ void Cliente::renderizarFondo(VistaFondo* fondo) {
 
 void Cliente::recibirCantidadDeReceives() {
 	socket.recibir(&cantidadDeReceives);
-	mensajesServidor = new MensajeServidor[cantidadDeReceives + 3];
+	mensajesServidor = new MensajeServidor[(cantidadDeReceives + 3)];
 }
 
 
@@ -212,7 +212,7 @@ bool Cliente::terminoElNivel() {
 
 
 void Cliente::recibirMensajes() {
-	socket.recibir(mensajesServidor, cantidadDeReceives + 3);
+	socket.recibir(&mensajesServidor[0], cantidadDeReceives + 3);
 }
 
 

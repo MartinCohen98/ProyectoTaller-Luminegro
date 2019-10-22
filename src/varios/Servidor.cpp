@@ -136,6 +136,8 @@ void Servidor::enviarMensajeDeNivelTerminado(bool nivelTerminado) {
 
 void Servidor::generarMensajesParaEnviar() {
 	//Los el valor de 3 son los mensajes de las capas del fondo
+	if (mensajesServidor != NULL)
+		delete[] mensajesServidor;
 	mensajesServidor = new MensajeServidor[cantidadDeMensajes + 3];
 }
 
@@ -146,5 +148,7 @@ Servidor::~Servidor() {
 		socketsDeClientes[i].cerrar();
 	}
 	delete[] socketsDeClientes;
+	if (mensajesServidor != NULL)
+		delete[] mensajesServidor;
 }
 
