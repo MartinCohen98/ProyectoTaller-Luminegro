@@ -55,6 +55,8 @@ add_executable(ProyectoTaller_Luminegro
         src/modelos/CajaModelo.h
         src/modelos/ControlEnemigosModelo.cpp
         src/modelos/ControlEnemigosModelo.h
+        src/modelos/ControlJugadoresModelo.cpp
+        src/modelos/ControlJugadoresModelo.h
         src/modelos/ControlObjetosModelo.cpp
         src/modelos/ControlObjetosModelo.h
         src/modelos/CuchilloModelo.cpp
