@@ -2,7 +2,7 @@
 #define SRC_VISTAGENERAL_H_
 
 #include "../grafica/Textura.h"
-#include "../varios/MensajeServidor.h"
+#include "comunicacion/MensajeServidor.h"
 
 class VistaGeneral {
 

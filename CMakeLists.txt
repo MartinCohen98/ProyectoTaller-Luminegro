@@ -80,14 +80,14 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/Cliente.h
         src/varios/Logger.cpp
         src/varios/Logger.h
-        src/varios/MensajeCliente.cpp
-        src/varios/MensajeCliente.h
-        src/varios/MensajeServidor.cpp
-        src/varios/MensajeServidor.h
+        src/comunicacion/MensajeCliente.cpp
+        src/comunicacion/MensajeCliente.h
+        src/comunicacion/MensajeServidor.cpp
+        src/comunicacion/MensajeServidor.h
         src/varios/Servidor.cpp
         src/varios/Servidor.h
-        src/varios/Socket.cpp
-        src/varios/Socket.h
+        src/comunicacion/Socket.cpp
+        src/comunicacion/Socket.h
         src/varios/ConfigManager.cpp
         src/varios/ConfigManager.h
         src/varios/Cola.cpp
@@ -96,10 +96,10 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/ColaMensajesCliente.h
         src/varios/GestorThreads.cpp
         src/varios/GestorThreads.h
-        src/varios/RecibidorMensajesCliente.cpp
-        src/varios/RecibidorMensajesCliente.h
-        src/varios/MensajeCredenciales.cpp
-        src/varios/MensajeCredenciales.h
+        src/comunicacion/RecibidorMensajesCliente.cpp
+        src/comunicacion/RecibidorMensajesCliente.h
+        src/comunicacion/MensajeCredenciales.cpp
+        src/comunicacion/MensajeCredenciales.h
 
         src/vistas/VistaEnemigo.cpp
         src/vistas/VistaEnemigo.h
