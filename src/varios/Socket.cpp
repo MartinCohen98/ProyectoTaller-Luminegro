@@ -232,6 +232,11 @@ int Socket::enviar(MensajeCliente* mensaje) {
         resultadoAccion = send(numero, &datos[bytesEnviados], cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
 
         if (resultadoAccion < 0) {
+            if (errno == ERROR_SOCKET_OPERATION_ON_NO_SOCKET) {
+                elSocketRemotoEstaCerrado = true;
+                estado = ESTADO_DESCONECTADO;
+            }
+
             std::string mensajeError = "Clase Socket - Método enviar(MensajeCliente* mensaje) - Error en send(): ";
             mensajeError.append(strerror(errno));
             logueador->Error(mensajeError);
@@ -413,7 +418,9 @@ int Socket::recibir(MensajeServidor* mensaje, int cantidad) {
 
         } else if (resultadoAccion < 0) {
             // Hubo un error
-            logueador->Error("Clase Socket - Método recibir(MensajeServidor* mensaje) - Error en recv()");
+            std::string mensajeError = "Clase Socket - Método recibir(MensajeServidor* mensaje) - Error en recv(): ";
+            mensajeError.append(strerror(errno));
+            logueador->Error(mensajeError);
             return EXIT_FAILURE;
         } else {
             recibido += resultadoAccion;

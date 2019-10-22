@@ -2,7 +2,7 @@
     <log>
         <level>ERROR</level>
     </log>
-    <jugadoresCantidad>3</jugadoresCantidad>
+    <jugadoresCantidad>2</jugadoresCantidad>
     <escenario>
         <protagonistas>
             <protagonista1>

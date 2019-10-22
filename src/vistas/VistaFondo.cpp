@@ -9,6 +9,7 @@ VistaFondo::VistaFondo(Renderizador* renderizador,
 
 void VistaFondo::renderizarConLosMensajes(MensajeServidor* mensajeCielo,
 		MensajeServidor* mensajeEdificios, MensajeServidor* mensajeTerreno) {
+
 	cielo->renderizarConElMensaje(mensajeCielo);
 	edificios->renderizarConElMensaje(mensajeEdificios);
 	terreno->renderizarConElMensaje(mensajeTerreno);

@@ -60,6 +60,7 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 			controlEnemigos.realizarMovimientos();
 
 			if (fondo.seMovio()) {
+				protagonistas.movidaDePantalla(&fondo);
 				controlEnemigos.movidaDePantalla();
 				controlObjetos.movidaDePantalla();
 			}
@@ -87,9 +88,15 @@ void Servidor::recibirInputs(ControlJugadoresModelo* protagonistas) {
 
 void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 							ControlObjetosModelo* objetos) {
+
 	cantidadDeMensajes = jugadores + objetos->obtenerCantidad()
 					+ enemigos->obtenerCantidad();
-	socketsDeClientes[0].enviar(cantidadDeMensajes);
+
+	for (int i = 0; i < jugadores; i++) {
+        if (socketsDeClientes[i].getEstado() == Socket::ESTADO_CONECTADO) {
+            socketsDeClientes[i].enviar(cantidadDeMensajes);
+        }
+    }
 }
 
 void Servidor::enviarEncuadres(ControlJugadoresModelo* protagonistas,
@@ -115,9 +122,11 @@ void Servidor::enviarMensajeDeNivelTerminado(bool nivelTerminado) {
 	if (nivelTerminado) {
 		mensaje.darVuelta();
 	}
-	if (socketsDeClientes[0].getEstado() == Socket::ESTADO_CONECTADO) {
-    	socketsDeClientes[0].enviar(&mensaje,1);
-	}
+    for (int i = 0; i < jugadores; i++) {
+        if (socketsDeClientes[i].getEstado() == Socket::ESTADO_CONECTADO) {
+            socketsDeClientes[i].enviar(&mensaje, 1);
+        }
+    }
 }
 
 

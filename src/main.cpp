@@ -55,7 +55,12 @@ int main (int argc, char** argv) {
 
         logueador->Info("Se inicia el juego en modo servidor");
 
-        Servidor servidor(1, argv[2]);
+        std::string jugadoresCantidad = configManager.archivoConfig.child("configuracion")
+                .child_value("jugadoresCantidad");
+
+        int jugadoresCantidadInt = std::stoi(jugadoresCantidad);
+
+        Servidor servidor(jugadoresCantidadInt, argv[2]);
 
         servidor.correr(&configManager.archivoConfig);
 
@@ -135,7 +140,7 @@ int main (int argc, char** argv) {
         cerr << "\t./<ejecutable> servidor <puerto> <(opcional)ruta config> <(opcional)nivel log>" << endl;
         cerr << "Para modo Cliente:" << endl;
         cerr << "\t./<ejecutable> cliente <ipServidor:puerto> <(opcional)ruta config> <(opcional)nivel log>" << endl;
-        //cerr <<
+
         return EXIT_FAILURE;
     }
 }

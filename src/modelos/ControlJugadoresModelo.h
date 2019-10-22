@@ -13,6 +13,7 @@ public:
 	ControlJugadoresModelo(pugi::xml_document *archiConfig, int cantidadJugadores);
 	void procesarInput(MensajeCliente* mensaje, int numeroDeJugador);
 	void realizarMovimientos(FondoModelo* fondo);
+	void movidaDePantalla(FondoModelo* fondo);
 	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
 	bool llegaronAlFin(FondoModelo* fondo);
 	virtual ~ControlJugadoresModelo();

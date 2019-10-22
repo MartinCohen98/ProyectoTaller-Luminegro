@@ -77,6 +77,13 @@ void ControlJugadoresModelo::realizarMovimientos(FondoModelo* fondo) {
 }
 
 
+void ControlJugadoresModelo::movidaDePantalla(FondoModelo* fondo) {
+	for (int i = 0; i < cantidad; i++) {
+		jugadores[i]->movidaDePantalla(fondo);
+	}
+}
+
+
 void ControlJugadoresModelo::generarMensajes(MensajeServidor* mensajes,
 		int* mensajeActual) {
 	for (int i = 0; i < cantidad; i++) {
