@@ -40,7 +40,7 @@ T Cola<T>::desencolar() {
 
     if(!this->cantidadElementos){
     	pthread_mutex_unlock(&this->mutexCola);
-     //   return nullptr;
+     // return nullptr;
     }
     Nodo *nodo = this->primerNodo;
     T elemento = nodo->dato;

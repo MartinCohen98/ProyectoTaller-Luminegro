@@ -90,6 +90,12 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/ConfigManager.h
         src/varios/Cola.cpp
         src/varios/Cola.h
+        src/varios/ColaMensajesCliente.cpp
+        src/varios/ColaMensajesCliente.h
+        src/varios/GestorThreads.cpp
+        src/varios/GestorThreads.h
+        src/varios/RecibidorMensajesCliente.cpp
+        src/varios/RecibidorMensajesCliente.h
 
         src/vistas/VistaEnemigo.cpp
         src/vistas/VistaEnemigo.h

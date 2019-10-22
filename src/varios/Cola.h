@@ -1,7 +1,3 @@
-//
-// Created by nico on 16/10/19.
-//
-
 #ifndef PROYECTOTALLER_LUMINEGRO_COLA_H
 #define PROYECTOTALLER_LUMINEGRO_COLA_H
 
