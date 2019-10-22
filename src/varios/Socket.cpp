@@ -377,7 +377,14 @@ int Socket::recibir(MensajeCliente* mensaje) {
 
         } else if (resultadoAccion < 0) {
             // Hubo un error
-            logueador->Error("Clase Socket - Método recibir(MensajeCliente* mensaje) - Error en recv()");
+            if (errno == ERROR_SOCKET_OPERATION_ON_NO_SOCKET) {
+                estado = ESTADO_DESCONECTADO;
+            }
+
+            std::string mensajeError = "Clase Socket - Método recibir(MensajeCliente* mensaje) - Error en recv(): ";
+            mensajeError.append(strerror(errno));
+
+            logueador->Error(mensajeError);
             return EXIT_FAILURE;
         } else {
             recibido += resultadoAccion;

@@ -76,6 +76,10 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 }
 
 void Servidor::recibirInput(JugadorModelo* jugador) {
+    if (socketsDeClientes->getEstado() == Socket::ESTADO_DESCONECTADO) {
+        return;
+    }
+
 	socketsDeClientes[0].recibir(&mensajeCliente);
 
 	switch (mensajeCliente.get()) {
