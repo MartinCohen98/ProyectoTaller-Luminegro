@@ -135,8 +135,8 @@ int main (int argc, char** argv) {
 
     } else {
         logueador->Error("Parámetros incorrectos, no se inició ni en modo servidor ni en modo cliente");
-        configManager.MostrarError(Estado::ErrorParametrosIncorrectos);
-        configManager.MostrarUsoPrograma();
+        ConfigManager::MostrarError(Estado::ErrorParametrosIncorrectos);
+        ConfigManager::MostrarUsoPrograma();
         return EXIT_FAILURE;
     }
 }
