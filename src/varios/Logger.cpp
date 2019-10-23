@@ -7,6 +7,7 @@
 #include "Logger.h"
 #include <chrono>
 #include <pthread.h>
+#include <thread>
 
 using namespace Logger;
 using namespace chrono;
@@ -25,20 +26,20 @@ Log *Log::ObtenerInstancia() {
 
 //Se puede inicializar una sola vez en toda la aplicación, y ya deja creada la instancia.
 
-bool Log::InicializarLog(string severidadMinima, string rutaArchivo, char caracterSeparador) {
+bool Log::InicializarLog(string severidadMinima, string rutaArchivo, string modoInicio, char caracterSeparador) {
     if(instancia)
         return false;
 
-    instancia = new Log(severidadMinima, rutaArchivo, caracterSeparador);
+    instancia = new Log(severidadMinima, rutaArchivo, modoInicio, caracterSeparador);
     return true;
 }
 
-Log::Log(string severidadMinima, string rutaArchivo, char caracterSeparador) {
+Log::Log(string severidadMinima, string rutaArchivo, string modoInicio, char caracterSeparador) {
     //Carga por defecto como caracter separador la coma
     this->caracterSeparador = caracterSeparador;
+    this->modoInicio = modoInicio;
     //Inicializa severidad mínima (si no hay coincidencia, por defecto severidad ERROR)
     this->SetSeveridadMinima(severidadMinima);
-
     //Genera el id de sesión
     this->idSesion = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
 
@@ -82,6 +83,9 @@ void Log::escribirLog(const string& mensaje, string severidad) {
     archivoLog << buffer << string(3 - milisegundos.length(), '0').append(milisegundos);
     archivoLog << this->caracterSeparador<< this->idSesion;
     archivoLog << this->caracterSeparador << severidad;
+    archivoLog << this->caracterSeparador << this->modoInicio;
+    archivoLog << this->caracterSeparador <<
+    std::this_thread::get_id();
     archivoLog << this->caracterSeparador << mensaje << endl;
     //Se asegura de enviar al archivo lo que cargó en el buffer
     this->archivoLog.flush();

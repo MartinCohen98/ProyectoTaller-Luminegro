@@ -14,13 +14,21 @@ const int CANTIDAD_MINIMA_PARAMETROS = 3; //Programa servidor/cliente puerto/ip:
 
 Estado ConfigManager::ValidarParametros() {
     if(this->argc < CANTIDAD_MINIMA_PARAMETROS) {
-        if(strcmp(argv[1], "simple") == 0)
+        if(strcmp(argv[1], "simple") == 0) {
+            this->modo = Modo::Simple;
             return Estado::OK;
+        }
         Log::ObtenerInstancia()->Error("Faltan parámetros de invocación");
         return Estado::ErrorFaltanParametros;
     }
     //Validar acá que si viene en modo servidor o cliente, debe indicar para el primero el puerto y para el otro ip y puerto
-    if(strcmp(argv[1], "servidor") != 0 && strcmp(argv[1], "cliente") != 0 && strcmp(argv[1], "simple") != 0) {
+    if(strcmp(argv[1], "servidor") == 0)
+        this->modo = Modo::Servidor;
+    else if(strcmp(argv[1], "cliente") == 0)
+        this->modo = Modo::Cliente;
+    else if (strcmp(argv[1], "simple") == 0)
+        this->modo = Modo::Simple;
+    else{
         Log::ObtenerInstancia()->Error("Parámetros incorrectos, no se inició ni en modo servidor ni en modo cliente");
         return Estado::ErrorParametrosIncorrectos;
     }
@@ -106,6 +114,7 @@ void ConfigManager::MostrarError(Estado estado) {
 
 void ConfigManager::ConfigurarLogger() {
     string logLevel;
+    string modoInicio;
     // Lo envió por parámetro?
     if (argc >= 5) {
         // Si
@@ -114,9 +123,21 @@ void ConfigManager::ConfigurarLogger() {
         // No, leo del XML
         logLevel = archivoConfig.child("configuracion").child("log").child_value("level");
     }
+    //Modo inicio del juego
+    if(modo == Modo::Cliente)
+        modoInicio = "Cliente";
+    else if(modo == Modo::Servidor)
+        modoInicio = "Servidor";
+    else
+        modoInicio = "N/A";
+
     // Se inicializa el Logger acá y así queda para el resto de la aplicación.
-    if (!Log::InicializarLog(logLevel, "")) {
+    if (!Log::InicializarLog(logLevel, "", modoInicio)) {
         //Si ya se había inicializado el logger (por error en apertura de config) al menos le setea el nivel de log
         Log::ObtenerInstancia()->SetSeveridadMinima(logLevel);
     }
+}
+
+Modo ConfigManager::ModoAplicacion() {
+    return this->modo;
 }

@@ -10,7 +10,6 @@ include_directories(src)
 find_package(SDL2 REQUIRED)
 find_package(Threads REQUIRED)
 find_library(SDL2TTF_LIBRARIES SDL_ttf)
-
 include_directories(${SDL2_INCLUDE_DIRS})
 
 add_executable(ProyectoTaller_Luminegro
