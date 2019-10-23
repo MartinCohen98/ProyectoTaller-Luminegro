@@ -2,7 +2,7 @@
 #define SRC_FONDOMODELO_H_
 
 #include "../grafica/Encuadre.h"
-#include "comunicacion/Socket.h"
+#include "../comunicacion/Socket.h"
 #include "../../lib/pugixml/pugixml.hpp"
 
 class FondoModelo {

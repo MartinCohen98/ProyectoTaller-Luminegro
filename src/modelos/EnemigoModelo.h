@@ -3,7 +3,7 @@
 
 #include "PersonaModelo.h"
 #include "../estados/EstadoEnemigoParado.h"
-#include "comunicacion/Socket.h"
+#include "../comunicacion/Socket.h"
 
 class EnemigoModelo: public PersonaModelo {
 

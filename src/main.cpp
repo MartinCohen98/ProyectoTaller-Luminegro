@@ -2,6 +2,7 @@
 #include "varios/Cliente.h"
 #include "varios/ConfigManager.h"
 #include "grafica/VentanaClienteInicioSesion.h"
+#include <pthread.h>
 
 
 using namespace Logger;

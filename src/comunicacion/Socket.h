@@ -1,7 +1,7 @@
 #ifndef PROYECTOTALLER_LUMINEGRO_SOCKET_H
 #define PROYECTOTALLER_LUMINEGRO_SOCKET_H
 
-#include "varios/Logger.h"
+#include "../varios/Logger.h"
 #include <string>
 #include <sys/socket.h>
 #include <netdb.h>

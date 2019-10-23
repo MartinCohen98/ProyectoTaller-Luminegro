@@ -2,7 +2,7 @@
 #define ELEMENTOMODELO_H_
 
 #include "../grafica/Encuadre.h"
-#include "comunicacion/Socket.h"
+#include "../comunicacion/Socket.h"
 
 class ElementoModelo {
 

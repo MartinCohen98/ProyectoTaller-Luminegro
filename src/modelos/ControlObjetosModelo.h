@@ -6,7 +6,7 @@
 #include "CajaModelo.h"
 #include "CuchilloModelo.h"
 #include "TuboModelo.h"
-#include "comunicacion/Socket.h"
+#include "../comunicacion/Socket.h"
 #include <stdlib.h>
 #include <time.h>
 
