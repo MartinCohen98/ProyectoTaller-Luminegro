@@ -11,6 +11,12 @@ namespace Common{
         ErrorArchivoConfiguracion
     };
 
+    enum class Modo{
+        Servidor,
+        Cliente,
+        Simple  //para debuggear simplemente
+    };
+
     class ConfigManager {
     public:
         ConfigManager(int argc, char **argv);
@@ -20,9 +26,11 @@ namespace Common{
         static void MostrarUsoPrograma();
         static void MostrarError(Estado estado);
         pugi::xml_document archivoConfig;
+        Modo ModoAplicacion();
     private:
         int argc;
         char **argv;
+        Modo modo;
         //char *puerto;
         //string ip;
     };

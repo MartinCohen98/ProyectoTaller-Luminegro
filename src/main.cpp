@@ -51,7 +51,7 @@ int main (int argc, char** argv) {
     // En cualquier clase que haya que utilizar el logger, se lo instancia así (aunque no es necesario instanciarlo)
     Log *logueador  =  Log::ObtenerInstancia();
 
-    if (strcmp(argv[1], "servidor") == 0) {
+    if (configManager.ModoAplicacion() == Modo::Servidor) {
         // SERVIDOR
 
         logueador->Info("Se inicia el juego en modo servidor");
@@ -65,7 +65,7 @@ int main (int argc, char** argv) {
 
         servidor.correr(&configManager.archivoConfig);
 
-    } else if (strcmp(argv[1], "cliente") == 0) {
+    } else if (configManager.ModoAplicacion() == Modo::Cliente) {
         // CLIENTE
         logueador->Info("Se inicia el juego en modo cliente");
 
