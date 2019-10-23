@@ -14,7 +14,7 @@ const int CANTIDAD_MINIMA_PARAMETROS = 3; //Programa servidor/cliente puerto/ip:
 
 Estado ConfigManager::ValidarParametros() {
     if(this->argc < CANTIDAD_MINIMA_PARAMETROS) {
-        if(strcmp(argv[1], "simple") == 0) {
+        if(argc == 2 && strcmp(argv[1], "simple") == 0) {
             this->modo = Modo::Simple;
             return Estado::OK;
         }
