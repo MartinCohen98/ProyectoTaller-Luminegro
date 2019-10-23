@@ -134,14 +134,9 @@ int main (int argc, char** argv) {
         return EXIT_SUCCESS;
 
     } else {
-
         logueador->Error("Parámetros incorrectos, no se inició ni en modo servidor ni en modo cliente");
-        cerr << "ERROR: Parámetros de invocación incorrectos" << endl;
-        cerr << "Para modo Servidor:" << endl;
-        cerr << "\t./<ejecutable> servidor <puerto> <(opcional)ruta config> <(opcional)nivel log>" << endl;
-        cerr << "Para modo Cliente:" << endl;
-        cerr << "\t./<ejecutable> cliente <ipServidor:puerto> <(opcional)ruta config> <(opcional)nivel log>" << endl;
-
+        ConfigManager::MostrarError(Estado::ErrorParametrosIncorrectos);
+        ConfigManager::MostrarUsoPrograma();
         return EXIT_FAILURE;
     }
 }
