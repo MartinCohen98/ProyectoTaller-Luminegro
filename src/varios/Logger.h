@@ -18,13 +18,13 @@ using namespace std;
     class Log{
     public:
         static Log *ObtenerInstancia();
-        static bool InicializarLog(string severidadMinima, string rutaArchivo, char caracterSeparador = ',');
+        static bool InicializarLog(string severidadMinima, string rutaArchivo, string modoInicio = "N/A", char caracterSeparador = ',');
         void Info(string mensaje);
         void Debug(string mensaje);
         void Error(string mensaje);
         void SetSeveridadMinima(string severidad);
     private:
-        Log(string severidadMinima, string rutaArchivo, char caracterSeparador = ',');
+        Log(string severidadMinima, string rutaArchivo, string modoInicio = "N/A", char caracterSeparador = ',');
         static Log *instancia;
         ofstream archivoLog;
         Severidad severidadMinima;
@@ -32,6 +32,7 @@ using namespace std;
         void escribirLog(const string& mensaje, string severidad);
         char caracterSeparador;
         pthread_mutex_t mutexLogger;
+        string modoInicio;          //Cliente/Servidor
     };
 
 }

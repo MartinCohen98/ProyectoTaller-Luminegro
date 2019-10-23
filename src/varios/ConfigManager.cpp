@@ -114,6 +114,7 @@ void ConfigManager::MostrarError(Estado estado) {
 
 void ConfigManager::ConfigurarLogger() {
     string logLevel;
+    string modoInicio;
     // Lo envió por parámetro?
     if (argc >= 5) {
         // Si
@@ -122,8 +123,16 @@ void ConfigManager::ConfigurarLogger() {
         // No, leo del XML
         logLevel = archivoConfig.child("configuracion").child("log").child_value("level");
     }
+    //Modo inicio del juego
+    if(modo == Modo::Cliente)
+        modoInicio = "Cliente";
+    else if(modo == Modo::Servidor)
+        modoInicio = "Servidor";
+    else
+        modoInicio = "N/A";
+
     // Se inicializa el Logger acá y así queda para el resto de la aplicación.
-    if (!Log::InicializarLog(logLevel, "")) {
+    if (!Log::InicializarLog(logLevel, "", modoInicio)) {
         //Si ya se había inicializado el logger (por error en apertura de config) al menos le setea el nivel de log
         Log::ObtenerInstancia()->SetSeveridadMinima(logLevel);
     }
