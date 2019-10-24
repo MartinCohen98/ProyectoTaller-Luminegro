@@ -6,7 +6,7 @@
 
 
 using namespace Logger;
-using namespace Common;
+using namespace Utiles;
 
 int main (int argc, char** argv) {
 
@@ -54,14 +54,14 @@ int main (int argc, char** argv) {
     if (configManager.ModoAplicacion() == Modo::Servidor) {
         // SERVIDOR
 
-        logueador->Info("Se inicia el juego en modo servidor");
+        logueador->Info("Se inicia el juego en modo servidor, en puerto" + configManager.PuertoServidor());
 
         std::string jugadoresCantidad = configManager.archivoConfig.child("configuracion")
                 .child_value("jugadoresCantidad");
 
         int jugadoresCantidadInt = std::stoi(jugadoresCantidad);
 
-        Servidor servidor(jugadoresCantidadInt, argv[2]);
+        Servidor servidor(jugadoresCantidadInt, (char *) configManager.PuertoServidor().c_str());
 
         servidor.correr(&configManager.archivoConfig);
 
@@ -105,29 +105,12 @@ int main (int argc, char** argv) {
 
         Socket socketConectado;
 
-        // (INICIO) Desgloso IP y puerto del parámetro de entrada
-        // TODO Englobar en una función
-        unsigned int i;
-
-        for (i = 0; i <= strlen(argv[2]); i++) {
-            if (argv[2][i] == ':') {
-                break;
-            }
-        }
-
-        unsigned int j = strlen(argv[2]);
-        char direccionIP[i + 1];
-        char puerto[j - i];
-        memcpy(direccionIP, &argv[2][0], i);
-        direccionIP[i] = '\0';
-        memcpy(puerto, &argv[2][i + 1], j);
-        puerto[j - i] = '\0';
-        // (FIN) Desgloso IP y puerto del parámetro de entrada
-
         ventanaClienteInicioSesion.cerrar();
 
         Cliente cliente;
-        cliente.inicializar(direccionIP, puerto, &configManager.archivoConfig);
+        cliente.inicializar((char *) configManager.DireccionIpServidor().c_str(),
+                            (char *) configManager.PuertoServidor().c_str(),
+                            &configManager.archivoConfig);
 
         socketConectado.cerrar();
 

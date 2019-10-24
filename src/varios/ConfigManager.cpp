@@ -3,36 +3,59 @@
 //
 #include "ConfigManager.h"
 #include "Logger.h"
+#include "Common.h"
 #include <iostream>
 #include <cstring>
 
 using namespace std;
-using namespace Common;
+using namespace Utiles;
 using namespace Logger;
 
 const int CANTIDAD_MINIMA_PARAMETROS = 3; //Programa servidor/cliente puerto/ip:puerto
 
 Estado ConfigManager::ValidarParametros() {
-    if(this->argc < CANTIDAD_MINIMA_PARAMETROS) {
+    Estado resultado = Estado::OK;
+
+    if(argc < CANTIDAD_MINIMA_PARAMETROS) {
         if(argc == 2 && strcmp(argv[1], "simple") == 0) {
-            this->modo = Modo::Simple;
-            return Estado::OK;
+            modo = Modo::Simple;
+        }else {
+            Log::ObtenerInstancia()->Error("Faltan parámetros de invocación");
+            resultado = Estado::ErrorFaltanParametros;
         }
-        Log::ObtenerInstancia()->Error("Faltan parámetros de invocación");
-        return Estado::ErrorFaltanParametros;
+    }else {
+        if (strcmp(argv[1], "servidor") == 0) {
+            //SERVIDOR: Validar que el siguiente parámetro sea el número de puerto
+            puerto = argv[2];
+            if(Common::EsNumero(puerto)) {
+                modo = Modo::Servidor;
+            }else{
+                Log::ObtenerInstancia()->Error("El puerto ingresado(" + puerto + ") para modo servidor es inválido");
+                resultado = Estado::ErrorModoServidorPuertoInvalido;
+            }
+        } else if (strcmp(argv[1], "cliente") == 0) {
+            //CLIENTE: Validar que el siguiente parámetro sea la ip:puerto en ese formato (ej: "10.1.4.25:8028")
+            auto vectorTemp = Common::Split(argv[2], ':');
+            if(vectorTemp.size() == 2 && Common::IpValida(vectorTemp[0]) && Common::EsNumero(vectorTemp[1])){
+                ip = vectorTemp[0];
+                puerto = vectorTemp[1];
+                modo = Modo::Cliente;
+            }else{
+                string msjError = "La ip:puerto ingresados (";
+                msjError += argv[2];
+                msjError += ") para modo cliente es inválida";
+                Log::ObtenerInstancia()->Error(msjError);
+                resultado = Estado::ErrorModoClienteIpOPuertoInvalido;
+            }
+        }
+        else if (strcmp(argv[1], "simple") == 0)
+            modo = Modo::Simple;
+        else {
+            Log::ObtenerInstancia()->Error("Parámetros incorrectos, no se inició ni en modo servidor ni en modo cliente");
+            resultado = Estado::ErrorParametrosIncorrectos;
+        }
     }
-    //Validar acá que si viene en modo servidor o cliente, debe indicar para el primero el puerto y para el otro ip y puerto
-    if(strcmp(argv[1], "servidor") == 0)
-        this->modo = Modo::Servidor;
-    else if(strcmp(argv[1], "cliente") == 0)
-        this->modo = Modo::Cliente;
-    else if (strcmp(argv[1], "simple") == 0)
-        this->modo = Modo::Simple;
-    else{
-        Log::ObtenerInstancia()->Error("Parámetros incorrectos, no se inició ni en modo servidor ni en modo cliente");
-        return Estado::ErrorParametrosIncorrectos;
-    }
-    return Estado::OK;
+    return resultado;
 }
 
 
@@ -107,6 +130,11 @@ void ConfigManager::MostrarError(Estado estado) {
         case Estado::ErrorArchivoConfiguracion:
             cout << "ERROR: No se pudo abrir el archivo de configuración" << endl;
             break;
+        case Estado::ErrorModoServidorPuertoInvalido:
+            cout << "ERROR: el parámetro ingresado como puerto es inválido" << endl;
+            break;
+        case Estado::ErrorModoClienteIpOPuertoInvalido:
+            cout << "ERROR: el parámetro ingresado como puerto:ip es inválido" << endl;
         default:
             break;
     }
@@ -140,4 +168,12 @@ void ConfigManager::ConfigurarLogger() {
 
 Modo ConfigManager::ModoAplicacion() {
     return this->modo;
+}
+
+std::string ConfigManager::PuertoServidor() {
+    return this->puerto;
+}
+
+std::string ConfigManager::DireccionIpServidor() {
+    return this->ip;
 }
