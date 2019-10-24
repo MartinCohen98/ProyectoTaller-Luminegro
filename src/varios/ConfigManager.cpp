@@ -170,10 +170,10 @@ Modo ConfigManager::ModoAplicacion() {
     return this->modo;
 }
 
-std::string ConfigManager::ObtenerPuertoServidor() {
+std::string ConfigManager::PuertoServidor() {
     return this->puerto;
 }
 
-std::string ConfigManager::ObtenerDireccionIpServidor() {
+std::string ConfigManager::DireccionIpServidor() {
     return this->ip;
 }

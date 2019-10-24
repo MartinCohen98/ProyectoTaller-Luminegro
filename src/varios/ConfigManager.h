@@ -29,8 +29,8 @@ namespace Utiles{
         static void MostrarError(Estado estado);
         pugi::xml_document archivoConfig;
         Modo ModoAplicacion();
-        std::string ObtenerPuertoServidor();
-        std::string ObtenerDireccionIpServidor();
+        std::string PuertoServidor();
+        std::string DireccionIpServidor();
     private:
         int argc;
         char **argv;

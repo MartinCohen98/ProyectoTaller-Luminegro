@@ -54,14 +54,14 @@ int main (int argc, char** argv) {
     if (configManager.ModoAplicacion() == Modo::Servidor) {
         // SERVIDOR
 
-        logueador->Info("Se inicia el juego en modo servidor, en puerto" + configManager.ObtenerPuertoServidor());
+        logueador->Info("Se inicia el juego en modo servidor, en puerto" + configManager.PuertoServidor());
 
         std::string jugadoresCantidad = configManager.archivoConfig.child("configuracion")
                 .child_value("jugadoresCantidad");
 
         int jugadoresCantidadInt = std::stoi(jugadoresCantidad);
 
-        Servidor servidor(jugadoresCantidadInt, (char *)configManager.ObtenerPuertoServidor().c_str());
+        Servidor servidor(jugadoresCantidadInt, (char *) configManager.PuertoServidor().c_str());
 
         servidor.correr(&configManager.archivoConfig);
 
@@ -108,8 +108,8 @@ int main (int argc, char** argv) {
         ventanaClienteInicioSesion.cerrar();
 
         Cliente cliente;
-        cliente.inicializar((char *)configManager.ObtenerDireccionIpServidor().c_str(),
-                            (char *)configManager.ObtenerPuertoServidor().c_str(),
+        cliente.inicializar((char *) configManager.DireccionIpServidor().c_str(),
+                            (char *) configManager.PuertoServidor().c_str(),
                             &configManager.archivoConfig);
 
         socketConectado.cerrar();
