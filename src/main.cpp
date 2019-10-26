@@ -21,8 +21,8 @@ int main (int argc, char** argv) {
      * Ejemplos (el puerto a usar debe estar libre):
      *      ./ProyectoTaller-Luminegro servidor 2100 config/repiola.xml DEBUG
      *      ./ProyectoTaller-Luminegro servidor 2101
-     *      ./ProyectoTaller-Luminegro cliente 192.168.0.3:2100
-     *      ./ProyectoTaller-Luminegro cliente 192.168.0.3:2100 config/repiola.xml
+     *      ./ProyectoTaller-Luminegro cliente 127.0.0.1:2100
+     *      ./ProyectoTaller-Luminegro cliente 127.0.0.1:2100 config/repiola.xml
      *
      **/
 
