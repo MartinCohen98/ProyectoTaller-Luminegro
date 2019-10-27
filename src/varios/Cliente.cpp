@@ -17,17 +17,15 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
     }
 
     conectar(direccionIP, puerto);
+
     // Autenticar usuario
     MensajeCredenciales mensajeCredenciales;
 
     while (mensajeCredenciales.getEstado() == MensajeCredenciales::ESTADO_NO_AUTENTICADO) {
 
         ventanaInicioSesion.pedirCredenciales();
-
         ventanaInicioSesion.mostrarMensaje("Conectando...",
                                            VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
-
-
 
         string usuario = ventanaInicioSesion.getUsuario();
         string clave = ventanaInicioSesion.getClave();
