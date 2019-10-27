@@ -1,7 +1,6 @@
 #ifndef SRC_CLIENTE_H_
 #define SRC_CLIENTE_H_
 
-#include "../comunicacion/Socket.h"
 #include "../vistas/VistaEnemigo.h"
 #include "../vistas/VistaFondo.h"
 #include "../vistas/VistaJugador.h"
@@ -9,11 +8,10 @@
 #include "../grafica/VentanaCliente.h"
 #include "ConfigManager.h"
 #include "../grafica/Renderizador.h"
-#include "../comunicacion/MensajeCliente.h"
 #include "../comunicacion/MensajeServidor.h"
 #include "../comunicacion/MensajeCredenciales.h"
 #include "../grafica/VentanaClienteInicioSesion.h"
-#include <pthread.h>
+#include "GestorThreadsCliente.h"
 #include <iostream>
 #include "Logger.h"
 #include <SDL2/SDL.h>
@@ -39,7 +37,7 @@ public:
 
 private:
 	 void renderizarFondo(VistaFondo* fondo);
-	 void enviarInput(MensajeCliente* mensaje);
+	 void enviarInput(GestorThreadsCliente* gestorThreads);
 	 void recibirCantidadDeReceives();
 	 bool terminoElNivel();
 	 void recibirMensajes();

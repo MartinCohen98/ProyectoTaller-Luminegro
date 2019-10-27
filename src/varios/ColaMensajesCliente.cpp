@@ -5,7 +5,8 @@ ColaMensajesCliente::ColaMensajesCliente() {}
 
 void ColaMensajesCliente::encolar(MensajeCliente* mensaje) {
 	m.lock();
-	cola.push(*mensaje);
+	if (mensaje->get() != Nothing)
+		cola.push(*mensaje);
 	m.unlock();
 }
 

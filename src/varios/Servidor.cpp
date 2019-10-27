@@ -29,7 +29,7 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 
 	bool nivelTerminado;
 
-	GestorThreads gestorThreads(jugadores);
+	GestorThreadsServidor gestorThreads(jugadores);
 
 	for (int i = 0; i < jugadores; i++) {
 		gestorThreads.agregarJugador(&socketsDeClientes[i], i);
@@ -83,7 +83,7 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 }
 
 void Servidor::recibirInputs(ControlJugadoresModelo* protagonistas,
-							GestorThreads* gestorThreads) {
+							GestorThreadsServidor* gestorThreads) {
 	for (int i = 0; i < jugadores; i++) {
 		gestorThreads->recibirMensajeDeCliente(&mensajeCliente, i);
 		protagonistas->procesarInput(&mensajeCliente, i, true);

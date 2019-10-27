@@ -47,8 +47,6 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
     ventanaClienteInicioSesion.cerrar();
 
-    Socket socketConectado;
-
     conectar(direccionIP, puerto);
 
     VentanaCliente ventana;
@@ -61,11 +59,14 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	Renderizador renderizador(ventana.get());
 
+	GestorThreadsCliente gestorThreads(&socket);
+
+	gestorThreads.comenzarAEnviar();
+
 	for (int nivel = 1; nivel <= 2; nivel++) {
 
 		string nivelNodeName = "nivel";
 		nivelNodeName.append( to_string(nivel) );
-
 		salir = false;
 
 		logueador->Info("Iniciando nivel: "+ nivelNodeName);
@@ -91,7 +92,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 		recibirCantidadDeReceives();
 
 		while (!salir) {
-	    	enviarInput(&mensajeCliente);
+	    	enviarInput(&gestorThreads);
 
 	    	recibirMensajes();
 	    	renderizarFondo(&fondo);
@@ -147,7 +148,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 		logueador->Info("Fin de nivel: " +  nivelNodeName);
 	}
 
-    socketConectado.cerrar();
+	socket.cerrar();
 
     return 0;
 }
@@ -157,7 +158,7 @@ int Cliente::conectar(char* direccionIP, char* puerto){
 	return resultado;
 }
 
-void Cliente::enviarInput(MensajeCliente* mensaje){
+void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
 	mensajeCliente.Codificar(Nothing);
 
     SDL_PollEvent(&evento);
@@ -231,8 +232,7 @@ void Cliente::enviarInput(MensajeCliente* mensaje){
     		mensajeCliente.Codificar(Exit);
     		break;
 	}
-
-	socket.enviar(mensaje);
+	gestorThreads->enviarMensaje(&mensajeCliente);
 }
 
 

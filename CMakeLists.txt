@@ -97,12 +97,17 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/Cola.h
         src/varios/ColaMensajesCliente.cpp
         src/varios/ColaMensajesCliente.h
-        src/varios/GestorThreads.cpp
-        src/varios/GestorThreads.h
+        src/varios/GestorThreadsServidor.cpp
+        src/varios/GestorThreadsServidor.h
         src/comunicacion/RecibidorMensajesCliente.cpp
         src/comunicacion/RecibidorMensajesCliente.h
         src/comunicacion/MensajeCredenciales.cpp
         src/comunicacion/MensajeCredenciales.h
+        src/varios/GestorThreadsCliente.cpp
+        src/varios/GestorThreadsCliente.h
+        src/comunicacion/EnviadorMensajesCliente.cpp
+        src/comunicacion/EnviadorMensajesCliente.h
+        
 
         src/vistas/VistaEnemigo.cpp
         src/vistas/VistaEnemigo.h

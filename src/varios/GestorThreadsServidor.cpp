@@ -1,6 +1,6 @@
-#include "GestorThreads.h"
+#include "GestorThreadsServidor.h"
 
-GestorThreads::GestorThreads(int cantidadDeJugadores) {
+GestorThreadsServidor::GestorThreadsServidor(int cantidadDeJugadores) {
 	jugadores = cantidadDeJugadores;
 	colas = new ColaMensajesCliente[jugadores];
 	sockets = new Socket*[jugadores];
@@ -8,7 +8,7 @@ GestorThreads::GestorThreads(int cantidadDeJugadores) {
 }
 
 
-void GestorThreads::agregarJugador(Socket* socket, int numero) {
+void GestorThreadsServidor::agregarJugador(Socket* socket, int numero) {
 	sockets[numero] = socket;
 	threadsRecibidoras[numero] =
 			new std::thread(RecibidorMensajesCliente(sockets[numero],
@@ -16,12 +16,12 @@ void GestorThreads::agregarJugador(Socket* socket, int numero) {
 }
 
 
-void GestorThreads::recibirMensajeDeCliente(MensajeCliente* mensaje, int cliente) {
+void GestorThreadsServidor::recibirMensajeDeCliente(MensajeCliente* mensaje, int cliente) {
 	(*mensaje) = colas[cliente].desencolar();
 }
 
 
-GestorThreads::~GestorThreads() {
+GestorThreadsServidor::~GestorThreadsServidor() {
 	delete[] sockets;
 	delete[] colas;
 }

@@ -1,10 +1,10 @@
-#ifndef SRC_VARIOS_GESTORTHREADS_H_
-#define SRC_VARIOS_GESTORTHREADS_H_
+#ifndef SRC_VARIOS_GESTORTHREADSSERVIDOR_H_
+#define SRC_VARIOS_GESTORTHREADSSERVIDOR_H_
 
 #include "../comunicacion/RecibidorMensajesCliente.h"
 #include <pthread.h>
 
-class GestorThreads {
+class GestorThreadsServidor {
 
 private:
 	int jugadores;
@@ -13,10 +13,10 @@ private:
 	std::thread** threadsRecibidoras;
 
 public:
-	GestorThreads(int cantidadDeJugadores);
+	GestorThreadsServidor(int cantidadDeJugadores);
 	void agregarJugador(Socket* socket, int numero);
 	void recibirMensajeDeCliente(MensajeCliente* mensaje, int cliente);
-	virtual ~GestorThreads();
+	virtual ~GestorThreadsServidor();
 };
 
-#endif /* SRC_VARIOS_GESTORTHREADS_H_ */
+#endif /* SRC_VARIOS_GESTORTHREADSSERVIDOR_H_ */

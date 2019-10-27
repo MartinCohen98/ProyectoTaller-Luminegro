@@ -167,6 +167,7 @@ int Socket::conectarAUnServidor(char* direccionIP, char* puerto) {
 
     if (estaConectado) {
         logueador->Info("Clase Socket - Cliente conectado.");
+        estado = ESTADO_CONECTADO;
     } else {
         std::string error = "Clase Socket - Método conectarAUnServidor - se queda sin direcciones validas";
         error.append(" y se desconecta.");
