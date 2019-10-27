@@ -11,6 +11,8 @@
 #include "../grafica/Renderizador.h"
 #include "../comunicacion/MensajeCliente.h"
 #include "../comunicacion/MensajeServidor.h"
+#include "../comunicacion/MensajeCredenciales.h"
+#include "../grafica/VentanaClienteInicioSesion.h"
 #include <pthread.h>
 #include <iostream>
 #include "Logger.h"

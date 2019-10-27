@@ -1,3 +1,4 @@
+#include <comunicacion/MensajeCredenciales.h>
 #include "VentanaClienteInicioSesion.h"
 
 VentanaClienteInicioSesion::VentanaClienteInicioSesion() {
@@ -59,7 +60,7 @@ bool VentanaClienteInicioSesion::leerTeclado() {
             case SDL_QUIT:
                 return false;
             case SDL_TEXTINPUT:
-                if (stringSiendoIngresado.size() < 10) {
+                if (stringSiendoIngresado.size() < MensajeCredenciales::UNA_CREDENCIAL_LONGITUD_MAXIMA) {
                     stringSiendoIngresado += evento.text.text;
                     if (estado == ESTADO_INGRESANDO_CLAVE) {
                         stringIngresadoClaveConMascara += "*";

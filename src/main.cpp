@@ -1,7 +1,6 @@
 #include "varios/Servidor.h"
 #include "varios/Cliente.h"
 #include "varios/ConfigManager.h"
-#include "grafica/VentanaClienteInicioSesion.h"
 #include <pthread.h>
 
 
@@ -69,50 +68,10 @@ int main (int argc, char** argv) {
         // CLIENTE
         logueador->Info("Se inicia el juego en modo cliente");
 
-        VentanaClienteInicioSesion ventanaClienteInicioSesion;
-
-        if (ventanaClienteInicioSesion.getEstado() == VentanaClienteInicioSesion::ESTADO_ERROR) {
-            // Ya logueado en el objeto
-            return EXIT_FAILURE;
-        }
-
-        ventanaClienteInicioSesion.pedirCredenciales();
-
-        // INICIO - CODIGO DE EJEMPLO: la siguiente rutina simula cierta espera, da error de contraseña, pide
-        // credenciales nuevamente y finalmente hace como que conecta. */
-        /*
-        ventanaClienteInicioSesion.mostrarMensaje("Conectando...",
-                                                  VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
-
-        string usuario = ventanaClienteInicioSesion.getUsuario();
-        string clave = ventanaClienteInicioSesion.getClave();
-
-        ventanaClienteInicioSesion.demorar(2000);
-        ventanaClienteInicioSesion.mostrarMensaje("Error en clave, es usted hacker?",
-                                                  VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
-        ventanaClienteInicioSesion.demorar(3000);
-        ventanaClienteInicioSesion.resetear();
-        ventanaClienteInicioSesion.pedirCredenciales();
-        ventanaClienteInicioSesion.mostrarMensaje("Conectando...",
-                                                   VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
-
-        usuario = ventanaClienteInicioSesion.getUsuario();
-        clave = ventanaClienteInicioSesion.getClave();
-
-        ventanaClienteInicioSesion.demorar(2000);
-        */
-        // FIN - CODIGO DE EJEMPLO
-
-        Socket socketConectado;
-
-        ventanaClienteInicioSesion.cerrar();
-
         Cliente cliente;
         cliente.inicializar((char *) configManager.DireccionIpServidor().c_str(),
                             (char *) configManager.PuertoServidor().c_str(),
                             &configManager.archivoConfig);
-
-        socketConectado.cerrar();
 
         return EXIT_SUCCESS;
 
