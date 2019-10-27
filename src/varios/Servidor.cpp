@@ -86,7 +86,7 @@ void Servidor::recibirInputs(ControlJugadoresModelo* protagonistas,
 							GestorThreads* gestorThreads) {
 	for (int i = 0; i < jugadores; i++) {
 		gestorThreads->recibirMensajeDeCliente(&mensajeCliente, i);
-		protagonistas->procesarInput(&mensajeCliente, i);
+		protagonistas->procesarInput(&mensajeCliente, i, true);
 	}
 }
 

@@ -2,13 +2,21 @@
 #define PROYECTOTALLER_LUMINEGRO_CONFIGMANAGER_H
 
 #include "../../lib/pugixml/pugixml.hpp"
-namespace Common{
+namespace Utiles{
 
     enum Estado{
         OK,
         ErrorFaltanParametros,
         ErrorParametrosIncorrectos,
-        ErrorArchivoConfiguracion
+        ErrorArchivoConfiguracion,
+        ErrorModoServidorPuertoInvalido,
+        ErrorModoClienteIpOPuertoInvalido
+    };
+
+    enum class Modo{
+        Servidor,
+        Cliente,
+        Simple  //para debuggear simplemente
     };
 
     class ConfigManager {
@@ -20,11 +28,15 @@ namespace Common{
         static void MostrarUsoPrograma();
         static void MostrarError(Estado estado);
         pugi::xml_document archivoConfig;
+        Modo ModoAplicacion();
+        std::string PuertoServidor();
+        std::string DireccionIpServidor();
     private:
         int argc;
         char **argv;
-        //char *puerto;
-        //string ip;
+        Modo modo;
+        std::string puerto;
+        std::string ip;
     };
 }
 

@@ -10,9 +10,13 @@ private:
     std::string clave;
     int estado;
 
+    void completarCredencialCaracteres(std::string *valor);
+
 public:
     static const int ESTADO_AUTENTICADO = 1;
     static const int ESTADO_NO_AUTENTICADO = 2;
+
+    static const int UNA_CREDENCIAL_LONGITUD_MAXIMA = 10;
 
     void setUsuario(std::string valor);
     void setClave(std::string valor);

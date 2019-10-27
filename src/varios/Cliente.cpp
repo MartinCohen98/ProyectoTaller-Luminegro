@@ -5,16 +5,56 @@ Cliente::Cliente() {
 	cantidadDeReceives = 0;
 }
 
-int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig){
+int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig) {
 
 	Logger::Log *logueador = Logger::Log::ObtenerInstancia();
 
-	VentanaCliente ventana;
+    VentanaClienteInicioSesion ventanaClienteInicioSesion;
 
-	conectar(direccionIP, puerto);
+    if (ventanaClienteInicioSesion.getEstado() == VentanaClienteInicioSesion::ESTADO_ERROR) {
+        // Ya logueado en el objeto
+        return EXIT_FAILURE;
+    }
 
-	int retorno = ventana.abrir(archiConfig);
-	if (retorno == -1){
+    ventanaClienteInicioSesion.pedirCredenciales();
+
+    // INICIO - CODIGO DE EJEMPLO: la siguiente rutina simula cierta espera, da error de contraseña, pide
+    // credenciales nuevamente y finalmente hace como que conecta. */
+    /*
+    ventanaClienteInicioSesion.mostrarMensaje("Conectando...",
+                                              VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
+
+    ventanaClienteInicioSesion.demorar(2000);
+    ventanaClienteInicioSesion.mostrarMensaje("Error en clave, es usted hacker?",
+                                              VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
+    ventanaClienteInicioSesion.demorar(3000);
+    ventanaClienteInicioSesion.resetear();
+    ventanaClienteInicioSesion.pedirCredenciales();
+    ventanaClienteInicioSesion.mostrarMensaje("Conectando...",
+                                               VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
+
+    ventanaClienteInicioSesion.demorar(2000);
+    */
+    // FIN - CODIGO DE EJEMPLO
+
+    string usuario = ventanaClienteInicioSesion.getUsuario();
+    string clave = ventanaClienteInicioSesion.getClave();
+
+
+    MensajeCredenciales mensajeCredenciales;
+    mensajeCredenciales.setUsuario(usuario);
+    mensajeCredenciales.setClave(clave);
+
+    ventanaClienteInicioSesion.cerrar();
+
+    Socket socketConectado;
+
+    conectar(direccionIP, puerto);
+
+    VentanaCliente ventana;
+
+    int retorno = ventana.abrir(archiConfig);
+	if (retorno == -1) {
 	   logueador->Error("No se pudo crear la ventana");
 	}
 	bool salir;
@@ -106,7 +146,10 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 		}
 		logueador->Info("Fin de nivel: " +  nivelNodeName);
 	}
-	return 0;
+
+    socketConectado.cerrar();
+
+    return 0;
 }
 
 int Cliente::conectar(char* direccionIP, char* puerto){

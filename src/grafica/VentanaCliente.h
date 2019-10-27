@@ -5,7 +5,7 @@
 #include "Renderizador.h"
 #include <SDL2/SDL.h>
 #include "../varios/Logger.h"
-#include "../varios/MensajeCliente.h"
+#include "../comunicacion/MensajeCliente.h"
 #include "../../lib/pugixml/pugixml.hpp"
 
 class VentanaCliente {

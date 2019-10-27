@@ -4,8 +4,8 @@
 #include "../estados/EstadoJugadorParado.h"
 #include "PersonaModelo.h"
 #include "../../lib/pugixml/pugixml.hpp"
-#include "../varios/Socket.h"
-#include "../varios/MensajeServidor.h"
+#include "../comunicacion/Socket.h"
+#include "../comunicacion/MensajeServidor.h"
 #include <string>
 #include "FondoModelo.h"
 
@@ -35,6 +35,7 @@ public:
 	void dejarDeBajar();
 	void pegar();
 	void saltar();
+	void congelar();
 	void realizarMovimientos(FondoModelo* fondo);
 	bool llegoAlFin(FondoModelo *fondo);
 	void movidaDePantalla(FondoModelo* fondo);

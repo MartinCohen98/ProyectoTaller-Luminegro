@@ -1,7 +1,7 @@
 #ifndef SRC_SERVIDOR_H_
 #define SRC_SERVIDOR_H_
 
-#include "Socket.h"
+#include "../comunicacion/Socket.h"
 #include "../modelos/ControlJugadoresModelo.h"
 #include "../modelos/ControlEnemigosModelo.h"
 #include "../modelos/ControlObjetosModelo.h"

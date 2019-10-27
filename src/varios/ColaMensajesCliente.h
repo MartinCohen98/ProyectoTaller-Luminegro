@@ -4,7 +4,7 @@
 #include <thread>
 #include <mutex>
 #include <queue>
-#include "MensajeCliente.h"
+#include "../comunicacion/MensajeCliente.h"
 
 class ColaMensajesCliente {
 

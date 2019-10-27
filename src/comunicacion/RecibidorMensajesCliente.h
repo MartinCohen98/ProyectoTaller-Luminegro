@@ -1,9 +1,9 @@
 #ifndef SRC_VARIOS_RECIBIDORMENSAJESCLIENTE_H_
 #define SRC_VARIOS_RECIBIDORMENSAJESCLIENTE_H_
 
-#include "Cola.h"
+#include "../varios/Cola.h"
 #include "Socket.h"
-#include "ColaMensajesCliente.h"
+#include "../varios/ColaMensajesCliente.h"
 
 class RecibidorMensajesCliente {
 
