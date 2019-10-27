@@ -78,6 +78,10 @@ void JugadorModelo::saltar() {
 	estado = estado->saltar();
 }
 
+void JugadorModelo::congelar() {
+    movimientoEnX=0;
+    movimientoEnY=0;
+}
 
 bool JugadorModelo::moverEnY() {
 	bool seMovio = false;

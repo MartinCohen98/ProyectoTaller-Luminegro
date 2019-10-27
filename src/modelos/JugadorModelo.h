@@ -35,6 +35,7 @@ public:
 	void dejarDeBajar();
 	void pegar();
 	void saltar();
+	void congelar();
 	void realizarMovimientos(FondoModelo* fondo);
 	bool llegoAlFin(FondoModelo *fondo);
 	void movidaDePantalla(FondoModelo* fondo);
