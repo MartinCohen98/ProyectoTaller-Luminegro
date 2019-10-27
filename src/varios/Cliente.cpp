@@ -206,7 +206,7 @@ void Cliente::recibirCantidadDeReceives() {
 
 
 bool Cliente::terminoElNivel() {
-	socket.recibir(mensajesServidor, 1);
+	socket.recibir(&mensajesServidor[0], 1);
 	return (mensajesServidor->estaDadoVuelta());
 }
 
