@@ -15,6 +15,7 @@ namespace Utiles {
         static bool EsNumero(const std::string &cadena);
         static bool IpValida(const std::string &dirIP);
         static std::vector<std::string> Split(const std::string &cadena, char separador);
+        static bool ExisteArchivo(const std::string &ruta);
     };
 
 }

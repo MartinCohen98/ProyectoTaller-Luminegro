@@ -3,6 +3,7 @@
 //
 
 #include "Common.h"
+#include <sys/stat.h>
 
 bool Utiles::Common::EsNumero(const std::string &cadena) {
     for (char c: cadena)
@@ -33,5 +34,10 @@ std::vector<std::string> Utiles::Common::Split(const std::string &cadena, char s
     }
     salida.push_back(cadena.substr(indice, cadena.length()));
     return salida;
+}
+
+bool Utiles::Common::ExisteArchivo(const std::string &ruta) {
+    struct stat buffer;
+    return stat(ruta.c_str(), &buffer) == 0;
 }
 

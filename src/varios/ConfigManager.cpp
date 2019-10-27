@@ -85,12 +85,20 @@ Estado ConfigManager::CargarArchivoConfiguracion() {
     }
     // Ve si tiene que buscar el config por defecto
     if (cargarArchivoConfigPorDefecto) {
-        archiConfigCarga = archivoConfig.load_file("config/default.xml");
+        string rutaConfig;
+
+        if(Common::ExisteArchivo("config/default.xml"))
+            rutaConfig = "config/default.xml";
+        else if(Common::ExisteArchivo("../config/default.xml"))
+            rutaConfig = "../config/default.xml";
+        else
+            rutaConfig = "default.xml";
+        archiConfigCarga = archivoConfig.load_file(rutaConfig.c_str());
 
         if (archiConfigCarga.status != 0) {
             // Rompió hasta el config por defecto, más no se puede hacer
             string mensajeError = "No se pudo abrir el archivo de configuración por defecto: \"";
-            mensajeError.append(argv[3]);
+            mensajeError.append(rutaConfig);
             mensajeError.append("\". Se detectó el problema en el byte " + to_string(archiConfigCarga.offset)
                                 + ". Mensaje de error: " + archiConfigCarga.description());
 
