@@ -1,6 +1,8 @@
 #include "Servidor.h"
+#include <iostream>
 
 using namespace std;
+using namespace Logger;
 
 Servidor::Servidor(int cantidadDeJugadores, char* puerto) {
 	jugadores = cantidadDeJugadores;
@@ -10,7 +12,8 @@ Servidor::Servidor(int cantidadDeJugadores, char* puerto) {
 		// Ya fue logueado en la clase
 		return;
 	}
-
+    Log::ObtenerInstancia()->Debug("Esperando conexiones");
+	cout << "Esperando conexión de clientes en el puerto " << puerto << endl;
 	// ESTO SE LLAMA CON UNA INSTANCIA NUEVA DE "Socket" POR CADA JUGADOR QUE SE NOS CONECTA
 	for (int i = 0; i < jugadores; i++) {
 		resultadoAccion = socketAceptador.esperarYAceptarCliente(&socketsDeClientes[i]);
@@ -19,12 +22,13 @@ Servidor::Servidor(int cantidadDeJugadores, char* puerto) {
 			socketAceptador.cerrar();
 			return;
 		}
+		cout << "Cliente conectado" << endl;
 	}
 	mensajesServidor = NULL;
 	cantidadDeMensajes = 0;
 }
 
-void Servidor::correr(pugi::xml_document* archiConfig) {
+void Servidor::Correr(pugi::xml_document* archiConfig) {
 	Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
 
 	bool nivelTerminado;

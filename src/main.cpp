@@ -59,10 +59,10 @@ int main (int argc, char** argv) {
                 .child_value("jugadoresCantidad");
 
         int jugadoresCantidadInt = std::stoi(jugadoresCantidad);
-
+        logueador->Debug("Cantidad de jugadores esperada: " + jugadoresCantidad);
         Servidor servidor(jugadoresCantidadInt, (char *) configManager.PuertoServidor().c_str());
 
-        servidor.correr(&configManager.archivoConfig);
+        servidor.Correr(&configManager.archivoConfig);
 
     } else if (configManager.ModoAplicacion() == Modo::Cliente) {
         // CLIENTE

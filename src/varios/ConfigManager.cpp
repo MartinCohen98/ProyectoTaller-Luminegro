@@ -58,7 +58,6 @@ Estado ConfigManager::ValidarParametros() {
     return resultado;
 }
 
-
 Estado ConfigManager::CargarArchivoConfiguracion() {
     // Archivo de configuración
     pugi::xml_parse_result archiConfigCarga;
@@ -113,9 +112,8 @@ ConfigManager::ConfigManager(int argc, char **argv) {
     this->argc = argc;
     this->argv = argv;
     this->archivoConfig.empty();
+    this->modo = Modo::Simple;
 }
-
-
 
 void ConfigManager::MostrarUsoPrograma() {
     cout << "--------------------------------" << endl;

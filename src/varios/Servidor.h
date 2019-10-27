@@ -19,7 +19,7 @@ private:
 
 public:
 	Servidor(int cantidadDeJugadores, char* puerto);
-	void correr(pugi::xml_document* archiConfig);
+	void Correr(pugi::xml_document* archiConfig);
 	virtual ~Servidor();
 
 private:
