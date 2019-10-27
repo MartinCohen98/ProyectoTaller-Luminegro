@@ -1,4 +1,4 @@
-#include <comunicacion/MensajeCredenciales.h>
+#include "../comunicacion/MensajeCredenciales.h"
 #include "VentanaClienteInicioSesion.h"
 
 VentanaClienteInicioSesion::VentanaClienteInicioSesion() {

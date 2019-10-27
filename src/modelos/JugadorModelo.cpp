@@ -107,6 +107,7 @@ void JugadorModelo::realizarMovimientos(FondoModelo* fondo) {
 			estado = estado->parar();
 		}
 	}
+	actualizarInsercion();
 }
 
 
@@ -122,7 +123,6 @@ void JugadorModelo::actualizarPosicion(FondoModelo* fondo) {
 			estado = estado->parar();
 		}
 	}
-	actualizarInsercion();
 }
 
 
