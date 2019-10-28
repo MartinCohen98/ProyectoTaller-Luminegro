@@ -13,3 +13,10 @@ En **CLion** (y puede que en otros IDEs) no encuentra la biblioteca de SDL2_ttf.
 Y una vez aquí, ejecutar:
 
 `sudo cp libSDL2_ttf-2.0.so libSDL_ttf.so`
+
+---
+Para la conexión cableada, una vez conectadas las máquinas configurar la conexión:
+
+Ejemplo:
+En Cableado, agregar un perfil con **+**, y ahí en la solapa IPv4, seleccionar método manual.
+Dentro del cuadro que se abre, cargar en dirección, por ej. `192.168.1.1`. En máscara de red va `255.255.255.0` y en puerta de enlace `0.0.0.0`   
