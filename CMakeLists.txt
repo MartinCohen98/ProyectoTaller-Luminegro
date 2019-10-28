@@ -107,6 +107,8 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/GestorThreadsCliente.h
         src/comunicacion/EnviadorMensajesCliente.cpp
         src/comunicacion/EnviadorMensajesCliente.h
+        src/varios/ColaMensajesServidor.cpp
+        src/varios/ColaMensajesServidor.h
         
 
         src/vistas/VistaEnemigo.cpp

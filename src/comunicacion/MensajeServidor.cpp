@@ -9,8 +9,10 @@ MensajeServidor::MensajeServidor() {
 
 void MensajeServidor::generarMensaje(Encuadre* unFrame,
 		Encuadre* unaInsercion, tipoDeSprite tipo) {
-	frame = *unFrame;
-	insercion = *unaInsercion;
+	if (unFrame != NULL)
+		frame = *unFrame;
+	if (unaInsercion != NULL)
+		insercion = *unaInsercion;
 	sprite = tipo;
 	dadoVuelta = false;
 }
