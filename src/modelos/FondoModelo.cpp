@@ -60,6 +60,10 @@ bool FondoModelo::consultarFin() {
 	return (fin && !movido);
 }
 
+int FondoModelo::darInicioTerreno(){
+    return encuadres[3].getX();
+}
+
 
 int FondoModelo::obtenerAncho() {
 	return limite;

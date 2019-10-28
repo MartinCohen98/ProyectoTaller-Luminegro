@@ -12,6 +12,7 @@ public:
 	EstadoJugador* agacharse();
 	EstadoJugador* pegar();
 	EstadoJugador* saltar();
+    EstadoJugador* congelarse();
 	bool puedeMoverse();
 	virtual ~EstadoJugadorAgachado();
 };

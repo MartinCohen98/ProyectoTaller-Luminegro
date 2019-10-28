@@ -71,20 +71,22 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
          }
       }
       else {
-            jugadores[numeroDeJugador]->congelar();
+            jugadores[numeroDeJugador]->congelarse();
         }
 }
 
 
 void ControlJugadoresModelo::realizarMovimientos(FondoModelo* fondo) {
+    bool rezagado = verificarRezagado(fondo);
 	for (int i = 0; i < cantidad; i++){
-		jugadores[i]->realizarMovimientos(fondo);
+		jugadores[i]->realizarMovimientos(fondo, rezagado);
 	}
 }
 
 
 void ControlJugadoresModelo::movidaDePantalla(FondoModelo* fondo) {
-	for (int i = 0; i < cantidad; i++) {
+
+    for (int i = 0; i < cantidad; i++) {
 		jugadores[i]->movidaDePantalla(fondo);
 	}
 }
@@ -107,6 +109,14 @@ bool ControlJugadoresModelo::llegaronAlFin(FondoModelo* fondo) {
 	return retorno;
 }
 
+bool ControlJugadoresModelo::verificarRezagado(FondoModelo* fondo){
+    bool rezagado=false;
+    for (int i = 0; i < cantidad; i++) {
+        if (jugadores[i]->darPosicion() <= fondo->darInicioTerreno()-600)
+            rezagado = true;
+       }
+    return rezagado;
+    }
 
 ControlJugadoresModelo::~ControlJugadoresModelo() {
 	for (int i = 0; i < cantidad; i++) {

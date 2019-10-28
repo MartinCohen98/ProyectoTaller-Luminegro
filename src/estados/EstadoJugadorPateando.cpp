@@ -45,6 +45,11 @@ EstadoJugador* EstadoJugadorPateando::saltar() {
 	return pegar();
 }
 
+EstadoJugador* EstadoJugadorPateando::congelarse() {
+    delete this;
+    return (new EstadoJugadorCongelado());
+}
+
 void EstadoJugadorPateando::cambiarFrame() {
 	frameCambiada = true;
 	frameActual.modificar(0, 320, ancho, alto);

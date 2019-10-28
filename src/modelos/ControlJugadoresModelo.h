@@ -16,6 +16,7 @@ public:
 	void movidaDePantalla(FondoModelo* fondo);
 	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
 	bool llegaronAlFin(FondoModelo* fondo);
+	bool verificarRezagado(FondoModelo* fondo);
 	virtual ~ControlJugadoresModelo();
 };
 

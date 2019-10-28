@@ -43,6 +43,11 @@ EstadoJugador* EstadoJugadorSaltando::saltar() {
 	}
 }
 
+EstadoJugador* EstadoJugadorSaltando::congelarse() {
+    delete this;
+    return (new EstadoJugadorCongelado());
+}
+
 int EstadoJugadorSaltando::obtenerElevacion() {
 	return elevacion;
 }

@@ -25,6 +25,7 @@ public:
 	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
 	bool seMovio();
 	bool consultarFin();
+	int darInicioTerreno();
 	virtual ~FondoModelo();
 
 };

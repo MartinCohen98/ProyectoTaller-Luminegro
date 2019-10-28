@@ -78,9 +78,10 @@ void JugadorModelo::saltar() {
 	estado = estado->saltar();
 }
 
-void JugadorModelo::congelar() {
+void JugadorModelo::congelarse() {
     movimientoEnX=0;
     movimientoEnY=0;
+    estado = estado ->congelarse();
 }
 
 bool JugadorModelo::moverEnY() {
@@ -97,9 +98,9 @@ bool JugadorModelo::moverEnY() {
 }
 
 
-void JugadorModelo::realizarMovimientos(FondoModelo* fondo) {
+void JugadorModelo::realizarMovimientos(FondoModelo* fondo, bool rezagado) {
 	if (estado->puedeMoverse()) {
-		actualizarPosicion(fondo);
+		actualizarPosicion(fondo, rezagado);
 	} else {
 		if (agachado) {
 			estado = estado->agacharse();
@@ -111,8 +112,8 @@ void JugadorModelo::realizarMovimientos(FondoModelo* fondo) {
 }
 
 
-void JugadorModelo::actualizarPosicion(FondoModelo* fondo) {
-	bool seMovioEnX = moverEnX(fondo);
+void JugadorModelo::actualizarPosicion(FondoModelo* fondo, bool rezagado) {
+	bool seMovioEnX = moverEnX(fondo, rezagado);
 	bool seMovioEnY = moverEnY();
 	if (seMovioEnX || seMovioEnY) {
 		estado = estado->avanzar();
@@ -138,7 +139,7 @@ void JugadorModelo::actualizarInsercion() {
 	}
 }
 
-bool JugadorModelo::moverEnX(FondoModelo* fondo) {
+bool JugadorModelo::moverEnX(FondoModelo* fondo, bool rezagado) {
 	bool seMovio = false;
 	int movimiento = movimientoEnX;
 	if (estado->estaSaltando())
@@ -148,8 +149,11 @@ bool JugadorModelo::moverEnX(FondoModelo* fondo) {
 		if ((posicionX < posicionXMaxima) || fondo->consultarFin()) {
 			posicionX = posicionX + movimiento;
 		} else {
-			fondo->mover();
+            if (!rezagado) {
+              fondo->mover();
+           }
 		}
+
 		seMovio = true;
 	}
 	if	((posicionX > 0) && (movimiento < 0)) {
@@ -214,6 +218,9 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
 	(*mensajeActual)++;
 }
 
+int JugadorModelo::darPosicion(){
+    return posicionX;
+}
 
 JugadorModelo::~JugadorModelo() {}
 

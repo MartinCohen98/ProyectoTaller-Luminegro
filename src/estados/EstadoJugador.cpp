@@ -29,6 +29,10 @@ EstadoJugador* EstadoJugador::saltar() {
 	return NULL;
 }
 
+EstadoJugador* EstadoJugador::congelarse() {
+    return NULL;
+}
+
 bool EstadoJugador::estaSaltando() {
 	return false;
 }

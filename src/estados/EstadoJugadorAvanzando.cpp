@@ -37,6 +37,11 @@ EstadoJugador* EstadoJugadorAvanzando::saltar() {
 	return (new EstadoJugadorSaltando());
 }
 
+EstadoJugador* EstadoJugadorAvanzando::congelarse() {
+    delete this;
+    return (new EstadoJugadorCongelado());
+}
+
 void EstadoJugadorAvanzando::cambiarFrame() {
 	if (numeroDeFrame == 5) {
 		numeroDeFrame = 0;
