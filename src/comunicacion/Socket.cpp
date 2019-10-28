@@ -221,44 +221,6 @@ int Socket::enviar(MensajeCredenciales* mensaje) {
 }
 
 
-int Socket::enviar(int* datos, int* cantidadDeBytes) {
-    Logger::Log *logueador = Logger::Log::ObtenerInstancia();
-
-    bool hayUnErrorDeSocket = false;
-    bool elSocketRemotoEstaCerrado = false;
-
-    int bytesEnviados = 0;
-    int resultadoAccion;
-
-    while (bytesEnviados < *cantidadDeBytes && !hayUnErrorDeSocket && !elSocketRemotoEstaCerrado) {
-
-        resultadoAccion = send(numero, &datos[bytesEnviados], *cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
-
-        if (resultadoAccion < 0) {
-            std::string mensajeError = "Clase Socket - Método enviar(int* datos ...) - Error en send(): ";
-            mensajeError.append(strerror(errno));
-
-            logueador->Error(mensajeError);
-
-            hayUnErrorDeSocket = true;
-
-        } else if (resultadoAccion == 0) {
-            elSocketRemotoEstaCerrado = true;
-
-        } else {
-            bytesEnviados += resultadoAccion;
-        }
-    }
-
-    if (elSocketRemotoEstaCerrado || hayUnErrorDeSocket) {
-        cerrar();
-        return EXIT_FAILURE;
-    }
-
-    return EXIT_SUCCESS;
-}
-
-
 int Socket::enviar(MensajeCliente* mensaje) {
 	Logger::Log *logueador = Logger::Log::ObtenerInstancia();
 
@@ -301,7 +263,7 @@ int Socket::enviar(MensajeCliente* mensaje) {
 }
 
 
-int Socket::enviar(MensajeServidor* mensajes, int cantidad) {
+int Socket::enviar(MensajeServidor* mensajes) {
 	Logger::Log *logueador = Logger::Log::ObtenerInstancia();
 
     bool hayUnErrorDeSocket = false;
@@ -309,7 +271,7 @@ int Socket::enviar(MensajeServidor* mensajes, int cantidad) {
 
     char* datos = (char*) mensajes;
     int bytesEnviados = 0;
-    int cantidadDeBytes = (sizeof(MensajeServidor) * cantidad);
+    int cantidadDeBytes = sizeof(MensajeServidor);
     int resultadoAccion;
 
     while (bytesEnviados < cantidadDeBytes && !hayUnErrorDeSocket && !elSocketRemotoEstaCerrado) {
@@ -327,42 +289,6 @@ int Socket::enviar(MensajeServidor* mensajes, int cantidad) {
             std::string mensajeError = "Clase Socket - Método enviar(MensajeServidor* mensaje) - Error en send(): ";
             mensajeError.append(strerror(errno));
             logueador->Error(mensajeError);
-
-        } else if (resultadoAccion == 0) {
-            elSocketRemotoEstaCerrado = true;
-
-        } else {
-            bytesEnviados += resultadoAccion;
-        }
-    }
-    if (elSocketRemotoEstaCerrado || hayUnErrorDeSocket) {
-        cerrar();
-        return EXIT_FAILURE;
-    }
-    return EXIT_SUCCESS;
-}
-
-int Socket::enviar(int unNumero) {
-	Logger::Log *logueador = Logger::Log::ObtenerInstancia();
-
-    bool hayUnErrorDeSocket = false;
-    bool elSocketRemotoEstaCerrado = false;
-
-    char* datos = (char*) &unNumero;
-    int bytesEnviados = 0;
-    int cantidadDeBytes = sizeof(int);
-    int resultadoAccion;
-
-    while (bytesEnviados < cantidadDeBytes && !hayUnErrorDeSocket && !elSocketRemotoEstaCerrado) {
-
-        resultadoAccion = send(numero, &datos[bytesEnviados], cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
-
-        if (resultadoAccion < 0) {
-            std::string mensajeError = "Clase Socket - Método enviar(int unNumero) - Error en send(): ";
-            mensajeError.append(strerror(errno));
-            logueador->Error(mensajeError);
-
-            hayUnErrorDeSocket = true;
 
         } else if (resultadoAccion == 0) {
             elSocketRemotoEstaCerrado = true;
@@ -414,33 +340,6 @@ int Socket::recibir(MensajeCredenciales *mensaje) {
     return recibido;
 }
 
-
-int Socket::recibir(unsigned char(*datos), int* tamanoMaximo, bool* elSocketEsValido) {
-    Logger::Log *logueador = Logger::Log::ObtenerInstancia();
-
-    int recibido = 0;
-    int resultadoAccion = 0;
-
-    while (recibido < *tamanoMaximo && *elSocketEsValido) {
-        int bytesCantidadMaximaParaRecibir = *tamanoMaximo - recibido;
-
-        resultadoAccion = recv(numero, &datos[recibido], bytesCantidadMaximaParaRecibir,MSG_NOSIGNAL);
-
-        if (resultadoAccion == 0) {
-            // Nos cerraron el socket
-            *elSocketEsValido = false;
-
-        } else if (resultadoAccion < 0) {
-            // Hubo un error
-            std::string error = "Clase Socket - Método recibir(unsigned char(*datos), ...) - Error en recv()";
-            logueador->Error(error);
-            return EXIT_FAILURE;
-        } else {
-            recibido += resultadoAccion;
-        }
-    }
-    return recibido;
-}
 
 
 int Socket::recibir(MensajeCliente* mensaje) {
@@ -509,65 +408,6 @@ int Socket::recibir(MensajeServidor* mensaje) {
     return recibido;
 }
 
-
-int Socket::recibir(MensajeServidor* mensaje, int cantidad) {
-    Logger::Log *logueador = Logger::Log::ObtenerInstancia();
-
-    int recibido = 0;
-    int resultadoAccion = 0;
-    int tamanoMaximo = sizeof(MensajeServidor) * cantidad;
-    char* datos = (char*) mensaje;
-
-    while (recibido < tamanoMaximo) {
-        int bytesCantidadMaximaParaRecibir = tamanoMaximo - recibido;
-
-        resultadoAccion = recv(numero, &datos[recibido], bytesCantidadMaximaParaRecibir,MSG_NOSIGNAL);
-
-        if (resultadoAccion == 0) {
-            // Nos cerraron el socket
-            return EXIT_FAILURE;
-
-        } else if (resultadoAccion < 0) {
-            // Hubo un error
-            std::string mensajeError = "Clase Socket - Método recibir(MensajeServidor* mensaje) - Error en recv(): ";
-            mensajeError.append(strerror(errno));
-            logueador->Error(mensajeError);
-            return EXIT_FAILURE;
-        } else {
-            recibido += resultadoAccion;
-        }
-    }
-    return recibido;
-}
-
-
-int Socket::recibir(int* unNumero) {
-    Logger::Log *logueador = Logger::Log::ObtenerInstancia();
-
-    int recibido = 0;
-    int resultadoAccion = 0;
-    int tamanoMaximo = sizeof(int);
-    char* datos = (char*) unNumero;
-
-    while (recibido < tamanoMaximo) {
-        int bytesCantidadMaximaParaRecibir = tamanoMaximo - recibido;
-
-        resultadoAccion = recv(numero, &datos[recibido], bytesCantidadMaximaParaRecibir,MSG_NOSIGNAL);
-
-        if (resultadoAccion == 0) {
-            // Nos cerraron el socket
-            return EXIT_FAILURE;
-
-        } else if (resultadoAccion < 0) {
-            // Hubo un error
-            logueador->Error("Clase Socket - Método recibir(int* unNumero) - Error en recv()");
-            return EXIT_FAILURE;
-        } else {
-            recibido += resultadoAccion;
-        }
-    }
-    return recibido;
-}
 
 
 int Socket::getEstado() {

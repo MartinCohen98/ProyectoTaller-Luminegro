@@ -65,7 +65,7 @@ void Servidor::Correr(pugi::xml_document* archiConfig) {
 		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 		ControlObjetosModelo controlObjetos(archiConfig, fondo.obtenerAncho(), nivel);
 
-		enviarCantidadDeReceives(&controlEnemigos, &controlObjetos);
+		enviarCantidadDeReceives(&controlEnemigos, &controlObjetos, &gestorThreads);
 
 		generarMensajesParaEnviar();
 
@@ -81,12 +81,13 @@ void Servidor::Correr(pugi::xml_document* archiConfig) {
 				controlObjetos.movidaDePantalla();
 			}
 
-			enviarEncuadres(&protagonistas, &fondo, &controlEnemigos,
+			generarMensajes(&protagonistas, &fondo, &controlEnemigos,
 								&controlObjetos);
+			enviarMensajes(&gestorThreads);
 
 			nivelTerminado = protagonistas.llegaronAlFin(&fondo);
 
-			enviarMensajeDeNivelTerminado(nivelTerminado);
+			enviarMensajeDeNivelTerminado(nivelTerminado, &gestorThreads);
 
 			SDL_Delay(25);
 		}
@@ -105,7 +106,8 @@ void Servidor::recibirInputs(ControlJugadoresModelo* protagonistas,
 }
 
 void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
-							ControlObjetosModelo* objetos) {
+							ControlObjetosModelo* objetos,
+							GestorThreadsServidor* gestorThreads) {
 
 	cantidadDeMensajes = jugadores + objetos->obtenerCantidad()
 					+ enemigos->obtenerCantidad();
@@ -113,14 +115,10 @@ void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 	Encuadre frame(cantidadDeMensajes, 0, 0, 0);
 	MensajeServidor mensaje;
 	mensaje.generarMensaje(&frame, &insercion, Jugador1);
-	for (int i = 0; i < jugadores; i++) {
-        if (socketsDeClientes[i].getEstado() == Socket::ESTADO_CONECTADO) {
-            socketsDeClientes[i].enviar(&mensaje, 1);
-        }
-    }
+	gestorThreads->enviarMensaje(&mensaje);
 }
 
-void Servidor::enviarEncuadres(ControlJugadoresModelo* protagonistas,
+void Servidor::generarMensajes(ControlJugadoresModelo* protagonistas,
 		FondoModelo* fondo, ControlEnemigosModelo* enemigos,
 		ControlObjetosModelo* objetos) {
     
@@ -130,24 +128,23 @@ void Servidor::enviarEncuadres(ControlJugadoresModelo* protagonistas,
 	protagonistas->generarMensajes(mensajesServidor, &mensajeActual);
 	enemigos->generarMensajes(mensajesServidor, &mensajeActual);
 	objetos->generarMensajes(mensajesServidor, &mensajeActual);
-	for (int i = 0; i < jugadores; i++) {
-		if (socketsDeClientes[i].getEstado() == Socket::ESTADO_CONECTADO) {
-			socketsDeClientes[i].enviar(mensajesServidor, cantidadDeMensajes + 3);
-		}
+}
+
+
+void Servidor::enviarMensajes(GestorThreadsServidor* gestorThreads) {
+	for (int i = 0; i < (cantidadDeMensajes + 3); i++) {
+		gestorThreads->enviarMensaje(&mensajesServidor[i]);
 	}
 }
 
 
-void Servidor::enviarMensajeDeNivelTerminado(bool nivelTerminado) {
+void Servidor::enviarMensajeDeNivelTerminado(bool nivelTerminado,
+							GestorThreadsServidor* gestorThreads) {
 	MensajeServidor mensaje;
 	if (nivelTerminado) {
 		mensaje.darVuelta();
 	}
-    for (int i = 0; i < jugadores; i++) {
-        if (socketsDeClientes[i].getEstado() == Socket::ESTADO_CONECTADO) {
-            socketsDeClientes[i].enviar(&mensaje, 1);
-        }
-    }
+	gestorThreads->enviarMensaje(&mensaje);
 }
 
 

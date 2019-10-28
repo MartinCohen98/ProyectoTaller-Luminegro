@@ -25,10 +25,13 @@ private:
 	void recibirInputs(ControlJugadoresModelo* protagonistas,
 						GestorThreadsServidor* gestorThreads);
 	void enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
-							ControlObjetosModelo* objetos);
-	void enviarEncuadres(ControlJugadoresModelo* protagonistas, FondoModelo* fondo,
+							ControlObjetosModelo* objetos,
+							GestorThreadsServidor* gestorThreads);
+	void generarMensajes(ControlJugadoresModelo* protagonistas, FondoModelo* fondo,
 			ControlEnemigosModelo* enemigos, ControlObjetosModelo* objetos);
-	void enviarMensajeDeNivelTerminado(bool nivelTerminado);
+	void enviarMensajes(GestorThreadsServidor* gestorThreads);
+	void enviarMensajeDeNivelTerminado(bool nivelTerminado,
+							GestorThreadsServidor* gestorThreadds);
 	void generarMensajesParaEnviar();
 
 public:

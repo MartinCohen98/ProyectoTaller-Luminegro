@@ -111,6 +111,8 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/ColaMensajesServidor.h
         src/comunicacion/RecibidorMensajesServidor.cpp
         src/comunicacion/RecibidorMensajesServidor.h
+        src/comunicacion/EnviadorMensajesServidor.cpp
+        src/comunicacion/EnviadorMensajesServidor.h
         
 
         src/vistas/VistaEnemigo.cpp

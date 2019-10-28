@@ -32,12 +32,11 @@ public:
     int enviar(MensajeCredenciales *mensaje);
     int enviar(int* datos, int* cantidadDeBytes);
     int enviar(MensajeCliente* mensaje);
-    int enviar(MensajeServidor* mensajes, int cantidad);
+    int enviar(MensajeServidor* mensajes);
     int enviar(int unNumero);
     int recibir(MensajeCredenciales *mensaje);
     int recibir(unsigned char* datos, int* tamanoMaximo, bool* elSocketEsValido);
     int recibir(MensajeCliente* mensaje);
-    int recibir(MensajeServidor* mensaje, int cantidad);
     int recibir(MensajeServidor* mensaje);
     int recibir(int* unNumero);
     int getEstado();
