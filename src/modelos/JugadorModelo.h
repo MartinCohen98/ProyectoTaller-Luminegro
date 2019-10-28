@@ -35,18 +35,19 @@ public:
 	void dejarDeBajar();
 	void pegar();
 	void saltar();
-	void congelar();
-	void realizarMovimientos(FondoModelo* fondo);
+	void congelarse();
+	void realizarMovimientos(FondoModelo* fondo, bool rezagado);
 	bool llegoAlFin(FondoModelo *fondo);
 	void movidaDePantalla(FondoModelo* fondo);
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual,
 							int numeroSprite);
+	int darPosicion();
 	virtual ~JugadorModelo();
 
 private:
-	void actualizarPosicion(FondoModelo* fondo);
+	void actualizarPosicion(FondoModelo* fondo, bool rezagado);
 	void actualizarInsercion();
-	bool moverEnX(FondoModelo* fondo);
+	bool moverEnX(FondoModelo* fondo, bool rezagado);
 	bool moverEnY();
 	bool movioAlFondo(FondoModelo* fondo);
 	int escalar(int tamanio);

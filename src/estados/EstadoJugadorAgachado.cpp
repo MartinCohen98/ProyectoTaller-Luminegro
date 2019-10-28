@@ -29,6 +29,11 @@ EstadoJugador* EstadoJugadorAgachado::saltar() {
 	return (new EstadoJugadorSaltando());
 }
 
+EstadoJugador* EstadoJugadorAgachado::congelarse() {
+    delete this;
+    return (new EstadoJugadorCongelado());
+}
+
 bool EstadoJugadorAgachado::puedeMoverse() {
 	return false;
 }

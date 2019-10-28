@@ -30,5 +30,10 @@ EstadoJugador* EstadoJugadorParado::saltar() {
 	return (new EstadoJugadorSaltando());
 }
 
+EstadoJugador* EstadoJugadorParado::congelarse() {
+    delete this;
+    return (new EstadoJugadorCongelado());
+}
+
 EstadoJugadorParado::~EstadoJugadorParado() {}
 

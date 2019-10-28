@@ -2,6 +2,7 @@
 #define SRC_ESTADOJUGADORAVANZANDO_H_
 
 #include "EstadoJugadorParado.h"
+#include "EstadoJugadorCongelado.h"
 
 class EstadoJugadorAvanzando: public EstadoJugador {
 
@@ -16,6 +17,7 @@ public:
 	EstadoJugador* agacharse();
 	EstadoJugador* pegar();
 	EstadoJugador* saltar();
+	EstadoJugador* congelarse();
 	virtual ~EstadoJugadorAvanzando();
 
 private:
