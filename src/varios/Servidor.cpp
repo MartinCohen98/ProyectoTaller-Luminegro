@@ -30,34 +30,7 @@ void Servidor::validarCredenciales(MensajeCredenciales *mensajeCredenciales) {
 Servidor::Servidor(int cantidadDeJugadores, char* puerto) {
 	jugadores = cantidadDeJugadores;
 	socketsDeClientes = new Socket[cantidadDeJugadores];
-	int resultadoAccion = socketAceptador.servidorInicializar(puerto);
-	if (resultadoAccion == 1) {
-		// Ya fue logueado en la clase
-		return;
-	}
-    Log::ObtenerInstancia()->Debug("Esperando conexiones");
-
-    MensajeCredenciales mensajeCredenciales;
-
-	cout << "Esperando conexión de clientes en el puerto " << puerto << endl;
-	// ESTO SE LLAMA CON UNA INSTANCIA NUEVA DE "Socket" POR CADA JUGADOR QUE SE NOS CONECTA
-	for (int i = 0; i < jugadores; i++) {
-		resultadoAccion = socketAceptador.esperarYAceptarCliente(&socketsDeClientes[i]);
-		if (resultadoAccion == EXIT_FAILURE) {
-			// Ya fue logueado en la clase
-			socketAceptador.cerrar();
-			return;
-        } else {
-            mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_NO_AUTENTICADO);
-
-            while (mensajeCredenciales.getEstado() == MensajeCredenciales::ESTADO_NO_AUTENTICADO) {
-                resultadoAccion = socketsDeClientes[i].recibir(&mensajeCredenciales);
-                validarCredenciales(&mensajeCredenciales);
-                resultadoAccion = socketsDeClientes[i].enviar(&mensajeCredenciales);
-            }
-        }
-		cout << "Cliente conectado" << endl;
-	}
+	this->puerto = puerto;
 	mensajesServidor = NULL;
 	cantidadDeMensajes = 0;
 }
@@ -188,5 +161,35 @@ Servidor::~Servidor() {
 	delete[] socketsDeClientes;
 	if (mensajesServidor != NULL)
 		delete[] mensajesServidor;
+}
+
+int Servidor::AbrirSesion() {
+    return socketAceptador.servidorInicializar(puerto);
+}
+
+int Servidor::EsperarConexiones() {
+    int resultadoAccion;
+    MensajeCredenciales mensajeCredenciales;
+
+    cout << "Esperando conexión de clientes en el puerto " << puerto << endl;
+    // ESTO SE LLAMA CON UNA INSTANCIA NUEVA DE "Socket" POR CADA JUGADOR QUE SE NOS CONECTA
+    for (int i = 0; i < jugadores; i++) {
+        resultadoAccion = socketAceptador.esperarYAceptarCliente(&socketsDeClientes[i]);
+        if (resultadoAccion == EXIT_FAILURE) {
+            // Ya fue logueado en la clase
+            socketAceptador.cerrar();
+            return resultadoAccion;
+        } else {
+            mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_NO_AUTENTICADO);
+
+            while (mensajeCredenciales.getEstado() == MensajeCredenciales::ESTADO_NO_AUTENTICADO) {
+                resultadoAccion = socketsDeClientes[i].recibir(&mensajeCredenciales);
+                validarCredenciales(&mensajeCredenciales);
+                resultadoAccion = socketsDeClientes[i].enviar(&mensajeCredenciales);
+            }
+        }
+        cout << "Cliente conectado" << endl;
+    }
+    return resultadoAccion;
 }
 

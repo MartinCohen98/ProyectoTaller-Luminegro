@@ -17,6 +17,7 @@ private:
 	int cantidadDeMensajes;
 	Socket socketAceptador;
 	Socket* socketsDeClientes;
+	char *puerto;
 
 
 private:
@@ -32,6 +33,8 @@ private:
 
 public:
     Servidor(int cantidadDeJugadores, char* puerto);
+    int AbrirSesion();
+    int EsperarConexiones();
     void Correr(pugi::xml_document* archiConfig);
     virtual ~Servidor();
 
