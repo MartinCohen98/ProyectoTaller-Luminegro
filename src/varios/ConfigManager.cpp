@@ -58,7 +58,6 @@ Estado ConfigManager::ValidarParametros() {
     return resultado;
 }
 
-
 Estado ConfigManager::CargarArchivoConfiguracion() {
     // Archivo de configuración
     pugi::xml_parse_result archiConfigCarga;
@@ -113,9 +112,8 @@ ConfigManager::ConfigManager(int argc, char **argv) {
     this->argc = argc;
     this->argv = argv;
     this->archivoConfig.empty();
+    this->modo = Modo::Simple;
 }
-
-
 
 void ConfigManager::MostrarUsoPrograma() {
     cout << "--------------------------------" << endl;
@@ -127,25 +125,8 @@ void ConfigManager::MostrarUsoPrograma() {
     cout << "\t./<ejecutable> cliente <ipServidor:puerto> <(opcional)ruta config> <(opcional)nivel logl>" << endl;
 }
 
-void ConfigManager::MostrarError(Estado estado) {
-    switch(estado){
-        case Estado::ErrorParametrosIncorrectos:
-            cout << "ERROR: Parámetros de invocación incorrectos" << endl;
-            break;
-        case Estado::ErrorFaltanParametros:
-            cout << "ERROR: Faltan parámetros de invocación" << endl;
-            break;
-        case Estado::ErrorArchivoConfiguracion:
-            cout << "ERROR: No se pudo abrir el archivo de configuración" << endl;
-            break;
-        case Estado::ErrorModoServidorPuertoInvalido:
-            cout << "ERROR: el parámetro ingresado como puerto es inválido" << endl;
-            break;
-        case Estado::ErrorModoClienteIpOPuertoInvalido:
-            cout << "ERROR: el parámetro ingresado como puerto:ip es inválido" << endl;
-        default:
-            break;
-    }
+void ConfigManager::MostrarError(Estado estado, string mensajeAux) {
+    cout << MensajesDeError(estado) << " " << mensajeAux;
 }
 
 void ConfigManager::ConfigurarLogger() {
@@ -184,4 +165,32 @@ std::string ConfigManager::PuertoServidor() {
 
 std::string ConfigManager::DireccionIpServidor() {
     return this->ip;
+}
+
+string ConfigManager::MensajesDeError(Estado estado) {
+    string mensaje = "";
+
+    switch (estado) {
+        case Estado::ErrorParametrosIncorrectos:
+            mensaje = "ERROR: Parámetros de invocación incorrectos";
+            break;
+        case Estado::ErrorFaltanParametros:
+            mensaje = "ERROR: Faltan parámetros de invocación";
+            break;
+        case Estado::ErrorArchivoConfiguracion:
+            mensaje = "ERROR: No se pudo abrir el archivo de configuración";
+            break;
+        case Estado::ErrorModoServidorPuertoInvalido:
+            mensaje = "ERROR: el parámetro ingresado como puerto es inválido";
+            break;
+        case Estado::ErrorModoClienteIpOPuertoInvalido:
+            mensaje = "ERROR: el parámetro ingresado como puerto:ip es inválido";
+            break;
+        case Estado::ErrorModoServidorNoPudoAbrirSesionEnPuerto:
+            mensaje = "ERROR: no se pudo abrir la conexión en el puerto indicado";
+            break;
+        default:
+            break;
+    }
+    return mensaje;
 }

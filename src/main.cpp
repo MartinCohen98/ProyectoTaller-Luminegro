@@ -52,17 +52,21 @@ int main (int argc, char** argv) {
 
     if (configManager.ModoAplicacion() == Modo::Servidor) {
         // SERVIDOR
-
         logueador->Info("Se inicia el juego en modo servidor, en puerto" + configManager.PuertoServidor());
 
         std::string jugadoresCantidad = configManager.archivoConfig.child("configuracion")
                 .child_value("jugadoresCantidad");
-
         int jugadoresCantidadInt = std::stoi(jugadoresCantidad);
-
+        logueador->Debug("Cantidad de jugadores esperada: " + jugadoresCantidad);
         Servidor servidor(jugadoresCantidadInt, (char *) configManager.PuertoServidor().c_str());
-
-        servidor.correr(&configManager.archivoConfig);
+        //Apertura del puerto para recibir clientes
+        if(servidor.AbrirSesion() == 1){
+            ConfigManager::MostrarError(Estado::ErrorModoServidorNoPudoAbrirSesionEnPuerto);
+            return  EXIT_FAILURE;
+        }
+        //Espera de conexión de clientes
+        servidor.EsperarConexiones();
+        servidor.Correr(&configManager.archivoConfig);
 
     } else if (configManager.ModoAplicacion() == Modo::Cliente) {
         // CLIENTE

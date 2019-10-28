@@ -6,7 +6,7 @@
 
 enum tipoDeSprite {Jugador1, Jugador2, Jugador3, Jugador4,
 	Enemigo1, Enemigo2, Enemigo3, Barril, Caja,
-	Cuchillo, Tubo
+	Cuchillo, Tubo, MensajeInvalido
 };
 
 class MensajeServidor {

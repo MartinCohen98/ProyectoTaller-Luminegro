@@ -1,30 +1,41 @@
 #include "Servidor.h"
+#include <iostream>
 
 using namespace std;
+using namespace Logger;
+
+
+void Servidor::validarCredenciales(MensajeCredenciales *mensajeCredenciales) {
+    string claveCorrecta;
+
+    string tmp = mensajeCredenciales->getUsuario();
+    char *usuario = (char*) &tmp;
+
+    if (strcmp(usuario, "mariano")) {
+        claveCorrecta = "cognitiva";
+    } else if (strcmp(usuario, "julio")) {
+        claveCorrecta = "conductual";
+    } else if (strcmp(usuario, "martin")) {
+        claveCorrecta = "gestalt";
+    } else if (strcmp(usuario, "nicolas")) {
+        claveCorrecta = "freud";
+    }
+
+    if (mensajeCredenciales->getClave() == claveCorrecta) {
+        mensajeCredenciales->setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);
+    }
+}
+
 
 Servidor::Servidor(int cantidadDeJugadores, char* puerto) {
 	jugadores = cantidadDeJugadores;
 	socketsDeClientes = new Socket[cantidadDeJugadores];
-	int resultadoAccion = socketAceptador.servidorInicializar(puerto);
-	if (resultadoAccion == 1) {
-		// Ya fue logueado en la clase
-		return;
-	}
-
-	// ESTO SE LLAMA CON UNA INSTANCIA NUEVA DE "Socket" POR CADA JUGADOR QUE SE NOS CONECTA
-	for (int i = 0; i < jugadores; i++) {
-		resultadoAccion = socketAceptador.esperarYAceptarCliente(&socketsDeClientes[i]);
-		if (resultadoAccion == EXIT_FAILURE) {
-			// Ya fue logueado en la clase
-			socketAceptador.cerrar();
-			return;
-		}
-	}
+	this->puerto = puerto;
 	mensajesServidor = NULL;
 	cantidadDeMensajes = 0;
 }
 
-void Servidor::correr(pugi::xml_document* archiConfig) {
+void Servidor::Correr(pugi::xml_document* archiConfig) {
 	Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
 
 	bool nivelTerminado;
@@ -153,5 +164,35 @@ Servidor::~Servidor() {
 	delete[] socketsDeClientes;
 	if (mensajesServidor != NULL)
 		delete[] mensajesServidor;
+}
+
+int Servidor::AbrirSesion() {
+    return socketAceptador.servidorInicializar(puerto);
+}
+
+int Servidor::EsperarConexiones() {
+    int resultadoAccion;
+    MensajeCredenciales mensajeCredenciales;
+
+    cout << "Esperando conexión de clientes en el puerto " << puerto << endl;
+    // ESTO SE LLAMA CON UNA INSTANCIA NUEVA DE "Socket" POR CADA JUGADOR QUE SE NOS CONECTA
+    for (int i = 0; i < jugadores; i++) {
+        resultadoAccion = socketAceptador.esperarYAceptarCliente(&socketsDeClientes[i]);
+        if (resultadoAccion == EXIT_FAILURE) {
+            // Ya fue logueado en la clase
+            socketAceptador.cerrar();
+            return resultadoAccion;
+        } else {
+            mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_NO_AUTENTICADO);
+
+            while (mensajeCredenciales.getEstado() == MensajeCredenciales::ESTADO_NO_AUTENTICADO) {
+                resultadoAccion = socketsDeClientes[i].recibir(&mensajeCredenciales);
+                validarCredenciales(&mensajeCredenciales);
+                resultadoAccion = socketsDeClientes[i].enviar(&mensajeCredenciales);
+            }
+        }
+        cout << "Cliente conectado" << endl;
+    }
+    return resultadoAccion;
 }
 

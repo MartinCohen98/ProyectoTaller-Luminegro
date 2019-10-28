@@ -9,55 +9,53 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	Logger::Log *logueador = Logger::Log::ObtenerInstancia();
 
-    VentanaClienteInicioSesion ventanaClienteInicioSesion;
+    VentanaClienteInicioSesion ventanaInicioSesion;
 
-    if (ventanaClienteInicioSesion.getEstado() == VentanaClienteInicioSesion::ESTADO_ERROR) {
+    if (ventanaInicioSesion.getEstado() == VentanaClienteInicioSesion::ESTADO_ERROR) {
         // Ya logueado en el objeto
         return EXIT_FAILURE;
     }
 
-    ventanaClienteInicioSesion.pedirCredenciales();
-
-    // INICIO - CODIGO DE EJEMPLO: la siguiente rutina simula cierta espera, da error de contraseña, pide
-    // credenciales nuevamente y finalmente hace como que conecta. */
-    /*
-    ventanaClienteInicioSesion.mostrarMensaje("Conectando...",
-                                              VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
-
-    ventanaClienteInicioSesion.demorar(2000);
-    ventanaClienteInicioSesion.mostrarMensaje("Error en clave, es usted hacker?",
-                                              VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
-    ventanaClienteInicioSesion.demorar(3000);
-    ventanaClienteInicioSesion.resetear();
-    ventanaClienteInicioSesion.pedirCredenciales();
-    ventanaClienteInicioSesion.mostrarMensaje("Conectando...",
-                                               VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
-
-    ventanaClienteInicioSesion.demorar(2000);
-    */
-    // FIN - CODIGO DE EJEMPLO
-
-    string usuario = ventanaClienteInicioSesion.getUsuario();
-    string clave = ventanaClienteInicioSesion.getClave();
-
-
-    MensajeCredenciales mensajeCredenciales;
-    mensajeCredenciales.setUsuario(usuario);
-    mensajeCredenciales.setClave(clave);
-
-    ventanaClienteInicioSesion.cerrar();
-
     conectar(direccionIP, puerto);
 
-    VentanaCliente ventana;
+    // Autenticar usuario
+    MensajeCredenciales mensajeCredenciales;
 
-    int retorno = ventana.abrir(archiConfig);
+    while (mensajeCredenciales.getEstado() == MensajeCredenciales::ESTADO_NO_AUTENTICADO) {
+
+        ventanaInicioSesion.pedirCredenciales();
+        ventanaInicioSesion.mostrarMensaje("Conectando...",
+                                           VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
+
+        string usuario = ventanaInicioSesion.getUsuario();
+        string clave = ventanaInicioSesion.getClave();
+        mensajeCredenciales.setUsuario(usuario);
+        mensajeCredenciales.setClave(clave);
+        socket.enviar(&mensajeCredenciales);
+        socket.recibir(&mensajeCredenciales);
+
+        if (mensajeCredenciales.getEstado() != MensajeCredenciales::ESTADO_AUTENTICADO) {
+
+            ventanaInicioSesion.mostrarMensaje("Error en usuario y/o clave, caballer@",
+                                               VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
+
+            ventanaInicioSesion.demorar(2000);
+            ventanaInicioSesion.resetear();
+        }
+    }
+
+    // Fue autenticado
+    ventanaInicioSesion.cerrar();
+
+    VentanaCliente ventanaJuego;
+
+    int retorno = ventanaJuego.abrir(archiConfig);
 	if (retorno == -1) {
-	   logueador->Error("No se pudo crear la ventana");
+	   logueador->Error("No se pudo crear la ventanaJuego");
 	}
 	bool salir;
 
-	Renderizador renderizador(ventana.get());
+	Renderizador renderizador(ventanaJuego.get());
 
 	GestorThreadsCliente gestorThreads(&socket);
 

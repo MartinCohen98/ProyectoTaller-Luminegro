@@ -10,7 +10,8 @@ namespace Utiles{
         ErrorParametrosIncorrectos,
         ErrorArchivoConfiguracion,
         ErrorModoServidorPuertoInvalido,
-        ErrorModoClienteIpOPuertoInvalido
+        ErrorModoClienteIpOPuertoInvalido,
+        ErrorModoServidorNoPudoAbrirSesionEnPuerto
     };
 
     enum class Modo{
@@ -26,11 +27,12 @@ namespace Utiles{
         Estado ValidarParametros();
         void ConfigurarLogger();
         static void MostrarUsoPrograma();
-        static void MostrarError(Estado estado);
+        static void MostrarError(Estado estado, std::string mensajeAux = "");
         pugi::xml_document archivoConfig;
         Modo ModoAplicacion();
         std::string PuertoServidor();
         std::string DireccionIpServidor();
+        static std::string MensajesDeError(Estado estado);
     private:
         int argc;
         char **argv;
