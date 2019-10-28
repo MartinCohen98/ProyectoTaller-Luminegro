@@ -38,6 +38,7 @@ public:
     int recibir(unsigned char* datos, int* tamanoMaximo, bool* elSocketEsValido);
     int recibir(MensajeCliente* mensaje);
     int recibir(MensajeServidor* mensaje, int cantidad);
+    int recibir(MensajeServidor* mensaje);
     int recibir(int* unNumero);
     int getEstado();
     int cerrar();

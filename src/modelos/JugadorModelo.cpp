@@ -155,6 +155,8 @@ bool JugadorModelo::moverEnX(FondoModelo* fondo) {
 	if	((posicionX > 0) && (movimiento < 0)) {
 		dadoVuelta = true;
 		posicionX = posicionX + movimiento;
+		if (posicionX < 0)
+			posicionX = 0;
 		seMovio = true;
 	}
 	return seMovio;
@@ -168,13 +170,15 @@ int JugadorModelo::escalar(int tamanio) {
 
 bool JugadorModelo::llegoAlFin(FondoModelo *fondo) {
 	return (fondo->consultarFin() &&
-			(posicionX == (800 - escalar(estado->obtenerAncho()))));
+			(posicionX >= 800));
 }
 
 
 void JugadorModelo::movidaDePantalla(FondoModelo* fondo) {
 	if (!movioAlFondo(fondo)) {
 		posicionX = posicionX - 10;
+		if (posicionX < 0)
+			posicionX = 0;
 	}
 }
 

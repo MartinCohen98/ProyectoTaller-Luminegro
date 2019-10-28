@@ -1,7 +1,6 @@
 #include "Cliente.h"
 
 Cliente::Cliente() {
-	mensajesServidor = NULL;
 	cantidadDeReceives = 0;
 }
 
@@ -59,7 +58,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	GestorThreadsCliente gestorThreads(&socket);
 
-	gestorThreads.comenzarAEnviar();
+	gestorThreads.comenzar();
 
 	for (int nivel = 1; nivel <= 2; nivel++) {
 
@@ -87,14 +86,13 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 		VistaObjeto cuchillo(&renderizador, archiConfig, Cuchillo);
 		VistaObjeto tubo(&renderizador, archiConfig, Tubo);
 
-		recibirCantidadDeReceives();
+		recibirCantidadDeReceives(&gestorThreads);
 
 		while (!salir) {
 	    	enviarInput(&gestorThreads);
 
-	    	recibirMensajes();
-	    	renderizarFondo(&fondo);
-	    	agregarMensajesALista();
+	    	renderizarFondo(&fondo, &gestorThreads);
+	    	recibirMensajes(&gestorThreads);
 
 	        while (!listaOrdenada.empty()) {
 	        	MensajeServidor mensaje;
@@ -139,7 +137,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	        renderizador.renderizar();
 
-	        if (terminoElNivel()) {
+	        if (terminoElNivel(&gestorThreads)) {
 	    		salir = true;
 	    	}
 		}
@@ -234,32 +232,32 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
 }
 
 
-void Cliente::renderizarFondo(VistaFondo* fondo) {
-	fondo->renderizarConLosMensajes(&mensajesServidor[0],
-			&mensajesServidor[1], &mensajesServidor[2]);
+void Cliente::renderizarFondo(VistaFondo* fondo,
+								GestorThreadsCliente* gestorThreads) {
+	MensajeServidor mensaje1 = gestorThreads->recibirMensaje();
+	MensajeServidor mensaje2 = gestorThreads->recibirMensaje();
+	MensajeServidor mensaje3 = gestorThreads->recibirMensaje();
+	fondo->renderizarConLosMensajes(&mensaje1, &mensaje2, &mensaje3);
 }
 
 
-void Cliente::recibirCantidadDeReceives() {
-	socket.recibir(&cantidadDeReceives);
-	mensajesServidor = new MensajeServidor[(cantidadDeReceives + 3)];
+void Cliente::recibirCantidadDeReceives(GestorThreadsCliente* gestorThreads) {
+	mensajeServidor = gestorThreads->recibirMensaje();
+	cantidadDeReceives = mensajeServidor.obtenerFrame()->getX();
 }
 
 
-bool Cliente::terminoElNivel() {
-	socket.recibir(&mensajesServidor[0], 1);
-	return (mensajesServidor->estaDadoVuelta());
+bool Cliente::terminoElNivel(GestorThreadsCliente* gestorThreads) {
+	mensajeServidor = gestorThreads->recibirMensaje();
+	return (mensajeServidor.estaDadoVuelta());
 }
 
 
-void Cliente::recibirMensajes() {
-	socket.recibir(&mensajesServidor[0], cantidadDeReceives + 3);
-}
-
-
-void Cliente::agregarMensajesALista() {
-	for (int i = 3; i < (cantidadDeReceives + 3); i++)
-		listaOrdenada.push_front(mensajesServidor[i]);
+void Cliente::recibirMensajes(GestorThreadsCliente* gestorThreads) {
+	for (int i = 0; i < cantidadDeReceives; i++) {
+		mensajeServidor = gestorThreads->recibirMensaje();
+		listaOrdenada.push_front(mensajeServidor);
+	}
 	listaOrdenada.sort();
 }
 

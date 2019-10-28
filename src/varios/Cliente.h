@@ -26,7 +26,7 @@ private:
 	Socket socket;
 	SDL_Event evento;
 	MensajeCliente mensajeCliente;
-	MensajeServidor* mensajesServidor;
+	MensajeServidor mensajeServidor;
 	list<MensajeServidor> listaOrdenada;
 
 public:
@@ -36,12 +36,11 @@ public:
 	 virtual ~Cliente();
 
 private:
-	 void renderizarFondo(VistaFondo* fondo);
+	 void renderizarFondo(VistaFondo* fondo, GestorThreadsCliente* gestorThreads);
 	 void enviarInput(GestorThreadsCliente* gestorThreads);
-	 void recibirCantidadDeReceives();
-	 bool terminoElNivel();
-	 void recibirMensajes();
-	 void agregarMensajesALista();
+	 void recibirCantidadDeReceives(GestorThreadsCliente* gestorThreads);
+	 bool terminoElNivel(GestorThreadsCliente* gestorThreads);
+	 void recibirMensajes(GestorThreadsCliente* gestorThreads);
 };
 
 #endif /* SRC_CLIENTE_H_ */

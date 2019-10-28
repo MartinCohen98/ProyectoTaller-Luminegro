@@ -479,6 +479,37 @@ int Socket::recibir(MensajeCliente* mensaje) {
 }
 
 
+int Socket::recibir(MensajeServidor* mensaje) {
+	Logger::Log *logueador = Logger::Log::ObtenerInstancia();
+
+    int recibido = 0;
+    int resultadoAccion = 0;
+    int tamanoMaximo = sizeof(MensajeServidor);
+    char* datos = (char*) mensaje;
+
+    while (recibido < tamanoMaximo) {
+        int bytesCantidadMaximaParaRecibir = tamanoMaximo - recibido;
+
+        resultadoAccion = recv(numero, &datos[recibido], bytesCantidadMaximaParaRecibir,MSG_NOSIGNAL);
+
+        if (resultadoAccion == 0) {
+            // Nos cerraron el socket
+            return EXIT_FAILURE;
+
+        } else if (resultadoAccion < 0) {
+            // Hubo un error
+            std::string mensajeError = "Clase Socket - Método recibir(MensajeServidor* mensaje) - Error en recv(): ";
+            mensajeError.append(strerror(errno));
+            logueador->Error(mensajeError);
+            return EXIT_FAILURE;
+        } else {
+            recibido += resultadoAccion;
+        }
+    }
+    return recibido;
+}
+
+
 int Socket::recibir(MensajeServidor* mensaje, int cantidad) {
     Logger::Log *logueador = Logger::Log::ObtenerInstancia();
 

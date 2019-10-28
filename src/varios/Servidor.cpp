@@ -106,10 +106,13 @@ void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 
 	cantidadDeMensajes = jugadores + objetos->obtenerCantidad()
 					+ enemigos->obtenerCantidad();
-
+	Encuadre insercion;
+	Encuadre frame(cantidadDeMensajes, 0, 0, 0);
+	MensajeServidor mensaje;
+	mensaje.generarMensaje(&frame, &insercion, Jugador1);
 	for (int i = 0; i < jugadores; i++) {
         if (socketsDeClientes[i].getEstado() == Socket::ESTADO_CONECTADO) {
-            socketsDeClientes[i].enviar(cantidadDeMensajes);
+            socketsDeClientes[i].enviar(&mensaje, 1);
         }
     }
 }
