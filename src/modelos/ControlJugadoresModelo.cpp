@@ -12,9 +12,8 @@ ControlJugadoresModelo::ControlJugadoresModelo(pugi::xml_document *archiConfig,
 
 
 void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
-											int numeroDeJugador, bool conectado) {
+											int numeroDeJugador) {
 
-   // if (conectado) {
         switch (mensaje->get()) {
             case Right:{
                 //Avanzar
@@ -80,10 +79,6 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
 
 
         }
-    /*  }
-      else {
-            jugadores[numeroDeJugador]->congelarse();
-        }*/
 }
 
 

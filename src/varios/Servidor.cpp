@@ -112,12 +112,8 @@ void Servidor::Correr(pugi::xml_document* archiConfig) {
 void Servidor::recibirInputs(ControlJugadoresModelo* protagonistas,
 							GestorThreadsServidor* gestorThreads) {
 	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
-	    bool conectado=true;
-	  /*  if (i==0) {
-            conectado = false;
-          };*/
 		gestorThreads->recibirMensajeDeCliente(&mensajeCliente, i);
-		protagonistas->procesarInput(&mensajeCliente, i, conectado);
+		protagonistas->procesarInput(&mensajeCliente, i);
 	}
 }
 
