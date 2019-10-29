@@ -13,7 +13,7 @@ ControlJugadoresModelo::ControlJugadoresModelo(pugi::xml_document *archiConfig,
 void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
 											int numeroDeJugador, bool conectado) {
 
-    if (conectado) {
+   // if (conectado) {
         switch (mensaje->get()) {
             case Right:
                 //Avanzar
@@ -43,6 +43,10 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                 //Pegar
                 jugadores[numeroDeJugador]->pegar();
                 break;
+            case Disconnected:
+                //Desconectado
+                jugadores[numeroDeJugador]->congelarse();
+                break;
             case Exit:
                 //Salir
                 // logueador->Info("Se seleccionó salir");
@@ -69,17 +73,21 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
             case Nothing:
                 break;
          }
-      }
+    /*  }
       else {
             jugadores[numeroDeJugador]->congelarse();
-        }
+        }*/
 }
 
 
 void ControlJugadoresModelo::realizarMovimientos(FondoModelo* fondo) {
     bool rezagado = verificarRezagado(fondo);
+    bool conectado=true;
 	for (int i = 0; i < cantidad; i++){
-		jugadores[i]->realizarMovimientos(fondo, rezagado);
+      /*  if (i==0) {
+            conectado = false;
+        };*/
+		jugadores[i]->realizarMovimientos(fondo, rezagado, conectado);
 	}
 }
 

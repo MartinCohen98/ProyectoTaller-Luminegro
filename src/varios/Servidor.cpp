@@ -112,8 +112,9 @@ void Servidor::recibirInputs(ControlJugadoresModelo* protagonistas,
 							GestorThreadsServidor* gestorThreads) {
 	for (int i = 0; i < jugadores; i++) {
 	    bool conectado=true;
-	   /* if (i=1)
-	       conectado=true;*/
+	  /*  if (i==0) {
+            conectado = false;
+          };*/
 		gestorThreads->recibirMensajeDeCliente(&mensajeCliente, i);
 		protagonistas->procesarInput(&mensajeCliente, i, conectado);
 	}

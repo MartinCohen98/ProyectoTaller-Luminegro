@@ -6,10 +6,17 @@
 #define PROYECTOTALLER_LUMINEGRO_ESTADOJUGADORCONGELADO_H
 
 #include "EstadoJugador.h"
+#include "EstadoEnemigoParado.h"
 
 class EstadoJugadorCongelado: public EstadoJugador {
 public:
     EstadoJugadorCongelado();
+    EstadoJugador* parar();
+    EstadoJugador* avanzar();
+    EstadoJugador* agacharse();
+    EstadoJugador* pegar();
+    EstadoJugador* saltar();
+    bool puedeMoverse();
     virtual ~EstadoJugadorCongelado();
 };
 

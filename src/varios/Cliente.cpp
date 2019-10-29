@@ -200,6 +200,9 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
     					//Pegar
     					mensajeCliente.Codificar(Hit);
     					break;
+    			    case SDLK_d:
+    			        //Desconectado
+    			        mensajeCliente.Codificar(Disconnected);
     				case SDLK_ESCAPE:
     					//Salir
     					mensajeCliente.Codificar(Exit);

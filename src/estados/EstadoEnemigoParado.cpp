@@ -26,7 +26,6 @@ EstadoJugador* EstadoEnemigoParado::agacharse() {
 	return (new EstadoJugadorAgachado());
 }
 
-
 EstadoEnemigoParado::~EstadoEnemigoParado() {
 	// TODO Auto-generated destructor stub
 }

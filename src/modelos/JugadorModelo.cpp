@@ -12,6 +12,7 @@ JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig) {
 	estadoOriginal = new EstadoJugadorParado();
 	dadoVuelta = false;
 	agachado = false;
+	desconectado = false;
 
     std::string margenWidthString = archiConfig->child("configuracion").child("escenario").
             child_value("margenWidth");
@@ -81,7 +82,8 @@ void JugadorModelo::saltar() {
 void JugadorModelo::congelarse() {
     movimientoEnX=0;
     movimientoEnY=0;
-    estado = estado ->congelarse();
+    estado = estado->congelarse();
+    desconectado=true;
 }
 
 bool JugadorModelo::moverEnY() {
@@ -98,16 +100,20 @@ bool JugadorModelo::moverEnY() {
 }
 
 
-void JugadorModelo::realizarMovimientos(FondoModelo* fondo, bool rezagado) {
-	if (estado->puedeMoverse()) {
-		actualizarPosicion(fondo, rezagado);
-	} else {
-		if (agachado) {
-			estado = estado->agacharse();
-		} else {
-			estado = estado->parar();
-		}
-	}
+void JugadorModelo::realizarMovimientos(FondoModelo* fondo, bool rezagado, bool conectado) {
+    //if (conectado) {
+        if (estado->puedeMoverse()) {
+            actualizarPosicion(fondo, rezagado);
+        } else {
+            if (agachado) {
+                estado = estado->agacharse();
+            } else {
+                estado = estado->parar();
+            }
+        }
+    /*  }
+    else
+        estado = estado->congelarse();*/
 	actualizarInsercion();
 }
 
