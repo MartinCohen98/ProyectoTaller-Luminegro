@@ -295,7 +295,7 @@ int Socket::enviar(MensajeServidor* mensajes) {
         }
     }
     if (elSocketRemotoEstaCerrado || hayUnErrorDeSocket) {
-    	estado = ESTADO_DESCONECTADO;
+//    	estado = ESTADO_DESCONECTADO;
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;

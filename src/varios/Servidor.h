@@ -23,22 +23,20 @@ private:
 	Socket socketAceptador;
 	Socket* socketsDeClientes;
 	char *puerto;
+	GestorThreadsServidor* gestorThreads;
 
 private:
     std::thread* threadRechazadorConexiones;
 
     void validarCredenciales(MensajeCredenciales *mensajeCredenciales);
-	void recibirInputs(ControlJugadoresModelo* protagonistas,
-						GestorThreadsServidor* gestorThreads);
+	void recibirInputs(ControlJugadoresModelo* protagonistas);
 	void enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
-							ControlObjetosModelo* objetos,
-							GestorThreadsServidor* gestorThreads);
-	void generarMensajes(ControlJugadoresModelo* protagonistas, FondoModelo* fondo,
+							ControlObjetosModelo* objetos);
+	void enviarMensajes(ControlJugadoresModelo* protagonistas, FondoModelo* fondo,
 			ControlEnemigosModelo* enemigos, ControlObjetosModelo* objetos);
-	void enviarMensajes(GestorThreadsServidor* gestorThreads);
-	void enviarMensajeDeNivelTerminado(bool nivelTerminado,
-							GestorThreadsServidor* gestorThreadds);
+	void enviarMensajeDeNivelTerminado(bool nivelTerminado);
 	void generarMensajesParaEnviar();
+    void desconectarJugadoresDesconectados(ControlJugadoresModelo* jugadores);
 
 public:
     Servidor(int cantidadDeJugadores, char* puerto);

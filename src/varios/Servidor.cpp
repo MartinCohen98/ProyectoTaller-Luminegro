@@ -54,10 +54,10 @@ void Servidor::Correr(pugi::xml_document* archiConfig) {
 
 	bool nivelTerminado;
 
-	GestorThreadsServidor gestorThreads(jugadoresCantidadEsperada);
+	gestorThreads = new GestorThreadsServidor(jugadoresCantidadEsperada);
 
 	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
-		gestorThreads.agregarJugador(&socketsDeClientes[i], i);
+		gestorThreads->agregarJugador(&socketsDeClientes[i], i);
 	}
 
 	for (int nivel = 1; nivel <= 2; nivel++) {
@@ -73,19 +73,21 @@ void Servidor::Correr(pugi::xml_document* archiConfig) {
 		FondoModelo fondo(archiConfig, nivel);
 		ControlJugadoresModelo protagonistas(archiConfig, jugadoresCantidadEsperada);
 
+		desconectarJugadoresDesconectados(&protagonistas);
+
 		logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
 		ControlEnemigosModelo controlEnemigos(nivel);
 
 		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 		ControlObjetosModelo controlObjetos(archiConfig, fondo.obtenerAncho(), nivel);
 
-		enviarCantidadDeReceives(&controlEnemigos, &controlObjetos, &gestorThreads);
+		enviarCantidadDeReceives(&controlEnemigos, &controlObjetos);
 
 		generarMensajesParaEnviar();
 
 		while (!nivelTerminado) {
-			gestorThreads.checkearDesconecciones();
-			recibirInputs(&protagonistas, &gestorThreads);
+			gestorThreads->checkearDesconecciones();
+			recibirInputs(&protagonistas);
 
 			protagonistas.realizarMovimientos(&fondo);
 			controlEnemigos.realizarMovimientos();
@@ -96,21 +98,19 @@ void Servidor::Correr(pugi::xml_document* archiConfig) {
 				controlObjetos.movidaDePantalla();
 			}
 
-			generarMensajes(&protagonistas, &fondo, &controlEnemigos,
+			enviarMensajes(&protagonistas, &fondo, &controlEnemigos,
 								&controlObjetos);
-			enviarMensajes(&gestorThreads);
 
 			nivelTerminado = protagonistas.llegaronAlFin(&fondo);
 
-			enviarMensajeDeNivelTerminado(nivelTerminado, &gestorThreads);
+			enviarMensajeDeNivelTerminado(nivelTerminado);
 
 			SDL_Delay(25);
 		}
 	}
 }
 
-void Servidor::recibirInputs(ControlJugadoresModelo* protagonistas,
-							GestorThreadsServidor* gestorThreads) {
+void Servidor::recibirInputs(ControlJugadoresModelo* protagonistas) {
 	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
 		gestorThreads->recibirMensajeDeCliente(&mensajeCliente, i);
 		protagonistas->procesarInput(&mensajeCliente, i);
@@ -118,8 +118,7 @@ void Servidor::recibirInputs(ControlJugadoresModelo* protagonistas,
 }
 
 void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
-							ControlObjetosModelo* objetos,
-							GestorThreadsServidor* gestorThreads) {
+							ControlObjetosModelo* objetos) {
 
 	cantidadDeMensajes = jugadoresCantidadEsperada + objetos->obtenerCantidad()
 					+ enemigos->obtenerCantidad();
@@ -130,7 +129,7 @@ void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 	gestorThreads->enviarMensaje(&mensaje);
 }
 
-void Servidor::generarMensajes(ControlJugadoresModelo* protagonistas,
+void Servidor::enviarMensajes(ControlJugadoresModelo* protagonistas,
 		FondoModelo* fondo, ControlEnemigosModelo* enemigos,
 		ControlObjetosModelo* objetos) {
     
@@ -140,18 +139,13 @@ void Servidor::generarMensajes(ControlJugadoresModelo* protagonistas,
 	protagonistas->generarMensajes(mensajesServidor, &mensajeActual);
 	enemigos->generarMensajes(mensajesServidor, &mensajeActual);
 	objetos->generarMensajes(mensajesServidor, &mensajeActual);
-}
-
-
-void Servidor::enviarMensajes(GestorThreadsServidor* gestorThreads) {
 	for (int i = 0; i < (cantidadDeMensajes + 3); i++) {
 		gestorThreads->enviarMensaje(&mensajesServidor[i]);
 	}
 }
 
 
-void Servidor::enviarMensajeDeNivelTerminado(bool nivelTerminado,
-							GestorThreadsServidor* gestorThreads) {
+void Servidor::enviarMensajeDeNivelTerminado(bool nivelTerminado) {
 	MensajeServidor mensaje;
 	if (nivelTerminado) {
 		mensaje.darVuelta();
@@ -234,4 +228,15 @@ int Servidor::EsperarConexiones() {
 
     return resultadoAccion;
 }
+
+
+void Servidor::desconectarJugadoresDesconectados(ControlJugadoresModelo* jugadores) {
+	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
+		if (!gestorThreads->estaConectado(i)) {
+			jugadores->desaparecer(i);
+			jugadores->desconectar(i);
+		}
+	}
+}
+
 

@@ -41,7 +41,7 @@ public:
 	void desaparecer();
 	void descongelarse();
 	bool estaDesconectado();
-	void realizarMovimientos(FondoModelo* fondo, bool rezagado, bool conectado);
+	void realizarMovimientos(FondoModelo* fondo, bool rezagado);
 	bool llegoAlFin(FondoModelo *fondo);
 	void movidaDePantalla(FondoModelo* fondo);
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual,

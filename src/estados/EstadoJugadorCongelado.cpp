@@ -36,7 +36,7 @@ EstadoJugador* EstadoJugadorCongelado::saltar() {
 
 
 bool EstadoJugadorCongelado::puedeMoverse() {
-    return false;
+    return true;
 }
 
 EstadoJugadorCongelado::~EstadoJugadorCongelado() {

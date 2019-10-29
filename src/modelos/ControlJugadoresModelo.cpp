@@ -84,10 +84,8 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
 
 void ControlJugadoresModelo::realizarMovimientos(FondoModelo* fondo) {
     bool rezagado = verificarRezagado(fondo);
-    bool conectado = true;
 	for (int i = 0; i < cantidad; i++){
-        if (!jugadores[i]->estaDesconectado())
-		  jugadores[i]->realizarMovimientos(fondo, rezagado, conectado);
+		jugadores[i]->realizarMovimientos(fondo, rezagado);
 	}
 }
 
@@ -117,14 +115,27 @@ bool ControlJugadoresModelo::llegaronAlFin(FondoModelo* fondo) {
 	return retorno;
 }
 
+
 bool ControlJugadoresModelo::verificarRezagado(FondoModelo* fondo){
-    bool rezagado=false;
+    bool rezagado = false;
     for (int i = 0; i < cantidad; i++) {
-        if (jugadores[i]->darPosicion() <= fondo->darInicioTerreno()-600)
+        if ((jugadores[i]->darPosicion() <= fondo->darInicioTerreno() - 600)
+        		&& !jugadores[i]->estaDesconectado())
             rezagado = true;
        }
     return rezagado;
-    }
+}
+
+
+void ControlJugadoresModelo::desconectar(int jugador) {
+	jugadores[jugador]->congelarse();
+}
+
+
+void ControlJugadoresModelo::desaparecer(int jugador) {
+	jugadores[jugador]->desaparecer();
+}
+
 
 ControlJugadoresModelo::~ControlJugadoresModelo() {
 	for (int i = 0; i < cantidad; i++) {

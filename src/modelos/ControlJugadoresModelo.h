@@ -17,6 +17,8 @@ public:
 	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
 	bool llegaronAlFin(FondoModelo* fondo);
 	bool verificarRezagado(FondoModelo* fondo);
+	void desconectar(int jugador);
+	void desaparecer(int jugador);
 	virtual ~ControlJugadoresModelo();
 };
 

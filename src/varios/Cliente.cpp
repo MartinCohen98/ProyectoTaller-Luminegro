@@ -108,9 +108,10 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 		while (!salir) {
 	    	enviarInput(&gestorThreads);
-	    	if (mensajeCliente.get() == Exit)
+	    	if (mensajeCliente.get() == Exit) {
+	    		SDL_Delay(200);
 	    		return 0;
-
+	    	}
 	    	renderizarFondo(&fondo, &gestorThreads);
 	    	recibirMensajes(&gestorThreads);
 

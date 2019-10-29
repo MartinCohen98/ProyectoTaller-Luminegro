@@ -14,6 +14,7 @@ private:
 	Socket** sockets;
 	std::thread** threadsRecibidoras;
 	std::thread** threadsEnviadoras;
+	bool* conectado;
 
 public:
 	GestorThreadsServidor(int cantidadDeJugadores);
@@ -21,6 +22,7 @@ public:
 	void recibirMensajeDeCliente(MensajeCliente* mensaje, int cliente);
 	void enviarMensaje(MensajeServidor* mensaje);
 	void checkearDesconecciones();
+	bool estaConectado(int jugador);
 	virtual ~GestorThreadsServidor();
 };
 

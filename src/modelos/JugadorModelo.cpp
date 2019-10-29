@@ -121,16 +121,16 @@ bool JugadorModelo::moverEnY() {
 }
 
 
-void JugadorModelo::realizarMovimientos(FondoModelo* fondo, bool rezagado, bool conectado) {
-        if (estado->puedeMoverse()) {
-            actualizarPosicion(fondo, rezagado);
-        } else {
-            if (agachado) {
-                estado = estado->agacharse();
-            } else {
-                estado = estado->parar();
-            }
-        }
+void JugadorModelo::realizarMovimientos(FondoModelo* fondo, bool rezagado) {
+	if (estado->puedeMoverse()) {
+		actualizarPosicion(fondo, rezagado);
+    } else {
+    	if (agachado) {
+    		estado = estado->agacharse();
+    	} else {
+    		estado = estado->parar();
+    	}
+	}
 	actualizarInsercion();
 }
 
