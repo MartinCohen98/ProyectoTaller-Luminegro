@@ -1,4 +1,5 @@
 #include "JugadorModelo.h"
+#include <iostream>
 
 JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig) {
 	posicionX = 0;
@@ -94,6 +95,15 @@ void JugadorModelo::desaparecer() {
 }
 
 
+void JugadorModelo::descongelarse() {
+    desconectado=false;
+}
+
+
+bool JugadorModelo::estaDesconectado() {
+    return desconectado;
+}
+
 bool JugadorModelo::moverEnY() {
 	bool seMovio = false;
 	int movimiento = movimientoEnY;
@@ -109,7 +119,6 @@ bool JugadorModelo::moverEnY() {
 
 
 void JugadorModelo::realizarMovimientos(FondoModelo* fondo, bool rezagado, bool conectado) {
-    //if (conectado) {
         if (estado->puedeMoverse()) {
             actualizarPosicion(fondo, rezagado);
         } else {
@@ -119,9 +128,6 @@ void JugadorModelo::realizarMovimientos(FondoModelo* fondo, bool rezagado, bool 
                 estado = estado->parar();
             }
         }
-    /*  }
-    else
-        estado = estado->congelarse();*/
 	actualizarInsercion();
 }
 

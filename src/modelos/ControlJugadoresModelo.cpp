@@ -1,4 +1,5 @@
 #include "ControlJugadoresModelo.h"
+#include <iostream>
 
 ControlJugadoresModelo::ControlJugadoresModelo(pugi::xml_document *archiConfig,
 					int cantidadJugadores) {
@@ -15,9 +16,10 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
 
    // if (conectado) {
         switch (mensaje->get()) {
-            case Right:
+            case Right:{
                 //Avanzar
-                jugadores[numeroDeJugador]->avanzar();
+                if (!jugadores[numeroDeJugador]->estaDesconectado())
+                   jugadores[numeroDeJugador]->avanzar();}
                 break;
             case Left:
                 //Atras
@@ -43,7 +45,7 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                 //Pegar
                 jugadores[numeroDeJugador]->pegar();
                 break;
-            case Disconnected:
+            case Disconnect:
                 //Desconectado
                 jugadores[numeroDeJugador]->congelarse();
                 break;
@@ -72,7 +74,12 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                 break;
             case Nothing:
                 break;
-         }
+            case Connect:
+                //Conectado
+                jugadores[numeroDeJugador]->descongelarse();
+
+
+        }
     /*  }
       else {
             jugadores[numeroDeJugador]->congelarse();
@@ -84,10 +91,8 @@ void ControlJugadoresModelo::realizarMovimientos(FondoModelo* fondo) {
     bool rezagado = verificarRezagado(fondo);
     bool conectado = true;
 	for (int i = 0; i < cantidad; i++){
-      /*  if (i==0) {
-            conectado = false;
-        };*/
-		jugadores[i]->realizarMovimientos(fondo, rezagado, conectado);
+        if (!jugadores[i]->estaDesconectado())
+		  jugadores[i]->realizarMovimientos(fondo, rezagado, conectado);
 	}
 }
 
