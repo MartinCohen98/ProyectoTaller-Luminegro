@@ -108,6 +108,8 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 		while (!salir) {
 	    	enviarInput(&gestorThreads);
+	    	if (mensajeCliente.get() == Exit)
+	    		return 0;
 
 	    	renderizarFondo(&fondo, &gestorThreads);
 	    	recibirMensajes(&gestorThreads);

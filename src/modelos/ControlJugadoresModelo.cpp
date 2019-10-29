@@ -50,7 +50,7 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                 break;
             case Exit:
                 //Salir
-                // logueador->Info("Se seleccionó salir");
+            	jugadores[numeroDeJugador]->desaparecer();
                 break;
             case StopGoingRight:
                 //Avanzar
@@ -84,7 +84,7 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
 
 void ControlJugadoresModelo::realizarMovimientos(FondoModelo* fondo) {
     bool rezagado = verificarRezagado(fondo);
-    bool conectado=true;
+    bool conectado = true;
 	for (int i = 0; i < cantidad; i++){
         if (!jugadores[i]->estaDesconectado())
 		  jugadores[i]->realizarMovimientos(fondo, rezagado, conectado);

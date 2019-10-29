@@ -13,6 +13,8 @@ void RecibidorMensajesCliente::operator()() {
 		if (mensaje.get() != Nothing)
 			cola->encolar(&mensaje);
 	}
+	mensaje.Codificar(Disconnected);
+	cola->encolar(&mensaje);
 }
 
 

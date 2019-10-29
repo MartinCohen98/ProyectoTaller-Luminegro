@@ -20,6 +20,7 @@ public:
 	void agregarJugador(Socket* socket, int numero);
 	void recibirMensajeDeCliente(MensajeCliente* mensaje, int cliente);
 	void enviarMensaje(MensajeServidor* mensaje);
+	void checkearDesconecciones();
 	virtual ~GestorThreadsServidor();
 };
 
