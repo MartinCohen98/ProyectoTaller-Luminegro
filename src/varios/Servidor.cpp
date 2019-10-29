@@ -84,6 +84,7 @@ void Servidor::Correr(pugi::xml_document* archiConfig) {
 		generarMensajesParaEnviar();
 
 		while (!nivelTerminado) {
+			gestorThreads.checkearDesconecciones();
 			recibirInputs(&protagonistas, &gestorThreads);
 
 			protagonistas.realizarMovimientos(&fondo);

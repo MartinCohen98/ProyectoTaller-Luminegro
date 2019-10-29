@@ -197,7 +197,6 @@ int Socket::enviar(MensajeCredenciales* mensaje) {
         if (resultadoAccion < 0) {
             if (errno == ERROR_SOCKET_OPERATION_ON_NO_SOCKET) {
                 elSocketRemotoEstaCerrado = true;
-                estado = ESTADO_DESCONECTADO;
             }
 
             std::string mensajeError = "Clase Socket - Método enviar(MensajeCredenciales* mensaje) - Error en send(): ";
@@ -214,7 +213,7 @@ int Socket::enviar(MensajeCredenciales* mensaje) {
         }
     }
     if (elSocketRemotoEstaCerrado || hayUnErrorDeSocket) {
-        cerrar();
+        estado = ESTADO_DESCONECTADO;
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
@@ -239,7 +238,6 @@ int Socket::enviar(MensajeCliente* mensaje) {
         if (resultadoAccion < 0) {
             if (errno == ERROR_SOCKET_OPERATION_ON_NO_SOCKET) {
                 elSocketRemotoEstaCerrado = true;
-                estado = ESTADO_DESCONECTADO;
             }
 
             std::string mensajeError = "Clase Socket - Método enviar(MensajeCliente* mensaje) - Error en send(): ";
@@ -256,7 +254,7 @@ int Socket::enviar(MensajeCliente* mensaje) {
         }
     }
     if (elSocketRemotoEstaCerrado || hayUnErrorDeSocket) {
-        cerrar();
+    	estado = ESTADO_DESCONECTADO;
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
@@ -283,7 +281,6 @@ int Socket::enviar(MensajeServidor* mensajes) {
 
             if (errno == ERROR_SOCKET_OPERATION_ON_NO_SOCKET) {
                 elSocketRemotoEstaCerrado = true;
-                estado = ESTADO_DESCONECTADO;
             }
 
             std::string mensajeError = "Clase Socket - Método enviar(MensajeServidor* mensaje) - Error en send(): ";
@@ -298,7 +295,7 @@ int Socket::enviar(MensajeServidor* mensajes) {
         }
     }
     if (elSocketRemotoEstaCerrado || hayUnErrorDeSocket) {
-        cerrar();
+    	estado = ESTADO_DESCONECTADO;
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
@@ -320,18 +317,17 @@ int Socket::recibir(MensajeCredenciales *mensaje) {
 
         if (resultadoAccion == 0) {
             // Nos cerraron el socket
+        	estado = ESTADO_DESCONECTADO;
             return EXIT_FAILURE;
 
         } else if (resultadoAccion < 0) {
             // Hubo un error
-            if (errno == ERROR_SOCKET_OPERATION_ON_NO_SOCKET) {
-                estado = ESTADO_DESCONECTADO;
-            }
 
             std::string mensajeError = "Clase Socket - Método recibir(MensajeCredenciales* mensaje) - Error en recv(): ";
             mensajeError.append(strerror(errno));
 
             logueador->Error(mensajeError);
+            estado = ESTADO_DESCONECTADO;
             return EXIT_FAILURE;
         } else {
             recibido += resultadoAccion;
@@ -357,18 +353,16 @@ int Socket::recibir(MensajeCliente* mensaje) {
 
         if (resultadoAccion == 0) {
             // Nos cerraron el socket
+        	estado = ESTADO_DESCONECTADO;
             return EXIT_FAILURE;
 
         } else if (resultadoAccion < 0) {
             // Hubo un error
-            if (errno == ERROR_SOCKET_OPERATION_ON_NO_SOCKET) {
-                estado = ESTADO_DESCONECTADO;
-            }
-
             std::string mensajeError = "Clase Socket - Método recibir(MensajeCliente* mensaje) - Error en recv(): ";
             mensajeError.append(strerror(errno));
 
             logueador->Error(mensajeError);
+            estado = ESTADO_DESCONECTADO;
             return EXIT_FAILURE;
         } else {
             recibido += resultadoAccion;
@@ -393,6 +387,7 @@ int Socket::recibir(MensajeServidor* mensaje) {
 
         if (resultadoAccion == 0) {
             // Nos cerraron el socket
+        	estado = ESTADO_DESCONECTADO;
             return EXIT_FAILURE;
 
         } else if (resultadoAccion < 0) {
@@ -400,6 +395,7 @@ int Socket::recibir(MensajeServidor* mensaje) {
             std::string mensajeError = "Clase Socket - Método recibir(MensajeServidor* mensaje) - Error en recv(): ";
             mensajeError.append(strerror(errno));
             logueador->Error(mensajeError);
+            estado = ESTADO_DESCONECTADO;
             return EXIT_FAILURE;
         } else {
             recibido += resultadoAccion;
@@ -421,7 +417,7 @@ int Socket::cerrar() {
 		close(numero);
 		numero = 0;
 	}
-
+	estado = ESTADO_DISPONIBLE;
 	return EXIT_SUCCESS;
 }
 

@@ -17,11 +17,12 @@
 class Socket {
 private:
     int numero;
-    int estado = ESTADO_DESCONECTADO;
+    int estado = ESTADO_DISPONIBLE;
 
 public:
     static const int ESTADO_CONECTADO = 1;
     static const int ESTADO_DESCONECTADO = 2;
+    static const int ESTADO_DISPONIBLE = 3;
 
     static const int ERROR_SOCKET_BROKEN_PIPE = 32;
     static const int ERROR_SOCKET_OPERATION_ON_NO_SOCKET = 88;

@@ -12,6 +12,12 @@ GestorThreadsServidor::GestorThreadsServidor(int cantidadDeJugadores) {
 
 void GestorThreadsServidor::agregarJugador(Socket* socket, int numero) {
 	sockets[numero] = socket;
+	MensajeServidor mensajeServidor;
+	MensajeCliente mensajeCliente;
+	while (mensajeServidor.obtenerTipoDeSprite() != MensajeInvalido)
+		mensajeServidor = colasEnviadoras[numero].desencolar();
+	while (mensajeCliente.get() != Nothing)
+		mensajeCliente = colasRecibidoras[numero].desencolar();
 	threadsRecibidoras[numero] =
 			new std::thread(RecibidorMensajesCliente(sockets[numero],
 												&colasRecibidoras[numero]));
@@ -33,7 +39,34 @@ void GestorThreadsServidor::enviarMensaje(MensajeServidor* mensaje) {
 }
 
 
+void GestorThreadsServidor::checkearDesconecciones() {
+	for (int i = 0; i < jugadores; i++) {
+		if (sockets[i]->getEstado() == Socket::ESTADO_DESCONECTADO) {
+			threadsEnviadoras[i]->join();
+			delete threadsEnviadoras[i];
+			threadsEnviadoras[i] = NULL;
+			threadsRecibidoras[i]->join();
+			delete threadsRecibidoras[i];
+			threadsRecibidoras[i] = NULL;
+			sockets[i]->cerrar();
+		}
+	}
+}
+
+
 GestorThreadsServidor::~GestorThreadsServidor() {
+	for (int i = 0; i < jugadores; i++) {
+		if (threadsEnviadoras[i] != NULL) {
+			threadsEnviadoras[i]->join();
+			delete threadsEnviadoras[i];
+		}
+		if (threadsRecibidoras[i] != NULL) {
+			threadsRecibidoras[i]->join();
+			delete threadsRecibidoras[i];
+		}
+	}
+	delete[] threadsEnviadoras;
+	delete[] threadsRecibidoras;
 	delete[] sockets;
 	delete[] colasRecibidoras;
 	delete[] colasEnviadoras;

@@ -19,6 +19,7 @@ private:
 	int movimientoAlSaltarEnY;
 	int posicionXMaxima;
 	bool agachado;
+	bool salio;
 	bool desconectado;
 	EstadoJugadorParado* estadoOriginal;
 
@@ -37,6 +38,7 @@ public:
 	void pegar();
 	void saltar();
 	void congelarse();
+	void desaparecer();
 	void realizarMovimientos(FondoModelo* fondo, bool rezagado, bool conectado);
 	bool llegoAlFin(FondoModelo *fondo);
 	void movidaDePantalla(FondoModelo* fondo);
