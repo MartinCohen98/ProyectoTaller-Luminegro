@@ -247,9 +247,6 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
     				case SDLK_x:
     					mensajeCliente.Codificar(Rise);
     					break;
-                  /*  case SDLK_q:
-                        mensajeCliente.Codificar(Connect);
-                        break;*/
 
                 }
     		}
