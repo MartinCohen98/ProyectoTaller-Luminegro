@@ -86,17 +86,20 @@ void JugadorModelo::congelarse() {
     movimientoEnX = 0;
     movimientoEnY = 0;
     estado = estado->congelarse();
-    desconectado=true;
+    desconectado = true;
 }
 
 
 void JugadorModelo::desaparecer() {
 	posicionY += 600;
+	salio = true;
 }
 
 
 void JugadorModelo::descongelarse() {
-    desconectado=false;
+    desconectado = false;
+    if (salio)
+    	posicionY -= 600;
 }
 
 
