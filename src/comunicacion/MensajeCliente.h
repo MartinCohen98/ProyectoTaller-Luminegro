@@ -5,7 +5,8 @@ enum teclas {Right,Left,Up,Down,
 		Jump, Crouch, Hit, Exit,
 		StopGoingRight, StopGoingLeft,
 		StopGoingUp, StopGoingDown,
-		Rise,Nothing, Disconnected};
+		Rise,Nothing, Disconnect,
+		Connect};
 
 class MensajeCliente {
 

@@ -32,6 +32,7 @@ EstadoJugador* EstadoJugadorParado::saltar() {
 
 EstadoJugador* EstadoJugadorParado::congelarse() {
     delete this;
+    printf("Desconectado");
     return (new EstadoJugadorCongelado());
 }
 

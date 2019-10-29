@@ -4,6 +4,7 @@ EstadoJugadorAgachado::EstadoJugadorAgachado() {
 	alto = 100;
 	ancho = 50;
 	frameActual.modificar(100, 100, ancho, alto);
+    printf("Agachado");
 }
 
 EstadoJugador* EstadoJugadorAgachado::parar() {

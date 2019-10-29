@@ -8,6 +8,7 @@ EstadoJugadorCongelado::EstadoJugadorCongelado() {
     alto=100;
     ancho=50;
     frameActual.modificar(150,100,ancho,alto);
+    printf("Desconectado");
 }
 
 EstadoJugador* EstadoJugadorCongelado::parar() {

@@ -209,12 +209,18 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
     					//Pegar
     					mensajeCliente.Codificar(Hit);
     					break;
-    			    case SDLK_d:
+    			    case SDLK_q:
     			        //Desconectado
-    			        mensajeCliente.Codificar(Disconnected);
+    			        mensajeCliente.Codificar(Disconnect);
+    			        break;
+                    case SDLK_w:
+                        //Conectado
+                        mensajeCliente.Codificar(Connect);
+                        break;
     				case SDLK_ESCAPE:
     					//Salir
     					mensajeCliente.Codificar(Exit);
+    					break;
     			}
     		}
     		break;
@@ -241,7 +247,11 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
     				case SDLK_x:
     					mensajeCliente.Codificar(Rise);
     					break;
-    			}
+                    case SDLK_q:
+                        mensajeCliente.Codificar(Connect);
+                        break;
+
+                }
     		}
     		break;
 

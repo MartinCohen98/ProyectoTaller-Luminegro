@@ -37,6 +37,8 @@ public:
 	void pegar();
 	void saltar();
 	void congelarse();
+	void descongelarse();
+	bool estaDesconectado();
 	void realizarMovimientos(FondoModelo* fondo, bool rezagado, bool conectado);
 	bool llegoAlFin(FondoModelo *fondo);
 	void movidaDePantalla(FondoModelo* fondo);
