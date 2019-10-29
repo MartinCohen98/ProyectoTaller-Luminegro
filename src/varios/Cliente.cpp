@@ -20,10 +20,12 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
     // Autenticar usuario
     MensajeCredenciales mensajeCredenciales;
 
-    while (mensajeCredenciales.getEstado() == MensajeCredenciales::ESTADO_NO_AUTENTICADO) {
+    string mensajeError;
+
+    while (mensajeCredenciales.getEstado() != MensajeCredenciales::ESTADO_AUTENTICADO) {
 
         ventanaInicioSesion.pedirCredenciales();
-        ventanaInicioSesion.mostrarMensaje("Conectando...",
+        ventanaInicioSesion.mostrarMensaje("Validando...",
                                            VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
 
         string usuario = ventanaInicioSesion.getUsuario();
@@ -33,11 +35,18 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
         socket.enviar(&mensajeCredenciales);
         socket.recibir(&mensajeCredenciales);
 
+        switch (mensajeCredenciales.getEstado()) {
+            case MensajeCredenciales::ESTADO_USUARIO_O_CLAVE_ERRONEOS:
+                mensajeError = "Error en usuario y/o clave, caballer@.";
+                break;
+
+            case MensajeCredenciales::ESTADO_USUARIO_YA_CONECTADO:
+                mensajeError = "El usuario ya se encuentra conectado.";
+                break;
+        }
+
         if (mensajeCredenciales.getEstado() != MensajeCredenciales::ESTADO_AUTENTICADO) {
-
-            ventanaInicioSesion.mostrarMensaje("Error en usuario y/o clave, caballer@",
-                                               VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
-
+            ventanaInicioSesion.mostrarMensaje(mensajeError, VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
             ventanaInicioSesion.demorar(2000);
             ventanaInicioSesion.resetear();
         }

@@ -7,22 +7,36 @@ using namespace Logger;
 
 void Servidor::validarCredenciales(MensajeCredenciales *mensajeCredenciales) {
     string claveCorrecta;
+    int jugadorNombre;
 
-    string tmp = mensajeCredenciales->getUsuario();
-    char *usuario = (char*) &tmp;
+    string usuario = mensajeCredenciales->getUsuario();
 
-    if (strcmp(usuario, "mariano")) {
+    if (usuario.compare("mariano") == 0) {
+        jugadorNombre = mariano;
         claveCorrecta = "cognitiva";
-    } else if (strcmp(usuario, "julio")) {
+
+    } else if (usuario.compare("julio") == 0) {
+        jugadorNombre = julio;
         claveCorrecta = "conductual";
-    } else if (strcmp(usuario, "martin")) {
+
+    } else if (usuario.compare("martin") == 0) {
+        jugadorNombre = martin;
         claveCorrecta = "gestalt";
-    } else if (strcmp(usuario, "nicolas")) {
+
+    } else if (usuario.compare("nicolas") == 0) {
+        jugadorNombre = nicolas;
         claveCorrecta = "freud";
     }
 
     if (mensajeCredenciales->getClave() == claveCorrecta) {
-        mensajeCredenciales->setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);
+        if (jugadoresConectados[jugadorNombre]) {
+            mensajeCredenciales->setEstado(MensajeCredenciales::ESTADO_USUARIO_YA_CONECTADO);
+        } else {
+            mensajeCredenciales->setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);
+            jugadoresConectados[jugadorNombre] = true;
+        }
+    } else {
+        mensajeCredenciales->setEstado(MensajeCredenciales::ESTADO_USUARIO_O_CLAVE_ERRONEOS);
     }
 }
 
@@ -183,9 +197,9 @@ int Servidor::EsperarConexiones() {
             socketAceptador.cerrar();
             return resultadoAccion;
         } else {
-            mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_NO_AUTENTICADO);
+            mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_NULO);
 
-            while (mensajeCredenciales.getEstado() == MensajeCredenciales::ESTADO_NO_AUTENTICADO) {
+            while (mensajeCredenciales.getEstado() != MensajeCredenciales::ESTADO_AUTENTICADO) {
                 resultadoAccion = socketsDeClientes[i].recibir(&mensajeCredenciales);
                 validarCredenciales(&mensajeCredenciales);
                 resultadoAccion = socketsDeClientes[i].enviar(&mensajeCredenciales);

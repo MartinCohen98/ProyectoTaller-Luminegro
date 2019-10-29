@@ -11,11 +11,13 @@ private:
 
     char usuario[MAX];
     char clave[MAX];
-    int estado = ESTADO_NO_AUTENTICADO;
+    int estado;
 
 public:
+    static const int ESTADO_NULO = 0;
     static const int ESTADO_AUTENTICADO = 1;
-    static const int ESTADO_NO_AUTENTICADO = 2;
+    static const int ESTADO_USUARIO_O_CLAVE_ERRONEOS = 2;
+    static const int ESTADO_USUARIO_YA_CONECTADO = 3;
 
     static const int UNA_CREDENCIAL_LONGITUD_MAXIMA = MAX;
 

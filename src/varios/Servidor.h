@@ -8,10 +8,14 @@
 #include "../modelos/ControlObjetosModelo.h"
 #include "GestorThreadsServidor.h"
 
+enum jugadoresNombres {mariano, julio, martin, nicolas};
+
+
 class Servidor {
 
 private:
 	int jugadores;
+	bool jugadoresConectados[4];
 	MensajeCliente mensajeCliente;
 	MensajeServidor* mensajesServidor;
 	int cantidadDeMensajes;
