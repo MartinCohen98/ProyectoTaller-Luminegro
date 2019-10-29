@@ -17,9 +17,18 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
     conectar(direccionIP, puerto);
 
-    // Autenticar usuario
     MensajeCredenciales mensajeCredenciales;
 
+    // Se verifica si hay cupo disponible para que se conecte el jugador
+    socket.recibir(&mensajeCredenciales);
+    if (mensajeCredenciales.getEstado() == MensajeCredenciales::ESTADO_NO_MAS_JUGADORES_PERMITIDOS) {
+        ventanaInicioSesion.mostrarMensaje("ERROR: tope de jugadores alcanzado",
+                                           VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
+        ventanaInicioSesion.demorar(5000);
+        return EXIT_SUCCESS;
+    }
+
+    // Autenticar usuario
     string mensajeError;
 
     while (mensajeCredenciales.getEstado() != MensajeCredenciales::ESTADO_AUTENTICADO) {

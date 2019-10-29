@@ -42,7 +42,7 @@ void Servidor::validarCredenciales(MensajeCredenciales *mensajeCredenciales) {
 
 
 Servidor::Servidor(int cantidadDeJugadores, char* puerto) {
-	jugadores = cantidadDeJugadores;
+	jugadoresCantidadEsperada = cantidadDeJugadores;
 	socketsDeClientes = new Socket[cantidadDeJugadores];
 	this->puerto = puerto;
 	mensajesServidor = NULL;
@@ -54,9 +54,9 @@ void Servidor::Correr(pugi::xml_document* archiConfig) {
 
 	bool nivelTerminado;
 
-	GestorThreadsServidor gestorThreads(jugadores);
+	GestorThreadsServidor gestorThreads(jugadoresCantidadEsperada);
 
-	for (int i = 0; i < jugadores; i++) {
+	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
 		gestorThreads.agregarJugador(&socketsDeClientes[i], i);
 	}
 
@@ -71,7 +71,7 @@ void Servidor::Correr(pugi::xml_document* archiConfig) {
 		logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
 		
 		FondoModelo fondo(archiConfig, nivel);
-		ControlJugadoresModelo protagonistas(archiConfig, jugadores);
+		ControlJugadoresModelo protagonistas(archiConfig, jugadoresCantidadEsperada);
 
 		logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
 		ControlEnemigosModelo controlEnemigos(nivel);
@@ -110,7 +110,7 @@ void Servidor::Correr(pugi::xml_document* archiConfig) {
 
 void Servidor::recibirInputs(ControlJugadoresModelo* protagonistas,
 							GestorThreadsServidor* gestorThreads) {
-	for (int i = 0; i < jugadores; i++) {
+	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
 	    bool conectado=true;
 	  /*  if (i==0) {
             conectado = false;
@@ -124,7 +124,7 @@ void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 							ControlObjetosModelo* objetos,
 							GestorThreadsServidor* gestorThreads) {
 
-	cantidadDeMensajes = jugadores + objetos->obtenerCantidad()
+	cantidadDeMensajes = jugadoresCantidadEsperada + objetos->obtenerCantidad()
 					+ enemigos->obtenerCantidad();
 	Encuadre insercion;
 	Encuadre frame(cantidadDeMensajes, 0, 0, 0);
@@ -173,7 +173,7 @@ void Servidor::generarMensajesParaEnviar() {
 
 Servidor::~Servidor() {
 	socketAceptador.cerrar();
-	for (int i = 0; i < jugadores; i++) {
+	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
 		socketsDeClientes[i].cerrar();
 	}
 	delete[] socketsDeClientes;
@@ -190,24 +190,51 @@ int Servidor::EsperarConexiones() {
     MensajeCredenciales mensajeCredenciales;
 
     cout << "Esperando conexión de clientes en el puerto " << puerto << endl;
+
     // ESTO SE LLAMA CON UNA INSTANCIA NUEVA DE "Socket" POR CADA JUGADOR QUE SE NOS CONECTA
-    for (int i = 0; i < jugadores; i++) {
+    for (int i = 0; i < jugadoresCantidadEsperada; i++) {
+
         resultadoAccion = socketAceptador.esperarYAceptarCliente(&socketsDeClientes[i]);
         if (resultadoAccion == EXIT_FAILURE) {
             // Ya fue logueado en la clase
             socketAceptador.cerrar();
             return resultadoAccion;
-        } else {
-            mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_NULO);
+        }
 
-            while (mensajeCredenciales.getEstado() != MensajeCredenciales::ESTADO_AUTENTICADO) {
-                resultadoAccion = socketsDeClientes[i].recibir(&mensajeCredenciales);
-                validarCredenciales(&mensajeCredenciales);
-                resultadoAccion = socketsDeClientes[i].enviar(&mensajeCredenciales);
+        // Se le avisa que hay cupo disponible para que se conecte el jugador
+        mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_ESPERANDO_CONEXIONES);
+        resultadoAccion = socketsDeClientes[i].enviar(&mensajeCredenciales);
+        if (resultadoAccion == EXIT_FAILURE) {
+            // Ya fue logueado en la clase
+            socketAceptador.cerrar();
+            return resultadoAccion;
+        }
+
+        while (mensajeCredenciales.getEstado() != MensajeCredenciales::ESTADO_AUTENTICADO) {
+            resultadoAccion = socketsDeClientes[i].recibir(&mensajeCredenciales);
+            if (resultadoAccion == EXIT_FAILURE) {
+                // Ya fue logueado en la clase
+                socketAceptador.cerrar();
+                return resultadoAccion;
+            }
+
+            validarCredenciales(&mensajeCredenciales);
+
+            resultadoAccion = socketsDeClientes[i].enviar(&mensajeCredenciales);
+            if (resultadoAccion == EXIT_FAILURE) {
+                // Ya fue logueado en la clase
+                socketAceptador.cerrar();
+                return resultadoAccion;
             }
         }
+
+        mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_ESPERANDO_CONEXIONES);
         cout << "Cliente conectado" << endl;
     }
+
+    // Se deja un thread esperando conexiones porque ya superarían el máximo permitido de jugadores y hay que avisarles
+    //threadRechazadorConexiones = new std::thread(RechazadorConexiones(&socketAceptador));
+
     return resultadoAccion;
 }
 

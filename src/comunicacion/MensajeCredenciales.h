@@ -11,13 +11,14 @@ private:
 
     char usuario[MAX];
     char clave[MAX];
-    int estado;
+    int estado = ESTADO_ESPERANDO_CONEXIONES;
 
 public:
-    static const int ESTADO_NULO = 0;
-    static const int ESTADO_AUTENTICADO = 1;
-    static const int ESTADO_USUARIO_O_CLAVE_ERRONEOS = 2;
-    static const int ESTADO_USUARIO_YA_CONECTADO = 3;
+    static const int ESTADO_ESPERANDO_CONEXIONES = 0;
+    static const int ESTADO_NO_MAS_JUGADORES_PERMITIDOS = 1;
+    static const int ESTADO_AUTENTICADO = 2;
+    static const int ESTADO_USUARIO_O_CLAVE_ERRONEOS = 3;
+    static const int ESTADO_USUARIO_YA_CONECTADO = 4;
 
     static const int UNA_CREDENCIAL_LONGITUD_MAXIMA = MAX;
 

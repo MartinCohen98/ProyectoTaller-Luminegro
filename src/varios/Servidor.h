@@ -3,6 +3,7 @@
 
 #include "../comunicacion/Socket.h"
 #include "../comunicacion/MensajeCredenciales.h"
+#include "../comunicacion/RechazadorConexiones.h"
 #include "../modelos/ControlJugadoresModelo.h"
 #include "../modelos/ControlEnemigosModelo.h"
 #include "../modelos/ControlObjetosModelo.h"
@@ -14,7 +15,7 @@ enum jugadoresNombres {mariano, julio, martin, nicolas};
 class Servidor {
 
 private:
-	int jugadores;
+	int jugadoresCantidadEsperada;
 	bool jugadoresConectados[4];
 	MensajeCliente mensajeCliente;
 	MensajeServidor* mensajesServidor;
@@ -23,8 +24,9 @@ private:
 	Socket* socketsDeClientes;
 	char *puerto;
 
-
 private:
+    std::thread* threadRechazadorConexiones;
+
     void validarCredenciales(MensajeCredenciales *mensajeCredenciales);
 	void recibirInputs(ControlJugadoresModelo* protagonistas,
 						GestorThreadsServidor* gestorThreads);

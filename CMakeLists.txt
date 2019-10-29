@@ -20,6 +20,25 @@ add_executable(ProyectoTaller_Luminegro
 
         src/main.cpp
 
+        src/comunicacion/MensajeCliente.cpp
+        src/comunicacion/MensajeCliente.h
+        src/comunicacion/MensajeServidor.cpp
+        src/comunicacion/MensajeServidor.h
+        src/comunicacion/Socket.cpp
+        src/comunicacion/Socket.h
+        src/comunicacion/RecibidorMensajesCliente.cpp
+        src/comunicacion/RecibidorMensajesCliente.h
+        src/comunicacion/MensajeCredenciales.cpp
+        src/comunicacion/MensajeCredenciales.h
+        src/comunicacion/EnviadorMensajesCliente.cpp
+        src/comunicacion/EnviadorMensajesCliente.h
+        src/comunicacion/RecibidorMensajesServidor.cpp
+        src/comunicacion/RecibidorMensajesServidor.h
+        src/comunicacion/EnviadorMensajesServidor.cpp
+        src/comunicacion/EnviadorMensajesServidor.h
+        src/comunicacion/RechazadorConexiones.cpp
+        src/comunicacion/RechazadorConexiones.h
+
         src/estados/EstadoEnemigoAvanzando.cpp
         src/estados/EstadoEnemigoAvanzando.h
         src/estados/EstadoEnemigoParado.cpp
@@ -38,6 +57,8 @@ add_executable(ProyectoTaller_Luminegro
         src/estados/EstadoJugadorPegando.h
         src/estados/EstadoJugadorSaltando.cpp
         src/estados/EstadoJugadorSaltando.h
+        src/estados/EstadoJugadorCongelado.cpp
+        src/estados/EstadoJugadorCongelado.h
         src/estados/EstadoJugadorCongelado.cpp
         src/estados/EstadoJugadorCongelado.h
 
@@ -83,14 +104,8 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/Cliente.h
         src/varios/Logger.cpp
         src/varios/Logger.h
-        src/comunicacion/MensajeCliente.cpp
-        src/comunicacion/MensajeCliente.h
-        src/comunicacion/MensajeServidor.cpp
-        src/comunicacion/MensajeServidor.h
         src/varios/Servidor.cpp
         src/varios/Servidor.h
-        src/comunicacion/Socket.cpp
-        src/comunicacion/Socket.h
         src/varios/ConfigManager.cpp
         src/varios/ConfigManager.h
         src/varios/Cola.cpp
@@ -99,21 +114,12 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/ColaMensajesCliente.h
         src/varios/GestorThreadsServidor.cpp
         src/varios/GestorThreadsServidor.h
-        src/comunicacion/RecibidorMensajesCliente.cpp
-        src/comunicacion/RecibidorMensajesCliente.h
-        src/comunicacion/MensajeCredenciales.cpp
-        src/comunicacion/MensajeCredenciales.h
         src/varios/GestorThreadsCliente.cpp
         src/varios/GestorThreadsCliente.h
-        src/comunicacion/EnviadorMensajesCliente.cpp
-        src/comunicacion/EnviadorMensajesCliente.h
         src/varios/ColaMensajesServidor.cpp
         src/varios/ColaMensajesServidor.h
-        src/comunicacion/RecibidorMensajesServidor.cpp
-        src/comunicacion/RecibidorMensajesServidor.h
-        src/comunicacion/EnviadorMensajesServidor.cpp
-        src/comunicacion/EnviadorMensajesServidor.h
-        
+        src/varios/Common.cpp
+        src/varios/Common.h
 
         src/vistas/VistaEnemigo.cpp
         src/vistas/VistaEnemigo.h
@@ -131,7 +137,7 @@ add_executable(ProyectoTaller_Luminegro
         src/vistas/VistaJugador.h
         src/vistas/VistaObjeto.cpp
         src/vistas/VistaObjeto.h
-        src/varios/Common.cpp src/varios/Common.h src/estados/EstadoJugadorCongelado.cpp src/estados/EstadoJugadorCongelado.h)
+        )
 
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2_LIBRARIES})
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2TTF_LIBRARIES})
