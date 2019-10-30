@@ -14,14 +14,14 @@ using namespace Logger;
 const int CANTIDAD_MINIMA_PARAMETROS = 3; //Programa servidor/cliente puerto/ip:puerto
 
 Estado ConfigManager::ValidarParametros() {
-    Estado resultado = Estado::OK;
+    Estado estado = Estado::OK;
 
     if(argc < CANTIDAD_MINIMA_PARAMETROS) {
         if(argc == 2 && strcmp(argv[1], "simple") == 0) {
             modo = Modo::Simple;
         }else {
             Log::ObtenerInstancia()->Error("Faltan parámetros de invocación");
-            resultado = Estado::ErrorFaltanParametros;
+            estado = Estado::ErrorFaltanParametros;
         }
     }else {
         if (strcmp(argv[1], "servidor") == 0) {
@@ -31,7 +31,7 @@ Estado ConfigManager::ValidarParametros() {
                 modo = Modo::Servidor;
             }else{
                 Log::ObtenerInstancia()->Error("El puerto ingresado(" + puerto + ") para modo servidor es inválido");
-                resultado = Estado::ErrorModoServidorPuertoInvalido;
+                estado = Estado::ErrorModoServidorPuertoInvalido;
             }
         } else if (strcmp(argv[1], "cliente") == 0) {
             //CLIENTE: Validar que el siguiente parámetro sea la ip:puerto en ese formato (ej: "10.1.4.25:8028")
@@ -45,17 +45,17 @@ Estado ConfigManager::ValidarParametros() {
                 msjError += argv[2];
                 msjError += ") para modo cliente es inválida";
                 Log::ObtenerInstancia()->Error(msjError);
-                resultado = Estado::ErrorModoClienteIpOPuertoInvalido;
+                estado = Estado::ErrorModoClienteIpOPuertoInvalido;
             }
         }
         else if (strcmp(argv[1], "simple") == 0)
             modo = Modo::Simple;
         else {
             Log::ObtenerInstancia()->Error("Parámetros incorrectos, no se inició ni en modo servidor ni en modo cliente");
-            resultado = Estado::ErrorParametrosIncorrectos;
+            estado = Estado::ErrorParametrosIncorrectos;
         }
     }
-    return resultado;
+    return estado;
 }
 
 Estado ConfigManager::CargarArchivoConfiguracion() {

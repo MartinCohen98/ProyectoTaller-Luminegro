@@ -57,7 +57,11 @@ int main (int argc, char** argv) {
         std::string jugadoresCantidad = configManager.archivoConfig.child("configuracion")
                 .child_value("jugadoresCantidad");
         int jugadoresCantidadInt = std::stoi(jugadoresCantidad);
-        logueador->Debug("Cantidad de jugadores esperada: " + jugadoresCantidad);
+        if(jugadoresCantidadInt < 1)
+            jugadoresCantidadInt = 1;
+        else if(jugadoresCantidadInt > 4)
+            jugadoresCantidadInt = 4;
+        logueador->Debug(string("Cantidad de jugadores esperada: ", jugadoresCantidadInt));
         Servidor servidor(jugadoresCantidadInt, (char *) configManager.PuertoServidor().c_str());
         //Apertura del puerto para recibir clientes
         if(servidor.abrirSesion() == 1){

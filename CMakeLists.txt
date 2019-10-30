@@ -17,9 +17,7 @@ add_executable(ProyectoTaller_Luminegro
         lib/pugixml/pugiconfig.hpp
         lib/pugixml/pugixml.cpp
         lib/pugixml/pugixml.hpp
-
         src/main.cpp
-
         src/comunicacion/MensajeCliente.cpp
         src/comunicacion/MensajeCliente.h
         src/comunicacion/MensajeServidor.cpp
@@ -38,7 +36,6 @@ add_executable(ProyectoTaller_Luminegro
         src/comunicacion/EnviadorMensajesServidor.h
         src/comunicacion/AceptadorConexiones.cpp
         src/comunicacion/AceptadorConexiones.h
-
         src/estados/EstadoEnemigoAvanzando.cpp
         src/estados/EstadoEnemigoAvanzando.h
         src/estados/EstadoEnemigoParado.cpp
@@ -61,7 +58,6 @@ add_executable(ProyectoTaller_Luminegro
         src/estados/EstadoJugadorCongelado.h
         src/estados/EstadoJugadorCongelado.cpp
         src/estados/EstadoJugadorCongelado.h
-
         src/grafica/Encuadre.cpp
         src/grafica/Encuadre.h
         src/grafica/Imagen.cpp
@@ -74,7 +70,6 @@ add_executable(ProyectoTaller_Luminegro
         src/grafica/Textura.h
         src/grafica/VentanaCliente.cpp
         src/grafica/VentanaCliente.h
-
         src/modelos/BarrilModelo.cpp
         src/modelos/BarrilModelo.h
         src/modelos/CajaModelo.cpp
@@ -99,7 +94,6 @@ add_executable(ProyectoTaller_Luminegro
         src/modelos/TuboModelo.h
         src/modelos/PersonaModelo.cpp
         src/modelos/PersonaModelo.h
-
         src/varios/Cliente.cpp
         src/varios/Cliente.h
         src/varios/Logger.cpp
@@ -108,8 +102,6 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/Servidor.h
         src/varios/ConfigManager.cpp
         src/varios/ConfigManager.h
-        src/varios/Cola.cpp
-        src/varios/Cola.h
         src/varios/ColaMensajesCliente.cpp
         src/varios/ColaMensajesCliente.h
         src/varios/GestorThreadsServidor.cpp
