@@ -28,6 +28,9 @@ private:
 	MensajeCliente mensajeCliente;
 	MensajeServidor mensajeServidor;
 	list<MensajeServidor> listaOrdenada;
+	bool salir;
+	Imagen imagenDesconectado;
+	Textura texturaDesconectado;
 
 public:
 	 Cliente();

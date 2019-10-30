@@ -33,6 +33,11 @@ int Imagen::cargar(const char* path, const int tipo) {
                 // Reemplazamos por un muñeco
                 imagen = SDL_LoadBMP("assets/images/missingPictures/person.bmp");
                 break;
+            case TIPO_DESCONECTADO:
+                // Reemplazamos por un muñeco
+                imagen = SDL_LoadBMP("assets/images/missingPictures/CerrandoJuego.bmp");
+                break;
+
         }
     } else {
     	std::string mensajeCarga = "Se cargo la imagen: ";
