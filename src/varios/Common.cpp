@@ -76,6 +76,9 @@ string Utiles::Common::MensajesDeError(EstadoAplicacion estado) {
         case EstadoAplicacion::ErrorModoServidorNoPudoAbrirSesionEnPuerto:
             mensaje = "ERROR: no se pudo abrir la conexión en el puerto indicado";
             break;
+        case EstadoAplicacion::ErrorClienteNoPudoConectarAServidor:
+            mensaje = "ERROR: no se pudo conectar al servidor.\n";
+            mensaje += "Por favor verifique que el servidor esté corriendo y lo haga en la ip y puerto indicados";
         default:
             break;
     }

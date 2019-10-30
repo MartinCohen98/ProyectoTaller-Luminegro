@@ -15,7 +15,12 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
         return EXIT_FAILURE;
     }
 
-    conectar(direccionIP, puerto);
+    if(conectar(direccionIP, puerto) != 0){
+        ventanaInicioSesion.mostrarMensaje("ERROR: No se pudo acceder al servidor indicado",
+                                           VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
+        ventanaInicioSesion.demorar(5000);
+        return EXIT_FAILURE;
+    }
 
     MensajeCredenciales mensajeCredenciales;
 
@@ -25,7 +30,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
         ventanaInicioSesion.mostrarMensaje("ERROR: tope de jugadores alcanzado",
                                            VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
         ventanaInicioSesion.demorar(5000);
-        return EXIT_SUCCESS;
+        return EXIT_FAILURE;
     }
 
     // Autenticar usuario
