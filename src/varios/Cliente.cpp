@@ -212,6 +212,8 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
     					//Pegar
     					mensajeCliente.Codificar(Hit);
     					break;
+    					//Para probar grisado sin red
+    					//---------------------------
     			    case SDLK_q:
     			        //Desconectado
     			        mensajeCliente.Codificar(Disconnect);
@@ -220,6 +222,8 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
                         //Conectado
                         mensajeCliente.Codificar(Connect);
                         break;
+                        //----------------------------
+                        //
     				case SDLK_ESCAPE:
     					//Salir
     					mensajeCliente.Codificar(Exit);
