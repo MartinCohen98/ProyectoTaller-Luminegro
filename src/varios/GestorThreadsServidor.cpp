@@ -7,7 +7,8 @@ GestorThreadsServidor::GestorThreadsServidor(int cantidadDeJugadores) {
 	sockets = new Socket*[jugadores];
 	threadsRecibidoras = new std::thread*[jugadores];
 	threadsEnviadoras = new std::thread*[jugadores];
-	conectado = new bool[jugadores];
+	contador = new ContadorDeJugadores(jugadores);
+	threadAceptador = NULL;
 }
 
 
@@ -25,7 +26,7 @@ void GestorThreadsServidor::agregarJugador(Socket* socket, int numero) {
 	threadsEnviadoras[numero] =
 			new std::thread(EnviadorMensajesServidor(sockets[numero],
 												&colasEnviadoras[numero]));
-	conectado[numero] = true;
+	contador->seConectoElJugador(numero);
 }
 
 
@@ -41,7 +42,7 @@ void GestorThreadsServidor::enviarMensaje(MensajeServidor* mensaje) {
 }
 
 
-void GestorThreadsServidor::checkearDesconecciones() {
+void GestorThreadsServidor::checkearConecciones() {
 	for (int i = 0; i < jugadores; i++) {
 		if (sockets[i]->getEstado() == Socket::ESTADO_DESCONECTADO) {
 			threadsEnviadoras[i]->join();
@@ -51,14 +52,20 @@ void GestorThreadsServidor::checkearDesconecciones() {
 			delete threadsRecibidoras[i];
 			threadsRecibidoras[i] = NULL;
 			sockets[i]->cerrar();
-			conectado[i] = false;
+			contador->seDesconectoElJugador(i);
 		}
 	}
 }
 
 
 bool GestorThreadsServidor::estaConectado(int jugador) {
-	return conectado[jugador];
+	return contador->estaConectado(jugador);
+}
+
+
+void GestorThreadsServidor::comenzarAAceptar(Socket* socketAceptador) {
+	threadAceptador = new std::thread(AceptadorConexiones(socketAceptador,
+															contador));
 }
 
 

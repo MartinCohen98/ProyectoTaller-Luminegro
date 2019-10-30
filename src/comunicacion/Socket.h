@@ -23,6 +23,7 @@ public:
     static const int ESTADO_CONECTADO = 1;
     static const int ESTADO_DESCONECTADO = 2;
     static const int ESTADO_DISPONIBLE = 3;
+    static const int ESTADO_ESCUCHANDO = 4;
 
     static const int ERROR_SOCKET_BROKEN_PIPE = 32;
     static const int ERROR_SOCKET_OPERATION_ON_NO_SOCKET = 88;
@@ -31,16 +32,14 @@ public:
     int esperarYAceptarCliente(Socket *socketConectado);
     int conectarAUnServidor(char* direccionIP, char* puerto);
     int enviar(MensajeCredenciales *mensaje);
-    int enviar(int* datos, int* cantidadDeBytes);
     int enviar(MensajeCliente* mensaje);
     int enviar(MensajeServidor* mensajes);
-    int enviar(int unNumero);
     int recibir(MensajeCredenciales *mensaje);
-    int recibir(unsigned char* datos, int* tamanoMaximo, bool* elSocketEsValido);
     int recibir(MensajeCliente* mensaje);
     int recibir(MensajeServidor* mensaje);
-    int recibir(int* unNumero);
     int getEstado();
+    void asignarNumero(int unNumero);
+    int obtenerNumero();
     int cerrar();
     ~Socket();
 };

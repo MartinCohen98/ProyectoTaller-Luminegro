@@ -60,13 +60,13 @@ int main (int argc, char** argv) {
         logueador->Debug("Cantidad de jugadores esperada: " + jugadoresCantidad);
         Servidor servidor(jugadoresCantidadInt, (char *) configManager.PuertoServidor().c_str());
         //Apertura del puerto para recibir clientes
-        if(servidor.AbrirSesion() == 1){
+        if(servidor.abrirSesion() == 1){
             ConfigManager::MostrarError(Estado::ErrorModoServidorNoPudoAbrirSesionEnPuerto);
             return  EXIT_FAILURE;
         }
         //Espera de conexión de clientes
-        servidor.EsperarConexiones();
-        servidor.Correr(&configManager.archivoConfig);
+        servidor.esperarConexiones();
+        servidor.correr(&configManager.archivoConfig);
 
     } else if (configManager.ModoAplicacion() == Modo::Cliente) {
         // CLIENTE

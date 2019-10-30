@@ -3,6 +3,7 @@
 
 #include "../comunicacion/RecibidorMensajesCliente.h"
 #include "../comunicacion/EnviadorMensajesServidor.h"
+#include "../comunicacion/AceptadorConexiones.h"
 #include <pthread.h>
 
 class GestorThreadsServidor {
@@ -14,14 +15,16 @@ private:
 	Socket** sockets;
 	std::thread** threadsRecibidoras;
 	std::thread** threadsEnviadoras;
-	bool* conectado;
+	std::thread* threadAceptador;
+	ContadorDeJugadores* contador;
 
 public:
 	GestorThreadsServidor(int cantidadDeJugadores);
+	void comenzarAAceptar(Socket* socketAceptador);
 	void agregarJugador(Socket* socket, int numero);
 	void recibirMensajeDeCliente(MensajeCliente* mensaje, int cliente);
 	void enviarMensaje(MensajeServidor* mensaje);
-	void checkearDesconecciones();
+	void checkearConecciones();
 	bool estaConectado(int jugador);
 	virtual ~GestorThreadsServidor();
 };

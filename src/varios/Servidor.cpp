@@ -47,18 +47,19 @@ Servidor::Servidor(int cantidadDeJugadores, char* puerto) {
 	this->puerto = puerto;
 	mensajesServidor = NULL;
 	cantidadDeMensajes = 0;
+	gestorThreads = new GestorThreadsServidor(jugadoresCantidadEsperada);
 }
 
-void Servidor::Correr(pugi::xml_document* archiConfig) {
+void Servidor::correr(pugi::xml_document* archiConfig) {
 	Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
 
 	bool nivelTerminado;
 
-	gestorThreads = new GestorThreadsServidor(jugadoresCantidadEsperada);
-
 	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
 		gestorThreads->agregarJugador(&socketsDeClientes[i], i);
 	}
+
+	gestorThreads->comenzarAAceptar(&socketAceptador);
 
 	for (int nivel = 1; nivel <= 2; nivel++) {
 
@@ -86,7 +87,7 @@ void Servidor::Correr(pugi::xml_document* archiConfig) {
 		generarMensajesParaEnviar();
 
 		while (!nivelTerminado) {
-			gestorThreads->checkearDesconecciones();
+			gestorThreads->checkearConecciones();
 			recibirInputs(&protagonistas);
 
 			protagonistas.realizarMovimientos(&fondo);
@@ -172,11 +173,11 @@ Servidor::~Servidor() {
 		delete[] mensajesServidor;
 }
 
-int Servidor::AbrirSesion() {
+int Servidor::abrirSesion() {
     return socketAceptador.servidorInicializar(puerto);
 }
 
-int Servidor::EsperarConexiones() {
+int Servidor::esperarConexiones() {
     int resultadoAccion;
     MensajeCredenciales mensajeCredenciales;
 
@@ -223,8 +224,8 @@ int Servidor::EsperarConexiones() {
         cout << "Cliente conectado" << endl;
     }
 
-    // Se deja un thread esperando conexiones porque ya superarían el máximo permitido de jugadores y hay que avisarles
-    //threadRechazadorConexiones = new std::thread(RechazadorConexiones(&socketAceptador));
+    //Se deja un thread esperando conexiones porque ya superarían el máximo permitido de jugadores y hay que avisarles
+	//threadRechazadorConexiones = new std::thread(RechazadorConexiones(&socketAceptador));
 
     return resultadoAccion;
 }

@@ -1,9 +1,9 @@
 #ifndef SRC_SERVIDOR_H_
 #define SRC_SERVIDOR_H_
 
+#include "../comunicacion/AceptadorConexiones.h"
 #include "../comunicacion/Socket.h"
 #include "../comunicacion/MensajeCredenciales.h"
-#include "../comunicacion/RechazadorConexiones.h"
 #include "../modelos/ControlJugadoresModelo.h"
 #include "../modelos/ControlEnemigosModelo.h"
 #include "../modelos/ControlObjetosModelo.h"
@@ -26,8 +26,6 @@ private:
 	GestorThreadsServidor* gestorThreads;
 
 private:
-    std::thread* threadRechazadorConexiones;
-
     void validarCredenciales(MensajeCredenciales *mensajeCredenciales);
 	void recibirInputs(ControlJugadoresModelo* protagonistas);
 	void enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
@@ -40,9 +38,9 @@ private:
 
 public:
     Servidor(int cantidadDeJugadores, char* puerto);
-    int AbrirSesion();
-    int EsperarConexiones();
-    void Correr(pugi::xml_document* archiConfig);
+    int abrirSesion();
+    int esperarConexiones();
+    void correr(pugi::xml_document* archiConfig);
     virtual ~Servidor();
 
 };

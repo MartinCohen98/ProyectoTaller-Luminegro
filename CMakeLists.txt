@@ -36,8 +36,8 @@ add_executable(ProyectoTaller_Luminegro
         src/comunicacion/RecibidorMensajesServidor.h
         src/comunicacion/EnviadorMensajesServidor.cpp
         src/comunicacion/EnviadorMensajesServidor.h
-        src/comunicacion/RechazadorConexiones.cpp
-        src/comunicacion/RechazadorConexiones.h
+        src/comunicacion/AceptadorConexiones.cpp
+        src/comunicacion/AceptadorConexiones.h
 
         src/estados/EstadoEnemigoAvanzando.cpp
         src/estados/EstadoEnemigoAvanzando.h
@@ -120,6 +120,10 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/ColaMensajesServidor.h
         src/varios/Common.cpp
         src/varios/Common.h
+        src/varios/ContadorDeJugadores.cpp
+        src/varios/ContadorDeJugadores.h
+        src/varios/InformacionJugador.cpp
+        src/varios/InformacionJugador.h
 
         src/vistas/VistaEnemigo.cpp
         src/vistas/VistaEnemigo.h

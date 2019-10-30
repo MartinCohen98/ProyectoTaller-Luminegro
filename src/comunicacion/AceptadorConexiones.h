@@ -2,18 +2,18 @@
 #define PROYECTOTALLER_LUMINEGRO_RECHAZADORCONEXIONES_H
 
 #include "Socket.h"
-#include "../varios/ColaMensajesCliente.h"
+#include "../varios/ContadorDeJugadores.h"
 #include <thread>
 
 // Rechaza las conexiones cuando el máximo de jugadores ya se conectó
-class RechazadorConexiones {
+class AceptadorConexiones {
 
 private:
     Socket* socketAceptador;
-    Socket* socketDeCliente;
+    ContadorDeJugadores* contador;
 
 public:
-    RechazadorConexiones(Socket* unSocket);
+    AceptadorConexiones(Socket* unSocket, ContadorDeJugadores* unContador);
     void operator()();
 };
 

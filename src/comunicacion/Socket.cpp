@@ -79,6 +79,8 @@ int Socket::servidorInicializar(char* puerto) {
         return EXIT_FAILURE;
     }
 
+    estado = ESTADO_ESCUCHANDO;
+
     return EXIT_SUCCESS;
 }
 
@@ -408,6 +410,16 @@ int Socket::recibir(MensajeServidor* mensaje) {
 
 int Socket::getEstado() {
     return estado;
+}
+
+
+void Socket::asignarNumero(int unNumero) {
+	numero = unNumero;
+}
+
+
+int Socket::obtenerNumero() {
+	return numero;
 }
 
 
