@@ -27,21 +27,21 @@ int main (int argc, char** argv) {
 
     //Inicializo el controlador de parámetros
     ConfigManager configManager = ConfigManager(argc, argv);
-    Estado estado;
+    EstadoAplicacion estado;
 
     // Valida que tenga la cantidad mínima de parámetros
     estado = configManager.ValidarParametros();
-    if (estado != Estado::OK) {
-        ConfigManager::MostrarError(estado);
-        ConfigManager::MostrarUsoPrograma();
+    if (estado != EstadoAplicacion::OK) {
+        Common::MostrarError(estado);
+        Common::MostrarUsoPrograma();
         return EXIT_FAILURE;
     }
 
     // Carga archivo de configuración
     estado = configManager.CargarArchivoConfiguracion();
-    if (estado != Estado::OK) {
-        ConfigManager::MostrarError(estado);
-        ConfigManager::MostrarUsoPrograma();
+    if (estado != EstadoAplicacion::OK) {
+        Common::MostrarError(estado);
+        Common::MostrarUsoPrograma();
         return EXIT_FAILURE;
     }
 
@@ -65,7 +65,7 @@ int main (int argc, char** argv) {
         Servidor servidor(jugadoresCantidadInt, (char *) configManager.PuertoServidor().c_str());
         //Apertura del puerto para recibir clientes
         if(servidor.abrirSesion() == 1){
-            ConfigManager::MostrarError(Estado::ErrorModoServidorNoPudoAbrirSesionEnPuerto);
+            Common::MostrarError(EstadoAplicacion::ErrorModoServidorNoPudoAbrirSesionEnPuerto);
             return  EXIT_FAILURE;
         }
         //Espera de conexión de clientes
@@ -85,8 +85,8 @@ int main (int argc, char** argv) {
 
     } else {
         logueador->Error("Parámetros incorrectos, no se inició ni en modo servidor ni en modo cliente");
-        ConfigManager::MostrarError(Estado::ErrorParametrosIncorrectos);
-        ConfigManager::MostrarUsoPrograma();
+        Common::MostrarError(EstadoAplicacion::ErrorParametrosIncorrectos);
+        Common::MostrarUsoPrograma();
         return EXIT_FAILURE;
     }
 }

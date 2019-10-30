@@ -2,7 +2,7 @@
     <log>
         <level>DEBUG</level>
     </log>
-    <jugadoresCantidad>1</jugadoresCantidad>
+    <jugadoresCantidad>3</jugadoresCantidad>
     <escenario>
         <protagonistas>
             <protagonista1>

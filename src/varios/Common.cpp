@@ -1,5 +1,8 @@
 #include "Common.h"
 #include <sys/stat.h>
+#include <iostream>
+
+using namespace std;
 
 bool Utiles::Common::EsNumero(const std::string &cadena) {
     for (char c: cadena)
@@ -37,3 +40,44 @@ bool Utiles::Common::ExisteArchivo(const std::string &ruta) {
     return stat(ruta.c_str(), &buffer) == 0;
 }
 
+void Utiles::Common::MostrarUsoPrograma() {
+    cout << "--------------------------------" << endl;
+    cout << "Forma de invocación del programa" << endl;
+    cout << "--------------------------------" << endl;
+    cout << "Para modo Servidor:" << endl;
+    cout << "\t./<ejecutable> servidor <puerto> <(opcional)ruta config> <(opcional)nivel log>" << endl;
+    cout << "Para modo Cliente:" << endl;
+    cout << "\t./<ejecutable> cliente <ipServidor:puerto> <(opcional)ruta config> <(opcional)nivel logl>" << endl;
+}
+
+void Utiles::Common::MostrarError(EstadoAplicacion estado, const string& mensajeAux) {
+    cout << MensajesDeError(estado) << " " << mensajeAux;
+}
+
+string Utiles::Common::MensajesDeError(EstadoAplicacion estado) {
+    string mensaje;
+
+    switch (estado) {
+        case EstadoAplicacion::ErrorParametrosIncorrectos:
+            mensaje = "ERROR: Parámetros de invocación incorrectos";
+            break;
+        case EstadoAplicacion::ErrorFaltanParametros:
+            mensaje = "ERROR: Faltan parámetros de invocación";
+            break;
+        case EstadoAplicacion::ErrorArchivoConfiguracion:
+            mensaje = "ERROR: No se pudo abrir el archivo de configuración";
+            break;
+        case EstadoAplicacion::ErrorModoServidorPuertoInvalido:
+            mensaje = "ERROR: el parámetro ingresado como puerto es inválido";
+            break;
+        case EstadoAplicacion::ErrorModoClienteIpOPuertoInvalido:
+            mensaje = "ERROR: el parámetro ingresado como puerto:ip es inválido";
+            break;
+        case EstadoAplicacion::ErrorModoServidorNoPudoAbrirSesionEnPuerto:
+            mensaje = "ERROR: no se pudo abrir la conexión en el puerto indicado";
+            break;
+        default:
+            break;
+    }
+    return mensaje;
+}
