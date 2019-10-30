@@ -91,15 +91,18 @@ void JugadorModelo::congelarse() {
 
 
 void JugadorModelo::desaparecer() {
-	posicionY += 600;
+	if (!salio)
+		posicionY += 600;
 	salio = true;
 }
 
 
 void JugadorModelo::descongelarse() {
     desconectado = false;
-    if (salio)
-    	posicionY -= 600;
+    if (salio) {
+    	posicionY = posicionY - 600;
+    	salio = false;
+    }
 }
 
 

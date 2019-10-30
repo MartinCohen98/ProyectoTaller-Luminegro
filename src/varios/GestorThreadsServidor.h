@@ -4,6 +4,7 @@
 #include "../comunicacion/RecibidorMensajesCliente.h"
 #include "../comunicacion/EnviadorMensajesServidor.h"
 #include "../comunicacion/AceptadorConexiones.h"
+#include "../modelos/ControlJugadoresModelo.h"
 #include <pthread.h>
 
 class GestorThreadsServidor {
@@ -24,7 +25,8 @@ public:
 	void agregarJugador(Socket* socket, int numero);
 	void recibirMensajeDeCliente(MensajeCliente* mensaje, int cliente);
 	void enviarMensaje(MensajeServidor* mensaje);
-	void checkearConecciones();
+	void checkearConecciones(int cantiadDeRecieves,
+							ControlJugadoresModelo* jugadores);
 	bool estaConectado(int jugador);
 	virtual ~GestorThreadsServidor();
 };

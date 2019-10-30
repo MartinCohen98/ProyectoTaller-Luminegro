@@ -5,17 +5,18 @@
 #include <mutex>
 #include <queue>
 #include "../comunicacion/MensajeCredenciales.h"
+#include "../comunicacion/Socket.h"
 #include "InformacionJugador.h"
+#include <string>
 
 class ContadorDeJugadores {
 
 private:
+	int cantidad;
 	int espaciosDisponibles;
 	std::mutex m;
 	std::queue<InformacionJugador> cola;
 	bool* conectados;
-	int cantidadDeRecieves;
-
 public:
 	ContadorDeJugadores(int jugadores);
 	bool hayEspacioDisponible();
@@ -24,6 +25,8 @@ public:
 	bool estaConectado(int jugador);
 	void actualizarCantidadDeRecieves(int recieves);
 	int obtenerCantidadDeRecieves();
+	void validarCredenciales(MensajeCredenciales* mensaje, Socket* socket);
+	InformacionJugador obtenerInfo();
 	virtual ~ContadorDeJugadores();
 };
 

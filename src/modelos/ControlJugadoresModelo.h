@@ -18,6 +18,7 @@ public:
 	bool llegaronAlFin(FondoModelo* fondo);
 	bool verificarRezagado(FondoModelo* fondo);
 	void desconectar(int jugador);
+	void conectar(int jugador);
 	void desaparecer(int jugador);
 	virtual ~ControlJugadoresModelo();
 };

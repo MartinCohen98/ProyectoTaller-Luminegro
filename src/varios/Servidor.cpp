@@ -5,11 +5,11 @@ using namespace std;
 using namespace Logger;
 
 
-void Servidor::validarCredenciales(MensajeCredenciales *mensajeCredenciales) {
+void Servidor::validarCredenciales(MensajeCredenciales *mensaje) {
     string claveCorrecta;
     int jugadorNombre;
 
-    string usuario = mensajeCredenciales->getUsuario();
+    string usuario = mensaje->getUsuario();
 
     if (usuario.compare("mariano") == 0) {
         jugadorNombre = mariano;
@@ -28,15 +28,15 @@ void Servidor::validarCredenciales(MensajeCredenciales *mensajeCredenciales) {
         claveCorrecta = "freud";
     }
 
-    if (mensajeCredenciales->getClave() == claveCorrecta) {
+    if (mensaje->getClave() == claveCorrecta) {
         if (jugadoresConectados[jugadorNombre]) {
-            mensajeCredenciales->setEstado(MensajeCredenciales::ESTADO_USUARIO_YA_CONECTADO);
+            mensaje->setEstado(MensajeCredenciales::ESTADO_USUARIO_YA_CONECTADO);
         } else {
-            mensajeCredenciales->setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);
+            mensaje->setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);
             jugadoresConectados[jugadorNombre] = true;
         }
     } else {
-        mensajeCredenciales->setEstado(MensajeCredenciales::ESTADO_USUARIO_O_CLAVE_ERRONEOS);
+        mensaje->setEstado(MensajeCredenciales::ESTADO_USUARIO_O_CLAVE_ERRONEOS);
     }
 }
 
@@ -87,7 +87,7 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 		generarMensajesParaEnviar();
 
 		while (!nivelTerminado) {
-			gestorThreads->checkearConecciones();
+			gestorThreads->checkearConecciones(cantidadDeMensajes, &protagonistas);
 			recibirInputs(&protagonistas);
 
 			protagonistas.realizarMovimientos(&fondo);

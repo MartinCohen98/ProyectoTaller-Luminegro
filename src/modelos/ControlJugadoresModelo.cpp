@@ -132,6 +132,11 @@ void ControlJugadoresModelo::desconectar(int jugador) {
 }
 
 
+void ControlJugadoresModelo::conectar(int jugador) {
+	jugadores[jugador]->descongelarse();
+}
+
+
 void ControlJugadoresModelo::desaparecer(int jugador) {
 	jugadores[jugador]->desaparecer();
 }

@@ -415,6 +415,7 @@ int Socket::getEstado() {
 
 void Socket::asignarNumero(int unNumero) {
 	numero = unNumero;
+	estado = ESTADO_CONECTADO;
 }
 
 

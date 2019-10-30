@@ -13,7 +13,8 @@ GestorThreadsServidor::GestorThreadsServidor(int cantidadDeJugadores) {
 
 
 void GestorThreadsServidor::agregarJugador(Socket* socket, int numero) {
-	sockets[numero] = socket;
+	if (socket != NULL)
+		sockets[numero] = socket;
 	MensajeServidor mensajeServidor;
 	MensajeCliente mensajeCliente;
 	while (mensajeServidor.obtenerTipoDeSprite() != MensajeInvalido)
@@ -42,7 +43,8 @@ void GestorThreadsServidor::enviarMensaje(MensajeServidor* mensaje) {
 }
 
 
-void GestorThreadsServidor::checkearConecciones() {
+void GestorThreadsServidor::checkearConecciones(int cantidadDeMensajes,
+										ControlJugadoresModelo* protagonistas) {
 	for (int i = 0; i < jugadores; i++) {
 		if (sockets[i]->getEstado() == Socket::ESTADO_DESCONECTADO) {
 			threadsEnviadoras[i]->join();
@@ -54,6 +56,17 @@ void GestorThreadsServidor::checkearConecciones() {
 			sockets[i]->cerrar();
 			contador->seDesconectoElJugador(i);
 		}
+	}
+	InformacionJugador info = contador->obtenerInfo();
+	if (info.obtenerSocket() != 0) {
+		sockets[info.obtenerNumeroDeJugador()]->asignarNumero(info.obtenerSocket());
+		Encuadre insercion;
+		Encuadre frame(cantidadDeMensajes, 0, 0, 0);
+		MensajeServidor mensaje;
+		mensaje.generarMensaje(&frame, &insercion, Jugador1);
+		sockets[info.obtenerNumeroDeJugador()]->enviar(&mensaje);
+		protagonistas->conectar(info.obtenerNumeroDeJugador());
+		agregarJugador(NULL, info.obtenerNumeroDeJugador());
 	}
 }
 

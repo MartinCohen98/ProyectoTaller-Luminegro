@@ -30,6 +30,13 @@ void AceptadorConexiones::operator()() {
         } else {
         	mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_ESPERANDO_CONEXIONES);
         	socketDeCliente.enviar(&mensajeCredenciales);
+        	while (mensajeCredenciales.getEstado() != MensajeCredenciales::ESTADO_AUTENTICADO) {
+
+        		socketDeCliente.recibir(&mensajeCredenciales);
+
+        	    contador->validarCredenciales(&mensajeCredenciales, &socketDeCliente);
+
+        	}
         }
     }
 }
