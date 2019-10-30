@@ -27,7 +27,6 @@ void GestorThreadsServidor::agregarJugador(Socket* socket, int numero) {
 	threadsEnviadoras[numero] =
 			new std::thread(EnviadorMensajesServidor(sockets[numero],
 												&colasEnviadoras[numero]));
-	contador->seConectoElJugador(numero);
 }
 
 

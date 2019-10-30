@@ -23,7 +23,6 @@ public:
 	ContadorDeJugadores(int jugadores);
 	bool hayEspacioDisponible();
 	void seDesconectoElJugador(int jugador);
-	void seConectoElJugador(int jugador);
 	bool estaConectado(int jugador);
 	void actualizarCantidadDeRecieves(int recieves);
 	int obtenerCantidadDeRecieves();

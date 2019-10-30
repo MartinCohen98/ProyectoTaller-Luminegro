@@ -12,8 +12,7 @@ EstadoJugadorCongelado::EstadoJugadorCongelado() {
 }
 
 EstadoJugador* EstadoJugadorCongelado::parar() {
-    delete this;
-    return (new EstadoJugadorParado());
+    return this;
 }
 
 EstadoJugador* EstadoJugadorCongelado::avanzar() {

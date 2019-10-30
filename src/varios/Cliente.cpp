@@ -261,6 +261,7 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
 
     	case SDL_QUIT:
     		mensajeCliente.Codificar(Exit);
+    		return;
     		break;
 	}
 	gestorThreads->enviarMensaje(&mensajeCliente);

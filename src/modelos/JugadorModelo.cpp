@@ -99,6 +99,8 @@ void JugadorModelo::desaparecer() {
 
 void JugadorModelo::descongelarse() {
     desconectado = false;
+    delete estado;
+    estado = new EstadoJugadorParado();
     if (salio) {
     	posicionY = posicionY - 600;
     	salio = false;
