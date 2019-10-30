@@ -1,7 +1,3 @@
-//
-// Created by nico on 24/10/19.
-//
-
 #include "Common.h"
 #include <sys/stat.h>
 
@@ -16,7 +12,7 @@ bool Utiles::Common::IpValida(const std::string &dirIP) {
     auto elementos = Split(dirIP,'.');
     if(elementos.size() != 4)
         return false;
-    for(std::string e: elementos)
+    for(const std::string& e: elementos)
         if(!EsNumero(e) || stoi(e) > 255)
             return false;
     return true;

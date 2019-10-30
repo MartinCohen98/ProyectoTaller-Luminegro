@@ -171,8 +171,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 }
 
 int Cliente::conectar(char* direccionIP, char* puerto){
-	int resultado = socket.conectarAUnServidor(direccionIP, puerto);
-	return resultado;
+	return socket.conectarAUnServidor(direccionIP, puerto);
 }
 
 void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){

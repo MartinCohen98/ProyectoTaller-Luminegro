@@ -1,6 +1,3 @@
-//
-// Created by nico on 6/10/19.
-//
 #include "ConfigManager.h"
 #include "Logger.h"
 #include "Common.h"
@@ -125,7 +122,7 @@ void ConfigManager::MostrarUsoPrograma() {
     cout << "\t./<ejecutable> cliente <ipServidor:puerto> <(opcional)ruta config> <(opcional)nivel logl>" << endl;
 }
 
-void ConfigManager::MostrarError(Estado estado, string mensajeAux) {
+void ConfigManager::MostrarError(Estado estado, const string& mensajeAux) {
     cout << MensajesDeError(estado) << " " << mensajeAux;
 }
 
@@ -168,7 +165,7 @@ std::string ConfigManager::DireccionIpServidor() {
 }
 
 string ConfigManager::MensajesDeError(Estado estado) {
-    string mensaje = "";
+    string mensaje;
 
     switch (estado) {
         case Estado::ErrorParametrosIncorrectos:

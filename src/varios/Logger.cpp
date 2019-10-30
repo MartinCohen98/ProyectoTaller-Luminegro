@@ -1,7 +1,3 @@
-//
-// Created by nico on 18/9/19.
-//
-
 #include <ctime>
 #include <iostream>
 #include "Logger.h"
@@ -34,10 +30,10 @@ bool Log::InicializarLog(string severidadMinima, string rutaArchivo, string modo
     return true;
 }
 
-Log::Log(string severidadMinima, string rutaArchivo, string modoInicio, char caracterSeparador) {
+Log::Log(const string& severidadMinima, string rutaArchivo, string modoInicio, char caracterSeparador) {
     //Carga por defecto como caracter separador la coma
     this->caracterSeparador = caracterSeparador;
-    this->modoInicio = modoInicio;
+    this->modoInicio = std::move(modoInicio);
     //Inicializa severidad mínima (si no hay coincidencia, por defecto severidad ERROR)
     this->SetSeveridadMinima(severidadMinima);
     //Genera el id de sesión
@@ -56,21 +52,21 @@ Log::Log(string severidadMinima, string rutaArchivo, string modoInicio, char car
 }
 
 
-void Log::Debug(string mensaje) {
+void Log::Debug(const string& mensaje) {
     if(this->severidadMinima == Severidad::DEBUG)
-        escribirLog(std::move(mensaje), "DEBUG");
+        escribirLog(mensaje, "DEBUG");
 }
 
-void Log::Info(string mensaje) {
+void Log::Info(const string& mensaje) {
     if(this->severidadMinima <= Severidad::INFO)
-        escribirLog(std::move(mensaje), "INFO");
+        escribirLog(mensaje, "INFO");
 }
 
-void Log::Error(std::string mensaje) {
-    escribirLog(std::move(mensaje), "ERROR");
+void Log::Error(const std::string& mensaje) {
+    escribirLog(mensaje, "ERROR");
 }
 
-void Log::escribirLog(const string& mensaje, string severidad) {
+void Log::escribirLog(const string& mensaje, const string& severidad) {
     char buffer[MAX_LENGTH_BUFFER_FECHA];
 
     //Bloqueo el logger para que no haya otro hilo intentando escribir el archivo
@@ -94,7 +90,7 @@ void Log::escribirLog(const string& mensaje, string severidad) {
     pthread_mutex_unlock(&this->mutexLogger);
 }
 
-void Log::SetSeveridadMinima(const string severidad) {
+void Log::SetSeveridadMinima(const string& severidad) {
     //Inicializa severidad mínima (si no hay coincidencia, por defecto severidad ERROR)
     if (severidad == "DEBUG") {
         this->severidadMinima = Severidad::DEBUG;

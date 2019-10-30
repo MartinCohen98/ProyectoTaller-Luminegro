@@ -1,7 +1,3 @@
-//
-// Created by nico on 24/10/19.
-//
-
 #ifndef PROYECTOTALLER_LUMINEGRO_COMMON_H
 #define PROYECTOTALLER_LUMINEGRO_COMMON_H
 
