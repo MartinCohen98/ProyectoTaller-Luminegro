@@ -83,15 +83,6 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	gestorThreads.comenzar();
 
-	imagenDesconectado.cargar("assets/images/missingPictures/CerrandoJuego.bmp",4);
-	Encuadre encuadreDesconectado={0,0,800,600};
-	Encuadre encuadreFijoDesconectado={0,0,800,600};
-
-    //texturaDesconectado.texturizar(&renderizador,imagenDesconectado);
-    //texturaDesconectado.copiarseEn(&renderizador,encuadreDesconectado,encuadreFijoDesconectado);
-   // renderizador.renderizar();
-   // SDL_Delay(1000);
-
 
     for (int nivel = 1; nivel <= 2; nivel++) {
 
@@ -123,8 +114,18 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 		while (!salir) {
 	    	enviarInput(&gestorThreads);
-	    	if (mensajeCliente.get() == Exit || socket.getEstado()==2) {
+	    	if (mensajeCliente.get() == Exit) {
 	    		SDL_Delay(200);
+	    		return 0;
+	    	}
+	    	if (gestorThreads.seDesconecto()) {
+	    		imagenDesconectado.cargar("assets/images/missingPictures/CerrandoJuego.bmp",4);
+	    		Encuadre encuadreDesconectado={0,0,800,600};
+	    		Encuadre encuadreFijoDesconectado={0,0,800,600};
+	    		texturaDesconectado.texturizar(&renderizador,imagenDesconectado);
+	    		texturaDesconectado.copiarseEn(&renderizador,encuadreDesconectado,encuadreFijoDesconectado);
+	    		renderizador.renderizar();
+	    		SDL_Delay(3000);
 	    		return 0;
 	    	}
 	    	renderizarFondo(&fondo, &gestorThreads);
@@ -135,15 +136,6 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	        	MensajeServidor mensaje;
 	        	mensaje = listaOrdenada.front();
 
-	        	//Cuando el servidor se desconecta muestra un mensaje
-                if (socket.getEstado()==2) {
-                    salir=true;
-                    texturaDesconectado.texturizar(&renderizador,imagenDesconectado);
-                    texturaDesconectado.copiarseEn(&renderizador,encuadreDesconectado,encuadreFijoDesconectado);
-                    renderizador.renderizar();
-                    SDL_Delay(1000);
-                    return 0;
-                }
 	        	switch(mensaje.obtenerTipoDeSprite()) {
 	        		case Jugador1:
 	        			jugador1.renderizarConElMensaje(&mensaje);

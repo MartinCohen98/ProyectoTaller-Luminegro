@@ -17,6 +17,7 @@ private:
 public:
 	GestorThreadsCliente(Socket* unSocket);
 	void comenzar();
+	bool seDesconecto();
 	void enviarMensaje(MensajeCliente* mensaje);
 	MensajeServidor recibirMensaje();
 	virtual ~GestorThreadsCliente();

@@ -15,6 +15,15 @@ void GestorThreadsCliente::comenzar() {
 }
 
 
+bool GestorThreadsCliente::seDesconecto() {
+	if (socket->getEstado() == Socket::ESTADO_DESCONECTADO) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+
 void GestorThreadsCliente::enviarMensaje(MensajeCliente* mensaje) {
 	colaCliente.encolar(mensaje);
 }
@@ -22,6 +31,9 @@ void GestorThreadsCliente::enviarMensaje(MensajeCliente* mensaje) {
 
 MensajeServidor GestorThreadsCliente::recibirMensaje() {
 	MensajeServidor mensaje;
+	if (seDesconecto()) {
+		return mensaje;
+	}
 	mensaje.generarMensaje(NULL, NULL, MensajeInvalido);
 	while (mensaje.obtenerTipoDeSprite() == MensajeInvalido) {
 		mensaje = colaServidor.desencolar();
