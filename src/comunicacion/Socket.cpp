@@ -112,6 +112,12 @@ int Socket::esperarYAceptarCliente(Socket *socketConectado) {
         return EXIT_FAILURE;
     }
 
+    struct timeval timeout;
+    timeout.tv_sec = 3;
+    timeout.tv_usec =  0;
+
+    setsockopt(socketConectado->numero, SOL_SOCKET, SO_RCVTIMEO, (char*) &timeout, sizeof(timeout));
+    setsockopt(socketConectado->numero, SOL_SOCKET, SO_SNDTIMEO, (char*) &timeout, sizeof(timeout));
     return EXIT_SUCCESS;
 }
 
@@ -176,6 +182,13 @@ int Socket::conectarAUnServidor(char* direccionIP, char* puerto) {
         logueador->Error(error);
         return EXIT_FAILURE;
     }
+
+    struct timeval timeout;
+    timeout.tv_sec = 3;
+    timeout.tv_usec =  0;
+
+    setsockopt(numero, SOL_SOCKET, SO_RCVTIMEO, (char*) &timeout, sizeof(timeout));
+    setsockopt(numero, SOL_SOCKET, SO_SNDTIMEO, (char*) &timeout, sizeof(timeout));
 
     return EXIT_SUCCESS;
 }
