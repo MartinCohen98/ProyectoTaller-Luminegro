@@ -234,6 +234,7 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
     			    case SDLK_q:
     			        //Desconectado
     			        mensajeCliente.Codificar(Disconnect);
+                        Logger::Log::ObtenerInstancia()->Info("Selccionó desconectar (q)");
     			        break;
                     case SDLK_w:
                         //Conectado
@@ -243,6 +244,7 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
                         //
     				case SDLK_ESCAPE:
     					//Salir
+                        Logger::Log::ObtenerInstancia()->Info("Selccionó salir (Escape)");
     					mensajeCliente.Codificar(Exit);
     					break;
     			}
@@ -278,6 +280,7 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
 
     	case SDL_QUIT:
     		mensajeCliente.Codificar(Exit);
+    		Logger::Log::ObtenerInstancia()->Info("Selccionó salir (cerró ventana)");
     		return;
     		break;
 	}
