@@ -23,6 +23,7 @@ private:
 	Socket socketAceptador;
 	Socket* socketsDeClientes;
 	char *puerto;
+	MensajeCredenciales credenciales[4];
 	GestorThreadsServidor* gestorThreads;
 
 private:

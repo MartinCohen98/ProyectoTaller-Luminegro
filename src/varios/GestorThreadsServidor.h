@@ -21,7 +21,7 @@ private:
 
 public:
 	GestorThreadsServidor(int cantidadDeJugadores);
-	void comenzarAAceptar(Socket* socketAceptador);
+	void comenzarAAceptar(Socket* socketAceptador, MensajeCredenciales* credenciales);
 	void agregarJugador(Socket* socket, int numero);
 	void recibirMensajeDeCliente(MensajeCliente* mensaje, int cliente);
 	void enviarMensaje(MensajeServidor* mensaje);

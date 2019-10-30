@@ -7,6 +7,7 @@ ContadorDeJugadores::ContadorDeJugadores(int jugadores) {
 	for (int i = 0; i < jugadores; i++) {
 		conectados[i] =  true;
 	}
+	credenciales = NULL;
 }
 
 
@@ -39,37 +40,33 @@ bool ContadorDeJugadores::estaConectado(int jugador) {
 void ContadorDeJugadores::validarCredenciales(MensajeCredenciales* mensaje,
 											Socket* socket) {
 	std::string claveCorrecta;
-    int jugadorNombre;
+	int numeroJugador;
     std::string usuario = mensaje->getUsuario();
     m.lock();
-    if (usuario.compare("mariano") == 0) {
-        claveCorrecta = "cognitiva";
 
-    } else if (usuario.compare("julio") == 0) {
-        claveCorrecta = "conductual";
-
-    } else if (usuario.compare("martin") == 0) {
-        claveCorrecta = "gestalt";
-
-    } else if (usuario.compare("nicolas") == 0) {
-        claveCorrecta = "freud";
+    for (int i = 0; i < cantidad; i++) {
+    	if (!conectados[i] && (usuario.compare(credenciales[i].getUsuario()) == 0)) {
+    		claveCorrecta = credenciales[i].getClave();
+    		numeroJugador = i;
+    	}
     }
 
     if (mensaje->getClave() == claveCorrecta) {
         mensaje->setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);
-        for (int i = 0; i < cantidad; i++) {
-        	if (!conectados[i]) {
-        		conectados[i] = true;
-        		espaciosDisponibles--;
-        		InformacionJugador info(socket->obtenerNumero(), i);
-        		cola.push(info);
-        	}
-        }
+        conectados[numeroJugador] = true;
+        espaciosDisponibles--;
+        InformacionJugador info(socket->obtenerNumero(), numeroJugador);
+        cola.push(info);
     } else {
     	mensaje->setEstado(MensajeCredenciales::ESTADO_USUARIO_O_CLAVE_ERRONEOS);
     }
     socket->enviar(mensaje);
     m.unlock();
+}
+
+
+void ContadorDeJugadores::definirCredenciales(MensajeCredenciales* lasCredenciales) {
+	credenciales = lasCredenciales;
 }
 
 

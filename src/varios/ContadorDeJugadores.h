@@ -17,6 +17,8 @@ private:
 	std::mutex m;
 	std::queue<InformacionJugador> cola;
 	bool* conectados;
+	MensajeCredenciales* credenciales;
+
 public:
 	ContadorDeJugadores(int jugadores);
 	bool hayEspacioDisponible();
@@ -26,6 +28,7 @@ public:
 	void actualizarCantidadDeRecieves(int recieves);
 	int obtenerCantidadDeRecieves();
 	void validarCredenciales(MensajeCredenciales* mensaje, Socket* socket);
+	void definirCredenciales(MensajeCredenciales* lasCredenciales);
 	InformacionJugador obtenerInfo();
 	virtual ~ContadorDeJugadores();
 };

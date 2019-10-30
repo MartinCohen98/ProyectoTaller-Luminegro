@@ -9,6 +9,8 @@ void Servidor::validarCredenciales(MensajeCredenciales *mensaje) {
     string claveCorrecta;
     int jugadorNombre;
 
+    //Me dio cosa borrar esto
+
     string usuario = mensaje->getUsuario();
 
     if (usuario.compare("mariano") == 0) {
@@ -59,7 +61,7 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 		gestorThreads->agregarJugador(&socketsDeClientes[i], i);
 	}
 
-	gestorThreads->comenzarAAceptar(&socketAceptador);
+	gestorThreads->comenzarAAceptar(&socketAceptador, credenciales);
 
 	for (int nivel = 1; nivel <= 2; nivel++) {
 
@@ -210,7 +212,10 @@ int Servidor::esperarConexiones() {
                 return resultadoAccion;
             }
 
-            validarCredenciales(&mensajeCredenciales);
+            //validarCredenciales(&mensajeCredenciales);
+
+            credenciales[i] = mensajeCredenciales;
+            mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);
 
             resultadoAccion = socketsDeClientes[i].enviar(&mensajeCredenciales);
             if (resultadoAccion == EXIT_FAILURE) {
