@@ -17,7 +17,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
     }
 
     if(conectar(direccionIP, puerto) != 0){
-        ventanaInicioSesion.mostrarMensaje("ERROR: No se pudo acceder al servidor indicado",
+        ventanaInicioSesion.mostrarMensaje("ERROR: No se pudo acceder al servidor",
                                            VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
         ventanaInicioSesion.demorar(5000);
         return EXIT_FAILURE;
