@@ -89,13 +89,6 @@ int Socket::esperarYAceptarCliente(Socket *socketConectado) {
     Logger::Log *logueador = Logger::Log::ObtenerInstancia();
     bool elSocketAceptadoEsValido = true;
 
-    struct timeval timeout;
-    timeout.tv_sec = 3;
-    timeout.tv_usec =  0;
-
-    setsockopt(socketConectado->numero, SOL_SOCKET, SO_RCVTIMEO, (char*) &timeout, sizeof(timeout));
-    setsockopt(socketConectado->numero, SOL_SOCKET, SO_SNDTIMEO, (char*) &timeout, sizeof(timeout));
-
     // Aceptamos cliente
     socketConectado->numero = accept(numero, NULL, NULL);
 
@@ -119,6 +112,10 @@ int Socket::esperarYAceptarCliente(Socket *socketConectado) {
         return EXIT_FAILURE;
     }
 
+    int timeout = 40000;  // timeout en millisegundos [ms]
+    setsockopt(socketConectado->obtenerNumero(),
+    			SOL_TCP, TCP_USER_TIMEOUT, (char*) &timeout, sizeof (timeout));
+
   /*  struct timeval timeout;
   //  timeout.tv_sec = 3;
   //  timeout.tv_usec =  0;
@@ -130,12 +127,6 @@ int Socket::esperarYAceptarCliente(Socket *socketConectado) {
 
 
 int Socket::conectarAUnServidor(char* direccionIP, char* puerto) {
-    struct timeval timeout;
-    timeout.tv_sec = 3;
-    timeout.tv_usec =  0;
-
-    setsockopt(numero, SOL_SOCKET, SO_RCVTIMEO, (char*) &timeout, sizeof(timeout));
-    setsockopt(numero, SOL_SOCKET, SO_SNDTIMEO, (char*) &timeout, sizeof(timeout));
     int resultadoAccion;
     bool estaConectado = false;
     Logger::Log *logueador = Logger::Log::ObtenerInstancia();
@@ -195,6 +186,9 @@ int Socket::conectarAUnServidor(char* direccionIP, char* puerto) {
         logueador->Error(error);
         return EXIT_FAILURE;
     }
+
+    int timeout = 40000;  // timeout en millisegundos [ms]
+    setsockopt(numero, SOL_TCP, TCP_USER_TIMEOUT, (char*) &timeout, sizeof (timeout));
 
  /*   struct timeval timeout;
     timeout.tv_sec = 3;
