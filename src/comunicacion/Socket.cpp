@@ -156,7 +156,15 @@ int Socket::conectarAUnServidor(char* direccionIP, char* puerto) {
             mensajeError.append(strerror(errno));
 
             logueador->Error(mensajeError);
+
         } else {
+
+            // Si el cliente se desconecta (por ejemplo físicamente) el receive no debe esperar hasta el infinito
+            struct timeval tv;
+            tv.tv_sec = 4;
+            tv.tv_usec = 0;
+            setsockopt(numero, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
+
             resultadoAccion = connect(numero, ptr->ai_addr, ptr->ai_addrlen);
             if (resultadoAccion == -1) {
                 std::string mensajeError = "Clase Socket - Método conectarAUnServidor - Error en connect(): ";
@@ -304,7 +312,7 @@ int Socket::enviar(MensajeServidor* mensajes) {
         }
     }
     if (elSocketRemotoEstaCerrado || hayUnErrorDeSocket) {
-//    	estado = ESTADO_DESCONECTADO;
+    	estado = ESTADO_DESCONECTADO;
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
@@ -404,6 +412,7 @@ int Socket::recibir(MensajeServidor* mensaje) {
             std::string mensajeError = "Clase Socket - Método recibir(MensajeServidor* mensaje) - Error en recv(): ";
             mensajeError.append(strerror(errno));
             logueador->Error(mensajeError);
+            logueador->Info("CERRANDO JUEGO DE CLIENTE POR DESCONEXIÓN");
             estado = ESTADO_DESCONECTADO;
             return EXIT_FAILURE;
         } else {

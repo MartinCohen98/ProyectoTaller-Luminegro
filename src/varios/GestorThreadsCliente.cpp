@@ -31,11 +31,11 @@ void GestorThreadsCliente::enviarMensaje(MensajeCliente* mensaje) {
 
 MensajeServidor GestorThreadsCliente::recibirMensaje() {
 	MensajeServidor mensaje;
-	if (seDesconecto()) {
-		return mensaje;
-	}
 	mensaje.generarMensaje(NULL, NULL, MensajeInvalido);
 	while (mensaje.obtenerTipoDeSprite() == MensajeInvalido) {
+        if (seDesconecto()) {
+            return mensaje;
+        }
 		mensaje = colaServidor.desencolar();
 		if (mensaje.obtenerTipoDeSprite() == MensajeInvalido)
 			std::this_thread::yield();
