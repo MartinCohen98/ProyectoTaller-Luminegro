@@ -112,7 +112,7 @@ int Socket::esperarYAceptarCliente(Socket *socketConectado) {
         return EXIT_FAILURE;
     }
 
-    int timeout = 40000;  // timeout en millisegundos [ms]
+    int timeout = 4000;  // timeout en millisegundos [ms]
     setsockopt(socketConectado->obtenerNumero(),
     			SOL_TCP, TCP_USER_TIMEOUT, (char*) &timeout, sizeof (timeout));
 
@@ -187,7 +187,7 @@ int Socket::conectarAUnServidor(char* direccionIP, char* puerto) {
         return EXIT_FAILURE;
     }
 
-    int timeout = 40000;  // timeout en millisegundos [ms]
+    int timeout = 4000;  // timeout en millisegundos [ms]
     setsockopt(numero, SOL_TCP, TCP_USER_TIMEOUT, (char*) &timeout, sizeof (timeout));
 
  /*   struct timeval timeout;
