@@ -1,9 +1,9 @@
 #include "JugadorModelo.h"
 #include <iostream>
 
-JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig) {
-	posicionX = 0;
-	posicionY = 250;
+JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig, int posXinicial, int posYinicial) {
+	posicionX = posXinicial;
+	posicionY = posYinicial;
 	movimientoEnX = 0;
 	movimientoEnY = 0;
 	movimientoAlSaltarEnX = 0;

@@ -24,7 +24,7 @@ private:
 	EstadoJugadorParado* estadoOriginal;
 
 public:
-	JugadorModelo(pugi::xml_document *archiConfig);
+	JugadorModelo(pugi::xml_document *archiConfig, int posXinicial, int poYinicial);
 	void avanzar();
 	void dejarDeAvanzar();
 	void retroceder();
