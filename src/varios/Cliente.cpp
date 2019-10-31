@@ -79,7 +79,15 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	Renderizador renderizador(ventanaJuego.get());
 
-	GestorThreadsCliente gestorThreads(&socket);
+    imagenEspera.cargar("assets/images/general/loading.bmp",2);
+    Encuadre encuadreEspera={0,0,800,600};
+    Encuadre encuadreFijoEspera={0,0,800,600};
+    texturaTransiciones.texturizar(&renderizador,imagenEspera);
+    texturaTransiciones.copiarseEn(&renderizador,encuadreEspera,encuadreFijoEspera);
+    renderizador.renderizar();
+
+
+    GestorThreadsCliente gestorThreads(&socket);
 
 	gestorThreads.comenzar();
 
@@ -122,8 +130,8 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	    		imagenDesconectado.cargar("assets/images/missingPictures/CerrandoJuego.bmp",4);
 	    		Encuadre encuadreDesconectado={0,0,800,600};
 	    		Encuadre encuadreFijoDesconectado={0,0,800,600};
-	    		texturaDesconectado.texturizar(&renderizador,imagenDesconectado);
-	    		texturaDesconectado.copiarseEn(&renderizador,encuadreDesconectado,encuadreFijoDesconectado);
+	    		texturaTransiciones.texturizar(&renderizador,imagenDesconectado);
+	    		texturaTransiciones.copiarseEn(&renderizador,encuadreDesconectado,encuadreFijoDesconectado);
 	    		renderizador.renderizar();
 	    		SDL_Delay(3000);
 	    		return 0;

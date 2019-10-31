@@ -30,7 +30,8 @@ private:
 	list<MensajeServidor> listaOrdenada;
 	bool salir;
 	Imagen imagenDesconectado;
-	Textura texturaDesconectado;
+	Imagen imagenEspera;
+	Textura texturaTransiciones;
 
 public:
 	 Cliente();
