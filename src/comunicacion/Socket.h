@@ -25,6 +25,9 @@ class Socket {
 private:
     int numero;
     int estado = ESTADO_DISPONIBLE;
+    bool arrancoElJuego = false;
+    bool seguirRecibiendo = true;
+    bool seguirEnviando = true;
 
 public:
     static const int ESTADO_CONECTADO = 1;

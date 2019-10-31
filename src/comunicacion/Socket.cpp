@@ -250,7 +250,14 @@ int Socket::enviar(MensajeCliente* mensaje) {
 
     while (bytesEnviados < cantidadDeBytes && !hayUnErrorDeSocket && !elSocketRemotoEstaCerrado) {
 
-        resultadoAccion = send(numero, &datos[bytesEnviados], cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
+
+        seguirEnviando = true;
+        // Esto previene que se desconecte por timeout antes de arrancar el juego mientras se espera otros jugadores
+        while (seguirEnviando) {
+            resultadoAccion = send(numero, &datos[bytesEnviados], cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
+            seguirEnviando = (resultadoAccion < 0 && !arrancoElJuego);
+        }
+        arrancoElJuego = true;
 
         if (resultadoAccion < 0) {
             if (errno == ERROR_SOCKET_OPERATION_ON_NO_SOCKET) {
@@ -330,7 +337,12 @@ int Socket::recibir(MensajeCredenciales *mensaje) {
     while (recibido < tamanoMaximo) {
         int bytesCantidadMaximaParaRecibir = tamanoMaximo - recibido;
 
-        resultadoAccion = recv(numero, &datos[recibido], bytesCantidadMaximaParaRecibir,MSG_NOSIGNAL);
+        seguirRecibiendo = true;
+        // Esto previene que se desconecte por timeout antes de arrancar el juego mientras se espera otros jugadores
+        while (seguirRecibiendo) {
+            resultadoAccion = recv(numero, &datos[recibido], bytesCantidadMaximaParaRecibir,MSG_NOSIGNAL);
+            seguirRecibiendo = (resultadoAccion < 0 && !arrancoElJuego);
+        }
 
         if (resultadoAccion == 0) {
             // Nos cerraron el socket
@@ -400,7 +412,13 @@ int Socket::recibir(MensajeServidor* mensaje) {
     while (recibido < tamanoMaximo) {
         int bytesCantidadMaximaParaRecibir = tamanoMaximo - recibido;
 
-        resultadoAccion = recv(numero, &datos[recibido], bytesCantidadMaximaParaRecibir,MSG_NOSIGNAL);
+        seguirRecibiendo = true;
+        // Esto previene que se desconecte por timeout antes de arrancar el juego mientras se espera otros jugadores
+        while (seguirRecibiendo) {
+            resultadoAccion = recv(numero, &datos[recibido], bytesCantidadMaximaParaRecibir,MSG_NOSIGNAL);
+            seguirRecibiendo = (resultadoAccion < 0 && !arrancoElJuego);
+        }
+        arrancoElJuego = true;
 
         if (resultadoAccion == 0) {
             // Nos cerraron el socket
