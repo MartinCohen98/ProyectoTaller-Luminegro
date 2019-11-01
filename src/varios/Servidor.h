@@ -8,6 +8,7 @@
 #include "../modelos/ControlEnemigosModelo.h"
 #include "../modelos/ControlObjetosModelo.h"
 #include "GestorThreadsServidor.h"
+#include "../varios/UsuarioYClave.h"
 
 enum jugadoresNombres {mariano, julio, martin, nicolas};
 
@@ -25,6 +26,7 @@ private:
 	MensajeCredenciales credenciales[4];
 	GestorThreadsServidor* gestorThreads;
     pugi::xml_document* archivoConfiguracion;
+    UsuarioYClave* usuariosYClaves;
 
     void recibirInputs(ControlJugadoresModelo* protagonistas);
 	void enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
@@ -34,6 +36,8 @@ private:
 	void enviarMensajeDeNivelTerminado(bool nivelTerminado);
 	void generarMensajesParaEnviar();
     void desconectarJugadoresDesconectados(ControlJugadoresModelo* jugadores);
+    void leerTodosLosUsuariosYClavesDelConfig(int *cantidadDeJugadores);
+    bool validarUsuarioYClave(MensajeCredenciales* mensajeCredenciales);
 
 public:
     Servidor(int cantidadDeJugadores, char* puerto, pugi::xml_document* archivoConfiguracion);

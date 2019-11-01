@@ -122,6 +122,8 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/ContadorDeJugadores.h
         src/varios/InformacionJugador.cpp
         src/varios/InformacionJugador.h
+        src/varios/UsuarioYClave.cpp
+        src/varios/UsuarioYClave.h
 
         src/vistas/VistaEnemigo.cpp
         src/vistas/VistaEnemigo.h
@@ -138,8 +140,7 @@ add_executable(ProyectoTaller_Luminegro
         src/vistas/VistaJugador.cpp
         src/vistas/VistaJugador.h
         src/vistas/VistaObjeto.cpp
-        src/vistas/VistaObjeto.h
-        )
+        src/vistas/VistaObjeto.h)
 
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2_LIBRARIES})
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2TTF_LIBRARIES})

@@ -13,7 +13,7 @@ Servidor::Servidor(int cantidadDeJugadores, char* puerto, pugi::xml_document* ar
 	cantidadDeMensajes = 0;
     this->archivoConfiguracion = archivoConfiguracion;
 	gestorThreads = new GestorThreadsServidor(jugadoresCantidadEsperada);
-
+    leerTodosLosUsuariosYClavesDelConfig(&cantidadDeJugadores);
 }
 
 void Servidor::correr() {
@@ -147,6 +147,7 @@ int Servidor::abrirSesion() {
 int Servidor::esperarConexiones() {
     int resultadoAccion;
     MensajeCredenciales mensajeCredenciales;
+    bool usuarioYClaveValidados = false;
 
     cout << "Esperando conexión de clientes en el puerto " << puerto << endl;
 
@@ -177,8 +178,14 @@ int Servidor::esperarConexiones() {
                 return resultadoAccion;
             }
 
-            credenciales[i] = mensajeCredenciales;
-            mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);
+            usuarioYClaveValidados = this->validarUsuarioYClave(&mensajeCredenciales);
+
+            if (usuarioYClaveValidados) {
+                credenciales[i] = mensajeCredenciales;
+                mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);
+            } else {
+                mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_USUARIO_O_CLAVE_ERRONEOS);
+            }
 
             resultadoAccion = socketsDeClientes[i].enviar(&mensajeCredenciales);
             if (resultadoAccion == EXIT_FAILURE) {
@@ -209,3 +216,32 @@ void Servidor::desconectarJugadoresDesconectados(ControlJugadoresModelo* jugador
 }
 
 
+void Servidor::leerTodosLosUsuariosYClavesDelConfig(int *cantidadDeJugadores) {
+
+    usuariosYClaves = new UsuarioYClave[4];
+    string usuariosNombres[4] = {"mariano", "julio", "martin", "nicolas"};
+    string clave;
+    int n;
+
+    for (int i = 0; i < 4; i ++) {
+        n = usuariosNombres[i].length();
+        char unUsuarioNombre[n + 1];
+        strcpy(unUsuarioNombre, usuariosNombres[i].c_str());
+
+        clave = archivoConfiguracion->child("configuracion").child("claves").child_value(unUsuarioNombre);
+        usuariosYClaves[i].setValores(usuariosNombres[i], clave);
+    }
+}
+
+
+bool Servidor::validarUsuarioYClave(MensajeCredenciales* mensajeCredenciales) {
+    bool resultado = false;
+    int i = 0;
+
+    while (!resultado && i < 4) {
+        resultado = usuariosYClaves[i].validar( mensajeCredenciales->getUsuario(), mensajeCredenciales->getClave());
+        i++;
+    }
+
+    return resultado;
+}
