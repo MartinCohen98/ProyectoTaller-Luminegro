@@ -3,6 +3,12 @@
         <level>DEBUG</level>
     </log>
     <jugadoresCantidad>4</jugadoresCantidad>
+    <claves>
+        <mariano>cognitiva</mariano>
+        <julio>conductual</julio>
+        <martin>gestalt</martin>
+        <nicolas>freud</nicolas>
+    </claves>
     <escenario>
         <protagonistas>
             <protagonista1>

@@ -16,7 +16,6 @@ class Servidor {
 
 private:
 	int jugadoresCantidadEsperada;
-	bool jugadoresConectados[4];
 	MensajeCliente mensajeCliente;
 	MensajeServidor* mensajesServidor;
 	int cantidadDeMensajes;
@@ -25,10 +24,9 @@ private:
 	char *puerto;
 	MensajeCredenciales credenciales[4];
 	GestorThreadsServidor* gestorThreads;
+    pugi::xml_document* archivoConfiguracion;
 
-private:
-    void validarCredenciales(MensajeCredenciales *mensajeCredenciales);
-	void recibirInputs(ControlJugadoresModelo* protagonistas);
+    void recibirInputs(ControlJugadoresModelo* protagonistas);
 	void enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
 							ControlObjetosModelo* objetos);
 	void enviarMensajes(ControlJugadoresModelo* protagonistas, FondoModelo* fondo,
@@ -38,10 +36,10 @@ private:
     void desconectarJugadoresDesconectados(ControlJugadoresModelo* jugadores);
 
 public:
-    Servidor(int cantidadDeJugadores, char* puerto);
+    Servidor(int cantidadDeJugadores, char* puerto, pugi::xml_document* archivoConfiguracion);
     int abrirSesion();
     int esperarConexiones();
-    void correr(pugi::xml_document* archiConfig);
+    void correr();
     virtual ~Servidor();
 
 };

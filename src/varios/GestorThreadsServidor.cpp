@@ -79,8 +79,7 @@ bool GestorThreadsServidor::estaConectado(int jugador) {
 void GestorThreadsServidor::comenzarAAceptar(Socket* socketAceptador,
 									MensajeCredenciales* credenciales) {
 	contador->definirCredenciales(credenciales);
-	threadAceptador = new std::thread(AceptadorConexiones(socketAceptador,
-															contador));
+	threadAceptador = new std::thread(AceptadorConexiones(socketAceptador,contador));
 }
 
 

@@ -5,54 +5,18 @@ using namespace std;
 using namespace Logger;
 
 
-void Servidor::validarCredenciales(MensajeCredenciales *mensaje) {
-    string claveCorrecta;
-    int jugadorNombre;
-
-    //Me dio cosa borrar esto
-
-    string usuario = mensaje->getUsuario();
-
-    if (usuario.compare("mariano") == 0) {
-        jugadorNombre = mariano;
-        claveCorrecta = "cognitiva";
-
-    } else if (usuario.compare("julio") == 0) {
-        jugadorNombre = julio;
-        claveCorrecta = "conductual";
-
-    } else if (usuario.compare("martin") == 0) {
-        jugadorNombre = martin;
-        claveCorrecta = "gestalt";
-
-    } else if (usuario.compare("nicolas") == 0) {
-        jugadorNombre = nicolas;
-        claveCorrecta = "freud";
-    }
-
-    if (mensaje->getClave() == claveCorrecta) {
-        if (jugadoresConectados[jugadorNombre]) {
-            mensaje->setEstado(MensajeCredenciales::ESTADO_USUARIO_YA_CONECTADO);
-        } else {
-            mensaje->setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);
-            jugadoresConectados[jugadorNombre] = true;
-        }
-    } else {
-        mensaje->setEstado(MensajeCredenciales::ESTADO_USUARIO_O_CLAVE_ERRONEOS);
-    }
-}
-
-
-Servidor::Servidor(int cantidadDeJugadores, char* puerto) {
+Servidor::Servidor(int cantidadDeJugadores, char* puerto, pugi::xml_document* archivoConfiguracion) {
 	jugadoresCantidadEsperada = cantidadDeJugadores;
 	socketsDeClientes = new Socket[cantidadDeJugadores];
 	this->puerto = puerto;
 	mensajesServidor = NULL;
 	cantidadDeMensajes = 0;
+    this->archivoConfiguracion = archivoConfiguracion;
 	gestorThreads = new GestorThreadsServidor(jugadoresCantidadEsperada);
+
 }
 
-void Servidor::correr(pugi::xml_document* archiConfig) {
+void Servidor::correr() {
 	Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
 
 	bool nivelTerminado;
@@ -73,8 +37,8 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 		logueador->Info("Iniciando nivel: "+ nivelNodeName);
 		logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
 		
-		FondoModelo fondo(archiConfig, nivel);
-		ControlJugadoresModelo protagonistas(archiConfig, jugadoresCantidadEsperada);
+		FondoModelo fondo(archivoConfiguracion, nivel);
+		ControlJugadoresModelo protagonistas(archivoConfiguracion, jugadoresCantidadEsperada);
 
 		desconectarJugadoresDesconectados(&protagonistas);
 
@@ -82,7 +46,7 @@ void Servidor::correr(pugi::xml_document* archiConfig) {
 		ControlEnemigosModelo controlEnemigos(nivel);
 
 		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
-		ControlObjetosModelo controlObjetos(archiConfig, fondo.obtenerAncho(), nivel);
+		ControlObjetosModelo controlObjetos(archivoConfiguracion, fondo.obtenerAncho(), nivel);
 
 		enviarCantidadDeReceives(&controlEnemigos, &controlObjetos);
 
@@ -175,6 +139,7 @@ Servidor::~Servidor() {
 		delete[] mensajesServidor;
 }
 
+
 int Servidor::abrirSesion() {
     return socketAceptador.servidorInicializar(puerto);
 }
@@ -211,8 +176,6 @@ int Servidor::esperarConexiones() {
                 socketAceptador.cerrar();
                 return resultadoAccion;
             }
-
-            //validarCredenciales(&mensajeCredenciales);
 
             credenciales[i] = mensajeCredenciales;
             mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);

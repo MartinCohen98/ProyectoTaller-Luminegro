@@ -62,15 +62,20 @@ int main (int argc, char** argv) {
         else if(jugadoresCantidadInt > 4)
             jugadoresCantidadInt = 4;
         logueador->Debug(string("Cantidad de jugadores esperada: ", jugadoresCantidadInt));
-        Servidor servidor(jugadoresCantidadInt, (char *) configManager.PuertoServidor().c_str());
-        //Apertura del puerto para recibir clientes
-        if(servidor.abrirSesion() == 1){
+
+        Servidor servidor(jugadoresCantidadInt,
+                          (char *) configManager.PuertoServidor().c_str(),
+                          &configManager.archivoConfig);
+
+        // Apertura del puerto para recibir clientes
+        if (servidor.abrirSesion() == 1) {
             Common::MostrarError(EstadoAplicacion::ErrorModoServidorNoPudoAbrirSesionEnPuerto);
             return  EXIT_FAILURE;
         }
-        //Espera de conexión de clientes
+
+        // Espera de conexión de clientes
         servidor.esperarConexiones();
-        servidor.correr(&configManager.archivoConfig);
+        servidor.correr();
 
     } else if (configManager.ModoAplicacion() == Modo::Cliente) {
         // CLIENTE
