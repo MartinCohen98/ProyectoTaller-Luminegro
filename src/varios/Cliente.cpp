@@ -72,7 +72,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
     VentanaCliente ventanaJuego;
 
-    int retorno = ventanaJuego.abrir(archiConfig);
+    int retorno = ventanaJuego.abrir();
 	if (retorno == -1) {
 	   logueador->Error("No se pudo crear la ventanaJuego");
 	}
@@ -83,7 +83,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
     Encuadre encuadreEspera={0,0,800,600};
     Encuadre encuadreFijoEspera={0,0,800,600};
     texturaTransiciones.texturizar(&renderizador,imagenEspera);
-    texturaTransiciones.copiarseEn(&renderizador,encuadreEspera,encuadreFijoEspera);
+    texturaTransiciones.copiarseEn(&renderizador, encuadreEspera, encuadreFijoEspera);
     renderizador.renderizar();
 
 

@@ -17,7 +17,7 @@ VentanaCliente::VentanaCliente() {
 								0);
 }
 
-int VentanaCliente::abrir(pugi::xml_document* archiConfig) {
+int VentanaCliente::abrir() {
 
 	if(!ventana)
 		return -1;
