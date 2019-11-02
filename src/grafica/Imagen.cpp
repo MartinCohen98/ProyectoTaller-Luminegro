@@ -34,7 +34,7 @@ int Imagen::cargar(const char* path, const int tipo) {
                 imagen = SDL_LoadBMP("assets/images/missingPictures/person.bmp");
                 break;
             case TIPO_DESCONECTADO:
-                // Reemplazamos por un muñeco
+                // Nada, no está contemplado
                 imagen = SDL_LoadBMP("assets/images/general/cerrandoJuego.bmp");
                 break;
 

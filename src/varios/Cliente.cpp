@@ -127,6 +127,8 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	    		return 0;
 	    	}
 	    	if (gestorThreads.seDesconecto()) {
+                Logger::Log::ObtenerInstancia()->Error("Se desconectó el servidor. Cerrando cliente.");
+
 	    		imagenDesconectado.cargar("assets/images/general/cerrandoJuego.bmp",4);
 	    		Encuadre encuadreDesconectado={0,0,800,600};
 	    		Encuadre encuadreFijoDesconectado={0,0,800,600};
