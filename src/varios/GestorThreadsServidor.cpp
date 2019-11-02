@@ -54,7 +54,11 @@ void GestorThreadsServidor::checkearConecciones(int cantidadDeMensajes,
 			threadsRecibidoras[i] = NULL;
 			sockets[i]->cerrar();
 			contador->seDesconectoElJugador(i);
-			Logger::Log::ObtenerInstancia()->Info(std::string("Se desconectó el jugador " + i));
+
+            std::string mensajeInfo = "Se desconectó el jugador ";
+            mensajeInfo.append( std::to_string(i) );
+
+			Logger::Log::ObtenerInstancia()->Info(mensajeInfo);
 		}
 	}
 	InformacionJugador info = contador->obtenerInfo();

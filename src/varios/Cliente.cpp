@@ -252,7 +252,7 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
                         //
     				case SDLK_ESCAPE:
     					//Salir
-                        Logger::Log::ObtenerInstancia()->Info("Selccionó salir (Escape)");
+                        Logger::Log::ObtenerInstancia()->Info("Seleccionó salir (Escape)");
     					mensajeCliente.Codificar(Exit);
     					break;
     			}
@@ -288,7 +288,7 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
 
     	case SDL_QUIT:
     		mensajeCliente.Codificar(Exit);
-    		Logger::Log::ObtenerInstancia()->Info("Selccionó salir (cerró ventana)");
+    		Logger::Log::ObtenerInstancia()->Info("Seleccionó salir (cerró ventana)");
     		return;
 	}
 	gestorThreads->enviarMensaje(&mensajeCliente);

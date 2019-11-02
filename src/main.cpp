@@ -52,7 +52,7 @@ int main (int argc, char** argv) {
 
     if (configManager.ModoAplicacion() == Modo::Servidor) {
         // SERVIDOR
-        logueador->Info("Se inicia el juego en modo servidor, en puerto" + configManager.PuertoServidor());
+        logueador->Info("Se inicia el juego en modo servidor, en puerto " + configManager.PuertoServidor());
 
         std::string jugadoresCantidad = configManager.archivoConfig.child("configuracion")
                 .child_value("jugadoresCantidad");
@@ -61,7 +61,10 @@ int main (int argc, char** argv) {
             jugadoresCantidadInt = 1;
         else if(jugadoresCantidadInt > 4)
             jugadoresCantidadInt = 4;
-        logueador->Debug(string("Cantidad de jugadores esperada: ", jugadoresCantidadInt));
+
+        std::string mensajeInfo = "Cantidad de jugadores esperada: ";
+        mensajeInfo.append(std::to_string(jugadoresCantidadInt));
+        Logger::Log::ObtenerInstancia()->Debug(mensajeInfo);
 
         Servidor servidor(jugadoresCantidadInt,
                           (char *) configManager.PuertoServidor().c_str(),
