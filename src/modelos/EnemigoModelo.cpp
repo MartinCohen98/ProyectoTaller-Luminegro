@@ -19,6 +19,7 @@ void EnemigoModelo::avanzar() {
 
 void EnemigoModelo::parar() {
 	estado = estado->parar();
+    actualizarInsercion();
 }
 
 void EnemigoModelo::retroceder() {
@@ -31,8 +32,9 @@ void EnemigoModelo::retroceder() {
 void EnemigoModelo::subir() {
 	if (posicionY > 180) {
 		estado = estado->avanzar();
-		moverEnY(-5);
+		moverEnY(-1);
 	} else {
+	    parar();
 		estado = estado->parar();
 	}
 	actualizarInsercion();
@@ -43,6 +45,7 @@ void EnemigoModelo::bajar() {
 		moverEnY(1);
         estado = estado->avanzar();
 	} else {
+	    parar();
 		estado = estado->parar();
 	}
 	actualizarInsercion();
@@ -53,12 +56,42 @@ void EnemigoModelo::agacharse() {
 }
 
 void EnemigoModelo::avanzarDiagArriba(){
+    dadoVuelta = true;
+    moverEnX(5);
+    if (posicionY > 180) {
+        moverEnY(-1);
+        estado = estado->avanzar();
+    } else {
+        parar();
+        estado = estado->parar();
+    }
+    actualizarInsercion();
 }
 
 void EnemigoModelo::avanzarDiagAbajo(){
+    dadoVuelta = true;
+    moverEnX(5);
+    if (posicionY < 320) {
+        moverEnY(1);
+        estado = estado->avanzar();
+    } else {
+        parar();
+        estado = estado->parar();
+    }
+    actualizarInsercion();
 }
 
 void EnemigoModelo::retrocederDiagArriba(){
+    dadoVuelta = true;
+    moverEnX(-5);
+    if (posicionY > 180) {
+        moverEnY(1);
+        estado = estado->avanzar();
+    } else {
+        parar();
+        estado = estado->parar();
+    }
+    actualizarInsercion();
 }
 
 void EnemigoModelo::retrocederDiagAbajo(){
@@ -68,7 +101,7 @@ void EnemigoModelo::retrocederDiagAbajo(){
         moverEnY(1);
         estado = estado->avanzar();
     } else {
-        estado = estado->parar();
+        parar();
     }
     actualizarInsercion();
 }

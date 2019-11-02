@@ -39,7 +39,6 @@ void ControlEnemigosModelo::realizarMovimientos(){
 	enemigos[0]->retroceder();
 	enemigos[1]->avanzar();
     enemigos[2]->retroceder();
-    enemigos[2]->retrocederDiagAbajo();
 	enemigos[3]->avanzar();
 	enemigos[4]->retroceder();
 	enemigos[5]->retroceder();
