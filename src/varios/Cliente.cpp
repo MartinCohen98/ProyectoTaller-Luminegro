@@ -16,7 +16,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
         return EXIT_FAILURE;
     }
 
-    if(conectar(direccionIP, puerto) != 0){
+    if (conectar(direccionIP, puerto) != 0) {
         ventanaInicioSesion.mostrarMensaje("ERROR: No se pudo acceder al servidor",
                                            VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
         ventanaInicioSesion.demorar(5000);
@@ -25,6 +25,9 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
     MensajeCredenciales mensajeCredenciales;
 
+    ventanaInicioSesion.mostrarMensaje("Conectando con el servidor, aguarde...",
+                                       VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
+
     // Se verifica si hay cupo disponible para que se conecte el jugador
     socket.recibir(&mensajeCredenciales);
     if (mensajeCredenciales.getEstado() == MensajeCredenciales::ESTADO_NO_MAS_JUGADORES_PERMITIDOS) {
@@ -32,6 +35,9 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
                                            VentanaClienteInicioSesion::MENSAJE_TIPO_ERROR);
         ventanaInicioSesion.demorar(5000);
         return EXIT_FAILURE;
+    } else {
+        ventanaInicioSesion.mostrarMensaje("",
+                                           VentanaClienteInicioSesion::MENSAJE_TIPO_INFORMATIVO);
     }
 
     // Autenticar usuario
