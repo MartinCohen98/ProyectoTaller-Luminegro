@@ -92,7 +92,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	gestorThreads.comenzar();
 
 
-    for (int nivel = 1; nivel <= 2; nivel++) {
+    for (int nivel = mensajeCredenciales.getNivelInicial(); nivel <= 2; nivel++) {
 
 		string nivelNodeName = "nivel";
 		nivelNodeName.append( to_string(nivel) );
@@ -290,7 +290,6 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
     		mensajeCliente.Codificar(Exit);
     		Logger::Log::ObtenerInstancia()->Info("Selccionó salir (cerró ventana)");
     		return;
-    		break;
 	}
 	gestorThreads->enviarMensaje(&mensajeCliente);
 }

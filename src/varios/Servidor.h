@@ -17,6 +17,7 @@ class Servidor {
 
 private:
 	int jugadoresCantidadEsperada;
+	int nivelActual;
 	MensajeCliente mensajeCliente;
 	MensajeServidor* mensajesServidor;
 	int cantidadDeMensajes;

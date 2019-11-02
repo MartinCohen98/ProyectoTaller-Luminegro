@@ -1,9 +1,10 @@
 #include "AceptadorConexiones.h"
 
 
-AceptadorConexiones::AceptadorConexiones(Socket* unSocket, ContadorDeJugadores* unContador) {
+AceptadorConexiones::AceptadorConexiones(Socket* unSocket, ContadorDeJugadores* unContador, int *nivelActual) {
     socketAceptador = unSocket;
     contador = unContador;
+    nroNivel = nivelActual;
 }
 
 
@@ -34,7 +35,7 @@ void AceptadorConexiones::operator()() {
 
         	while (mensajeCredenciales.getEstado() != MensajeCredenciales::ESTADO_AUTENTICADO) {
         		socketDeCliente.recibir(&mensajeCredenciales);
-        	    contador->validarCredenciales(&mensajeCredenciales, &socketDeCliente);
+        	    contador->validarCredenciales(&mensajeCredenciales, &socketDeCliente, nroNivel);
         	}
         }
     }

@@ -14,6 +14,7 @@ Servidor::Servidor(int cantidadDeJugadores, char* puerto, pugi::xml_document* ar
     this->archivoConfiguracion = archivoConfiguracion;
 	gestorThreads = new GestorThreadsServidor(jugadoresCantidadEsperada);
     leerTodosLosUsuariosYClavesDelConfig(&cantidadDeJugadores);
+    nivelActual = 1;
 }
 
 void Servidor::correr() {
@@ -25,28 +26,28 @@ void Servidor::correr() {
 		gestorThreads->agregarJugador(&socketsDeClientes[i], i);
 	}
 
-	gestorThreads->comenzarAAceptar(&socketAceptador, credenciales);
+	gestorThreads->comenzarAAceptar(&socketAceptador, credenciales, &nivelActual);
 
-	for (int nivel = 1; nivel <= 2; nivel++) {
+	for (nivelActual = 1; nivelActual <= 2; nivelActual++) {
 
         string nivelNodeName = "nivel";
-        nivelNodeName.append( to_string(nivel) );
+        nivelNodeName.append( to_string(nivelActual) );
 
 		nivelTerminado = false;
 
 		logueador->Info("Iniciando nivel: "+ nivelNodeName);
 		logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
 		
-		FondoModelo fondo(archivoConfiguracion, nivel);
+		FondoModelo fondo(archivoConfiguracion, nivelActual);
 		ControlJugadoresModelo protagonistas(archivoConfiguracion, jugadoresCantidadEsperada);
 
 		desconectarJugadoresDesconectados(&protagonistas);
 
 		logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
-		ControlEnemigosModelo controlEnemigos(nivel);
+		ControlEnemigosModelo controlEnemigos(nivelActual);
 
 		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
-		ControlObjetosModelo controlObjetos(archivoConfiguracion, fondo.obtenerAncho(), nivel);
+		ControlObjetosModelo controlObjetos(archivoConfiguracion, fondo.obtenerAncho(), nivelActual);
 
 		enviarCantidadDeReceives(&controlEnemigos, &controlObjetos);
 
@@ -183,6 +184,7 @@ int Servidor::esperarConexiones() {
             if (usuarioYClaveValidados) {
                 credenciales[i] = mensajeCredenciales;
                 mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);
+                mensajeCredenciales.setNivelInicial(nivelActual);
             } else {
                 mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_USUARIO_O_CLAVE_ERRONEOS);
             }

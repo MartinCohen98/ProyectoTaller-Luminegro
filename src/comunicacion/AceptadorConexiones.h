@@ -11,9 +11,10 @@ class AceptadorConexiones {
 private:
     Socket* socketAceptador;
     ContadorDeJugadores* contador;
+    int *nroNivel;
 
 public:
-    AceptadorConexiones(Socket* unSocket, ContadorDeJugadores* unContador);
+    AceptadorConexiones(Socket* unSocket, ContadorDeJugadores* unContador, int *nivelActual);
     void operator()();
 };
 

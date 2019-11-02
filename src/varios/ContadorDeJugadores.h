@@ -26,7 +26,7 @@ public:
 	bool estaConectado(int jugador);
 	void actualizarCantidadDeRecieves(int recieves);
 	int obtenerCantidadDeRecieves();
-	void validarCredenciales(MensajeCredenciales* mensaje, Socket* socket);
+	void validarCredenciales(MensajeCredenciales* mensaje, Socket* socket, const int *nroNivel);
 	void definirCredenciales(MensajeCredenciales* lasCredenciales);
 	InformacionJugador obtenerInfo();
 	virtual ~ContadorDeJugadores();

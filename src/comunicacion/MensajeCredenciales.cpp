@@ -1,7 +1,7 @@
 #include "MensajeCredenciales.h"
 
 
-void MensajeCredenciales::setUsuario(std::string valor) {
+void MensajeCredenciales::setUsuario(const std::string& valor) {
     // Se almacena el usuario, pero siempre con un largo fijo
     strcpy(this->usuario, valor.c_str());
 }
@@ -29,4 +29,12 @@ std::string MensajeCredenciales::getClave() {
 
 int MensajeCredenciales::getEstado() {
     return this->estado;
+}
+
+void MensajeCredenciales::setNivelInicial(int nivel) {
+    this->nivelInicial = nivel;
+}
+
+int MensajeCredenciales::getNivelInicial() {
+    return nivelInicial;
 }

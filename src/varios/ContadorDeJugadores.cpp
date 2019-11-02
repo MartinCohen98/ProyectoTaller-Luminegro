@@ -30,7 +30,7 @@ bool ContadorDeJugadores::estaConectado(int jugador) {
 
 
 void ContadorDeJugadores::validarCredenciales(MensajeCredenciales* mensaje,
-											Socket* socket) {
+											Socket* socket, const int *nroNivel) {
 	std::string claveCorrecta;
 	int numeroJugador;
     std::string usuario = mensaje->getUsuario();
@@ -45,6 +45,7 @@ void ContadorDeJugadores::validarCredenciales(MensajeCredenciales* mensaje,
 
     if (mensaje->getClave() == claveCorrecta) {
         mensaje->setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);
+        mensaje->setNivelInicial(*nroNivel);
         conectados[numeroJugador] = true;
         espaciosDisponibles--;
         InformacionJugador info(socket->obtenerNumero(), numeroJugador);
@@ -74,5 +75,5 @@ InformacionJugador ContadorDeJugadores::obtenerInfo() {
 }
 
 
-ContadorDeJugadores::~ContadorDeJugadores() {}
+ContadorDeJugadores::~ContadorDeJugadores() = default;
 
