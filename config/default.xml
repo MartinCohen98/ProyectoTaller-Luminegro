@@ -2,7 +2,7 @@
     <log>
         <level>DEBUG</level>
     </log>
-    <jugadoresCantidad>1</jugadoresCantidad>
+    <jugadoresCantidad>4</jugadoresCantidad>
     <claves>
         <mariano>cognitiva</mariano>
         <julio>conductual</julio>

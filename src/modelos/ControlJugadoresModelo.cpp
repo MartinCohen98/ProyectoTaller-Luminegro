@@ -122,10 +122,13 @@ void ControlJugadoresModelo::generarMensajes(MensajeServidor* mensajes,
 
 bool ControlJugadoresModelo::llegaronAlFin(FondoModelo* fondo) {
 	bool retorno = false;
-	for (int i = 0; i < cantidad; i++) {
+	int i,j=0;
+	for (i = 0; i < cantidad; i++) {
 		if (jugadores[i]->llegoAlFin(fondo))
-			retorno = true;
+		    j++;
 	}
+	if (j==cantidad)
+        retorno = true;
 	return retorno;
 }
 
