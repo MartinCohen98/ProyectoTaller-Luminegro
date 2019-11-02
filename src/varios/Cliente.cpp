@@ -79,7 +79,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	Renderizador renderizador(ventanaJuego.get());
 
-    imagenEspera.cargar("assets/images/general/loading.bmp",2);
+    imagenEspera.cargar("assets/images/general/esperaPostAutenticacion.bmp",2);
     Encuadre encuadreEspera={0,0,800,600};
     Encuadre encuadreFijoEspera={0,0,800,600};
     texturaTransiciones.texturizar(&renderizador,imagenEspera);
@@ -127,7 +127,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	    		return 0;
 	    	}
 	    	if (gestorThreads.seDesconecto()) {
-	    		imagenDesconectado.cargar("assets/images/missingPictures/CerrandoJuego.bmp",4);
+	    		imagenDesconectado.cargar("assets/images/general/cerrandoJuego.bmp",4);
 	    		Encuadre encuadreDesconectado={0,0,800,600};
 	    		Encuadre encuadreFijoDesconectado={0,0,800,600};
 	    		texturaTransiciones.texturizar(&renderizador,imagenDesconectado);
