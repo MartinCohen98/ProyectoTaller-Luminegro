@@ -19,6 +19,10 @@ public:
 	void agacharse();
 	void subir();
 	void bajar();
+	void avanzarDiagArriba();
+	void avanzarDiagAbajo();
+	void retrocederDiagArriba();
+	void retrocederDiagAbajo();
 	void retrocesoDePantalla();
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~EnemigoModelo();

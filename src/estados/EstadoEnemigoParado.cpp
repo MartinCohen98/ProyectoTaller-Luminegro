@@ -7,6 +7,8 @@
 
 #include "EstadoEnemigoParado.h"
 
+EstadoEnemigoParado::EstadoEnemigoParado() {
+}
 
 EstadoEnemigoParado::EstadoEnemigoParado(int x, int y, int ancho, int alto) {
 	frameActual.modificar(x,y,ancho,alto);

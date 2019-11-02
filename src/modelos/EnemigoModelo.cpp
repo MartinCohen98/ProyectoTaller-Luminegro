@@ -3,8 +3,8 @@
 EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
-	ancho = 120;
-	alto = 240;
+	ancho = 140;
+	alto = 280;
 	estado = new EstadoEnemigoParado(0,0,47,78);
 	dadoVuelta = false;
 	actualizarInsercion();
@@ -40,8 +40,8 @@ void EnemigoModelo::subir() {
 
 void EnemigoModelo::bajar() {
 	if (posicionY < 320) {
-		estado = estado->avanzar();
-		moverEnY(5);
+		moverEnY(1);
+        estado = estado->avanzar();
 	} else {
 		estado = estado->parar();
 	}
@@ -50,6 +50,27 @@ void EnemigoModelo::bajar() {
 
 void EnemigoModelo::agacharse() {
 	estado = estado->agacharse();
+}
+
+void EnemigoModelo::avanzarDiagArriba(){
+}
+
+void EnemigoModelo::avanzarDiagAbajo(){
+}
+
+void EnemigoModelo::retrocederDiagArriba(){
+}
+
+void EnemigoModelo::retrocederDiagAbajo(){
+    dadoVuelta = true;
+    moverEnX(-5);
+    if (posicionY < 320) {
+        moverEnY(1);
+        estado = estado->avanzar();
+    } else {
+        estado = estado->parar();
+    }
+    actualizarInsercion();
 }
 
 void EnemigoModelo::retrocesoDePantalla() {

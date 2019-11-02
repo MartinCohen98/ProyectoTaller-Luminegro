@@ -128,12 +128,12 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	    	}
 	    	if (gestorThreads.seDesconecto()) {
 	    		imagenDesconectado.cargar("assets/images/missingPictures/CerrandoJuego.bmp",4);
-	    		Encuadre encuadreDesconectado={0,0,800,600};
+	    		Encuadre encuadreDesconectado={0,0,960,540};
 	    		Encuadre encuadreFijoDesconectado={0,0,800,600};
 	    		texturaTransiciones.texturizar(&renderizador,imagenDesconectado);
 	    		texturaTransiciones.copiarseEn(&renderizador,encuadreDesconectado,encuadreFijoDesconectado);
 	    		renderizador.renderizar();
-	    		SDL_Delay(3000);
+	    		SDL_Delay(5000);
 	    		return 0;
 	    	}
 	    	renderizarFondo(&fondo, &gestorThreads);
