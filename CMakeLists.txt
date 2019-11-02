@@ -38,6 +38,8 @@ add_executable(ProyectoTaller_Luminegro
         src/comunicacion/EnviadorMensajesServidor.h
         src/comunicacion/AceptadorConexiones.cpp
         src/comunicacion/AceptadorConexiones.h
+        src/comunicacion/UsuarioYClave.cpp
+        src/comunicacion/UsuarioYClave.h
 
         src/estados/EstadoEnemigoAvanzando.cpp
         src/estados/EstadoEnemigoAvanzando.h
@@ -126,8 +128,6 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/ContadorDeJugadores.h
         src/varios/InformacionJugador.cpp
         src/varios/InformacionJugador.h
-        src/varios/UsuarioYClave.cpp
-        src/varios/UsuarioYClave.h
 
         src/vistas/VistaEnemigo.cpp
         src/vistas/VistaEnemigo.h
