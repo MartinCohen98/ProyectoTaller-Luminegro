@@ -47,15 +47,24 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                 //Pegar
                 jugadores[numeroDeJugador]->pegar();
                 break;
+
             case Disconnect:
-                //Desconectado
+                // Desconectado
                 jugadores[numeroDeJugador]->congelarse();
-                Logger::Log::ObtenerInstancia()->Info(std::string("Se desconetó el jugador " + numeroDeJugador));
+                {
+                    std::string mensajeInfo = "Se desconectó el jugador ";
+                    mensajeInfo.append(std::to_string(numeroDeJugador));
+                    Logger::Log::ObtenerInstancia()->Info(mensajeInfo);
+                }
                 break;
             case Exit:
-                //Salir
+                // Salir
             	jugadores[numeroDeJugador]->desaparecer();
-                Logger::Log::ObtenerInstancia()->Info(std::string("Salió el jugador " + numeroDeJugador));
+                {
+                    std::string mensajeInfo = "Salió el jugador ";
+                    mensajeInfo.append( std::to_string(numeroDeJugador) );
+                    Logger::Log::ObtenerInstancia()->Info(mensajeInfo);
+                }
                 break;
             case StopGoingRight:
                 //Avanzar
