@@ -133,7 +133,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	    		texturaTransiciones.texturizar(&renderizador,imagenDesconectado);
 	    		texturaTransiciones.copiarseEn(&renderizador,encuadreDesconectado,encuadreFijoDesconectado);
 	    		renderizador.renderizar();
-	    		SDL_Delay(3000);
+	    		SDL_Delay(5000);
 	    		return 0;
 	    	}
 	    	renderizarFondo(&fondo, &gestorThreads);
