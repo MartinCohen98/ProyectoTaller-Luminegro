@@ -13,7 +13,7 @@ private:
 	SDL_Window* ventana;
 public:
 	VentanaCliente();
-	int abrir(pugi::xml_document* archiConfig);
+	int abrir();
 	SDL_Window* get();
 	virtual ~VentanaCliente();
 };

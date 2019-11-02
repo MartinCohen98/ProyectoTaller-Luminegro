@@ -72,18 +72,18 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
     VentanaCliente ventanaJuego;
 
-    int retorno = ventanaJuego.abrir(archiConfig);
+    int retorno = ventanaJuego.abrir();
 	if (retorno == -1) {
 	   logueador->Error("No se pudo crear la ventanaJuego");
 	}
 
 	Renderizador renderizador(ventanaJuego.get());
 
-    imagenEspera.cargar("assets/images/general/loading.bmp",2);
+    imagenEspera.cargar("assets/images/general/esperaPostAutenticacion.bmp",2);
     Encuadre encuadreEspera={0,0,800,600};
     Encuadre encuadreFijoEspera={0,0,800,600};
     texturaTransiciones.texturizar(&renderizador,imagenEspera);
-    texturaTransiciones.copiarseEn(&renderizador,encuadreEspera,encuadreFijoEspera);
+    texturaTransiciones.copiarseEn(&renderizador, encuadreEspera, encuadreFijoEspera);
     renderizador.renderizar();
 
 
@@ -127,13 +127,13 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	    		return 0;
 	    	}
 	    	if (gestorThreads.seDesconecto()) {
-	    		imagenDesconectado.cargar("assets/images/missingPictures/CerrandoJuego.bmp",4);
-	    		Encuadre encuadreDesconectado={0,0,960,540};
+	    		imagenDesconectado.cargar("assets/images/general/cerrandoJuego.bmp",4);
+	    		Encuadre encuadreDesconectado={0,0,800,600};
 	    		Encuadre encuadreFijoDesconectado={0,0,800,600};
 	    		texturaTransiciones.texturizar(&renderizador,imagenDesconectado);
 	    		texturaTransiciones.copiarseEn(&renderizador,encuadreDesconectado,encuadreFijoDesconectado);
 	    		renderizador.renderizar();
-	    		SDL_Delay(5000);
+	    		SDL_Delay(3000);
 	    		return 0;
 	    	}
 	    	renderizarFondo(&fondo, &gestorThreads);
