@@ -46,7 +46,6 @@ public:
 	void movidaDePantalla(FondoModelo* fondo);
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual,
 							int numeroSprite);
-	int darPosicion();
 	virtual ~JugadorModelo();
 
 private:

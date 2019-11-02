@@ -7,5 +7,13 @@ PersonaModelo::PersonaModelo() {
     estado = NULL;
 }
 
+int PersonaModelo::darPosicionX(){
+    return posicionX;
+}
+
+int PersonaModelo::darPosicionY(){
+    return posicionY;
+}
+
 PersonaModelo::~PersonaModelo() {}
 

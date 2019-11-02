@@ -15,6 +15,8 @@ protected:
 
 public:
 	PersonaModelo();
+	int darPosicionX();
+	int darPosicionY();
 	virtual ~PersonaModelo();
 };
 

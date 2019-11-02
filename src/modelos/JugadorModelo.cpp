@@ -250,9 +250,6 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
 	(*mensajeActual)++;
 }
 
-int JugadorModelo::darPosicion(){
-    return posicionX;
-}
 
 JugadorModelo::~JugadorModelo() {}
 
