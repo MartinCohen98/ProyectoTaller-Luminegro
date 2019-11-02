@@ -36,7 +36,8 @@ void ControlEnemigosModelo::movidaDePantalla() {
 
 
 void ControlEnemigosModelo::realizarMovimientos(){
-	enemigos[0]->retroceder();
+
+    enemigos[0]->retroceder();
 	enemigos[1]->avanzar();
     enemigos[2]->retroceder();
 	enemigos[3]->avanzar();

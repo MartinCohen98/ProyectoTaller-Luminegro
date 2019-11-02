@@ -133,7 +133,7 @@ bool ControlJugadoresModelo::llegaronAlFin(FondoModelo* fondo) {
 bool ControlJugadoresModelo::verificarRezagado(FondoModelo* fondo){
     bool rezagado = false;
     for (int i = 0; i < cantidad; i++) {
-        if ((jugadores[i]->darPosicion() <= fondo->darInicioTerreno() - 600)
+        if ((jugadores[i]->darPosicionX() <= fondo->darInicioTerreno() - 600)
         		&& !jugadores[i]->estaDesconectado())
             rezagado = true;
        }
