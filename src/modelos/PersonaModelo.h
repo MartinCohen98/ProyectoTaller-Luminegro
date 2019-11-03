@@ -4,12 +4,16 @@
 #include "../grafica/Encuadre.h"
 #include "../estados/EstadoJugador.h"
 
+enum arma {cuchillo,tubo,desarmado};
+
 class PersonaModelo {
 
 protected:
 	int posicionX;
 	int posicionY;
 	bool dadoVuelta;
+	int energia;
+	int arma=desarmado;
 	EstadoJugador* estado;
 	Encuadre insercion;
 

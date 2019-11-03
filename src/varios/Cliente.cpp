@@ -245,6 +245,14 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
     					//Pegar
     					mensajeCliente.Codificar(Hit);
     					break;
+                    case SDLK_t:
+                        //Pegar
+                        mensajeCliente.Codificar(Test);
+                        break;
+                    case SDLK_s:
+                        //Pegar
+                        mensajeCliente.Codificar(Sound);
+                        break;
     					//Para probar grisado sin red
     					//---------------------------
     			    case SDLK_q:

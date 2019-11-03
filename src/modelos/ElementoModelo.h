@@ -11,6 +11,7 @@ protected:
 	int posicionY;
 	int ancho;
 	int alto;
+	int golpesResistidos;
 	tipoDeSprite sprite;
 	Encuadre encuadre;
 	Encuadre insercion;

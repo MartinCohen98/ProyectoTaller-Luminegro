@@ -9,6 +9,10 @@ JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig, int posXinicial, i
 	movimientoAlSaltarEnX = 0;
 	movimientoAlSaltarEnY = 0;
 	escaladoDeSprite = 3;
+	inmortal=false;
+	energia=100;
+	vidas=3;
+	puntaje=0;
 	estado = new EstadoJugadorParado();
 	estadoOriginal = new EstadoJugadorParado();
 	dadoVuelta = false;
@@ -107,9 +111,20 @@ void JugadorModelo::descongelarse() {
     }
 }
 
-
 bool JugadorModelo::estaDesconectado() {
     return desconectado;
+}
+
+bool JugadorModelo::consultarModoTest(){
+   return inmortal;
+}
+
+void JugadorModelo::activarModoTest(){
+    inmortal=true;
+}
+
+void JugadorModelo::desactivarModoTest(){
+    inmortal=false;
 }
 
 bool JugadorModelo::moverEnY() {

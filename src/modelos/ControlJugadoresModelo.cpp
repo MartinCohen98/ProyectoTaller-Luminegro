@@ -57,6 +57,13 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                     Logger::Log::ObtenerInstancia()->Info(mensajeInfo);
                 }
                 break;
+            case Test:
+                // Modo test
+                if(jugadores[numeroDeJugador]->consultarModoTest())
+                    jugadores[numeroDeJugador]->desactivarModoTest();
+                else
+                    jugadores[numeroDeJugador]->activarModoTest();
+                break;
             case Exit:
                 // Salir
             	jugadores[numeroDeJugador]->desaparecer();

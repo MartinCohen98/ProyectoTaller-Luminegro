@@ -21,6 +21,9 @@ private:
 	bool agachado;
 	bool salio;
 	bool desconectado;
+	bool inmortal;
+	int vidas;
+	int puntaje;
 	EstadoJugadorParado* estadoOriginal;
 
 public:
@@ -41,6 +44,9 @@ public:
 	void desaparecer();
 	void descongelarse();
 	bool estaDesconectado();
+	bool consultarModoTest();
+	void activarModoTest();
+	void desactivarModoTest();
 	void realizarMovimientos(FondoModelo* fondo, bool rezagado);
 	bool llegoAlFin(FondoModelo *fondo);
 	void movidaDePantalla(FondoModelo* fondo);

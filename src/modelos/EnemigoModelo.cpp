@@ -5,6 +5,7 @@ EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial) {
 	posicionY = posYinicial;
 	ancho = 140;
 	alto = 280;
+	energia=100;
 	estado = new EstadoEnemigoParado(0,0,47,78);
 	dadoVuelta = false;
 	actualizarInsercion();
@@ -96,12 +97,13 @@ void EnemigoModelo::retrocederDiagArriba(){
 
 void EnemigoModelo::retrocederDiagAbajo(){
     dadoVuelta = true;
-    moverEnX(-5);
     if (posicionY < 320) {
+        moverEnX(-5);
         moverEnY(1);
         estado = estado->avanzar();
     } else {
         parar();
+        estado = estado->parar();
     }
     actualizarInsercion();
 }
