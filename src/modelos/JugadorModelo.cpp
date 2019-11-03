@@ -260,7 +260,8 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
 					break;
 	}
 	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, tipo);
-	mensajes[*mensajeActual].agregarPosicionY(posicionY);
+	mensajes[*mensajeActual].agregarPosicionY(posicionY +
+									escalar(estadoOriginal->obtenerAlto()));
 	if (dadoVuelta)
 		mensajes[*mensajeActual].darVuelta();
 	(*mensajeActual)++;

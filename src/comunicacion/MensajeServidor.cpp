@@ -14,8 +14,9 @@ void MensajeServidor::generarMensaje(Encuadre* unFrame,
 		frame = *unFrame;
 	if (unaInsercion != NULL) {
 		insercion = *unaInsercion;
-		posicionY = insercion.getY();
 	}
+
+	posicionY = insercion.getY() + insercion.getAlto();
 	sprite = tipo;
 	dadoVuelta = false;
 }
@@ -51,8 +52,7 @@ bool MensajeServidor::estaDadoVuelta() {
 }
 
 bool MensajeServidor::operator <(const MensajeServidor & mensaje) const {
-	return ((posicionY + insercion.getAlto()) <
-			(mensaje.posicionY + mensaje.insercion.getAlto()));
+	return (posicionY < mensaje.posicionY);
 }
 
 
