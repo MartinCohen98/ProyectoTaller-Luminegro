@@ -15,12 +15,14 @@ private:
 	Encuadre frame;
 	Encuadre insercion;
 	bool dadoVuelta;
+	int posicionY;
 	tipoDeSprite sprite;
 
 public:
 	MensajeServidor();
 	void generarMensaje(Encuadre* unFrame, Encuadre* unaInsercion, tipoDeSprite tipo);
 	void darVuelta();
+	void agregarPosicionY(int posicion);
 	Encuadre* obtenerFrame();
 	Encuadre* obtenerInsercion();
 	bool estaDadoVuelta();

@@ -8,7 +8,7 @@
 #include "../modelos/ControlEnemigosModelo.h"
 #include "../modelos/ControlObjetosModelo.h"
 #include "GestorThreadsServidor.h"
-#include "comunicacion/UsuarioYClave.h"
+#include "../comunicacion/UsuarioYClave.h"
 
 enum jugadoresNombres {mariano, julio, martin, nicolas};
 

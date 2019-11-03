@@ -5,14 +5,17 @@ using namespace std;
 MensajeServidor::MensajeServidor() {
 	sprite = Jugador1;
 	dadoVuelta = false;
+	posicionY = 0;
 }
 
 void MensajeServidor::generarMensaje(Encuadre* unFrame,
 		Encuadre* unaInsercion, tipoDeSprite tipo) {
 	if (unFrame != NULL)
 		frame = *unFrame;
-	if (unaInsercion != NULL)
+	if (unaInsercion != NULL) {
 		insercion = *unaInsercion;
+		posicionY = insercion.getY();
+	}
 	sprite = tipo;
 	dadoVuelta = false;
 }
@@ -20,6 +23,11 @@ void MensajeServidor::generarMensaje(Encuadre* unFrame,
 
 void MensajeServidor::darVuelta() {
 	dadoVuelta = true;
+}
+
+
+void MensajeServidor::agregarPosicionY(int posicion) {
+	posicionY = posicion;
 }
 
 
@@ -43,9 +51,8 @@ bool MensajeServidor::estaDadoVuelta() {
 }
 
 bool MensajeServidor::operator <(const MensajeServidor & mensaje) const {
-	return ((insercion.getY() + insercion.getAlto()) <
-			(mensaje.insercion.getY() +
-			mensaje.insercion.getAlto()));
+	return ((posicionY + insercion.getAlto()) <
+			(mensaje.posicionY + mensaje.insercion.getAlto()));
 }
 
 
