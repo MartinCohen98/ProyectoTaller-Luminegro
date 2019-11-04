@@ -34,6 +34,10 @@ void ControlEnemigosModelo::movidaDePantalla() {
     }
 }
 
+int ControlEnemigosModelo::calcularDistancia(int x1, int y1, int x2, int y2){
+    return sqrt((x1-x2)^2+(y1-y2)^2);
+}
+
 void ControlEnemigosModelo::realizarMovimientos(){
     enemigos[0]->patrullar();
 	enemigos[1]->patrullar();
@@ -50,6 +54,10 @@ void ControlEnemigosModelo::movimientosIniciales(){
     enemigos[3]->avanzar();
     enemigos[4]->retroceder();
     enemigos[5]->retroceder();
+}
+
+void ControlEnemigosModelo::buscarObjetivo(){
+
 }
 
 void ControlEnemigosModelo::generarMensajes(MensajeServidor* mensajes, int* mensajeActual) {

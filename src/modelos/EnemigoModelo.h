@@ -11,6 +11,8 @@ private:
 	int ancho;
 	int alto;
     bool subiendo;
+    int bordeSuperior=180;
+    int bordeInferior=320;
     tipoDeSprite tipoEnemigo;
 
 public:
@@ -21,13 +23,13 @@ public:
 	void agacharse();
 	void subir();
 	void bajar();
-	void avanzarDiagArriba();
-	void avanzarDiagAbajo();
+	void avanzarDiagArriba(int tope);
+	void avanzarDiagAbajo(int tope);
+	void retrocederDiagArriba(int tope);
+	void retrocederDiagAbajo(int tope);
     void estaSubiendo();
     void estaBajando();
     bool consultarSubiendo();
-	void retrocederDiagArriba();
-	void retrocederDiagAbajo();
 	void trasladarse(int destinoX,int destinoY);
 	void patrullar();
 	void retrocesoDePantalla();

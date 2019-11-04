@@ -14,7 +14,9 @@ public:
 	int obtenerCantidad();
 	void realizarMovimientos();
 	void movimientosIniciales();
+	void buscarObjetivo();
 	void movidaDePantalla();
+	int calcularDistancia(int x1, int y1, int x2, int y2);
 	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~ControlEnemigosModelo();
 };

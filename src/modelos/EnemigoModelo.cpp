@@ -58,10 +58,10 @@ void EnemigoModelo::agacharse() {
 	estado = estado->agacharse();
 }
 
-void EnemigoModelo::avanzarDiagArriba(){
+void EnemigoModelo::avanzarDiagArriba(int tope){
     dadoVuelta = false;
     moverEnX(5);
-    if (posicionY > 180) {
+    if (posicionY > tope) {
         moverEnY(-1);
         estado = estado->avanzar();
     } else {
@@ -71,10 +71,10 @@ void EnemigoModelo::avanzarDiagArriba(){
     actualizarInsercion();
 }
 
-void EnemigoModelo::avanzarDiagAbajo(){
+void EnemigoModelo::avanzarDiagAbajo(int tope){
     dadoVuelta = false;
     moverEnX(5);
-    if (posicionY < 320) {
+    if (posicionY < tope) {
         moverEnY(1);
         estado = estado->avanzar();
     } else {
@@ -84,10 +84,10 @@ void EnemigoModelo::avanzarDiagAbajo(){
     actualizarInsercion();
 }
 
-void EnemigoModelo::retrocederDiagArriba(){
+void EnemigoModelo::retrocederDiagArriba(int tope){
     dadoVuelta = true;
     moverEnX(-5);
-    if (posicionY > 180) {
+    if (posicionY > tope) {
         moverEnY(-1);
         estado = estado->avanzar();
     } else {
@@ -97,9 +97,9 @@ void EnemigoModelo::retrocederDiagArriba(){
     actualizarInsercion();
 }
 
-void EnemigoModelo::retrocederDiagAbajo(){
+void EnemigoModelo::retrocederDiagAbajo(int tope){
     dadoVuelta = true;
-    if (posicionY < 320) {
+    if (posicionY < tope) {
         moverEnX(-5);
         moverEnY(1);
         estado = estado->avanzar();
@@ -110,32 +110,53 @@ void EnemigoModelo::retrocederDiagAbajo(){
     actualizarInsercion();
 }
 
-void EnemigoModelo::trasladarse(int destinoX,int destinoY){
-
+void EnemigoModelo::trasladarse(int destinoX,int destinoY) {
+    bool atras = false;
+    bool abajo = false;
+    if (destinoX < posicionX)
+        atras = true;
+    if (destinoY > posicionY)
+        abajo = true;
+    if (atras & abajo) {
+        retrocederDiagAbajo(destinoY);
+        if (posicionY==destinoY)
+            retroceder();
+    }
+    if (atras & !abajo) {
+        retrocederDiagArriba(destinoY);
+        if (posicionY==destinoY)
+            retroceder();
+    }
+    if (!atras & abajo) {
+        avanzarDiagAbajo(destinoY);
+        if (posicionY==destinoY)
+            avanzar();
+    }
+    if (!atras & !abajo) {
+        avanzarDiagArriba(destinoY);
+        if (posicionY==destinoY)
+            avanzar();
+    }
 }
 
 void EnemigoModelo::patrullar(){
-    switch(darPosicionY()) {
-        case 180:
-            estaBajando();
-            break;
-        case 320:
-            estaSubiendo();
-    }
+    if (darPosicionY()==bordeSuperior)
+        estaBajando();
+    if (darPosicionY()==bordeInferior)
+        estaSubiendo();
     if (!consultarSubiendo()){
         if (consultarDadoVuelta())
-            retrocederDiagAbajo();
+            retrocederDiagAbajo(bordeInferior);
         else
-            avanzarDiagAbajo();
+            avanzarDiagAbajo(bordeInferior);
       }
     else {
         if (consultarDadoVuelta())
-            retrocederDiagArriba();
+            retrocederDiagArriba(bordeSuperior);
         else
-            avanzarDiagArriba();
+            avanzarDiagArriba(bordeSuperior);
       }
 }
-
 
 void EnemigoModelo::estaSubiendo(){
     subiendo=true;
