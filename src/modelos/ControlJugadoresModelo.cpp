@@ -131,7 +131,7 @@ bool ControlJugadoresModelo::llegaronAlFin(FondoModelo* fondo) {
 	bool retorno = false;
 	int i,j=0;
 	for (i = 0; i < cantidad; i++) {
-		if (jugadores[i]->llegoAlFin(fondo))
+		if (jugadores[i]->estaDesconectado() || jugadores[i]->llegoAlFin(fondo))
 		    j++;
 	}
 	if (j==cantidad)
