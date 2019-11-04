@@ -1,13 +1,15 @@
 #include "EnemigoModelo.h"
 
-EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial) {
+EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
 	ancho = 140;
 	alto = 280;
 	energia=100;
+	tipoEnemigo=tipo;
 	estado = new EstadoEnemigoParado(0,0,47,78);
 	dadoVuelta = false;
+	subiendo=false;
 	actualizarInsercion();
 }
 
@@ -57,7 +59,7 @@ void EnemigoModelo::agacharse() {
 }
 
 void EnemigoModelo::avanzarDiagArriba(){
-    dadoVuelta = true;
+    dadoVuelta = false;
     moverEnX(5);
     if (posicionY > 180) {
         moverEnY(-1);
@@ -70,7 +72,7 @@ void EnemigoModelo::avanzarDiagArriba(){
 }
 
 void EnemigoModelo::avanzarDiagAbajo(){
-    dadoVuelta = true;
+    dadoVuelta = false;
     moverEnX(5);
     if (posicionY < 320) {
         moverEnY(1);
@@ -86,7 +88,7 @@ void EnemigoModelo::retrocederDiagArriba(){
     dadoVuelta = true;
     moverEnX(-5);
     if (posicionY > 180) {
-        moverEnY(1);
+        moverEnY(-1);
         estado = estado->avanzar();
     } else {
         parar();
@@ -108,6 +110,45 @@ void EnemigoModelo::retrocederDiagAbajo(){
     actualizarInsercion();
 }
 
+void EnemigoModelo::trasladarse(int destinoX,int destinoY){
+
+}
+
+void EnemigoModelo::patrullar(){
+    switch(darPosicionY()) {
+        case 180:
+            estaBajando();
+            break;
+        case 320:
+            estaSubiendo();
+    }
+    if (!consultarSubiendo()){
+        if (consultarDadoVuelta())
+            retrocederDiagAbajo();
+        else
+            avanzarDiagAbajo();
+      }
+    else {
+        if (consultarDadoVuelta())
+            retrocederDiagArriba();
+        else
+            avanzarDiagArriba();
+      }
+}
+
+
+void EnemigoModelo::estaSubiendo(){
+    subiendo=true;
+}
+
+void EnemigoModelo::estaBajando(){
+    subiendo=false;
+}
+
+bool EnemigoModelo::consultarSubiendo(){
+    return subiendo;
+}
+
 void EnemigoModelo::retrocesoDePantalla() {
 	posicionX = posicionX - 12;
 }
@@ -115,7 +156,7 @@ void EnemigoModelo::retrocesoDePantalla() {
 
 void EnemigoModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual) {
 	Encuadre sprite = estado->obtenerSprite();
-	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, Enemigo1);
+	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, tipoEnemigo);
 	if (dadoVuelta)
 		mensajes[*mensajeActual].darVuelta();
 	(*mensajeActual)++;

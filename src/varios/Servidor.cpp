@@ -53,6 +53,8 @@ void Servidor::correr() {
 
 		generarMensajesParaEnviar();
 
+		controlEnemigos.movimientosIniciales();
+
 		while (!nivelTerminado) {
 			gestorThreads->checkearConecciones(cantidadDeMensajes, &protagonistas);
 			recibirInputs(&protagonistas);

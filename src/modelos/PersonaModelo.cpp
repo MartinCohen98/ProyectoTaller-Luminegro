@@ -15,5 +15,9 @@ int PersonaModelo::darPosicionY(){
     return posicionY;
 }
 
+bool PersonaModelo::consultarDadoVuelta(){
+    return dadoVuelta;
+}
+
 PersonaModelo::~PersonaModelo() {}
 

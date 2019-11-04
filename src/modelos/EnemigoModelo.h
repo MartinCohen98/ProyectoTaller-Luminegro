@@ -10,9 +10,11 @@ class EnemigoModelo: public PersonaModelo {
 private:
 	int ancho;
 	int alto;
+    bool subiendo;
+    tipoDeSprite tipoEnemigo;
 
 public:
-	EnemigoModelo(int posXinicial, int posYinicial);
+	EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo);
 	void avanzar();
 	void parar();
 	void retroceder();
@@ -21,8 +23,13 @@ public:
 	void bajar();
 	void avanzarDiagArriba();
 	void avanzarDiagAbajo();
+    void estaSubiendo();
+    void estaBajando();
+    bool consultarSubiendo();
 	void retrocederDiagArriba();
 	void retrocederDiagAbajo();
+	void trasladarse(int destinoX,int destinoY);
+	void patrullar();
 	void retrocesoDePantalla();
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~EnemigoModelo();

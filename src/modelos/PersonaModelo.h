@@ -21,6 +21,7 @@ public:
 	PersonaModelo();
 	int darPosicionX();
 	int darPosicionY();
+	bool consultarDadoVuelta();
 	virtual ~PersonaModelo();
 };
 

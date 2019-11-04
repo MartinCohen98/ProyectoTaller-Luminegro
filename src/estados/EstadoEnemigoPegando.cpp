@@ -5,8 +5,8 @@
 #include "EstadoEnemigoPegando.h"
 
 EstadoEnemigoPegando::EstadoEnemigoPegando() {
-    alto = 100;
-    ancho = 70;
+    ancho=47;
+    alto=78;
     frameActual.modificar(0, 410, ancho, alto);
     framesTranscurridas = 0;
     numeroDeFrame = 0;

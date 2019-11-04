@@ -13,6 +13,7 @@ public:
 	ControlEnemigosModelo(int nivel);
 	int obtenerCantidad();
 	void realizarMovimientos();
+	void movimientosIniciales();
 	void movidaDePantalla();
 	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~ControlEnemigosModelo();
