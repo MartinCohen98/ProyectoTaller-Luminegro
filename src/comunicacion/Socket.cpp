@@ -103,7 +103,7 @@ int Socket::esperarYAceptarCliente(Socket *socketConectado) {
 
     if (elSocketAceptadoEsValido) {
         socketConectado->estado = ESTADO_CONECTADO;
-        std::string mensajeError = "Clase Socket - Servidor conectado";
+        std::string mensajeError = "Clase Socket - Se conecto un cliente al servidor";
         logueador->Info(mensajeError);
 
     } else {
