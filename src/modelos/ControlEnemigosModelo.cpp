@@ -34,8 +34,17 @@ void ControlEnemigosModelo::movidaDePantalla() {
     }
 }
 
-int ControlEnemigosModelo::calcularDistancia(int x1, int y1, int x2, int y2){
-    return sqrt((x1-x2)^2+(y1-y2)^2);
+int ControlEnemigosModelo::calcularDistancia(JugadorModelo *protagonista,EnemigoModelo *enemigo){
+	int x1,x2,y1,y2;
+	x1=protagonista->darPosicionX();
+	y1=protagonista->darPosicionY();
+	x2=enemigo->darPosicionX();
+	y2=enemigo->darPosicionY();
+	return sqrt(((x1-x2)^2)+((y1-y2)^2));
+}
+
+EnemigoModelo* ControlEnemigosModelo::darEnemigo(int j){
+	return enemigos[j];
 }
 
 void ControlEnemigosModelo::realizarMovimientos(){
@@ -56,8 +65,22 @@ void ControlEnemigosModelo::movimientosIniciales(){
     enemigos[5]->retroceder();
 }
 
-void ControlEnemigosModelo::buscarObjetivo(){
-
+int ControlEnemigosModelo::buscarObjetivo(ControlJugadoresModelo *jugadores){
+int jugadorObjetivo;
+int enemigoAtacante;
+int distancia, distAux;
+int i,j;
+for(i==0;i<jugadores->consultarCantidadJugadores();i++){
+	for(j==0;j<enemigosCantidad;j++){
+		distAux=distancia;
+		distancia=calcularDistancia(jugadores->darJugador(i),darEnemigo(j));
+        if (distancia<distAux){
+        	jugadorObjetivo=i;
+        	enemigoAtacante=j;
+        };
+	};
+ };
+ darEnemigo(enemigoAtacante)->modificarJugadorObjetivo(jugadorObjetivo);
 }
 
 void ControlEnemigosModelo::generarMensajes(MensajeServidor* mensajes, int* mensajeActual) {

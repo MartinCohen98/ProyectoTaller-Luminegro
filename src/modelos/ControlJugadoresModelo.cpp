@@ -2,21 +2,20 @@
 #include <iostream>
 
 ControlJugadoresModelo::ControlJugadoresModelo(pugi::xml_document *archiConfig,
-					int cantidadJugadores) {
+					int cantidad) {
 	jugadores = new JugadorModelo*[cantidadJugadores];
-	cantidad = cantidadJugadores;
+	cantidadJugadores = cantidad;
 	int posXinic[4] = {100,100,0,200};
 	int posYinic[4] = {175,275,225,225};
 
-	for (int i = 0; i < cantidad; i++) {
+	for (int i = 0; i < cantidadJugadores; i++) {
 		jugadores[i] = new JugadorModelo(archiConfig, posXinic[i], posYinic[i]);
 	}
 }
 
 
 void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
-											int numeroDeJugador) {
-
+											int numeroDeJugador){
         switch (mensaje->get()) {
             case Right:{
                 //Avanzar
@@ -105,7 +104,7 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
 
 void ControlJugadoresModelo::realizarMovimientos(FondoModelo* fondo) {
     bool rezagado = verificarRezagado(fondo);
-	for (int i = 0; i < cantidad; i++){
+	for (int i = 0; i < cantidadJugadores; i++){
 		jugadores[i]->realizarMovimientos(fondo, rezagado);
 	}
 }
@@ -113,7 +112,7 @@ void ControlJugadoresModelo::realizarMovimientos(FondoModelo* fondo) {
 
 void ControlJugadoresModelo::movidaDePantalla(FondoModelo* fondo) {
 
-    for (int i = 0; i < cantidad; i++) {
+    for (int i = 0; i < cantidadJugadores; i++) {
 		jugadores[i]->movidaDePantalla(fondo);
 	}
 }
@@ -121,7 +120,7 @@ void ControlJugadoresModelo::movidaDePantalla(FondoModelo* fondo) {
 
 void ControlJugadoresModelo::generarMensajes(MensajeServidor* mensajes,
 		int* mensajeActual) {
-	for (int i = 0; i < cantidad; i++) {
+	for (int i = 0; i < cantidadJugadores; i++) {
 		jugadores[i]->generarMensaje(mensajes, mensajeActual, i + 1);
 	}
 }
@@ -130,11 +129,11 @@ void ControlJugadoresModelo::generarMensajes(MensajeServidor* mensajes,
 bool ControlJugadoresModelo::llegaronAlFin(FondoModelo* fondo) {
 	bool retorno = false;
 	int i,j=0;
-	for (i = 0; i < cantidad; i++) {
+	for (i = 0; i < cantidadJugadores; i++) {
 		if (jugadores[i]->estaDesconectado() || jugadores[i]->llegoAlFin(fondo))
 		    j++;
 	}
-	if (j==cantidad)
+	if (j==cantidadJugadores)
         retorno = true;
 	return retorno;
 }
@@ -142,7 +141,7 @@ bool ControlJugadoresModelo::llegaronAlFin(FondoModelo* fondo) {
 
 bool ControlJugadoresModelo::verificarRezagado(FondoModelo* fondo){
     bool rezagado = false;
-    for (int i = 0; i < cantidad; i++) {
+    for (int i = 0; i < cantidadJugadores; i++) {
         if ((jugadores[i]->darPosicionX() <= fondo->darInicioTerreno() - 600)
         		&& !jugadores[i]->estaDesconectado())
             rezagado = true;
@@ -165,9 +164,16 @@ void ControlJugadoresModelo::desaparecer(int jugador) {
 	jugadores[jugador]->desaparecer();
 }
 
+int ControlJugadoresModelo::consultarCantidadJugadores(){
+	return cantidadJugadores;
+}
+
+JugadorModelo* ControlJugadoresModelo::darJugador(int i){
+	return jugadores[i];
+}
 
 ControlJugadoresModelo::~ControlJugadoresModelo() {
-	for (int i = 0; i < cantidad; i++) {
+	for (int i = 0; i < cantidadJugadores; i++) {
 		delete jugadores[i];
 	}
 	delete[] jugadores;

@@ -1,5 +1,9 @@
 #include "EnemigoModelo.h"
 
+EnemigoModelo::EnemigoModelo(){
+
+}
+
 EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
@@ -156,6 +160,18 @@ void EnemigoModelo::patrullar(){
         else
             avanzarDiagArriba(bordeSuperior);
       }
+}
+
+void EnemigoModelo::modificarJugadorObjetivo(int objetivo){
+	jugadorObjetivo=objetivo;
+}
+
+int EnemigoModelo::consultarJugadorObjetivo(){
+	return jugadorObjetivo;
+}
+
+void EnemigoModelo::atacar(int objetivo){
+
 }
 
 void EnemigoModelo::estaSubiendo(){

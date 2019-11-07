@@ -13,9 +13,11 @@ private:
     bool subiendo;
     int bordeSuperior=180;
     int bordeInferior=320;
+    int jugadorObjetivo;
     tipoDeSprite tipoEnemigo;
 
 public:
+    EnemigoModelo();
 	EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo);
 	void avanzar();
 	void parar();
@@ -32,6 +34,9 @@ public:
     bool consultarSubiendo();
 	void trasladarse(int destinoX,int destinoY);
 	void patrullar();
+	void modificarJugadorObjetivo(int objetivo);
+	int consultarJugadorObjetivo();
+	void atacar(int objetivo);
 	void retrocesoDePantalla();
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~EnemigoModelo();
