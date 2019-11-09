@@ -223,7 +223,7 @@ void Servidor::desconectarJugadoresDesconectados(ControlJugadoresModelo* jugador
 void Servidor::leerTodosLosUsuariosYClavesDelConfig(int *cantidadDeJugadores) {
 
     usuariosYClaves = new UsuarioYClave[4];
-    string usuariosNombres[4] = {"m", "j", "martin", "nicolas"};
+    string usuariosNombres[4] = {"mariano", "julio", "martin", "nicolas"};
     string clave;
     int n;
 
