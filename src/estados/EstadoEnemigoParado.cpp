@@ -26,9 +26,9 @@ EstadoJugador* EstadoEnemigoParado::avanzar() {
 	return (new EstadoEnemigoAvanzando());
 }
 
-EstadoJugador* EstadoEnemigoParado::agacharse() {
-	delete this;
-	return (new EstadoJugadorAgachado());
+EstadoJugador* EstadoEnemigoParado::pegar() {
+    delete this;
+    return (new EstadoEnemigoPegando());
 }
 
 EstadoEnemigoParado::~EstadoEnemigoParado() {

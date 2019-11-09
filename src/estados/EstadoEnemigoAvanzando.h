@@ -2,8 +2,8 @@
 #define SRC_ESTADOENEMIGOAVANZANDO_H_
 
 #include "EstadoJugador.h"
-#include "EstadoJugadorParado.h"
-#include "EstadoJugadorAgachado.h"
+#include "EstadoEnemigoParado.h"
+#include "EstadoEnemigoPegando.h"
 
 class EstadoEnemigoAvanzando: public EstadoJugador {
 
@@ -16,7 +16,7 @@ public:
 	EstadoEnemigoAvanzando(int x, int y, int ancho, int alto);
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();
-	EstadoJugador* agacharse();
+    EstadoJugador* pegar();
 	virtual ~EstadoEnemigoAvanzando();
 
 private:

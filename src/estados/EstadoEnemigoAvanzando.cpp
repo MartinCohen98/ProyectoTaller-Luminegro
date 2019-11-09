@@ -16,7 +16,7 @@ EstadoEnemigoAvanzando::EstadoEnemigoAvanzando(int x, int y, int ancho, int alto
 
 EstadoJugador* EstadoEnemigoAvanzando::parar() {
 	delete this;
-	return (new EstadoJugadorParado());
+	return (new EstadoEnemigoParado());
 }
 
 EstadoJugador* EstadoEnemigoAvanzando::avanzar() {
@@ -28,9 +28,9 @@ EstadoJugador* EstadoEnemigoAvanzando::avanzar() {
 	return (this);
 }
 
-EstadoJugador* EstadoEnemigoAvanzando::agacharse() {
-	delete this;
-	return (new EstadoJugadorAgachado());
+EstadoJugador* EstadoEnemigoAvanzando::pegar() {
+    delete this;
+    return (new EstadoEnemigoPegando());
 }
 
 void EstadoEnemigoAvanzando::cambiarFrame() {

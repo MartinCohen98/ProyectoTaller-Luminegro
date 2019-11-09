@@ -62,6 +62,10 @@ void EnemigoModelo::agacharse() {
 	estado = estado->agacharse();
 }
 
+void EnemigoModelo::pegar(){
+    estado = estado->pegar();
+}
+
 void EnemigoModelo::avanzarDiagArriba(int tope){
     dadoVuelta = false;
     moverEnX(5);

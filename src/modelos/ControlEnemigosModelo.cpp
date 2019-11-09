@@ -15,7 +15,7 @@ ControlEnemigosModelo::ControlEnemigosModelo(int nivel) {
 	}
 
 	if (nivel == 2){
-		enemigos[0] = new EnemigoModelo(750, 220, Enemigo3);
+		enemigos[0] = new EnemigoModelo(550, 220, Enemigo3);
 		enemigos[1] = new EnemigoModelo(700, 320, Enemigo2);
 		enemigos[2] = new EnemigoModelo(2500, 220, Enemigo1);
 		enemigos[3] = new EnemigoModelo(-300, 320, Enemigo1);
@@ -47,13 +47,26 @@ EnemigoModelo* ControlEnemigosModelo::darEnemigo(int j){
 	return enemigos[j];
 }
 
-void ControlEnemigosModelo::realizarMovimientos(){
+void ControlEnemigosModelo::realizarMovimientos(int atacante,ControlJugadoresModelo *jugadores){
+   /* int x,y;
+    JugadorModelo *jugador;
+    int objetivo=enemigos[atacante]->consultarJugadorObjetivo();
+    jugador=jugadores->darJugador(objetivo);
+    x=jugador->darPosicionX();
+    y=jugador->darPosicionY();;*/
+   for (int i=0;i<enemigosCantidad;i++) {
+       int posicionY=enemigos[i]->darPosicionY();
+       if (posicionY==250 || posicionY==200 || posicionY==300)
+           enemigos[i]->pegar();
+      };
+    //   else
     enemigos[0]->patrullar();
 	enemigos[1]->patrullar();
     enemigos[2]->patrullar();
 	enemigos[3]->patrullar();
 	enemigos[4]->patrullar();
 	enemigos[5]->patrullar();
+	/*enemigos[atacante]->trasladarse(x,y);*/
 }
 
 void ControlEnemigosModelo::movimientosIniciales(){
@@ -68,9 +81,10 @@ void ControlEnemigosModelo::movimientosIniciales(){
 int ControlEnemigosModelo::buscarObjetivo(ControlJugadoresModelo *jugadores){
 int jugadorObjetivo;
 int enemigoAtacante;
+EnemigoModelo *enemigo;
 int distancia, distAux;
 int i,j;
-for(i==0;i<jugadores->consultarCantidadJugadores();i++){
+for(i==0;i<(jugadores->consultarCantidadJugadores());i++){
 	for(j==0;j<enemigosCantidad;j++){
 		distAux=distancia;
 		distancia=calcularDistancia(jugadores->darJugador(i),darEnemigo(j));
@@ -80,7 +94,10 @@ for(i==0;i<jugadores->consultarCantidadJugadores();i++){
         };
 	};
  };
- darEnemigo(enemigoAtacante)->modificarJugadorObjetivo(jugadorObjetivo);
+ enemigo=darEnemigo(enemigoAtacante);
+ enemigo->modificarJugadorObjetivo(jugadorObjetivo);
+ printf("%d/n", enemigoAtacante);
+ return enemigoAtacante;
 }
 
 void ControlEnemigosModelo::generarMensajes(MensajeServidor* mensajes, int* mensajeActual) {

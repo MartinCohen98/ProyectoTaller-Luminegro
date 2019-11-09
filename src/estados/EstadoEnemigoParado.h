@@ -19,7 +19,7 @@ public:
 	EstadoEnemigoParado(int x, int y, int ancho, int alto);
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();
-	EstadoJugador* agacharse();
+    EstadoJugador* pegar();
 	virtual ~EstadoEnemigoParado();
 };
 

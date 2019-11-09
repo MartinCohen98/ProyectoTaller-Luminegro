@@ -55,12 +55,14 @@ void Servidor::correr() {
 
 		controlEnemigos.movimientosIniciales();
 
+		int atacante=controlEnemigos.buscarObjetivo(&protagonistas);
+
 		while (!nivelTerminado) {
 			gestorThreads->checkearConecciones(cantidadDeMensajes, &protagonistas);
 			recibirInputs(&protagonistas);
 
 			protagonistas.realizarMovimientos(&fondo);
-			controlEnemigos.realizarMovimientos();
+			controlEnemigos.realizarMovimientos(atacante, &protagonistas);
 
 			if (fondo.seMovio()) {
 				protagonistas.movidaDePantalla(&fondo);
