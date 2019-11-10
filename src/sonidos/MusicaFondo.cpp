@@ -19,7 +19,7 @@ int MusicaFondo::inicializar() {
 
     sonido = Mix_LoadWAV("assets/sounds/background.mp3");
     if (sonido == NULL) {
-        mensajeError = "Unable to load WAV file:";
+        mensajeError = "Unable to load WAV file: ";
         mensajeError.append( Mix_GetError() );
         logueador->Error(mensajeError);
         return EXIT_FAILURE;
@@ -33,7 +33,7 @@ int MusicaFondo::dalePlay() {
     logueador->Info("Empieza a sonar la música de fondo.");
     int canal = Mix_PlayChannel(-1, sonido, -1);
     if (canal == -1) {
-        mensajeError = "Unable to play WAV file:";
+        mensajeError = "Unable to play WAV file: ";
         mensajeError.append( Mix_GetError() );
         logueador->Error(mensajeError);
         return EXIT_FAILURE;
