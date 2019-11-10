@@ -5,8 +5,13 @@ VentanaClienteInicioSesion::VentanaClienteInicioSesion() {
     estado = ESTADO_INICIALIZACION;
 
     Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
+    std::string mensajeError;
 
-    SDL_Init(SDL_INIT_VIDEO);
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
+        mensajeError = "Unable to initialize SDL: ";
+        mensajeError.append( SDL_GetError() );
+        logueador->Error(mensajeError);
+    }
     TTF_Init();
 
     ventana = SDL_CreateWindow("Luminegro Final Fight - Iniciar sesión",
@@ -20,7 +25,7 @@ VentanaClienteInicioSesion::VentanaClienteInicioSesion() {
     fuente = TTF_OpenFont("assets/fonts/Ubuntu-M.ttf", 30);
 
     if (!fuente) {
-        std::string mensajeError = "TTF_OpenFont: ";
+        mensajeError = "TTF_OpenFont: ";
         mensajeError.append( TTF_GetError() );
         logueador->Error(mensajeError);
         estado = ESTADO_ERROR;

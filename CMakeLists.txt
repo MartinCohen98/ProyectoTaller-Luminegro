@@ -106,6 +106,9 @@ add_executable(ProyectoTaller_Luminegro
         src/modelos/PersonaModelo.cpp
         src/modelos/PersonaModelo.h
 
+        src/sonidos/MusicaFondo.cpp
+        src/sonidos/MusicaFondo.h
+
         src/varios/Cliente.cpp
         src/varios/Cliente.h
         src/varios/Logger.cpp
@@ -151,3 +154,4 @@ target_link_libraries(ProyectoTaller_Luminegro ${SDL2_LIBRARIES})
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2TTF_LIBRARIES})
 target_link_libraries(ProyectoTaller_Luminegro Threads::Threads)
 target_link_libraries(ProyectoTaller_Luminegro ${CMAKE_THREAD_LIBES_INIT})
+target_link_libraries(ProyectoTaller_Luminegro ${SDL2_MIXER_LIBRARY} )

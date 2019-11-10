@@ -91,5 +91,8 @@
             </nivel2>
         </niveles>
         <margenWidth>300</margenWidth>
+        <sonidos>
+            <fondo>assets/sounds/background.mp3</fondo>
+        </sonidos>
     </escenario>
 </configuracion>

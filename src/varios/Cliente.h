@@ -12,6 +12,7 @@
 #include "../comunicacion/MensajeCredenciales.h"
 #include "../grafica/VentanaClienteInicioSesion.h"
 #include "GestorThreadsCliente.h"
+#include "../sonidos/MusicaFondo.h"
 #include <iostream>
 #include "Logger.h"
 #include <SDL2/SDL.h>
