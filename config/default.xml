@@ -40,10 +40,10 @@
         </enemigos>
         <objetos>
             <barril>
-                <imagen>assets/images/objects/barrel2.bmp</imagen>
+                <imagen>assets/images/objects/barrel.bmp</imagen>
             </barril>
             <caja>
-                <imagen>assets/images/objects/box2.bmp</imagen>
+                <imagen>assets/images/objects/box.bmp</imagen>
             </caja>
             <cuchillo>
                 <imagen>assets/images/objects/knife.bmp</imagen>
