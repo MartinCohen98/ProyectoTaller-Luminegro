@@ -205,9 +205,6 @@ int Servidor::esperarConexiones() {
         cout << "Cliente conectado" << endl;
     }
 
-    //Se deja un thread esperando conexiones porque ya superarían el máximo permitido de jugadores y hay que avisarles
-	//threadRechazadorConexiones = new std::thread(RechazadorConexiones(&socketAceptador));
-
     return resultadoAccion;
 }
 
