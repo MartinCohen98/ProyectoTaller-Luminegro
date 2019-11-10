@@ -27,12 +27,15 @@
         <enemigos>
             <bred>
                 <imagen url="assets/images/sprites/bred.bmp" />
+                <energia>100</energia>
             </bred>
             <dug>
                 <imagen url="assets/images/sprites/dug.bmp" />
+                <energia>100</energia>
             </dug>
             <jake>
                 <imagen url="assets/images/sprites/jake.bmp" />
+                <energia>100</energia>
             </jake>
         </enemigos>
         <objetos>
