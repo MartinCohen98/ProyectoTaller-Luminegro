@@ -81,6 +81,8 @@ add_executable(ProyectoTaller_Luminegro
         src/grafica/VentanaCliente.cpp
         src/grafica/VentanaCliente.h
 
+		src/modelos/Modelo.cpp
+		src/modelos/Modelo.h
         src/modelos/BarrilModelo.cpp
         src/modelos/BarrilModelo.h
         src/modelos/CajaModelo.cpp

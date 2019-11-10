@@ -41,13 +41,13 @@ void Servidor::correr() {
 		FondoModelo fondo(archivoConfiguracion, nivelActual);
 		ControlJugadoresModelo protagonistas(archivoConfiguracion, jugadoresCantidadEsperada);
 
-		desconectarJugadoresDesconectados(&protagonistas);
-
 		logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
 		ControlEnemigosModelo controlEnemigos(nivelActual);
 
 		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 		ControlObjetosModelo controlObjetos(archivoConfiguracion, fondo.obtenerAncho(), nivelActual);
+
+		desconectarJugadoresDesconectados(&protagonistas);
 
 		enviarCantidadDeReceives(&controlEnemigos, &controlObjetos);
 
@@ -55,7 +55,7 @@ void Servidor::correr() {
 
 		controlEnemigos.movimientosIniciales();
 
-		int atacante=controlEnemigos.buscarObjetivo(&protagonistas);
+		int atacante = controlEnemigos.buscarObjetivo(&protagonistas);
 
 		while (!nivelTerminado) {
 			gestorThreads->checkearConecciones(cantidadDeMensajes, &protagonistas);
