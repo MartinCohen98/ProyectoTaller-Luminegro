@@ -3,8 +3,8 @@
 CajaModelo::CajaModelo(int posXinicial, int posYinicial) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
-	ancho = 96;
-	alto = 170;
+	ancho = 120;
+	alto = 250;
 	golpesResistidos=2;
 	sprite = Caja;
 

@@ -3,8 +3,8 @@
 BarrilModelo::BarrilModelo(int posXinicial, int posYinicial) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
-	ancho = 100;
-	alto = 200;
+	ancho = 150;
+	alto = 300;
 	golpesResistidos=1;
 	sprite = Barril;
 
