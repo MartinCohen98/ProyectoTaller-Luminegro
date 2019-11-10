@@ -8,9 +8,14 @@
 class MusicaFondo {
 
 private:
+    Logger::Log *logueador;
+    std::string mensajeError;
+    Mix_Chunk *sonido = NULL;
 
 public:
+    int inicializar();
     int dalePlay();
+    virtual ~MusicaFondo();
 };
 
 

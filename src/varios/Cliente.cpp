@@ -8,6 +8,7 @@ Cliente::Cliente() {
 int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig) {
 
 	Logger::Log *logueador = Logger::Log::ObtenerInstancia();
+    string mensajeError;
 
     VentanaClienteInicioSesion ventanaInicioSesion;
 
@@ -41,8 +42,6 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
     }
 
     // Autenticar usuario
-    string mensajeError;
-
     while (mensajeCredenciales.getEstado() != MensajeCredenciales::ESTADO_AUTENTICADO) {
 
         ventanaInicioSesion.pedirCredenciales();
@@ -98,8 +97,12 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	gestorThreads.comenzar();
 
     MusicaFondo musicaFondo;
-    int musicaArranco = musicaFondo.dalePlay();
-    if (musicaArranco == EXIT_FAILURE) {
+    if (musicaFondo.inicializar() == EXIT_FAILURE) {
+        // Ya fue logueado en la clase
+        return EXIT_FAILURE;
+    }
+
+    if (musicaFondo.dalePlay() == EXIT_FAILURE) {
         // Ya fue logueado en la clase
         return EXIT_FAILURE;
     }
