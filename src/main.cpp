@@ -1,8 +1,6 @@
 #include "varios/Servidor.h"
 #include "varios/Cliente.h"
 #include "varios/ConfigManager.h"
-#include <pthread.h>
-
 
 using namespace Logger;
 using namespace Utiles;
