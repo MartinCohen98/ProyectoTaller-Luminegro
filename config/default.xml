@@ -27,20 +27,23 @@
         <enemigos>
             <bred>
                 <imagen url="assets/images/sprites/bred.bmp" />
+                <energia>100</energia>
             </bred>
             <dug>
                 <imagen url="assets/images/sprites/dug.bmp" />
+                <energia>100</energia>
             </dug>
             <jake>
                 <imagen url="assets/images/sprites/jake.bmp" />
+                <energia>100</energia>
             </jake>
         </enemigos>
         <objetos>
             <barril>
-                <imagen>assets/images/objects/barrel.bmp</imagen>
+                <imagen>assets/images/objects/barrel2.bmp</imagen>
             </barril>
             <caja>
-                <imagen>assets/images/objects/box.bmp</imagen>
+                <imagen>assets/images/objects/box2.bmp</imagen>
             </caja>
             <cuchillo>
                 <imagen>assets/images/objects/knife.bmp</imagen>
