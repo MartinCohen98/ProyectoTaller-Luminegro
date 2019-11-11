@@ -33,6 +33,11 @@ EstadoJugador* EstadoEnemigoAvanzando::pegar() {
     return (new EstadoEnemigoPegando());
 }
 
+EstadoJugador* EstadoEnemigoAvanzando::morir(){
+    delete this;
+    return (new EstadoEnemigoMuriendo());
+}
+
 void EstadoEnemigoAvanzando::cambiarFrame() {
 	if (numeroDeFrame == 2) {
 		numeroDeFrame = 0;

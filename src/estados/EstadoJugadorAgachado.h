@@ -2,6 +2,7 @@
 #define SRC_ESTADOJUGADORAGACHADO_H_
 
 #include "EstadoJugadorParado.h"
+#include "EstadoJugadorMuriendo.h"
 
 class EstadoJugadorAgachado: public EstadoJugador {
 
@@ -12,6 +13,7 @@ public:
 	EstadoJugador* agacharse();
 	EstadoJugador* pegar();
 	EstadoJugador* saltar();
+    EstadoJugador* morir();
     EstadoJugador* congelarse();
 	bool puedeMoverse();
 	virtual ~EstadoJugadorAgachado();

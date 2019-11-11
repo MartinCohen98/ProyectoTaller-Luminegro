@@ -61,6 +61,9 @@ void Servidor::correr() {
 			gestorThreads->checkearConecciones(cantidadDeMensajes, &protagonistas);
 			recibirInputs(&protagonistas);
 
+			//if (protagonistas.consultarMatar()) {
+             //   controlEnemigos.matar();
+            //}
 			protagonistas.realizarMovimientos(&fondo);
 			controlEnemigos.realizarMovimientos(atacante, &protagonistas);
 
@@ -84,9 +87,9 @@ void Servidor::correr() {
 
 void Servidor::recibirInputs(ControlJugadoresModelo* protagonistas) {
 	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
-		gestorThreads->recibirMensajeDeCliente(&mensajeCliente, i);
-		protagonistas->procesarInput(&mensajeCliente, i);
-	}
+        gestorThreads->recibirMensajeDeCliente(&mensajeCliente, i);
+        protagonistas->procesarInput(&mensajeCliente, i);
+    }
 }
 
 void Servidor::enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,

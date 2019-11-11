@@ -2,6 +2,7 @@
 #define SRC_ESTADOJUGADORSALTANDO_H_
 
 #include "EstadoJugadorParado.h"
+#include "EstadoJugadorMuriendo.h"
 
 class EstadoJugadorSaltando: public EstadoJugador {
 
@@ -17,6 +18,7 @@ public:
 	EstadoJugador* agacharse();
 	EstadoJugador* pegar();
 	EstadoJugador* saltar();
+    EstadoJugador* morir();
     EstadoJugador* congelarse();
 	int obtenerElevacion();
 	bool estaSaltando();

@@ -11,6 +11,7 @@ ControlJugadoresModelo::ControlJugadoresModelo(pugi::xml_document *archiConfig,
 	for (int i = 0; i < cantidadJugadores; i++) {
 		jugadores[i] = new JugadorModelo(archiConfig, posXinic[i], posYinic[i]);
 	}
+	matar=false;
 }
 
 
@@ -46,7 +47,6 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                 //Pegar
                 jugadores[numeroDeJugador]->pegar();
                 break;
-
             case Disconnect:
                 // Desconectado
                 jugadores[numeroDeJugador]->congelarse();
@@ -62,6 +62,10 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                     jugadores[numeroDeJugador]->desactivarModoTest();
                 else
                     jugadores[numeroDeJugador]->activarModoTest();
+                break;
+            case Kill:
+                // Matar a todos los enemigos
+                matar=true;
                 break;
             case Exit:
                 // Salir
@@ -162,6 +166,10 @@ void ControlJugadoresModelo::conectar(int jugador) {
 
 void ControlJugadoresModelo::desaparecer(int jugador) {
 	jugadores[jugador]->desaparecer();
+}
+
+bool ControlJugadoresModelo::consultarMatar(){
+    return matar;
 }
 
 int ControlJugadoresModelo::consultarCantidadJugadores(){

@@ -39,6 +39,11 @@ EstadoJugador* EstadoJugadorPegando::saltar() {
 	return (pegar());
 }
 
+EstadoJugador* EstadoJugadorPegando::morir(){
+    delete this;
+    return (new EstadoEnemigoMuriendo());
+}
+
 EstadoJugador* EstadoJugadorPegando::congelarse() {
     delete this;
     return (new EstadoJugadorCongelado());

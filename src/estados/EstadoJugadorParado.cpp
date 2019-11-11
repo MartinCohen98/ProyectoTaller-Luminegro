@@ -30,6 +30,11 @@ EstadoJugador* EstadoJugadorParado::saltar() {
 	return (new EstadoJugadorSaltando());
 }
 
+EstadoJugador* EstadoJugadorParado::morir(){
+    delete this;
+    return (new EstadoEnemigoMuriendo());
+}
+
 EstadoJugador* EstadoJugadorParado::congelarse() {
     delete this;
     printf("Desconectado");

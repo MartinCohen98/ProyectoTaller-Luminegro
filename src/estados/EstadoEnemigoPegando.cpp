@@ -21,10 +21,6 @@ EstadoJugador* EstadoEnemigoPegando::parar() {
     return (pegar());
 }
 
-EstadoJugador* EstadoEnemigoPegando::agacharse() {
-    return (pegar());
-}
-
 EstadoJugador* EstadoEnemigoPegando::pegar() {
     if (!terminado()) {
         framesTranscurridas++;
@@ -39,8 +35,9 @@ EstadoJugador* EstadoEnemigoPegando::pegar() {
     }
 }
 
-EstadoJugador* EstadoEnemigoPegando::saltar() {
-    return (pegar());
+EstadoJugador* EstadoEnemigoPegando::morir(){
+    delete this;
+    return (new EstadoEnemigoMuriendo());
 }
 
 bool EstadoEnemigoPegando::puedeMoverse() {

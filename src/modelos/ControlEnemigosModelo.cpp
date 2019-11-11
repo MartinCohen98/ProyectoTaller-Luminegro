@@ -48,25 +48,21 @@ EnemigoModelo* ControlEnemigosModelo::darEnemigo(int j){
 }
 
 void ControlEnemigosModelo::realizarMovimientos(int atacante,ControlJugadoresModelo *jugadores){
-   /* int x,y;
+    int x,y;
     JugadorModelo *jugador;
-    int objetivo=enemigos[atacante]->consultarJugadorObjetivo();
+    int objetivo;
+    objetivo=enemigos[atacante]->consultarJugadorObjetivo();
     jugador=jugadores->darJugador(objetivo);
     x=jugador->darPosicionX();
-    y=jugador->darPosicionY();;*/
+    y=jugador->darPosicionY();
    for (int i=0;i<enemigosCantidad;i++) {
        int posicionY=enemigos[i]->darPosicionY();
        if (posicionY==250 || posicionY==200 || posicionY==300)
            enemigos[i]->pegar();
+       if (i!=atacante)
+          enemigos[i]->patrullar();
       };
-    //   else
-    enemigos[0]->patrullar();
-	enemigos[1]->patrullar();
-    enemigos[2]->patrullar();
-	enemigos[3]->patrullar();
-	enemigos[4]->patrullar();
-	enemigos[5]->patrullar();
-	/*enemigos[atacante]->trasladarse(x,y);*/
+	//enemigos[atacante]->trasladarse(x-20,y-10);
 }
 
 void ControlEnemigosModelo::movimientosIniciales(){
@@ -79,8 +75,8 @@ void ControlEnemigosModelo::movimientosIniciales(){
 }
 
 int ControlEnemigosModelo::buscarObjetivo(ControlJugadoresModelo *jugadores){
-int jugadorObjetivo;
-int enemigoAtacante;
+int jugadorObjetivo=0;
+int enemigoAtacante=0;
 EnemigoModelo *enemigo;
 int distancia, distAux;
 int i,j;
@@ -98,6 +94,11 @@ for(i==0;i<(jugadores->consultarCantidadJugadores());i++){
  enemigo->modificarJugadorObjetivo(jugadorObjetivo);
  printf("%d/n", enemigoAtacante);
  return enemigoAtacante;
+}
+
+void ControlEnemigosModelo::matar(){
+    for(int i=0;i<enemigosCantidad;i++)
+    enemigos[i]->morir();
 }
 
 void ControlEnemigosModelo::generarMensajes(MensajeServidor* mensajes, int* mensajeActual) {

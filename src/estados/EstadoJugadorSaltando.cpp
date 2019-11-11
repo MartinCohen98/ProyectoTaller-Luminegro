@@ -43,6 +43,11 @@ EstadoJugador* EstadoJugadorSaltando::saltar() {
 	}
 }
 
+EstadoJugador* EstadoJugadorSaltando::morir(){
+    delete this;
+    return (new EstadoEnemigoMuriendo());
+}
+
 EstadoJugador* EstadoJugadorSaltando::congelarse() {
     delete this;
     return (new EstadoJugadorCongelado());

@@ -29,6 +29,11 @@ EstadoJugador* EstadoJugadorAgachado::saltar() {
 	return (new EstadoJugadorSaltando());
 }
 
+EstadoJugador* EstadoJugadorAgachado::morir(){
+    delete this;
+    return (new EstadoEnemigoMuriendo());
+}
+
 EstadoJugador* EstadoJugadorAgachado::congelarse() {
     delete this;
     return (new EstadoJugadorCongelado());

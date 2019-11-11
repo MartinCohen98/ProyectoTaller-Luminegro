@@ -17,6 +17,7 @@ public:
 	void realizarMovimientos(int atacante, ControlJugadoresModelo *jugadores);
 	void movimientosIniciales();
 	int buscarObjetivo(ControlJugadoresModelo *jugadores);
+	void matar();
 	void movidaDePantalla();
 	int calcularDistancia(JugadorModelo *protagonista,EnemigoModelo *enemigo);
 	EnemigoModelo* darEnemigo(int j);

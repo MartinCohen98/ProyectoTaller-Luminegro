@@ -4,6 +4,7 @@
 #include "EstadoJugador.h"
 #include "EstadoEnemigoParado.h"
 #include "EstadoEnemigoPegando.h"
+#include "EstadoEnemigoMuriendo.h"
 
 class EstadoEnemigoAvanzando: public EstadoJugador {
 
@@ -17,6 +18,7 @@ public:
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();
     EstadoJugador* pegar();
+    EstadoJugador* morir();
 	virtual ~EstadoEnemigoAvanzando();
 
 private:

@@ -6,6 +6,7 @@
 #define PROYECTOTALLER_LUMINEGRO_ESTADOENEMIGOPEGANDO_H
 
 #include "EstadoEnemigoParado.h"
+#include "EstadoEnemigoMuriendo.h"
 
 class EstadoEnemigoPegando: public EstadoJugador {
 
@@ -19,9 +20,8 @@ public:
     EstadoEnemigoPegando();
     EstadoJugador* avanzar();
     EstadoJugador* parar();
-    EstadoJugador* agacharse();
     EstadoJugador* pegar();
-    EstadoJugador* saltar();
+    EstadoJugador* morir();
     bool puedeMoverse();
     bool terminado();
     virtual ~EstadoEnemigoPegando();

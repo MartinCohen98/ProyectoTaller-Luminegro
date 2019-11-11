@@ -8,6 +8,7 @@ class ControlJugadoresModelo {
 private:
 	JugadorModelo** jugadores;
 	int cantidadJugadores;
+	bool matar;
 
 public:
 	ControlJugadoresModelo(pugi::xml_document *archiConfig, int cantidad);
@@ -20,6 +21,7 @@ public:
 	void desconectar(int jugador);
 	void conectar(int jugador);
 	void desaparecer(int jugador);
+	bool consultarMatar();
 	int consultarCantidadJugadores();
 	JugadorModelo* darJugador(int i);
 	virtual ~ControlJugadoresModelo();

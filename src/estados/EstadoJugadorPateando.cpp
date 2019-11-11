@@ -45,6 +45,11 @@ EstadoJugador* EstadoJugadorPateando::saltar() {
 	return pegar();
 }
 
+EstadoJugador* EstadoJugadorPateando::morir(){
+    delete this;
+    return (new EstadoEnemigoMuriendo());
+}
+
 EstadoJugador* EstadoJugadorPateando::congelarse() {
     delete this;
     return (new EstadoJugadorCongelado());
