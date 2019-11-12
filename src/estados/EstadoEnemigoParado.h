@@ -17,7 +17,6 @@
 class EstadoEnemigoParado: public EstadoJugador {
 public:
     EstadoEnemigoParado();
-	EstadoEnemigoParado(int x, int y, int ancho, int alto);
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();
     EstadoJugador* pegar();

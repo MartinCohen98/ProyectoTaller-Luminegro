@@ -6,14 +6,6 @@ EstadoEnemigoAvanzando::EstadoEnemigoAvanzando() {
 	frameActual.modificar(0, 0, ancho, alto);
 }
 
-EstadoEnemigoAvanzando::EstadoEnemigoAvanzando(int x, int y, int ancho, int alto) {
-	framesTranscurridas = 0;
-	numeroDeFrame = 0;
-	ancho=47;
-	alto=78;
-	frameActual.modificar(x,y,ancho,alto);
-}
-
 EstadoJugador* EstadoEnemigoAvanzando::parar() {
 	delete this;
 	return (new EstadoEnemigoParado());

@@ -11,7 +11,7 @@ EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo
 	alto = 280;
 	energia=100;
 	tipoEnemigo=tipo;
-	estado = new EstadoEnemigoParado(0,0,47,78);
+	estado = new EstadoEnemigoParado();
 	dadoVuelta = false;
 	subiendo=false;
 	actualizarInsercion();

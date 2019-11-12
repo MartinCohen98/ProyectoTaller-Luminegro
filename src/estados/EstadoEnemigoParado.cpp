@@ -13,10 +13,6 @@ EstadoEnemigoParado::EstadoEnemigoParado() {
     frameActual.modificar(0, 0, ancho, alto);
 }
 
-EstadoEnemigoParado::EstadoEnemigoParado(int x, int y, int ancho, int alto) {
-	frameActual.modificar(x,y,ancho,alto);
-}
-
 EstadoJugador* EstadoEnemigoParado::parar() {
 	return (this);
 }

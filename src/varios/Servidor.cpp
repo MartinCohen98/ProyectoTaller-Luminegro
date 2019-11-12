@@ -61,9 +61,9 @@ void Servidor::correr() {
 			gestorThreads->checkearConecciones(cantidadDeMensajes, &protagonistas);
 			recibirInputs(&protagonistas);
 
-			//if (protagonistas.consultarMatar()) {
-             //   controlEnemigos.matar();
-            //}
+			if (protagonistas.consultarMatar()) {
+                controlEnemigos.matar();
+            }
 			protagonistas.realizarMovimientos(&fondo);
 			controlEnemigos.realizarMovimientos(atacante, &protagonistas);
 

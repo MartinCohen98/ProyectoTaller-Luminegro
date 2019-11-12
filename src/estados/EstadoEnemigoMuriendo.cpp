@@ -5,9 +5,9 @@
 #include "EstadoEnemigoMuriendo.h"
 
 EstadoEnemigoMuriendo::EstadoEnemigoMuriendo() {
-   // ancho=65;
-   // alto=78;
-    frameActual.modificar(65, 160, ancho, alto);
+    ancho=65;
+    alto=78;
+    frameActual.modificar(65, 164, ancho, alto);
     framesTranscurridas = 0;
     numeroDeFrame = 0;
     caidaTerminada = false;
@@ -50,7 +50,7 @@ void EstadoEnemigoMuriendo::cambiarFrame(){
     } else {
         numeroDeFrame++;
     }
-    frameActual.modificar(((ancho * numeroDeFrame) + 65), 220, ancho, alto);
+    frameActual.modificar(((ancho * numeroDeFrame) + 65), 164, ancho, alto);
 
 }
 

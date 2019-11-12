@@ -62,6 +62,7 @@ void ControlEnemigosModelo::realizarMovimientos(int atacante,ControlJugadoresMod
        if (i!=atacante)
           enemigos[i]->patrullar();
       };
+   // enemigos[enemigosCantidad-1]->parar();
 	//enemigos[atacante]->trasladarse(x-20,y-10);
 }
 
