@@ -47,6 +47,8 @@ add_executable(ProyectoTaller_Luminegro
         src/estados/EstadoEnemigoParado.h
         src/estados/EstadoEnemigoPegando.cpp
         src/estados/EstadoEnemigoPegando.h
+        src/estados/EstadoEnemigoMuriendo.cpp
+        src/estados/EstadoEnemigoMuriendo.h
         src/estados/EstadoJugador.cpp
         src/estados/EstadoJugador.h
         src/estados/EstadoJugadorAgachado.cpp
@@ -63,10 +65,13 @@ add_executable(ProyectoTaller_Luminegro
         src/estados/EstadoJugadorSaltando.h
         src/estados/EstadoJugadorCongelado.cpp
         src/estados/EstadoJugadorCongelado.h
-        src/estados/EstadoJugadorCongelado.cpp
-        src/estados/EstadoJugadorCongelado.h
-        src/estados/EstadoEnemigoPegando.h
-        src/estados/EstadoEnemigoPegando.cpp
+        src/estados/EstadoJugadorMuriendo.h
+        src/estados/EstadoJugadorMuriendo.cpp
+		src/estados/EstadoJugadorApaleando.h
+		src/estados/EstadoJugadorApaleando.cpp
+		src/estados/EstadoJugadorAcuchillando.h
+		src/estados/EstadoJugadorAcuchillando.cpp
+
 
         src/grafica/Encuadre.cpp
         src/grafica/Encuadre.h
@@ -150,10 +155,11 @@ add_executable(ProyectoTaller_Luminegro
         src/vistas/VistaJugador.h
         src/vistas/VistaObjeto.cpp
         src/vistas/VistaObjeto.h
-        )
+        src/estados/EstadoJugadorMuriendo.cpp src/estados/EstadoJugadorMuriendo.h src/estados/EstadoEnemigoMuriendo.cpp src/estados/EstadoEnemigoMuriendo.h src/estados/EstadoJugadorApaleando.cpp src/estados/EstadoJugadorApaleando.h src/estados/EstadoJugadorAcuchillando.cpp src/estados/EstadoJugadorAcuchillando.h)
 
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2_LIBRARIES})
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2TTF_LIBRARIES})
 target_link_libraries(ProyectoTaller_Luminegro Threads::Threads)
 target_link_libraries(ProyectoTaller_Luminegro ${CMAKE_THREAD_LIBES_INIT})
-target_link_libraries(ProyectoTaller_Luminegro ${SDL2_MIXER_LIBRARY} )
+target_link_libraries(ProyectoTaller_Luminegro ${SDL2_MIXER_LIBRARY})
+

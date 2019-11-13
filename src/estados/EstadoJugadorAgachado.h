@@ -3,6 +3,9 @@
 
 #include "EstadoJugadorParado.h"
 #include "EstadoJugadorMuriendo.h"
+#include "EstadoJugadorAcuchillando.h"
+#include "EstadoJugadorApaleando.h"
+
 
 class EstadoJugadorAgachado: public EstadoJugador {
 
@@ -14,6 +17,8 @@ public:
 	EstadoJugador* pegar();
 	EstadoJugador* saltar();
     EstadoJugador* morir();
+    EstadoJugador* acuchillar();
+    EstadoJugador* apalear();
     EstadoJugador* congelarse();
 	bool puedeMoverse();
 	virtual ~EstadoJugadorAgachado();

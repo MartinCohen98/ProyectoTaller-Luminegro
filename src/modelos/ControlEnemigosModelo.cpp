@@ -59,7 +59,7 @@ void ControlEnemigosModelo::realizarMovimientos(int atacante,ControlJugadoresMod
        int posicionY=enemigos[i]->darPosicionY();
        if (posicionY==250 || posicionY==200 || posicionY==300)
            enemigos[i]->pegar();
-       if (i!=atacante)
+    //   if (i!=atacante)
           enemigos[i]->patrullar();
       };
    // enemigos[enemigosCantidad-1]->parar();

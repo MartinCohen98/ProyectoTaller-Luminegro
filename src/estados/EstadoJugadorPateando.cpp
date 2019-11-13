@@ -50,6 +50,14 @@ EstadoJugador* EstadoJugadorPateando::morir(){
     return (new EstadoEnemigoMuriendo());
 }
 
+EstadoJugador* EstadoJugadorPateando::acuchillar(){
+    return pegar();
+}
+
+EstadoJugador* EstadoJugadorPateando::apalear(){
+    return pegar();
+}
+
 EstadoJugador* EstadoJugadorPateando::congelarse() {
     delete this;
     return (new EstadoJugadorCongelado());

@@ -34,6 +34,16 @@ EstadoJugador* EstadoJugadorAgachado::morir(){
     return (new EstadoEnemigoMuriendo());
 }
 
+EstadoJugador* EstadoJugadorAgachado::acuchillar(){
+    delete this;
+    return (new EstadoJugadorAcuchillando());
+}
+
+EstadoJugador* EstadoJugadorAgachado::apalear(){
+    delete this;
+    return (new EstadoJugadorApaleando());
+}
+
 EstadoJugador* EstadoJugadorAgachado::congelarse() {
     delete this;
     return (new EstadoJugadorCongelado());

@@ -35,6 +35,16 @@ EstadoJugador* EstadoJugadorParado::morir(){
     return (new EstadoEnemigoMuriendo());
 }
 
+EstadoJugador* EstadoJugadorParado::acuchillar(){
+    delete this;
+    return (new EstadoJugadorAcuchillando());
+}
+
+EstadoJugador* EstadoJugadorParado::apalear(){
+    delete this;
+    return (new EstadoJugadorApaleando());
+}
+
 EstadoJugador* EstadoJugadorParado::congelarse() {
     delete this;
     printf("Desconectado");

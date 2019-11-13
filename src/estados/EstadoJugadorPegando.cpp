@@ -44,6 +44,14 @@ EstadoJugador* EstadoJugadorPegando::morir(){
     return (new EstadoEnemigoMuriendo());
 }
 
+EstadoJugador* EstadoJugadorPegando::acuchillar(){
+    return (pegar());
+}
+
+EstadoJugador* EstadoJugadorPegando::apalear(){
+    return (pegar());
+}
+
 EstadoJugador* EstadoJugadorPegando::congelarse() {
     delete this;
     return (new EstadoJugadorCongelado());

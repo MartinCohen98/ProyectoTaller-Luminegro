@@ -21,6 +21,8 @@ public:
 	EstadoJugador* pegar();
 	EstadoJugador* saltar();
     EstadoJugador* morir();
+    EstadoJugador* acuchillar();
+    EstadoJugador* apalear();
     EstadoJugador* congelarse();
 	int obtenerElevacion();
 	bool estaSaltando();
