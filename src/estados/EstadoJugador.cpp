@@ -34,7 +34,15 @@ EstadoJugador* EstadoJugador::congelarse() {
 }
 
 EstadoJugador* EstadoJugador::morir(){
+    return NULL;
+}
 
+EstadoJugador* EstadoJugador::acuchillar(){
+    return NULL;
+}
+
+EstadoJugador* EstadoJugador::apalear(){
+    return NULL;
 }
 
 bool EstadoJugador::estaSaltando() {

@@ -6,7 +6,7 @@
 
 EstadoJugadorApaleando::EstadoJugadorApaleando() {
     alto = 100;
-    ancho = 70;
+    ancho = 90;
     frameActual.modificar(0, 610, ancho, alto);
     framesTranscurridas = 0;
     numeroDeFrame = 0;
@@ -76,7 +76,7 @@ void EstadoJugadorApaleando::cambiarFrame() {
     } else {
         numeroDeFrame++;
     }
-    frameActual.modificar((70 * numeroDeFrame), 610, ancho, alto);
+    frameActual.modificar((90 * numeroDeFrame), 610, ancho, alto);
 }
 
 EstadoJugadorApaleando::~EstadoJugadorApaleando() {}

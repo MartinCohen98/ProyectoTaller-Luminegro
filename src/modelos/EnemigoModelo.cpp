@@ -70,6 +70,14 @@ void EnemigoModelo::morir(){
     estado = estado->morir();
 }
 
+void EnemigoModelo::acuchillar(){
+    estado = estado->acuchillar();
+}
+
+void EnemigoModelo::apalear(){
+    estado = estado->apalear();
+}
+
 void EnemigoModelo::avanzarDiagArriba(int tope){
     dadoVuelta = false;
     moverEnX(5);

@@ -5,7 +5,7 @@
 #include "EstadoEnemigoPegando.h"
 
 EstadoEnemigoPegando::EstadoEnemigoPegando() {
-    ancho=65;
+    ancho=70;
     alto=78;
     frameActual.modificar(0, 82, ancho, alto);
     framesTranscurridas = 0;
@@ -55,7 +55,7 @@ void EstadoEnemigoPegando::cambiarFrame() {
     } else {
         numeroDeFrame++;
     }
-    frameActual.modificar((80 * numeroDeFrame), 82, ancho, alto);
+    frameActual.modificar((70 * numeroDeFrame), 82, ancho, alto);
 }
 
 EstadoEnemigoPegando::~EstadoEnemigoPegando() {}

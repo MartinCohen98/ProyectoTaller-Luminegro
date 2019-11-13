@@ -42,6 +42,8 @@ public:
 	void pegar();
 	void saltar();
 	void congelarse();
+    void acuchillar();
+    void apalear();
 	void desaparecer();
 	void descongelarse();
 	bool estaDesconectado();

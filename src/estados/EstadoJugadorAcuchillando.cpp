@@ -6,7 +6,7 @@
 
 EstadoJugadorAcuchillando::EstadoJugadorAcuchillando() {
     alto = 100;
-    ancho = 70;
+    ancho = 90;
     frameActual.modificar(0, 510, ancho, alto);
     framesTranscurridas = 0;
     numeroDeFrame = 0;
@@ -76,7 +76,7 @@ void EstadoJugadorAcuchillando::cambiarFrame() {
     } else {
         numeroDeFrame++;
     }
-    frameActual.modificar((70 * numeroDeFrame), 510, ancho, alto);
+    frameActual.modificar((90 * numeroDeFrame), 510, ancho, alto);
 }
 
 EstadoJugadorAcuchillando::~EstadoJugadorAcuchillando() {}

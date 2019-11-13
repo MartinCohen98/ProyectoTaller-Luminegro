@@ -97,6 +97,13 @@ void JugadorModelo::congelarse() {
     desconectado = true;
 }
 
+void JugadorModelo::acuchillar(){
+    estado = estado->acuchillar();
+}
+
+void JugadorModelo::apalear(){
+    estado = estado->apalear();
+}
 
 void JugadorModelo::desaparecer() {
 	if (!salio)
