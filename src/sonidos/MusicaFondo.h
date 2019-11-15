@@ -4,6 +4,7 @@
 #include "../varios/Logger.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
+#include "../../lib/pugixml/pugixml.hpp"
 
 class MusicaFondo {
 
@@ -13,8 +14,8 @@ private:
     Mix_Chunk *sonido = NULL;
 
 public:
-    int inicializar();
-    int dalePlay();
+    int inicializar(pugi::xml_document* archiConfig);
+    int reproducir();
     virtual ~MusicaFondo();
 };
 

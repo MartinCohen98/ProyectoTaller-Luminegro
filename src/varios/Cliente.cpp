@@ -97,12 +97,12 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	gestorThreads.comenzar();
 
     MusicaFondo musicaFondo;
-    if (musicaFondo.inicializar() == EXIT_FAILURE) {
+    if (musicaFondo.inicializar(archiConfig) == EXIT_FAILURE) {
         // Ya fue logueado en la clase
         return EXIT_FAILURE;
     }
 
-    if (musicaFondo.dalePlay() == EXIT_FAILURE) {
+    if (musicaFondo.reproducir() == EXIT_FAILURE) {
         // Ya fue logueado en la clase
         return EXIT_FAILURE;
     }
