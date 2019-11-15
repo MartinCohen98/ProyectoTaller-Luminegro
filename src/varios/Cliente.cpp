@@ -96,7 +96,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	gestorThreads.comenzar();
 
-  /*  MusicaFondo musicaFondo;
+    MusicaFondo musicaFondo;
     if (musicaFondo.inicializar() == EXIT_FAILURE) {
         // Ya fue logueado en la clase
         return EXIT_FAILURE;
@@ -105,7 +105,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
     if (musicaFondo.dalePlay() == EXIT_FAILURE) {
         // Ya fue logueado en la clase
         return EXIT_FAILURE;
-    }*/
+    }
 
     for (int nivel = mensajeCredenciales.getNivelInicial(); nivel <= 2; nivel++) {
 
