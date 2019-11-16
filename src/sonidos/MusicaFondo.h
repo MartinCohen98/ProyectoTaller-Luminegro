@@ -18,7 +18,7 @@ private:
 
 public:
     MusicaFondo(pugi::xml_document* archiConfig, bool *sonidoEstaActivo);
-    void operator()();k
+    void operator()();
     virtual ~MusicaFondo();
 };
 

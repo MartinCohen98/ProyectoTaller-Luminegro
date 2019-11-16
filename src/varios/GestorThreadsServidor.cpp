@@ -43,7 +43,7 @@ void GestorThreadsServidor::enviarMensaje(MensajeServidor* mensaje) {
 
 
 void GestorThreadsServidor::checkearConecciones(int cantidadDeMensajes,
-										ControlJugadoresModelo* protagonistas) {
+										Modelo* modelo) {
 	for (int i = 0; i < jugadores; i++) {
 		if (sockets[i]->getEstado() == Socket::ESTADO_DESCONECTADO) {
 			threadsEnviadoras[i]->join();
@@ -69,7 +69,7 @@ void GestorThreadsServidor::checkearConecciones(int cantidadDeMensajes,
 		MensajeServidor mensaje;
 		mensaje.generarMensaje(&frame, &insercion, Jugador1);
 		sockets[info.obtenerNumeroDeJugador()]->enviar(&mensaje);
-		protagonistas->conectar(info.obtenerNumeroDeJugador());
+		modelo->conectarJugador(info.obtenerNumeroDeJugador());
 		agregarJugador(NULL, info.obtenerNumeroDeJugador());
 	}
 }

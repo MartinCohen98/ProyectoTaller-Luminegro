@@ -28,7 +28,16 @@ int Modelo::obtenerCantidadDeEntidades() {
 }
 
 
+void Modelo::procesarInputDeJugador(MensajeCliente* mensaje, int jugador) {
+	protagonistas->procesarInput(mensaje, jugador);
+}
+
+
 void Modelo::realzarMovimientos() {
+	if (protagonistas->consultarMatar()) {
+		enemigos->matar();
+	}
+
 	protagonistas->realizarMovimientos(fondo);
 	enemigos->realizarMovimientos(atacante, protagonistas);
 
@@ -37,6 +46,22 @@ void Modelo::realzarMovimientos() {
 		enemigos->movidaDePantalla();
 		objetos->movidaDePantalla();
 	}
+}
+
+
+void Modelo::generarMensajesServidor(MensajeServidor* mensajes) {
+
+	int mensajeActual = 0;
+
+	fondo->generarMensajes(mensajes, &mensajeActual);
+	protagonistas->generarMensajes(mensajes, &mensajeActual);
+	enemigos->generarMensajes(mensajes, &mensajeActual);
+	objetos->generarMensajes(mensajes, &mensajeActual);
+}
+
+
+bool Modelo::nivelTerminado() {
+	return (protagonistas->llegaronAlFin(fondo));
 }
 
 
@@ -62,6 +87,21 @@ void Modelo::pasarNivel() {
 	enemigos->movimientosIniciales();
 
 	atacante = enemigos->buscarObjetivo(protagonistas);
+}
+
+
+void Modelo::desaparecerJugador(int jugador) {
+	protagonistas->desaparecer(jugador);
+}
+
+
+void Modelo::desconectarJugador(int jugador) {
+	protagonistas->desconectar(jugador);
+}
+
+
+void Modelo::conectarJugador(int jugador) {
+	protagonistas->conectar(jugador);
 }
 
 

@@ -2,11 +2,7 @@
 #define SRC_SERVIDOR_H_
 
 #include "../comunicacion/AceptadorConexiones.h"
-#include "../comunicacion/Socket.h"
 #include "../comunicacion/MensajeCredenciales.h"
-#include "../modelos/ControlJugadoresModelo.h"
-#include "../modelos/ControlEnemigosModelo.h"
-#include "../modelos/ControlObjetosModelo.h"
 #include "GestorThreadsServidor.h"
 #include "../comunicacion/UsuarioYClave.h"
 
@@ -28,15 +24,14 @@ private:
 	GestorThreadsServidor* gestorThreads;
     pugi::xml_document* archivoConfiguracion;
     UsuarioYClave* usuariosYClaves;
+    Modelo* modelo;
 
-    void recibirInputs(ControlJugadoresModelo* protagonistas);
-	void enviarCantidadDeReceives(ControlEnemigosModelo* enemigos,
-							ControlObjetosModelo* objetos);
-	void enviarMensajes(ControlJugadoresModelo* protagonistas, FondoModelo* fondo,
-			ControlEnemigosModelo* enemigos, ControlObjetosModelo* objetos);
+    void recibirInputs();
+	void enviarCantidadDeReceives();
+	void enviarMensajes();
 	void enviarMensajeDeNivelTerminado(bool nivelTerminado);
 	void generarMensajesParaEnviar();
-    void desconectarJugadoresDesconectados(ControlJugadoresModelo* jugadores);
+    void desconectarJugadoresDesconectados();
     void leerTodosLosUsuariosYClavesDelConfig(int *cantidadDeJugadores);
     bool validarUsuarioYClave(MensajeCredenciales* mensajeCredenciales);
 

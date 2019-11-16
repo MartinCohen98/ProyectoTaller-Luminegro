@@ -21,8 +21,14 @@ private:
 public:
 	Modelo(pugi::xml_document* archiConfig, int cantidadDeJugadores);
 	int obtenerCantidadDeEntidades();
+	void procesarInputDeJugador(MensajeCliente* mensaje, int jugador);
 	void realzarMovimientos();
+	void generarMensajesServidor(MensajeServidor* mensajes);
+	bool nivelTerminado();
 	void pasarNivel();
+	void desaparecerJugador(int jugador);
+	void desconectarJugador(int jugador);
+	void conectarJugador(int jugador);
 	virtual ~Modelo();
 };
 
