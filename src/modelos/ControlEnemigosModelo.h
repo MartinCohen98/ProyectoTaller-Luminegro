@@ -2,6 +2,7 @@
 #define SRC_CONTROLENEMIGOSMODELO_H_
 
 #include "../modelos/EnemigoModelo.h"
+#include "../modelos/EnemigoJefeModelo.h"
 #include "../modelos/JugadorModelo.h"
 #include "../modelos/ControlJugadoresModelo.h"
 

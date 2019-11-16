@@ -20,7 +20,7 @@ ControlEnemigosModelo::ControlEnemigosModelo(int nivel) {
 		enemigos[2] = new EnemigoModelo(2500, 220, Enemigo1);
 		enemigos[3] = new EnemigoModelo(-300, 320, Enemigo1);
 		enemigos[4] = new EnemigoModelo(4000, 220, Enemigo2);
-		enemigos[5] = new EnemigoModelo(5500, 220, EnemigoJefe);
+		enemigos[5] = new EnemigoJefeModelo(5500, 220, EnemigoJefe);
 	}
 }
 
@@ -63,7 +63,7 @@ void ControlEnemigosModelo::realizarMovimientos(int atacante,ControlJugadoresMod
           enemigos[i]->patrullar();
       };
    // enemigos[enemigosCantidad-1]->parar();
-	//enemigos[atacante]->trasladarse(x-30,y);
+	//enemigos[atacante]->trasladarse(x-40,y);
 }
 
 void ControlEnemigosModelo::movimientosIniciales(){

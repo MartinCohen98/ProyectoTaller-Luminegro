@@ -8,8 +8,19 @@ EstadoEnemigoAvanzando::EstadoEnemigoAvanzando() {
 	frameActual.modificar(0, 0, ancho, alto);
 }
 
-EstadoEnemigoAvanzando::EstadoEnemigoAvanzando(int ancho,int alto){
-
+EstadoEnemigoAvanzando::EstadoEnemigoAvanzando(tipoDeSprite tipoNuevo){
+	framesTranscurridas = 0;
+	numeroDeFrame = 0;
+	tipo=tipoNuevo;
+	ancho=47;
+	alto=78;
+	switch (tipo){
+	    case EnemigoJefe:{
+	    	ancho=90;
+	    	alto=150;
+	     }
+	    }
+	frameActual.modificar(0, 0, ancho, alto);
 }
 
 EstadoJugador* EstadoEnemigoAvanzando::parar() {
@@ -28,7 +39,7 @@ EstadoJugador* EstadoEnemigoAvanzando::avanzar() {
 
 EstadoJugador* EstadoEnemigoAvanzando::pegar() {
     delete this;
-    return (new EstadoEnemigoPegando());
+    return (new EstadoEnemigoPegando(tipo));
 }
 
 EstadoJugador* EstadoEnemigoAvanzando::morir(){

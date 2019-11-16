@@ -7,31 +7,56 @@
 EstadoEnemigoPegando::EstadoEnemigoPegando() {
     ancho=70;
     alto=78;
-    frameActual.modificar(0, 82, ancho, alto);
+    frameActual.modificar(0, alto, ancho, alto);
     framesTranscurridas = 0;
     numeroDeFrame = 0;
     golpeTerminado = false;
 }
 
+EstadoEnemigoPegando::EstadoEnemigoPegando(tipoDeSprite tipoNuevo){
+	ancho=70;
+	alto=78;
+	tipo=tipoNuevo;
+	frameActual.modificar(0, alto, ancho, alto);
+	switch (tipo){
+    case EnemigoJefe:{
+    	ancho=115;
+    	alto=125;
+    	frameActual.modificar(0, 140, ancho, alto);
+     }
+	}
+
+	framesTranscurridas = 0;
+	numeroDeFrame = 0;
+	golpeTerminado = false;
+}
+
 EstadoJugador* EstadoEnemigoPegando::avanzar() {
-    return (pegar());
+    return (pegar(tipo));
 }
 
 EstadoJugador* EstadoEnemigoPegando::parar() {
-    return (pegar());
+    return (pegar(tipo));
 }
 
-EstadoJugador* EstadoEnemigoPegando::pegar() {
+EstadoJugador* EstadoEnemigoPegando::pegar(tipoDeSprite tipoNuevo) {
+	int framesLimite=2;
+	tipo = tipoNuevo;
+	switch (tipo){
+    case EnemigoJefe:{
+    	framesLimite=4;
+     }
+	}
     if (!terminado()) {
         framesTranscurridas++;
-        if (framesTranscurridas == 2) {
+        if (framesTranscurridas == framesLimite) {
             framesTranscurridas = 0;
             cambiarFrame();
         }
         return (this);
     } else {
         delete this;
-        return (new EstadoEnemigoParado());
+        return (new EstadoEnemigoParado(tipo));
     }
 }
 
@@ -45,17 +70,34 @@ bool EstadoEnemigoPegando::puedeMoverse() {
 }
 
 bool EstadoEnemigoPegando::terminado() {
-    return ((numeroDeFrame == 0) && (framesTranscurridas == 1) && golpeTerminado);
+	int framesLimite=1;
+		switch (tipo){
+	    case EnemigoJefe:{
+	    	framesLimite=3;
+	     }
+		}
+    return ((numeroDeFrame == 0) && (framesTranscurridas == framesLimite) && golpeTerminado);
 }
 
 void EstadoEnemigoPegando::cambiarFrame() {
-    if (numeroDeFrame == 1) {
+	int framesLimite=1;
+		switch (tipo){
+		case EnemigoJefe:{
+		   framesLimite=3;
+		 }
+	    }
+    if (numeroDeFrame == framesLimite) {
         golpeTerminado = true;
         numeroDeFrame = 0;
     } else {
         numeroDeFrame++;
     }
-    frameActual.modificar((70 * numeroDeFrame), 82, ancho, alto);
+    frameActual.modificar((ancho * numeroDeFrame), alto, ancho, alto);
+    switch (tipo){
+    		case EnemigoJefe:{
+    			frameActual.modificar((ancho * numeroDeFrame), 140, ancho, alto);
+    		 }
+    	    }
 }
 
 EstadoEnemigoPegando::~EstadoEnemigoPegando() {}

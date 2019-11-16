@@ -13,10 +13,12 @@
 #include "EstadoEnemigoAvanzando.h"
 #include "EstadoJugadorAgachado.h"
 #include "EstadoEnemigoMuriendo.h"
+#include "../comunicacion/MensajeServidor.h"
 
 class EstadoEnemigoParado: public EstadoJugador {
 public:
     EstadoEnemigoParado();
+    EstadoEnemigoParado(tipoDeSprite tipo);
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();
     EstadoJugador* pegar();

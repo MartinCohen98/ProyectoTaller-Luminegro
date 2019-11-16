@@ -2,6 +2,7 @@
 #define SRC_ESTADOJUGADOR_H_
 
 #include "../grafica/Encuadre.h"
+#include "../comunicacion/MensajeServidor.h"
 
 class EstadoJugador {
 
@@ -29,6 +30,7 @@ protected:
 	Encuadre frameActual;
 	int alto;
 	int ancho;
+	tipoDeSprite tipo;
 };
 
 #endif /* SRC_ESTADOJUGADOR_H_ */

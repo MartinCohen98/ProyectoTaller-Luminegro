@@ -5,6 +5,7 @@
 #include "EstadoEnemigoParado.h"
 #include "EstadoEnemigoPegando.h"
 #include "EstadoEnemigoMuriendo.h"
+#include "../comunicacion/MensajeServidor.h"
 
 class EstadoEnemigoAvanzando: public EstadoJugador {
 
@@ -14,7 +15,7 @@ private:
 
 public:
 	EstadoEnemigoAvanzando();
-	EstadoEnemigoAvanzando(int ancho,int alto);
+	EstadoEnemigoAvanzando(tipoDeSprite tipo);
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();
     EstadoJugador* pegar();
