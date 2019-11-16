@@ -14,10 +14,11 @@ private:
     pugi::xml_document* archiConfig;
     std::string mensajeError;
     Mix_Chunk *sonido = NULL;
+    bool *sonidoEstaActivo;
 
 public:
-    MusicaFondo(pugi::xml_document* archiConfig);
-    void operator()();
+    MusicaFondo(pugi::xml_document* archiConfig, bool *sonidoEstaActivo);
+    void operator()();k
     virtual ~MusicaFondo();
 };
 

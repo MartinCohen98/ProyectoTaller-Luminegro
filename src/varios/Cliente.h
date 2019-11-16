@@ -34,19 +34,19 @@ private:
 	Imagen imagenEspera;
 	Textura texturaTransiciones;
     std::thread* musicaFondo;
+    bool musicaFondoActiva = true;
+
+    void renderizarFondo(VistaFondo* fondo, GestorThreadsCliente* gestorThreads);
+    void enviarInput(GestorThreadsCliente* gestorThreads);
+    void recibirCantidadDeReceives(GestorThreadsCliente* gestorThreads);
+    bool terminoElNivel(GestorThreadsCliente* gestorThreads);
+    void recibirMensajes(GestorThreadsCliente* gestorThreads);
 
 public:
 	 Cliente();
 	 int inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig);
 	 int conectar(char* direccionIP, char* puerto);
 	 virtual ~Cliente();
-
-private:
-	 void renderizarFondo(VistaFondo* fondo, GestorThreadsCliente* gestorThreads);
-	 void enviarInput(GestorThreadsCliente* gestorThreads);
-	 void recibirCantidadDeReceives(GestorThreadsCliente* gestorThreads);
-	 bool terminoElNivel(GestorThreadsCliente* gestorThreads);
-	 void recibirMensajes(GestorThreadsCliente* gestorThreads);
 };
 
 #endif /* SRC_CLIENTE_H_ */

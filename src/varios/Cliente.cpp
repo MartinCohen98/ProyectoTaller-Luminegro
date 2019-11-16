@@ -117,7 +117,6 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 		VistaEnemigo enemigo3(&renderizador, archiConfig, Enemigo3);
 		VistaEnemigo enemigo4(&renderizador, archiConfig, EnemigoJefe);
 
-
 		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 		VistaObjeto barril(&renderizador, archiConfig, Barril);
 		VistaObjeto caja(&renderizador, archiConfig, Caja);
@@ -128,7 +127,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 		if (musicaFondo == NULL) {
 		    // Arranca por única vez la música de fondo
-            musicaFondo = new std::thread(MusicaFondo(archiConfig));
+            musicaFondo = new std::thread(MusicaFondo(archiConfig, &musicaFondoActiva));
         }
 
         while (!salir) {
@@ -259,8 +258,8 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
                         mensajeCliente.Codificar(Test);
                         break;
                     case SDLK_s:
-                        //Sonido
-                        mensajeCliente.Codificar(Sound);
+                        // Activar / desactivar música de fondo
+                        musicaFondoActiva = !musicaFondoActiva;
                         break;
     			    case SDLK_k:
     			        //Matar enemigos

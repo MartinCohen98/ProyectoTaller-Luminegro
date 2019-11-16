@@ -1,7 +1,8 @@
 #include "MusicaFondo.h"
 
-MusicaFondo::MusicaFondo(pugi::xml_document *archiConfig) {
+MusicaFondo::MusicaFondo(pugi::xml_document *archiConfig, bool *sonidoEstaActivo) {
     this->archiConfig = archiConfig;
+    this->sonidoEstaActivo = sonidoEstaActivo;
 }
 
 
@@ -42,9 +43,23 @@ void MusicaFondo::operator()() {
         return;
     }
 
+    bool sonidoEstaActivoUltimoEstado = *sonidoEstaActivo;
     while (Mix_Playing(canal) != 0) {
-        // Si no lo demoro acá, la música se corta
-        SDL_Delay(3000);
+        // Si no bucleo acá, la música se corta
+        SDL_Delay(500);
+
+        if (sonidoEstaActivoUltimoEstado != *sonidoEstaActivo) {
+            // Se solicitó cambiar el estado del sonido (activo / inactivo)
+
+            if (!*sonidoEstaActivo) {
+                Mix_Pause(canal);
+                logueador->Info("Se pausa la música de fondo.");
+            } else {
+                Mix_Resume(canal);
+                logueador->Info("Se reanuda la música de fondo.");
+            }
+            sonidoEstaActivoUltimoEstado = *sonidoEstaActivo;
+        }
     }
 }
 
