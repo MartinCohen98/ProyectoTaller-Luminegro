@@ -96,20 +96,9 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	gestorThreads.comenzar();
 
-    MusicaFondo musicaFondo;
-    if (musicaFondo.inicializar(archiConfig) == EXIT_FAILURE) {
-        // Ya fue logueado en la clase
-        return EXIT_FAILURE;
-    }
+   for (int nivel = mensajeCredenciales.getNivelInicial(); nivel <= 2; nivel++) {
 
-    if (musicaFondo.reproducir() == EXIT_FAILURE) {
-        // Ya fue logueado en la clase
-        return EXIT_FAILURE;
-    }
-
-    for (int nivel = mensajeCredenciales.getNivelInicial(); nivel <= 2; nivel++) {
-
-		string nivelNodeName = "nivel";
+        string nivelNodeName = "nivel";
 		nivelNodeName.append( to_string(nivel) );
 		salir = false;
 
@@ -135,7 +124,12 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 		recibirCantidadDeReceives(&gestorThreads);
 
-		while (!salir) {
+		if (musicaFondo == NULL) {
+		    // Arranca por única vez la música de fondo
+            musicaFondo = new std::thread(MusicaFondo(archiConfig));
+        }
+
+        while (!salir) {
 	    	enviarInput(&gestorThreads);
 	    	if (mensajeCliente.get() == Exit) {
 	    		SDL_Delay(200);
@@ -205,6 +199,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	    		salir = true;
 	    	}
 		}
+
 		logueador->Info("Fin de nivel: " +  nivelNodeName);
 	}
 

@@ -33,6 +33,7 @@ private:
 	Imagen imagenDesconectado;
 	Imagen imagenEspera;
 	Textura texturaTransiciones;
+    std::thread* musicaFondo;
 
 public:
 	 Cliente();

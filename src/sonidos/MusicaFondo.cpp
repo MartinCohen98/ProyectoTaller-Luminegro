@@ -1,6 +1,11 @@
 #include "MusicaFondo.h"
 
-int MusicaFondo::inicializar(pugi::xml_document* archiConfig) {
+MusicaFondo::MusicaFondo(pugi::xml_document *archiConfig) {
+    this->archiConfig = archiConfig;
+}
+
+
+void MusicaFondo::operator()() {
     logueador = Logger::Log::ObtenerInstancia();
 
     // SDL_Init() lo hace VentanaClienteInicioSesion
@@ -14,7 +19,7 @@ int MusicaFondo::inicializar(pugi::xml_document* archiConfig) {
         mensajeError = "No fue posible inicializar el audio: ";
         mensajeError.append( Mix_GetError() );
         logueador->Error(mensajeError);
-        return EXIT_FAILURE;
+        return;
     }
 
     std::string sonidoURL = archiConfig->child("configuracion").child("escenario")
@@ -25,24 +30,21 @@ int MusicaFondo::inicializar(pugi::xml_document* archiConfig) {
         mensajeError = "No fue posible cargar el archivo de audio: ";
         mensajeError.append( Mix_GetError() );
         logueador->Error(mensajeError);
-        return EXIT_FAILURE;
+        return;
     }
 
-    return EXIT_SUCCESS;
-}
-
-
-int MusicaFondo::reproducir() {
     logueador->Info("Empieza a sonar la música de fondo.");
     int canal = Mix_PlayChannel(-1, sonido, -1);
     if (canal == -1) {
         mensajeError = "No fue posible reproducir el archivo de audio: ";
         mensajeError.append( Mix_GetError() );
         logueador->Error(mensajeError);
-        return EXIT_FAILURE;
+        return;
     }
 
-    return EXIT_SUCCESS;
+    while (Mix_Playing(canal) != 0) {
+        SDL_Delay(3000);
+    }
 }
 
 
