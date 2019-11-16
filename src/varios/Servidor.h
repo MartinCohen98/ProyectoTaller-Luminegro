@@ -26,6 +26,7 @@ private:
     UsuarioYClave* usuariosYClaves;
     Modelo* modelo;
 
+    void jugarNivel();
     void recibirInputs();
 	void enviarCantidadDeReceives();
 	void enviarMensajes();

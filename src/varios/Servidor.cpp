@@ -21,8 +21,6 @@ Servidor::Servidor(int cantidadDeJugadores, char* puerto, pugi::xml_document* ar
 void Servidor::correr() {
 	Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
 
-	bool nivelTerminado;
-
 	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
 		gestorThreads->agregarJugador(&socketsDeClientes[i], i);
 	}
@@ -30,37 +28,39 @@ void Servidor::correr() {
 	gestorThreads->comenzarAAceptar(&socketAceptador, credenciales, &nivelActual);
 
 	for (nivelActual = 1; nivelActual <= 2; nivelActual++) {
-
-        string nivelNodeName = "nivel";
-        nivelNodeName.append( to_string(nivelActual) );
-
-		nivelTerminado = false;
-
-		logueador->Info("Iniciando nivel: "+ nivelNodeName);
-		
-		desconectarJugadoresDesconectados();
-
-		enviarCantidadDeReceives();
-
-		generarMensajesParaEnviar();
-
-		while (!nivelTerminado) {
-			gestorThreads->checkearConecciones(cantidadDeMensajes, modelo);
-			recibirInputs();
-
-			modelo->realzarMovimientos();
-			enviarMensajes();
-
-			nivelTerminado = modelo->nivelTerminado();
-
-			enviarMensajeDeNivelTerminado(nivelTerminado);
-
-			SDL_Delay(25);
-		}
-		if (nivelActual < 2)
-			modelo->pasarNivel();
+		jugarNivel();
 	}
 }
+
+
+void Servidor::jugarNivel() {
+	Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
+
+    string nivelNodeName = "nivel";
+    nivelNodeName.append( to_string(nivelActual) );
+    logueador->Info("Iniciando nivel: "+ nivelNodeName);
+
+	bool nivelTerminado = false;
+
+	desconectarJugadoresDesconectados();
+	enviarCantidadDeReceives();
+
+	while (!nivelTerminado) {
+		gestorThreads->checkearConecciones(cantidadDeMensajes, modelo);
+		recibirInputs();
+
+		modelo->realzarMovimientos();
+		enviarMensajes();
+
+		nivelTerminado = modelo->nivelTerminado();
+		enviarMensajeDeNivelTerminado(nivelTerminado);
+
+		SDL_Delay(25);
+	}
+	if (nivelActual < 2)
+		modelo->pasarNivel();
+}
+
 
 void Servidor::recibirInputs() {
 	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
@@ -76,6 +76,7 @@ void Servidor::enviarCantidadDeReceives() {
 	MensajeServidor mensaje;
 	mensaje.generarMensaje(&frame, &insercion, Jugador1);
 	gestorThreads->enviarMensaje(&mensaje);
+	generarMensajesParaEnviar();
 }
 
 void Servidor::enviarMensajes() {
