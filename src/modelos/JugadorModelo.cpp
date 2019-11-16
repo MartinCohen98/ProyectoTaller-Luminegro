@@ -1,9 +1,6 @@
 #include "JugadorModelo.h"
 #include <iostream>
 
-JugadorModelo::JugadorModelo(){
-
-}
 
 JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig, int posXinicial, int posYinicial) {
 	posicionX = posXinicial;

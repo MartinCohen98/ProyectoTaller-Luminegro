@@ -3,12 +3,11 @@
 MusicaFondo::MusicaFondo(pugi::xml_document *archiConfig, bool *sonidoEstaActivo) {
     this->archiConfig = archiConfig;
     this->sonidoEstaActivo = sonidoEstaActivo;
+    logueador = Logger::Log::ObtenerInstancia();
 }
 
 
 void MusicaFondo::operator()() {
-    logueador = Logger::Log::ObtenerInstancia();
-
     // SDL_Init() lo hace VentanaClienteInicioSesion
 
     int frecuencia = 44100;

@@ -6,6 +6,8 @@ VentanaClienteInicioSesion::VentanaClienteInicioSesion() {
 
     Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
     std::string mensajeError;
+    mensajeInformativoTipo = 0;
+    texturaTxtIngre = NULL;
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
         mensajeError = "Unable to initialize SDL: ";

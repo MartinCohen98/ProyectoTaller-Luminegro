@@ -3,8 +3,8 @@
 
 ControlJugadoresModelo::ControlJugadoresModelo(pugi::xml_document *archiConfig,
 					int cantidad) {
-	jugadores = new JugadorModelo*[cantidadJugadores];
 	cantidadJugadores = cantidad;
+	jugadores = new JugadorModelo*[cantidadJugadores];
 	int posXinic[4] = {100,100,0,200};
 	int posYinic[4] = {175,275,225,225};
 

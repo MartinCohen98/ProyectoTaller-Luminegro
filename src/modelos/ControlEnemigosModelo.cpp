@@ -76,13 +76,13 @@ void ControlEnemigosModelo::movimientosIniciales(){
 }
 
 int ControlEnemigosModelo::buscarObjetivo(ControlJugadoresModelo *jugadores){
-int jugadorObjetivo=0;
-int enemigoAtacante=0;
+int jugadorObjetivo = 0;
+int enemigoAtacante = 0;
 EnemigoModelo *enemigo;
 int distancia, distAux;
 int i,j;
-for(i==0;i<(jugadores->consultarCantidadJugadores());i++){
-	for(j==0;j<enemigosCantidad;j++){
+for(i = 0; i < (jugadores->consultarCantidadJugadores()); i++){
+	for(j = 0; j < enemigosCantidad; j++){
 		distAux=distancia;
 		distancia=calcularDistancia(jugadores->darJugador(i),darEnemigo(j));
         if (distancia<distAux){

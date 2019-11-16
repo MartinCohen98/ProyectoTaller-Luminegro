@@ -19,8 +19,6 @@ Servidor::Servidor(int cantidadDeJugadores, char* puerto, pugi::xml_document* ar
 }
 
 void Servidor::correr() {
-	Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
-
 	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
 		gestorThreads->agregarJugador(&socketsDeClientes[i], i);
 	}
