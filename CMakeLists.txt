@@ -105,6 +105,8 @@ add_executable(ProyectoTaller_Luminegro
         src/modelos/ElementoModelo.h
         src/modelos/EnemigoModelo.cpp
         src/modelos/EnemigoModelo.h
+        src/modelos/EnemigoJefeModelo.cpp
+		src/modelos/EnemigoJefeModelo.h
         src/modelos/FondoModelo.cpp
         src/modelos/FondoModelo.h
         src/modelos/JugadorModelo.cpp
