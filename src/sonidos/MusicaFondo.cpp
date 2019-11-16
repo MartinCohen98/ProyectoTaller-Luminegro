@@ -43,6 +43,7 @@ void MusicaFondo::operator()() {
     }
 
     while (Mix_Playing(canal) != 0) {
+        // Si no lo demoro acá, la música se corta
         SDL_Delay(3000);
     }
 }
