@@ -13,6 +13,7 @@ public:
 	Colisionador();
 	void agregarEncuadre(Encuadre* encuadre);
 	bool colisiona(Encuadre* encuadre);
+	void vaciar();
 	virtual ~Colisionador();
 
 private:

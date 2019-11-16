@@ -8,6 +8,12 @@ void Colisionador::agregarEncuadre(Encuadre* encuadre) {
 }
 
 
+void Colisionador::vaciar() {
+	while (!listaEncuadres.empty())
+		listaEncuadres.pop_front();
+}
+
+
 bool Colisionador::colisiona(Encuadre* encuadre) {
 	bool colisiona = false;
 	for (std::list<Encuadre*>::iterator it = listaEncuadres.begin();
@@ -54,7 +60,6 @@ bool Colisionador::seChocanEnX(Encuadre* unEncuadre, Encuadre* otroEncuadre) {
 
 
 Colisionador::~Colisionador() {
-	while (!listaEncuadres.empty())
-		listaEncuadres.pop_front();
+	vaciar();
 }
 

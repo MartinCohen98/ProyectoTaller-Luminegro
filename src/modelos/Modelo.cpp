@@ -69,6 +69,7 @@ bool Modelo::nivelTerminado() {
 void Modelo::pasarNivel() {
 	Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
 
+	colisionador->vaciar();
 	delete fondo;
 	delete protagonistas;
 	delete enemigos;
@@ -84,6 +85,7 @@ void Modelo::pasarNivel() {
 
 	logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 	objetos = new ControlObjetosModelo(archivoConfiguracion, fondo->obtenerAncho(), nivelActual);
+	llenarColisionador();
 
 	enemigos->movimientosIniciales();
 
