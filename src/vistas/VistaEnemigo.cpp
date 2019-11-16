@@ -16,6 +16,9 @@ VistaEnemigo::VistaEnemigo(Renderizador* elRenderizador,
 		case Enemigo3:	path = archiConfig->child("configuracion").child("escenario").
 						child("enemigos").child("jake").child("imagen").attribute("url").value();
 						break;
+		case EnemigoJefe: path = archiConfig->child("configuracion").child("escenario").
+						  child("enemigos").child("damnd").child("imagen").attribute("url").value();
+						  break;
 		default:		path = archiConfig->child("configuracion").child("escenario").
 						child("enemigos").child("bred").child("imagen").attribute("url").value();
 						break;

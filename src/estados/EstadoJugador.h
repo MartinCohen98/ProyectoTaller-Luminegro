@@ -7,6 +7,7 @@ class EstadoJugador {
 
 public:
 	EstadoJugador();
+	EstadoJugador(int ancho,int alto);
 	Encuadre obtenerSprite();
 	virtual EstadoJugador* avanzar();
 	virtual EstadoJugador* parar();

@@ -5,7 +5,7 @@
 #include <string>
 
 enum tipoDeSprite {Jugador1, Jugador2, Jugador3, Jugador4,
-	Enemigo1, Enemigo2, Enemigo3, Barril, Caja,
+	Enemigo1, Enemigo2, Enemigo3, EnemigoJefe, Barril, Caja,
 	Cuchillo, Tubo, MensajeInvalido
 };
 

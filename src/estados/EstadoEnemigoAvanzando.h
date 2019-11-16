@@ -14,6 +14,7 @@ private:
 
 public:
 	EstadoEnemigoAvanzando();
+	EstadoEnemigoAvanzando(int ancho,int alto);
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();
     EstadoJugador* pegar();

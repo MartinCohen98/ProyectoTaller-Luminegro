@@ -2,7 +2,7 @@
     <log>
         <level>DEBUG</level>
     </log>
-    <jugadoresCantidad>2</jugadoresCantidad>
+    <jugadoresCantidad>1</jugadoresCantidad>
     <claves>
         <mariano>cognitiva</mariano>
         <julio>conductual</julio>
@@ -37,6 +37,10 @@
                 <imagen url="assets/images/sprites/jake.bmp" />
                 <energia>100</energia>
             </jake>
+            <damnd>
+                <imagen url="assets/images/sprites/damnd.bmp" />
+                <energia>500</energia>
+            </damnd>
         </enemigos>
         <objetos>
             <barril>

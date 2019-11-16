@@ -115,6 +115,8 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 		VistaEnemigo enemigo1(&renderizador, archiConfig, Enemigo1);
 		VistaEnemigo enemigo2(&renderizador, archiConfig, Enemigo2);
 		VistaEnemigo enemigo3(&renderizador, archiConfig, Enemigo3);
+		VistaEnemigo enemigo4(&renderizador, archiConfig, EnemigoJefe);
+
 
 		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 		VistaObjeto barril(&renderizador, archiConfig, Barril);
@@ -176,6 +178,9 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	        			break;
 	        		case Enemigo3:
 	        			enemigo3.renderizarConElMensaje(&mensaje);
+	        			break;
+	        		case EnemigoJefe:
+	        			enemigo4.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Barril:
 	        			barril.renderizarConElMensaje(&mensaje);

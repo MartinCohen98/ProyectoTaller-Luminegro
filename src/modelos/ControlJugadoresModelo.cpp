@@ -45,7 +45,7 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                 break;
             case Hit:
                 //Pegar
-                jugadores[numeroDeJugador]->apalear();
+                jugadores[numeroDeJugador]->acuchillar();
                 break;
             case Disconnect:
                 // Desconectado

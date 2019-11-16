@@ -7,7 +7,7 @@
 
 class EnemigoModelo: public PersonaModelo {
 
-private:
+protected:
 	int ancho;
 	int alto;
     bool subiendo;
@@ -45,7 +45,7 @@ public:
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~EnemigoModelo();
 
-private:
+protected:
 	void actualizarInsercion();
 	void moverEnX(int movimiento);
 	void moverEnY(int movimiento);

@@ -5,6 +5,10 @@ EstadoJugador::EstadoJugador() {
 	ancho = 0;
 }
 
+EstadoJugador::EstadoJugador(int ancho,int alto){
+
+}
+
 Encuadre EstadoJugador::obtenerSprite() {
 	return frameActual;
 }
