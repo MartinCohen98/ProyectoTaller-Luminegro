@@ -162,8 +162,7 @@ add_executable(ProyectoTaller_Luminegro
 
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2_LIBRARIES})
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2TTF_LIBRARIES})
-target_link_libraries(ProyectoTaller_Luminegro ${SDL2MIXER_LIBRARIES})
 target_link_libraries(ProyectoTaller_Luminegro Threads::Threads)
 target_link_libraries(ProyectoTaller_Luminegro ${CMAKE_THREAD_LIBES_INIT})
-target_link_libraries(ProyectoTaller_Luminegro ${SDL2_MIXER_LIBRARY})
+target_link_libraries(ProyectoTaller_Luminegro ${SDL2_MIXER_LIBRARIES})
 
