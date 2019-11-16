@@ -1,12 +1,12 @@
 #ifndef SRC_PERSONAMODELO_H_
 #define SRC_PERSONAMODELO_H_
 
-#include "../grafica/Encuadre.h"
 #include "../estados/EstadoJugador.h"
+#include "Colisionable.h"
 
 enum arma {cuchillo,tubo,desarmado};
 
-class PersonaModelo {
+class PersonaModelo: public Colisionable {
 
 protected:
 	int posicionX;
@@ -15,7 +15,6 @@ protected:
 	int energia;
 	int arma=desarmado;
 	EstadoJugador* estado;
-	Encuadre insercion;
 
 public:
 	PersonaModelo();

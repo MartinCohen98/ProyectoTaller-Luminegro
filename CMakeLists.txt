@@ -117,6 +117,8 @@ add_executable(ProyectoTaller_Luminegro
         src/modelos/PersonaModelo.h
         src/modelos/Colisionador.cpp
         src/modelos/Colisionador.h
+        src/modelos/Colisionable.cpp
+        src/modelos/Colisionable.h
 
         src/sonidos/MusicaFondo.cpp
         src/sonidos/MusicaFondo.h

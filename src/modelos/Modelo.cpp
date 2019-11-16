@@ -52,7 +52,6 @@ void Modelo::realzarMovimientos() {
 
 
 void Modelo::generarMensajesServidor(MensajeServidor* mensajes) {
-
 	int mensajeActual = 0;
 
 	fondo->generarMensajes(mensajes, &mensajeActual);
@@ -104,6 +103,13 @@ void Modelo::desconectarJugador(int jugador) {
 
 void Modelo::conectarJugador(int jugador) {
 	protagonistas->conectar(jugador);
+}
+
+
+void Modelo::llenarColisionador() {
+	protagonistas->agregarJugadoresEnColisionador(colisionador);
+	enemigos->agregarEnemigosEnColisionador(colisionador);
+	objetos->agregarObjetosEnColisionador(colisionador);
 }
 
 

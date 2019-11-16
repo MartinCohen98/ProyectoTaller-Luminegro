@@ -1,10 +1,10 @@
 #ifndef ELEMENTOMODELO_H_
 #define ELEMENTOMODELO_H_
 
-#include "../grafica/Encuadre.h"
 #include "../comunicacion/Socket.h"
+#include "Colisionable.h"
 
-class ElementoModelo {
+class ElementoModelo: public Colisionable {
 
 protected:
 	int posicionX;
@@ -14,7 +14,6 @@ protected:
 	int golpesResistidos;
 	tipoDeSprite sprite;
 	Encuadre encuadre;
-	Encuadre insercion;
 
 public:
 	ElementoModelo();

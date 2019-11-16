@@ -180,6 +180,14 @@ JugadorModelo* ControlJugadoresModelo::darJugador(int i){
 	return jugadores[i];
 }
 
+
+void ControlJugadoresModelo::agregarJugadoresEnColisionador(Colisionador* colisionador) {
+	for (int i = 0; i < cantidadJugadores; i++) {
+		jugadores[i]->agregarEnColisionador(colisionador);
+	}
+}
+
+
 ControlJugadoresModelo::~ControlJugadoresModelo() {
 	for (int i = 0; i < cantidadJugadores; i++) {
 		delete jugadores[i];

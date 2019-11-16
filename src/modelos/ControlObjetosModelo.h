@@ -28,6 +28,7 @@ public:
 	int obtenerCantidad();
 	void movidaDePantalla();
 	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
+	void agregarObjetosEnColisionador(Colisionador* colisionador);
 	virtual ~ControlObjetosModelo();
 };
 

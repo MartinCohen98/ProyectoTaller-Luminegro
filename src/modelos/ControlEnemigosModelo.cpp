@@ -109,7 +109,17 @@ void ControlEnemigosModelo::generarMensajes(MensajeServidor* mensajes, int* mens
 }
 
 
+void ControlEnemigosModelo::agregarEnemigosEnColisionador(Colisionador* colisionador) {
+	for(int i = 0; i < enemigosCantidad; i++) {
+		enemigos[i]->agregarEnColisionador(colisionador);
+	}
+}
+
+
 ControlEnemigosModelo::~ControlEnemigosModelo() {
-	// TODO Auto-generated destructor stub
+	for (int i = 0; i < enemigosCantidad; i++) {
+		delete enemigos[i];
+	}
+	delete[] enemigos;
 }
 

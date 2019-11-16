@@ -24,6 +24,7 @@ public:
 	bool consultarMatar();
 	int consultarCantidadJugadores();
 	JugadorModelo* darJugador(int i);
+	void agregarJugadoresEnColisionador(Colisionador* colisionador);
 	virtual ~ControlJugadoresModelo();
 };
 

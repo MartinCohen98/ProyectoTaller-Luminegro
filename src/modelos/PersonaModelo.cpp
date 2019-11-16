@@ -5,6 +5,7 @@ PersonaModelo::PersonaModelo() {
     posicionY = 0;
     dadoVuelta = false;
     estado = NULL;
+    energia = 0;
 }
 
 int PersonaModelo::darPosicionX(){

@@ -1,10 +1,9 @@
 #ifndef SRC_CONTROLENEMIGOSMODELO_H_
 #define SRC_CONTROLENEMIGOSMODELO_H_
 
-#include "../modelos/EnemigoModelo.h"
-#include "../modelos/EnemigoJefeModelo.h"
-#include "../modelos/JugadorModelo.h"
-#include "../modelos/ControlJugadoresModelo.h"
+#include "EnemigoJefeModelo.h"
+#include "JugadorModelo.h"
+#include "ControlJugadoresModelo.h"
 
 class ControlEnemigosModelo {
 
@@ -23,6 +22,7 @@ public:
 	int calcularDistancia(JugadorModelo *protagonista,EnemigoModelo *enemigo);
 	EnemigoModelo* darEnemigo(int j);
 	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
+	void agregarEnemigosEnColisionador(Colisionador* colisionador);
 	virtual ~ControlEnemigosModelo();
 };
 

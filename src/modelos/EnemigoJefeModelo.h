@@ -1,14 +1,7 @@
-/*
- * EnemigoJefeModelo.h
- *
- *  Created on: 15 nov. 2019
- *      Author: julio
- */
-
-#include "EnemigoModelo.h"
-
 #ifndef SRC_MODELOS_ENEMIGOJEFEMODELO_H_
 #define SRC_MODELOS_ENEMIGOJEFEMODELO_H_
+
+#include "EnemigoModelo.h"
 
 class EnemigoJefeModelo: public EnemigoModelo {
 public:

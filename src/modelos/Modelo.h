@@ -2,10 +2,8 @@
 #define SRC_MODELOS_MODELO_H_
 
 #include "FondoModelo.h"
-#include "ControlJugadoresModelo.h"
 #include "ControlEnemigosModelo.h"
 #include "ControlObjetosModelo.h"
-#include "Colisionador.h"
 
 class Modelo {
 
@@ -32,6 +30,9 @@ public:
 	void desconectarJugador(int jugador);
 	void conectarJugador(int jugador);
 	virtual ~Modelo();
+
+private:
+	void llenarColisionador();
 };
 
 #endif /* SRC_MODELOS_MODELO_H_ */
