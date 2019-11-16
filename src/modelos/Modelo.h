@@ -1,10 +1,11 @@
 #ifndef SRC_MODELOS_MODELO_H_
 #define SRC_MODELOS_MODELO_H_
 
-#include "../modelos/FondoModelo.h"
-#include "../modelos/ControlJugadoresModelo.h"
-#include "../modelos/ControlEnemigosModelo.h"
-#include "../modelos/ControlObjetosModelo.h"
+#include "FondoModelo.h"
+#include "ControlJugadoresModelo.h"
+#include "ControlEnemigosModelo.h"
+#include "ControlObjetosModelo.h"
+#include "Colisionador.h"
 
 class Modelo {
 
@@ -15,6 +16,7 @@ private:
     ControlJugadoresModelo* protagonistas;
     ControlEnemigosModelo* enemigos;
     ControlObjetosModelo* objetos;
+    Colisionador* colisionador;
     int nivelActual;
     int atacante;
 

@@ -7,6 +7,8 @@ Modelo::Modelo(pugi::xml_document* archiConfig, int cantidadDeJugadores) {
 	archivoConfiguracion = archiConfig;
 	cantidadJugadores = cantidadDeJugadores;
 
+	colisionador = new Colisionador();
+
 	fondo = new FondoModelo(archivoConfiguracion, nivelActual);
 
 	protagonistas = new ControlJugadoresModelo(archivoConfiguracion, cantidadJugadores);
@@ -105,5 +107,16 @@ void Modelo::conectarJugador(int jugador) {
 }
 
 
-Modelo::~Modelo() {}
+Modelo::~Modelo() {
+	if (fondo != NULL)
+		delete fondo;
+	if (protagonistas != NULL)
+		delete protagonistas;
+	if (enemigos != NULL)
+		delete enemigos;
+	if (objetos != NULL)
+		delete objetos;
+	if (colisionador != NULL)
+		delete colisionador;
+}
 
