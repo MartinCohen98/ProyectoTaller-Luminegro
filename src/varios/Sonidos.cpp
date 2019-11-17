@@ -43,49 +43,16 @@ void Sonidos::operator()() {
     std::string sonidoURLDestruccion = archiConfig->child("configuracion").child("escenario")
             .child("sonidos").child_value("destruccion");
 
-    sonidoFondo = Mix_LoadWAV(sonidoURLFondo.data() );
-    if (sonidoFondo == NULL) {
-        mensajeLog = "No fue posible cargar el archivo de audio: ";
-        mensajeLog.append( Mix_GetError() );
-        logueador->Error(mensajeLog);
-        return;
-    }
-    
+    sonidoFondo = cargarSonido(sonidoURLFondo.data() );
+
     mensajeLog = "Ubicación de la música de fondo: ";
     mensajeLog.append( sonidoURLFondo.data() );
     logueador->Debug(mensajeLog);
     
-    sonidoGolpe = Mix_LoadWAV(sonidoURLGolpe.data() );
-    if (sonidoGolpe == NULL) {
-        mensajeLog = "No fue posible cargar el archivo de audio: ";
-        mensajeLog.append( Mix_GetError() );
-        logueador->Error(mensajeLog);
-        return;
-    }
-
-    sonidoSalto = Mix_LoadWAV(sonidoURLSalto.data() );
-    if (sonidoSalto == NULL) {
-        mensajeLog = "No fue posible cargar el archivo de audio: ";
-        mensajeLog.append( Mix_GetError() );
-        logueador->Error(mensajeLog);
-        return;
-    }
-
-    sonidoCaida = Mix_LoadWAV(sonidoURLCaida.data() );
-    if (sonidoCaida == NULL) {
-        mensajeLog = "No fue posible cargar el archivo de audio: ";
-        mensajeLog.append( Mix_GetError() );
-        logueador->Error(mensajeLog);
-        return;
-    }
-
-    sonidoDestruccion = Mix_LoadWAV(sonidoURLDestruccion.data() );
-    if (sonidoDestruccion == NULL) {
-        mensajeLog = "No fue posible cargar el archivo de audio: ";
-        mensajeLog.append( Mix_GetError() );
-        logueador->Error(mensajeLog);
-        return;
-    }
+    sonidoGolpe = cargarSonido( sonidoURLGolpe.data() );
+    sonidoSalto = cargarSonido( sonidoURLSalto.data() );
+    sonidoCaida = cargarSonido( sonidoURLCaida.data() );
+    sonidoDestruccion = cargarSonido( sonidoURLDestruccion.data() );
 
     logueador->Info("Empieza a sonar la música de fondo.");
     int canal1 = Mix_PlayChannel(-1, sonidoFondo, -1);
@@ -128,6 +95,19 @@ void Sonidos::operator()() {
 }
 
 
+Mix_Chunk *Sonidos::cargarSonido(const char* archivo) {
+    Mix_Chunk *sonido  = Mix_LoadWAV(archivo);
+    if (sonido == NULL) {
+        mensajeLog = "No fue posible cargar el archivo de audio: ";
+        mensajeLog.append( Mix_GetError() );
+        logueador->Error(mensajeLog);
+        return NULL;
+    }
+
+    return sonido;
+}
+
+
 Sonidos::~Sonidos() {
     Mix_FreeChunk(sonidoFondo);
     Mix_FreeChunk(sonidoGolpe);
@@ -137,4 +117,3 @@ Sonidos::~Sonidos() {
     Mix_CloseAudio();
     // SDL_Quit() lo hace VentanaCliente
 }
-

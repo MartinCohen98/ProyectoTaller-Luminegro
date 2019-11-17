@@ -24,6 +24,8 @@ private:
     bool *ejecutarSonidoCaida;
     bool *ejecutarSonidoDestruccion;
 
+    Mix_Chunk *cargarSonido(const char* archivo);
+
 public:
     Sonidos(pugi::xml_document* archiConfig, bool *musicaFondoActiva, bool *ejecutarSonidoGolpe,
             bool *ejecutarSonidoSalto, bool *ejecutarSonidoCaida, bool *ejecutarSonidoDestruccion);
