@@ -97,6 +97,10 @@
         <margenWidth>300</margenWidth>
         <sonidos>
             <fondo>assets/sounds/background.mp3</fondo>
+            <golpe>assets/sounds/hit.mp3</golpe>
+            <caida>assets/sounds/fall.mp3</caida>
+            <salto>assets/sounds/jump.mp3</salto>
+            <destruccion>assets/sounds/destruction.mp3</destruccion>
         </sonidos>
     </escenario>
 </configuracion>

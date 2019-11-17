@@ -120,10 +120,7 @@ add_executable(ProyectoTaller_Luminegro
         src/modelos/Colisionable.cpp
         src/modelos/Colisionable.h
 
-        src/sonidos/MusicaFondo.cpp
-        src/sonidos/MusicaFondo.h
-
-        src/varios/Cliente.cpp
+		src/varios/Cliente.cpp
         src/varios/Cliente.h
         src/varios/Logger.cpp
         src/varios/Logger.h
@@ -145,8 +142,10 @@ add_executable(ProyectoTaller_Luminegro
         src/varios/ContadorDeJugadores.h
         src/varios/InformacionJugador.cpp
         src/varios/InformacionJugador.h
+		src/varios/Sonidos.cpp
+		src/varios/Sonidos.h
 
-        src/vistas/VistaEnemigo.cpp
+		src/vistas/VistaEnemigo.cpp
         src/vistas/VistaEnemigo.h
         src/vistas/VistaFondo.cpp
         src/vistas/VistaFondo.h

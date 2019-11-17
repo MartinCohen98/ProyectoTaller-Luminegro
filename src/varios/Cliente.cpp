@@ -9,6 +9,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	Logger::Log *logueador = Logger::Log::ObtenerInstancia();
     string mensajeError;
+    this->archiConfig = archiConfig;
 
     VentanaClienteInicioSesion ventanaInicioSesion;
 
@@ -125,9 +126,11 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 		recibirCantidadDeReceives(&gestorThreads);
 
-		if (musicaFondo == NULL) {
-		    // Arranca por única vez la música de fondo
-            musicaFondo = new std::thread(MusicaFondo(archiConfig, &musicaFondoActiva));
+		if (sonidos == NULL) {
+		    sonidos = new std::thread( Sonidos(archiConfig,&musicaFondoActiva,
+		                                    &ejecutarSonidoGolpe, &ejecutarSonidoSalto,
+		                                    &ejecutarSonidoCaida, &ejecutarSonidoDestruccion)
+		                              );
         }
 
         while (!salir) {
@@ -217,7 +220,7 @@ int Cliente::conectar(char* direccionIP, char* puerto){
 }
 
 void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
-	mensajeCliente.Codificar(Nothing);
+    mensajeCliente.Codificar(Nothing);
 
     SDL_PollEvent(&evento);
 
@@ -251,7 +254,8 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
     					break;
     				case SDLK_c:
     					//Pegar
-    					mensajeCliente.Codificar(Hit);
+                        ejecutarSonidoGolpe = true;
+                        mensajeCliente.Codificar(Hit);
     					break;
                     case SDLK_t:
                         //Modo test

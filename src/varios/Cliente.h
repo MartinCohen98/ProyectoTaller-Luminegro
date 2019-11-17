@@ -12,7 +12,7 @@
 #include "../comunicacion/MensajeCredenciales.h"
 #include "../grafica/VentanaClienteInicioSesion.h"
 #include "GestorThreadsCliente.h"
-#include "../sonidos/MusicaFondo.h"
+#include "../varios/Sonidos.h"
 #include <iostream>
 #include "Logger.h"
 #include <SDL2/SDL.h>
@@ -33,8 +33,13 @@ private:
 	Imagen imagenDesconectado;
 	Imagen imagenEspera;
 	Textura texturaTransiciones;
-    std::thread* musicaFondo;
+    std::thread* sonidos;
     bool musicaFondoActiva = true;
+    bool ejecutarSonidoGolpe = false;
+    bool ejecutarSonidoSalto = false;
+    bool ejecutarSonidoCaida = false;
+    bool ejecutarSonidoDestruccion = false;
+    pugi::xml_document* archiConfig;
 
     void renderizarFondo(VistaFondo* fondo, GestorThreadsCliente* gestorThreads);
     void enviarInput(GestorThreadsCliente* gestorThreads);
