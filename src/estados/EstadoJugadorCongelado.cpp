@@ -4,9 +4,10 @@
 
 #include "EstadoJugadorCongelado.h"
 
-EstadoJugadorCongelado::EstadoJugadorCongelado() {
+EstadoJugadorCongelado::EstadoJugadorCongelado(tipoDeArma tipoArma) {
     alto=100;
     ancho=50;
+    arma=tipoArma;
     frameActual.modificar(150,100,ancho,alto);
     printf("Desconectado");
 }
@@ -25,12 +26,12 @@ EstadoJugador* EstadoJugadorCongelado::agacharse() {
 
 EstadoJugador* EstadoJugadorCongelado::pegar() {
     delete this;
-    return (new EstadoJugadorPegando());
+    return (new EstadoJugadorPegando(arma));
 }
 
 EstadoJugador* EstadoJugadorCongelado::saltar() {
     delete this;
-    return (new EstadoJugadorSaltando());
+    return (new EstadoJugadorSaltando(arma));
 }
 
 

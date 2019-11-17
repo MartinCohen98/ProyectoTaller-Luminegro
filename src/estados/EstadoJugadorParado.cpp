@@ -1,9 +1,25 @@
 #include "EstadoJugadorParado.h"
 
-EstadoJugadorParado::EstadoJugadorParado() {
+EstadoJugadorParado::EstadoJugadorParado(tipoDeArma tipoArma) {
 	alto = 100;
 	ancho = 50;
-	frameActual.modificar(0, 100, ancho, alto);
+	arma=tipoArma;
+	int posY;
+	switch(arma){
+	case desarmado:{
+		posY=100;
+		break;
+ 	 }
+	case cuchillo:{
+	   posY=710;
+	   break;
+	 }
+	case tubo:{
+	   posY=810;
+	   break;
+	 }
+	}
+	frameActual.modificar(0, posY, ancho, alto);
 }
 
 EstadoJugador* EstadoJugadorParado::parar() {
@@ -12,43 +28,43 @@ EstadoJugador* EstadoJugadorParado::parar() {
 
 EstadoJugador* EstadoJugadorParado::avanzar() {
 	delete this;
-	return (new EstadoJugadorAvanzando());
+	return (new EstadoJugadorAvanzando(arma));
 }
 
 EstadoJugador* EstadoJugadorParado::agacharse() {
 	delete this;
-	return (new EstadoJugadorAgachado());
+	return (new EstadoJugadorAgachado(arma));
 }
 
 EstadoJugador* EstadoJugadorParado::pegar() {
 	delete this;
-	return (new EstadoJugadorPegando());
+	return (new EstadoJugadorPegando(arma));
 }
 
 EstadoJugador* EstadoJugadorParado::saltar() {
 	delete this;
-	return (new EstadoJugadorSaltando());
+	return (new EstadoJugadorSaltando(arma));
 }
 
 EstadoJugador* EstadoJugadorParado::morir(){
     delete this;
-    return (new EstadoEnemigoMuriendo());
+    return (new EstadoJugadorMuriendo(arma));
 }
 
 EstadoJugador* EstadoJugadorParado::acuchillar(){
     delete this;
-    return (new EstadoJugadorAcuchillando());
+    return (new EstadoJugadorAcuchillando(arma));
 }
 
 EstadoJugador* EstadoJugadorParado::apalear(){
     delete this;
-    return (new EstadoJugadorApaleando());
+    return (new EstadoJugadorApaleando(arma));
 }
 
 EstadoJugador* EstadoJugadorParado::congelarse() {
     delete this;
     printf("Desconectado");
-    return (new EstadoJugadorCongelado());
+    return (new EstadoJugadorCongelado(arma));
 }
 
 EstadoJugadorParado::~EstadoJugadorParado() {}

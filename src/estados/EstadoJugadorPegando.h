@@ -13,7 +13,7 @@ private:
 
 public:
 
-	EstadoJugadorPegando();
+	EstadoJugadorPegando(tipoDeArma arma);
 	EstadoJugador* avanzar();
 	EstadoJugador* parar();
 	EstadoJugador* agacharse();

@@ -14,12 +14,14 @@ JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig, int posXinicial, i
 	energia=100;
 	vidas=3;
 	puntaje=0;
-	estado = new EstadoJugadorParado();
-	estadoOriginal = new EstadoJugadorParado();
+	arma=cuchillo;
+	estado = new EstadoJugadorParado(arma);
+	estadoOriginal = new EstadoJugadorParado(arma);
 	dadoVuelta = false;
 	agachado = false;
 	desconectado = false;
 	salio = false;
+
 
     std::string margenWidthString = archiConfig->child("configuracion").child("escenario").
             child_value("margenWidth");
@@ -112,7 +114,7 @@ void JugadorModelo::desaparecer() {
 void JugadorModelo::descongelarse() {
     desconectado = false;
     delete estado;
-    estado = new EstadoJugadorParado();
+    estado = new EstadoJugadorParado(arma);
     if (salio) {
     	posicionY = posicionY - 600;
     	salio = false;

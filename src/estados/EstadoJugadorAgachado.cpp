@@ -1,14 +1,15 @@
 #include "EstadoJugadorAgachado.h"
 
-EstadoJugadorAgachado::EstadoJugadorAgachado() {
+EstadoJugadorAgachado::EstadoJugadorAgachado(tipoDeArma tipoArma) {
 	alto = 100;
 	ancho = 50;
+	arma=tipoArma;
 	frameActual.modificar(100, 100, ancho, alto);
 }
 
 EstadoJugador* EstadoJugadorAgachado::parar() {
 	delete this;
-	return (new EstadoJugadorParado());
+	return (new EstadoJugadorParado(arma));
 }
 
 EstadoJugador* EstadoJugadorAgachado::avanzar() {
@@ -21,32 +22,32 @@ EstadoJugador* EstadoJugadorAgachado::agacharse() {
 
 EstadoJugador* EstadoJugadorAgachado::pegar() {
 	delete this;
-	return (new EstadoJugadorPegando());
+	return (new EstadoJugadorPegando(arma));
 }
 
 EstadoJugador* EstadoJugadorAgachado::saltar() {
 	delete this;
-	return (new EstadoJugadorSaltando());
+	return (new EstadoJugadorSaltando(arma));
 }
 
 EstadoJugador* EstadoJugadorAgachado::morir(){
     delete this;
-    return (new EstadoEnemigoMuriendo());
+    return (new EstadoJugadorMuriendo(arma));
 }
 
 EstadoJugador* EstadoJugadorAgachado::acuchillar(){
     delete this;
-    return (new EstadoJugadorAcuchillando());
+    return (new EstadoJugadorAcuchillando(arma));
 }
 
 EstadoJugador* EstadoJugadorAgachado::apalear(){
     delete this;
-    return (new EstadoJugadorApaleando());
+    return (new EstadoJugadorApaleando(arma));
 }
 
 EstadoJugador* EstadoJugadorAgachado::congelarse() {
     delete this;
-    return (new EstadoJugadorCongelado());
+    return (new EstadoJugadorCongelado(arma));
 }
 
 bool EstadoJugadorAgachado::puedeMoverse() {

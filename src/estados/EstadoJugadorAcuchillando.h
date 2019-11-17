@@ -17,7 +17,7 @@ private:
 
 public:
 
-    EstadoJugadorAcuchillando();
+    EstadoJugadorAcuchillando(tipoDeArma arma);
     EstadoJugador* avanzar();
     EstadoJugador* parar();
     EstadoJugador* agacharse();

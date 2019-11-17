@@ -10,9 +10,10 @@ class EstadoJugadorAvanzando: public EstadoJugador {
 private:
 	int framesTranscurridas;
 	int numeroDeFrame;
+	int posYframe;
 
 public:
-	EstadoJugadorAvanzando();
+	EstadoJugadorAvanzando(tipoDeArma arma);
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();
 	EstadoJugador* agacharse();

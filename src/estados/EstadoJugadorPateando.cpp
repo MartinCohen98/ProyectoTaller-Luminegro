@@ -1,9 +1,10 @@
 #include "EstadoJugadorPateando.h"
 
 EstadoJugadorPateando::EstadoJugadorPateando(int elNumeroDeFrame,
-					int lasFramesTranscurridas, int laElevacion) {
+					int lasFramesTranscurridas, int laElevacion, tipoDeArma tipoArma) {
 	alto = 100;
 	ancho = 80;
+	arma=tipoArma;
 	frameActual.modificar(0, 320, ancho, alto);
 	numeroDeFrame = elNumeroDeFrame;
 	framesTranscurridas = lasFramesTranscurridas;
@@ -37,7 +38,7 @@ EstadoJugador* EstadoJugadorPateando::pegar() {
 		return (this);
 	} else {
 		delete this;
-		return (new EstadoJugadorParado());
+		return (new EstadoJugadorParado(arma));
 	}
 }
 
@@ -47,7 +48,7 @@ EstadoJugador* EstadoJugadorPateando::saltar() {
 
 EstadoJugador* EstadoJugadorPateando::morir(){
     delete this;
-    return (new EstadoEnemigoMuriendo());
+    return (new EstadoJugadorMuriendo(arma));
 }
 
 EstadoJugador* EstadoJugadorPateando::acuchillar(){
@@ -60,7 +61,7 @@ EstadoJugador* EstadoJugadorPateando::apalear(){
 
 EstadoJugador* EstadoJugadorPateando::congelarse() {
     delete this;
-    return (new EstadoJugadorCongelado());
+    return (new EstadoJugadorCongelado(arma));
 }
 
 void EstadoJugadorPateando::cambiarFrame() {

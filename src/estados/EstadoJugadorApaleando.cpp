@@ -4,9 +4,10 @@
 
 #include "EstadoJugadorApaleando.h"
 
-EstadoJugadorApaleando::EstadoJugadorApaleando() {
+EstadoJugadorApaleando::EstadoJugadorApaleando(tipoDeArma tipoArma) {
     alto = 100;
     ancho = 90;
+    arma=tipoArma;
     frameActual.modificar(0, 610, ancho, alto);
     framesTranscurridas = 0;
     numeroDeFrame = 0;
@@ -35,7 +36,7 @@ EstadoJugador* EstadoJugadorApaleando::saltar() {
 
 EstadoJugador* EstadoJugadorApaleando::morir(){
     delete this;
-    return (new EstadoEnemigoMuriendo());
+    return (new EstadoJugadorMuriendo(arma));
 }
 
 EstadoJugador* EstadoJugadorApaleando::acuchillar(){
@@ -52,13 +53,13 @@ EstadoJugador* EstadoJugadorApaleando::apalear(){
         return (this);
     } else {
         delete this;
-        return (new EstadoJugadorParado());
+        return (new EstadoJugadorParado(arma));
     }
 }
 
 EstadoJugador* EstadoJugadorApaleando::congelarse() {
     delete this;
-    return (new EstadoJugadorCongelado());
+    return (new EstadoJugadorCongelado(arma));
 }
 
 bool EstadoJugadorApaleando::puedeMoverse() {

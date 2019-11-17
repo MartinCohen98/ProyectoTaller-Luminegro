@@ -4,6 +4,9 @@
 #include "../grafica/Encuadre.h"
 #include "../comunicacion/MensajeServidor.h"
 
+enum tipoDeArma {desarmado,
+	       cuchillo, tubo};
+
 class EstadoJugador {
 
 public:
@@ -31,6 +34,7 @@ protected:
 	int alto;
 	int ancho;
 	tipoDeSprite tipo;
+	tipoDeArma arma;
 };
 
 #endif /* SRC_ESTADOJUGADOR_H_ */

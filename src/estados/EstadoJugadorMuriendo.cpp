@@ -5,9 +5,10 @@
 #include "EstadoJugadorMuriendo.h"
 
 
-EstadoJugadorMuriendo::EstadoJugadorMuriendo() {
+EstadoJugadorMuriendo::EstadoJugadorMuriendo(tipoDeArma tipoArma) {
     alto = 110;
     ancho = 60;
+    arma=tipoArma;
     frameActual.modificar(0, 510, ancho, alto);
     numeroDeFrame = 0;
     framesTranscurridas = 0;
@@ -15,17 +16,17 @@ EstadoJugadorMuriendo::EstadoJugadorMuriendo() {
 
 EstadoJugador* EstadoJugadorMuriendo::avanzar() {
     delete this;
-    return (new EstadoJugadorAvanzando());
+    return (new EstadoJugadorAvanzando(arma));
 }
 
 EstadoJugador* EstadoJugadorMuriendo::parar() {
     delete this;
-    return (new EstadoJugadorParado());
+    return (new EstadoJugadorParado(arma));
 }
 
 EstadoJugador* EstadoJugadorMuriendo::pegar() {
     delete this;
-    return (new EstadoJugadorPegando());
+    return (new EstadoJugadorPegando(arma));
 }
 
 EstadoJugador* EstadoJugadorMuriendo::morir() {

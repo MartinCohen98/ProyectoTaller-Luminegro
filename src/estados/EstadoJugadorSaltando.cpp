@@ -1,8 +1,9 @@
 #include "EstadoJugadorSaltando.h"
 
-EstadoJugadorSaltando::EstadoJugadorSaltando() {
+EstadoJugadorSaltando::EstadoJugadorSaltando(tipoDeArma tipoArma) {
 	alto = 110;
 	ancho = 60;
+	arma=tipoArma;
 	frameActual.modificar(0, 210, ancho, alto);
 	numeroDeFrame = 0;
 	framesTranscurridas = 0;
@@ -23,7 +24,7 @@ EstadoJugador* EstadoJugadorSaltando::agacharse() {
 
 EstadoJugador* EstadoJugadorSaltando::pegar() {
 	EstadoJugadorPateando* nuevoEstado = new EstadoJugadorPateando(numeroDeFrame,
-			framesTranscurridas, elevacion);
+			framesTranscurridas, elevacion, arma);
 	delete this;
 	return nuevoEstado;
 }
@@ -39,13 +40,13 @@ EstadoJugador* EstadoJugadorSaltando::saltar() {
 		return (this);
 	} else {
 		delete this;
-		return (new EstadoJugadorParado());
+		return (new EstadoJugadorParado(arma));
 	}
 }
 
 EstadoJugador* EstadoJugadorSaltando::morir(){
     delete this;
-    return (new EstadoEnemigoMuriendo());
+    return (new EstadoJugadorMuriendo(arma));
 }
 
 EstadoJugador* EstadoJugadorSaltando::acuchillar(){
@@ -58,7 +59,7 @@ EstadoJugador* EstadoJugadorSaltando::apalear(){
 
 EstadoJugador* EstadoJugadorSaltando::congelarse() {
     delete this;
-    return (new EstadoJugadorCongelado());
+    return (new EstadoJugadorCongelado(arma));
 }
 
 int EstadoJugadorSaltando::obtenerElevacion() {

@@ -10,7 +10,7 @@
 
 class EstadoJugadorCongelado: public EstadoJugador {
 public:
-    EstadoJugadorCongelado();
+    EstadoJugadorCongelado(tipoDeArma arma);
     EstadoJugador* parar();
     EstadoJugador* avanzar();
     EstadoJugador* agacharse();

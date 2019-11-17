@@ -4,8 +4,6 @@
 #include "../estados/EstadoJugador.h"
 #include "Colisionable.h"
 
-enum arma {cuchillo,tubo,desarmado};
-
 class PersonaModelo: public Colisionable {
 
 protected:
@@ -13,7 +11,6 @@ protected:
 	int posicionY;
 	bool dadoVuelta;
 	int energia;
-	int arma=desarmado;
 	EstadoJugador* estado;
 
 public:

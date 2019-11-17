@@ -2,6 +2,7 @@
 #define SRC_JUGADORMODELO_H_
 
 #include "../estados/EstadoJugadorParado.h"
+#include "../estados/EstadoJugador.h"
 #include "PersonaModelo.h"
 #include "../../lib/pugixml/pugixml.hpp"
 #include "../comunicacion/Socket.h"
@@ -24,6 +25,7 @@ private:
 	bool inmortal;
 	int vidas;
 	int puntaje;
+	tipoDeArma arma;
 	EstadoJugadorParado* estadoOriginal;
 
 public:

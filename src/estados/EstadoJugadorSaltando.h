@@ -12,7 +12,7 @@ private:
 	int elevacion;
 
 public:
-	EstadoJugadorSaltando();
+	EstadoJugadorSaltando(tipoDeArma arma);
 	EstadoJugador* avanzar();
 	EstadoJugador* parar();
 	EstadoJugador* agacharse();

@@ -1,8 +1,9 @@
 #include "EstadoJugadorPegando.h"
 
-EstadoJugadorPegando::EstadoJugadorPegando() {
+EstadoJugadorPegando::EstadoJugadorPegando(tipoDeArma tipoArma) {
 	alto = 100;
 	ancho = 70;
+	arma=tipoArma;
 	frameActual.modificar(0, 410, ancho, alto);
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;
@@ -31,7 +32,7 @@ EstadoJugador* EstadoJugadorPegando::pegar() {
 		return (this);
 	} else {
 		delete this;
-		return (new EstadoJugadorParado());
+		return (new EstadoJugadorParado(arma));
 	}
 }
 
@@ -41,7 +42,7 @@ EstadoJugador* EstadoJugadorPegando::saltar() {
 
 EstadoJugador* EstadoJugadorPegando::morir(){
     delete this;
-    return (new EstadoEnemigoMuriendo());
+    return (new EstadoJugadorMuriendo(arma));
 }
 
 EstadoJugador* EstadoJugadorPegando::acuchillar(){
@@ -54,7 +55,7 @@ EstadoJugador* EstadoJugadorPegando::apalear(){
 
 EstadoJugador* EstadoJugadorPegando::congelarse() {
     delete this;
-    return (new EstadoJugadorCongelado());
+    return (new EstadoJugadorCongelado(arma));
 }
 
 bool EstadoJugadorPegando::puedeMoverse() {

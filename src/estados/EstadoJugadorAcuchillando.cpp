@@ -4,13 +4,14 @@
 
 #include "EstadoJugadorAcuchillando.h"
 
-EstadoJugadorAcuchillando::EstadoJugadorAcuchillando() {
+EstadoJugadorAcuchillando::EstadoJugadorAcuchillando(tipoDeArma tipoArma) {
     alto = 100;
     ancho = 90;
     frameActual.modificar(0, 510, ancho, alto);
     framesTranscurridas = 0;
     numeroDeFrame = 0;
     golpeTerminado = false;
+    arma=tipoArma;
 }
 
 EstadoJugador* EstadoJugadorAcuchillando::avanzar() {
@@ -35,7 +36,7 @@ EstadoJugador* EstadoJugadorAcuchillando::saltar() {
 
 EstadoJugador* EstadoJugadorAcuchillando::morir(){
     delete this;
-    return (new EstadoEnemigoMuriendo());
+    return (new EstadoJugadorMuriendo(arma));
 }
 
 EstadoJugador* EstadoJugadorAcuchillando::acuchillar(){
@@ -48,7 +49,7 @@ EstadoJugador* EstadoJugadorAcuchillando::acuchillar(){
         return (this);
     } else {
         delete this;
-        return (new EstadoJugadorParado());
+        return (new EstadoJugadorParado(arma));
     }
 }
 
@@ -58,7 +59,7 @@ EstadoJugador* EstadoJugadorAcuchillando::apalear(){
 
 EstadoJugador* EstadoJugadorAcuchillando::congelarse() {
     delete this;
-    return (new EstadoJugadorCongelado());
+    return (new EstadoJugadorCongelado(arma));
 }
 
 bool EstadoJugadorAcuchillando::puedeMoverse() {

@@ -51,6 +51,8 @@ void ControlEnemigosModelo::realizarMovimientos(int atacante,ControlJugadoresMod
     int x,y;
     JugadorModelo *jugador;
     int objetivo;
+    int enemigoAtacante=atacante;
+    enemigoAtacante=0;
     objetivo=enemigos[atacante]->consultarJugadorObjetivo();
     jugador=jugadores->darJugador(objetivo);
     x=jugador->darPosicionX();
@@ -63,7 +65,7 @@ void ControlEnemigosModelo::realizarMovimientos(int atacante,ControlJugadoresMod
           enemigos[i]->patrullar();
       };
    // enemigos[enemigosCantidad-1]->parar();
-	//enemigos[atacante]->trasladarse(x-40,y);
+	//enemigos[enemigoAtacante]->trasladarse(x-110,y);
 }
 
 void ControlEnemigosModelo::movimientosIniciales(){

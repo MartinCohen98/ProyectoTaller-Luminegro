@@ -12,7 +12,7 @@ private:
     int framesTranscurridas;
     int numeroDeFrame;
 public:
-    EstadoJugadorMuriendo();
+    EstadoJugadorMuriendo(tipoDeArma arma);
     EstadoJugador* morir();
     EstadoJugador* avanzar();
     EstadoJugador* parar();
