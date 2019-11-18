@@ -12,6 +12,7 @@ ControlJugadoresModelo::ControlJugadoresModelo(pugi::xml_document *archiConfig,
 		jugadores[i] = new JugadorModelo(archiConfig, posXinic[i], posYinic[i]);
 	}
 	matar=false;
+	golpear=false;
 }
 
 
@@ -65,7 +66,8 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                 break;
             case Kill:
                 // Matar a todos los enemigos
-                matar=true;
+               // matar=true;
+            	golpear=true;
                 break;
             case Exit:
                 // Salir
@@ -170,6 +172,18 @@ void ControlJugadoresModelo::desaparecer(int jugador) {
 
 bool ControlJugadoresModelo::consultarMatar(){
     return matar;
+}
+
+bool ControlJugadoresModelo::consultarGolpear(){
+    return golpear;
+}
+
+void ControlJugadoresModelo::dejarDeMatar(){
+	matar = false;
+}
+
+void ControlJugadoresModelo::dejarDeGolpear(){
+	golpear = false;
 }
 
 int ControlJugadoresModelo::consultarCantidadJugadores(){

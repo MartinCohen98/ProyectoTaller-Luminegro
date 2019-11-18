@@ -22,6 +22,7 @@ public:
     EstadoJugador* morir();
     EstadoJugador* acuchillar();
     EstadoJugador* apalear();
+    EstadoJugador* serGolpeado();
     EstadoJugador* congelarse();
 	virtual ~EstadoJugadorAvanzando();
 

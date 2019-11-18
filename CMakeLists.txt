@@ -50,6 +50,8 @@ add_executable(ProyectoTaller_Luminegro
         src/estados/EstadoEnemigoPegando.h
         src/estados/EstadoEnemigoMuriendo.cpp
         src/estados/EstadoEnemigoMuriendo.h
+        src/estados/EstadoEnemigoGolpeado.cpp
+        src/estados/EstadoEnemigoGolpeado.h
         src/estados/EstadoJugador.cpp
         src/estados/EstadoJugador.h
         src/estados/EstadoJugadorAgachado.cpp
@@ -71,7 +73,9 @@ add_executable(ProyectoTaller_Luminegro
 		src/estados/EstadoJugadorApaleando.h
 		src/estados/EstadoJugadorApaleando.cpp
 		src/estados/EstadoJugadorAcuchillando.h
-		src/estados/EstadoJugadorAcuchillando.cpp
+		src/estados/EstadoJugadorGolpeado.cpp
+		src/estados/EstadoJugadorGolpeado.cpp
+		
 
 
         src/grafica/Encuadre.cpp

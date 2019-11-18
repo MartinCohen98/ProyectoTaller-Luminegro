@@ -13,6 +13,7 @@
 #include "EstadoEnemigoAvanzando.h"
 #include "EstadoJugadorAgachado.h"
 #include "EstadoEnemigoMuriendo.h"
+#include "EstadoEnemigoGolpeado.h"
 #include "../comunicacion/MensajeServidor.h"
 
 class EstadoEnemigoParado: public EstadoJugador {
@@ -23,6 +24,7 @@ public:
 	EstadoJugador* avanzar();
     EstadoJugador* pegar();
     EstadoJugador* morir();
+    EstadoJugador* serGolpeado();
 	virtual ~EstadoEnemigoParado();
 };
 

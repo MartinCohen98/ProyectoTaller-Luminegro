@@ -29,6 +29,7 @@ public:
     void morir();
     void acuchillar();
     void apalear();
+    void serGolpeado();
 	void avanzarDiagArriba(int tope);
 	void avanzarDiagAbajo(int tope);
 	void retrocederDiagArriba(int tope);

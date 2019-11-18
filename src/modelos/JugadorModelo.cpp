@@ -104,6 +104,10 @@ void JugadorModelo::apalear(){
     estado = estado->apalear();
 }
 
+void JugadorModelo::serGolpeado(){
+	estado = estado->serGolpeado();
+}
+
 void JugadorModelo::desaparecer() {
 	if (!salio)
 		posicionY += 600;

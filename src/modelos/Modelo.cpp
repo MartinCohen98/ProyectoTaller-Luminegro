@@ -38,7 +38,13 @@ void Modelo::procesarInputDeJugador(MensajeCliente* mensaje, int jugador) {
 void Modelo::realzarMovimientos() {
 	if (protagonistas->consultarMatar()) {
 		enemigos->matar();
+		protagonistas->dejarDeMatar();
 	}
+
+	if (protagonistas->consultarGolpear()) {
+			enemigos->golpear();
+		    protagonistas->dejarDeGolpear();
+		}
 
 	protagonistas->realizarMovimientos(fondo);
 	enemigos->realizarMovimientos(atacante, protagonistas);

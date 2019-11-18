@@ -20,6 +20,7 @@ public:
 	EstadoJugador* avanzar();
     EstadoJugador* pegar();
     EstadoJugador* morir();
+    EstadoJugador* serGolpeado();
 	virtual ~EstadoEnemigoAvanzando();
 
 private:
