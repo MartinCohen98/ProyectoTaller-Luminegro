@@ -16,11 +16,7 @@ void GestorThreadsCliente::comenzar() {
 
 
 bool GestorThreadsCliente::seDesconecto() {
-	if (socket->getEstado() == Socket::ESTADO_DESCONECTADO) {
-		return true;
-	} else {
-		return false;
-	}
+    return socket->getEstado() == Socket::ESTADO_DESCONECTADO;
 }
 
 
