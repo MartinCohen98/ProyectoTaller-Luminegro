@@ -9,6 +9,7 @@ private:
 	JugadorModelo** jugadores;
 	int cantidadJugadores;
 	bool matar;
+	bool golpear;
 
 public:
 	ControlJugadoresModelo(pugi::xml_document *archiConfig, int cantidad);
@@ -22,6 +23,9 @@ public:
 	void conectar(int jugador);
 	void desaparecer(int jugador);
 	bool consultarMatar();
+	bool consultarGolpear();
+	void dejarDeMatar();
+	void dejarDeGolpear();
 	int consultarCantidadJugadores();
 	JugadorModelo* darJugador(int i);
 	void agregarJugadoresEnColisionador(Colisionador* colisionador);

@@ -22,6 +22,7 @@ public:
     virtual EstadoJugador* morir();
     virtual EstadoJugador* acuchillar();
     virtual EstadoJugador* apalear();
+    virtual EstadoJugador* serGolpeado();
 	virtual bool puedeMoverse();
 	virtual bool estaSaltando();
 	virtual int obtenerElevacion();

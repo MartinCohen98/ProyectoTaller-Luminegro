@@ -67,6 +67,11 @@ EstadoJugador* EstadoJugadorAvanzando::apalear(){
     return (new EstadoJugadorApaleando(arma));
 }
 
+EstadoJugador* EstadoJugadorAvanzando::serGolpeado(){
+	delete this;
+	return (new EstadoJugadorGolpeado());
+}
+
 EstadoJugador* EstadoJugadorAvanzando::congelarse() {
     delete this;
    // printf("Desconectado");

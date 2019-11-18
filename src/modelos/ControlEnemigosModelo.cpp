@@ -66,16 +66,7 @@ void ControlEnemigosModelo::realizarMovimientos(int atacante,ControlJugadoresMod
           enemigos[i]->patrullar();
        enemigos[i]->realizarMovimientos();
       };
- // enemigos[0]->parar();
-   //enemigos[enemigosCantidad-1]->realizarMovimientos();
-	//enemigos[enemigoAtacante]->atacar(x,y);
-
-   posicionY=enemigos[enemigoAtacante]->darPosicionY();
-   if (posicionY==y)
-
-   // if (posicionY==250 || posicionY==200 || posicionY==300)
-	  enemigos[enemigoAtacante]->pegar();
-   enemigos[enemigoAtacante]->trasladarse(x-110,y+20);
+   enemigos[enemigoAtacante]->atacar(x,y);
    enemigos[enemigoAtacante]->realizarMovimientos();
 }
 
@@ -113,6 +104,11 @@ for(i = 0; i < (jugadores->consultarCantidadJugadores()); i++){
 void ControlEnemigosModelo::matar(){
     for(int i=0;i<enemigosCantidad;i++)
     enemigos[i]->morir();
+}
+
+void ControlEnemigosModelo::golpear(){
+    for(int i=0;i<enemigosCantidad;i++)
+    enemigos[i]->serGolpeado();
 }
 
 void ControlEnemigosModelo::generarMensajes(MensajeServidor* mensajes, int* mensajeActual) {

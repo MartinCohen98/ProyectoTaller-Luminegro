@@ -23,6 +23,7 @@ public:
     EstadoJugador* parar();
     EstadoJugador* pegar(tipoDeSprite tipo);
     EstadoJugador* morir();
+    EstadoJugador* serGolpeado();
     bool puedeMoverse();
     bool terminado();
     virtual ~EstadoEnemigoPegando();

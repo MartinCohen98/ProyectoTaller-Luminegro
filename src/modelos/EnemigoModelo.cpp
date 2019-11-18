@@ -78,6 +78,10 @@ void EnemigoModelo::apalear(){
     estado = estado->apalear();
 }
 
+void EnemigoModelo::serGolpeado(){
+	estado = estado->serGolpeado();
+}
+
 void EnemigoModelo::avanzarDiagArriba(int tope){
     dadoVuelta = false;
     moverEnX(5);
@@ -191,9 +195,10 @@ int EnemigoModelo::consultarJugadorObjetivo(){
 }
 
 void EnemigoModelo::atacar(int x,int y){
-	if (posicionY==250 || posicionY==200 || posicionY==300)
+	//if (posicionY==250 || posicionY==200 || posicionY==300)
+	if (posicionY==y)
 	  pegar();
-	trasladarse(x-110,y);
+	trasladarse(x-110,y+20);
 }
 
 void EnemigoModelo::estaSubiendo(){

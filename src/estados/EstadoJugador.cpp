@@ -49,6 +49,10 @@ EstadoJugador* EstadoJugador::apalear(){
     return NULL;
 }
 
+EstadoJugador* EstadoJugador::serGolpeado(){
+    return NULL;
+}
+
 bool EstadoJugador::estaSaltando() {
 	return false;
 }

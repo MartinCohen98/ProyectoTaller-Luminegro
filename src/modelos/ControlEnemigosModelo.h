@@ -18,6 +18,7 @@ public:
 	void movimientosIniciales();
 	int buscarObjetivo(ControlJugadoresModelo *jugadores);
 	void matar();
+	void golpear();
 	void movidaDePantalla();
 	int calcularDistancia(JugadorModelo *protagonista,EnemigoModelo *enemigo);
 	EnemigoModelo* darEnemigo(int j);

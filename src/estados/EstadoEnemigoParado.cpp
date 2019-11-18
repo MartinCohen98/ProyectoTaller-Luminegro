@@ -45,6 +45,11 @@ EstadoJugador* EstadoEnemigoParado::morir(){
     return (new EstadoEnemigoMuriendo(tipo));
 }
 
+EstadoJugador* EstadoEnemigoParado::serGolpeado() {
+	delete this;
+	return (new EstadoEnemigoGolpeado(tipo));
+}
+
 EstadoEnemigoParado::~EstadoEnemigoParado() {
 	// TODO Auto-generated destructor stub
 }
