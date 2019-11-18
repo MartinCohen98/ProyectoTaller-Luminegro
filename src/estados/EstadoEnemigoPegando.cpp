@@ -62,7 +62,7 @@ EstadoJugador* EstadoEnemigoPegando::pegar(tipoDeSprite tipoNuevo) {
 
 EstadoJugador* EstadoEnemigoPegando::morir(){
     delete this;
-    return (new EstadoEnemigoMuriendo());
+    return (new EstadoEnemigoMuriendo(tipo));
 }
 
 bool EstadoEnemigoPegando::puedeMoverse() {

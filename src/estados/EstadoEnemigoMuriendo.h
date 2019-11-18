@@ -14,6 +14,7 @@ private:
     bool caidaTerminada;
 public:
     EstadoEnemigoMuriendo();
+    EstadoEnemigoMuriendo(tipoDeSprite tipo);
     EstadoJugador* avanzar();
     EstadoJugador* parar();
     EstadoJugador* pegar();

@@ -42,7 +42,7 @@ EstadoJugador* EstadoEnemigoParado::pegar() {
 
 EstadoJugador* EstadoEnemigoParado::morir(){
     delete this;
-    return (new EstadoEnemigoMuriendo());
+    return (new EstadoEnemigoMuriendo(tipo));
 }
 
 EstadoEnemigoParado::~EstadoEnemigoParado() {
