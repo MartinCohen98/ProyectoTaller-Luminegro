@@ -22,7 +22,8 @@ void Servidor::correr() {
 	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
 		gestorThreads->agregarJugador(&socketsDeClientes[i], i);
 	}
-
+    //Queda un hilo escuchando intentos de conexiones.
+    // Si en algún momento se desconecta un cliente, habilita reloguearse (por eso la referencia al nivel)
 	gestorThreads->comenzarAAceptar(&socketAceptador, credenciales, &nivelActual);
 
 	for (nivelActual = 1; nivelActual <= 2; nivelActual++) {
