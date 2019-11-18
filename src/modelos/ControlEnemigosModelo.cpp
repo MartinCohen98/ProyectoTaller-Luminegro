@@ -49,6 +49,7 @@ EnemigoModelo* ControlEnemigosModelo::darEnemigo(int j){
 
 void ControlEnemigosModelo::realizarMovimientos(int atacante,ControlJugadoresModelo *jugadores){
     int x,y;
+    int posicionX,posicionY;
     JugadorModelo *jugador;
     int objetivo;
     int enemigoAtacante=atacante;
@@ -57,15 +58,25 @@ void ControlEnemigosModelo::realizarMovimientos(int atacante,ControlJugadoresMod
     jugador=jugadores->darJugador(objetivo);
     x=jugador->darPosicionX();
     y=jugador->darPosicionY();
-   for (int i=0;i<enemigosCantidad;i++) {
-       int posicionY=enemigos[i]->darPosicionY();
+   for (int i=1;i<enemigosCantidad;i++) {
+       posicionY=enemigos[i]->darPosicionY();
        if (posicionY==250 || posicionY==200 || posicionY==300)
            enemigos[i]->pegar();
-    //   if (i!=atacante)
+       if (i!=enemigoAtacante)
           enemigos[i]->patrullar();
+       enemigos[i]->realizarMovimientos();
       };
-   // enemigos[enemigosCantidad-1]->parar();
-	//enemigos[enemigoAtacante]->trasladarse(x-110,y);
+ // enemigos[0]->parar();
+   //enemigos[enemigosCantidad-1]->realizarMovimientos();
+	//enemigos[enemigoAtacante]->atacar(x,y);
+
+   posicionY=enemigos[enemigoAtacante]->darPosicionY();
+   if (posicionY==y)
+
+   // if (posicionY==250 || posicionY==200 || posicionY==300)
+	  enemigos[enemigoAtacante]->pegar();
+   enemigos[enemigoAtacante]->trasladarse(x-110,y+20);
+   enemigos[enemigoAtacante]->realizarMovimientos();
 }
 
 void ControlEnemigosModelo::movimientosIniciales(){

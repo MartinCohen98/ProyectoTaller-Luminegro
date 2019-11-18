@@ -25,7 +25,7 @@ EstadoEnemigoAvanzando::EstadoEnemigoAvanzando(tipoDeSprite tipoNuevo){
 
 EstadoJugador* EstadoEnemigoAvanzando::parar() {
 	delete this;
-	return (new EstadoEnemigoParado());
+	return (new EstadoEnemigoParado(tipo));
 }
 
 EstadoJugador* EstadoEnemigoAvanzando::avanzar() {
@@ -44,7 +44,7 @@ EstadoJugador* EstadoEnemigoAvanzando::pegar() {
 
 EstadoJugador* EstadoEnemigoAvanzando::morir(){
     delete this;
-    return (new EstadoEnemigoMuriendo());
+    return (new EstadoEnemigoMuriendo(tipo));
 }
 
 void EstadoEnemigoAvanzando::cambiarFrame() {

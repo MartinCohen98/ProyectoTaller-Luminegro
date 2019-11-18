@@ -157,6 +157,10 @@ void EnemigoModelo::trasladarse(int destinoX,int destinoY) {
         if (posicionY==destinoY)
             avanzar();
     }
+    if (abajo)
+    	bajar();
+    if (!abajo)
+    	subir();
 }
 
 void EnemigoModelo::patrullar(){
@@ -186,8 +190,10 @@ int EnemigoModelo::consultarJugadorObjetivo(){
 	return jugadorObjetivo;
 }
 
-void EnemigoModelo::atacar(int objetivo){
-
+void EnemigoModelo::atacar(int x,int y){
+	if (posicionY==250 || posicionY==200 || posicionY==300)
+	  pegar();
+	trasladarse(x-110,y);
 }
 
 void EnemigoModelo::estaSubiendo(){
@@ -229,6 +235,16 @@ void EnemigoModelo::moverEnX(int movimiento) {
 void EnemigoModelo::moverEnY(int movimiento) {
 	posicionY = posicionY + movimiento;
 }
+
+void EnemigoModelo::realizarMovimientos() {
+	if (estado->puedeMoverse()) {
+//		actualizarPosicion(fondo, rezagado);
+    } else {
+    		estado = estado->parar();
+    	}
+	actualizarInsercion();
+}
+
 
 EnemigoModelo::~EnemigoModelo() {}
 

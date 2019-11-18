@@ -40,8 +40,9 @@ public:
 	void patrullar();
 	void modificarJugadorObjetivo(int objetivo);
 	int consultarJugadorObjetivo();
-	void atacar(int objetivo);
+	void atacar(int x,int y);
 	void retrocesoDePantalla();
+	void realizarMovimientos();
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~EnemigoModelo();
 

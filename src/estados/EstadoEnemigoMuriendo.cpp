@@ -13,6 +13,25 @@ EstadoEnemigoMuriendo::EstadoEnemigoMuriendo() {
     caidaTerminada = false;
 }
 
+
+EstadoEnemigoMuriendo::EstadoEnemigoMuriendo(tipoDeSprite tipoNuevo) {
+    ancho=65;
+    alto=78;
+    tipo=tipoNuevo;
+    frameActual.modificar(65, 164, ancho, alto);
+    switch (tipo){
+       case EnemigoJefe:{
+       	ancho=115;
+       	alto=125;
+       	frameActual.modificar(65, 240, ancho, alto);
+        }
+       }
+    frameActual.modificar(65, 164, ancho, alto);
+    framesTranscurridas = 0;
+    numeroDeFrame = 0;
+    caidaTerminada = false;
+}
+
 EstadoJugador* EstadoEnemigoMuriendo::avanzar() {
     return (morir());
 }
@@ -35,7 +54,7 @@ EstadoJugador* EstadoEnemigoMuriendo::morir() {
     return (this);
     } else {
         delete this;
-        return (new EstadoEnemigoParado());
+        return (new EstadoEnemigoParado(tipo));
     }
 }
 
