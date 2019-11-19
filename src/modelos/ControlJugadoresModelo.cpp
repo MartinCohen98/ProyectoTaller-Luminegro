@@ -44,10 +44,22 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                 //Agacharse
                 jugadores[numeroDeJugador]->agacharse();
                 break;
-            case Hit:
-                //Pegar
-                jugadores[numeroDeJugador]->acuchillar();
+            case Hit:{
+            	//Atacar
+            	tipoDeArma arma=jugadores[numeroDeJugador]->consultarArma();
+                switch(arma){
+                    case (desarmado):
+		                jugadores[numeroDeJugador]->pegar();
+                        break;
+                    case (cuchillo):
+                        jugadores[numeroDeJugador]->acuchillar();
+                        break;
+                    case (tubo):
+	                	jugadores[numeroDeJugador]->apalear();
+                    	break;
+                    }
                 break;
+               }
             case Disconnect:
                 // Desconectado
                 jugadores[numeroDeJugador]->congelarse();
@@ -66,8 +78,8 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                 break;
             case Kill:
                 // Matar a todos los enemigos
-               // matar=true;
-            	golpear=true;
+                matar=true;
+            	//golpear=true;
                 break;
             case Exit:
                 // Salir

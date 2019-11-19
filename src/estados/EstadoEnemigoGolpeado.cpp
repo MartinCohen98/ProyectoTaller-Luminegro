@@ -77,18 +77,13 @@ bool EstadoEnemigoGolpeado::terminado() {
 
 void EstadoEnemigoGolpeado::cambiarFrame() {
 	int framesLimite=1;
-		switch (tipo){
-		case EnemigoJefe:{
-		   framesLimite=3;
-		 }
-	    }
     if (numeroDeFrame == framesLimite) {
         palizaTerminada = true;
         numeroDeFrame = 0;
     } else {
         numeroDeFrame++;
     }
-    frameActual.modificar((ancho * numeroDeFrame), (alto * numeroDeFrame)+alto, ancho, alto);
+    frameActual.modificar((ancho * numeroDeFrame), (alto * numeroDeFrame) + alto, ancho, alto);
     switch (tipo){
     		case EnemigoJefe:{
     			frameActual.modificar((ancho * numeroDeFrame), 140, ancho, alto);
