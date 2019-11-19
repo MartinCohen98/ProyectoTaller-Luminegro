@@ -63,6 +63,11 @@ bool EstadoJugadorPegando::puedeMoverse() {
 }
 
 
+bool EstadoJugadorPegando::estaAtacando() {
+	return true;
+}
+
+
 int EstadoJugadorPegando::obtenerDanio() {
 	return 20;
 }

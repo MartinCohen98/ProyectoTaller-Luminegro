@@ -3,10 +3,15 @@
 EstadoJugador::EstadoJugador() {
 	alto = 0;
 	ancho = 0;
+	tipo = Jugador1;
+	arma = desarmado;
 }
 
 EstadoJugador::EstadoJugador(int ancho,int alto){
-
+	this->alto = alto;
+	this->ancho = ancho;
+	tipo = Jugador1;
+	arma = desarmado;
 }
 
 Encuadre EstadoJugador::obtenerSprite() {
@@ -56,6 +61,12 @@ EstadoJugador* EstadoJugador::serGolpeado(){
 bool EstadoJugador::estaSaltando() {
 	return false;
 }
+
+
+bool EstadoJugador::estaAtacando() {
+	return false;
+}
+
 
 int EstadoJugador::obtenerElevacion() {
 	return 0;

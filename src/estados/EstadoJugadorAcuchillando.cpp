@@ -66,6 +66,12 @@ bool EstadoJugadorAcuchillando::puedeMoverse() {
     return false;
 }
 
+
+bool EstadoJugadorAcuchillando::estaAtacando() {
+	return true;
+}
+
+
 bool EstadoJugadorAcuchillando::terminado() {
     return ((numeroDeFrame == 0) && (framesTranscurridas == 1) && golpeTerminado);
 }
