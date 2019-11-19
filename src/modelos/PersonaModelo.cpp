@@ -6,6 +6,8 @@ PersonaModelo::PersonaModelo() {
     dadoVuelta = false;
     estado = NULL;
     energia = 0;
+    posicionXAnterior = 0;
+    posicionYAnterior = 0;
 }
 
 int PersonaModelo::darPosicionX(){

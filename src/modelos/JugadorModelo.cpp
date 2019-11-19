@@ -10,11 +10,11 @@ JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig, int posXinicial, i
 	movimientoAlSaltarEnX = 0;
 	movimientoAlSaltarEnY = 0;
 	escaladoDeSprite = 3;
-	inmortal=false;
-	energia=100;
-	vidas=3;
-	puntaje=0;
-	arma=tubo;
+	inmortal = false;
+	energia = 100;
+	vidas = 3;
+	puntaje = 0;
+	arma = tubo;
 	estado = new EstadoJugadorParado(arma);
 	estadoOriginal = new EstadoJugadorParado(arma);
 	dadoVuelta = false;
@@ -192,24 +192,29 @@ void JugadorModelo::actualizarPosicion(FondoModelo* fondo, bool rezagado) {
 
 
 void JugadorModelo::checkearColisiones(Colisionador* colisionador) {
-	actualizarInsercion();
+	actualizarInsercion(false);
 	if (colisionador->colisiona(&insercion)) {
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
-		actualizarInsercion();
+		actualizarInsercion(false);
 	}
 }
 
 
-void JugadorModelo::actualizarInsercion() {
+void JugadorModelo::actualizarInsercion(bool conElevacion) {
+	int elevacion = 0;
+	if (estado->estaSaltando())
+		elevacion = 30;
+	if (conElevacion)
+		elevacion = estado->obtenerElevacion();
 	if (!dadoVuelta) {
-		insercion.modificar(posicionX, posicionY - estado->obtenerElevacion(),
+		insercion.modificar(posicionX, posicionY - elevacion,
 				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
 	} else {
 		insercion.modificar(posicionX - escalar(estado->obtenerAncho()) +
 				escalar(estadoOriginal->obtenerAncho()),
-				posicionY - estado->obtenerElevacion(),
-				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
+				posicionY - elevacion, escalar(estado->obtenerAncho()),
+				escalar(estado->obtenerAlto()));
 	}
 }
 
@@ -277,7 +282,7 @@ bool JugadorModelo::movioAlFondo(FondoModelo* fondo) {
 
 void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual,
 		int numeroSprite) {
-
+	actualizarInsercion(true);
 	Encuadre sprite = estado->obtenerSprite();
 	tipoDeSprite tipo;
 	switch (numeroSprite) {
@@ -295,6 +300,7 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
 									escalar(estadoOriginal->obtenerAlto()));
 	if (dadoVuelta)
 		mensajes[*mensajeActual].darVuelta();
+	actualizarInsercion(false);
 	(*mensajeActual)++;
 }
 

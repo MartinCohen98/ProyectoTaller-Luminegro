@@ -64,7 +64,7 @@ public:
 private:
 	void actualizarPosicion(FondoModelo* fondo, bool rezagado);
 	void checkearColisiones(Colisionador* colisionador);
-	void actualizarInsercion();
+	void actualizarInsercion(bool conElevacion);
 	bool moverEnX(FondoModelo* fondo, bool rezagado);
 	bool moverEnY();
 	bool movioAlFondo(FondoModelo* fondo);
