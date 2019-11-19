@@ -24,6 +24,7 @@ public:
     EstadoJugador* apalear();
     EstadoJugador* congelarse();
 	bool puedeMoverse();
+	int obtenerDanio();
 	bool terminado();
 	virtual ~EstadoJugadorPegando();
 

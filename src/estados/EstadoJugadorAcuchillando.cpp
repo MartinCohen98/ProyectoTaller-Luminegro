@@ -70,6 +70,10 @@ bool EstadoJugadorAcuchillando::terminado() {
     return ((numeroDeFrame == 0) && (framesTranscurridas == 1) && golpeTerminado);
 }
 
+int EstadoJugadorAcuchillando::obtenerDanio() {
+	return 50;
+}
+
 void EstadoJugadorAcuchillando::cambiarFrame() {
     if (numeroDeFrame == 1) {
         golpeTerminado = true;

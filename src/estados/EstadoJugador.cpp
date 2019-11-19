@@ -73,4 +73,8 @@ bool EstadoJugador::puedeMoverse() {
 	return true;
 }
 
+int EstadoJugador::obtenerDanio() {
+	return 0;
+}
+
 EstadoJugador::~EstadoJugador() {}

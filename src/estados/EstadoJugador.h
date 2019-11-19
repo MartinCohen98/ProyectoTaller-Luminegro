@@ -26,6 +26,7 @@ public:
 	virtual bool puedeMoverse();
 	virtual bool estaSaltando();
 	virtual int obtenerElevacion();
+	virtual int obtenerDanio();
 	int obtenerAlto();
 	int obtenerAncho();
 	virtual ~EstadoJugador();

@@ -1,7 +1,3 @@
-//
-// Created by julio on 1/11/19.
-//
-
 #include "EstadoEnemigoPegando.h"
 
 EstadoEnemigoPegando::EstadoEnemigoPegando() {

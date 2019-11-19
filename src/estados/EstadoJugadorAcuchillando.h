@@ -1,7 +1,3 @@
-//
-// Created by julio on 12/11/19.
-//
-
 #ifndef PROYECTOTALLER_LUMINEGRO_ESTADOJUGADORACUCHILLANDO_H
 #define PROYECTOTALLER_LUMINEGRO_ESTADOJUGADORACUCHILLANDO_H
 
@@ -29,6 +25,7 @@ public:
     EstadoJugador* congelarse();
     bool puedeMoverse();
     bool terminado();
+    int obtenerDanio();
     virtual ~EstadoJugadorAcuchillando();
 
 private:

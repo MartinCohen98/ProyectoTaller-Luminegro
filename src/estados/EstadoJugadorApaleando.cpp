@@ -66,6 +66,12 @@ bool EstadoJugadorApaleando::puedeMoverse() {
     return false;
 }
 
+
+int EstadoJugadorApaleando::obtenerDanio() {
+	return 35;
+}
+
+
 bool EstadoJugadorApaleando::terminado() {
     return ((numeroDeFrame == 0) && (framesTranscurridas == 1) && golpeTerminado);
 }
