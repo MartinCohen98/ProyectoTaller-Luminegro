@@ -44,9 +44,11 @@ public:
     int enviar(MensajeCredenciales *mensaje);
     int enviar(MensajeCliente* mensaje);
     int enviar(MensajeServidor* mensajes);
+    int enviar(char *mensaje, int tamanio);
     int recibir(MensajeCredenciales *mensaje);
     int recibir(MensajeCliente* mensaje);
     int recibir(MensajeServidor* mensaje);
+    int recibir(char *mensaje, int tamanio);
     int getEstado();
     void asignarNumero(int unNumero);
     int obtenerNumero();

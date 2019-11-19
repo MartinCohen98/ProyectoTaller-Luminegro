@@ -165,7 +165,7 @@ add_executable(ProyectoTaller_Luminegro
         src/vistas/VistaJugador.h
         src/vistas/VistaObjeto.cpp
         src/vistas/VistaObjeto.h
-        src/estados/EstadoJugadorMuriendo.cpp src/estados/EstadoJugadorMuriendo.h src/estados/EstadoEnemigoMuriendo.cpp src/estados/EstadoEnemigoMuriendo.h src/estados/EstadoJugadorApaleando.cpp src/estados/EstadoJugadorApaleando.h src/estados/EstadoJugadorAcuchillando.cpp src/estados/EstadoJugadorAcuchillando.h)
+        src/estados/EstadoJugadorMuriendo.cpp src/estados/EstadoJugadorMuriendo.h src/estados/EstadoEnemigoMuriendo.cpp src/estados/EstadoEnemigoMuriendo.h src/estados/EstadoJugadorApaleando.cpp src/estados/EstadoJugadorApaleando.h src/estados/EstadoJugadorAcuchillando.cpp src/estados/EstadoJugadorAcuchillando.h src/comunicacion/MensajeInicioPartida.cpp src/comunicacion/MensajeInicioPartida.h)
 
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2_LIBRARIES})
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2TTF_LIBRARIES})

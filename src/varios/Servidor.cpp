@@ -1,5 +1,6 @@
 #include "Servidor.h"
 #include <iostream>
+#include "../comunicacion/MensajeInicioPartida.h"
 
 using namespace std;
 using namespace Logger;
@@ -22,9 +23,13 @@ void Servidor::correr() {
 	for (int i = 0; i < jugadoresCantidadEsperada; i++) {
 		gestorThreads->agregarJugador(&socketsDeClientes[i], i);
 	}
+	//Generar mensaje de inicio y enviarlo a los clientes para arrancar la partida
+	MensajeInicioPartida mensajeInicio = generarMensajeInicioPartida();
+	enviarMensajeInicioPartida(&mensajeInicio);
+
     //Queda un hilo escuchando intentos de conexiones.
     // Si en algún momento se desconecta un cliente, habilita reloguearse (por eso la referencia al nivel)
-	gestorThreads->comenzarAAceptar(&socketAceptador, credenciales, &nivelActual);
+	gestorThreads->comenzarAAceptar(&socketAceptador, credenciales, &nivelActual, &mensajeInicio);
 
 	for (nivelActual = 1; nivelActual <= 2; nivelActual++) {
 		jugarNivel();
@@ -216,4 +221,17 @@ bool Servidor::validarUsuarioYClave(MensajeCredenciales* mensajeCredenciales) {
     }
 
     return resultado;
+}
+
+int Servidor::enviarMensajeInicioPartida(MensajeInicioPartida *mensaje) {
+    return gestorThreads->enviarMensajeInicioPartida(mensaje);
+}
+
+MensajeInicioPartida Servidor::generarMensajeInicioPartida() {
+    //TODO cargar la  vida inicial desde el config
+    MensajeInicioPartida mensaje = MensajeInicioPartida(nivelActual, 100);
+    for(int i = 0; i < jugadoresCantidadEsperada; i++){
+        mensaje.setNombreJugador(i, credenciales[i].getUsuario());
+    }
+    return mensaje;
 }

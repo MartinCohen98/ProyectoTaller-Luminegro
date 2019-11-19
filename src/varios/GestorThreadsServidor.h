@@ -6,6 +6,7 @@
 #include "../comunicacion/AceptadorConexiones.h"
 #include "../modelos/Modelo.h"
 #include <pthread.h>
+#include <comunicacion/MensajeInicioPartida.h>
 
 class GestorThreadsServidor {
 
@@ -21,13 +22,18 @@ private:
 
 public:
 	GestorThreadsServidor(int cantidadDeJugadores);
-	void comenzarAAceptar(Socket* socketAceptador, MensajeCredenciales* credenciales, int *nivelActual);
+    void comenzarAAceptar(Socket *socketAceptador, MensajeCredenciales *credenciales,
+            int *nivelActual, MensajeInicioPartida *mensaje);
 	void agregarJugador(Socket* socket, int numero);
 	void recibirMensajeDeCliente(MensajeCliente* mensaje, int cliente);
 	void enviarMensaje(MensajeServidor* mensaje);
 	void checkearConecciones(int cantiadDeRecieves, Modelo* modelo);
 	bool estaConectado(int jugador);
-	virtual ~GestorThreadsServidor();
+    int enviarMensajeInicioPartida(MensajeInicioPartida *mensajeInicio);
+
+    virtual ~GestorThreadsServidor();
+
+
 };
 
 #endif /* SRC_VARIOS_GESTORTHREADSSERVIDOR_H_ */

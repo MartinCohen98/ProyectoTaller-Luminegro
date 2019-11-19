@@ -4,6 +4,7 @@
 #include <pthread.h>
 #include "../comunicacion/EnviadorMensajesCliente.h"
 #include "../comunicacion/RecibidorMensajesServidor.h"
+#include "../comunicacion/MensajeInicioPartida.h"
 
 class GestorThreadsCliente {
 
@@ -20,6 +21,7 @@ public:
 	bool seDesconecto();
 	void enviarMensaje(MensajeCliente* mensaje);
 	MensajeServidor recibirMensaje();
+	MensajeInicioPartida recibirMensajeDeInicio();
 	virtual ~GestorThreadsCliente();
 };
 

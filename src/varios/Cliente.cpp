@@ -1,4 +1,5 @@
 #include "Cliente.h"
+#include "../comunicacion/MensajeInicioPartida.h"
 
 Cliente::Cliente() {
 	cantidadDeReceives = 0;
@@ -94,6 +95,11 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 
     GestorThreadsCliente gestorThreads(&socket);
+
+    //Esperar mensaje con datos de inicio de partida
+    //TODO cargar datos de los usuarios conectados en pantalla
+    MensajeInicioPartida mensajeInicio = gestorThreads.recibirMensajeDeInicio();
+
 
 	gestorThreads.comenzar();
 
@@ -359,5 +365,10 @@ void Cliente::recibirMensajes(GestorThreadsCliente* gestorThreads) {
 
 Cliente::~Cliente() {
 	socket.cerrar();
+}
+
+MensajeInicioPartida Cliente::recibirMensajeInicioPartida(GestorThreadsCliente *gestorThreads) {
+    MensajeInicioPartida mensajeInicio = MensajeInicioPartida();
+    return mensajeInicio;
 }
 

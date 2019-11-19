@@ -421,7 +421,7 @@ int Socket::recibir(MensajeServidor* mensaje) {
         arrancoElJuego = true;
 
         if (resultadoAccion == 0) {
-            // Nos cerraron el socket
+            // Nos cerraron el sock et
         	estado = ESTADO_DESCONECTADO;
             return EXIT_FAILURE;
 
@@ -440,6 +440,84 @@ int Socket::recibir(MensajeServidor* mensaje) {
     return recibido;
 }
 
+int Socket::recibir(char *mensaje, int tamanio) {
+    Logger::Log *logueador = Logger::Log::ObtenerInstancia();
+
+    int recibido = 0;
+    int resultadoAccion = 0;
+    int tamanoMaximo = tamanio;
+    char* datos = mensaje;
+
+    while (recibido < tamanoMaximo) {
+        int bytesCantidadMaximaParaRecibir = tamanoMaximo - recibido;
+
+        seguirRecibiendo = true;
+        // Esto previene que se desconecte por timeout antes de arrancar el juego mientras se espera otros jugadores
+        while (seguirRecibiendo) {
+            resultadoAccion = recv(numero, &datos[recibido], bytesCantidadMaximaParaRecibir,MSG_NOSIGNAL);
+            seguirRecibiendo = (resultadoAccion < 0 && !arrancoElJuego);
+        }
+
+        if (resultadoAccion == 0) {
+            // Nos cerraron el socket
+            estado = ESTADO_DESCONECTADO;
+            return EXIT_FAILURE;
+
+        } else if (resultadoAccion < 0) {
+            // Hubo un error
+
+            std::string mensajeError = "Clase Socket - Método recibir genérico - Error en recv(): ";
+            mensajeError.append(strerror(errno));
+
+            logueador->Error(mensajeError);
+            estado = ESTADO_DESCONECTADO;
+            return EXIT_FAILURE;
+        } else {
+            recibido += resultadoAccion;
+        }
+    }
+    return recibido;
+}
+
+int Socket::enviar(char *mensaje, int tamanio){
+    Logger::Log *logueador = Logger::Log::ObtenerInstancia();
+
+    bool hayUnErrorDeSocket = false;
+    bool elSocketRemotoEstaCerrado = false;
+
+    char* datos = mensaje;
+    int bytesEnviados = 0;
+    int cantidadDeBytes = tamanio;
+    int resultadoAccion;
+
+    while (bytesEnviados < cantidadDeBytes && !hayUnErrorDeSocket && !elSocketRemotoEstaCerrado) {
+
+        resultadoAccion = send(numero, &datos[bytesEnviados], cantidadDeBytes - bytesEnviados,MSG_NOSIGNAL);
+
+        if (resultadoAccion < 0) {
+            hayUnErrorDeSocket = true;
+
+            if (errno == ERROR_SOCKET_OPERATION_ON_NO_SOCKET) {
+                elSocketRemotoEstaCerrado = true;
+            }
+
+            std::string mensajeError = "Clase Socket - Método enviar genérico - Error en send(): ";
+            mensajeError.append(strerror(errno));
+            logueador->Error(mensajeError);
+
+        } else if (resultadoAccion == 0) {
+            elSocketRemotoEstaCerrado = true;
+
+        } else {
+            bytesEnviados += resultadoAccion;
+        }
+    }
+    if (elSocketRemotoEstaCerrado || hayUnErrorDeSocket) {
+        estado = ESTADO_DESCONECTADO;
+        return EXIT_FAILURE;
+    }
+    return EXIT_SUCCESS;
+}
 
 
 int Socket::getEstado() {
@@ -471,3 +549,5 @@ int Socket::cerrar() {
 Socket::~Socket() {
 	cerrar();
 }
+
+

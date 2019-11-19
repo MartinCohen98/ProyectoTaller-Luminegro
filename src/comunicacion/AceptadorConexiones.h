@@ -3,6 +3,7 @@
 
 #include "Socket.h"
 #include "../varios/ContadorDeJugadores.h"
+#include "../comunicacion/MensajeInicioPartida.h"
 #include <thread>
 
 // Rechaza las conexiones cuando el máximo de jugadores ya se conectó
@@ -12,9 +13,10 @@ private:
     Socket* socketAceptador;
     ContadorDeJugadores* contador;
     int *nroNivel;
+    MensajeInicioPartida *mensajeInicio;
 
 public:
-    AceptadorConexiones(Socket* unSocket, ContadorDeJugadores* unContador, int *nivelActual);
+    AceptadorConexiones(Socket* unSocket, ContadorDeJugadores* unContador, int *nivelActual, MensajeInicioPartida *mensajeInicio);
     void operator()();
 };
 

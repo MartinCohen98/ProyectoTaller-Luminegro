@@ -46,6 +46,7 @@ private:
     void recibirCantidadDeReceives(GestorThreadsCliente* gestorThreads);
     bool terminoElNivel(GestorThreadsCliente* gestorThreads);
     void recibirMensajes(GestorThreadsCliente* gestorThreads);
+    MensajeInicioPartida recibirMensajeInicioPartida(GestorThreadsCliente* gestorThreads);
 
 public:
 	 Cliente();

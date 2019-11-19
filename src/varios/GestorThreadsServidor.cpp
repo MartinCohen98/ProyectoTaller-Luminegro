@@ -80,10 +80,10 @@ bool GestorThreadsServidor::estaConectado(int jugador) {
 }
 
 
-void GestorThreadsServidor::comenzarAAceptar(Socket* socketAceptador,
-									MensajeCredenciales* credenciales, int *nivelActual) {
+void GestorThreadsServidor::comenzarAAceptar(Socket* socketAceptador, MensajeCredenciales* credenciales,
+									 int *nivelActual,MensajeInicioPartida *mensaje) {
 	contador->definirCredenciales(credenciales);
-	threadAceptador = new std::thread(AceptadorConexiones(socketAceptador,contador, nivelActual));
+	threadAceptador = new std::thread(AceptadorConexiones(socketAceptador, contador, nivelActual, mensaje));
 }
 
 
@@ -104,4 +104,13 @@ GestorThreadsServidor::~GestorThreadsServidor() {
 	delete[] colasRecibidoras;
 	delete[] colasEnviadoras;
 }
+
+int GestorThreadsServidor::enviarMensajeInicioPartida(MensajeInicioPartida *mensajeInicio) {
+    int bytesEnviados = 0;
+    for(int i = 0; i < jugadores; i++){
+        bytesEnviados += sockets[i]->enviar((char *) mensajeInicio, sizeof(MensajeInicioPartida));
+    }
+    return bytesEnviados;
+}
+
 
