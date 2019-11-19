@@ -5,7 +5,7 @@
 #include "EstadoEnemigoMuriendo.h"
 
 EstadoEnemigoMuriendo::EstadoEnemigoMuriendo() {
-    ancho=65;
+    ancho=100;
     alto=78;
     frameActual.modificar(65, 164, ancho, alto);
     framesTranscurridas = 0;
@@ -15,7 +15,7 @@ EstadoEnemigoMuriendo::EstadoEnemigoMuriendo() {
 
 
 EstadoEnemigoMuriendo::EstadoEnemigoMuriendo(tipoDeSprite tipoNuevo) {
-    ancho=65;
+    ancho=100;
     alto=78;
     tipo=tipoNuevo;
     frameActual.modificar(65, 164, ancho, alto);
@@ -23,31 +23,37 @@ EstadoEnemigoMuriendo::EstadoEnemigoMuriendo(tipoDeSprite tipoNuevo) {
        case EnemigoJefe:{
        	ancho=115;
        	alto=125;
-       	frameActual.modificar(65, 240, ancho, alto);
+       	frameActual.modificar(65, 310, ancho, alto);
         }
        }
-    frameActual.modificar(65, 164, ancho, alto);
     framesTranscurridas = 0;
     numeroDeFrame = 0;
     caidaTerminada = false;
 }
 
 EstadoJugador* EstadoEnemigoMuriendo::avanzar() {
-    return (morir());
+    return (morir(tipo));
 }
 
 EstadoJugador* EstadoEnemigoMuriendo::parar() {
-    return (morir());
+    return (morir(tipo));
 }
 
 EstadoJugador* EstadoEnemigoMuriendo::pegar() {
-    return (morir());
+    return (morir(tipo));
 }
 
-EstadoJugador* EstadoEnemigoMuriendo::morir() {
-    if (!terminado()) {
+EstadoJugador* EstadoEnemigoMuriendo::morir(tipoDeSprite tipoNuevo) {
+	int framesLimite=4;
+		tipo = tipoNuevo;
+		switch (tipo){
+	    case EnemigoJefe:{
+	    	framesLimite=6;
+	     }
+		}
+	if (!terminado()) {
        framesTranscurridas++;
-       if (framesTranscurridas == 4) {
+       if (framesTranscurridas == framesLimite) {
            framesTranscurridas = 0;
            cambiarFrame();
      }
@@ -59,18 +65,34 @@ EstadoJugador* EstadoEnemigoMuriendo::morir() {
 }
 
 bool EstadoEnemigoMuriendo::terminado() {
-    return ((numeroDeFrame == 0) && (framesTranscurridas == 3) && caidaTerminada);
+	int framesLimite=3;
+			switch (tipo){
+		    case EnemigoJefe:{
+		    	framesLimite=5;
+		     }
+			}
+    return ((numeroDeFrame == 0) && (framesTranscurridas == framesLimite) && caidaTerminada);
 }
 
 void EstadoEnemigoMuriendo::cambiarFrame(){
-    if (numeroDeFrame == 3) {
+	int framesLimite=3;
+			switch (tipo){
+			case EnemigoJefe:{
+			   framesLimite=5;
+			 }
+		    }
+	if (numeroDeFrame == framesLimite) {
         caidaTerminada = true;
         numeroDeFrame = 0;
     } else {
         numeroDeFrame++;
     }
     frameActual.modificar(((ancho * numeroDeFrame) + 65), 164, ancho, alto);
-
+    switch (tipo){
+        		case EnemigoJefe:{
+        			frameActual.modificar((ancho * numeroDeFrame) + 65, 310, ancho, alto);
+        		 }
+        	    }
 }
 
 EstadoEnemigoMuriendo::~EstadoEnemigoMuriendo() {

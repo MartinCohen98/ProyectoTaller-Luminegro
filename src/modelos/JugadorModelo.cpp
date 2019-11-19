@@ -14,7 +14,7 @@ JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig, int posXinicial, i
 	energia=100;
 	vidas=3;
 	puntaje=0;
-	arma=cuchillo;
+	arma=tubo;
 	estado = new EstadoJugadorParado(arma);
 	estadoOriginal = new EstadoJugadorParado(arma);
 	dadoVuelta = false;
@@ -139,6 +139,10 @@ void JugadorModelo::activarModoTest(){
 
 void JugadorModelo::desactivarModoTest(){
     inmortal=false;
+}
+
+tipoDeArma JugadorModelo::consultarArma(){
+	return arma;
 }
 
 bool JugadorModelo::moverEnY() {

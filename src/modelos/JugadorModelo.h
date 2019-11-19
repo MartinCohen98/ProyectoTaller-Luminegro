@@ -52,6 +52,7 @@ public:
 	bool consultarModoTest();
 	void activarModoTest();
 	void desactivarModoTest();
+	tipoDeArma consultarArma();
 	void realizarMovimientos(FondoModelo* fondo, bool rezagado);
 	bool llegoAlFin(FondoModelo *fondo);
 	void movidaDePantalla(FondoModelo* fondo);
