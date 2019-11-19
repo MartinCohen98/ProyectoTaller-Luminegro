@@ -35,9 +35,10 @@ void EnemigoModelo::retroceder() {
 }
 
 void EnemigoModelo::subir() {
-	if (posicionY > 180) {
+	if (posicionY > bordeSuperior) {
 		estado = estado->avanzar();
 		moverEnY(-1);
+		subiendo=true;
 	} else {
 	    parar();
 		estado = estado->parar();
@@ -46,9 +47,10 @@ void EnemigoModelo::subir() {
 }
 
 void EnemigoModelo::bajar() {
-	if (posicionY < 320) {
+	if (posicionY < bordeInferior) {
 		moverEnY(1);
         estado = estado->avanzar();
+        subiendo=false;
 	} else {
 	    parar();
 		estado = estado->parar();
@@ -260,6 +262,10 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 	if (colisionador->colisiona(this)) {
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
+		if (subiendo)
+			bajar();
+		else
+			subir();
 		actualizarInsercion();
 	}
 }
