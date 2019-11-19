@@ -367,8 +367,4 @@ Cliente::~Cliente() {
 	socket.cerrar();
 }
 
-MensajeInicioPartida Cliente::recibirMensajeInicioPartida(GestorThreadsCliente *gestorThreads) {
-    MensajeInicioPartida mensajeInicio = MensajeInicioPartida();
-    return mensajeInicio;
-}
 

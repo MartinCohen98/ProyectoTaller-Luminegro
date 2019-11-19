@@ -228,8 +228,10 @@ int Servidor::enviarMensajeInicioPartida(MensajeInicioPartida *mensaje) {
 }
 
 MensajeInicioPartida Servidor::generarMensajeInicioPartida() {
-    //TODO cargar la  vida inicial desde el config
-    MensajeInicioPartida mensaje = MensajeInicioPartida(nivelActual, 100);
+    int vidaMaxima = stoi(archivoConfiguracion->child("configuracion").child("escenario").child("vitalidad").child_value("energia"));
+
+    MensajeInicioPartida mensaje = MensajeInicioPartida(nivelActual,vidaMaxima);
+
     for(int i = 0; i < jugadoresCantidadEsperada; i++){
         mensaje.setNombreJugador(i, credenciales[i].getUsuario());
     }

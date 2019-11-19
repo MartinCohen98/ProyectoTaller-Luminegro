@@ -102,5 +102,24 @@
             <salto>assets/sounds/jump.mp3</salto>
             <destruccion>assets/sounds/destruction.mp3</destruccion>
         </sonidos>
+        <vitalidad>
+            <energia>100</energia>
+            <vidas>3</vidas>
+        </vitalidad>
+        <puntos>
+            <piña>100</piña>
+            <patadaVoladora>400</patadaVoladora>
+            <cuchillazo>150</cuchillazo>
+            <tubazo>200</tubazo>
+            <caja>200</caja>
+            <barril>300</barril>
+            <enemigo>500</enemigo>
+        </puntos>
+        <potencia>
+            <piña>20</piña>
+            <patadaVoladora>75</patadaVoladora>
+            <cuchillazo>50</cuchillazo>
+            <tubazo>35</tubazo>
+        </potencia>
     </escenario>
 </configuracion>
