@@ -41,6 +41,7 @@ void EnemigoModelo::subir() {
 		estado = estado->avanzar();
 		moverEnY(-1);
 		subiendo=true;
+		avanzando=false;
 	} else {
 	    parar();
 		estado = estado->parar();
@@ -53,6 +54,7 @@ void EnemigoModelo::bajar() {
 		moverEnY(1);
         estado = estado->avanzar();
         subiendo=false;
+        avanzando=false;
 	} else {
 	    parar();
 		estado = estado->parar();

@@ -69,8 +69,8 @@ void ControlEnemigosModelo::realizarMovimientos(int atacante, ControlJugadoresMo
           enemigos[i]->patrullar();
        enemigos[i]->realizarMovimientos(colisionador);
       };
-   //enemigos[enemigoAtacante]->atacar(x,y);
-   //enemigos[enemigoAtacante]->realizarMovimientos(colisionador);
+  // enemigos[enemigoAtacante]->atacar(x,y);
+  // enemigos[enemigoAtacante]->realizarMovimientos(colisionador);
 }
 
 void ControlEnemigosModelo::movimientosIniciales(){

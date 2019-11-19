@@ -14,7 +14,7 @@ private:
 
 public:
 	EstadoJugadorPateando(int numeroDeFrame, int framesTranscurridas,
-						int elevacion, tipoDeArma arma);
+						int elevacion, tipoDeArma tipoArma);
 	EstadoJugador* avanzar();
 	EstadoJugador* parar();
 	EstadoJugador* agacharse();

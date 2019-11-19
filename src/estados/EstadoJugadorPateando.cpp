@@ -4,7 +4,7 @@ EstadoJugadorPateando::EstadoJugadorPateando(int elNumeroDeFrame,
 					int lasFramesTranscurridas, int laElevacion, tipoDeArma tipoArma) {
 	alto = 100;
 	ancho = 80;
-	arma=tipoArma;
+	arma = tipoArma;
 	frameActual.modificar(0, 320, ancho, alto);
 	numeroDeFrame = elNumeroDeFrame;
 	framesTranscurridas = lasFramesTranscurridas;
@@ -78,4 +78,3 @@ bool EstadoJugadorPateando::estaSaltando() {
 }
 
 EstadoJugadorPateando::~EstadoJugadorPateando() {}
-

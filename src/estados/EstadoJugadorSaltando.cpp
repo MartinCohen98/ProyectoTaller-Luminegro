@@ -50,11 +50,17 @@ EstadoJugador* EstadoJugadorSaltando::morir(){
 }
 
 EstadoJugador* EstadoJugadorSaltando::acuchillar(){
-    return saltar();
+	EstadoJugadorPateando* nuevoEstado = new EstadoJugadorPateando(numeroDeFrame,
+				framesTranscurridas, elevacion, arma);
+		delete this;
+		return nuevoEstado;
 }
 
 EstadoJugador* EstadoJugadorSaltando::apalear(){
-    return saltar();
+	EstadoJugadorPateando* nuevoEstado = new EstadoJugadorPateando(numeroDeFrame,
+				framesTranscurridas, elevacion, arma);
+		delete this;
+		return nuevoEstado;
 }
 
 EstadoJugador* EstadoJugadorSaltando::congelarse() {
