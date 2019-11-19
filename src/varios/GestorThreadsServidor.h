@@ -6,7 +6,7 @@
 #include "../comunicacion/AceptadorConexiones.h"
 #include "../modelos/Modelo.h"
 #include <pthread.h>
-#include <comunicacion/MensajeInicioPartida.h>
+#include "../comunicacion/MensajeInicioPartida.h"
 
 class GestorThreadsServidor {
 

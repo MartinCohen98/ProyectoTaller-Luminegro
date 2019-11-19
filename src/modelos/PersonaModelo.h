@@ -9,6 +9,8 @@ class PersonaModelo: public Colisionable {
 protected:
 	int posicionX;
 	int posicionY;
+	int posicionXAnterior;
+	int posicionYAnterior;
 	bool dadoVuelta;
 	int energia;
 	EstadoJugador* estado;

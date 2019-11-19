@@ -218,6 +218,12 @@ void EnemigoModelo::retrocesoDePantalla() {
 }
 
 
+void EnemigoModelo::guardarPosicionesActuales() {
+	posicionXAnterior = posicionX;
+	posicionYAnterior = posicionY;
+}
+
+
 void EnemigoModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual) {
 	Encuadre sprite = estado->obtenerSprite();
 	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, tipoEnemigo);
@@ -241,13 +247,23 @@ void EnemigoModelo::moverEnY(int movimiento) {
 	posicionY = posicionY + movimiento;
 }
 
-void EnemigoModelo::realizarMovimientos() {
+void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 	if (estado->puedeMoverse()) {
 //		actualizarPosicion(fondo, rezagado);
     } else {
     		estado = estado->parar();
-    	}
+	}
+	checkearColisiones(colisionador);
+}
+
+
+void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 	actualizarInsercion();
+	if (colisionador->colisiona(&insercion)) {
+		posicionX = posicionXAnterior;
+		posicionY = posicionYAnterior;
+		actualizarInsercion();
+	}
 }
 
 

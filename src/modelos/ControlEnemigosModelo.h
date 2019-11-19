@@ -14,7 +14,8 @@ private:
 public:
 	ControlEnemigosModelo(int nivel);
 	int obtenerCantidad();
-	void realizarMovimientos(int atacante, ControlJugadoresModelo *jugadores);
+	void realizarMovimientos(int atacante, ControlJugadoresModelo *jugadores,
+												Colisionador* colisionador);
 	void movimientosIniciales();
 	int buscarObjetivo(ControlJugadoresModelo *jugadores);
 	void matar();

@@ -39,8 +39,8 @@ bool Colisionador::coincidenEnY(Encuadre* unEncuadre, Encuadre* otroEncuadre) {
 	bool coinciden = false;
 	int unaPosicionY = unEncuadre->getY() + unEncuadre->getAlto();
 	int otraPosicionY = otroEncuadre->getY() + otroEncuadre->getAlto();
-	if ((unaPosicionY + 5 > otraPosicionY - 5) &&
-			(unaPosicionY - 5 < otraPosicionY + 5))
+	if ((unaPosicionY + 10 > otraPosicionY - 10) &&
+			(unaPosicionY - 10 < otraPosicionY + 10))
 		coinciden = true;
 	return coinciden;
 }

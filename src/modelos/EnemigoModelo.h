@@ -43,11 +43,13 @@ public:
 	int consultarJugadorObjetivo();
 	void atacar(int x,int y);
 	void retrocesoDePantalla();
-	void realizarMovimientos();
+	void guardarPosicionesActuales();
+	void realizarMovimientos(Colisionador* colisionador);
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~EnemigoModelo();
 
 protected:
+	void checkearColisiones(Colisionador* colisionador);
 	void actualizarInsercion();
 	void moverEnX(int movimiento);
 	void moverEnY(int movimiento);

@@ -53,7 +53,8 @@ public:
 	void activarModoTest();
 	void desactivarModoTest();
 	tipoDeArma consultarArma();
-	void realizarMovimientos(FondoModelo* fondo, bool rezagado);
+	void realizarMovimientos(FondoModelo* fondo, bool rezagado,
+										Colisionador* colisionador);
 	bool llegoAlFin(FondoModelo *fondo);
 	void movidaDePantalla(FondoModelo* fondo);
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual,
@@ -62,6 +63,7 @@ public:
 
 private:
 	void actualizarPosicion(FondoModelo* fondo, bool rezagado);
+	void checkearColisiones(Colisionador* colisionador);
 	void actualizarInsercion();
 	bool moverEnX(FondoModelo* fondo, bool rezagado);
 	bool moverEnY();

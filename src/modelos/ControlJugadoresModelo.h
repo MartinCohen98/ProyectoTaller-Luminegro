@@ -14,7 +14,7 @@ private:
 public:
 	ControlJugadoresModelo(pugi::xml_document *archiConfig, int cantidad);
 	void procesarInput(MensajeCliente* mensaje, int numeroDeJugador);
-	void realizarMovimientos(FondoModelo* fondo);
+	void realizarMovimientos(FondoModelo* fondo, Colisionador* colisionador);
 	void movidaDePantalla(FondoModelo* fondo);
 	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
 	bool llegaronAlFin(FondoModelo* fondo);

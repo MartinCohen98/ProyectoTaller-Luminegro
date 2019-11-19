@@ -19,6 +19,8 @@ Modelo::Modelo(pugi::xml_document* archiConfig, int cantidadDeJugadores) {
 	logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 	objetos = new ControlObjetosModelo(archivoConfiguracion, fondo->obtenerAncho(), nivelActual);
 
+	llenarColisionador();
+
 	enemigos->movimientosIniciales();
 
 	atacante = enemigos->buscarObjetivo(protagonistas);
@@ -46,8 +48,8 @@ void Modelo::realzarMovimientos() {
 		protagonistas->dejarDeGolpear();
 	}
 
-	protagonistas->realizarMovimientos(fondo);
-	enemigos->realizarMovimientos(atacante, protagonistas);
+	protagonistas->realizarMovimientos(fondo, colisionador);
+	enemigos->realizarMovimientos(atacante, protagonistas, colisionador);
 
 	if (fondo->seMovio()) {
 		protagonistas->movidaDePantalla(fondo);
@@ -91,6 +93,7 @@ void Modelo::pasarNivel() {
 
 	logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 	objetos = new ControlObjetosModelo(archivoConfiguracion, fondo->obtenerAncho(), nivelActual);
+
 	llenarColisionador();
 
 	enemigos->movimientosIniciales();

@@ -120,10 +120,11 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
 }
 
 
-void ControlJugadoresModelo::realizarMovimientos(FondoModelo* fondo) {
+void ControlJugadoresModelo::realizarMovimientos(FondoModelo* fondo,
+										Colisionador* colisionador) {
     bool rezagado = verificarRezagado(fondo);
 	for (int i = 0; i < cantidadJugadores; i++){
-		jugadores[i]->realizarMovimientos(fondo, rezagado);
+		jugadores[i]->realizarMovimientos(fondo, rezagado, colisionador);
 	}
 }
 

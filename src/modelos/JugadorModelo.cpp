@@ -159,7 +159,10 @@ bool JugadorModelo::moverEnY() {
 }
 
 
-void JugadorModelo::realizarMovimientos(FondoModelo* fondo, bool rezagado) {
+void JugadorModelo::realizarMovimientos(FondoModelo* fondo, bool rezagado,
+										Colisionador* colisionador) {
+	posicionXAnterior = posicionX;
+	posicionYAnterior = posicionY;
 	if (estado->puedeMoverse()) {
 		actualizarPosicion(fondo, rezagado);
     } else {
@@ -169,7 +172,7 @@ void JugadorModelo::realizarMovimientos(FondoModelo* fondo, bool rezagado) {
     		estado = estado->parar();
     	}
 	}
-	actualizarInsercion();
+	checkearColisiones(colisionador);
 }
 
 
@@ -184,6 +187,16 @@ void JugadorModelo::actualizarPosicion(FondoModelo* fondo, bool rezagado) {
 		} else {
 			estado = estado->parar();
 		}
+	}
+}
+
+
+void JugadorModelo::checkearColisiones(Colisionador* colisionador) {
+	actualizarInsercion();
+	if (colisionador->colisiona(&insercion)) {
+		posicionX = posicionXAnterior;
+		posicionY = posicionYAnterior;
+		actualizarInsercion();
 	}
 }
 
