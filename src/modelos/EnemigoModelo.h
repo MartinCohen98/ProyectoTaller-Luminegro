@@ -12,6 +12,7 @@ protected:
 	int ancho;
 	int alto;
     bool subiendo;
+    bool avanzando;
     int bordeSuperior=180;
     int bordeInferior=320;
     int jugadorObjetivo;

@@ -19,6 +19,7 @@ void EnemigoModelo::avanzar() {
 	dadoVuelta = false;
 	estado = estado->avanzar();
 	moverEnX(5);
+	avanzando=true;
 	actualizarInsercion();
 }
 
@@ -31,6 +32,7 @@ void EnemigoModelo::retroceder() {
 	dadoVuelta = true;
 	estado = estado->avanzar();
 	moverEnX(-5);
+	avanzando=false;
 	actualizarInsercion();
 }
 
@@ -92,6 +94,7 @@ void EnemigoModelo::avanzarDiagArriba(int tope){
         parar();
         estado = estado->parar();
     }
+    avanzando=true;
     actualizarInsercion();
 }
 
@@ -105,6 +108,7 @@ void EnemigoModelo::avanzarDiagAbajo(int tope){
         parar();
         estado = estado->parar();
     }
+    avanzando=true;
     actualizarInsercion();
 }
 
@@ -118,6 +122,7 @@ void EnemigoModelo::retrocederDiagArriba(int tope){
         parar();
         estado = estado->parar();
     }
+    avanzando=false;
     actualizarInsercion();
 }
 
@@ -131,6 +136,7 @@ void EnemigoModelo::retrocederDiagAbajo(int tope){
         parar();
         estado = estado->parar();
     }
+    avanzando=false;
     actualizarInsercion();
 }
 
@@ -266,6 +272,10 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 			bajar();
 		else
 			subir();
+		if (avanzando)
+			retroceder();
+		else
+			avanzar();
 		actualizarInsercion();
 	}
 }
