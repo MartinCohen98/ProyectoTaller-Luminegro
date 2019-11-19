@@ -1,8 +1,6 @@
 #include "EnemigoModelo.h"
 
-EnemigoModelo::EnemigoModelo(){
-
-}
+EnemigoModelo::EnemigoModelo(){}
 
 EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo) {
 	posicionX = posXinicial;
@@ -259,7 +257,7 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 
 void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 	actualizarInsercion();
-	if (colisionador->colisiona(&insercion)) {
+	if (colisionador->colisiona(this)) {
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
 		actualizarInsercion();

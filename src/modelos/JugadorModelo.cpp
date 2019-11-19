@@ -193,7 +193,7 @@ void JugadorModelo::actualizarPosicion(FondoModelo* fondo, bool rezagado) {
 
 void JugadorModelo::checkearColisiones(Colisionador* colisionador) {
 	actualizarInsercion(false);
-	if (colisionador->colisiona(&insercion)) {
+	if (colisionador->colisiona(this)) {
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
 		actualizarInsercion(false);
@@ -232,7 +232,6 @@ bool JugadorModelo::moverEnX(FondoModelo* fondo, bool rezagado) {
               fondo->mover();
            }
 		}
-
 		seMovio = true;
 	}
 	if	((posicionX > 0) && (movimiento < 0)) {

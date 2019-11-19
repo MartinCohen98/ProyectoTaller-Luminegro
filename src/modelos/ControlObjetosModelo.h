@@ -9,6 +9,7 @@
 #include "../comunicacion/Socket.h"
 #include <stdlib.h>
 #include <time.h>
+#include "Colisionador.h"
 
 class ControlObjetosModelo {
 

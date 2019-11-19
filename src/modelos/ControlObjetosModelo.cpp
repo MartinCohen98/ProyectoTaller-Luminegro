@@ -103,11 +103,11 @@ void ControlObjetosModelo::generarMensajes(MensajeServidor* mensajes, int* mensa
 
 void ControlObjetosModelo::agregarObjetosEnColisionador(Colisionador* colisionador) {
 	for(int i = 0; i < barrilesCantidad; i++){
-		barriles[i]->agregarEnColisionador(colisionador);
+		colisionador->agregarEntidad(barriles[i]);
 	}
 
 	for(int i = 0; i < cajasCantidad; i++){
-		cajas[i]->agregarEnColisionador(colisionador);
+		colisionador->agregarEntidad(cajas[i]);
 	}
 }
 

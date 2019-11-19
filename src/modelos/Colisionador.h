@@ -2,17 +2,17 @@
 #define SRC_MODELOS_COLISIONADOR_H_
 
 #include <list>
-#include "../grafica/Encuadre.h"
+#include "Colisionable.h"
 
 class Colisionador {
 
 private:
-	std::list<Encuadre*> listaEncuadres;
+	std::list<Colisionable*> listaColisionables;
 
 public:
 	Colisionador();
-	void agregarEncuadre(Encuadre* encuadre);
-	bool colisiona(Encuadre* encuadre);
+	void agregarEntidad(Colisionable* colisionable);
+	bool colisiona(Colisionable* colisionable);
 	void vaciar();
 	virtual ~Colisionador();
 

@@ -2,7 +2,6 @@
 #define SRC_MODELOS_COLISIONABLE_H_
 
 #include "../grafica/Encuadre.h"
-#include "Colisionador.h"
 
 class Colisionable {
 
@@ -11,7 +10,7 @@ protected:
 
 public:
 	Colisionable();
-	void agregarEnColisionador(Colisionador* colisionador);
+	Encuadre* obtenerInsercion();
 	virtual ~Colisionable();
 };
 

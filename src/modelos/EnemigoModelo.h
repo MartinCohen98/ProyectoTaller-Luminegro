@@ -4,6 +4,7 @@
 #include "PersonaModelo.h"
 #include "../estados/EstadoEnemigoParado.h"
 #include "../comunicacion/Socket.h"
+#include "Colisionador.h"
 
 class EnemigoModelo: public PersonaModelo {
 

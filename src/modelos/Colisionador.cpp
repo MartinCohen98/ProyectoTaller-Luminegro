@@ -3,23 +3,23 @@
 Colisionador::Colisionador() {}
 
 
-void Colisionador::agregarEncuadre(Encuadre* encuadre) {
-	listaEncuadres.push_front(encuadre);
+void Colisionador::agregarEntidad(Colisionable* colisionable) {
+	listaColisionables.push_front(colisionable);
 }
 
 
 void Colisionador::vaciar() {
-	while (!listaEncuadres.empty())
-		listaEncuadres.pop_front();
+	while (!listaColisionables.empty())
+		listaColisionables.pop_front();
 }
 
 
-bool Colisionador::colisiona(Encuadre* encuadre) {
+bool Colisionador::colisiona(Colisionable* colisionable) {
 	bool colisiona = false;
-	for (std::list<Encuadre*>::iterator it = listaEncuadres.begin();
-										it != listaEncuadres.end(); ++it) {
-		if (((*it) != encuadre) && !colisiona)
-			colisiona = colisionan(encuadre, *it);
+	for (std::list<Colisionable*>::iterator it = listaColisionables.begin();
+										it != listaColisionables.end(); ++it) {
+		if (((*it)->obtenerInsercion() != colisionable->obtenerInsercion()) && !colisiona)
+			colisiona = colisionan(colisionable->obtenerInsercion(), (*it)->obtenerInsercion());
 	}
 	return colisiona;
 }

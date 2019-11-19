@@ -2,11 +2,9 @@
 
 Colisionable::Colisionable() {}
 
-
-void Colisionable::agregarEnColisionador(Colisionador* colisionador) {
-	colisionador->agregarEncuadre(&insercion);
+Encuadre* Colisionable::obtenerInsercion() {
+	return &insercion;
 }
-
 
 Colisionable::~Colisionable() {}
 

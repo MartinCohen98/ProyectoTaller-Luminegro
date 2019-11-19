@@ -125,7 +125,7 @@ void ControlEnemigosModelo::generarMensajes(MensajeServidor* mensajes, int* mens
 
 void ControlEnemigosModelo::agregarEnemigosEnColisionador(Colisionador* colisionador) {
 	for(int i = 0; i < enemigosCantidad; i++) {
-		enemigos[i]->agregarEnColisionador(colisionador);
+		colisionador->agregarEntidad(enemigos[i]);
 	}
 }
 

@@ -9,6 +9,7 @@
 #include "../comunicacion/MensajeServidor.h"
 #include <string>
 #include "FondoModelo.h"
+#include "Colisionador.h"
 
 class JugadorModelo: public PersonaModelo {
 
