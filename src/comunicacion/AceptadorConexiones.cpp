@@ -36,8 +36,9 @@ void AceptadorConexiones::operator()() {
 
         	while (mensajeCredenciales.getEstado() != MensajeCredenciales::ESTADO_AUTENTICADO) {
         		socketDeCliente.recibir(&mensajeCredenciales);
-        	    contador->validarCredenciales(&mensajeCredenciales, &socketDeCliente, nroNivel);
+        	    contador->validarCredenciales(&mensajeCredenciales, &socketDeCliente);
         	}
+        	mensajeInicio->setNivelInicial(*nroNivel);
         	socketDeCliente.enviar((char *) mensajeInicio, sizeof(MensajeInicioPartida));
         }
     }

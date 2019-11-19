@@ -12,7 +12,6 @@ private:
     char usuario[MAX];
     char clave[MAX];
     int estado = ESTADO_ESPERANDO_CONEXIONES;
-    int nivelInicial;
 
 public:
     static const int ESTADO_ESPERANDO_CONEXIONES = 0;
@@ -26,11 +25,9 @@ public:
     void setUsuario(const std::string& valor);
     void setClave(std::string valor);
     void setEstado(int valor);
-    void setNivelInicial(int nivel);
     std::string getUsuario();
     std::string getClave();
     int getEstado();
-    int getNivelInicial();
 };
 
 

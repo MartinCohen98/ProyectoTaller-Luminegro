@@ -103,7 +103,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	gestorThreads.comenzar();
 
-   for (int nivel = mensajeCredenciales.getNivelInicial(); nivel <= 2; nivel++) {
+   for (int nivel = mensajeInicio.getNivelInicial(); nivel <= 2; nivel++) {
 
         string nivelNodeName = "nivel";
 		nivelNodeName.append( to_string(nivel) );

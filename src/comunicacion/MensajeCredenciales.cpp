@@ -27,10 +27,3 @@ int MensajeCredenciales::getEstado() {
     return this->estado;
 }
 
-void MensajeCredenciales::setNivelInicial(int nivel) {
-    this->nivelInicial = nivel;
-}
-
-int MensajeCredenciales::getNivelInicial() {
-    return nivelInicial;
-}

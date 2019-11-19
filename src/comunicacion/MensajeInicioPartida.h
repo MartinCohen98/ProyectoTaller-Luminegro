@@ -13,10 +13,11 @@ private:
     int vidaMax;
 public:
     MensajeInicioPartida();
-    MensajeInicioPartida( int nivelInicio, int vidaMax);
     void setNombreJugador(int numeroJugador, std::string nombre);
+    void setNivelInicial(int nivel);
+    void setVidaMax(int vidaMaxima);
     std::string getNombreJugador(int numeroJugador);
-    int getNivelInicio();
+    int getNivelInicial();
     int getVidaMax();
 };
 

@@ -162,7 +162,6 @@ int Servidor::esperarConexiones() {
             if (usuarioYClaveValidados) {
                 credenciales[i] = mensajeCredenciales;
                 mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_AUTENTICADO);
-                mensajeCredenciales.setNivelInicial(nivelActual);
             } else {
                 mensajeCredenciales.setEstado(MensajeCredenciales::ESTADO_USUARIO_O_CLAVE_ERRONEOS);
             }
@@ -230,8 +229,9 @@ int Servidor::enviarMensajeInicioPartida(MensajeInicioPartida *mensaje) {
 MensajeInicioPartida Servidor::generarMensajeInicioPartida() {
     int vidaMaxima = stoi(archivoConfiguracion->child("configuracion").child("escenario").child("vitalidad").child_value("energia"));
 
-    MensajeInicioPartida mensaje = MensajeInicioPartida(nivelActual,vidaMaxima);
-
+    MensajeInicioPartida mensaje = MensajeInicioPartida();
+    mensaje.setNivelInicial(nivelActual);
+    mensaje.setVidaMax(vidaMaxima);
     for(int i = 0; i < jugadoresCantidadEsperada; i++){
         mensaje.setNombreJugador(i, credenciales[i].getUsuario());
     }

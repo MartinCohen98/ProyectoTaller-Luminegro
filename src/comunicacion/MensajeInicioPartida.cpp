@@ -6,13 +6,8 @@ int MensajeInicioPartida::getVidaMax() {
     return vidaMax;
 }
 
-int MensajeInicioPartida::getNivelInicio() {
+int MensajeInicioPartida::getNivelInicial() {
     return nivelInicio;
-}
-
-MensajeInicioPartida::MensajeInicioPartida(int nivelInicio, int vidaMax) {
-    this->nivelInicio = nivelInicio;
-    this->vidaMax = vidaMax;
 }
 
 void MensajeInicioPartida::setNombreJugador(int numeroJugador, std::string nombre) {
@@ -30,6 +25,14 @@ std::string MensajeInicioPartida::getNombreJugador(int numeroJugador) {
 MensajeInicioPartida::MensajeInicioPartida() {
     nivelInicio = 1;
     vidaMax = 80;
+}
+
+void MensajeInicioPartida::setNivelInicial(int nivel) {
+    nivelInicio = nivel;
+}
+
+void MensajeInicioPartida::setVidaMax(int vidaMaxima) {
+    vidaMax = vidaMaxima;
 }
 
 
