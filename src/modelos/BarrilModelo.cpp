@@ -12,5 +12,17 @@ BarrilModelo::BarrilModelo(int posXinicial, int posYinicial) {
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);
 }
 
+
+int BarrilModelo::recibirDanioDe(Colisionable* colisionable) {
+	golpes--;
+	int puntos = 0;
+	if (golpes == 0) {
+		desaparecer();
+		puntos = 300;
+	}
+	return puntos;
+}
+
+
 BarrilModelo::~BarrilModelo() {}
 

@@ -18,7 +18,14 @@ int Colisionable::obtenerDanio() {
 }
 
 
-void Colisionable::recibirDanioDe(Colisionable* colisionable) {}
+int Colisionable::obtenerPuntosDeGolpe() {
+	return 0;
+}
+
+
+int Colisionable::recibirDanioDe(Colisionable* colisionable) {
+	return 0;
+}
 
 
 Colisionable::~Colisionable() {}

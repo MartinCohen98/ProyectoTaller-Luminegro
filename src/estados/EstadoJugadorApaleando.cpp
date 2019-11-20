@@ -75,6 +75,11 @@ int EstadoJugadorApaleando::obtenerDanio() {
 }
 
 
+int EstadoJugadorApaleando::obtenerPuntosDeGolpe() {
+	return 200;
+}
+
+
 bool EstadoJugadorApaleando::terminado() {
     return ((numeroDeFrame == 0) && (framesTranscurridas == 1) && golpeTerminado);
 }

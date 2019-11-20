@@ -7,6 +7,7 @@ class BarrilModelo: public ElementoModelo {
 
 public:
 	BarrilModelo(int posXinicial, int posYinicial);
+	int recibirDanioDe(Colisionable* colisionable);
 	virtual ~BarrilModelo();
 };
 

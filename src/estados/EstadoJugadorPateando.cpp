@@ -64,14 +64,22 @@ EstadoJugador* EstadoJugadorPateando::congelarse() {
     return (new EstadoJugadorCongelado(arma));
 }
 
+
 void EstadoJugadorPateando::cambiarFrame() {
 	frameCambiada = true;
 	frameActual.modificar(0, 320, ancho, alto);
 }
 
+
 int EstadoJugadorPateando::obtenerElevacion() {
 	return elevacion;
 }
+
+
+int EstadoJugadorPateando::obtenerPuntosDeGolpe() {
+	return 400;
+}
+
 
 bool EstadoJugadorPateando::estaSaltando() {
 	return true;

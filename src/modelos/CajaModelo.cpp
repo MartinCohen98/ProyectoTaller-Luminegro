@@ -12,5 +12,17 @@ CajaModelo::CajaModelo(int posXinicial, int posYinicial) {
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);
 }
 
+
+int CajaModelo::recibirDanioDe(Colisionable* colisionable) {
+	golpes--;
+	int puntos = 0;
+	if (golpes == 0) {
+		desaparecer();
+		puntos = 200;
+	}
+	return puntos;
+}
+
+
 CajaModelo::~CajaModelo() {}
 

@@ -232,6 +232,17 @@ void EnemigoModelo::guardarPosicionesActuales() {
 }
 
 
+int EnemigoModelo::recibirDanioDe(Colisionable* colisionable) {
+	energia -= colisionable->obtenerDanio();
+	int puntos = colisionable->obtenerPuntosDeGolpe();
+	if (energia <= 0) {
+		desaparecer();
+		puntos += 500;
+	}
+	return puntos;
+}
+
+
 void EnemigoModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual) {
 	Encuadre sprite = estado->obtenerSprite();
 	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, tipoEnemigo);
@@ -280,6 +291,12 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 			avanzar();
 		actualizarInsercion();
 	}
+}
+
+
+void EnemigoModelo::desaparecer() {
+	alto = 0;
+	ancho = 0;
 }
 
 

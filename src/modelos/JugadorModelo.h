@@ -52,6 +52,7 @@ public:
 	bool estaDesconectado();
 	bool estaAtacando();
 	int obtenerDanio();
+	int obtenerPuntosDeGolpe();
 	bool consultarModoTest();
 	void activarModoTest();
 	void desactivarModoTest();

@@ -1,18 +1,12 @@
-/*
- * EstadoJugadorGolpeado.cpp
- *
- *  Created on: 18 nov. 2019
- *      Author: julio
- */
-
 #include "EstadoJugadorGolpeado.h"
 
 EstadoJugadorGolpeado::EstadoJugadorGolpeado() {
-	// TODO Auto-generated constructor stub
-	ancho=47;
-   alto=78;
-   frameActual.modificar(0, 0, ancho, alto);
-
+	ancho = 47;
+	alto = 78;
+	frameActual.modificar(0, 0, ancho, alto);
+	palizaTerminada = false;
+	numeroDeFrame = 0;
+	framesTranscurridas = 0;
 }
 
 EstadoJugador* EstadoJugadorGolpeado::avanzar() {
@@ -63,7 +57,5 @@ void EstadoJugadorGolpeado::cambiarFrame() {
     frameActual.modificar((ancho * numeroDeFrame), alto, ancho, alto);
 }
 
-EstadoJugadorGolpeado::~EstadoJugadorGolpeado() {
-	// TODO Auto-generated destructor stub
-}
+EstadoJugadorGolpeado::~EstadoJugadorGolpeado() {}
 

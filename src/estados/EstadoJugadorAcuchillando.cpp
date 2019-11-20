@@ -79,6 +79,12 @@ int EstadoJugadorAcuchillando::obtenerDanio() {
 	return 50;
 }
 
+
+int EstadoJugadorAcuchillando::obtenerPuntosDeGolpe() {
+	return 150;
+}
+
+
 void EstadoJugadorAcuchillando::cambiarFrame() {
     if (numeroDeFrame == 1) {
         golpeTerminado = true;

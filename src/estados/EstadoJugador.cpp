@@ -80,12 +80,20 @@ int EstadoJugador::obtenerAncho() {
 	return ancho;
 }
 
+
 bool EstadoJugador::puedeMoverse() {
 	return true;
 }
 
+
 int EstadoJugador::obtenerDanio() {
 	return 0;
 }
+
+
+int EstadoJugador::obtenerPuntosDeGolpe() {
+	return 0;
+}
+
 
 EstadoJugador::~EstadoJugador() {}

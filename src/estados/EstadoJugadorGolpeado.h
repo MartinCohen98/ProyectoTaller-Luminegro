@@ -1,10 +1,3 @@
-/*
- * EstadoJugadorGolpeado.h
- *
- *  Created on: 18 nov. 2019
- *      Author: julio
- */
-
 #ifndef SRC_ESTADOS_ESTADOJUGADORGOLPEADO_H_
 #define SRC_ESTADOS_ESTADOJUGADORGOLPEADO_H_
 

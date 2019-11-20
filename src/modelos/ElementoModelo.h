@@ -19,7 +19,6 @@ public:
 	ElementoModelo();
 	void movidaDePantalla();
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
-	void recibirDanioDe(Colisionable* colisionable);
 	void desaparecer();
 	virtual ~ElementoModelo();
 };

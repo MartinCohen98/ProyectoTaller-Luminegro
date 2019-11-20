@@ -7,6 +7,7 @@ class CajaModelo: public ElementoModelo {
 
 public:
 	CajaModelo(int posXinicial, int posYinicial);
+	int recibirDanioDe(Colisionable* colisionable);
 	virtual ~CajaModelo();
 };
 

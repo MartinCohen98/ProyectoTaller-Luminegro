@@ -23,13 +23,6 @@ void ElementoModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActua
 }
 
 
-void ElementoModelo::recibirDanioDe(Colisionable* colisionable) {
-	golpes--;
-	if (golpes == 0)
-		desaparecer();
-}
-
-
 void ElementoModelo::desaparecer() {
 	posicionY += 600;
 	insercion.modificar(posicionX, posicionY, ancho, alto);
