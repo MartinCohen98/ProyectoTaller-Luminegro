@@ -31,6 +31,8 @@ add_executable(ProyectoTaller_Luminegro
         src/comunicacion/RecibidorMensajesCliente.h
         src/comunicacion/MensajeCredenciales.cpp
         src/comunicacion/MensajeCredenciales.h
+		src/comunicacion/MensajeInicioPartida.cpp
+		src/comunicacion/MensajeInicioPartida.h
         src/comunicacion/EnviadorMensajesCliente.cpp
         src/comunicacion/EnviadorMensajesCliente.h
         src/comunicacion/RecibidorMensajesServidor.cpp
@@ -54,11 +56,17 @@ add_executable(ProyectoTaller_Luminegro
         src/estados/EstadoEnemigoGolpeado.h
         src/estados/EstadoJugador.cpp
         src/estados/EstadoJugador.h
-        src/estados/EstadoJugadorAgachado.cpp
+		src/estados/EstadoJugadorAcuchillando.cpp
+		src/estados/EstadoJugadorAcuchillando.h
+		src/estados/EstadoJugadorAgachado.cpp
         src/estados/EstadoJugadorAgachado.h
+		src/estados/EstadoJugadorApaleando.h
+		src/estados/EstadoJugadorApaleando.cpp
         src/estados/EstadoJugadorAvanzando.cpp
         src/estados/EstadoJugadorAvanzando.h
-        src/estados/EstadoJugadorParado.cpp
+		src/estados/EstadoJugadorMuriendo.cpp
+		src/estados/EstadoJugadorMuriendo.h
+		src/estados/EstadoJugadorParado.cpp
         src/estados/EstadoJugadorParado.h
         src/estados/EstadoJugadorPateando.cpp
         src/estados/EstadoJugadorPateando.h
@@ -68,18 +76,14 @@ add_executable(ProyectoTaller_Luminegro
         src/estados/EstadoJugadorSaltando.h
         src/estados/EstadoJugadorCongelado.cpp
         src/estados/EstadoJugadorCongelado.h
-        src/estados/EstadoJugadorMuriendo.h
-        src/estados/EstadoJugadorMuriendo.cpp
-		src/estados/EstadoJugadorApaleando.h
-		src/estados/EstadoJugadorApaleando.cpp
-		src/estados/EstadoJugadorAcuchillando.h
 		src/estados/EstadoJugadorGolpeado.cpp
 		src/estados/EstadoJugadorGolpeado.h
+		src/estados/EstadoObjeto.cpp
+		src/estados/EstadoObjeto.h
 		src/estados/EstadoObjetoEntero.cpp
 		src/estados/EstadoObjetoEntero.h
 		src/estados/EstadoObjetoRoto.cpp
 		src/estados/EstadoObjetoRoto.h
-
 
         src/grafica/Encuadre.cpp
         src/grafica/Encuadre.h
@@ -168,7 +172,7 @@ add_executable(ProyectoTaller_Luminegro
         src/vistas/VistaJugador.h
         src/vistas/VistaObjeto.cpp
         src/vistas/VistaObjeto.h
-        src/estados/EstadoJugadorMuriendo.cpp src/estados/EstadoJugadorMuriendo.h src/estados/EstadoEnemigoMuriendo.cpp src/estados/EstadoEnemigoMuriendo.h src/estados/EstadoJugadorApaleando.cpp src/estados/EstadoJugadorApaleando.h src/estados/EstadoJugadorAcuchillando.cpp src/estados/EstadoJugadorAcuchillando.h src/comunicacion/MensajeInicioPartida.cpp src/comunicacion/MensajeInicioPartida.h)
+		)
 
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2_LIBRARIES})
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2TTF_LIBRARIES})
