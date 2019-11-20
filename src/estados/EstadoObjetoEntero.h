@@ -8,9 +8,10 @@
 #ifndef SRC_ESTADOS_ESTADOOBJETOENTERO_H_
 #define SRC_ESTADOS_ESTADOOBJETOENTERO_H_
 
+#include "../estados/EstadoObjeto.h"
 #include "../estados/EstadoObjetoRoto.h"
 
-class EstadoObjetoEntero {
+class EstadoObjetoEntero: public EstadoObjeto {
 private:
 	Encuadre frameActual;
 	int alto;
@@ -18,7 +19,7 @@ private:
 	tipoDeSprite tipo;
 public:
 	EstadoObjetoEntero(tipoDeSprite tipo);
-	EstadoObjetoRoto* romperse();
+	EstadoObjeto* romperse();
 	virtual ~EstadoObjetoEntero();
 };
 

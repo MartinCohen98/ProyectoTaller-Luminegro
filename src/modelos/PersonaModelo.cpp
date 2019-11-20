@@ -14,6 +14,7 @@ int PersonaModelo::darPosicionX(){
     return posicionX;
 }
 
+
 int PersonaModelo::darPosicionY(){
     return posicionY;
 }

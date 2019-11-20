@@ -74,8 +74,11 @@ add_executable(ProyectoTaller_Luminegro
 		src/estados/EstadoJugadorApaleando.cpp
 		src/estados/EstadoJugadorAcuchillando.h
 		src/estados/EstadoJugadorGolpeado.cpp
-		src/estados/EstadoJugadorGolpeado.cpp
-		
+		src/estados/EstadoJugadorGolpeado.h
+		src/estados/EstadoObjetoEntero.cpp
+		src/estados/EstadoObjetoEntero.h
+		src/estados/EstadoObjetoRoto.cpp
+		src/estados/EstadoObjetoRoto.h
 
 
         src/grafica/Encuadre.cpp

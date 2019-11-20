@@ -27,6 +27,7 @@ public:
     bool puedeMoverse();
     bool estaAtacando();
     int obtenerDanio();
+    int obtenerPuntosDeGolpe();
     bool terminado();
     virtual ~EstadoJugadorApaleando();
 

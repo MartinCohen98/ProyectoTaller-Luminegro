@@ -140,6 +140,11 @@ int JugadorModelo::obtenerDanio() {
 }
 
 
+int JugadorModelo::obtenerPuntosDeGolpe() {
+	return estado->obtenerPuntosDeGolpe();
+}
+
+
 bool JugadorModelo::consultarModoTest(){
    return inmortal;
 }

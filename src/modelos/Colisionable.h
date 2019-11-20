@@ -12,8 +12,9 @@ public:
 	Colisionable();
 	Encuadre* obtenerInsercion();
 	virtual bool estaAtacando();
-	virtual void recibirDanioDe(Colisionable* colisionable);
+	virtual int recibirDanioDe(Colisionable* colisionable);
 	virtual int obtenerDanio();
+	virtual int obtenerPuntosDeGolpe();
 	virtual ~Colisionable();
 };
 

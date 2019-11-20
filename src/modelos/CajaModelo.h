@@ -2,11 +2,15 @@
 #define CAJAMODELO_H_
 
 #include "ElementoModelo.h"
+#include "../estados/EstadoObjetoEntero.h"
+#include "../estados/EstadoObjetoRoto.h"
 
 class CajaModelo: public ElementoModelo {
 
 public:
 	CajaModelo(int posXinicial, int posYinicial);
+	int recibirDanioDe(Colisionable* colisionable);
+	void romperse();
 	virtual ~CajaModelo();
 };
 

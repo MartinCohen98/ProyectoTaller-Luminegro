@@ -23,7 +23,7 @@ EstadoObjetoEntero::EstadoObjetoEntero(tipoDeSprite tipoNuevo) {
 	frameActual.modificar(0, 0, ancho, alto);
 }
 
-EstadoObjetoRoto* EstadoObjetoEntero::romperse(){
+EstadoObjeto* EstadoObjetoEntero::romperse(){
 	delete this;
 	return (new EstadoObjetoRoto(tipo));
 }

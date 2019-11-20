@@ -26,7 +26,7 @@ EstadoObjetoRoto::EstadoObjetoRoto(tipoDeSprite tipoNuevo) {
     roturaTerminada = false;
 }
 
-EstadoObjetoRoto* EstadoObjetoRoto::romperse(tipoDeSprite tipoNuevo) {
+EstadoObjeto* EstadoObjetoRoto::romperse(tipoDeSprite tipoNuevo) {
 	int framesLimite=2;
 	tipo = tipoNuevo;
     if (!terminado()) {

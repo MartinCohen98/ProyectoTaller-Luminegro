@@ -8,9 +8,10 @@
 #ifndef SRC_ESTADOS_ESTADOOBJETOROTO_H_
 #define SRC_ESTADOS_ESTADOOBJETOROTO_H_
 
-#include "../comunicacion/MensajeServidor.h"
 
-class EstadoObjetoRoto {
+#include "../estados/EstadoObjeto.h"
+
+class EstadoObjetoRoto: public EstadoObjeto {
 private:
 	Encuadre frameActual;
 	int alto;
@@ -21,7 +22,7 @@ private:
 	bool roturaTerminada;
 public:
     EstadoObjetoRoto(tipoDeSprite tipo);
-    EstadoObjetoRoto* romperse(tipoDeSprite tipo);
+    EstadoObjeto* romperse(tipoDeSprite tipo);
     bool terminado();
     void cambiarFrame();
     virtual ~EstadoObjetoRoto();

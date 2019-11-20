@@ -313,5 +313,6 @@ void EnemigoModelo::desaparecer() {
 	ancho = 0;
 }
 
+
 EnemigoModelo::~EnemigoModelo() {}
 
