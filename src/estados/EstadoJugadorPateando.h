@@ -25,8 +25,11 @@ public:
     EstadoJugador* apalear();
     EstadoJugador* congelarse();
 	int obtenerElevacion();
+	int obtenerDanio();
 	int obtenerPuntosDeGolpe();
 	bool estaSaltando();
+	bool estaAtacando();
+	bool estaPateando();
 	virtual ~EstadoJugadorPateando();
 
 private:

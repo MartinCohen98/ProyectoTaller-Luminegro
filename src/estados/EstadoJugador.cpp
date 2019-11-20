@@ -69,13 +69,20 @@ bool EstadoJugador::estaAtacando() {
 }
 
 
+bool EstadoJugador::estaPateando() {
+	return false;
+}
+
+
 int EstadoJugador::obtenerElevacion() {
 	return 0;
 }
 
+
 int EstadoJugador::obtenerAlto() {
 	return alto;
 }
+
 
 int EstadoJugador::obtenerAncho() {
 	return ancho;
@@ -90,6 +97,7 @@ bool EstadoJugador::puedeMoverse() {
 int EstadoJugador::obtenerDanio() {
 	return 0;
 }
+
 
 int EstadoJugador::obtenerPuntosDeGolpe() {
 	return 0;

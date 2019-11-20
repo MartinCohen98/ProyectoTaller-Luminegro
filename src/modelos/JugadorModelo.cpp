@@ -219,7 +219,7 @@ void JugadorModelo::checkearColisiones(Colisionador* colisionador) {
 
 void JugadorModelo::actualizarInsercion(bool conElevacion) {
 	int elevacion = 0;
-	if (estado->estaSaltando())
+	if (estado->estaSaltando() && !estado->estaPateando())
 		elevacion = 30;
 	if (conElevacion)
 		elevacion = estado->obtenerElevacion();

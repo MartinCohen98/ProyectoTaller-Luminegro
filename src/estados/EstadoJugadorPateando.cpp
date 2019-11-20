@@ -76,6 +76,11 @@ int EstadoJugadorPateando::obtenerElevacion() {
 }
 
 
+int EstadoJugadorPateando::obtenerDanio() {
+	return 75;
+}
+
+
 int EstadoJugadorPateando::obtenerPuntosDeGolpe() {
 	return 400;
 }
@@ -84,5 +89,16 @@ int EstadoJugadorPateando::obtenerPuntosDeGolpe() {
 bool EstadoJugadorPateando::estaSaltando() {
 	return true;
 }
+
+
+bool EstadoJugadorPateando::estaAtacando() {
+	return (elevacion == 120);
+}
+
+
+bool EstadoJugadorPateando::estaPateando() {
+	return true;
+}
+
 
 EstadoJugadorPateando::~EstadoJugadorPateando() {}
