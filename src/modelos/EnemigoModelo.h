@@ -13,8 +13,8 @@ protected:
 	int alto;
     bool subiendo;
     bool avanzando;
-    int bordeSuperior=180;
-    int bordeInferior=320;
+    int bordeSuperior;
+    int bordeInferior;
     int jugadorObjetivo;
     int tiempoDeGolpe;
     tipoDeSprite tipoEnemigo;

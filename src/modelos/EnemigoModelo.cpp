@@ -5,10 +5,12 @@ EnemigoModelo::EnemigoModelo(){}
 EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
+	bordeSuperior = 180;
+	bordeInferior = 320;
 	ancho = 140;
 	alto = 280;
-	energia=100;
-	tipoEnemigo=tipo;
+	energia = 100;
+	tipoEnemigo = tipo;
 	estado = new EstadoEnemigoParado();
 	dadoVuelta = false;
 	subiendo=false;
