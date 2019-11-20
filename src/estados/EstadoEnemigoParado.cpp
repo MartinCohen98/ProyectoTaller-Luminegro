@@ -1,10 +1,3 @@
-/*
- * EstadoEnemigoFrenado.cpp
- *
- *  Created on: 16 sep. 2019
- *      Author: julio
- */
-
 #include "EstadoEnemigoParado.h"
 
 EstadoEnemigoParado::EstadoEnemigoParado() {
@@ -50,7 +43,5 @@ EstadoJugador* EstadoEnemigoParado::serGolpeado() {
 	return (new EstadoEnemigoGolpeado(tipo));
 }
 
-EstadoEnemigoParado::~EstadoEnemigoParado() {
-	// TODO Auto-generated destructor stub
-}
+EstadoEnemigoParado::~EstadoEnemigoParado() {}
 

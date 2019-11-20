@@ -1,10 +1,3 @@
-/*
- * EstadoEnemigoGolpeado.h
- *
- *  Created on: 18 nov. 2019
- *      Author: julio
- */
-
 #ifndef SRC_ESTADOS_ESTADOENEMIGOGOLPEADO_H_
 #define SRC_ESTADOS_ESTADOENEMIGOGOLPEADO_H_
 
@@ -24,10 +17,7 @@ public:
 	EstadoJugador* serGolpeado();
 	EstadoJugador* morir();
 	bool puedeMoverse();
-	bool terminado();
 	virtual ~EstadoEnemigoGolpeado();
-private:
-	void cambiarFrame();
 };
 
 #endif /* SRC_ESTADOS_ESTADOENEMIGOGOLPEADO_H_ */
