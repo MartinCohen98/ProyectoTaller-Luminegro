@@ -1,7 +1,3 @@
-//
-// Created by julio on 10/11/19.
-//
-
 #ifndef PROYECTOTALLER_LUMINEGRO_ESTADOENEMIGOMURIENDO_H
 #define PROYECTOTALLER_LUMINEGRO_ESTADOENEMIGOMURIENDO_H
 
@@ -20,6 +16,7 @@ public:
     EstadoJugador* pegar();
     EstadoJugador* morir(tipoDeSprite tipo);
     bool puedeMoverse();
+    EstadoJugador* serGolpeado();
     bool terminado();
     virtual ~EstadoEnemigoMuriendo();
 private:

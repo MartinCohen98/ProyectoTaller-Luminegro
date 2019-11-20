@@ -195,6 +195,23 @@ void EnemigoModelo::patrullar(){
             avanzarDiagArriba(bordeSuperior);
       }
 //	}
+    if (estado->puedeMoverse()) {
+		if (darPosicionY()==bordeSuperior)
+			estaBajando();
+		if (darPosicionY()==bordeInferior)
+			estaSubiendo();
+		if (!consultarSubiendo()){
+			if (consultarDadoVuelta())
+				retrocederDiagAbajo(bordeInferior);
+			else
+				avanzarDiagAbajo(bordeInferior);
+		} else {
+			if (consultarDadoVuelta())
+				retrocederDiagArriba(bordeSuperior);
+			else
+				avanzarDiagArriba(bordeSuperior);
+		}
+    }
 }
 
 void EnemigoModelo::modificarJugadorObjetivo(int objetivo){
@@ -246,6 +263,7 @@ void EnemigoModelo::guardarPosicionesActuales() {
 int EnemigoModelo::recibirDanioDe(Colisionable* colisionable) {
 	energia -= colisionable->obtenerDanio();
 	int puntos = colisionable->obtenerPuntosDeGolpe();
+	serGolpeado();
 	if (energia <= 0) {
 		desaparecer();
 		puntos += 500;
@@ -281,7 +299,7 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 	if (estado->puedeMoverse()) {
 //		actualizarPosicion(fondo, rezagado);
     } else {
-    		estado = estado->parar();
+    	estado = estado->parar();
 	}
 	checkearColisiones(colisionador);
 }

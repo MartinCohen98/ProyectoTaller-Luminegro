@@ -1,7 +1,3 @@
-//
-// Created by julio on 10/11/19.
-//
-
 #include "EstadoEnemigoMuriendo.h"
 
 EstadoEnemigoMuriendo::EstadoEnemigoMuriendo() {
@@ -66,6 +62,10 @@ EstadoJugador* EstadoEnemigoMuriendo::morir(tipoDeSprite tipoNuevo) {
 
 bool EstadoEnemigoMuriendo::puedeMoverse() {
     return false;
+}
+
+EstadoJugador* EstadoEnemigoMuriendo::serGolpeado() {
+	return (this->morir(tipo));
 }
 
 bool EstadoEnemigoMuriendo::terminado() {
