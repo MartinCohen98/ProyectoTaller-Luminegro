@@ -5,7 +5,7 @@ BarrilModelo::BarrilModelo(int posXinicial, int posYinicial) {
 	posicionY = posYinicial;
 	ancho = 150;
 	alto = 300;
-	golpesResistidos=1;
+	golpes = 1;
 	sprite = Barril;
 
 	encuadre.modificar(0, 0, 80, 175);

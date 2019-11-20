@@ -11,6 +11,9 @@ protected:
 public:
 	Colisionable();
 	Encuadre* obtenerInsercion();
+	virtual bool estaAtacando();
+	virtual void recibirDanioDe(Colisionable* colisionable);
+	virtual int obtenerDanio();
 	virtual ~Colisionable();
 };
 

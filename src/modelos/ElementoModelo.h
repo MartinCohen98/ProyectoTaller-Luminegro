@@ -11,7 +11,7 @@ protected:
 	int posicionY;
 	int ancho;
 	int alto;
-	int golpesResistidos;
+	int golpes;
 	tipoDeSprite sprite;
 	Encuadre encuadre;
 
@@ -19,6 +19,8 @@ public:
 	ElementoModelo();
 	void movidaDePantalla();
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
+	void recibirDanioDe(Colisionable* colisionable);
+	void desaparecer();
 	virtual ~ElementoModelo();
 };
 

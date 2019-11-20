@@ -129,6 +129,17 @@ bool JugadorModelo::estaDesconectado() {
     return desconectado;
 }
 
+
+bool JugadorModelo::estaAtacando() {
+	return estado->estaAtacando();
+}
+
+
+int JugadorModelo::obtenerDanio() {
+	return estado->obtenerDanio();
+}
+
+
 bool JugadorModelo::consultarModoTest(){
    return inmortal;
 }

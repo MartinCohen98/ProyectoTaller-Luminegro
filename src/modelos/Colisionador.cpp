@@ -18,8 +18,13 @@ bool Colisionador::colisiona(Colisionable* colisionable) {
 	bool colisiona = false;
 	for (std::list<Colisionable*>::iterator it = listaColisionables.begin();
 										it != listaColisionables.end(); ++it) {
-		if (((*it)->obtenerInsercion() != colisionable->obtenerInsercion()) && !colisiona)
-			colisiona = colisionan(colisionable->obtenerInsercion(), (*it)->obtenerInsercion());
+		if (((*it)->obtenerInsercion() != colisionable->obtenerInsercion()))
+			if (colisionan(colisionable->obtenerInsercion(),
+							(*it)->obtenerInsercion())) {
+				colisiona = true;
+				if (colisionable->estaAtacando())
+					(*it)->recibirDanioDe(colisionable);
+			}
 	}
 	return colisiona;
 }

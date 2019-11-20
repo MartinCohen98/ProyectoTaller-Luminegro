@@ -5,7 +5,7 @@ CajaModelo::CajaModelo(int posXinicial, int posYinicial) {
 	posicionY = posYinicial;
 	ancho = 120;
 	alto = 250;
-	golpesResistidos=2;
+	golpes = 2;
 	sprite = Caja;
 
 	encuadre.modificar(0, 0, 96, 169);

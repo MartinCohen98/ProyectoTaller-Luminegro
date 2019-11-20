@@ -1,7 +1,3 @@
-//
-// Created by julio on 12/11/19.
-//
-
 #include "EstadoJugadorApaleando.h"
 
 EstadoJugadorApaleando::EstadoJugadorApaleando(tipoDeArma tipoArma) {
@@ -12,6 +8,7 @@ EstadoJugadorApaleando::EstadoJugadorApaleando(tipoDeArma tipoArma) {
     framesTranscurridas = 0;
     numeroDeFrame = 0;
     golpeTerminado = false;
+    frameDeDanio = true;
 }
 
 EstadoJugador* EstadoJugadorApaleando::avanzar() {
@@ -68,8 +65,9 @@ bool EstadoJugadorApaleando::puedeMoverse() {
 
 
 bool EstadoJugadorApaleando::estaAtacando() {
-	return true;
-}
+	bool retorno = frameDeDanio;
+	frameDeDanio = false;
+	return retorno;}
 
 
 int EstadoJugadorApaleando::obtenerDanio() {

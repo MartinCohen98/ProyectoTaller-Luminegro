@@ -50,6 +50,8 @@ public:
 	void desaparecer();
 	void descongelarse();
 	bool estaDesconectado();
+	bool estaAtacando();
+	int obtenerDanio();
 	bool consultarModoTest();
 	void activarModoTest();
 	void desactivarModoTest();

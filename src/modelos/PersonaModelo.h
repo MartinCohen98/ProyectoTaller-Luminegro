@@ -19,6 +19,7 @@ public:
 	PersonaModelo();
 	int darPosicionX();
 	int darPosicionY();
+	void recibirDanioDe(Colisionable* colisionable);
 	bool consultarDadoVuelta();
 	virtual ~PersonaModelo();
 };

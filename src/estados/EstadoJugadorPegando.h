@@ -10,6 +10,7 @@ private:
 	int framesTranscurridas;
 	int numeroDeFrame;
 	bool golpeTerminado;
+	bool frameDeDanio;
 
 public:
 

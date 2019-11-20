@@ -40,7 +40,7 @@ ControlObjetosModelo::ControlObjetosModelo(pugi::xml_document *archiConfig,
 
 	for(i = 0; i < cajasCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 96;
-		int distrY = i * 5 + 370;
+		int distrY = i * 5 + 270;
 		cajas[i] = new CajaModelo(distrX, distrY);
 	}
 

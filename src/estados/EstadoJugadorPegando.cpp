@@ -8,6 +8,7 @@ EstadoJugadorPegando::EstadoJugadorPegando(tipoDeArma tipoArma) {
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;
 	golpeTerminado = false;
+	frameDeDanio = true;
 }
 
 EstadoJugador* EstadoJugadorPegando::avanzar() {
@@ -64,7 +65,9 @@ bool EstadoJugadorPegando::puedeMoverse() {
 
 
 bool EstadoJugadorPegando::estaAtacando() {
-	return true;
+	bool retorno = frameDeDanio;
+	frameDeDanio = false;
+	return retorno;
 }
 
 

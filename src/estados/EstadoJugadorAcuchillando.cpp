@@ -1,7 +1,3 @@
-//
-// Created by julio on 12/11/19.
-//
-
 #include "EstadoJugadorAcuchillando.h"
 
 EstadoJugadorAcuchillando::EstadoJugadorAcuchillando(tipoDeArma tipoArma) {
@@ -11,7 +7,8 @@ EstadoJugadorAcuchillando::EstadoJugadorAcuchillando(tipoDeArma tipoArma) {
     framesTranscurridas = 0;
     numeroDeFrame = 0;
     golpeTerminado = false;
-    arma=tipoArma;
+    arma = tipoArma;
+    frameDeDanio = true;
 }
 
 EstadoJugador* EstadoJugadorAcuchillando::avanzar() {
@@ -68,7 +65,9 @@ bool EstadoJugadorAcuchillando::puedeMoverse() {
 
 
 bool EstadoJugadorAcuchillando::estaAtacando() {
-	return true;
+	bool retorno = frameDeDanio;
+	frameDeDanio = false;
+	return retorno;
 }
 
 

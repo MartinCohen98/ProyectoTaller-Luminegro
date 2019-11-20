@@ -1,7 +1,3 @@
-//
-// Created by julio on 12/11/19.
-//
-
 #ifndef PROYECTOTALLER_LUMINEGRO_ESTADOJUGADORAPALEANDO_H
 #define PROYECTOTALLER_LUMINEGRO_ESTADOJUGADORAPALEANDO_H
 
@@ -14,6 +10,7 @@ private:
     int framesTranscurridas;
     int numeroDeFrame;
     bool golpeTerminado;
+    bool frameDeDanio;
 
 public:
 
