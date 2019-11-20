@@ -3,8 +3,8 @@
 EstadoEnemigoAvanzando::EstadoEnemigoAvanzando() {
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;
-	ancho=47;
-	alto=78;
+	ancho = 47;
+	alto = 78;
 	frameActual.modificar(0, 0, ancho, alto);
 }
 

@@ -65,9 +65,9 @@ void ControlEnemigosModelo::realizarMovimientos(int atacante, ControlJugadoresMo
        posicionY=enemigos[i]->darPosicionY();
      //  if (posicionY==250 || posicionY==200 || posicionY==300)
     //       enemigos[i]->pegar();
-       if (i!=enemigoAtacante)
+   //   if (i!=enemigoAtacante)
           enemigos[i]->patrullar();
-       enemigos[i]->realizarMovimientos(colisionador);
+      enemigos[i]->realizarMovimientos(colisionador);
       };
    enemigos[enemigoAtacante]->atacar(x,y);
    enemigos[enemigoAtacante]->realizarMovimientos(colisionador);

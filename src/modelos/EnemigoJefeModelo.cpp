@@ -5,11 +5,11 @@ EnemigoJefeModelo::EnemigoJefeModelo() {}
 EnemigoJefeModelo::EnemigoJefeModelo(int posXinicial, int posYinicial){
 	posicionX = posXinicial;
 	posicionY = posYinicial;
-	ancho = 200;
-	alto = 400;
+	ancho = 180;
+	alto = 360;
 	energia = 500;
-	bordeSuperior = 80;
-	bordeInferior = 220;
+	bordeSuperior = 120;
+	bordeInferior = 260;
 	tipoEnemigo = EnemigoJefe;
 	estado = new EstadoEnemigoParado(tipoEnemigo);
 	dadoVuelta = false;
