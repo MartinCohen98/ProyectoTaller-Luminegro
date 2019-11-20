@@ -26,6 +26,7 @@ int BarrilModelo::recibirDanioDe(Colisionable* colisionable) {
 
 void BarrilModelo::romperse(){
 	estado = estado->romperse();
+	actualizarInsercion();
 }
 
 

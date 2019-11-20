@@ -73,6 +73,9 @@ bool EstadoJugador::estaPateando() {
 	return false;
 }
 
+bool EstadoJugador::terminado() {
+	return false;
+}
 
 int EstadoJugador::obtenerElevacion() {
 	return 0;
