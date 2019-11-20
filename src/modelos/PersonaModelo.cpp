@@ -19,11 +19,6 @@ int PersonaModelo::darPosicionY(){
 }
 
 
-void PersonaModelo::recibirDanioDe(Colisionable* colisionable) {
-	energia -= colisionable->obtenerDanio();
-}
-
-
 bool PersonaModelo::consultarDadoVuelta(){
     return dadoVuelta;
 }

@@ -64,6 +64,10 @@ EstadoJugador* EstadoEnemigoMuriendo::morir(tipoDeSprite tipoNuevo) {
     }
 }
 
+bool EstadoEnemigoMuriendo::puedeMoverse() {
+    return false;
+}
+
 bool EstadoEnemigoMuriendo::terminado() {
 	int framesLimite=3;
 			switch (tipo){

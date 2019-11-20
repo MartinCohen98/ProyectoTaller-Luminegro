@@ -16,6 +16,7 @@ protected:
     int bordeSuperior=180;
     int bordeInferior=320;
     int jugadorObjetivo;
+    int tiempoDeGolpe;
     tipoDeSprite tipoEnemigo;
 
 public:
@@ -46,6 +47,7 @@ public:
 	void atacar(int x,int y);
 	void retrocesoDePantalla();
 	void guardarPosicionesActuales();
+	int recibirDanioDe(Colisionable* colisionable);
 	void realizarMovimientos(Colisionador* colisionador);
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~EnemigoModelo();
@@ -55,6 +57,7 @@ protected:
 	void actualizarInsercion();
 	void moverEnX(int movimiento);
 	void moverEnY(int movimiento);
+	void desaparecer();
 };
 
 #endif /* SRC_ENEMIGOMODELO_H_ */

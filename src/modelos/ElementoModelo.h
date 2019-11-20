@@ -3,6 +3,7 @@
 
 #include "../comunicacion/Socket.h"
 #include "Colisionable.h"
+#include "../estados/EstadoObjetoEntero.h"
 
 class ElementoModelo: public Colisionable {
 
@@ -14,7 +15,7 @@ protected:
 	int golpes;
 	tipoDeSprite sprite;
 	Encuadre encuadre;
-
+	EstadoObjetoEntero* estado;
 public:
 	ElementoModelo();
 	void movidaDePantalla();

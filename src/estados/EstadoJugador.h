@@ -23,11 +23,12 @@ public:
     virtual EstadoJugador* acuchillar();
     virtual EstadoJugador* apalear();
     virtual EstadoJugador* serGolpeado();
-	virtual bool puedeMoverse();
 	virtual bool estaSaltando();
 	virtual bool estaAtacando();
+	virtual bool puedeMoverse();
 	virtual int obtenerElevacion();
 	virtual int obtenerDanio();
+	virtual int obtenerPuntosDeGolpe();
 	int obtenerAlto();
 	int obtenerAncho();
 	virtual ~EstadoJugador();

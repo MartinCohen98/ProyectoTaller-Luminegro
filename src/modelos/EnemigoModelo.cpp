@@ -12,6 +12,7 @@ EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo
 	estado = new EstadoEnemigoParado();
 	dadoVuelta = false;
 	subiendo=false;
+	tiempoDeGolpe=0;
 	actualizarInsercion();
 }
 
@@ -176,6 +177,7 @@ void EnemigoModelo::trasladarse(int destinoX,int destinoY) {
 }
 
 void EnemigoModelo::patrullar(){
+//if (estado->puedeMoverse()){
     if (darPosicionY()==bordeSuperior)
         estaBajando();
     if (darPosicionY()==bordeInferior)
@@ -192,6 +194,7 @@ void EnemigoModelo::patrullar(){
         else
             avanzarDiagArriba(bordeSuperior);
       }
+//	}
 }
 
 void EnemigoModelo::modificarJugadorObjetivo(int objetivo){
@@ -203,10 +206,19 @@ int EnemigoModelo::consultarJugadorObjetivo(){
 }
 
 void EnemigoModelo::atacar(int x,int y){
-	//if (posicionY==250 || posicionY==200 || posicionY==300)
-	if (posicionY==y)
-	  pegar();
-	trasladarse(x-110,y+20);
+	if (posicionY==y){
+	  if (tiempoDeGolpe==0)
+	     pegar();
+	  tiempoDeGolpe++;
+	  if (tiempoDeGolpe==4)
+		  tiempoDeGolpe==0;
+	}
+//	if (estado->puedeMoverse()){
+	if (avanzando)
+	  trasladarse(x-110,y+20);
+	else
+	  trasladarse(x+110,y+20);
+//	}
 }
 
 void EnemigoModelo::estaSubiendo(){
@@ -229,6 +241,16 @@ void EnemigoModelo::retrocesoDePantalla() {
 void EnemigoModelo::guardarPosicionesActuales() {
 	posicionXAnterior = posicionX;
 	posicionYAnterior = posicionY;
+}
+
+int EnemigoModelo::recibirDanioDe(Colisionable* colisionable) {
+	energia -= colisionable->obtenerDanio();
+	int puntos = colisionable->obtenerPuntosDeGolpe();
+	if (energia <= 0) {
+		desaparecer();
+		puntos += 500;
+	}
+	return puntos;
 }
 
 
@@ -270,18 +292,26 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 	if (colisionador->colisiona(this)) {
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
-		if (subiendo)
+
+		if (subiendo){
 			bajar();
-		else
+		}
+		else {
 			subir();
+
+		}
 		if (avanzando)
-			retroceder();
+		   retroceder();
 		else
-			avanzar();
+		   avanzar();
 		actualizarInsercion();
 	}
 }
 
+void EnemigoModelo::desaparecer() {
+	alto = 0;
+	ancho = 0;
+}
 
 EnemigoModelo::~EnemigoModelo() {}
 

@@ -63,14 +63,14 @@ void ControlEnemigosModelo::realizarMovimientos(int atacante, ControlJugadoresMo
    for (int i=0;i<enemigosCantidad;i++) {
 	   enemigos[i]->guardarPosicionesActuales();
        posicionY=enemigos[i]->darPosicionY();
-      // if (posicionY==250 || posicionY==200 || posicionY==300)
-       //    enemigos[i]->pegar();
-       //if (i!=enemigoAtacante)
+     //  if (posicionY==250 || posicionY==200 || posicionY==300)
+    //       enemigos[i]->pegar();
+       if (i!=enemigoAtacante)
           enemigos[i]->patrullar();
        enemigos[i]->realizarMovimientos(colisionador);
       };
-  // enemigos[enemigoAtacante]->atacar(x,y);
-  // enemigos[enemigoAtacante]->realizarMovimientos(colisionador);
+   enemigos[enemigoAtacante]->atacar(x,y);
+   enemigos[enemigoAtacante]->realizarMovimientos(colisionador);
 }
 
 void ControlEnemigosModelo::movimientosIniciales(){

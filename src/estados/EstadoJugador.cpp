@@ -58,6 +58,7 @@ EstadoJugador* EstadoJugador::serGolpeado(){
     return NULL;
 }
 
+
 bool EstadoJugador::estaSaltando() {
 	return false;
 }
@@ -86,6 +87,10 @@ bool EstadoJugador::puedeMoverse() {
 
 int EstadoJugador::obtenerDanio() {
 	return 0;
+
+}int EstadoJugador::obtenerPuntosDeGolpe() {
+	return 0;
 }
+
 
 EstadoJugador::~EstadoJugador() {}

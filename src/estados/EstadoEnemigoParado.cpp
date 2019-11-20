@@ -45,6 +45,10 @@ EstadoJugador* EstadoEnemigoParado::morir(){
     return (new EstadoEnemigoMuriendo(tipo));
 }
 
+bool EstadoEnemigoParado::puedeMoverse() {
+    return true;
+}
+
 EstadoJugador* EstadoEnemigoParado::serGolpeado() {
 	delete this;
 	return (new EstadoEnemigoGolpeado(tipo));

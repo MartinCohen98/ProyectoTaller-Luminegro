@@ -52,6 +52,10 @@ EstadoJugador* EstadoEnemigoAvanzando::serGolpeado() {
 	return (new EstadoEnemigoGolpeado(tipo));
 }
 
+bool EstadoEnemigoAvanzando::puedeMoverse() {
+    return true;
+}
+
 void EstadoEnemigoAvanzando::cambiarFrame() {
 	if (numeroDeFrame == 2) {
 		numeroDeFrame = 0;
