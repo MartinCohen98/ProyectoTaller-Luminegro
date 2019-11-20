@@ -15,9 +15,9 @@ EstadoEnemigoGolpeado::EstadoEnemigoGolpeado(tipoDeSprite tipoNuevo){
 	tipo = tipoNuevo;
 	frameActual.modificar(60, 170, ancho, alto);
 	if (tipo == EnemigoJefe){
-    	ancho=115;
-    	alto=125;
-    	frameActual.modificar(0, 140, ancho, alto);
+    	ancho = 90;
+    	alto = 130;
+    	frameActual.modificar(50, 270, ancho, alto);
 	}
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;

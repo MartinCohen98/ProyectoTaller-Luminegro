@@ -16,8 +16,8 @@ EstadoEnemigoAvanzando::EstadoEnemigoAvanzando(tipoDeSprite tipoNuevo){
 	alto=78;
 	switch (tipo){
 	    case EnemigoJefe:{
-	    	ancho=90;
-	    	alto=150;
+	    	ancho = 90;
+	    	alto = 130;
 	    }
 	}
 	frameActual.modificar(0, 0, ancho, alto);

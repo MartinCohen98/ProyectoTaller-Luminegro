@@ -9,7 +9,7 @@ ControlEnemigosModelo::ControlEnemigosModelo(int nivel) {
 		enemigos[0] = new EnemigoModelo(1000, 220, Enemigo1);
 		enemigos[1] = new EnemigoModelo(500, 320, Enemigo2);
 		enemigos[2] = new EnemigoModelo(3000, 220, Enemigo3);
-		enemigos[3] = new EnemigoModelo(-500, 320, Enemigo3);
+		enemigos[3] = new EnemigoJefeModelo(-500, 220);
 		enemigos[4] = new EnemigoModelo(5000, 220, Enemigo2);
 		enemigos[5] = new EnemigoModelo(7000, 220, Enemigo1);
 	}
@@ -20,7 +20,7 @@ ControlEnemigosModelo::ControlEnemigosModelo(int nivel) {
 		enemigos[2] = new EnemigoModelo(2500, 220, Enemigo1);
 		enemigos[3] = new EnemigoModelo(-300, 320, Enemigo1);
 		enemigos[4] = new EnemigoModelo(4000, 220, Enemigo2);
-		enemigos[5] = new EnemigoJefeModelo(5500, 220, EnemigoJefe);
+		enemigos[5] = new EnemigoJefeModelo(5500, 220);
 	}
 }
 
