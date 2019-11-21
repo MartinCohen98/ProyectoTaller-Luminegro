@@ -3,11 +3,17 @@
 
 #include "../grafica/Encuadre.h"
 #include "../comunicacion/MensajeServidor.h"
-
-enum tipoDeArma {desarmado,
-	       cuchillo, tubo};
+#include "../modelos/TipoDeArma.h"
 
 class EstadoJugador {
+
+
+protected:
+	Encuadre frameActual;
+	int alto;
+	int ancho;
+	tipoDeSprite tipo;
+	tipoDeArma arma;
 
 public:
 	EstadoJugador();
@@ -30,16 +36,10 @@ public:
 	virtual int obtenerElevacion();
 	virtual int obtenerDanio();
 	virtual int obtenerPuntosDeGolpe();
+	void asignarArma(tipoDeArma tipoDeArma);
 	int obtenerAlto();
 	int obtenerAncho();
 	virtual ~EstadoJugador();
-
-protected:
-	Encuadre frameActual;
-	int alto;
-	int ancho;
-	tipoDeSprite tipo;
-	tipoDeArma arma;
 };
 
 #endif /* SRC_ESTADOJUGADOR_H_ */

@@ -210,7 +210,7 @@ JugadorModelo* ControlJugadoresModelo::darJugador(int i){
 
 void ControlJugadoresModelo::agregarJugadoresEnColisionador(Colisionador* colisionador) {
 	for (int i = 0; i < cantidadJugadores; i++) {
-		colisionador->agregarEntidad(jugadores[i]);
+		colisionador->agregarColisionable(jugadores[i]);
 	}
 }
 

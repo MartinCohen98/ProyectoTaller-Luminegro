@@ -24,8 +24,11 @@ private:
 	bool salio;
 	bool desconectado;
 	bool inmortal;
+	bool tiroGolpe;
+	bool golpeImpacto;
 	int vidas;
 	int puntaje;
+	int golpesDeArma;
 	tipoDeArma arma;
 	EstadoJugadorParado* estadoOriginal;
 

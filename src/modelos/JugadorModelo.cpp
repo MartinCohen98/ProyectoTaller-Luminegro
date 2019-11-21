@@ -2,7 +2,8 @@
 #include <iostream>
 
 
-JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig, int posXinicial, int posYinicial) {
+JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig, int posXinicial,
+								int posYinicial) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
 	movimientoEnX = 0;
@@ -14,17 +15,20 @@ JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig, int posXinicial, i
 	energia = 100;
 	vidas = 3;
 	puntaje = 0;
-	arma = tubo;
+	arma = desarmado;
 	estado = new EstadoJugadorParado(arma);
 	estadoOriginal = new EstadoJugadorParado(arma);
 	dadoVuelta = false;
 	agachado = false;
 	desconectado = false;
 	salio = false;
+	tiroGolpe = false;
+	golpeImpacto = false;
+	golpesDeArma = 0;
 
 
-    std::string margenWidthString = archiConfig->child("configuracion").child("escenario").
-            child_value("margenWidth");
+    std::string margenWidthString = archiConfig->child("configuracion")
+    		.child("escenario").child_value("margenWidth");
 
 	posicionXMaxima = 800 - std::stoi(margenWidthString);
 	insercion.modificar(posicionX, posicionY,
@@ -76,6 +80,7 @@ void JugadorModelo::dejarDeAgacharse() {
 
 
 void JugadorModelo::pegar() {
+	tiroGolpe = true;
 	estado = estado->pegar();
 }
 
@@ -97,10 +102,12 @@ void JugadorModelo::congelarse() {
 }
 
 void JugadorModelo::acuchillar(){
+	tiroGolpe = true;
     estado = estado->acuchillar();
 }
 
 void JugadorModelo::apalear(){
+	tiroGolpe = true;
     estado = estado->apalear();
 }
 
@@ -149,17 +156,21 @@ bool JugadorModelo::consultarModoTest(){
    return inmortal;
 }
 
+
 void JugadorModelo::activarModoTest(){
     inmortal=true;
 }
+
 
 void JugadorModelo::desactivarModoTest(){
     inmortal=false;
 }
 
+
 tipoDeArma JugadorModelo::consultarArma(){
 	return arma;
 }
+
 
 bool JugadorModelo::moverEnY() {
 	bool seMovio = false;
@@ -184,6 +195,12 @@ void JugadorModelo::realizarMovimientos(FondoModelo* fondo, bool rezagado,
     } else {
     	if (agachado) {
     		estado = estado->agacharse();
+    		Colisionable* punteroArma = colisionador->levantarSiHay(this);
+    		if (punteroArma != NULL) {
+    			golpesDeArma = 3;
+    			arma = punteroArma->obtenerTipoDeArma();
+    			estado->asignarArma(arma);
+    		}
     	} else {
     		estado = estado->parar();
     	}
@@ -210,6 +227,15 @@ void JugadorModelo::actualizarPosicion(FondoModelo* fondo, bool rezagado) {
 void JugadorModelo::checkearColisiones(Colisionador* colisionador) {
 	actualizarInsercion(false);
 	if (colisionador->colisiona(this)) {
+		if (tiroGolpe) {
+			golpeImpacto = true;
+			if (!estado->estaPateando()) {
+				golpesDeArma--;
+				if (golpesDeArma == 0)
+					arma = desarmado;
+					estado->asignarArma(arma);
+			}
+		}
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
 		actualizarInsercion(false);
@@ -317,6 +343,8 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
 		mensajes[*mensajeActual].darVuelta();
 	actualizarInsercion(false);
 	(*mensajeActual)++;
+	tiroGolpe = false;
+	golpeImpacto = false;
 }
 
 

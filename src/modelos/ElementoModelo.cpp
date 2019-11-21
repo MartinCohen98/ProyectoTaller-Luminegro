@@ -7,6 +7,7 @@ ElementoModelo::ElementoModelo() {
 	alto = 0;
 	sprite = Caja;
 	golpes = 0;
+	estado = NULL;
 }
 
 

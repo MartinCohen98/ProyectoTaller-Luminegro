@@ -104,4 +104,9 @@ int EstadoJugador::obtenerPuntosDeGolpe() {
 }
 
 
+void EstadoJugador::asignarArma(tipoDeArma tipoDeArma) {
+	arma = tipoDeArma;
+}
+
+
 EstadoJugador::~EstadoJugador() {}

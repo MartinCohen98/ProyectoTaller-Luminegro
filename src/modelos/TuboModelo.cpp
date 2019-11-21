@@ -11,5 +11,11 @@ TuboModelo::TuboModelo(int posXinicial, int posYinicial) {
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);
 }
 
+
+tipoDeArma TuboModelo::obtenerTipoDeArma() {
+	return tubo;
+}
+
+
 TuboModelo::~TuboModelo() {}
 

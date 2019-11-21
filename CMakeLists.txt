@@ -126,6 +126,7 @@ add_executable(ProyectoTaller_Luminegro
         src/modelos/Colisionador.h
         src/modelos/Colisionable.cpp
         src/modelos/Colisionable.h
+        src/modelos/TipoDeArma.h
 
 		src/varios/Cliente.cpp
         src/varios/Cliente.h

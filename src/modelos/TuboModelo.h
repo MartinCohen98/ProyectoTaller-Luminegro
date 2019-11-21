@@ -6,6 +6,7 @@
 class TuboModelo: public ElementoModelo {
 public:
 	TuboModelo(int posXinicial, int posYinicial);
+	tipoDeArma obtenerTipoDeArma();
 	virtual ~TuboModelo();
 };
 

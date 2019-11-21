@@ -11,5 +11,11 @@ CuchilloModelo::CuchilloModelo(int posXinicial, int posYinicial) {
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);
 }
 
+
+tipoDeArma CuchilloModelo::obtenerTipoDeArma() {
+	return cuchillo;
+}
+
+
 CuchilloModelo::~CuchilloModelo() {}
 
