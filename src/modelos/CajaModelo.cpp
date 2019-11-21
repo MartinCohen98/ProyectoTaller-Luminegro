@@ -17,17 +17,27 @@ int CajaModelo::recibirDanioDe(Colisionable* colisionable) {
 	golpes--;
 	int puntos = 0;
 	if (golpes == 0) {
-		desaparecer();
-		//romperse();
+		romperse();
 		puntos = 200;
 	}
 	return puntos;
 }
 
 void CajaModelo::romperse(){
-	estado = estado->romperse();
+	estado = estado->romperse(sprite);
 	actualizarInsercion();
 }
+
+
+void CajaModelo::actualizar() {
+	if (estado->estaRoto()) {
+		romperse();
+		if (estado->terminado()) {
+			desaparecer();
+		}
+	}
+}
+
 
 CajaModelo::~CajaModelo() {}
 

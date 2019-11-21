@@ -4,9 +4,19 @@
 #include "../comunicacion/MensajeServidor.h"
 
 class EstadoObjeto {
+
+protected:
+	Encuadre frameActual;
+	int alto;
+	int ancho;
+	tipoDeSprite tipo;
+
 public:
 	EstadoObjeto();
-	virtual EstadoObjeto* romperse();
+	virtual EstadoObjeto* romperse(tipoDeSprite tipo);
+	virtual bool estaRoto();
+	virtual bool terminado();
+	Encuadre* obtenerEncuadre();
 	virtual ~EstadoObjeto();
 };
 

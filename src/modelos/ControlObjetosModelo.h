@@ -28,6 +28,7 @@ public:
 								int terrenoWidth, int nivel);
 	int obtenerCantidad();
 	void movidaDePantalla();
+	void actualizar();
 	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
 	void agregarObjetosEnColisionador(Colisionador* colisionador);
 	virtual ~ControlObjetosModelo();

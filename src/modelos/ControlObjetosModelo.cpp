@@ -38,7 +38,7 @@ ControlObjetosModelo::ControlObjetosModelo(pugi::xml_document *archiConfig,
 
 	for(i = 0; i < barrilesCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 90;
-		int distrY = i * 1 + 300;
+		int distrY = i * 1 + 250;
 	    barriles[i] = new BarrilModelo(distrX, distrY);
 	}
 
@@ -82,6 +82,17 @@ void ControlObjetosModelo::movidaDePantalla() {
 
 	for(int i = 0; i < tubosCantidad; i++){
 		tubos[i]->movidaDePantalla();
+	}
+}
+
+
+void ControlObjetosModelo::actualizar() {
+	for(int i = 0; i < barrilesCantidad; i++){
+		barriles[i]->actualizar();
+	}
+
+	for(int i = 0; i < cajasCantidad; i++){
+		cajas[i]->actualizar();
 	}
 }
 

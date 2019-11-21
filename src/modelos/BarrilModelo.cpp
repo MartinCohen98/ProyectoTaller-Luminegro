@@ -17,16 +17,25 @@ int BarrilModelo::recibirDanioDe(Colisionable* colisionable) {
 	golpes--;
 	int puntos = 0;
 	if (golpes == 0) {
-		 desaparecer();
-		//romperse();
+		romperse();
 		puntos = 300;
 	}
 	return puntos;
 }
 
 void BarrilModelo::romperse(){
-	estado = estado->romperse();
+	estado = estado->romperse(sprite);
 	actualizarInsercion();
+}
+
+
+void BarrilModelo::actualizar() {
+	if (estado->estaRoto()) {
+		romperse();
+		if (estado->terminado()) {
+			desaparecer();
+		}
+	}
 }
 
 
