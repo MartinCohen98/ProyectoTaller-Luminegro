@@ -1,6 +1,7 @@
 #ifndef SRC_SERVIDOR_H_
 #define SRC_SERVIDOR_H_
 
+#include <comunicacion/MensajeEstadoJugador.h>
 #include "../comunicacion/AceptadorConexiones.h"
 #include "../comunicacion/MensajeCredenciales.h"
 #include "GestorThreadsServidor.h"
@@ -21,6 +22,7 @@ private:
 	Socket* socketsDeClientes;
 	char *puerto;
 	MensajeCredenciales credenciales[4];
+	MensajeEstadoJugador estadosJugadores[4];
 	GestorThreadsServidor* gestorThreads;
     pugi::xml_document* archivoConfiguracion;
     UsuarioYClave* usuariosYClaves;

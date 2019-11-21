@@ -172,7 +172,7 @@ add_executable(ProyectoTaller_Luminegro
         src/vistas/VistaJugador.h
         src/vistas/VistaObjeto.cpp
         src/vistas/VistaObjeto.h
-		)
+        src/comunicacion/MensajeEstadoJugador.cpp src/comunicacion/MensajeEstadoJugador.h)
 
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2_LIBRARIES})
 target_link_libraries(ProyectoTaller_Luminegro ${SDL2TTF_LIBRARIES})

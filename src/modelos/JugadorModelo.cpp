@@ -320,5 +320,17 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
 }
 
 
+
+
 JugadorModelo::~JugadorModelo() {}
+
+MensajeEstadoJugador JugadorModelo::generarMensajeEstado(int numeroJugador) {
+    MensajeEstadoJugador mensajeEstado;
+    mensajeEstado.numeroJugador = numeroJugador;
+    mensajeEstado.energia = energia;
+    mensajeEstado.conectado = !salio && !desconectado; //Si no está ni desconectado ni salió, está conectado
+    mensajeEstado.puntaje = puntaje;
+    mensajeEstado.vidas = vidas;
+    return mensajeEstado;
+}
 

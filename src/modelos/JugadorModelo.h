@@ -8,6 +8,7 @@
 #include "../comunicacion/Socket.h"
 #include "../comunicacion/MensajeServidor.h"
 #include <string>
+#include <comunicacion/MensajeEstadoJugador.h>
 #include "FondoModelo.h"
 #include "Colisionador.h"
 
@@ -63,6 +64,7 @@ public:
 	void movidaDePantalla(FondoModelo* fondo);
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual,
 							int numeroSprite);
+	MensajeEstadoJugador generarMensajeEstado(int numeroJugador);
 	virtual ~JugadorModelo();
 
 private:

@@ -137,3 +137,7 @@ Modelo::~Modelo() {
 		delete colisionador;
 }
 
+void Modelo::generarMensajesEstadoPersonaje(MensajeEstadoJugador *estadosJugadores) {
+    protagonistas->generarMensajesEstado(estadosJugadores);
+}
+

@@ -1,6 +1,7 @@
 #ifndef SRC_MODELOS_MODELO_H_
 #define SRC_MODELOS_MODELO_H_
 
+#include <comunicacion/MensajeEstadoJugador.h>
 #include "FondoModelo.h"
 #include "ControlEnemigosModelo.h"
 #include "ControlObjetosModelo.h"
@@ -24,6 +25,7 @@ public:
 	void procesarInputDeJugador(MensajeCliente* mensaje, int jugador);
 	void realzarMovimientos();
 	void generarMensajesServidor(MensajeServidor* mensajes);
+	void generarMensajesEstadoPersonaje(MensajeEstadoJugador *estadosJugadores);
 	bool nivelTerminado();
 	void pasarNivel();
 	void desaparecerJugador(int jugador);
