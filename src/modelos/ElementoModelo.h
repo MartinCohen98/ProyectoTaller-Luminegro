@@ -22,6 +22,7 @@ public:
 	void movidaDePantalla();
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
 	void desaparecer();
+	void actualizarInsercion();
 	virtual ~ElementoModelo();
 };
 

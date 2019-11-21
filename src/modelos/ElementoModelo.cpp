@@ -29,6 +29,10 @@ void ElementoModelo::desaparecer() {
 	insercion.modificar(posicionX, posicionY, ancho, alto);
 }
 
+void ElementoModelo::actualizarInsercion() {
+	insercion.modificar(posicionX, posicionY, ancho, alto);
+}
+
 
 ElementoModelo::~ElementoModelo() {}
 

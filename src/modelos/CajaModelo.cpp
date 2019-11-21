@@ -26,6 +26,7 @@ int CajaModelo::recibirDanioDe(Colisionable* colisionable) {
 
 void CajaModelo::romperse(){
 	estado = estado->romperse();
+	actualizarInsercion();
 }
 
 CajaModelo::~CajaModelo() {}

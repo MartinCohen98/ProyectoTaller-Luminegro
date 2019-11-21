@@ -1,6 +1,7 @@
 #ifndef SRC_MODELOS_CONTROLJUGADORESMODELO_H_
 #define SRC_MODELOS_CONTROLJUGADORESMODELO_H_
 
+#include <comunicacion/MensajeEstadoJugador.h>
 #include "JugadorModelo.h"
 
 class ControlJugadoresModelo {
@@ -29,6 +30,7 @@ public:
 	int consultarCantidadJugadores();
 	JugadorModelo* darJugador(int i);
 	void agregarJugadoresEnColisionador(Colisionador* colisionador);
+    void generarMensajesEstado(MensajeEstadoJugador *estadosJugadores);
 	virtual ~ControlJugadoresModelo();
 };
 

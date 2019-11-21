@@ -17,6 +17,7 @@ protected:
     int bordeInferior;
     int jugadorObjetivo;
     int tiempoDeGolpe;
+    int vivo;
     tipoDeSprite tipoEnemigo;
 
 public:

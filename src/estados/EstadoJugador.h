@@ -33,6 +33,7 @@ public:
 	virtual bool estaAtacando();
 	virtual bool puedeMoverse();
 	virtual bool estaPateando();
+	virtual bool terminado();
 	virtual int obtenerElevacion();
 	virtual int obtenerDanio();
 	virtual int obtenerPuntosDeGolpe();

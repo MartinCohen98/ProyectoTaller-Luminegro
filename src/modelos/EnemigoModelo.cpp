@@ -15,6 +15,7 @@ EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo
 	dadoVuelta = false;
 	subiendo=false;
 	tiempoDeGolpe=0;
+	vivo=true;
 	actualizarInsercion();
 }
 
@@ -75,6 +76,8 @@ void EnemigoModelo::pegar(){
 
 void EnemigoModelo::morir(){
     estado = estado->morir();
+ //   if (estado->terminado)
+		desaparecer();
 }
 
 void EnemigoModelo::acuchillar(){
@@ -197,23 +200,6 @@ void EnemigoModelo::patrullar(){
             avanzarDiagArriba(bordeSuperior);
       }
 //	}
-    if (estado->puedeMoverse()) {
-		if (darPosicionY()==bordeSuperior)
-			estaBajando();
-		if (darPosicionY()==bordeInferior)
-			estaSubiendo();
-		if (!consultarSubiendo()){
-			if (consultarDadoVuelta())
-				retrocederDiagAbajo(bordeInferior);
-			else
-				avanzarDiagAbajo(bordeInferior);
-		} else {
-			if (consultarDadoVuelta())
-				retrocederDiagArriba(bordeSuperior);
-			else
-				avanzarDiagArriba(bordeSuperior);
-		}
-    }
 }
 
 void EnemigoModelo::modificarJugadorObjetivo(int objetivo){
@@ -267,7 +253,8 @@ int EnemigoModelo::recibirDanioDe(Colisionable* colisionable) {
 	int puntos = colisionable->obtenerPuntosDeGolpe();
 	serGolpeado();
 	if (energia <= 0) {
-		desaparecer();
+		//desaparecer();
+		morir();
 		puntos += 500;
 	}
 	return puntos;

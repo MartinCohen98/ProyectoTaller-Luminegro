@@ -17,7 +17,7 @@ void MensajeInicioPartida::setNombreJugador(int numeroJugador, std::string nombr
 }
 
 std::string MensajeInicioPartida::getNombreJugador(int numeroJugador) {
-    if(numeroJugador < 1 || numeroJugador > 4)
+    if(numeroJugador < 0 || numeroJugador > 3)
         return "Error número";
     return jugadores[numeroJugador];
 }
