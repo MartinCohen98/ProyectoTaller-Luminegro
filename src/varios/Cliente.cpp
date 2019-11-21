@@ -263,7 +263,7 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
     					break;
     				case SDLK_c:
     					//Pegar
-                        ejecutarSonidoGolpe = true;
+                        ejecutarSonidoGolpeTiro = true;
                         mensajeCliente.Codificar(Hit);
     					break;
                     case SDLK_t:
