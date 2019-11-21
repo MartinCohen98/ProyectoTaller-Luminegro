@@ -1,7 +1,6 @@
 #ifndef SRC_SERVIDOR_H_
 #define SRC_SERVIDOR_H_
 
-#include <comunicacion/MensajeEstadoJugador.h>
 #include "../comunicacion/AceptadorConexiones.h"
 #include "../comunicacion/MensajeCredenciales.h"
 #include "GestorThreadsServidor.h"

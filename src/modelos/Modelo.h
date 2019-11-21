@@ -1,7 +1,6 @@
 #ifndef SRC_MODELOS_MODELO_H_
 #define SRC_MODELOS_MODELO_H_
 
-#include <comunicacion/MensajeEstadoJugador.h>
 #include "FondoModelo.h"
 #include "ControlEnemigosModelo.h"
 #include "ControlObjetosModelo.h"

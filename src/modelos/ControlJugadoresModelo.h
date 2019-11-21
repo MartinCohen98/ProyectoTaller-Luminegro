@@ -1,7 +1,6 @@
 #ifndef SRC_MODELOS_CONTROLJUGADORESMODELO_H_
 #define SRC_MODELOS_CONTROLJUGADORESMODELO_H_
 
-#include <comunicacion/MensajeEstadoJugador.h>
 #include "JugadorModelo.h"
 
 class ControlJugadoresModelo {

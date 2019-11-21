@@ -8,7 +8,7 @@
 #include "../comunicacion/Socket.h"
 #include "../comunicacion/MensajeServidor.h"
 #include <string>
-#include <comunicacion/MensajeEstadoJugador.h>
+#include "../comunicacion/MensajeEstadoJugador.h"
 #include "FondoModelo.h"
 #include "Colisionador.h"
 
