@@ -2,10 +2,10 @@
     <log>
         <level>DEBUG</level>
     </log>
-    <jugadoresCantidad>4</jugadoresCantidad>
+    <jugadoresCantidad>1</jugadoresCantidad>
     <claves>
-        <mariano>cognitiva</mariano>
-        <julio>conductual</julio>
+        <m>q</m>
+        <j>q</j>
         <martin>gestalt</martin>
         <nicolas>freud</nicolas>
     </claves>
@@ -97,7 +97,8 @@
         <margenWidth>300</margenWidth>
         <sonidos>
             <fondo>assets/sounds/background.mp3</fondo>
-            <golpe>assets/sounds/hit.mp3</golpe>
+            <golpeTiro>assets/sounds/knockThrown.mp3</golpeTiro>
+            <golpeImpacto>assets/sounds/knockImpact.mp3</golpeImpacto>
             <caida>assets/sounds/fall.mp3</caida>
             <salto>assets/sounds/jump.mp3</salto>
             <destruccion>assets/sounds/destruction.mp3</destruccion>

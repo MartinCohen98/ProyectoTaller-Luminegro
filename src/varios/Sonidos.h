@@ -14,12 +14,14 @@ private:
     pugi::xml_document* archiConfig;
     std::string mensajeLog;
     Mix_Chunk *sonidoFondo = NULL;
-    Mix_Chunk *sonidoGolpe = NULL;
+    Mix_Chunk *sonidoGolpeTiro = NULL;
+    Mix_Chunk *sonidoGolpeImpacto = NULL;
     Mix_Chunk *sonidoSalto = NULL;
     Mix_Chunk *sonidoCaida = NULL;
     Mix_Chunk *sonidoDestruccion = NULL;
     bool *musicaFondoActiva;
-    bool *ejecutarSonidoGolpe;
+    bool *ejecutarSonidoGolpeTiro;
+    bool *ejecutarSonidoGolpeImpacto;
     bool *ejecutarSonidoSalto;
     bool *ejecutarSonidoCaida;
     bool *ejecutarSonidoDestruccion;
@@ -27,8 +29,9 @@ private:
     Mix_Chunk *cargarSonido(const char* archivo);
 
 public:
-    Sonidos(pugi::xml_document* archiConfig, bool *musicaFondoActiva, bool *ejecutarSonidoGolpe,
-            bool *ejecutarSonidoSalto, bool *ejecutarSonidoCaida, bool *ejecutarSonidoDestruccion);
+    Sonidos(pugi::xml_document* archiConfig, bool *musicaFondoActiva, bool *ejecutarSonidoGolpeTiro,
+            bool *ejecutarSonidoGolpeImpacto, bool *ejecutarSonidoSalto, bool *ejecutarSonidoCaida,
+            bool *ejecutarSonidoDestruccion);
     void operator()();
     virtual ~Sonidos();
 };

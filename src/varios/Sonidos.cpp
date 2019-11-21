@@ -1,12 +1,14 @@
 #include "Sonidos.h"
 
 
-Sonidos::Sonidos(pugi::xml_document* archiConfig, bool *musicaFondoActiva, bool *ejecutarSonidoGolpe,
+Sonidos::Sonidos(pugi::xml_document* archiConfig, bool *musicaFondoActiva, bool *ejecutarSonidoGolpeTiro,
+                 bool *ejecutarSonidoGolpeImpacto,
                  bool *ejecutarSonidoSalto, bool *ejecutarSonidoCaida, bool *ejecutarSonidoDestruccion) {
 
     this->archiConfig = archiConfig;
     this->musicaFondoActiva = musicaFondoActiva;
-    this->ejecutarSonidoGolpe = ejecutarSonidoGolpe;
+    this->ejecutarSonidoGolpeTiro = ejecutarSonidoGolpeTiro;
+    this->ejecutarSonidoGolpeImpacto = ejecutarSonidoGolpeImpacto;
     this->ejecutarSonidoSalto = ejecutarSonidoSalto;
     this->ejecutarSonidoCaida = ejecutarSonidoCaida;
     this->ejecutarSonidoDestruccion = ejecutarSonidoDestruccion;
@@ -31,8 +33,11 @@ void Sonidos::operator()() {
     std::string sonidoURLFondo = archiConfig->child("configuracion").child("escenario")
             .child("sonidos").child_value("fondo");
 
-    std::string sonidoURLGolpe = archiConfig->child("configuracion").child("escenario")
-            .child("sonidos").child_value("golpe");
+    std::string sonidoURLGolpeTiro = archiConfig->child("configuracion").child("escenario")
+            .child("sonidos").child_value("golpeTiro");
+
+    std::string sonidoURLGolpeImpacto = archiConfig->child("configuracion").child("escenario")
+            .child("sonidos").child_value("golpeImpacto");
 
     std::string sonidoURLSalto = archiConfig->child("configuracion").child("escenario")
             .child("sonidos").child_value("salto");
@@ -49,7 +54,8 @@ void Sonidos::operator()() {
     mensajeLog.append( sonidoURLFondo.data() );
     logueador->Debug(mensajeLog);
     
-    sonidoGolpe = cargarSonido( sonidoURLGolpe.data() );
+    sonidoGolpeTiro = cargarSonido( sonidoURLGolpeTiro.data() );
+    sonidoGolpeImpacto = cargarSonido( sonidoURLGolpeImpacto.data() );
     sonidoSalto = cargarSonido( sonidoURLSalto.data() );
     sonidoCaida = cargarSonido( sonidoURLCaida.data() );
     sonidoDestruccion = cargarSonido( sonidoURLDestruccion.data() );
@@ -81,15 +87,15 @@ void Sonidos::operator()() {
             musicaFondoActivaUltimoEstado = *musicaFondoActiva;
         }
 
-        if (*ejecutarSonidoGolpe) {
-            int canal2 = Mix_PlayChannel(-1, sonidoGolpe, 0);
+        if (*ejecutarSonidoGolpeTiro) {
+            int canal2 = Mix_PlayChannel(-1, sonidoGolpeTiro, 0);
             if (canal2 == -1) {
                 mensajeLog = "No fue posible reproducir el archivo de audio: ";
                 mensajeLog.append( Mix_GetError() );
                 logueador->Error(mensajeLog);
                 return;
             }
-            *ejecutarSonidoGolpe = false;
+            *ejecutarSonidoGolpeTiro = false;
         }
     }
 }
@@ -110,7 +116,8 @@ Mix_Chunk *Sonidos::cargarSonido(const char* archivo) {
 
 Sonidos::~Sonidos() {
     Mix_FreeChunk(sonidoFondo);
-    Mix_FreeChunk(sonidoGolpe);
+    Mix_FreeChunk(sonidoGolpeTiro);
+    Mix_FreeChunk(sonidoGolpeImpacto);
     Mix_FreeChunk(sonidoSalto);
     Mix_FreeChunk(sonidoCaida);
     Mix_FreeChunk(sonidoDestruccion);

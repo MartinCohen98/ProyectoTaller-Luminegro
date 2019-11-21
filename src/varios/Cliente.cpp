@@ -134,8 +134,11 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 		if (sonidos == NULL) {
 		    sonidos = new std::thread( Sonidos(archiConfig,&musicaFondoActiva,
-		                                    &ejecutarSonidoGolpe, &ejecutarSonidoSalto,
-		                                    &ejecutarSonidoCaida, &ejecutarSonidoDestruccion)
+		                                    &ejecutarSonidoGolpeTiro,
+		                                    &ejecutarSonidoGolpeImpacto,
+		                                    &ejecutarSonidoSalto,
+		                                    &ejecutarSonidoCaida,
+		                                    &ejecutarSonidoDestruccion)
 		                              );
         }
 
