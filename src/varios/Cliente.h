@@ -29,7 +29,6 @@ private:
 	MensajeCliente mensajeCliente;
 	MensajeServidor mensajeServidor;
 	list<MensajeServidor> listaOrdenada;
-	bool salir;
 	Imagen imagenDesconectado;
 	Imagen imagenEspera;
 	Textura texturaTransiciones;
@@ -45,7 +44,7 @@ private:
     void renderizarFondo(VistaFondo* fondo, GestorThreadsCliente* gestorThreads);
     void enviarInput(GestorThreadsCliente* gestorThreads);
     void recibirCantidadDeReceives(GestorThreadsCliente* gestorThreads);
-    bool terminoElNivel(GestorThreadsCliente* gestorThreads);
+    bool getTerminoElNivel(GestorThreadsCliente* gestorThreads);
     void recibirMensajes(GestorThreadsCliente* gestorThreads);
 
 public:
