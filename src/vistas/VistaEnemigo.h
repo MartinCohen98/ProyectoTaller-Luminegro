@@ -7,8 +7,10 @@
 class VistaEnemigo: public VistaGeneral {
 
 public:
-	VistaEnemigo(Renderizador* elRenderizador, pugi::xml_document *archiConfig,
-					tipoDeSprite codigoEnemigo);
+	VistaEnemigo(Renderizador* elRenderizador, pugi::xml_document *archiConfig,	tipoDeSprite codigoEnemigo,
+	        bool *ejecutarSonidoGolpeTiro, bool *ejecutarSonidoGolpeImpacto, bool *ejecutarSonidoSalto,
+        bool *ejecutarSonidoCaida);
+
 	virtual ~VistaEnemigo();
 };
 

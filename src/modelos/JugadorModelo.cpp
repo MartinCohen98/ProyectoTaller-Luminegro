@@ -337,13 +337,19 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
 					break;
 	}
 	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, tipo);
+    mensajes[*mensajeActual].setSonidoEjecutarGolpeTiro(tiroGolpe);
+    mensajes[*mensajeActual].setSonidoEjecutarGolpeImpacto(golpeImpacto);
+
+    if (tiroGolpe)  tiroGolpe = false;
+    if (golpeImpacto)  golpeImpacto = false;
+
 	mensajes[*mensajeActual].agregarPosicionY(posicionY +
 									escalar(estadoOriginal->obtenerAlto()));
 	if (dadoVuelta)
 		mensajes[*mensajeActual].darVuelta();
 	actualizarInsercion(false);
 	(*mensajeActual)++;
-	tiroGolpe = false;
+
 	golpeImpacto = false;
 }
 

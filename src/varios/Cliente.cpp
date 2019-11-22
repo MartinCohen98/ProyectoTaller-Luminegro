@@ -111,24 +111,40 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 		logueador->Info("Iniciando nivel: "+ nivelNodeName);
 		logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
+
 		VistaFondo fondo(&renderizador, archiConfig, nivelNodeName);
 
-		VistaJugador jugador1(&renderizador, archiConfig, Jugador1);
-		VistaJugador jugador2(&renderizador, archiConfig, Jugador2);
-		VistaJugador jugador3(&renderizador, archiConfig, Jugador3);
-		VistaJugador jugador4(&renderizador, archiConfig, Jugador4);
+		VistaJugador jugador1(&renderizador, archiConfig, Jugador1, &ejecutarSonidoGolpeTiro,
+		        &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
+
+		VistaJugador jugador2(&renderizador, archiConfig, Jugador2, &ejecutarSonidoGolpeTiro,
+		        &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
+
+		VistaJugador jugador3(&renderizador, archiConfig, Jugador3, &ejecutarSonidoGolpeTiro,
+		        &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
+		        ;
+		VistaJugador jugador4(&renderizador, archiConfig, Jugador4, &ejecutarSonidoGolpeTiro,
+		        &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
 
 		logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
-		VistaEnemigo enemigo1(&renderizador, archiConfig, Enemigo1);
-		VistaEnemigo enemigo2(&renderizador, archiConfig, Enemigo2);
-		VistaEnemigo enemigo3(&renderizador, archiConfig, Enemigo3);
-		VistaEnemigo enemigo4(&renderizador, archiConfig, EnemigoJefe);
+		VistaEnemigo enemigo1(&renderizador, archiConfig, Enemigo1, &ejecutarSonidoGolpeTiro,
+                              &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
+
+		VistaEnemigo enemigo2(&renderizador, archiConfig, Enemigo2, &ejecutarSonidoGolpeTiro,
+                              &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
+
+		VistaEnemigo enemigo3(&renderizador, archiConfig, Enemigo3, &ejecutarSonidoGolpeTiro,
+                              &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
+
+		VistaEnemigo enemigo4(&renderizador, archiConfig, EnemigoJefe, &ejecutarSonidoGolpeTiro,
+                              &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
 
 		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
-		VistaObjeto barril(&renderizador, archiConfig, Barril);
-		VistaObjeto caja(&renderizador, archiConfig, Caja);
-		VistaObjeto cuchillo(&renderizador, archiConfig, Cuchillo);
-		VistaObjeto tubo(&renderizador, archiConfig, Tubo);
+
+		VistaObjeto barril(&renderizador, archiConfig, Barril, &ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
+		VistaObjeto caja(&renderizador, archiConfig, Caja, &ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
+		VistaObjeto cuchillo(&renderizador, archiConfig, Cuchillo, &ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
+		VistaObjeto tubo(&renderizador, archiConfig, Tubo, &ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
 
 		recibirCantidadDeReceives(&gestorThreads);
 
@@ -263,7 +279,6 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
     					break;
     				case SDLK_c:
     					//Pegar
-                        ejecutarSonidoGolpeTiro = true;
                         mensajeCliente.Codificar(Hit);
     					break;
                     case SDLK_t:
