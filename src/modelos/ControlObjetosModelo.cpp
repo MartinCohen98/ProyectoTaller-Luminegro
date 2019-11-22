@@ -6,17 +6,21 @@ ControlObjetosModelo::ControlObjetosModelo(pugi::xml_document *archiConfig,
     std::string nivelNodeName = "nivel";
     nivelNodeName.append( std::to_string(nivel) );
 
-	std::string barrilesCantidadString = archiConfig->child("configuracion").child("escenario")
-            .child("niveles").child( nivelNodeName.data() ).child("barril").child_value("cantidad");
+	std::string barrilesCantidadString = archiConfig->child("configuracion")
+			.child("escenario").child("niveles").child( nivelNodeName.data() )
+			.child("barril").child_value("cantidad");
 
-    std::string cajasCantidadString = archiConfig->child("configuracion").child("escenario")
-            .child("niveles").child( nivelNodeName.data() ).child("caja").child_value("cantidad");
+    std::string cajasCantidadString = archiConfig->child("configuracion")
+    		.child("escenario").child("niveles").child( nivelNodeName.data() )
+			.child("caja").child_value("cantidad");
 
-    std::string cuchillosCantidadString = archiConfig->child("configuracion").child("escenario")
-            .child("niveles").child( nivelNodeName.data() ).child("cuchillo").child_value("cantidad");
+    std::string cuchillosCantidadString = archiConfig->child("configuracion")
+    		.child("escenario").child("niveles").child( nivelNodeName.data() )
+			.child("cuchillo").child_value("cantidad");
 
-    std::string tubosMetalicosCantidadString = archiConfig->child("configuracion").child("escenario")
-            .child("niveles").child( nivelNodeName.data() ).child("tuboMetalico").child_value("cantidad");
+    std::string tubosMetalicosCantidadString = archiConfig->child("configuracion")
+    		.child("escenario").child("niveles").child( nivelNodeName.data() )
+			.child("tuboMetalico").child_value("cantidad");
 
     barrilesCantidad = std::stoi(barrilesCantidadString);
     cajasCantidad = std::stoi(cajasCantidadString);
@@ -34,7 +38,7 @@ ControlObjetosModelo::ControlObjetosModelo(pugi::xml_document *archiConfig,
 
 	for(i = 0; i < barrilesCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 90;
-		int distrY = i * 1 + 300;
+		int distrY = i * 1 + 250;
 	    barriles[i] = new BarrilModelo(distrX, distrY);
 	}
 
@@ -82,7 +86,19 @@ void ControlObjetosModelo::movidaDePantalla() {
 }
 
 
-void ControlObjetosModelo::generarMensajes(MensajeServidor* mensajes, int* mensajeActual) {
+void ControlObjetosModelo::actualizar() {
+	for(int i = 0; i < barrilesCantidad; i++){
+		barriles[i]->actualizar();
+	}
+
+	for(int i = 0; i < cajasCantidad; i++){
+		cajas[i]->actualizar();
+	}
+}
+
+
+void ControlObjetosModelo::generarMensajes(MensajeServidor* mensajes,
+											int* mensajeActual) {
 	for(int i = 0; i < barrilesCantidad; i++){
 		barriles[i]->generarMensaje(mensajes, mensajeActual);
 	}
@@ -103,11 +119,18 @@ void ControlObjetosModelo::generarMensajes(MensajeServidor* mensajes, int* mensa
 
 void ControlObjetosModelo::agregarObjetosEnColisionador(Colisionador* colisionador) {
 	for(int i = 0; i < barrilesCantidad; i++){
-		colisionador->agregarEntidad(barriles[i]);
+		colisionador->agregarColisionable(barriles[i]);
 	}
 
 	for(int i = 0; i < cajasCantidad; i++){
-		colisionador->agregarEntidad(cajas[i]);
+		colisionador->agregarColisionable(cajas[i]);
+	}
+	for(int i = 0; i < cuchillosCantidad; i++){
+		colisionador->agregarLevantable(cuchillos[i]);
+	}
+
+	for(int i = 0; i < tubosCantidad; i++){
+		colisionador->agregarLevantable(tubos[i]);
 	}
 }
 

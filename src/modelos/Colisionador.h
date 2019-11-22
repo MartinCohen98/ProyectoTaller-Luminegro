@@ -8,11 +8,14 @@ class Colisionador {
 
 private:
 	std::list<Colisionable*> listaColisionables;
+	std::list<Colisionable*> listaLevantables;
 
 public:
 	Colisionador();
-	void agregarEntidad(Colisionable* colisionable);
+	void agregarColisionable(Colisionable* colisionable);
+	void agregarLevantable(Colisionable* levantable);
 	bool colisiona(Colisionable* colisionable);
+	Colisionable* levantarSiHay(Colisionable* jugador);
 	void vaciar();
 	virtual ~Colisionador();
 

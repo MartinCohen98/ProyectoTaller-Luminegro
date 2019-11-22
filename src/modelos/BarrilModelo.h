@@ -11,6 +11,7 @@ public:
 	BarrilModelo(int posXinicial, int posYinicial);
 	int recibirDanioDe(Colisionable* colisionable);
 	void romperse();
+	void actualizar();
 	virtual ~BarrilModelo();
 };
 

@@ -24,6 +24,7 @@ public:
 	void procesarInputDeJugador(MensajeCliente* mensaje, int jugador);
 	void realzarMovimientos();
 	void generarMensajesServidor(MensajeServidor* mensajes);
+	void generarMensajesEstadoPersonaje(MensajeEstadoJugador *estadosJugadores);
 	bool nivelTerminado();
 	void pasarNivel();
 	void desaparecerJugador(int jugador);

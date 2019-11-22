@@ -7,6 +7,7 @@ class CuchilloModelo: public ElementoModelo {
 
 public:
 	CuchilloModelo(int posXinicial, int posYinicial);
+	tipoDeArma obtenerTipoDeArma();
 	virtual ~CuchilloModelo();
 };
 

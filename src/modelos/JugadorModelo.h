@@ -8,6 +8,7 @@
 #include "../comunicacion/Socket.h"
 #include "../comunicacion/MensajeServidor.h"
 #include <string>
+#include "../comunicacion/MensajeEstadoJugador.h"
 #include "FondoModelo.h"
 #include "Colisionador.h"
 
@@ -24,8 +25,11 @@ private:
 	bool salio;
 	bool desconectado;
 	bool inmortal;
+	bool tiroGolpe;
+	bool golpeImpacto;
 	int vidas;
 	int puntaje;
+	int golpesDeArma;
 	tipoDeArma arma;
 	EstadoJugadorParado* estadoOriginal;
 
@@ -63,6 +67,7 @@ public:
 	void movidaDePantalla(FondoModelo* fondo);
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual,
 							int numeroSprite);
+	MensajeEstadoJugador generarMensajeEstado(int numeroJugador);
 	virtual ~JugadorModelo();
 
 private:

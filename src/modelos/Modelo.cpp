@@ -51,6 +51,7 @@ void Modelo::realzarMovimientos() {
 	protagonistas->realizarMovimientos(fondo, colisionador);
 	enemigos->realizarMovimientos(atacante, protagonistas, colisionador);
 	objetos->actualizarPosiciones();
+	objetos->actualizar();
 
 	if (fondo->seMovio()) {
 		protagonistas->movidaDePantalla(fondo);
@@ -136,5 +137,9 @@ Modelo::~Modelo() {
 		delete objetos;
 	if (colisionador != NULL)
 		delete colisionador;
+}
+
+void Modelo::generarMensajesEstadoPersonaje(MensajeEstadoJugador *estadosJugadores) {
+    protagonistas->generarMensajesEstado(estadosJugadores);
 }
 

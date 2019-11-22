@@ -210,7 +210,7 @@ JugadorModelo* ControlJugadoresModelo::darJugador(int i){
 
 void ControlJugadoresModelo::agregarJugadoresEnColisionador(Colisionador* colisionador) {
 	for (int i = 0; i < cantidadJugadores; i++) {
-		colisionador->agregarEntidad(jugadores[i]);
+		colisionador->agregarColisionable(jugadores[i]);
 	}
 }
 
@@ -220,5 +220,11 @@ ControlJugadoresModelo::~ControlJugadoresModelo() {
 		delete jugadores[i];
 	}
 	delete[] jugadores;
+}
+
+void ControlJugadoresModelo::generarMensajesEstado(MensajeEstadoJugador *estadosJugadores) {
+    for (int i = 0; i < cantidadJugadores; i++) {
+        estadosJugadores[i] = jugadores[i]->generarMensajeEstado(i);
+    }
 }
 

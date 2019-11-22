@@ -3,8 +3,13 @@
 Colisionador::Colisionador() {}
 
 
-void Colisionador::agregarEntidad(Colisionable* colisionable) {
+void Colisionador::agregarColisionable(Colisionable* colisionable) {
 	listaColisionables.push_front(colisionable);
+}
+
+
+void Colisionador::agregarLevantable(Colisionable* levantable) {
+	listaLevantables.push_front(levantable);
 }
 
 
@@ -27,6 +32,21 @@ bool Colisionador::colisiona(Colisionable* colisionable) {
 			}
 	}
 	return colisiona;
+}
+
+
+Colisionable* Colisionador::levantarSiHay(Colisionable* jugador) {
+	Colisionable* levantable = NULL;
+	for (std::list<Colisionable*>::iterator it = listaLevantables.begin();
+										it != listaLevantables.end(); ++it) {
+		if (((*it)->obtenerInsercion() != jugador->obtenerInsercion()))
+			if (colisionan(jugador->obtenerInsercion(),
+							(*it)->obtenerInsercion())) {
+				levantable = (*it);
+				levantable->desaparecer();
+			}
+	}
+	return levantable;
 }
 
 

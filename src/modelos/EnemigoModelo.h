@@ -5,6 +5,10 @@
 #include "../estados/EstadoEnemigoParado.h"
 #include "../comunicacion/Socket.h"
 #include "Colisionador.h"
+#include "JugadorModelo.h"
+
+enum accionDeEnemigo {Detenido, Patrullando,
+           Esquivando, Atacando};
 
 class EnemigoModelo: public PersonaModelo {
 
@@ -16,8 +20,11 @@ protected:
     int bordeSuperior;
     int bordeInferior;
     int jugadorObjetivo;
+    JugadorModelo* objetivo;
     int tiempoDeGolpe;
+    int tiempoDeEsquivada;
     int vivo;
+    accionDeEnemigo modo;
     tipoDeSprite tipoEnemigo;
 
 public:
@@ -45,7 +52,8 @@ public:
 	void patrullar();
 	void modificarJugadorObjetivo(int objetivo);
 	int consultarJugadorObjetivo();
-	void atacar(int x,int y);
+	void atacar();
+	void esquivar();
 	void retrocesoDePantalla();
 	void guardarPosicionesActuales();
 	int recibirDanioDe(Colisionable* colisionable);

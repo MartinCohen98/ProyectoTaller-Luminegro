@@ -35,7 +35,8 @@ private:
 	Textura texturaTransiciones;
     std::thread* sonidos;
     bool musicaFondoActiva = true;
-    bool ejecutarSonidoGolpe = false;
+    bool ejecutarSonidoGolpeTiro = false;
+    bool ejecutarSonidoGolpeImpacto = false;
     bool ejecutarSonidoSalto = false;
     bool ejecutarSonidoCaida = false;
     bool ejecutarSonidoDestruccion = false;

@@ -15,7 +15,9 @@ EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo
 	dadoVuelta = false;
 	subiendo=false;
 	tiempoDeGolpe=0;
+	tiempoDeEsquivada=0;
 	vivo=true;
+	modo=Detenido;
 	actualizarInsercion();
 }
 
@@ -208,7 +210,10 @@ int EnemigoModelo::consultarJugadorObjetivo(){
 	return jugadorObjetivo;
 }
 
-void EnemigoModelo::atacar(int x,int y){
+void EnemigoModelo::atacar(){
+	int x,y;
+	x=objetivo->darPosicionX();
+	y=objetivo->darPosicionY();
 	if (posicionY==y){
 	  if (tiempoDeGolpe==0)
 	     pegar();
@@ -222,6 +227,39 @@ void EnemigoModelo::atacar(int x,int y){
 	else
 	  trasladarse(x+110,y+20);
 //	}
+}
+
+void EnemigoModelo::esquivar(){
+	accionDeEnemigo modoAnterior;
+	switch(tiempoDeEsquivada){
+	    case 0:{
+	    	modoAnterior = modo;
+	    	modo = Esquivando;
+			if (avanzando)
+			  retroceder();
+			else
+			  avanzar();
+			tiempoDeEsquivada++;
+			break;
+		    }
+	    case 1:{
+    	   if (subiendo)
+		     bajar();
+		   else
+		     subir();
+    	   tiempoDeEsquivada++;
+    	   break;
+			}
+	    case 2:{
+	    	if (!avanzando)
+	    	  avanzar();
+	    	else
+	    	  retroceder();
+	    	tiempoDeEsquivada=0;
+	    	modo = modoAnterior;
+	    	break;
+	    }
+	  }
 }
 
 void EnemigoModelo::estaSubiendo(){
@@ -283,10 +321,23 @@ void EnemigoModelo::moverEnY(int movimiento) {
 }
 
 void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
-	if (estado->puedeMoverse()) {
-//		actualizarPosicion(fondo, rezagado);
-    } else {
-    	estado = estado->parar();
+	switch (modo){
+	    case Detenido:{
+	    	parar();
+	    	break;
+	      }
+	    case Patrullando:{
+	    	patrullar();
+	    	break;
+	      }
+	    case Esquivando:{
+	    	esquivar();
+	    	break;
+	      }
+	    case Atacando:{
+	    	atacar();
+	    	break;
+	      }
 	}
 	if (estado->estaMuerto() & estado->terminado())
 		desaparecer();
@@ -301,17 +352,7 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
 
-		if (subiendo){
-			bajar();
-		}
-		else {
-			subir();
-
-		}
-		if (avanzando)
-		   retroceder();
-		else
-		   avanzar();
+		esquivar();
 		actualizarInsercion();
 	}
 }

@@ -29,6 +29,7 @@ public:
 	int consultarCantidadJugadores();
 	JugadorModelo* darJugador(int i);
 	void agregarJugadoresEnColisionador(Colisionador* colisionador);
+    void generarMensajesEstado(MensajeEstadoJugador *estadosJugadores);
 	virtual ~ControlJugadoresModelo();
 };
 

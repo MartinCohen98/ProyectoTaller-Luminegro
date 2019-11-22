@@ -4,22 +4,23 @@ EstadoJugadorAvanzando::EstadoJugadorAvanzando(tipoDeArma tipoArma) {
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;
 	alto = 100;
-	ancho = 50;
-	arma=tipoArma;
-		switch(arma){
-		case desarmado:{
-			posYframe=0;
-			break;
-	 	 }
-		case cuchillo:{
-			posYframe=710;
-		   break;
-		 }
-		case tubo:{
-			posYframe=810;
-		   break;
-		 }
-		}
+	arma = tipoArma;
+
+	switch (arma) {
+		case desarmado:
+            ancho = 50;
+			posYframe = 0;
+            break;
+		case cuchillo:
+            ancho = 50;
+			posYframe = 710;
+		    break;
+		case tubo:
+            ancho = 70;
+			posYframe = 810;
+            break;
+	}
+
 	frameActual.modificar(0, posYframe, ancho, alto);
 }
 

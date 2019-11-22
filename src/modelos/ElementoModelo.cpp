@@ -7,6 +7,7 @@ ElementoModelo::ElementoModelo() {
 	alto = 0;
 	sprite = Caja;
 	golpes = 0;
+	estado = NULL;
 }
 
 
@@ -17,8 +18,15 @@ void ElementoModelo::movidaDePantalla() {
 
 
 
-void ElementoModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual) {
-	mensajes[*mensajeActual].generarMensaje(&encuadre, &insercion, sprite);
+void ElementoModelo::generarMensaje(MensajeServidor* mensajes,
+									int* mensajeActual) {
+	if (estado == NULL) {
+		mensajes[*mensajeActual].generarMensaje(&encuadre, &insercion, sprite);
+	} else {
+		mensajes[*mensajeActual].generarMensaje(estado->obtenerEncuadre(),
+												&insercion, sprite);
+
+	}
 	(*mensajeActual)++;
 }
 

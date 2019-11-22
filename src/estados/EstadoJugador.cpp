@@ -110,4 +110,9 @@ bool EstadoJugador::estaMuerto(){
 	return false;
 }
 
+void EstadoJugador::asignarArma(tipoDeArma tipoDeArma) {
+	arma = tipoDeArma;
+}
+
+
 EstadoJugador::~EstadoJugador() {}

@@ -23,9 +23,17 @@ int Colisionable::obtenerPuntosDeGolpe() {
 }
 
 
+tipoDeArma Colisionable::obtenerTipoDeArma() {
+	return desarmado;
+}
+
+
 int Colisionable::recibirDanioDe(Colisionable* colisionable) {
 	return 0;
 }
+
+
+void Colisionable::desaparecer() {}
 
 
 Colisionable::~Colisionable() {}

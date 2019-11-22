@@ -134,8 +134,11 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 		if (sonidos == NULL) {
 		    sonidos = new std::thread( Sonidos(archiConfig,&musicaFondoActiva,
-		                                    &ejecutarSonidoGolpe, &ejecutarSonidoSalto,
-		                                    &ejecutarSonidoCaida, &ejecutarSonidoDestruccion)
+		                                    &ejecutarSonidoGolpeTiro,
+		                                    &ejecutarSonidoGolpeImpacto,
+		                                    &ejecutarSonidoSalto,
+		                                    &ejecutarSonidoCaida,
+		                                    &ejecutarSonidoDestruccion)
 		                              );
         }
 
@@ -260,7 +263,7 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
     					break;
     				case SDLK_c:
     					//Pegar
-                        ejecutarSonidoGolpe = true;
+                        ejecutarSonidoGolpeTiro = true;
                         mensajeCliente.Codificar(Hit);
     					break;
                     case SDLK_t:
