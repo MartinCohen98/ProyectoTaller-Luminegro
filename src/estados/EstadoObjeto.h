@@ -14,6 +14,7 @@ class EstadoObjeto {
 public:
 	EstadoObjeto();
 	virtual EstadoObjeto* romperse();
+	virtual bool terminado();
 	virtual ~EstadoObjeto();
 };
 

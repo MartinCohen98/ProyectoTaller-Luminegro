@@ -106,5 +106,8 @@ int EstadoJugador::obtenerPuntosDeGolpe() {
 	return 0;
 }
 
+bool EstadoJugador::estaMuerto(){
+	return false;
+}
 
 EstadoJugador::~EstadoJugador() {}

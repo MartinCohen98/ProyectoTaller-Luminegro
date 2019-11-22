@@ -32,6 +32,10 @@ void ElementoModelo::actualizarInsercion() {
 	insercion.modificar(posicionX, posicionY, ancho, alto);
 }
 
+void ElementoModelo::actualizarPosicion(){
+    if(estado->terminado())
+    	desaparecer();
+}
 
 ElementoModelo::~ElementoModelo() {}
 

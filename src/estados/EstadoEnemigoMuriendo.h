@@ -18,6 +18,7 @@ public:
     bool puedeMoverse();
     EstadoJugador* serGolpeado();
     bool terminado();
+    bool estaMuerto();
     virtual ~EstadoEnemigoMuriendo();
 private:
     void cambiarFrame();

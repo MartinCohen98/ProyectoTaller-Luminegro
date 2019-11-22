@@ -50,6 +50,7 @@ void Modelo::realzarMovimientos() {
 
 	protagonistas->realizarMovimientos(fondo, colisionador);
 	enemigos->realizarMovimientos(atacante, protagonistas, colisionador);
+	objetos->actualizarPosiciones();
 
 	if (fondo->seMovio()) {
 		protagonistas->movidaDePantalla(fondo);

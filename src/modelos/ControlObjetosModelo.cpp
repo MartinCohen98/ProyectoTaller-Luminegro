@@ -111,6 +111,15 @@ void ControlObjetosModelo::agregarObjetosEnColisionador(Colisionador* colisionad
 	}
 }
 
+void ControlObjetosModelo::actualizarPosiciones(){
+    for(int i = 0; i < barrilesCantidad; i++){
+		barriles[i]->actualizarPosicion();
+	}
+
+	for(int i = 0; i < cajasCantidad; i++){
+		cajas[i]->actualizarPosicion();
+	}
+}
 
 ControlObjetosModelo::~ControlObjetosModelo() {
 	if (barriles != NULL) {

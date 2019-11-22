@@ -16,6 +16,10 @@ EstadoObjeto* EstadoObjeto::romperse(){
 	return NULL;
 }
 
+bool EstadoObjeto::terminado(){
+	return false;
+}
+
 EstadoObjeto::~EstadoObjeto() {
 	// TODO Auto-generated destructor stub
 }

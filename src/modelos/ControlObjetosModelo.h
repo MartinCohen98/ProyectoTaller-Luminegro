@@ -30,6 +30,7 @@ public:
 	void movidaDePantalla();
 	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
 	void agregarObjetosEnColisionador(Colisionador* colisionador);
+	void actualizarPosiciones();
 	virtual ~ControlObjetosModelo();
 };
 

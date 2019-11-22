@@ -17,8 +17,8 @@ int BarrilModelo::recibirDanioDe(Colisionable* colisionable) {
 	golpes--;
 	int puntos = 0;
 	if (golpes == 0) {
-		 desaparecer();
-		//romperse();
+		// desaparecer();
+		romperse();
 		puntos = 300;
 	}
 	return puntos;

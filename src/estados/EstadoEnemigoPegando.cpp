@@ -82,7 +82,7 @@ bool EstadoEnemigoPegando::terminado() {
 
 void EstadoEnemigoPegando::cambiarFrame() {
 	int framesLimite=1;
-		switch (tipo){
+	switch (tipo){
 		case EnemigoJefe:{
 		   framesLimite=3;
 		 }

@@ -76,8 +76,6 @@ void EnemigoModelo::pegar(){
 
 void EnemigoModelo::morir(){
     estado = estado->morir();
- //   if (estado->terminado)
-		desaparecer();
 }
 
 void EnemigoModelo::acuchillar(){
@@ -290,6 +288,9 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
     } else {
     	estado = estado->parar();
 	}
+	if (estado->estaMuerto() & estado->terminado())
+		desaparecer();
+	actualizarInsercion();
 	checkearColisiones(colisionador);
 }
 

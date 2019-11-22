@@ -65,7 +65,7 @@ bool EstadoEnemigoMuriendo::puedeMoverse() {
 }
 
 EstadoJugador* EstadoEnemigoMuriendo::serGolpeado() {
-	return (this->morir(tipo));
+	return (morir(tipo));
 }
 
 bool EstadoEnemigoMuriendo::terminado() {
@@ -97,6 +97,10 @@ void EstadoEnemigoMuriendo::cambiarFrame(){
         			frameActual.modificar((ancho * numeroDeFrame) + 65, 310, ancho, alto);
         		 }
         	    }
+}
+
+bool EstadoEnemigoMuriendo::estaMuerto(){
+	return true;
 }
 
 EstadoEnemigoMuriendo::~EstadoEnemigoMuriendo() {

@@ -31,6 +31,7 @@ public:
 	virtual int obtenerElevacion();
 	virtual int obtenerDanio();
 	virtual int obtenerPuntosDeGolpe();
+	virtual bool estaMuerto();
 	int obtenerAlto();
 	int obtenerAncho();
 	virtual ~EstadoJugador();

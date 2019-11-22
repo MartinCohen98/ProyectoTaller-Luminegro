@@ -22,6 +22,7 @@ public:
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
 	void desaparecer();
 	void actualizarInsercion();
+	void actualizarPosicion();
 	virtual ~ElementoModelo();
 };
 
