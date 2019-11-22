@@ -28,6 +28,7 @@ private:
 	bool ejecutarSonidoGolpeTiro = false;
 	bool ejecutarSonidoGolpeImpacto = false;
     bool ejecutarSonidoSalto = false;
+    bool ejecutarSonidoCaida = false;
     int vidas;
 	int puntaje;
 	int golpesDeArma;

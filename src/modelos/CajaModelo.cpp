@@ -1,3 +1,4 @@
+#include <iostream>
 #include "CajaModelo.h"
 
 CajaModelo::CajaModelo(int posXinicial, int posYinicial) {
@@ -26,6 +27,11 @@ int CajaModelo::recibirDanioDe(Colisionable* colisionable) {
 void CajaModelo::romperse(){
 	estado = estado->romperse(sprite);
 	actualizarInsercion();
+
+	if (!comenzoARomperse) {
+        ejecutarSonidoDestruccion = true;
+        comenzoARomperse = true;
+    }
 }
 
 
