@@ -6,6 +6,8 @@
 #include "../estados/EstadoObjetoRoto.h"
 
 class CajaModelo: public ElementoModelo {
+private:
+    bool comenzoARomperse = false;
 
 public:
 	CajaModelo(int posXinicial, int posYinicial);

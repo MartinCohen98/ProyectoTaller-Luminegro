@@ -19,6 +19,7 @@ int BarrilModelo::recibirDanioDe(Colisionable* colisionable) {
 	if (golpes == 0) {
 		romperse();
 		puntos = 300;
+        ejecutarSonidoDestruccion = true;
 	}
 	return puntos;
 }

@@ -25,8 +25,12 @@ void ElementoModelo::generarMensaje(MensajeServidor* mensajes,
 	} else {
 		mensajes[*mensajeActual].generarMensaje(estado->obtenerEncuadre(),
 												&insercion, sprite);
-
 	}
+
+    mensajes[*mensajeActual].setSonidoEjecutarDestruccion(ejecutarSonidoDestruccion);
+
+    ejecutarSonidoDestruccion = false;
+
 	(*mensajeActual)++;
 }
 

@@ -339,10 +339,12 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
     mensajes[*mensajeActual].setSonidoEjecutarGolpeTiro(ejecutarSonidoGolpeTiro);
     mensajes[*mensajeActual].setSonidoEjecutarGolpeImpacto(ejecutarSonidoGolpeImpacto);
     mensajes[*mensajeActual].setSonidoEjecutarSalto(ejecutarSonidoSalto);
+    mensajes[*mensajeActual].setSonidoEjecutarCaida(ejecutarSonidoCaida);
 
     ejecutarSonidoGolpeTiro = false;
     ejecutarSonidoGolpeImpacto = false;
     ejecutarSonidoSalto = false;
+    ejecutarSonidoCaida = false;
 
 	mensajes[*mensajeActual].agregarPosicionY(posicionY +
 									escalar(estadoOriginal->obtenerAlto()));
@@ -353,9 +355,8 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
 }
 
 
-
-
 JugadorModelo::~JugadorModelo() {}
+
 
 MensajeEstadoJugador JugadorModelo::generarMensajeEstado(int numeroJugador) {
     MensajeEstadoJugador mensajeEstado;

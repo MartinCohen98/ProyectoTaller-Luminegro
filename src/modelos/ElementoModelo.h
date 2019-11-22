@@ -16,6 +16,7 @@ protected:
 	tipoDeSprite sprite;
 	Encuadre encuadre;
 	EstadoObjeto* estado;
+    bool ejecutarSonidoDestruccion = false;
 
 public:
 	ElementoModelo();
