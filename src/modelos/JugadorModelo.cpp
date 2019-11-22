@@ -22,8 +22,6 @@ JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig, int posXinicial,
 	agachado = false;
 	desconectado = false;
 	salio = false;
-	tiroGolpe = false;
-	golpeImpacto = false;
 	golpesDeArma = 0;
 
 
@@ -80,7 +78,7 @@ void JugadorModelo::dejarDeAgacharse() {
 
 
 void JugadorModelo::pegar() {
-	tiroGolpe = true;
+    ejecutarSonidoGolpeTiro = true;
 	estado = estado->pegar();
 }
 
@@ -89,6 +87,7 @@ void JugadorModelo::saltar() {
 	if (!estado->estaSaltando()) {
 		movimientoAlSaltarEnX = movimientoEnX;
 		movimientoAlSaltarEnY = movimientoEnY;
+        ejecutarSonidoSalto = true;
 	}
 	estado = estado->saltar();
 }
@@ -102,12 +101,12 @@ void JugadorModelo::congelarse() {
 }
 
 void JugadorModelo::acuchillar(){
-	tiroGolpe = true;
+    ejecutarSonidoGolpeTiro = true;
     estado = estado->acuchillar();
 }
 
 void JugadorModelo::apalear(){
-	tiroGolpe = true;
+    ejecutarSonidoGolpeTiro = true;
     estado = estado->apalear();
 }
 
@@ -227,8 +226,8 @@ void JugadorModelo::actualizarPosicion(FondoModelo* fondo, bool rezagado) {
 void JugadorModelo::checkearColisiones(Colisionador* colisionador) {
 	actualizarInsercion(false);
 	if (colisionador->colisiona(this)) {
-		if (tiroGolpe) {
-			golpeImpacto = true;
+		if (ejecutarSonidoGolpeTiro) {
+			ejecutarSonidoGolpeImpacto = true;
 			if (!estado->estaPateando()) {
 				golpesDeArma--;
 				if (golpesDeArma == 0)
@@ -337,11 +336,13 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
 					break;
 	}
 	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, tipo);
-    mensajes[*mensajeActual].setSonidoEjecutarGolpeTiro(tiroGolpe);
-    mensajes[*mensajeActual].setSonidoEjecutarGolpeImpacto(golpeImpacto);
+    mensajes[*mensajeActual].setSonidoEjecutarGolpeTiro(ejecutarSonidoGolpeTiro);
+    mensajes[*mensajeActual].setSonidoEjecutarGolpeImpacto(ejecutarSonidoGolpeImpacto);
+    mensajes[*mensajeActual].setSonidoEjecutarSalto(ejecutarSonidoSalto);
 
-    if (tiroGolpe)  tiroGolpe = false;
-    if (golpeImpacto)  golpeImpacto = false;
+    ejecutarSonidoGolpeTiro = false;
+    ejecutarSonidoGolpeImpacto = false;
+    ejecutarSonidoSalto = false;
 
 	mensajes[*mensajeActual].agregarPosicionY(posicionY +
 									escalar(estadoOriginal->obtenerAlto()));
@@ -349,8 +350,6 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
 		mensajes[*mensajeActual].darVuelta();
 	actualizarInsercion(false);
 	(*mensajeActual)++;
-
-	golpeImpacto = false;
 }
 
 
