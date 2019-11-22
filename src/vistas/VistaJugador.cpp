@@ -1,8 +1,14 @@
 #include "VistaJugador.h"
 
-VistaJugador::VistaJugador(Renderizador* elRenderizador,
-			pugi::xml_document *archiConfig, tipoDeSprite jugador) {
+VistaJugador::VistaJugador(Renderizador* elRenderizador, pugi::xml_document *archiConfig, tipoDeSprite jugador,
+        bool *ejecutarSonidoGolpeTiro, bool *ejecutarSonidoGolpeImpacto, bool *ejecutarSonidoSalto,
+        bool *ejecutarSonidoCaida) {
+
 	renderizador = elRenderizador;
+    this->ejecutarSonidoGolpeTiro = ejecutarSonidoGolpeTiro;
+    this->ejecutarSonidoGolpeImpacto = ejecutarSonidoGolpeImpacto;
+    this->ejecutarSonidoSalto = ejecutarSonidoSalto;
+    this->ejecutarSonidoCaida = ejecutarSonidoCaida;
 
 	std::string path;
 

@@ -1,10 +1,13 @@
 #include "VistaObjeto.h"
 
-VistaObjeto::VistaObjeto(Renderizador* elRenderizador,
-		pugi::xml_document *archiConfig, tipoDeSprite codigoObjeto) {
+VistaObjeto::VistaObjeto(Renderizador* elRenderizador, pugi::xml_document *archiConfig, tipoDeSprite codigoObjeto,
+        bool *ejecutarSonidoGolpeImpacto, bool *ejecutarSonidoDestruccion) {
+
 	std::string path;
 
 	renderizador = elRenderizador;
+    this->ejecutarSonidoGolpeImpacto = ejecutarSonidoGolpeImpacto;
+    this->ejecutarSonidoDestruccion = ejecutarSonidoDestruccion;
 
 	switch (codigoObjeto) {
 		case Barril:	path = archiConfig->child("configuracion").child("escenario")

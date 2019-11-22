@@ -1,10 +1,15 @@
 #include "VistaEnemigo.h"
 
-VistaEnemigo::VistaEnemigo(Renderizador* elRenderizador,
-		pugi::xml_document *archiConfig, tipoDeSprite codigoEnemigo) {
+VistaEnemigo::VistaEnemigo(Renderizador* elRenderizador, pugi::xml_document *archiConfig, tipoDeSprite codigoEnemigo,
+                           bool *ejecutarSonidoGolpeTiro, bool *ejecutarSonidoGolpeImpacto, bool *ejecutarSonidoSalto,
+                           bool *ejecutarSonidoCaida) {
 	std::string path;
 
 	renderizador = elRenderizador;
+    this->ejecutarSonidoGolpeTiro = ejecutarSonidoGolpeTiro;
+    this->ejecutarSonidoGolpeImpacto = ejecutarSonidoGolpeImpacto;
+    this->ejecutarSonidoSalto = ejecutarSonidoSalto;
+    this->ejecutarSonidoCaida = ejecutarSonidoCaida;
 
 	switch (codigoEnemigo) {
 		case Enemigo1:	path = archiConfig->child("configuracion").child("escenario").

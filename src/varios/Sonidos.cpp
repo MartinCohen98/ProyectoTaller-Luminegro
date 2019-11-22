@@ -15,6 +15,7 @@ Sonidos::Sonidos(pugi::xml_document* archiConfig, bool *musicaFondoActiva, bool 
     logueador = Logger::Log::ObtenerInstancia();
 }
 
+
 void Sonidos::operator()() {
     // SDL_Init() lo hace VentanaClienteInicioSesion
 
@@ -70,8 +71,9 @@ void Sonidos::operator()() {
     }
 
     bool musicaFondoActivaUltimoEstado = *musicaFondoActiva;
+
     while (Mix_Playing(canal1) != 0) {
-        // Si no bucleo acá, la música se corta
+        // Si no bucleo acá, la música y demás sonidos se cortan
         SDL_Delay(100);
 
         if (musicaFondoActivaUltimoEstado != *musicaFondoActiva) {
@@ -88,6 +90,7 @@ void Sonidos::operator()() {
         }
 
         if (*ejecutarSonidoGolpeTiro) {
+            *ejecutarSonidoGolpeTiro = false;
             int canal2 = Mix_PlayChannel(-1, sonidoGolpeTiro, 0);
             if (canal2 == -1) {
                 mensajeLog = "No fue posible reproducir el archivo de audio: ";
@@ -95,7 +98,50 @@ void Sonidos::operator()() {
                 logueador->Error(mensajeLog);
                 return;
             }
-            *ejecutarSonidoGolpeTiro = false;
+        }
+
+        if (*ejecutarSonidoGolpeImpacto) {
+            *ejecutarSonidoGolpeImpacto = false;
+            int canal3 = Mix_PlayChannel(-1, sonidoGolpeImpacto, 0);
+            if (canal3 == -1) {
+                mensajeLog = "No fue posible reproducir el archivo de audio: ";
+                mensajeLog.append( Mix_GetError() );
+                logueador->Error(mensajeLog);
+                return;
+            }
+        }
+
+        if (*ejecutarSonidoSalto) {
+            *ejecutarSonidoSalto = false;
+            int canal4 = Mix_PlayChannel(-1, sonidoSalto, 0);
+            if (canal4 == -1) {
+                mensajeLog = "No fue posible reproducir el archivo de audio: ";
+                mensajeLog.append( Mix_GetError() );
+                logueador->Error(mensajeLog);
+                return;
+            }
+        }
+
+        if (*ejecutarSonidoCaida) {
+            *ejecutarSonidoCaida = false;
+            int canal5 = Mix_PlayChannel(-1, sonidoCaida, 0);
+            if (canal5 == -1) {
+                mensajeLog = "No fue posible reproducir el archivo de audio: ";
+                mensajeLog.append( Mix_GetError() );
+                logueador->Error(mensajeLog);
+                return;
+            }
+        }
+
+        if (*ejecutarSonidoDestruccion) {
+            *ejecutarSonidoDestruccion = false;
+            int canal6 = Mix_PlayChannel(-1, sonidoDestruccion, 0);
+            if (canal6 == -1) {
+                mensajeLog = "No fue posible reproducir el archivo de audio: ";
+                mensajeLog.append( Mix_GetError() );
+                logueador->Error(mensajeLog);
+                return;
+            }
         }
     }
 }

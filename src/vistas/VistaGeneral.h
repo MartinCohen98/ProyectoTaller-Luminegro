@@ -9,6 +9,11 @@ class VistaGeneral {
 protected:
 	Textura textura;
 	Renderizador* renderizador;
+    bool *ejecutarSonidoGolpeTiro;
+    bool *ejecutarSonidoGolpeImpacto;
+    bool *ejecutarSonidoSalto;
+    bool *ejecutarSonidoCaida;
+    bool *ejecutarSonidoDestruccion;
 
 public:
 	VistaGeneral();

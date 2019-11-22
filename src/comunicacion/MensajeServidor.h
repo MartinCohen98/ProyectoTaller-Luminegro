@@ -17,6 +17,11 @@ private:
 	bool dadoVuelta;
 	int posicionY;
 	tipoDeSprite sprite;
+	bool ejecutarSonidoGolpeTiro = false;
+	bool ejecutarSonidoGolpeImpacto = false;
+	bool ejecutarSonidoSalto = false;
+	bool ejecutarSonidoCaida = false;
+	bool ejecutarSonidoDestruccion = false;
 
 public:
 	MensajeServidor();
@@ -28,6 +33,16 @@ public:
 	bool estaDadoVuelta();
 	tipoDeSprite obtenerTipoDeSprite();
 	bool operator <(const MensajeServidor & mensaje) const;
+    void setSonidoEjecutarGolpeTiro(bool valor);
+    bool getSonidoEjecutarGolpeTiro();
+    void setSonidoEjecutarGolpeImpacto(bool valor);
+    bool getSonidoEjecutarGolpeImpacto();
+    void setSonidoEjecutarSalto(bool valor);
+    bool getSonidoEjecutarSalto();
+    void setSonidoEjecutarCaida(bool valor);
+    bool getSonidoEjecutarCaida();
+    void setSonidoEjecutarDestruccion(bool valor);
+    bool getSonidoEjecutarDestruccion();
 	virtual ~MensajeServidor();
 };
 
