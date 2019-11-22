@@ -25,9 +25,10 @@ private:
 	bool salio;
 	bool desconectado;
 	bool inmortal;
-	bool tiroGolpe;
-	bool golpeImpacto;
-	int vidas;
+	bool ejecutarSonidoGolpeTiro = false;
+	bool ejecutarSonidoGolpeImpacto = false;
+    bool ejecutarSonidoSalto = false;
+    int vidas;
 	int puntaje;
 	int golpesDeArma;
 	tipoDeArma arma;
