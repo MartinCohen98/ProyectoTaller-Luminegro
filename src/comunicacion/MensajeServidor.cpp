@@ -50,40 +50,51 @@ bool MensajeServidor::estaDadoVuelta() {
 	return dadoVuelta;
 }
 
+
 bool MensajeServidor::operator <(const MensajeServidor & mensaje) const {
 	return (posicionY < mensaje.posicionY);
 }
+
 
 void MensajeServidor::setSonidoEjecutarGolpeTiro(bool valor) {
     ejecutarSonidoGolpeTiro = valor;
 }
 
+
 bool MensajeServidor::getSonidoEjecutarGolpeTiro() {
     return ejecutarSonidoGolpeTiro;
 }
+
 
 void MensajeServidor::setSonidoEjecutarGolpeImpacto(bool valor) {
     ejecutarSonidoGolpeImpacto = valor;
 }
 
+
 bool MensajeServidor::getSonidoEjecutarGolpeImpacto() {
     return ejecutarSonidoGolpeImpacto;
 }
+
+
 void MensajeServidor::setSonidoEjecutarSalto(bool valor) {
     ejecutarSonidoSalto = valor;
 }
+
 
 bool MensajeServidor::getSonidoEjecutarSalto() {
     return ejecutarSonidoSalto;
 }
 
+
 void MensajeServidor::setSonidoEjecutarCaida(bool valor) {
     ejecutarSonidoCaida = valor;
 }
 
+
 bool MensajeServidor::getSonidoEjecutarCaida() {
     return ejecutarSonidoCaida;
 }
+
 
 void MensajeServidor::setSonidoEjecutarDestruccion(bool valor) {
     ejecutarSonidoDestruccion = valor;
@@ -92,6 +103,7 @@ void MensajeServidor::setSonidoEjecutarDestruccion(bool valor) {
 bool MensajeServidor::getSonidoEjecutarDestruccion() {
     return ejecutarSonidoDestruccion;
 }
+
 
 MensajeServidor::~MensajeServidor() {}
 

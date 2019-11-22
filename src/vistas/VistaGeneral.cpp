@@ -15,7 +15,7 @@ void VistaGeneral::renderizarConElMensaje(MensajeServidor* mensaje) {
 	}
 
 	// Acá se pone true pero nunca false
-	if ( mensaje->getSonidoEjecutarGolpeTiro() )    *this->ejecutarSonidoGolpeTiro = true;
+	if ( mensaje->getSonidoEjecutarGolpeTiro() )     *this->ejecutarSonidoGolpeTiro = true;
 	if ( mensaje->getSonidoEjecutarGolpeImpacto() )  *this->ejecutarSonidoGolpeImpacto = true;
 	if ( mensaje->getSonidoEjecutarSalto() )         *this->ejecutarSonidoSalto = true;
 	if ( mensaje->getSonidoEjecutarCaida() )         *this->ejecutarSonidoCaida = true;
