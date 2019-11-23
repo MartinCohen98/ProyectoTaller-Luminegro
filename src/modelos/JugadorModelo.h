@@ -35,6 +35,14 @@ private:
 	tipoDeArma arma;
 	EstadoJugadorParado* estadoOriginal;
 
+    void actualizarPosicion(FondoModelo* fondo, bool rezagado);
+    void checkearColisiones(Colisionador* colisionador);
+    void actualizarInsercion(bool conElevacion);
+    bool moverEnX(FondoModelo* fondo, bool rezagado);
+    bool moverEnY();
+    bool movioAlFondo(FondoModelo* fondo);
+    int escalar(int tamanio);
+
 public:
 	JugadorModelo(pugi::xml_document *archiConfig, int posXinicial, int poYinicial);
 	void avanzar();
@@ -71,15 +79,6 @@ public:
 							int numeroSprite);
 	MensajeEstadoJugador generarMensajeEstado(int numeroJugador);
 	virtual ~JugadorModelo();
-
-private:
-	void actualizarPosicion(FondoModelo* fondo, bool rezagado);
-	void checkearColisiones(Colisionador* colisionador);
-	void actualizarInsercion(bool conElevacion);
-	bool moverEnX(FondoModelo* fondo, bool rezagado);
-	bool moverEnY();
-	bool movioAlFondo(FondoModelo* fondo);
-	int escalar(int tamanio);
 };
 
 #endif /* SRC_JUGADORMODELO_H_ */

@@ -3,7 +3,6 @@
 
 Cliente::Cliente() {
 	cantidadDeReceives = 0;
-	salir=false;
 }
 
 int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig) {
@@ -103,11 +102,12 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	gestorThreads.comenzar();
 
-   for (int nivel = mensajeInicio.getNivelInicial(); nivel <= 2; nivel++) {
+	bool terminoElNivel;
+
+    for (int nivel = mensajeInicio.getNivelInicial(); nivel <= 2; nivel++) {
 
         string nivelNodeName = "nivel";
 		nivelNodeName.append( to_string(nivel) );
-		salir = false;
 
 		logueador->Info("Iniciando nivel: "+ nivelNodeName);
 		logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
@@ -158,7 +158,9 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 		                              );
         }
 
-        while (!salir) {
+        terminoElNivel = false;
+
+        while (!terminoElNivel) {
 	    	enviarInput(&gestorThreads);
 	    	if (mensajeCliente.get() == Exit) {
 	    		SDL_Delay(200);
@@ -227,9 +229,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	        renderizador.renderizar();
 
-	        if (terminoElNivel(&gestorThreads)) {
-	    		salir = true;
-	    	}
+	        terminoElNivel = getTerminoElNivel(&gestorThreads);
 		}
 
 		logueador->Info("Fin de nivel: " +  nivelNodeName);
@@ -366,7 +366,7 @@ void Cliente::recibirCantidadDeReceives(GestorThreadsCliente* gestorThreads) {
 }
 
 
-bool Cliente::terminoElNivel(GestorThreadsCliente* gestorThreads) {
+bool Cliente::getTerminoElNivel(GestorThreadsCliente* gestorThreads) {
 	mensajeServidor = gestorThreads->recibirMensaje();
 	return (mensajeServidor.estaDadoVuelta());
 }
