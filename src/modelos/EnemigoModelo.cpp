@@ -190,7 +190,7 @@ void EnemigoModelo::trasladarse(int destinoX,int destinoY) {
 }
 
 void EnemigoModelo::patrullar(){
-	if(modo==Patrullando & vivo){
+	if(modo==Patrullando){
 
     if (posicionY==bordeSuperior)
         subiendo=false;
@@ -334,6 +334,10 @@ void EnemigoModelo::estaBajando(){
     subiendo=false;
 }
 
+bool EnemigoModelo::estaAtacando() {
+	return estado->estaAtacando();
+}
+
 bool EnemigoModelo::consultarSubiendo(){
     return subiendo;
 }
@@ -395,7 +399,7 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 	    	break;
 	      }
 	    case Esquivando:{
-	    	esquivar();
+	    	//esquivar();
 	    	break;
 	      }
 	    case Atacando:{
@@ -403,8 +407,12 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 	    	break;
 	      }
 	}
-	if (estado->estaMuerto() & estado->terminado())
+	if ((estado->estaMuerto()||!vivo) & estado->terminado()){
 		desaparecer();
+		cambiarModo(Detenido);
+	}
+	//if ((estado->estaMuerto()||!vivo) & (!estado->terminado()))
+	//morir();
 	checkearColisiones(colisionador);
 }
 

@@ -60,6 +60,7 @@ public:
 	void retrocesoDePantalla();
 	void guardarPosicionesActuales();
 	int recibirDanioDe(Colisionable* colisionable);
+	bool estaAtacando();
 	void realizarMovimientos(Colisionador* colisionador);
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);
 	virtual ~EnemigoModelo();

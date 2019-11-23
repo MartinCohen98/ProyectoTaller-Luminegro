@@ -124,4 +124,14 @@ void EstadoEnemigoPegando::cambiarFrame() {
     	    }
 }
 
+bool EstadoEnemigoPegando::estaAtacando() {
+	bool retorno = frameDeDanio;
+	frameDeDanio = false;
+	return retorno;
+}
+
+int EstadoEnemigoPegando::obtenerDanio() {
+	return 20;
+}
+
 EstadoEnemigoPegando::~EstadoEnemigoPegando() {}

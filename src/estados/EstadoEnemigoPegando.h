@@ -10,6 +10,7 @@ private:
     int framesTranscurridas;
     int numeroDeFrame;
     bool golpeTerminado;
+    bool frameDeDanio;
 
 public:
     EstadoEnemigoPegando(tipoDeSprite tipo);
@@ -20,6 +21,8 @@ public:
     EstadoJugador* serGolpeado();
     bool puedeMoverse();
     bool terminado();
+    bool estaAtacando();
+    int obtenerDanio();
     virtual ~EstadoEnemigoPegando();
 
 private:
