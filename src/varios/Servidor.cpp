@@ -237,6 +237,7 @@ MensajeInicioPartida Servidor::generarMensajeInicioPartida() {
     MensajeInicioPartida mensaje = MensajeInicioPartida();
     mensaje.setNivelInicial(nivelActual);
     mensaje.setVidaMax(vidaMaxima);
+    mensaje.setCantidadJugadoresPartida(jugadoresCantidadEsperada);
     for(int i = 0; i < jugadoresCantidadEsperada; i++){
         mensaje.setNombreJugador(i, credenciales[i].getUsuario());
     }

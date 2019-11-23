@@ -13,15 +13,19 @@
         <protagonistas>
             <protagonista1>
                 <imagen>assets/images/sprites/mariano.bmp</imagen>
+                <icono>assets/images/icons/mariano.bmp</icono>
             </protagonista1>
             <protagonista2>
                 <imagen>assets/images/sprites/martin.bmp</imagen>
+                <icono>assets/images/icons/martin.bmp</icono>
             </protagonista2>
             <protagonista3>
                 <imagen>assets/images/sprites/nicolas.bmp</imagen>
+                <icono>assets/images/icons/nicolas.bmp</icono>
             </protagonista3>
             <protagonista4>
                 <imagen>assets/images/sprites/julio.bmp</imagen>
+                <icono>assets/images/icons/julio.bmp</icono>
             </protagonista4>
         </protagonistas>
         <enemigos>

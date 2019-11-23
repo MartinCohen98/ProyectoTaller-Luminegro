@@ -107,3 +107,12 @@ bool MensajeServidor::getSonidoEjecutarDestruccion() {
 
 MensajeServidor::~MensajeServidor() {}
 
+InfoJugador MensajeServidor::getInfoJugador() {
+    return infoJugador;
+}
+
+void MensajeServidor::setInfoJugador(InfoJugador info) {
+    infoJugador = info;
+}
+
+

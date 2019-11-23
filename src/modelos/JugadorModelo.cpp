@@ -352,10 +352,15 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
     mensajes[*mensajeActual].setSonidoEjecutarSalto(ejecutarSonidoSalto);
     mensajes[*mensajeActual].setSonidoEjecutarCaida(ejecutarSonidoCaida);
 
+
+    mensajes[*mensajeActual].setInfoJugador(InfoJugador(energia, vidas, puntaje, (!salio && !desconectado)));
+    //Si no está ni desconectado ni salió, está conectado
+
     ejecutarSonidoGolpeTiro = false;
     ejecutarSonidoGolpeImpacto = false;
     ejecutarSonidoSalto = false;
     ejecutarSonidoCaida = false;
+
 
 	mensajes[*mensajeActual].agregarPosicionY(posicionY +
 									escalar(estadoOriginal->obtenerAlto()));

@@ -98,7 +98,8 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
     //Esperar mensaje con datos de inicio de partida
     //TODO cargar datos de los usuarios conectados en pantalla
     MensajeInicioPartida mensajeInicio = gestorThreads.recibirMensajeDeInicio();
-
+    //Dejo preparados los vectores donde se cargará la info a mostrar de cada jugador
+    InfoJugador infoJugadorees[mensajeInicio.getCantidadJugadoresPartida()];
 
 	gestorThreads.comenzar();
 
@@ -188,15 +189,19 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	        	switch(mensaje.obtenerTipoDeSprite()) {
 	        		case Jugador1:
+	        		    infoJugadorees[0] = mensaje.getInfoJugador();
 	        			jugador1.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Jugador2:
+                        infoJugadorees[1] = mensaje.getInfoJugador();
 	        			jugador2.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Jugador3:
+                        infoJugadorees[2] = mensaje.getInfoJugador();
 	        			jugador3.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Jugador4:
+                        infoJugadorees[3] = mensaje.getInfoJugador();
 	        			jugador4.renderizarConElMensaje(&mensaje);
 	        			break;
 	        		case Enemigo1:
@@ -233,6 +238,9 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 		}
 
 		logueador->Info("Fin de nivel: " +  nivelNodeName);
+        //TODO Loguear como corresponde
+        logueador->Debug("puntajes: " + to_string(infoJugadorees[0].getPuntaje()));
+        cout << "puntajes: " << infoJugadorees[0].getPuntaje() << endl;
 	}
 
 	socket.cerrar();

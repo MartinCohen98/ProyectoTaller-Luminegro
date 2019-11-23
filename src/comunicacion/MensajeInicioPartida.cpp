@@ -35,6 +35,15 @@ void MensajeInicioPartida::setVidaMax(int vidaMaxima) {
     vidaMax = vidaMaxima;
 }
 
+void MensajeInicioPartida::setCantidadJugadoresPartida(int8_t cantidad) {
+    cantidadJugadores = cantidad;
+}
+
+int8_t MensajeInicioPartida::getCantidadJugadoresPartida() {
+    return cantidadJugadores;
+}
+
+
 
 
 

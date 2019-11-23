@@ -3,6 +3,7 @@
 
 #include "../grafica/Encuadre.h"
 #include <string>
+#include <varios/InfoJugador.h>
 
 enum tipoDeSprite {Jugador1, Jugador2, Jugador3, Jugador4,
 	Enemigo1, Enemigo2, Enemigo3, EnemigoJefe, Barril, Caja,
@@ -22,6 +23,7 @@ private:
 	bool ejecutarSonidoSalto = false;
 	bool ejecutarSonidoCaida = false;
 	bool ejecutarSonidoDestruccion = false;
+	InfoJugador infoJugador;
 
 public:
 	MensajeServidor();
@@ -43,6 +45,9 @@ public:
     bool getSonidoEjecutarCaida();
     void setSonidoEjecutarDestruccion(bool valor);
     bool getSonidoEjecutarDestruccion();
+    InfoJugador getInfoJugador();
+    void setInfoJugador(InfoJugador info);
+
 	virtual ~MensajeServidor();
 };
 
