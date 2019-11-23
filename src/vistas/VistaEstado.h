@@ -12,6 +12,8 @@ private:
     Textura texturaIcono;
     Encuadre encuadreIcono;
     Encuadre encuadreNombre;
+    Encuadre encuadreBarraVida;
+    Encuadre encuadrePuntaje;
     int maxVida;
     std::string nombreJugador;
 public:
