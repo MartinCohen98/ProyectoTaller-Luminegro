@@ -21,7 +21,6 @@ private:
 	Socket* socketsDeClientes;
 	char *puerto;
 	MensajeCredenciales credenciales[4];
-	MensajeEstadoJugador estadosJugadores[4];
 	GestorThreadsServidor* gestorThreads;
     pugi::xml_document* archivoConfiguracion;
     UsuarioYClave* usuariosYClaves;

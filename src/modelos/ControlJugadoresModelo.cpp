@@ -232,9 +232,3 @@ ControlJugadoresModelo::~ControlJugadoresModelo() {
 	delete[] jugadores;
 }
 
-void ControlJugadoresModelo::generarMensajesEstado(MensajeEstadoJugador *estadosJugadores) {
-    for (int i = 0; i < cantidadJugadores; i++) {
-        estadosJugadores[i] = jugadores[i]->generarMensajeEstado(i);
-    }
-}
-

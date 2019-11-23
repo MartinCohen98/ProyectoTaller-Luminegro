@@ -1,3 +1,4 @@
+#include <vistas/VistaEstado.h>
 #include "Cliente.h"
 #include "../comunicacion/MensajeInicioPartida.h"
 
@@ -100,6 +101,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
     MensajeInicioPartida mensajeInicio = gestorThreads.recibirMensajeDeInicio();
     //Dejo preparados los vectores donde se cargará la info a mostrar de cada jugador
     InfoJugador infoJugadorees[mensajeInicio.getCantidadJugadoresPartida()];
+    VistaEstado *vistasEstado[mensajeInicio.getCantidadJugadoresPartida()];
 
 	gestorThreads.comenzar();
 
@@ -146,6 +148,11 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 		VistaObjeto caja(&renderizador, archiConfig, Caja, &ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
 		VistaObjeto cuchillo(&renderizador, archiConfig, Cuchillo, &ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
 		VistaObjeto tubo(&renderizador, archiConfig, Tubo, &ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
+
+		for(int i = 0; i < mensajeInicio.getCantidadJugadoresPartida(); i++){
+		    vistasEstado[i] = new VistaEstado(&renderizador, archiConfig, mensajeInicio.getVidaMax(),
+		            mensajeInicio.getNombreJugador(i), i);
+		}
 
 		recibirCantidadDeReceives(&gestorThreads);
 
@@ -233,6 +240,8 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	        }
 
 	        renderizador.renderizar();
+            for(auto i = 0; i < mensajeInicio.getCantidadJugadoresPartida(); i++)
+                vistasEstado[i]->renderizar(infoJugadorees[i]);
 
 	        terminoElNivel = getTerminoElNivel(&gestorThreads);
 		}
@@ -244,6 +253,9 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	}
 
 	socket.cerrar();
+    //libero memoria de vistas de estado
+    for(auto i = 0; i < mensajeInicio.getCantidadJugadoresPartida(); i++)
+        delete vistasEstado[i];
 
     return 0;
 }

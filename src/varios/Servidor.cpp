@@ -85,14 +85,9 @@ void Servidor::enviarCantidadDeReceives() {
 
 void Servidor::enviarMensajes() {
     modelo->generarMensajesServidor(mensajesServidor);
-    modelo->generarMensajesEstadoPersonaje(estadosJugadores);
 	for (int i = 0; i < (cantidadDeMensajes + 3); i++) {
 		gestorThreads->enviarMensaje(&mensajesServidor[i]);
 	}
-	//TODO Enviar mensajes de estado de clientes
-	/*for(int i = 0; i < jugadoresCantidadEsperada; i++)
-	 *
-	 * */
 }
 
 

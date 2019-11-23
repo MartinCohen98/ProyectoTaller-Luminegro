@@ -37,7 +37,12 @@ int Imagen::cargar(const char* path, const int tipo) {
                 // Nada, no está contemplado
                 imagen = SDL_LoadBMP("assets/images/general/cerrandoJuego.bmp");
                 break;
-
+	        case TIPO_ICONO:
+	            SDL_Surface *superficieTemp = SDL_LoadBMP("assets/images/missingPictures/person.bmp");
+	            SDL_Rect cachoDeImagen = {13,0,20,20};
+	            SDL_BlitSurface(superficieTemp, &cachoDeImagen, imagen, NULL);
+                SDL_FreeSurface(superficieTemp);
+                break;
         }
     } /*else {
     	std::string mensajeCarga = "Se cargo la imagen: ";
