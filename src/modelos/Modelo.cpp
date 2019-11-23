@@ -44,7 +44,7 @@ void Modelo::realzarMovimientos() {
 		protagonistas->dejarDeMatar();
 	}
 	if(protagonistas->consultarGolpear()){
-		protagonistas->golpeados();
+		enemigos->golpear();
 		protagonistas->dejarDeGolpear();
 	}
 	protagonistas->realizarMovimientos(fondo, colisionador);

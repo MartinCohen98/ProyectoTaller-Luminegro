@@ -249,12 +249,19 @@ void EnemigoModelo::atacar(){
 }
 
 void EnemigoModelo::esquivar(){
-/*	if (avanzando){
-		retroceder();
+	if(modo!=Atacando){
+	  if (subiendo){
+	     bajar();
+	    }
+	  else {
+	    subir();
+	    }
+	  if (avanzando)
+	    retroceder();
+	  else
+	    avanzar();
 	}
-	else {
-		avanzar();
-	}*/
+	/*
 
 	switch(tiempoDeEsquivada){
 	    case 0:{
@@ -304,7 +311,7 @@ void EnemigoModelo::esquivar(){
 	    	modo = modoAnterior;
 	    	break;
 	       }
-	  }
+	  }*/
 }
 
 void EnemigoModelo::cambiarModo(accionDeEnemigo nuevoModo){
@@ -408,18 +415,7 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
 
-		if(modo!=Atacando){
-		  if (subiendo){
-		     bajar();
-		    }
-		  else {
-		    subir();
-		    }
-		  if (avanzando)
-		    retroceder();
-		  else
-		    avanzar();
-		}
+		esquivar();
 		actualizarInsercion();
 	}
 }

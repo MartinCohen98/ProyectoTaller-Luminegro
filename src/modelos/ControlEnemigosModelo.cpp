@@ -113,7 +113,7 @@ void ControlEnemigosModelo::matar(){
 
 void ControlEnemigosModelo::golpear(){
     for(int i=0;i<enemigosCantidad;i++)
-    enemigos[i]->serGolpeado();
+    enemigos[i]->pegar();
 }
 
 void ControlEnemigosModelo::generarMensajes(MensajeServidor* mensajes, int* mensajeActual) {

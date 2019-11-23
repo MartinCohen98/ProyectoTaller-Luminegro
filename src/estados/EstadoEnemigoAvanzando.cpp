@@ -4,8 +4,6 @@ EstadoEnemigoAvanzando::EstadoEnemigoAvanzando(tipoDeSprite tipoNuevo){
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;
 	tipo=tipoNuevo;
-	ancho=47;
-	alto=78;
 	switch (tipo){
 	    case EnemigoJefe:{
 	    	ancho = 90;

@@ -76,11 +76,16 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                 else
                     jugadores[numeroDeJugador]->activarModoTest();
                 break;
+
             case Kill:
                 // Matar a todos
                 matar=true;
             	//golpear=true;
                 break;
+            case Punch:
+            	golpear=true;
+                break;
+
             case Exit:
                 // Salir
             	jugadores[numeroDeJugador]->desaparecer();

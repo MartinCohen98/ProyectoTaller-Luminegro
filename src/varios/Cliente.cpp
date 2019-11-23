@@ -310,9 +310,13 @@ void Cliente::enviarInput(GestorThreadsCliente* gestorThreads){
                         musicaFondoActiva = !musicaFondoActiva;
                         break;
     			    case SDLK_k:
-    			        //Matar enemigos
+    			        //Prueba de matar
                         mensajeCliente.Codificar(Kill);
                         break;
+    			    case SDLK_p:
+    			        //Prueba de pegar
+    			        mensajeCliente.Codificar(Punch);
+    			        break;
     					//Para probar grisado sin red
     					//---------------------------
     			    case SDLK_q:

@@ -5,16 +5,16 @@ EstadoEnemigoMuriendo::EstadoEnemigoMuriendo(tipoDeSprite tipoNuevo) {
     tipo=tipoNuevo;
     switch (tipo){
        case EnemigoJefe:{
-       	  ancho=115;
+       	  ancho=110;
        	  alto=125;
-       	  frameActual.modificar(65, 310, ancho, alto);
+       	  frameActual.modificar(115, 310, ancho, alto);
         }
        case Enemigo1:
        case Enemigo2:
        case Enemigo3:{
     	  ancho=100;
     	  alto=78;
-    	  frameActual.modificar(50, 164, ancho, alto);
+    	  frameActual.modificar(30, 164, ancho, alto);
        }
       }
 
@@ -104,25 +104,25 @@ void EstadoEnemigoMuriendo::cambiarFrame(){
 			  }
 		    }
 	if (numeroDeFrame == framesLimite) {
+		numeroDeFrame = 0;
         caidaTerminada = true;
-        numeroDeFrame = 0;
     } else {
         numeroDeFrame++;
     }
 
     switch (tipo){
         		case EnemigoJefe:{
-        			frameActual.modificar((ancho * numeroDeFrame) + 65, 310, ancho, alto);
+        			frameActual.modificar((ancho * numeroDeFrame) + 115, 310, ancho, alto);
         		    break;
         		}
         		case Enemigo1:
         		case Enemigo2:
         		case Enemigo3:{
-        			frameActual.modificar(((ancho * numeroDeFrame) + 50), 164, ancho, alto);
+        			frameActual.modificar(((ancho * numeroDeFrame) + 30), 164, ancho, alto);
         		    break;
         		}
 
-        	    }
+        	}
 }
 
 bool EstadoEnemigoMuriendo::estaMuerto(){
