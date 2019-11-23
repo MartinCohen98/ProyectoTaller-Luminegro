@@ -79,12 +79,14 @@ void EnemigoModelo::bajar() {
 	actualizarInsercion();
 }
 
-void EnemigoModelo::pegar(){
+void EnemigoModelo::pegar() {
+    ejecutarSonidoGolpeTiro = true;
     estado = estado->pegar();
     actualizarInsercion();
 }
 
-void EnemigoModelo::morir(){
+void EnemigoModelo::morir() {
+    ejecutarSonidoCaida = true;
     estado = estado->morir();
     cambiarModo(Detenido);
     vivo = false;
@@ -366,9 +368,19 @@ int EnemigoModelo::recibirDanioDe(Colisionable* colisionable) {
 
 void EnemigoModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual) {
 	Encuadre sprite = estado->obtenerSprite();
+
 	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, tipoEnemigo);
+    mensajes[*mensajeActual].setSonidoEjecutarGolpeTiro(ejecutarSonidoGolpeTiro);
+    mensajes[*mensajeActual].setSonidoEjecutarGolpeImpacto(ejecutarSonidoGolpeImpacto);
+    mensajes[*mensajeActual].setSonidoEjecutarCaida(ejecutarSonidoCaida);
+
+    ejecutarSonidoGolpeTiro = false;
+    ejecutarSonidoGolpeImpacto = false;
+    ejecutarSonidoCaida = false;
+
 	if (dadoVuelta)
 		mensajes[*mensajeActual].darVuelta();
+
 	(*mensajeActual)++;
 }
 
@@ -420,6 +432,9 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 	actualizarInsercion();
 	if (colisionador->colisiona(this)) {
+        if (ejecutarSonidoGolpeTiro) {
+            ejecutarSonidoGolpeImpacto = true;
+        }
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
 

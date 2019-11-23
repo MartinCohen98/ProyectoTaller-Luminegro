@@ -19,6 +19,7 @@ public:
 					Encuadre encuadreFijo);
 	void copiarseInvertidoEn(Renderizador* renderizador, Encuadre encuadre,
 							Encuadre encuadreFijo);
+	void copiarseEn(Renderizador *renderizador, Encuadre encuadre);
 	int texturizar(Renderizador* renderizador, Imagen imagen);
 	virtual ~Textura();
 };

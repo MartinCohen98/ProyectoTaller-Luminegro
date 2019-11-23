@@ -9,29 +9,29 @@ VistaEstado::VistaEstado(Renderizador *renderizador, pugi::xml_document *archiCo
     std::string pathIcono;
 
     switch(numeroJugador){
-        case tipoDeSprite::Jugador1:
+        case 0: //Jugador 1
             pathIcono = archiConfig->child("configuracion").child("escenario")
                     .child("protagonistas").child("protagonista1").child_value("icono");
-            encuadreIcono = Encuadre(10, 10, 40, 40);
-            encuadreNombre = Encuadre(50, 30, 150, 30);
+            encuadreIcono = Encuadre(10, 10, 45, 45);
+            encuadreNombre = Encuadre(60, 30, 200, 30);
             break;
-        case tipoDeSprite::Jugador2:
+        case 1: //Jugador 2
             pathIcono = archiConfig->child("configuracion").child("escenario")
                     .child("protagonistas").child("protagonista2").child_value("icono");
-            encuadreIcono = Encuadre(210, 10, 40, 40);
-            encuadreNombre = Encuadre(250, 30, 150, 30);
+            encuadreIcono = Encuadre(410, 10, 45, 45);
+            encuadreNombre = Encuadre(460, 30, 200, 30);
             break;
-        case tipoDeSprite::Jugador3:
+        case 2: //Jugador 3
             pathIcono = archiConfig->child("configuracion").child("escenario")
                     .child("protagonistas").child("protagonista3").child_value("icono");
-            encuadreIcono = Encuadre(10, 60, 40, 40);
-            encuadreNombre = Encuadre(50, 80, 150, 30);
+            encuadreIcono = Encuadre(10, 60, 45, 45);
+            encuadreNombre = Encuadre(60, 80, 200, 30);
             break;
-        case tipoDeSprite::Jugador4:
-            archiConfig->child("configuracion").child("escenario")
+        case 3: //Jugador 4
+            pathIcono = archiConfig->child("configuracion").child("escenario")
                     .child("protagonistas").child("protagonista4").child_value("icono");
-            encuadreIcono = Encuadre(210, 60, 40, 40);
-            encuadreNombre = Encuadre(250, 80, 150, 30);
+            encuadreIcono = Encuadre(410, 60, 45, 45);
+            encuadreNombre = Encuadre(460, 80, 200, 30);
             break;
         default:
             break;
@@ -45,5 +45,5 @@ VistaEstado::VistaEstado(Renderizador *renderizador, pugi::xml_document *archiCo
 
 void VistaEstado::renderizar(InfoJugador estadoJugador) {
     //Renderiza ícono
-    texturaIcono.copiarseEn(renderizador, encuadreIcono, Encuadre(0,0,30,30));
+    texturaIcono.copiarseEn(renderizador, encuadreIcono);
 }

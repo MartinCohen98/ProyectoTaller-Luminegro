@@ -132,6 +132,7 @@ void JugadorModelo::descongelarse() {
 }
 
 void JugadorModelo::morir(){
+    ejecutarSonidoCaida = true;
     estado = estado->morir();
     actualizarInsercion(false);
 }

@@ -29,6 +29,9 @@ protected:
     int vivo;
     accionDeEnemigo modo, modoAnterior;
     tipoDeSprite tipoEnemigo;
+    bool ejecutarSonidoCaida = false;
+    bool ejecutarSonidoGolpeTiro = false;
+    bool ejecutarSonidoGolpeImpacto = false;
 
 public:
     EnemigoModelo();
