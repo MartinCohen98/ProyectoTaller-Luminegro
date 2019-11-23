@@ -14,7 +14,6 @@ private:
 	int numeroDeFrame;
 
 public:
-	EstadoEnemigoAvanzando();
 	EstadoEnemigoAvanzando(tipoDeSprite tipo);
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();

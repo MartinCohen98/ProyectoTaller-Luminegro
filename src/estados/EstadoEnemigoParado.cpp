@@ -1,19 +1,20 @@
 #include "EstadoEnemigoParado.h"
 
-EstadoEnemigoParado::EstadoEnemigoParado() {
-    ancho=47;
-    alto=78;
-    frameActual.modificar(0, 0, ancho, alto);
-}
-
 EstadoEnemigoParado::EstadoEnemigoParado(tipoDeSprite tipoNuevo){
-	ancho=47;
-	alto=78;
+
 	tipo=tipoNuevo;
     switch (tipo){
     case EnemigoJefe:{
     	ancho=90;
     	alto=150;
+    	break;
+     }
+    case Enemigo1:
+    case Enemigo2:
+     case Enemigo3:{
+    	 ancho=47;
+    	 alto=78;
+    	 break;
      }
     }
 	frameActual.modificar(0, 0, ancho, alto);

@@ -6,7 +6,7 @@
 class EnemigoJefeModelo: public EnemigoModelo {
 public:
 	EnemigoJefeModelo();
-	EnemigoJefeModelo(int posXinicial, int posYinicial);
+	EnemigoJefeModelo(int posXinicial, int posYinicial,FondoModelo* fondo);
 	virtual ~EnemigoJefeModelo();
 };
 

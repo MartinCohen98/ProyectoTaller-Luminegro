@@ -14,7 +14,7 @@ Modelo::Modelo(pugi::xml_document* archiConfig, int cantidadDeJugadores) {
 	protagonistas = new ControlJugadoresModelo(archivoConfiguracion, cantidadJugadores);
 
 	logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
-	enemigos = new ControlEnemigosModelo(nivelActual);
+	enemigos = new ControlEnemigosModelo(nivelActual, fondo);
 
 	logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 	objetos = new ControlObjetosModelo(archivoConfiguracion, fondo->obtenerAncho(), nivelActual);
@@ -38,15 +38,6 @@ void Modelo::procesarInputDeJugador(MensajeCliente* mensaje, int jugador) {
 
 
 void Modelo::realzarMovimientos() {
-	if (protagonistas->consultarMatar()) {
-		enemigos->matar();
-		protagonistas->dejarDeMatar();
-	}
-
-	if (protagonistas->consultarGolpear()) {
-		enemigos->golpear();
-		protagonistas->dejarDeGolpear();
-	}
 
 	protagonistas->realizarMovimientos(fondo, colisionador);
 	enemigos->realizarMovimientos(atacante, protagonistas, colisionador);
@@ -79,11 +70,14 @@ bool Modelo::nivelTerminado() {
 void Modelo::pasarNivel() {
 	Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
 
-	colisionador->vaciar();
+	//colisionador->vaciar();
+	delete colisionador;
 	delete fondo;
 	delete protagonistas;
 	delete enemigos;
 	delete objetos;
+
+	colisionador = new Colisionador();
 
 	nivelActual++;
 	fondo = new FondoModelo(archivoConfiguracion, nivelActual);
@@ -91,7 +85,7 @@ void Modelo::pasarNivel() {
 	protagonistas = new ControlJugadoresModelo(archivoConfiguracion, cantidadJugadores);
 
 	logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
-	enemigos = new ControlEnemigosModelo(nivelActual);
+	enemigos = new ControlEnemigosModelo(nivelActual, fondo);
 
 	logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
 	objetos = new ControlObjetosModelo(archivoConfiguracion, fondo->obtenerAncho(), nivelActual);

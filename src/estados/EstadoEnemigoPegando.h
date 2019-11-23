@@ -12,8 +12,6 @@ private:
     bool golpeTerminado;
 
 public:
-
-    EstadoEnemigoPegando();
     EstadoEnemigoPegando(tipoDeSprite tipo);
     EstadoJugador* avanzar();
     EstadoJugador* parar();

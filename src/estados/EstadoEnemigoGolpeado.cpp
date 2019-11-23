@@ -1,23 +1,24 @@
 #include "EstadoEnemigoGolpeado.h"
 
-EstadoEnemigoGolpeado::EstadoEnemigoGolpeado() {
-	  ancho = 50;
-	  alto = 80;
-	  frameActual.modificar(60, 170, ancho, alto);
-	  palizaTerminada = false;
-	  framesTranscurridas = 0;
-	  numeroDeFrame = 0;
-}
-
 EstadoEnemigoGolpeado::EstadoEnemigoGolpeado(tipoDeSprite tipoNuevo){
-	ancho = 50;
-	alto = 80;
+
 	tipo = tipoNuevo;
-	frameActual.modificar(60, 170, ancho, alto);
-	if (tipo == EnemigoJefe){
+
+	switch (tipo){
+	case EnemigoJefe:{
     	ancho = 90;
     	alto = 130;
     	frameActual.modificar(50, 270, ancho, alto);
+    	break;
+	}
+	case Enemigo1:
+	case Enemigo2:
+	case Enemigo3:{
+		ancho = 50;
+		alto = 80;
+		frameActual.modificar(60, 170, ancho, alto);
+		break;
+	}
 	}
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;

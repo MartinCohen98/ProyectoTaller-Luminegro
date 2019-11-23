@@ -15,31 +15,31 @@ class EnemigoModelo: public PersonaModelo {
 protected:
 	int ancho;
 	int alto;
+	float escaladoDeSprite;
     bool subiendo;
     bool avanzando;
     int bordeSuperior;
     int bordeInferior;
+    int limiteInicial;
+    int limiteFinal;
     int jugadorObjetivo;
     JugadorModelo* objetivo;
     int tiempoDeGolpe;
     int tiempoDeEsquivada;
     int vivo;
-    accionDeEnemigo modo;
+    accionDeEnemigo modo, modoAnterior;
     tipoDeSprite tipoEnemigo;
 
 public:
     EnemigoModelo();
-	EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo);
+	EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo,FondoModelo* fondo);
 	void avanzar();
 	void parar();
 	void retroceder();
-	void agacharse();
 	void subir();
 	void bajar();
     void pegar();
     void morir();
-    void acuchillar();
-    void apalear();
     void serGolpeado();
 	void avanzarDiagArriba(int tope);
 	void avanzarDiagAbajo(int tope);
@@ -54,6 +54,9 @@ public:
 	int consultarJugadorObjetivo();
 	void atacar();
 	void esquivar();
+	void cambiarModo(accionDeEnemigo nuevoModo);
+	void asignarObjetivo(JugadorModelo *jugador);
+	bool estaVivo();
 	void retrocesoDePantalla();
 	void guardarPosicionesActuales();
 	int recibirDanioDe(Colisionable* colisionable);
@@ -67,6 +70,7 @@ protected:
 	void moverEnX(int movimiento);
 	void moverEnY(int movimiento);
 	void desaparecer();
+	int escalar(int tamanio);
 };
 
 #endif /* SRC_ENEMIGOMODELO_H_ */

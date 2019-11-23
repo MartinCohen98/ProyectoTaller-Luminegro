@@ -10,7 +10,6 @@ private:
 	int numeroDeFrame;
 	bool palizaTerminada;
 public:
-	EstadoEnemigoGolpeado();
 	EstadoEnemigoGolpeado(tipoDeSprite tipo);
 	EstadoJugador* avanzar();
 	EstadoJugador* parar();

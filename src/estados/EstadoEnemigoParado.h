@@ -11,7 +11,6 @@
 
 class EstadoEnemigoParado: public EstadoJugador {
 public:
-    EstadoEnemigoParado();
     EstadoEnemigoParado(tipoDeSprite tipo);
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();

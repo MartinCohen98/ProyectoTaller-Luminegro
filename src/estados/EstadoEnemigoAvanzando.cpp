@@ -1,13 +1,5 @@
 #include "EstadoEnemigoAvanzando.h"
 
-EstadoEnemigoAvanzando::EstadoEnemigoAvanzando() {
-	framesTranscurridas = 0;
-	numeroDeFrame = 0;
-	ancho = 47;
-	alto = 78;
-	frameActual.modificar(0, 0, ancho, alto);
-}
-
 EstadoEnemigoAvanzando::EstadoEnemigoAvanzando(tipoDeSprite tipoNuevo){
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;
@@ -18,6 +10,14 @@ EstadoEnemigoAvanzando::EstadoEnemigoAvanzando(tipoDeSprite tipoNuevo){
 	    case EnemigoJefe:{
 	    	ancho = 90;
 	    	alto = 130;
+	    	break;
+	    }
+	    case Enemigo1:
+	    case Enemigo2:
+	    case Enemigo3:{
+	        ancho=47;
+	        alto=78;
+	        break;
 	    }
 	}
 	frameActual.modificar(0, 0, ancho, alto);

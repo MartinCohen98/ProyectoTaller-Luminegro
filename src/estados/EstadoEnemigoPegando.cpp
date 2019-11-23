@@ -1,25 +1,22 @@
 #include "EstadoEnemigoPegando.h"
 
-EstadoEnemigoPegando::EstadoEnemigoPegando() {
-    ancho=70;
-    alto=78;
-    frameActual.modificar(0, alto, ancho, alto);
-    framesTranscurridas = 0;
-    numeroDeFrame = 0;
-    golpeTerminado = false;
-}
-
 EstadoEnemigoPegando::EstadoEnemigoPegando(tipoDeSprite tipoNuevo){
-	ancho=70;
-	alto=78;
+
 	tipo=tipoNuevo;
-	frameActual.modificar(0, alto, ancho, alto);
+
 	switch (tipo){
     case EnemigoJefe:{
     	ancho=115;
     	alto=125;
     	frameActual.modificar(0, 140, ancho, alto);
      }
+    case Enemigo1:
+    case Enemigo2:
+    case Enemigo3:{
+    	ancho=70;
+    	alto=78;
+    	frameActual.modificar(0, alto, ancho, alto);
+    }
 	}
 
 	framesTranscurridas = 0;
@@ -36,12 +33,18 @@ EstadoJugador* EstadoEnemigoPegando::parar() {
 }
 
 EstadoJugador* EstadoEnemigoPegando::pegar(tipoDeSprite tipoNuevo) {
-	int framesLimite=2;
+	int framesLimite;
 	tipo = tipoNuevo;
 	switch (tipo){
     case EnemigoJefe:{
     	framesLimite=4;
+    	break;
      }
+    case Enemigo1:
+    case Enemigo2:
+    case Enemigo3:{
+    	framesLimite=2;
+    }
 	}
     if (!terminado()) {
         framesTranscurridas++;
@@ -71,11 +74,18 @@ bool EstadoEnemigoPegando::puedeMoverse() {
 }
 
 bool EstadoEnemigoPegando::terminado() {
-	int framesLimite=1;
-		switch (tipo){
+	int framesLimite;
+	switch (tipo){
 	    case EnemigoJefe:{
 	    	framesLimite=3;
+	    	break;
 	     }
+	    case Enemigo1:
+	    case Enemigo2:
+	    case Enemigo3:{
+	        framesLimite=1;
+	        break;
+	        }
 		}
     return ((numeroDeFrame == 0) && (framesTranscurridas == framesLimite) && golpeTerminado);
 }
@@ -85,7 +95,14 @@ void EstadoEnemigoPegando::cambiarFrame() {
 	switch (tipo){
 		case EnemigoJefe:{
 		   framesLimite=3;
+		   break;
 		 }
+		case Enemigo1:
+	    case Enemigo2:
+	    case Enemigo3:{
+			framesLimite=1;
+			break;
+		  }
 	    }
     if (numeroDeFrame == framesLimite) {
         golpeTerminado = true;
@@ -93,11 +110,17 @@ void EstadoEnemigoPegando::cambiarFrame() {
     } else {
         numeroDeFrame++;
     }
-    frameActual.modificar((ancho * numeroDeFrame), alto, ancho, alto);
+
     switch (tipo){
     		case EnemigoJefe:{
     			frameActual.modificar((ancho * numeroDeFrame), 140, ancho, alto);
+    			break;
     		 }
+    		case Enemigo1:
+    	    case Enemigo2:
+    	    case Enemigo3:{
+    	    	frameActual.modificar((ancho * numeroDeFrame), alto, ancho, alto);
+    	    }
     	    }
 }
 

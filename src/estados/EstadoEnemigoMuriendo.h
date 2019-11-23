@@ -9,7 +9,6 @@ private:
     int numeroDeFrame;
     bool caidaTerminada;
 public:
-    EstadoEnemigoMuriendo();
     EstadoEnemigoMuriendo(tipoDeSprite tipo);
     EstadoJugador* avanzar();
     EstadoJugador* parar();

@@ -12,7 +12,7 @@ private:
 	int enemigosCantidad;
 
 public:
-	ControlEnemigosModelo(int nivel);
+	ControlEnemigosModelo(int nivel,FondoModelo* fondo);
 	int obtenerCantidad();
 	void realizarMovimientos(int atacante, ControlJugadoresModelo *jugadores,
 												Colisionador* colisionador);
