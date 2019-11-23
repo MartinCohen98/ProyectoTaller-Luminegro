@@ -6,45 +6,54 @@
 
 
 EstadoJugadorMuriendo::EstadoJugadorMuriendo(tipoDeArma tipoArma) {
-    alto = 110;
-    ancho = 60;
+    alto = 100;
+    ancho = 80;
     arma=tipoArma;
-    frameActual.modificar(0, 510, ancho, alto);
+    frameActual.modificar(35, 910, ancho, alto);
     numeroDeFrame = 0;
     framesTranscurridas = 0;
+    caidaTerminada=false;
 }
 
 EstadoJugador* EstadoJugadorMuriendo::avanzar() {
-    delete this;
-    return (new EstadoJugadorAvanzando(arma));
+    return (morir());
 }
 
 EstadoJugador* EstadoJugadorMuriendo::parar() {
-    delete this;
-    return (new EstadoJugadorParado(arma));
+	return (morir());
 }
 
 EstadoJugador* EstadoJugadorMuriendo::pegar() {
-    delete this;
-    return (new EstadoJugadorPegando(arma));
+	return (morir());
 }
 
 EstadoJugador* EstadoJugadorMuriendo::morir() {
-    framesTranscurridas++;
-    if (framesTranscurridas == 4) {
+	if (!terminado()) {
+      framesTranscurridas++;
+      if (framesTranscurridas == 4) {
         framesTranscurridas = 0;
         cambiarFrame();
-    }
-    return (this);
+       }
+      return (this);
+	} else {
+	      delete this;
+	      return (new EstadoJugadorParado(arma));
+	    }
+}
+
+bool EstadoJugadorMuriendo::terminado() {
+	int framesLimite=3;
+    return ((numeroDeFrame == 0) && (framesTranscurridas == framesLimite) && caidaTerminada);
 }
 
 void EstadoJugadorMuriendo::cambiarFrame(){
-    if (numeroDeFrame == 5) {
+    if (numeroDeFrame == 3) {
         numeroDeFrame = 0;
+        caidaTerminada = true;
     } else {
         numeroDeFrame++;
     }
-    frameActual.modificar((ancho * numeroDeFrame), 0, ancho, alto);
+    frameActual.modificar((ancho * numeroDeFrame) + 35, 910, ancho, alto);
 
 }
 

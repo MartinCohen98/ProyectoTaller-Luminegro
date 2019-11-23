@@ -78,8 +78,8 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                 break;
             case Kill:
                 // Matar a todos
-                //matar=true;
-            	golpear=true;
+                matar=true;
+            	//golpear=true;
                 break;
             case Exit:
                 // Salir

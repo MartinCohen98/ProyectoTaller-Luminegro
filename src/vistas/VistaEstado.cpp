@@ -1,4 +1,4 @@
-#include <comunicacion/MensajeServidor.h>
+#include "../comunicacion/MensajeServidor.h"
 #include "VistaEstado.h"
 
 VistaEstado::VistaEstado(Renderizador *renderizador, pugi::xml_document *archiConfig, int maxVida, std::string nombreJugador, int numeroJugador) {

@@ -2,9 +2,9 @@
 #define PROYECTOTALLER_LUMINEGRO_VISTAESTADO_H
 
 
-#include <grafica/Textura.h>
-#include <varios/InfoJugador.h>
-#include <pugixml.hpp>
+#include "../grafica/Textura.h"
+#include "../varios/InfoJugador.h"
+#include "../../lib/pugixml/pugixml.hpp"
 
 class VistaEstado {
 private:

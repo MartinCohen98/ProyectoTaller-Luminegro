@@ -11,12 +11,14 @@ class EstadoJugadorMuriendo: public EstadoJugador {
 private:
     int framesTranscurridas;
     int numeroDeFrame;
+    bool caidaTerminada;
 public:
     EstadoJugadorMuriendo(tipoDeArma arma);
     EstadoJugador* morir();
     EstadoJugador* avanzar();
     EstadoJugador* parar();
     EstadoJugador* pegar();
+    bool terminado();
     virtual ~EstadoJugadorMuriendo();
 private:
     void cambiarFrame();

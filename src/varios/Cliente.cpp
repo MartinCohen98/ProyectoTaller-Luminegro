@@ -1,4 +1,4 @@
-#include <vistas/VistaEstado.h>
+#include "../vistas/VistaEstado.h"
 #include "Cliente.h"
 #include "../comunicacion/MensajeInicioPartida.h"
 
