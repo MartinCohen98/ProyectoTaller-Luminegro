@@ -58,7 +58,7 @@ void EnemigoModelo::retroceder() {
 void EnemigoModelo::subir() {
 	if (posicionY > bordeSuperior) {
 		estado = estado->avanzar();
-		moverEnY(-5);
+		moverEnY(-1);
 		subiendo=true;
 	} else {
 	    parar();
@@ -69,7 +69,7 @@ void EnemigoModelo::subir() {
 
 void EnemigoModelo::bajar() {
 	if (posicionY < bordeInferior) {
-		moverEnY(5);
+		moverEnY(1);
         estado = estado->avanzar();
         subiendo=false;
 	} else {
@@ -88,7 +88,7 @@ void EnemigoModelo::pegar() {
 void EnemigoModelo::morir() {
     ejecutarSonidoCaida = true;
     estado = estado->morir();
-    cambiarModo(Detenido);
+   // cambiarModo(Detenido);
     vivo = false;
     actualizarInsercion();
 }
@@ -200,11 +200,11 @@ void EnemigoModelo::patrullar(){
         subiendo=true;
     if (posicionX==limiteFinal){
         avanzando=false;
-        dadoVuelta=true;
+        retroceder();
        }
     if (posicionX==limiteInicial){
         avanzando=true;
-        dadoVuelta=false;
+        avanzar();
       }
     if (!subiendo){
         if (dadoVuelta)
@@ -232,7 +232,7 @@ int EnemigoModelo::consultarJugadorObjetivo(){
 }
 
 void EnemigoModelo::atacar(){
-	if (modo==Atacando & vivo){
+	if (modo==Atacando){
 	int x,y;
 	x=objetivo->darPosicionX();
 	y=objetivo->darPosicionY();
@@ -328,6 +328,21 @@ bool EnemigoModelo::estaVivo(){
 	return vivo;
 }
 
+bool EnemigoModelo::estaMuerto(){
+	return (estado->estaMuerto());
+}
+
+bool EnemigoModelo::muerteTerminada(){
+	return (estado->terminado());
+}
+
+void EnemigoModelo::verificarMuerte(){
+	if ((estado->estaMuerto()||!vivo) & estado->terminado()){
+		desaparecer();
+		cambiarModo(Detenido);
+		}
+}
+
 void EnemigoModelo::estaSubiendo(){
     subiendo=true;
 }
@@ -419,10 +434,7 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 	    	break;
 	      }
 	}
-	if ((estado->estaMuerto()||!vivo) & estado->terminado()){
-		desaparecer();
-		cambiarModo(Detenido);
-	}
+	verificarMuerte();
 	//if ((estado->estaMuerto()||!vivo) & (!estado->terminado()))
 	//morir();
 	checkearColisiones(colisionador);

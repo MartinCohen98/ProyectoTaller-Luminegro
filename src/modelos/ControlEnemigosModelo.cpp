@@ -57,17 +57,21 @@ void ControlEnemigosModelo::realizarMovimientos(int atacante, ControlJugadoresMo
     objetivo = enemigos[atacante]->consultarJugadorObjetivo();
     jugador=jugadores->darJugador(objetivo);
 
-    for (int i=1;i<enemigosCantidad;i++) {
+  /*  for (int i=0;i<enemigosCantidad;i++) {
+       if ((enemigos[i]->estaMuerto()) & (enemigos[i]->muerteTerminada()))
+	      enemigos[i]->desaparecer();
+     }*/
+    for (int i=0;i<enemigosCantidad;i++) {
+      enemigos[i]->verificarMuerte();
 	  enemigos[i]->guardarPosicionesActuales();
 	  enemigos[i]->patrullar();
-      enemigos[i]->realizarMovimientos(colisionador);
+	  enemigos[i]->realizarMovimientos(colisionador);
       };
-    enemigos[0]->asignarObjetivo(jugador);
-    enemigos[0]->guardarPosicionesActuales();
-    if(enemigos[0]->estaVivo())
-        enemigos[0]->cambiarModo(Atacando);
-    enemigos[0]->atacar();
-    enemigos[0]->realizarMovimientos(colisionador);
+  //  enemigos[0]->asignarObjetivo(jugador);
+   // enemigos[0]->guardarPosicionesActuales();
+ //   enemigos[0]->cambiarModo(Atacando);
+   // enemigos[0]->atacar();
+   // enemigos[0]->realizarMovimientos(colisionador);
 
 }
 

@@ -35,6 +35,10 @@ EstadoJugador* EstadoEnemigoMuriendo::pegar() {
     return (morir(tipo));
 }
 
+EstadoJugador* EstadoEnemigoMuriendo::serGolpeado() {
+	return (morir(tipo));
+}
+
 EstadoJugador* EstadoEnemigoMuriendo::morir(tipoDeSprite tipoNuevo) {
 	tipo = tipoNuevo;
 	int framesLimite;
@@ -68,9 +72,6 @@ bool EstadoEnemigoMuriendo::puedeMoverse() {
     return false;
 }
 
-EstadoJugador* EstadoEnemigoMuriendo::serGolpeado() {
-	return (morir(tipo));
-}
 
 bool EstadoEnemigoMuriendo::terminado() {
 	int framesLimite;

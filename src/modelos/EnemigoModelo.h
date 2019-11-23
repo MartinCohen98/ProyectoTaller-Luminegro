@@ -60,6 +60,9 @@ public:
 	void cambiarModo(accionDeEnemigo nuevoModo);
 	void asignarObjetivo(JugadorModelo *jugador);
 	bool estaVivo();
+	bool estaMuerto();
+	void verificarMuerte();
+	bool muerteTerminada();
 	void retrocesoDePantalla();
 	void guardarPosicionesActuales();
 	int recibirDanioDe(Colisionable* colisionable);
