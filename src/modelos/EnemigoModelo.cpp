@@ -407,6 +407,7 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 	if (colisionador->colisiona(this)) {
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
+
 		if(modo!=Atacando){
 		  if (subiendo){
 		     bajar();

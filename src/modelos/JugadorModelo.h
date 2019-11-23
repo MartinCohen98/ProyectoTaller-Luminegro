@@ -60,6 +60,7 @@ public:
 	void congelarse();
     void acuchillar();
     void apalear();
+    void morir();
     void serGolpeado();
 	void desaparecer();
 	void descongelarse();
@@ -71,6 +72,7 @@ public:
 	void activarModoTest();
 	void desactivarModoTest();
 	tipoDeArma consultarArma();
+	int recibirDanioDe(Colisionable* colisionable);
 	void realizarMovimientos(FondoModelo* fondo, bool rezagado,
 										Colisionador* colisionador);
 	bool llegoAlFin(FondoModelo *fondo);

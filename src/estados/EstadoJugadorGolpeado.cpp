@@ -1,9 +1,9 @@
 #include "EstadoJugadorGolpeado.h"
 
 EstadoJugadorGolpeado::EstadoJugadorGolpeado() {
-	ancho = 47;
-	alto = 78;
-	frameActual.modificar(0, 0, ancho, alto);
+	ancho = 70;
+	alto = 100;
+	frameActual.modificar(40, 910, ancho, alto);
 	palizaTerminada = false;
 	numeroDeFrame = 0;
 	framesTranscurridas = 0;
@@ -54,7 +54,7 @@ void EstadoJugadorGolpeado::cambiarFrame() {
     } else {
         numeroDeFrame++;
     }
-    frameActual.modificar((ancho * numeroDeFrame), alto, ancho, alto);
+    frameActual.modificar((ancho * numeroDeFrame) + 40, 910, ancho, alto);
 }
 
 EstadoJugadorGolpeado::~EstadoJugadorGolpeado() {}

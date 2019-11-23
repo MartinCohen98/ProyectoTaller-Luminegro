@@ -131,6 +131,11 @@ void JugadorModelo::descongelarse() {
     }
 }
 
+void JugadorModelo::morir(){
+    estado = estado->morir();
+    actualizarInsercion(false);
+}
+
 bool JugadorModelo::estaDesconectado() {
     return desconectado;
 }
@@ -170,6 +175,12 @@ tipoDeArma JugadorModelo::consultarArma(){
 	return arma;
 }
 
+int JugadorModelo::recibirDanioDe(Colisionable* colisionable) {
+	energia -= colisionable->obtenerDanio();
+	serGolpeado();
+	if (energia <= 0)
+		morir();
+}
 
 bool JugadorModelo::moverEnY() {
 	bool seMovio = false;

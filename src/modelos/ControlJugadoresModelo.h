@@ -22,6 +22,8 @@ public:
 	void desconectar(int jugador);
 	void conectar(int jugador);
 	void desaparecer(int jugador);
+	void matados();
+	void golpeados();
 	bool consultarMatar();
 	bool consultarGolpear();
 	void dejarDeMatar();

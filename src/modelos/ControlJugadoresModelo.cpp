@@ -77,9 +77,9 @@ void ControlJugadoresModelo::procesarInput(MensajeCliente* mensaje,
                     jugadores[numeroDeJugador]->activarModoTest();
                 break;
             case Kill:
-                // Matar a todos los enemigos
-                matar=true;
-            	//golpear=true;
+                // Matar a todos
+                //matar=true;
+            	golpear=true;
                 break;
             case Exit:
                 // Salir
@@ -181,6 +181,16 @@ void ControlJugadoresModelo::conectar(int jugador) {
 
 void ControlJugadoresModelo::desaparecer(int jugador) {
 	jugadores[jugador]->desaparecer();
+}
+
+void ControlJugadoresModelo::matados(){
+    for(int i=0;i<cantidadJugadores;i++)
+    jugadores[i]->morir();
+}
+
+void ControlJugadoresModelo::golpeados(){
+    for(int i=0;i<cantidadJugadores;i++)
+    jugadores[i]->serGolpeado();
 }
 
 bool ControlJugadoresModelo::consultarMatar(){
