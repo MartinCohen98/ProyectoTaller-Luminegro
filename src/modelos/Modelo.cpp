@@ -23,7 +23,7 @@ Modelo::Modelo(pugi::xml_document* archiConfig, int cantidadDeJugadores) {
 
 	enemigos->movimientosIniciales();
 
-	atacante = enemigos->buscarObjetivo(protagonistas);
+	enemigos->buscarObjetivos(protagonistas);
 }
 
 
@@ -48,7 +48,7 @@ void Modelo::realzarMovimientos() {
 		protagonistas->dejarDeGolpear();
 	}
 	protagonistas->realizarMovimientos(fondo, colisionador);
-	enemigos->realizarMovimientos(atacante, protagonistas, colisionador);
+	enemigos->realizarMovimientos(protagonistas, colisionador);
 	objetos->actualizarPosiciones();
 	objetos->actualizar();
 
@@ -102,7 +102,7 @@ void Modelo::pasarNivel() {
 
 	enemigos->movimientosIniciales();
 
-	atacante = enemigos->buscarObjetivo(protagonistas);
+	enemigos->buscarObjetivos(protagonistas);
 }
 
 

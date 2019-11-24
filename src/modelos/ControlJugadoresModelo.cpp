@@ -9,7 +9,22 @@ ControlJugadoresModelo::ControlJugadoresModelo(pugi::xml_document *archiConfig,
 	int posYinic[4] = {175,275,225,225};
 
 	for (int i = 0; i < cantidadJugadores; i++) {
-		jugadores[i] = new JugadorModelo(archiConfig, posXinic[i], posYinic[i]);
+		tipoDeSprite tipoJugador;
+		switch (i){
+		   case 0:
+			   tipoJugador = Jugador1;
+			   break;
+		   case 1:
+		   	   tipoJugador = Jugador2;
+		   	   break;
+		   case 2:
+		   	   tipoJugador = Jugador3;
+		   	   break;
+		   case 3:
+		   	   tipoJugador = Jugador4;
+		   	   break;
+		}
+		jugadores[i] = new JugadorModelo(archiConfig, posXinic[i], posYinic[i], tipoJugador);
 	}
 	matar=false;
 	golpear=false;

@@ -8,6 +8,7 @@ CajaModelo::CajaModelo(int posXinicial, int posYinicial) {
 	alto = 250;
 	golpes = 2;
 	sprite = Caja;
+	tipo = Caja;
 	estado = new EstadoObjetoEntero(Caja);
 	encuadre.modificar(0, 0, 96, 169);
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);

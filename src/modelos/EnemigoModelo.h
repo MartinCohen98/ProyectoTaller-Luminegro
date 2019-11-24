@@ -28,7 +28,7 @@ protected:
     int tiempoDeEsquivada;
     int vivo;
     accionDeEnemigo modo, modoAnterior;
-    tipoDeSprite tipoEnemigo;
+   // tipoDeSprite tipoEnemigo;
     bool ejecutarSonidoCaida = false;
     bool ejecutarSonidoGolpeTiro = false;
     bool ejecutarSonidoGolpeImpacto = false;

@@ -7,6 +7,7 @@ BarrilModelo::BarrilModelo(int posXinicial, int posYinicial) {
 	alto = 300;
 	golpes = 1;
 	sprite = Barril;
+	tipo = Barril;
     estado = new EstadoObjetoEntero(Barril);
 	encuadre.modificar(0, 0, 80, 175);
 	insercion.modificar(posXinicial, posYinicial, ancho, alto);

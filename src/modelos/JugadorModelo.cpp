@@ -3,9 +3,10 @@
 
 
 JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig, int posXinicial,
-								int posYinicial) {
+								int posYinicial, tipoDeSprite tipoNuevo) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
+	tipo = tipoNuevo;
 	movimientoEnX = 0;
 	movimientoEnY = 0;
 	movimientoAlSaltarEnX = 0;
@@ -180,7 +181,8 @@ tipoDeArma JugadorModelo::consultarArma(){
 }
 
 int JugadorModelo::recibirDanioDe(Colisionable* colisionable) {
-	energia -= colisionable->obtenerDanio();
+	if(!inmortal)
+	  energia -= colisionable->obtenerDanio();
 	serGolpeado();
 	if (energia <= 0){
 		morir();
@@ -244,7 +246,8 @@ void JugadorModelo::actualizarPosicion(FondoModelo* fondo, bool rezagado) {
 
 void JugadorModelo::checkearColisiones(Colisionador* colisionador) {
 	actualizarInsercion(false);
-	if (colisionador->colisiona(this)) {
+	tipoDeSprite tipoColision;
+	if (colisionador->colisiona(this, &tipoColision)) {
 		if (ejecutarSonidoGolpeTiro) {
 			ejecutarSonidoGolpeImpacto = true;
 			if (!estado->estaPateando()) {

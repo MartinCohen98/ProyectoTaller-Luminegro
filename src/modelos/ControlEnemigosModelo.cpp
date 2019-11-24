@@ -48,14 +48,14 @@ EnemigoModelo* ControlEnemigosModelo::darEnemigo(int j){
 	return enemigos[j];
 }
 
-void ControlEnemigosModelo::realizarMovimientos(int atacante, ControlJugadoresModelo *jugadores,
+void ControlEnemigosModelo::realizarMovimientos(ControlJugadoresModelo *jugadores,
 										Colisionador* colisionador) {
-    JugadorModelo *jugador;
+  /*  JugadorModelo *jugador;
     int objetivo;
     int enemigoAtacante = atacante;
     enemigoAtacante = 0;
     objetivo = enemigos[atacante]->consultarJugadorObjetivo();
-    jugador=jugadores->darJugador(objetivo);
+    jugador=jugadores->darJugador(objetivo);*/
 
   /*  for (int i=0;i<enemigosCantidad;i++) {
        if ((enemigos[i]->estaMuerto()) & (enemigos[i]->muerteTerminada()))
@@ -64,14 +64,14 @@ void ControlEnemigosModelo::realizarMovimientos(int atacante, ControlJugadoresMo
     for (int i=0;i<enemigosCantidad;i++) {
       enemigos[i]->verificarMuerte();
 	  enemigos[i]->guardarPosicionesActuales();
-	  enemigos[i]->patrullar();
+	//  enemigos[i]->patrullar();
 	  enemigos[i]->realizarMovimientos(colisionador);
       };
-  //  enemigos[0]->asignarObjetivo(jugador);
+  // enemigos[0]->asignarObjetivo(jugador);
    // enemigos[0]->guardarPosicionesActuales();
- //   enemigos[0]->cambiarModo(Atacando);
-   // enemigos[0]->atacar();
-   // enemigos[0]->realizarMovimientos(colisionador);
+  //  enemigos[0]->cambiarModo(Atacando);
+  //  enemigos[0]->atacar();
+  //  enemigos[0]->realizarMovimientos(colisionador);
 
 }
 
@@ -83,31 +83,36 @@ void ControlEnemigosModelo::movimientosIniciales(){
     enemigos[3]->avanzar();
     enemigos[4]->retroceder();
     enemigos[5]->retroceder();
-    for (int i=0;i<enemigosCantidad;i++)
+    for (int i=1;i<enemigosCantidad;i++)
    	   enemigos[i]->cambiarModo(Patrullando);
+    enemigos[0]->cambiarModo(Atacando);
 }
 
 
-int ControlEnemigosModelo::buscarObjetivo(ControlJugadoresModelo *jugadores){
-int jugadorObjetivo = 0;
-int enemigoAtacante = 0;
-EnemigoModelo *enemigo;
-int distancia, distAux;
-int i,j;
-for(i = 0; i < (jugadores->consultarCantidadJugadores()); i++){
+void ControlEnemigosModelo::buscarObjetivos(ControlJugadoresModelo *jugadores){
+   EnemigoModelo *enemigo;
+ /*  int distancia, distAux;
+   int i,j;
+   for(i = 0; i < (jugadores->consultarCantidadJugadores()); i++){
+	distAux = 0;
+	int jugadorObjetivo = 0;
+	int enemigoAtacante = 0;
 	for(j = 0; j < enemigosCantidad; j++){
 		distAux=distancia;
 		distancia=calcularDistancia(jugadores->darJugador(i),darEnemigo(j));
         if (distancia<distAux){
         	jugadorObjetivo=i;
         	enemigoAtacante=j;
-        };
-	};
- };
- enemigo=darEnemigo(enemigoAtacante);
- enemigo->modificarJugadorObjetivo(jugadorObjetivo);
- printf("%d/n", enemigoAtacante);
- return enemigoAtacante;
+          };
+	   };
+	enemigo = darEnemigo(enemigoAtacante);
+	enemigo->asignarObjetivo(jugadores->darJugador(jugadorObjetivo));
+	enemigo->modificarJugadorObjetivo(jugadorObjetivo);
+    };*/
+
+   enemigo = darEnemigo(0);
+   enemigo->asignarObjetivo(jugadores->darJugador(0));
+
 }
 
 void ControlEnemigosModelo::matar(){

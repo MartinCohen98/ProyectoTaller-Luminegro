@@ -2,7 +2,7 @@
 
 EnemigoModelo::EnemigoModelo(){}
 
-EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo,
+EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipoNuevo,
 		FondoModelo* fondo) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
@@ -12,8 +12,8 @@ EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo
 	limiteFinal = fondo->obtenerAncho();
 	escaladoDeSprite = 3.6;
 	energia = 100;
-	tipoEnemigo = tipo;
-	estado = new EstadoEnemigoParado(tipoEnemigo);
+	tipo = tipoNuevo;
+	estado = new EstadoEnemigoParado(tipo);
 	dadoVuelta = false;
 	subiendo=false;
 	tiempoDeGolpe=0;
@@ -234,24 +234,26 @@ int EnemigoModelo::consultarJugadorObjetivo(){
 void EnemigoModelo::atacar(){
 	if (modo==Atacando){
 	int x,y;
+	bool pegando=false;
 	x=objetivo->darPosicionX();
 	y=objetivo->darPosicionY();
-	//if (posicionY==y){
+/*	if (posicionY==y){
 	//  if (tiempoDeGolpe==0)
-	//     pegar();
+	     pegar();
 //	  tiempoDeGolpe++;
 	//  if (tiempoDeGolpe==4)
 //		  tiempoDeGolpe==0;
-//	}
-	if (avanzando)
-	  trasladarse(x-110,y+20);
-	else
-	  trasladarse(x+110,y+20);
+	     pegando = false;
+	}*/
+	if(!pegando)
+	  if (avanzando)
+	    trasladarse(x-110,y+20);
+	  else
+	    trasladarse(x+110,y+20);
 	}
 }
 
 void EnemigoModelo::esquivar(){
-	if(modo!=Atacando){
 	  if (subiendo){
 	     bajar();
 	    }
@@ -262,7 +264,6 @@ void EnemigoModelo::esquivar(){
 	    retroceder();
 	  else
 	    avanzar();
-	}
 	/*
 
 	switch(tiempoDeEsquivada){
@@ -387,7 +388,7 @@ int EnemigoModelo::obtenerDanio() {
 void EnemigoModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual) {
 	Encuadre sprite = estado->obtenerSprite();
 
-	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, tipoEnemigo);
+	mensajes[*mensajeActual].generarMensaje(&sprite, &insercion, tipo);
     mensajes[*mensajeActual].setSonidoEjecutarGolpeTiro(ejecutarSonidoGolpeTiro);
     mensajes[*mensajeActual].setSonidoEjecutarGolpeImpacto(ejecutarSonidoGolpeImpacto);
     mensajes[*mensajeActual].setSonidoEjecutarCaida(ejecutarSonidoCaida);
@@ -425,7 +426,7 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 	    	break;
 	      }
 	    case Patrullando:{
-	   // 	patrullar();
+	    	patrullar();
 	    	break;
 	      }
 	    case Esquivando:{
@@ -433,7 +434,7 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 	    	break;
 	      }
 	    case Atacando:{
-	    //	atacar();
+	    	atacar();
 	    	break;
 	      }
 	}
@@ -446,14 +447,42 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 
 void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 	actualizarInsercion();
-	if (colisionador->colisiona(this)) {
+	tipoDeSprite tipoColision;
+	if (colisionador->colisiona(this, &tipoColision )) {
         if (ejecutarSonidoGolpeTiro) {
             ejecutarSonidoGolpeImpacto = true;
         }
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
+        switch(tipoColision){
+           case Enemigo1:
+           case Enemigo2:
+           case Enemigo3:
+           case Barril:
+           case Caja:
+        	   esquivar();
+        	   break;
+           case Jugador1:
+           case Jugador2:
+           case Jugador3:{
+        	   if(modo==Atacando){
+        		  if (tiempoDeGolpe==0){
+        			 pegar();
+        		/*	 if (avanzando)
+        			   posicionX-=10;
+        			 else
+        			   posicionX+=10;*/
+        			 cambiarModo(Patrullando);
+        		    }
+        		   tiempoDeGolpe++;
 
-		esquivar();
+        		  if (tiempoDeGolpe==4)
+        		    tiempoDeGolpe==0;
+               }
+        	   break;
+              }
+           }
+
 		actualizarInsercion();
 	}
 }

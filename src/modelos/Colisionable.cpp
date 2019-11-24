@@ -40,5 +40,9 @@ void Colisionable::sumarPuntos(int puntos){
 void Colisionable::desaparecer() {}
 
 
+tipoDeSprite Colisionable::consultarTipo(){
+	return tipo;
+}
+
 Colisionable::~Colisionable() {}
 

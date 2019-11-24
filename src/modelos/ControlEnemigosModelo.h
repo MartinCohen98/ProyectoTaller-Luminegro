@@ -14,10 +14,10 @@ private:
 public:
 	ControlEnemigosModelo(int nivel,FondoModelo* fondo);
 	int obtenerCantidad();
-	void realizarMovimientos(int atacante, ControlJugadoresModelo *jugadores,
+	void realizarMovimientos(ControlJugadoresModelo *jugadores,
 												Colisionador* colisionador);
 	void movimientosIniciales();
-	int buscarObjetivo(ControlJugadoresModelo *jugadores);
+	void buscarObjetivos(ControlJugadoresModelo *jugadores);
 	void matar();
 	void golpear();
 	void movidaDePantalla();

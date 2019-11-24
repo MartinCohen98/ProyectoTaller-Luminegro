@@ -13,8 +13,8 @@ EnemigoJefeModelo::EnemigoJefeModelo(int posXinicial, int posYinicial,FondoModel
 	bordeInferior = 240;
 	limiteInicial = 0;
 	limiteFinal = fondo->obtenerAncho();
-	tipoEnemigo = EnemigoJefe;
-	estado = new EstadoEnemigoParado(tipoEnemigo);
+	tipo = EnemigoJefe;
+	estado = new EstadoEnemigoParado(tipo);
 	dadoVuelta = false;
 	subiendo = false;
 	tiempoDeGolpe=0;

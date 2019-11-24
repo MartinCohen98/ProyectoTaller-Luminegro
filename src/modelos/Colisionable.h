@@ -3,11 +3,13 @@
 
 #include "../grafica/Encuadre.h"
 #include "TipoDeArma.h"
+#include "../comunicacion/MensajeServidor.h"
 
 class Colisionable {
 
 protected:
 	Encuadre insercion;
+	tipoDeSprite tipo;
 
 public:
 	Colisionable();
@@ -19,6 +21,7 @@ public:
 	virtual void sumarPuntos(int puntos);
 	virtual tipoDeArma obtenerTipoDeArma();
 	virtual void desaparecer();
+	tipoDeSprite consultarTipo();
 	virtual ~Colisionable();
 };
 

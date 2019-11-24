@@ -43,7 +43,7 @@ private:
     int escalar(int tamanio);
 
 public:
-	JugadorModelo(pugi::xml_document *archiConfig, int posXinicial, int poYinicial);
+	JugadorModelo(pugi::xml_document *archiConfig, int posXinicial, int poYinicial, tipoDeSprite tipo);
 	void avanzar();
 	void dejarDeAvanzar();
 	void retroceder();
