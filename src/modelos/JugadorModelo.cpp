@@ -247,7 +247,8 @@ void JugadorModelo::actualizarPosicion(FondoModelo* fondo, bool rezagado) {
 void JugadorModelo::checkearColisiones(Colisionador* colisionador) {
 	actualizarInsercion(false);
 	tipoDeSprite tipoColision;
-	if (colisionador->colisiona(this, &tipoColision)) {
+	bool siendoAtacado;
+	if (colisionador->colisiona(this, &tipoColision, &siendoAtacado)) {
 		if (ejecutarSonidoGolpeTiro) {
 			ejecutarSonidoGolpeImpacto = true;
 			if (!estado->estaPateando()) {

@@ -6,21 +6,21 @@ ControlEnemigosModelo::ControlEnemigosModelo(int nivel, FondoModelo* fondo) {
 	enemigos = new EnemigoModelo*[enemigosCantidad];
 
 	if (nivel == 1){
-		enemigos[0] = new EnemigoModelo(1000, 220, Enemigo1,fondo);
-		enemigos[1] = new EnemigoModelo(500, 320, Enemigo2, fondo);
-		enemigos[2] = new EnemigoModelo(3000, 220, Enemigo3, fondo);
+		enemigos[0] = new EnemigoModelo(1500, 250, Enemigo1,fondo);
+		enemigos[1] = new EnemigoModelo(1000, 320, Enemigo2, fondo);
+		enemigos[2] = new EnemigoModelo(3500, 220, Enemigo3, fondo);
 		enemigos[3] = new EnemigoModelo(-500, 220, Enemigo3, fondo);
-		enemigos[4] = new EnemigoModelo(5000, 220, Enemigo2, fondo);
-		enemigos[5] = new EnemigoModelo(7000, 220, Enemigo1, fondo);
+		enemigos[4] = new EnemigoModelo(5500, 220, Enemigo2, fondo);
+		enemigos[5] = new EnemigoModelo(7500, 220, Enemigo1, fondo);
 	}
 
 	if (nivel == 2){
-		enemigos[0] = new EnemigoModelo(550, 220, Enemigo3, fondo);
-		enemigos[1] = new EnemigoModelo(700, 320, Enemigo2, fondo);
-		enemigos[2] = new EnemigoModelo(2500, 220, Enemigo1, fondo);
+		enemigos[0] = new EnemigoModelo(1050, 250, Enemigo3, fondo);
+		enemigos[1] = new EnemigoModelo(1200, 320, Enemigo2, fondo);
+		enemigos[2] = new EnemigoModelo(3000, 220, Enemigo1, fondo);
 		enemigos[3] = new EnemigoModelo(-300, 320, Enemigo1, fondo);
-		enemigos[4] = new EnemigoModelo(4000, 220, Enemigo2, fondo);
-		enemigos[5] = new EnemigoJefeModelo(5500, 220, fondo);
+		enemigos[4] = new EnemigoModelo(4500, 220, Enemigo2, fondo);
+		enemigos[5] = new EnemigoJefeModelo(6000, 220, fondo);
 	}
 }
 
@@ -50,24 +50,17 @@ EnemigoModelo* ControlEnemigosModelo::darEnemigo(int j){
 
 void ControlEnemigosModelo::realizarMovimientos(ControlJugadoresModelo *jugadores,
 										Colisionador* colisionador) {
-  /*  JugadorModelo *jugador;
-    int objetivo;
-    int enemigoAtacante = atacante;
-    enemigoAtacante = 0;
-    objetivo = enemigos[atacante]->consultarJugadorObjetivo();
-    jugador=jugadores->darJugador(objetivo);*/
 
-  /*  for (int i=0;i<enemigosCantidad;i++) {
-       if ((enemigos[i]->estaMuerto()) & (enemigos[i]->muerteTerminada()))
-	      enemigos[i]->desaparecer();
-     }*/
+/*	JugadorModelo* jugador;
+	jugador = &(enemigos[0]->consultarObjetivo);
+	int distancia = calcularDistancia(enemigos[0], jugador);
+	if (distancia<200)
+		enemigos[0]->cambiarModo(Atacando);*/
     for (int i=0;i<enemigosCantidad;i++) {
       enemigos[i]->verificarMuerte();
 	  enemigos[i]->guardarPosicionesActuales();
-	//  enemigos[i]->patrullar();
 	  enemigos[i]->realizarMovimientos(colisionador);
       };
-  // enemigos[0]->asignarObjetivo(jugador);
    // enemigos[0]->guardarPosicionesActuales();
   //  enemigos[0]->cambiarModo(Atacando);
   //  enemigos[0]->atacar();
@@ -110,9 +103,10 @@ void ControlEnemigosModelo::buscarObjetivos(ControlJugadoresModelo *jugadores){
 	enemigo->modificarJugadorObjetivo(jugadorObjetivo);
     };*/
 
-   enemigo = darEnemigo(0);
-   enemigo->asignarObjetivo(jugadores->darJugador(0));
-
+   for (int i=0;i<enemigosCantidad;i++){
+       enemigo = darEnemigo(i);
+       enemigo->asignarObjetivo(jugadores->darJugador(0));
+   }
 }
 
 void ControlEnemigosModelo::matar(){

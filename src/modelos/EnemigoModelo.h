@@ -59,6 +59,7 @@ public:
 	void esquivar();
 	void cambiarModo(accionDeEnemigo nuevoModo);
 	void asignarObjetivo(JugadorModelo *jugador);
+	JugadorModelo* consultarObjetivo();
 	bool estaVivo();
 	bool estaMuerto();
 	void verificarMuerte();

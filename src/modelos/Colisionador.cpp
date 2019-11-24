@@ -19,9 +19,11 @@ void Colisionador::vaciar() {
 }
 
 
-bool Colisionador::colisiona(Colisionable* colisionable, tipoDeSprite* tipoColision) {
+bool Colisionador::colisiona(Colisionable* colisionable, tipoDeSprite* tipoColision, bool* estaAtacando) {
 	bool colisiona = false;
 	int puntos;
+	*estaAtacando = false;
+
 	for (std::list<Colisionable*>::iterator it = listaColisionables.begin();
 										it != listaColisionables.end(); ++it) {
 		if (((*it)->obtenerInsercion() != colisionable->obtenerInsercion()))
@@ -32,6 +34,8 @@ bool Colisionador::colisiona(Colisionable* colisionable, tipoDeSprite* tipoColis
 				if (colisionable->estaAtacando())
 					puntos = (*it)->recibirDanioDe(colisionable);
 				  //  colisionable->sumarPuntos(puntos);
+				if ((*it)->estaAtacando())
+				  *estaAtacando = true;
 			}
 	}
 	return colisiona;
