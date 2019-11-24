@@ -380,6 +380,9 @@ int EnemigoModelo::recibirDanioDe(Colisionable* colisionable) {
 	return puntos;
 }
 
+int EnemigoModelo::obtenerDanio() {
+	return estado->obtenerDanio();
+}
 
 void EnemigoModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual) {
 	Encuadre sprite = estado->obtenerSprite();

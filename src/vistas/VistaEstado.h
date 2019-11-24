@@ -2,7 +2,7 @@
 #define PROYECTOTALLER_LUMINEGRO_VISTAESTADO_H
 
 
-#include <SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 #include "../grafica/Textura.h"
 #include "../varios/InfoJugador.h"
 #include "../../lib/pugixml/pugixml.hpp"

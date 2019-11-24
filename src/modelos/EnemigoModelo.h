@@ -66,6 +66,7 @@ public:
 	void retrocesoDePantalla();
 	void guardarPosicionesActuales();
 	int recibirDanioDe(Colisionable* colisionable);
+	int obtenerDanio();
 	bool estaAtacando();
 	void realizarMovimientos(Colisionador* colisionador);
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual);

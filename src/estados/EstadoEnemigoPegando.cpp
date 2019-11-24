@@ -22,6 +22,7 @@ EstadoEnemigoPegando::EstadoEnemigoPegando(tipoDeSprite tipoNuevo){
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;
 	golpeTerminado = false;
+	frameDeDanio = true;
 }
 
 EstadoJugador* EstadoEnemigoPegando::avanzar() {
