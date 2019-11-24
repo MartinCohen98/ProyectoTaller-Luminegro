@@ -156,6 +156,9 @@ int JugadorModelo::obtenerPuntosDeGolpe() {
 	return estado->obtenerPuntosDeGolpe();
 }
 
+void JugadorModelo::sumarPuntos(int puntos){
+	puntaje+= puntos;
+}
 
 bool JugadorModelo::consultarModoTest(){
    return inmortal;
@@ -179,8 +182,12 @@ tipoDeArma JugadorModelo::consultarArma(){
 int JugadorModelo::recibirDanioDe(Colisionable* colisionable) {
 	energia -= colisionable->obtenerDanio();
 	serGolpeado();
-	if (energia <= 0)
+	if (energia <= 0){
 		morir();
+		vidas--;
+		if (vidas>0)
+			energia = 100;
+	}
 }
 
 bool JugadorModelo::moverEnY() {

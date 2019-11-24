@@ -27,6 +27,10 @@ EstadoJugador* EstadoJugadorMuriendo::pegar() {
 	return (morir());
 }
 
+bool EstadoJugadorMuriendo::estaAtacando(){
+	return false;
+}
+
 EstadoJugador* EstadoJugadorMuriendo::morir() {
 	if (!terminado()) {
       framesTranscurridas++;

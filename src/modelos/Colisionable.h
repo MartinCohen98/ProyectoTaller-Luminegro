@@ -16,6 +16,7 @@ public:
 	virtual int recibirDanioDe(Colisionable* colisionable);
 	virtual int obtenerDanio();
 	virtual int obtenerPuntosDeGolpe();
+	virtual void sumarPuntos(int puntos);
 	virtual tipoDeArma obtenerTipoDeArma();
 	virtual void desaparecer();
 	virtual ~Colisionable();

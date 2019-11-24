@@ -67,6 +67,7 @@ public:
 	bool estaAtacando();
 	int obtenerDanio();
 	int obtenerPuntosDeGolpe();
+	void sumarPuntos(int puntos);
 	bool consultarModoTest();
 	void activarModoTest();
 	void desactivarModoTest();

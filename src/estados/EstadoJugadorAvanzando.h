@@ -24,6 +24,7 @@ public:
     EstadoJugador* apalear();
     EstadoJugador* serGolpeado();
     EstadoJugador* congelarse();
+    bool estaAtacando();
 	virtual ~EstadoJugadorAvanzando();
 
 private:

@@ -34,6 +34,9 @@ EstadoJugador* EstadoJugadorCongelado::saltar() {
     return (new EstadoJugadorSaltando(arma));
 }
 
+bool EstadoJugadorCongelado::estaAtacando(){
+	return false;
+}
 
 bool EstadoJugadorCongelado::puedeMoverse() {
     return true;

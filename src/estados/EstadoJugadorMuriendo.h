@@ -18,6 +18,7 @@ public:
     EstadoJugador* avanzar();
     EstadoJugador* parar();
     EstadoJugador* pegar();
+    bool estaAtacando();
     bool terminado();
     virtual ~EstadoJugadorMuriendo();
 private:

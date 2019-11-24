@@ -32,6 +32,10 @@ int Colisionable::recibirDanioDe(Colisionable* colisionable) {
 	return 0;
 }
 
+void Colisionable::sumarPuntos(int puntos){
+
+}
+
 
 void Colisionable::desaparecer() {}
 

@@ -79,6 +79,10 @@ EstadoJugador* EstadoJugadorAvanzando::congelarse() {
     return (new EstadoJugadorCongelado(arma));
 }
 
+bool EstadoJugadorAvanzando::estaAtacando(){
+	return false;
+}
+
 void EstadoJugadorAvanzando::cambiarFrame() {
 	if (numeroDeFrame == 5) {
 		numeroDeFrame = 0;

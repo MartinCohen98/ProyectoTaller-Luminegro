@@ -72,5 +72,9 @@ EstadoJugador* EstadoJugadorParado::congelarse() {
     return (new EstadoJugadorCongelado(arma));
 }
 
+bool EstadoJugadorParado::estaAtacando(){
+	return false;
+}
+
 EstadoJugadorParado::~EstadoJugadorParado() {}
 

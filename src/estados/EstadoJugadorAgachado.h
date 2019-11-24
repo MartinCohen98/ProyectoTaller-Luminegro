@@ -20,6 +20,7 @@ public:
     EstadoJugador* acuchillar();
     EstadoJugador* apalear();
     EstadoJugador* congelarse();
+    bool estaAtacando();
 	bool puedeMoverse();
 	virtual ~EstadoJugadorAgachado();
 };

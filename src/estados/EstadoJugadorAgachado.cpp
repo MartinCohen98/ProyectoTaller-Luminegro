@@ -50,6 +50,10 @@ EstadoJugador* EstadoJugadorAgachado::congelarse() {
     return (new EstadoJugadorCongelado(arma));
 }
 
+bool EstadoJugadorAgachado::estaAtacando(){
+	return false;
+}
+
 bool EstadoJugadorAgachado::puedeMoverse() {
 	return false;
 }

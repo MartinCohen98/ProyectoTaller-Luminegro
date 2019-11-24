@@ -17,6 +17,10 @@ EstadoJugador* EstadoJugadorGolpeado::parar() {
     return (serGolpeado());
 }
 
+bool EstadoJugadorGolpeado::estaAtacando(){
+	return false;
+}
+
 EstadoJugador* EstadoJugadorGolpeado::serGolpeado() {
 	int framesLimite=2;
     if (!terminado()) {
