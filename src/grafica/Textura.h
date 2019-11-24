@@ -21,6 +21,7 @@ public:
 							Encuadre encuadreFijo);
 	void copiarseEn(Renderizador *renderizador, Encuadre encuadre);
 	int texturizar(Renderizador* renderizador, Imagen imagen);
+	int texturizar(Renderizador *renderizador, SDL_Surface *superficie);
 	virtual ~Textura();
 };
 

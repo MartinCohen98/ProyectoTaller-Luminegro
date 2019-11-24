@@ -30,7 +30,13 @@ int Textura::texturizar(Renderizador* renderizador,Imagen imagen) {
 		SDL_DestroyTexture(textura);
 	textura = SDL_CreateTextureFromSurface(renderizador->get(), imagen.get());
 	return 0;
+}
 
+int Textura::texturizar(Renderizador *renderizador, SDL_Surface *superficie) {
+    if (textura != NULL)
+        SDL_DestroyTexture(textura);
+    textura = SDL_CreateTextureFromSurface(renderizador->get(), superficie);
+    return 0;
 }
 
 void Textura::copiarseEn(Renderizador *renderizador, Encuadre encuadre) {
@@ -42,3 +48,4 @@ Textura::~Textura() {
     if (textura != NULL)
         SDL_DestroyTexture(textura);
 }
+
