@@ -22,11 +22,15 @@ private:
     SDL_Color colorRellenoLetras;
     SDL_Color colorLetrasNombre;
     SDL_Color colorPuntaje;
+    SDL_Color colorDesconexion;
     int maxVida;
     std::string nombreJugador;
 public:
     VistaEstado(Renderizador *renderizador, pugi::xml_document *archiConfig, int maxVida, std::string nombreJugador, int numeroJugador);
     void renderizar(InfoJugador estadoJugador);
+    void CargarBarraDeVida(InfoJugador *estadoJugador);
+    void CargarNombreYPuntaje(InfoJugador *estadoJugador);
+    void CargarPuntaje(InfoJugador *estadoJugador);
     ~VistaEstado();
 };
 

@@ -4,6 +4,9 @@
 VistaEstado::VistaEstado(Renderizador *renderizador, pugi::xml_document *archiConfig, int maxVida, std::string nombreJugador, int numeroJugador) {
     this->renderizador = renderizador;
     this->maxVida = maxVida;
+
+    if(9 > nombreJugador.size())
+        nombreJugador.append(9 - nombreJugador.size(), ' ');
     this->nombreJugador = nombreJugador;
 
     std::string pathIcono;
@@ -54,44 +57,72 @@ VistaEstado::VistaEstado(Renderizador *renderizador, pugi::xml_document *archiCo
     //Fuente principal: con contorno
     fuente = TTF_OpenFont("assets/fonts/Ubuntu-M.ttf", 13);
     TTF_SetFontStyle(fuente, TTF_STYLE_BOLD);
-    colorLetrasNombre = {0,0,0xFF, 0xFF};
+    colorLetrasNombre = {0,0,0x80, 0xFF};
     colorPuntaje = {0xFF,0,0,0xFF};
     colorRellenoLetras = {0xFF,0xFF,0xFF,0xFF};
+    colorDesconexion = {0xC0, 0xC0, 0xC0, 0x80};
 }
 
 void VistaEstado::renderizar(InfoJugador estadoJugador) {
     //Renderiza ícono
     texturaIcono.copiarseEn(renderizador, encuadreIcono);
-    //Cargar barra vida.
+    //Carga barra de vida
+    CargarBarraDeVida(&estadoJugador);
+    //Cargar nombre y vidas
+    CargarNombreYPuntaje(&estadoJugador);
+    //Cargar puntaje
+    CargarPuntaje(&estadoJugador);
+
+    if(!estadoJugador.getVidas() && !estadoJugador.getEnergia()){
+        //Le mando el gameover sobre la barra de vida
+        superficieTxt = TTF_RenderText_Solid(fuente, "GAME OVER", colorRellenoLetras);
+        texturaNombreJugador.texturizar(renderizador, superficieTxt);
+        texturaNombreJugador.copiarseEn(renderizador, encuadreBarraVida);
+    }
+
+}
+
+void VistaEstado::CargarBarraDeVida(InfoJugador *estadoJugador){
+    SDL_Color color = (estadoJugador->estaConectado())? SDL_Color{0xFF,0,0,0xFF}: colorDesconexion;
     // La base en rojo
     SDL_Rect rectangulo = encuadreBarraVida.get();
-    SDL_SetRenderDrawColor(renderizador->get(),0xFF,0,0,255);
+    SDL_SetRenderDrawColor(renderizador->get(),color.r, color.g, color.b, color.a);
     SDL_RenderFillRect(renderizador->get(), &rectangulo);
     //Calcular cuanto en amarillo y dibujarlo
-    rectangulo.w = rectangulo.w * estadoJugador.getEnergia() / maxVida;
-    SDL_SetRenderDrawColor(renderizador->get(),0xFF,0xFF,0,255);
+    color = (estadoJugador->estaConectado())? SDL_Color{0xFF,0xFF,0,0xFF}: colorDesconexion;
+    rectangulo.w = rectangulo.w * estadoJugador->getEnergia() / maxVida;
+    SDL_SetRenderDrawColor(renderizador->get(),color.r, color.g, color.b, color.a);
     SDL_RenderFillRect(renderizador->get(),&rectangulo);
-    //Cargar nombre y cantidad de vidas (color azul)
-    std::string nombreYVidas = nombreJugador + ":" + std::to_string(estadoJugador.getVidas());
+}
+
+void VistaEstado::CargarNombreYPuntaje(InfoJugador *estadoJugador){
+    std::string nombreYVidas = nombreJugador + ":" + std::to_string(estadoJugador->getVidas());
     //Agrega contorno a las letras
     TTF_SetFontOutline(fuente, 1);
     //Pone nombre y vidas
     superficieTxt = TTF_RenderText_Solid(fuente, nombreYVidas.c_str(), colorLetrasNombre);
     texturaNombreJugador.texturizar(renderizador, superficieTxt);
     texturaNombreJugador.copiarseEn(renderizador, encuadreNombre);
-    //Pone puntaje
-    std::string puntaje = std::to_string(estadoJugador.getPuntaje());
-    //superficieTxt = TTF_RenderText_Solid(fuente, std::to_string(estadoJugador.getPuntaje()).c_str(), colorPuntaje);
-    superficieTxt = TTF_RenderText_Solid(fuente, puntaje.c_str(), colorPuntaje);
-    texturaNombreJugador.texturizar(renderizador, superficieTxt);
-    texturaNombreJugador.copiarseEn(renderizador, encuadrePuntaje);
     //Saca contorno, y rellena nombres y puntajes
     TTF_SetFontOutline(fuente, 0);
+    //Rellena nombre y vidas
     superficieTxt = TTF_RenderText_Solid(fuente, nombreYVidas.c_str(), colorRellenoLetras);
     texturaNombreJugador.texturizar(renderizador, superficieTxt);
     texturaNombreJugador.copiarseEn(renderizador, encuadreNombre);
+}
 
-    //superficieTxt = TTF_RenderText_Solid(fuente, nombreYVidas.c_str(), colorRellenoLetras);
+
+void VistaEstado::CargarPuntaje(InfoJugador *estadoJugador){
+    std::string puntaje = std::to_string(estadoJugador->getPuntaje());
+    if(6 > puntaje.size())
+        puntaje.insert(0, 6 - puntaje.size(), ' ');
+    //Agrega contorno a las letras
+    TTF_SetFontOutline(fuente, 1);
+    superficieTxt = TTF_RenderText_Solid(fuente, puntaje.c_str(), colorPuntaje);
+    texturaNombreJugador.texturizar(renderizador, superficieTxt);
+    texturaNombreJugador.copiarseEn(renderizador, encuadrePuntaje);
+    //Rellena puntajes
+    TTF_SetFontOutline(fuente, 0);
     superficieTxt = TTF_RenderText_Solid(fuente, puntaje.c_str(), colorRellenoLetras);
     texturaNombreJugador.texturizar(renderizador, superficieTxt);
     texturaNombreJugador.copiarseEn(renderizador, encuadrePuntaje);
