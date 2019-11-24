@@ -19,6 +19,7 @@ EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo
 	tiempoDeGolpe=0;
 	tiempoDeEsquivada=0;
 	vivo=true;
+	esAtacante=false;
 	actualizarInsercion();
 }
 
@@ -222,6 +223,15 @@ void EnemigoModelo::patrullar(){
         else
             avanzarDiagArriba(bordeSuperior);
       }
+
+    if (esAtacante){
+    	tiempoDeGolpe++;
+    	if(tiempoDeGolpe==40){
+    		cambiarModo(Atacando);
+    	    tiempoDeGolpe=0;
+    	   }
+      }
+
 	}
 }
 
@@ -235,6 +245,7 @@ int EnemigoModelo::consultarJugadorObjetivo(){
 
 void EnemigoModelo::atacar(){
 	if (modo==Atacando){
+	esAtacante=true;
 	int x,y;
 	x=objetivo->darPosicionX();
 	y=objetivo->darPosicionY();
@@ -264,8 +275,8 @@ void EnemigoModelo::esquivar(){
 	    retroceder();
 	  else
 	    avanzar();
-	/*
 
+/*
 	switch(tiempoDeEsquivada){
 	    case 0:{
 	    	modoAnterior = modo;
@@ -475,6 +486,7 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
         	   case Atacando:{
         		  if (tiempoDeGolpe==0 & (!siendoAtacado)){
         			 pegar();
+        			//esquivar();
         			 cambiarModo(Patrullando);
         		    }
         		   tiempoDeGolpe++;
