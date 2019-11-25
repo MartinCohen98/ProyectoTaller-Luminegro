@@ -35,6 +35,7 @@ protected:
     bool ejecutarSonidoCaida = false;
     bool ejecutarSonidoGolpeTiro = false;
     bool ejecutarSonidoGolpeImpacto = false;
+    EstadoEnemigoParado* estadoOriginal;
 
 public:
     EnemigoModelo();

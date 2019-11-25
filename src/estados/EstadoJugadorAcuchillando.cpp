@@ -46,7 +46,7 @@ EstadoJugador* EstadoJugadorAcuchillando::morir(){
 EstadoJugador* EstadoJugadorAcuchillando::acuchillar(){
     if (!terminado()) {
         framesTranscurridas++;
-        if (framesTranscurridas == 2) {
+        if (framesTranscurridas == 3) {
             framesTranscurridas = 0;
             cambiarFrame();
         }

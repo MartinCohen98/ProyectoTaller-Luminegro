@@ -26,7 +26,7 @@ bool EstadoJugadorGolpeado::estaAtacando(){
 
 
 EstadoJugador* EstadoJugadorGolpeado::serGolpeado() {
-	int framesLimite=2;
+	int framesLimite = 2;
     if (!terminado()) {
         framesTranscurridas++;
         if (framesTranscurridas == framesLimite) {
