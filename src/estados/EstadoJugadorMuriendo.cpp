@@ -8,7 +8,7 @@ EstadoJugadorMuriendo::EstadoJugadorMuriendo(tipoDeArma tipoArma) {
     frameActual.modificar(35, 910, ancho, alto);
     numeroDeFrame = 0;
     framesTranscurridas = 0;
-    caidaTerminada=false;
+    caidaTerminada = false;
 }
 
 
@@ -40,7 +40,7 @@ bool EstadoJugadorMuriendo::estaAtacando(){
 EstadoJugador* EstadoJugadorMuriendo::morir() {
 	if (!terminado()) {
 		framesTranscurridas++;
-		if (framesTranscurridas == 4) {
+		if (framesTranscurridas == 6) {
 			framesTranscurridas = 0;
 			cambiarFrame();
 		}
