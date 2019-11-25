@@ -183,7 +183,7 @@ tipoDeArma JugadorModelo::consultarArma(){
 
 int JugadorModelo::recibirDanioDe(Colisionable* colisionable) {
 	if(!inmortal)
-	  energia -= colisionable->obtenerDanio();
+		energia -= colisionable->obtenerDanio();
 	serGolpeado();
 	if (energia <= 0){
 		morir();
@@ -191,10 +191,11 @@ int JugadorModelo::recibirDanioDe(Colisionable* colisionable) {
 		if (vidas>0)
 			energia = 100;
 		else {
-		   derrotado = true;
-		   desaparecer();
+			derrotado = true;
+			desaparecer();
 		}
 	}
+	return 0;
 }
 
 bool JugadorModelo::moverEnY() {

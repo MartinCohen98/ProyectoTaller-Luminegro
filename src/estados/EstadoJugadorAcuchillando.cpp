@@ -11,30 +11,37 @@ EstadoJugadorAcuchillando::EstadoJugadorAcuchillando(tipoDeArma tipoArma) {
     frameDeDanio = true;
 }
 
+
 EstadoJugador* EstadoJugadorAcuchillando::avanzar() {
     return (acuchillar());
 }
+
 
 EstadoJugador* EstadoJugadorAcuchillando::parar() {
     return (acuchillar());
 }
 
+
 EstadoJugador* EstadoJugadorAcuchillando::agacharse() {
     return (acuchillar());
 }
+
 
 EstadoJugador* EstadoJugadorAcuchillando::pegar() {
     return (acuchillar());
 }
 
+
 EstadoJugador* EstadoJugadorAcuchillando::saltar() {
     return (acuchillar());
 }
+
 
 EstadoJugador* EstadoJugadorAcuchillando::morir(){
     delete this;
     return (new EstadoJugadorMuriendo(arma));
 }
+
 
 EstadoJugador* EstadoJugadorAcuchillando::acuchillar(){
     if (!terminado()) {
@@ -50,14 +57,23 @@ EstadoJugador* EstadoJugadorAcuchillando::acuchillar(){
     }
 }
 
+
 EstadoJugador* EstadoJugadorAcuchillando::apalear(){
     return (acuchillar());
 }
+
+
+EstadoJugador* EstadoJugadorAcuchillando::serGolpeado() {
+	delete this;
+	return (new EstadoJugadorGolpeado());
+}
+
 
 EstadoJugador* EstadoJugadorAcuchillando::congelarse() {
     delete this;
     return (new EstadoJugadorCongelado(arma));
 }
+
 
 bool EstadoJugadorAcuchillando::puedeMoverse() {
     return false;

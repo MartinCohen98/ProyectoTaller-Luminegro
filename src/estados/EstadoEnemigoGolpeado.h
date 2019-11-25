@@ -15,6 +15,7 @@ public:
 	EstadoJugador* parar();
 	EstadoJugador* serGolpeado();
 	EstadoJugador* morir();
+	EstadoJugador* pegar();
 	bool puedeMoverse();
 	virtual ~EstadoEnemigoGolpeado();
 };

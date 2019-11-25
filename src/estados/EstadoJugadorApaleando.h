@@ -24,6 +24,7 @@ public:
     EstadoJugador* acuchillar();
     EstadoJugador* apalear();
     EstadoJugador* congelarse();
+    EstadoJugador* serGolpeado();
     bool puedeMoverse();
     bool estaAtacando();
     int obtenerDanio();

@@ -44,9 +44,14 @@ EstadoJugador* EstadoEnemigoGolpeado::serGolpeado() {
     }
 }
 
-EstadoJugador* EstadoEnemigoGolpeado::morir(){
+EstadoJugador* EstadoEnemigoGolpeado::morir() {
     delete this;
     return (new EstadoEnemigoMuriendo(tipo));
+}
+
+
+EstadoJugador* EstadoEnemigoGolpeado::pegar() {
+	return (serGolpeado());
 }
 
 

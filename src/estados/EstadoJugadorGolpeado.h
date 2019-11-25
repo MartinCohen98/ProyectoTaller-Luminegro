@@ -15,6 +15,11 @@ public:
 	EstadoJugador* parar();
 	EstadoJugador* serGolpeado();
 	EstadoJugador* morir();
+	EstadoJugador* agacharse();
+    EstadoJugador* acuchillar();
+    EstadoJugador* apalear();
+	EstadoJugador* saltar();
+    EstadoJugador* congelarse();
 	bool estaAtacando();
 	bool puedeMoverse();
 	bool terminado();

@@ -1,6 +1,6 @@
 #include "EnemigoModelo.h"
 
-EnemigoModelo::EnemigoModelo(){}
+EnemigoModelo::EnemigoModelo() {}
 
 EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipoNuevo,
 		FondoModelo* fondoNuevo) {
@@ -496,14 +496,14 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
            case Jugador3:{
         	   switch(modo){
         	   case Atacando:{
-        		  if (tiempoDeGolpe==0 & (!siendoAtacado)){
+        		  if (tiempoDeGolpe == 0 & (!siendoAtacado)){
         			 pegar();
         			//esquivar();
         			 cambiarModo(Patrullando);
         		    }
         		   tiempoDeGolpe++;
-        		  if (tiempoDeGolpe==4)
-        		    tiempoDeGolpe==0;
+        		  if (tiempoDeGolpe == 4)
+        		    tiempoDeGolpe = 0;
         		  break;
                 }
         	   case Patrullando:
@@ -519,9 +519,9 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 }
 
 void EnemigoModelo::desaparecer() {
-	escaladoDeSprite=0;
+	escaladoDeSprite = 0;
 	cambiarModo(Detenido);
-	posicionY=10000;
+	posicionY = 10000;
 }
 
 int EnemigoModelo::escalar(int tamanio) {

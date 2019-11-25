@@ -1,7 +1,3 @@
-//
-// Created by julio on 27/10/19.
-//
-
 #include "EstadoJugadorCongelado.h"
 
 EstadoJugadorCongelado::EstadoJugadorCongelado(tipoDeArma tipoArma) {
