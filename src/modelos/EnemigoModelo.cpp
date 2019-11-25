@@ -24,6 +24,7 @@ EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo
 	activado = false;
 	estadoOriginal = new EstadoEnemigoParado(tipo);
 	actualizarInsercion();
+	delayDeGolpe = 0;
 }
 
 
@@ -509,9 +510,10 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
         	case Jugador4:{
         		switch(modo){
         		case Atacando:
-        			if (tiempoDeGolpe == 0){
+        			delayDeGolpe++;
+        			if (tiempoDeGolpe == 0 && delayDeGolpe >= 10){
         				pegar();
-        				//esquivar();
+        				delayDeGolpe = 0;
         				cambiarModo(Patrullando);
         		    }
         			tiempoDeGolpe++;

@@ -12,7 +12,5 @@ int MensajeCliente::get(void){
 	return datos;
 }
 
-MensajeCliente::~MensajeCliente() {
-	// TODO Auto-generated destructor stub
-}
+MensajeCliente::~MensajeCliente() {}
 
