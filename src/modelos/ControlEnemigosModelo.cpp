@@ -9,9 +9,9 @@ ControlEnemigosModelo::ControlEnemigosModelo(int nivel, FondoModelo* fondo) {
 		enemigos[0] = new EnemigoModelo(1500, 250, Enemigo1,fondo);
 		enemigos[1] = new EnemigoModelo(1000, 320, Enemigo2, fondo);
 		enemigos[2] = new EnemigoModelo(3500, 220, Enemigo3, fondo);
-		enemigos[3] = new EnemigoModelo(-500, 220, Enemigo3, fondo);
-		enemigos[4] = new EnemigoModelo(5500, 220, Enemigo2, fondo);
-		enemigos[5] = new EnemigoModelo(7500, 220, Enemigo1, fondo);
+		enemigos[3] = new EnemigoModelo(-400, 220, Enemigo3, fondo);
+		enemigos[4] = new EnemigoModelo(4000, 220, Enemigo2, fondo);
+		enemigos[5] = new EnemigoModelo(4500, 220, Enemigo1, fondo);
 	}
 
 	if (nivel == 2){
@@ -19,8 +19,8 @@ ControlEnemigosModelo::ControlEnemigosModelo(int nivel, FondoModelo* fondo) {
 		enemigos[1] = new EnemigoModelo(1200, 320, Enemigo2, fondo);
 		enemigos[2] = new EnemigoModelo(3000, 220, Enemigo1, fondo);
 		enemigos[3] = new EnemigoModelo(-300, 320, Enemigo1, fondo);
-		enemigos[4] = new EnemigoModelo(4500, 220, Enemigo2, fondo);
-		enemigos[5] = new EnemigoJefeModelo(6000, 220, fondo);
+		enemigos[4] = new EnemigoModelo(3500, 220, Enemigo2, fondo);
+		enemigos[5] = new EnemigoJefeModelo(4000, 220, fondo);
 	}
 }
 
@@ -70,14 +70,14 @@ void ControlEnemigosModelo::realizarMovimientos(ControlJugadoresModelo *jugadore
 
 void ControlEnemigosModelo::movimientosIniciales(){
 
-    enemigos[0]->retroceder();
+    enemigos[0]->atacar();
     enemigos[1]->avanzar();
     enemigos[2]->retroceder();
     enemigos[3]->avanzar();
     enemigos[4]->retroceder();
     enemigos[5]->retroceder();
     for (int i=1;i<enemigosCantidad;i++)
-   	   enemigos[i]->cambiarModo(Patrullando);
+   	   enemigos[i]->cambiarModo(Detenido);
     enemigos[0]->cambiarModo(Atacando);
 }
 

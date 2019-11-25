@@ -20,6 +20,8 @@ EnemigoJefeModelo::EnemigoJefeModelo(int posXinicial, int posYinicial,FondoModel
 	tiempoDeGolpe=0;
 	tiempoDeEsquivada=0;
 	vivo=true;
+	esAtacante=false;
+	activado=false;
 	actualizarInsercion();
 }
 

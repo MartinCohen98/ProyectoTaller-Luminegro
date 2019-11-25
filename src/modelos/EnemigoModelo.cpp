@@ -3,13 +3,14 @@
 EnemigoModelo::EnemigoModelo(){}
 
 EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipoNuevo,
-		FondoModelo* fondo) {
+		FondoModelo* fondoNuevo) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
 	bordeSuperior = 180;
 	bordeInferior = 320;
+	fondo = fondoNuevo;
 	limiteInicial = 0;
-	limiteFinal = fondo->obtenerAncho();
+	limiteFinal = (fondo->obtenerAncho())-260;
 	escaladoDeSprite = 3.6;
 	energia = 100;
 	tipo = tipoNuevo;
@@ -20,7 +21,14 @@ EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo
 	tiempoDeEsquivada=0;
 	vivo=true;
 	esAtacante=false;
+	activado=false;
 	actualizarInsercion();
+}
+
+
+void EnemigoModelo::parar() {
+	estado = estado->parar();
+    actualizarInsercion();
 }
 
 void EnemigoModelo::avanzar() {
@@ -28,7 +36,7 @@ void EnemigoModelo::avanzar() {
   	  dadoVuelta = false;
 	  estado = estado->avanzar();
 	  moverEnX(5);
-	  avanzando=true;
+	  yendoAdelante=true;
 	}
 	else {
 	  parar();
@@ -37,17 +45,12 @@ void EnemigoModelo::avanzar() {
 	actualizarInsercion();
 }
 
-void EnemigoModelo::parar() {
-	estado = estado->parar();
-    actualizarInsercion();
-}
-
 void EnemigoModelo::retroceder() {
 	if (posicionX > limiteInicial) {
 	  dadoVuelta = true;
 	  estado = estado->avanzar();
 	  moverEnX(-5);
-	  avanzando=false;
+	  yendoAdelante=false;
 	}
 	else {
 	  parar();
@@ -109,7 +112,7 @@ void EnemigoModelo::avanzarDiagArriba(int tope){
         parar();
         estado = estado->parar();
     }
-    avanzando=true;
+    yendoAdelante=true;
     subiendo=true;
     actualizarInsercion();
 }
@@ -124,7 +127,7 @@ void EnemigoModelo::avanzarDiagAbajo(int tope){
         parar();
         estado = estado->parar();
     }
-    avanzando=true;
+    yendoAdelante=true;
     subiendo=false;
     actualizarInsercion();
 }
@@ -139,7 +142,7 @@ void EnemigoModelo::retrocederDiagArriba(int tope){
         parar();
         estado = estado->parar();
     }
-    avanzando=false;
+    yendoAdelante=false;
     subiendo=true;
     actualizarInsercion();
 }
@@ -154,7 +157,7 @@ void EnemigoModelo::retrocederDiagAbajo(int tope){
         parar();
         estado = estado->parar();
     }
-    avanzando=false;
+    yendoAdelante=false;
     subiendo=false;
     actualizarInsercion();
 }
@@ -162,34 +165,32 @@ void EnemigoModelo::retrocederDiagAbajo(int tope){
 void EnemigoModelo::trasladarse(int destinoX,int destinoY) {
     bool atras = false;
     bool abajo = false;
+    bool alineado = false;
+
     if (destinoX < posicionX)
         atras = true;
     if (destinoY > posicionY)
         abajo = true;
-    if (atras & abajo) {
+    if (destinoY == posicionY)
+    	alineado = true;
+
+    if (atras & abajo & !alineado)
         retrocederDiagAbajo(destinoY);
-        if (posicionY==destinoY)
-            retroceder();
-    }
-    if (atras & !abajo) {
+
+    if (atras & !abajo & !alineado)
         retrocederDiagArriba(destinoY);
-        if (posicionY==destinoY)
-            retroceder();
-    }
-    if (!atras & abajo) {
+
+    if (!atras & abajo & !alineado)
         avanzarDiagAbajo(destinoY);
-        if (posicionY==destinoY)
-            avanzar();
-    }
-    if (!atras & !abajo) {
+
+    if (!atras & !abajo & !alineado)
         avanzarDiagArriba(destinoY);
-        if (posicionY==destinoY)
-            avanzar();
-    }
-    if (abajo)
-    	bajar();
-    if (!abajo)
-    	subir();
+
+    if (atras & alineado)
+       retroceder();
+    if (!atras & alineado)
+       avanzar();
+
     if (posicionY==bordeSuperior)
        bajar();
     if (posicionY==bordeInferior)
@@ -204,11 +205,11 @@ void EnemigoModelo::patrullar(){
     if (posicionY==bordeInferior)
         subiendo=true;
     if (posicionX==limiteFinal){
-        avanzando=false;
+        yendoAdelante=false;
         retroceder();
        }
     if (posicionX==limiteInicial){
-        avanzando=true;
+    	yendoAdelante=true;
         avanzar();
       }
     if (!subiendo){
@@ -245,7 +246,7 @@ int EnemigoModelo::consultarJugadorObjetivo(){
 
 void EnemigoModelo::atacar(){
 	if (modo==Atacando){
-	esAtacante=true;
+	  esAtacante=true;
 	int x,y;
 	x=objetivo->darPosicionX();
 	y=objetivo->darPosicionY();
@@ -257,7 +258,7 @@ void EnemigoModelo::atacar(){
 //		  tiempoDeGolpe==0;
 	     pegando = false;
 	}*/
-	  if (avanzando)
+	  if (yendoAdelante)
 	    trasladarse(x-110,y+20);
 	  else
 	    trasladarse(x+110,y+20);
@@ -271,7 +272,7 @@ void EnemigoModelo::esquivar(){
 	  else {
 	    subir();
 	    }
-	  if (avanzando)
+	  if (yendoAdelante)
 	    retroceder();
 	  else
 	    avanzar();
@@ -436,6 +437,18 @@ void EnemigoModelo::moverEnY(int movimiento) {
 
 void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 	verificarMuerte();
+
+	limiteInicial = (fondo->darInicioTerreno());
+
+	if (!activado)
+	  if (((fondo->darInicioTerreno())) > (posicionX-800)){
+	    activado = true;
+	    if (esAtacante)
+		  cambiarModo(Atacando);
+	    else
+		  cambiarModo(Patrullando);
+	  }
+
 	switch (modo){
 	    case Detenido:{
 	    	parar();
@@ -507,8 +520,7 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 }
 
 void EnemigoModelo::desaparecer() {
-	alto = 0;
-	ancho = 0;
+	escaladoDeSprite=0;
 	cambiarModo(Detenido);
 	posicionY=10000;
 }
