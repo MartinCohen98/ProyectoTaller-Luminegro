@@ -76,9 +76,9 @@ void ControlEnemigosModelo::movimientosIniciales(){
     enemigos[3]->avanzar();
     enemigos[4]->retroceder();
     enemigos[5]->retroceder();
-    for (int i=1;i<enemigosCantidad;i++)
+    for (int i=0;i<enemigosCantidad;i++)
    	   enemigos[i]->cambiarModo(Detenido);
-    enemigos[0]->cambiarModo(Atacando);
+   // enemigos[0]->cambiarModo(Atacando);
 }
 
 
