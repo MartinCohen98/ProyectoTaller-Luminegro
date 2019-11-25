@@ -61,7 +61,7 @@ EstadoJugador* EstadoJugadorPegando::congelarse() {
 
 EstadoJugador* EstadoJugadorPegando::serGolpeado() {
 	delete this;
-	return (new EstadoJugadorGolpeado());
+	return (new EstadoJugadorGolpeado(arma));
 }
 
 bool EstadoJugadorPegando::puedeMoverse() {

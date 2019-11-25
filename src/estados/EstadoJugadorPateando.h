@@ -24,6 +24,7 @@ public:
     EstadoJugador* acuchillar();
     EstadoJugador* apalear();
     EstadoJugador* congelarse();
+    EstadoJugador* serGolpeado();
 	int obtenerElevacion();
 	int obtenerDanio();
 	int obtenerPuntosDeGolpe();

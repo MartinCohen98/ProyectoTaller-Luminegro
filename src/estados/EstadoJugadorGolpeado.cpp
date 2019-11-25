@@ -1,6 +1,7 @@
 #include "EstadoJugadorGolpeado.h"
 
-EstadoJugadorGolpeado::EstadoJugadorGolpeado() {
+EstadoJugadorGolpeado::EstadoJugadorGolpeado(tipoDeArma unArma) {
+	arma = unArma;
 	ancho = 70;
 	alto = 100;
 	frameActual.modificar(40, 910, ancho, alto);
@@ -17,6 +18,11 @@ EstadoJugador* EstadoJugadorGolpeado::avanzar() {
 
 EstadoJugador* EstadoJugadorGolpeado::parar() {
     return (serGolpeado());
+}
+
+
+EstadoJugador* EstadoJugadorGolpeado::pegar() {
+	return serGolpeado();
 }
 
 

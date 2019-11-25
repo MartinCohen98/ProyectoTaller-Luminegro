@@ -65,7 +65,7 @@ EstadoJugador* EstadoJugadorApaleando::apalear(){
 
 EstadoJugador* EstadoJugadorApaleando::serGolpeado() {
 	delete this;
-	return (new EstadoJugadorGolpeado());
+	return (new EstadoJugadorGolpeado(arma));
 }
 
 

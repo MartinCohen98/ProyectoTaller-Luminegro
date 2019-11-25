@@ -9,13 +9,15 @@ private:
 	int framesTranscurridas;
 	int numeroDeFrame;
 	bool palizaTerminada;
+
 public:
-	EstadoJugadorGolpeado();
+	EstadoJugadorGolpeado(tipoDeArma arma);
 	EstadoJugador* avanzar();
 	EstadoJugador* parar();
 	EstadoJugador* serGolpeado();
 	EstadoJugador* morir();
 	EstadoJugador* agacharse();
+	EstadoJugador* pegar();
     EstadoJugador* acuchillar();
     EstadoJugador* apalear();
 	EstadoJugador* saltar();

@@ -45,14 +45,23 @@ EstadoJugador* EstadoJugadorAgachado::apalear(){
     return (new EstadoJugadorApaleando(arma));
 }
 
+
 EstadoJugador* EstadoJugadorAgachado::congelarse() {
     delete this;
     return (new EstadoJugadorCongelado(arma));
 }
 
+
+EstadoJugador* EstadoJugadorAgachado::serGolpeado() {
+	delete this;
+	return (new EstadoJugadorGolpeado(arma));
+}
+
+
 bool EstadoJugadorAgachado::estaAtacando(){
 	return false;
 }
+
 
 bool EstadoJugadorAgachado::puedeMoverse() {
 	return false;
