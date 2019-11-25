@@ -1,7 +1,10 @@
 #include "EstadoObjeto.h"
 
-EstadoObjeto::EstadoObjeto() {}
-
+EstadoObjeto::EstadoObjeto() {
+	alto = 0;
+	ancho = 0;
+	tipo = MensajeInvalido;
+}
 
 
 EstadoObjeto* EstadoObjeto::romperse(tipoDeSprite tipo){

@@ -16,25 +16,24 @@ EstadoEnemigoMuriendo::EstadoEnemigoMuriendo(tipoDeSprite tipoNuevo) {
 }
 
 EstadoJugador* EstadoEnemigoMuriendo::avanzar() {
-    return (morir(tipo));
+    return (morir());
 }
 
 EstadoJugador* EstadoEnemigoMuriendo::parar() {
-    return (morir(tipo));
+    return (morir());
 }
 
 EstadoJugador* EstadoEnemigoMuriendo::pegar() {
-    return (morir(tipo));
+    return (morir());
 }
 
 EstadoJugador* EstadoEnemigoMuriendo::serGolpeado() {
-	return (morir(tipo));
+	return (morir());
 }
 
-EstadoJugador* EstadoEnemigoMuriendo::morir(tipoDeSprite tipoNuevo) {
-	tipo = tipoNuevo;
+EstadoJugador* EstadoEnemigoMuriendo::morir() {
 	int framesLimite = 4;
-	if (tipo == EnemigoJefe){
+	if (tipo == EnemigoJefe) {
 		framesLimite = 6;
 	}
 	if (!terminado()) {

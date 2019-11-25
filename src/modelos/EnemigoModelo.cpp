@@ -1,6 +1,6 @@
 #include "EnemigoModelo.h"
 
-EnemigoModelo::EnemigoModelo(){}
+EnemigoModelo::EnemigoModelo() {}
 
 EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipoNuevo,
 		FondoModelo* fondoNuevo) {
