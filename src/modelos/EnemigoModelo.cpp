@@ -10,7 +10,7 @@ EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo
 	bordeInferior = 320;
 	fondo = fondoNuevo;
 	limiteInicial = 0;
-	limiteFinal = (fondo->obtenerAncho())-260;
+	limiteFinal = (fondo->obtenerAncho());
 	escaladoDeSprite = 3.6;
 	energia = 100;
 	tipo = tipoNuevo;
@@ -468,8 +468,6 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 	      }
 	}
 
-	//if ((estado->estaMuerto()||!vivo) & (!estado->terminado()))
-	//morir();
 	checkearColisiones(colisionador);
 }
 

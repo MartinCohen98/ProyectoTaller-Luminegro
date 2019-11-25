@@ -24,5 +24,9 @@ bool PersonaModelo::consultarDadoVuelta(){
     return dadoVuelta;
 }
 
+void PersonaModelo::sumarPuntos(){
+
+}
+
 PersonaModelo::~PersonaModelo() {}
 

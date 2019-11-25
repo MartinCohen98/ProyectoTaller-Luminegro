@@ -24,6 +24,7 @@ JugadorModelo::JugadorModelo(pugi::xml_document *archiConfig, int posXinicial,
 	desconectado = false;
 	salio = false;
 	golpesDeArma = 0;
+	derrotado = false;
 
 
     std::string margenWidthString = archiConfig->child("configuracion")
@@ -189,6 +190,10 @@ int JugadorModelo::recibirDanioDe(Colisionable* colisionable) {
 		vidas--;
 		if (vidas>0)
 			energia = 100;
+		else {
+		   derrotado = true;
+		   desaparecer();
+		}
 	}
 }
 
