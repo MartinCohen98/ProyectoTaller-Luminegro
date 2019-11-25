@@ -20,6 +20,7 @@ public:
 	int darPosicionX();
 	int darPosicionY();
 	bool consultarDadoVuelta();
+	virtual void sumarPuntos();
 	virtual ~PersonaModelo();
 };
 

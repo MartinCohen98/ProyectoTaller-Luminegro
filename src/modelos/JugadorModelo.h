@@ -31,6 +31,7 @@ private:
     int vidas;
 	int puntaje;
 	int golpesDeArma;
+	bool derrotado;
 	tipoDeArma arma;
 	EstadoJugadorParado* estadoOriginal;
 
