@@ -3,7 +3,7 @@
 EnemigoModelo::EnemigoModelo() {}
 
 EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipoNuevo,
-		FondoModelo* fondoNuevo) {
+								FondoModelo* fondoNuevo) {
 	posicionX = posXinicial;
 	posicionY = posYinicial;
 	bordeSuperior = 180;
@@ -16,12 +16,12 @@ EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo
 	tipo = tipoNuevo;
 	estado = new EstadoEnemigoParado(tipo);
 	dadoVuelta = false;
-	subiendo=false;
-	tiempoDeGolpe=0;
-	tiempoDeEsquivada=0;
-	vivo=true;
-	esAtacante=true;
-	activado=false;
+	subiendo = false;
+	tiempoDeGolpe = 0;
+	tiempoDeEsquivada = 0;
+	vivo = true;
+	esAtacante = true;
+	activado = false;
 	estadoOriginal = new EstadoEnemigoParado(tipo);
 	actualizarInsercion();
 }
@@ -34,28 +34,26 @@ void EnemigoModelo::parar() {
 
 void EnemigoModelo::avanzar() {
 	if (posicionX < limiteFinal) {
-  	  dadoVuelta = false;
-	  estado = estado->avanzar();
-	  moverEnX(5);
-	  yendoAdelante=true;
-	}
-	else {
-	  parar();
-	  estado = estado->parar();
+  		dadoVuelta = false;
+		estado = estado->avanzar();
+		moverEnX(5);
+		yendoAdelante=true;
+	} else {
+		parar();
+		estado = estado->parar();
 	}
 	actualizarInsercion();
 }
 
 void EnemigoModelo::retroceder() {
 	if (posicionX > limiteInicial) {
-	  dadoVuelta = true;
-	  estado = estado->avanzar();
-	  moverEnX(-5);
-	  yendoAdelante=false;
-	}
-	else {
-	  parar();
-	  estado = estado->parar();
+		dadoVuelta = true;
+		estado = estado->avanzar();
+		moverEnX(-5);
+		yendoAdelante = false;
+	} else {
+		parar();
+		estado = estado->parar();
 	}
 	actualizarInsercion();
 }
@@ -64,7 +62,7 @@ void EnemigoModelo::subir() {
 	if (posicionY > bordeSuperior) {
 		estado = estado->avanzar();
 		moverEnY(-1);
-		subiendo=true;
+		subiendo = true;
 	} else {
 	    parar();
 		estado = estado->parar();
@@ -76,7 +74,7 @@ void EnemigoModelo::bajar() {
 	if (posicionY < bordeInferior) {
 		moverEnY(1);
         estado = estado->avanzar();
-        subiendo=false;
+        subiendo = false;
 	} else {
 	    parar();
 		estado = estado->parar();
@@ -113,8 +111,8 @@ void EnemigoModelo::avanzarDiagArriba(int tope){
         parar();
         estado = estado->parar();
     }
-    yendoAdelante=true;
-    subiendo=true;
+    yendoAdelante = true;
+    subiendo = true;
     actualizarInsercion();
 }
 
@@ -143,8 +141,8 @@ void EnemigoModelo::retrocederDiagArriba(int tope){
         parar();
         estado = estado->parar();
     }
-    yendoAdelante=false;
-    subiendo=true;
+    yendoAdelante = false;
+    subiendo = true;
     actualizarInsercion();
 }
 
@@ -158,8 +156,8 @@ void EnemigoModelo::retrocederDiagAbajo(int tope){
         parar();
         estado = estado->parar();
     }
-    yendoAdelante=false;
-    subiendo=false;
+    yendoAdelante = false;
+    subiendo = false;
     actualizarInsercion();
 }
 
@@ -199,7 +197,7 @@ void EnemigoModelo::trasladarse(int destinoX,int destinoY) {
 }
 
 void EnemigoModelo::patrullar(){
-	if(modo == Patrullando){
+	if (modo == Patrullando && estado->puedeMoverse()){
 		if (posicionY == bordeSuperior)
 			subiendo = false;
 		if (posicionY == bordeInferior)
@@ -216,7 +214,7 @@ void EnemigoModelo::patrullar(){
 			if (dadoVuelta) {
 				retrocederDiagAbajo(bordeInferior);
 			} else {
-            avanzarDiagAbajo(bordeInferior);
+				avanzarDiagAbajo(bordeInferior);
 			}
 		} else {
 			if (dadoVuelta) {
@@ -232,11 +230,13 @@ void EnemigoModelo::patrullar(){
 				tiempoDeGolpe = 0;
 			}
 		}
+	} else {
+		estado = estado->parar();
 	}
 }
 
 void EnemigoModelo::modificarJugadorObjetivo(int objetivo){
-	jugadorObjetivo=objetivo;
+	jugadorObjetivo = objetivo;
 }
 
 int EnemigoModelo::consultarJugadorObjetivo(){
@@ -258,23 +258,25 @@ void EnemigoModelo::atacar() {
 	     pegando = false;
 	}*/
 		if (yendoAdelante) {
-			trasladarse(x-110,y+20);
+			trasladarse(x - 110, y + 20);
 		} else {
-			trasladarse(x+110,y+20);
+			trasladarse(x + 110, y + 20);
 		}
 	}
 }
 
-void EnemigoModelo::esquivar(){
-	if (subiendo){
-		bajar();
-	} else {
-		subir();
-	}
-	if (yendoAdelante) {
-		retroceder();
-	} else {
-	    avanzar();
+void EnemigoModelo::esquivar() {
+	if (estado->puedeMoverse()) {
+		if (subiendo){
+			bajar();
+		} else {
+			subir();
+		}
+		if (yendoAdelante) {
+			retroceder();
+		} else {
+		    avanzar();
+		}
 	}
 
 /*
@@ -334,7 +336,7 @@ void EnemigoModelo::cambiarModo(accionDeEnemigo nuevoModo){
 }
 
 void EnemigoModelo::asignarObjetivo(JugadorModelo *jugador){
-	objetivo=jugador;
+	objetivo = jugador;
 }
 
 JugadorModelo* EnemigoModelo::consultarObjetivo(){
@@ -424,14 +426,18 @@ void EnemigoModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
 
 
 void EnemigoModelo::actualizarInsercion() {
-	if (dadoVuelta) {
+	bool modoDeGraficado = dadoVuelta;
+	if(estado->estaMuerto()) {
+		modoDeGraficado = (!modoDeGraficado);
+	}
+	if (!modoDeGraficado) {
 		insercion.modificar(posicionX, posicionY,
-				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
+			escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
 	} else {
 		insercion.modificar(posicionX - escalar(estado->obtenerAncho()) +
-				escalar(estadoOriginal->obtenerAncho()),
-				posicionY, escalar(estado->obtenerAncho()),
-				escalar(estado->obtenerAlto()));
+			escalar(estadoOriginal->obtenerAncho()),
+			posicionY, escalar(estado->obtenerAncho()),
+			escalar(estado->obtenerAlto()));
 	}
 }
 
@@ -445,40 +451,37 @@ void EnemigoModelo::moverEnY(int movimiento) {
 	posicionY = posicionY + movimiento;
 }
 
+
 void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
-
 	verificarMuerte();
-
 	limiteInicial = (fondo->darInicioTerreno());
-
 	if (!activado)
-	  if (((fondo->darInicioTerreno())) > (posicionX-800)){
-	    activado = true;
-	    if (esAtacante)
-		  cambiarModo(Atacando);
-	    else
-		  cambiarModo(Patrullando);
-	  }
-
+		if (((fondo->darInicioTerreno())) > (posicionX-800)){
+			activado = true;
+			if (esAtacante) {
+				cambiarModo(Atacando);
+			} else {
+				cambiarModo(Patrullando);
+			}
+		}
 	switch (modo){
-	    case Detenido:{
-	    	parar();
-	    	break;
-	      }
-	    case Patrullando:{
-	    	patrullar();
-	    	break;
-	      }
-	    case Esquivando:{
-	    	//esquivar();
-	    	break;
-	      }
-	    case Atacando:{
-	    	atacar();
-	    	break;
-	      }
+		case Detenido:{
+			parar();
+			break;
+		}
+		case Patrullando:{
+			patrullar();
+			break;
+		}
+		case Esquivando:{
+			//esquivar();
+			break;
+		}
+		case Atacando:{
+			atacar();
+			break;
+		}
 	}
-
 	checkearColisiones(colisionador);
 }
 
@@ -486,46 +489,44 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 	actualizarInsercion();
 	tipoDeSprite tipoColision;
-	bool siendoAtacado;
-	if (colisionador->colisiona(this, &tipoColision, &siendoAtacado )) {
+	if (colisionador->colisiona(this, &tipoColision)) {
         if (ejecutarSonidoGolpeTiro) {
             ejecutarSonidoGolpeImpacto = true;
         }
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
         switch(tipoColision){
-           case Enemigo1:
-           case Enemigo2:
-           case Enemigo3:
-           case Barril:
-           case Caja:
-        	   esquivar();
-        	   break;
-           case Jugador1:
-           case Jugador2:
-           case Jugador3:{
-        	   switch(modo){
-        	   case Atacando:{
-        		  if (tiempoDeGolpe == 0 & (!siendoAtacado)){
-        			 pegar();
-        			//esquivar();
-        			 cambiarModo(Patrullando);
+        	case Enemigo1:
+        	case Enemigo2:
+        	case Enemigo3:
+        	case Barril:
+        	case Caja:
+        		esquivar();
+        		break;
+        	case Jugador1:
+        	case Jugador2:
+        	case Jugador3:
+        	case Jugador4:{
+        		switch(modo){
+        		case Atacando:
+        			if (tiempoDeGolpe == 0){
+        				pegar();
+        				//esquivar();
+        				cambiarModo(Patrullando);
         		    }
-        		   tiempoDeGolpe++;
-        		  if (tiempoDeGolpe == 4)
-        		    tiempoDeGolpe = 0;
-        		  break;
-                }
-        	   case Patrullando:
-        		   esquivar();
-        		   break;
-        	   break;
-        	  }
-            }
-          }
-
+        			tiempoDeGolpe++;
+        			if (tiempoDeGolpe == 4)
+        				tiempoDeGolpe = 0;
+        			break;
+        		case Patrullando:
+        			esquivar();
+        			break;
+        		break;
+        		}
+        	}
+        }
 		actualizarInsercion();
-      }
+	}
 }
 
 void EnemigoModelo::desaparecer() {

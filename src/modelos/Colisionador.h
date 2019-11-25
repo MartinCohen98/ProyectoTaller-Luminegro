@@ -14,7 +14,7 @@ public:
 	Colisionador();
 	void agregarColisionable(Colisionable* colisionable);
 	void agregarLevantable(Colisionable* levantable);
-	bool colisiona(Colisionable* colisionable, tipoDeSprite* tipoColision, bool* estaAtacando);
+	bool colisiona(Colisionable* colisionable, tipoDeSprite* tipoColision);
 	Colisionable* levantarSiHay(Colisionable* jugador);
 	void vaciar();
 	virtual ~Colisionador();
