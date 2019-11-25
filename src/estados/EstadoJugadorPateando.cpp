@@ -12,17 +12,21 @@ EstadoJugadorPateando::EstadoJugadorPateando(int elNumeroDeFrame,
 	frameCambiada = false;
 }
 
+
 EstadoJugador* EstadoJugadorPateando::avanzar() {
 	return pegar();
 }
+
 
 EstadoJugador* EstadoJugadorPateando::parar() {
 	return pegar();
 }
 
+
 EstadoJugador* EstadoJugadorPateando::agacharse() {
 	return pegar();
 }
+
 
 EstadoJugador* EstadoJugadorPateando::pegar() {
 	if ((numeroDeFrame != 8) || (framesTranscurridas != 2)) {
@@ -62,6 +66,12 @@ EstadoJugador* EstadoJugadorPateando::apalear(){
 EstadoJugador* EstadoJugadorPateando::congelarse() {
     delete this;
     return (new EstadoJugadorCongelado(arma));
+}
+
+
+EstadoJugador* EstadoJugadorPateando::serGolpeado() {
+	delete this;
+	return (new EstadoJugadorGolpeado(arma));
 }
 
 

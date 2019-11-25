@@ -1,6 +1,7 @@
 #include "EstadoJugadorGolpeado.h"
 
-EstadoJugadorGolpeado::EstadoJugadorGolpeado() {
+EstadoJugadorGolpeado::EstadoJugadorGolpeado(tipoDeArma unArma) {
+	arma = unArma;
 	ancho = 70;
 	alto = 100;
 	frameActual.modificar(40, 910, ancho, alto);
@@ -20,13 +21,18 @@ EstadoJugador* EstadoJugadorGolpeado::parar() {
 }
 
 
+EstadoJugador* EstadoJugadorGolpeado::pegar() {
+	return serGolpeado();
+}
+
+
 bool EstadoJugadorGolpeado::estaAtacando(){
 	return false;
 }
 
 
 EstadoJugador* EstadoJugadorGolpeado::serGolpeado() {
-	int framesLimite=2;
+	int framesLimite = 2;
     if (!terminado()) {
         framesTranscurridas++;
         if (framesTranscurridas == framesLimite) {

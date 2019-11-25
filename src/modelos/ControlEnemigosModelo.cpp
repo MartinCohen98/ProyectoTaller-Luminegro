@@ -56,11 +56,11 @@ void ControlEnemigosModelo::realizarMovimientos(ControlJugadoresModelo *jugadore
 	int distancia = calcularDistancia(enemigos[0], jugador);
 	if (distancia<200)
 		enemigos[0]->cambiarModo(Atacando);*/
-    for (int i=0;i<enemigosCantidad;i++) {
-      enemigos[i]->verificarMuerte();
-	  enemigos[i]->guardarPosicionesActuales();
-	  enemigos[i]->realizarMovimientos(colisionador);
-      };
+    for (int i = 0;i<enemigosCantidad;i++) {
+    	enemigos[i]->verificarMuerte();
+		enemigos[i]->guardarPosicionesActuales();
+		enemigos[i]->realizarMovimientos(colisionador);
+    };
    // enemigos[0]->guardarPosicionesActuales();
   //  enemigos[0]->cambiarModo(Atacando);
   //  enemigos[0]->atacar();
@@ -115,12 +115,12 @@ void ControlEnemigosModelo::buscarObjetivos(ControlJugadoresModelo *jugadores){
 }
 
 void ControlEnemigosModelo::matar(){
-    for(int i=0;i<enemigosCantidad;i++)
+    for(int i = 0;i<enemigosCantidad;i++)
     enemigos[i]->morir();
 }
 
 void ControlEnemigosModelo::golpear(){
-    for(int i=0;i<enemigosCantidad;i++)
+    for(int i = 0;i<enemigosCantidad;i++)
     enemigos[i]->pegar();
 }
 

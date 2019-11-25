@@ -51,7 +51,7 @@ EstadoJugador* EstadoJugadorApaleando::acuchillar(){
 EstadoJugador* EstadoJugadorApaleando::apalear(){
     if (!terminado()) {
         framesTranscurridas++;
-        if (framesTranscurridas == 2) {
+        if (framesTranscurridas == 3) {
             framesTranscurridas = 0;
             cambiarFrame();
         }
@@ -65,7 +65,7 @@ EstadoJugador* EstadoJugadorApaleando::apalear(){
 
 EstadoJugador* EstadoJugadorApaleando::serGolpeado() {
 	delete this;
-	return (new EstadoJugadorGolpeado());
+	return (new EstadoJugadorGolpeado(arma));
 }
 
 

@@ -26,7 +26,7 @@ EstadoJugador* EstadoJugadorPegando::agacharse() {
 EstadoJugador* EstadoJugadorPegando::pegar() {
 	if (!terminado()) {
 		framesTranscurridas++;
-		if (framesTranscurridas == 2) {
+		if (framesTranscurridas == 3) {
 			framesTranscurridas = 0;
 			cambiarFrame();
 		}
@@ -61,7 +61,7 @@ EstadoJugador* EstadoJugadorPegando::congelarse() {
 
 EstadoJugador* EstadoJugadorPegando::serGolpeado() {
 	delete this;
-	return (new EstadoJugadorGolpeado());
+	return (new EstadoJugadorGolpeado(arma));
 }
 
 bool EstadoJugadorPegando::puedeMoverse() {

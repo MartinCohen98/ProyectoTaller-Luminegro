@@ -79,7 +79,7 @@ EstadoJugador* EstadoJugadorAvanzando::apalear(){
 
 EstadoJugador* EstadoJugadorAvanzando::serGolpeado(){
 	delete this;
-	return (new EstadoJugadorGolpeado());
+	return (new EstadoJugadorGolpeado(arma));
 }
 
 
