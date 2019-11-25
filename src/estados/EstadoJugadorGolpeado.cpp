@@ -2,9 +2,9 @@
 
 EstadoJugadorGolpeado::EstadoJugadorGolpeado(tipoDeArma unArma) {
 	arma = unArma;
-	ancho = 70;
+	ancho = 50;
 	alto = 100;
-	frameActual.modificar(40, 910, ancho, alto);
+	frameActual.modificar(120, 910, ancho, alto);
 	palizaTerminada = false;
 	numeroDeFrame = 0;
 	framesTranscurridas = 0;
@@ -99,7 +99,7 @@ void EstadoJugadorGolpeado::cambiarFrame() {
     } else {
         numeroDeFrame++;
     }
-    frameActual.modificar((ancho * numeroDeFrame) + 40, 910, ancho, alto);
+    frameActual.modificar(120, 910, ancho, alto);
 }
 
 

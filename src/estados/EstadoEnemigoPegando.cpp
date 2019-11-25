@@ -14,7 +14,7 @@ EstadoEnemigoPegando::EstadoEnemigoPegando(tipoDeSprite tipoNuevo) {
 	case Enemigo2:
 	case Enemigo3: {
 		ancho = 70;
-		alto = 85;
+		alto = 80;
 		frameActual.modificar(0, alto, ancho, alto);
 	}
 	}
