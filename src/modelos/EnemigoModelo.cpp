@@ -452,7 +452,7 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 	limiteInicial = (fondo->darInicioTerreno());
 
 	if (!activado)
-	  if (((fondo->darInicioTerreno())) > (posicionX-800)){
+	  if (((fondo->darInicioTerreno()*2.7)) > (posicionX-200)){
 	    activado = true;
 	    if (esAtacante)
 		  cambiarModo(Atacando);
