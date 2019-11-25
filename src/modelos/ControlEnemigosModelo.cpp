@@ -24,7 +24,6 @@ ControlEnemigosModelo::ControlEnemigosModelo(int nivel, FondoModelo* fondo) {
 		enemigos[4] = new EnemigoModelo(2500, 250, Enemigo2, fondo);
 		enemigos[5] = new EnemigoModelo(3000, 320, Enemigo1, fondo);
 		enemigos[6] = new EnemigoModelo(3500, 280, Enemigo2, fondo);
-	//	enemigos[7] = new EnemigoModelo(4000, 280, Enemigo2, fondo);
 		enemigos[7] = new EnemigoJefeModelo(4000, 220, fondo);
 	}
 }

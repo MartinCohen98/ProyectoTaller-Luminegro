@@ -46,22 +46,27 @@ EstadoJugador* EstadoJugadorPateando::pegar() {
 	}
 }
 
+
 EstadoJugador* EstadoJugadorPateando::saltar() {
 	return pegar();
 }
+
 
 EstadoJugador* EstadoJugadorPateando::morir(){
     delete this;
     return (new EstadoJugadorMuriendo(arma));
 }
 
+
 EstadoJugador* EstadoJugadorPateando::acuchillar(){
     return pegar();
 }
 
+
 EstadoJugador* EstadoJugadorPateando::apalear(){
     return pegar();
 }
+
 
 EstadoJugador* EstadoJugadorPateando::congelarse() {
     delete this;

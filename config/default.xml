@@ -98,7 +98,7 @@
                 </tuboMetalico>
             </nivel2>
         </niveles>
-        <margenWidth>300</margenWidth>
+        <margenWidth>400</margenWidth>
         <sonidos>
             <fondo>assets/sounds/background.mp3</fondo>
             <golpeTiro>assets/sounds/knockThrown.mp3</golpeTiro>

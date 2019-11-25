@@ -27,7 +27,5 @@ Encuadre* EstadoObjeto::obtenerEncuadre() {
 }
 
 
-EstadoObjeto::~EstadoObjeto() {
-	// TODO Auto-generated destructor stub
-}
+EstadoObjeto::~EstadoObjeto() {}
 

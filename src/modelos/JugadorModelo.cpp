@@ -253,15 +253,15 @@ void JugadorModelo::actualizarPosicion(FondoModelo* fondo, bool rezagado) {
 void JugadorModelo::checkearColisiones(Colisionador* colisionador) {
 	actualizarInsercion(false);
 	tipoDeSprite tipoColision;
-	bool siendoAtacado;
-	if (colisionador->colisiona(this, &tipoColision, &siendoAtacado)) {
+	if (colisionador->colisiona(this, &tipoColision)) {
 		if (ejecutarSonidoGolpeTiro) {
 			ejecutarSonidoGolpeImpacto = true;
 			if (!estado->estaPateando()) {
 				golpesDeArma--;
-				if (golpesDeArma == 0)
+				if (golpesDeArma == 0) {
 					arma = desarmado;
 					estado->asignarArma(arma);
+				}
 			}
 		}
 		posicionX = posicionXAnterior;

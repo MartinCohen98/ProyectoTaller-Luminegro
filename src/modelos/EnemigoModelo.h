@@ -36,6 +36,7 @@ protected:
     bool ejecutarSonidoGolpeTiro = false;
     bool ejecutarSonidoGolpeImpacto = false;
     EstadoEnemigoParado* estadoOriginal;
+    int delayDeGolpe;
 
 public:
     EnemigoModelo();

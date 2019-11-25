@@ -16,7 +16,7 @@ public:
     EstadoEnemigoPegando(tipoDeSprite tipo);
     EstadoJugador* avanzar();
     EstadoJugador* parar();
-    EstadoJugador* pegar(tipoDeSprite tipo);
+    EstadoJugador* pegar();
     EstadoJugador* morir();
     EstadoJugador* serGolpeado();
     bool puedeMoverse();
