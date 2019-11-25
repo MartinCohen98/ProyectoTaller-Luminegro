@@ -11,34 +11,42 @@ EstadoJugadorApaleando::EstadoJugadorApaleando(tipoDeArma tipoArma) {
     frameDeDanio = true;
 }
 
+
 EstadoJugador* EstadoJugadorApaleando::avanzar() {
     return (apalear());
 }
+
 
 EstadoJugador* EstadoJugadorApaleando::parar() {
     return (apalear());
 }
 
+
 EstadoJugador* EstadoJugadorApaleando::agacharse() {
     return (apalear());
 }
+
 
 EstadoJugador* EstadoJugadorApaleando::pegar() {
     return (apalear());
 }
 
+
 EstadoJugador* EstadoJugadorApaleando::saltar() {
     return (apalear());
 }
+
 
 EstadoJugador* EstadoJugadorApaleando::morir(){
     delete this;
     return (new EstadoJugadorMuriendo(arma));
 }
 
+
 EstadoJugador* EstadoJugadorApaleando::acuchillar(){
     return (apalear());
 }
+
 
 EstadoJugador* EstadoJugadorApaleando::apalear(){
     if (!terminado()) {
@@ -54,10 +62,18 @@ EstadoJugador* EstadoJugadorApaleando::apalear(){
     }
 }
 
+
+EstadoJugador* EstadoJugadorApaleando::serGolpeado() {
+	delete this;
+	return (new EstadoJugadorGolpeado());
+}
+
+
 EstadoJugador* EstadoJugadorApaleando::congelarse() {
     delete this;
     return (new EstadoJugadorCongelado(arma));
 }
+
 
 bool EstadoJugadorApaleando::puedeMoverse() {
     return false;
@@ -67,7 +83,8 @@ bool EstadoJugadorApaleando::puedeMoverse() {
 bool EstadoJugadorApaleando::estaAtacando() {
 	bool retorno = frameDeDanio;
 	frameDeDanio = false;
-	return retorno;}
+	return retorno;
+}
 
 
 int EstadoJugadorApaleando::obtenerDanio() {

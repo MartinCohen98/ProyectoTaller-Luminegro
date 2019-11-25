@@ -24,10 +24,12 @@ EstadoJugadorAvanzando::EstadoJugadorAvanzando(tipoDeArma tipoArma) {
 	frameActual.modificar(0, posYframe, ancho, alto);
 }
 
+
 EstadoJugador* EstadoJugadorAvanzando::parar() {
 	delete this;
 	return (new EstadoJugadorParado(arma));
 }
+
 
 EstadoJugador* EstadoJugadorAvanzando::avanzar() {
 	framesTranscurridas++;
@@ -38,50 +40,59 @@ EstadoJugador* EstadoJugadorAvanzando::avanzar() {
 	return (this);
 }
 
+
 EstadoJugador* EstadoJugadorAvanzando::agacharse() {
 	delete this;
 	return (new EstadoJugadorAgachado(arma));
 }
+
 
 EstadoJugador* EstadoJugadorAvanzando::pegar() {
 	delete this;
 	return (new EstadoJugadorPegando(arma));
 }
 
+
 EstadoJugador* EstadoJugadorAvanzando::saltar() {
 	delete this;
 	return (new EstadoJugadorSaltando(arma));
 }
+
 
 EstadoJugador* EstadoJugadorAvanzando::morir(){
     delete this;
     return (new EstadoJugadorMuriendo(arma));
 }
 
+
 EstadoJugador* EstadoJugadorAvanzando::acuchillar(){
     delete this;
     return (new EstadoJugadorAcuchillando(arma));
 }
+
 
 EstadoJugador* EstadoJugadorAvanzando::apalear(){
     delete this;
     return (new EstadoJugadorApaleando(arma));
 }
 
+
 EstadoJugador* EstadoJugadorAvanzando::serGolpeado(){
 	delete this;
 	return (new EstadoJugadorGolpeado());
 }
 
+
 EstadoJugador* EstadoJugadorAvanzando::congelarse() {
     delete this;
-   // printf("Desconectado");
     return (new EstadoJugadorCongelado(arma));
 }
+
 
 bool EstadoJugadorAvanzando::estaAtacando(){
 	return false;
 }
+
 
 void EstadoJugadorAvanzando::cambiarFrame() {
 	if (numeroDeFrame == 5) {
@@ -91,6 +102,7 @@ void EstadoJugadorAvanzando::cambiarFrame() {
 	}
 	frameActual.modificar((ancho * numeroDeFrame), posYframe, ancho, alto);
 }
+
 
 EstadoJugadorAvanzando::~EstadoJugadorAvanzando() {}
 

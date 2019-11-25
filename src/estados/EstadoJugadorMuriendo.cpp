@@ -1,7 +1,3 @@
-//
-// Created by julio on 10/11/19.
-//
-
 #include "EstadoJugadorMuriendo.h"
 
 
@@ -23,27 +19,57 @@ EstadoJugador* EstadoJugadorMuriendo::parar() {
 	return (morir());
 }
 
+
 EstadoJugador* EstadoJugadorMuriendo::pegar() {
 	return (morir());
 }
+
 
 bool EstadoJugadorMuriendo::estaAtacando(){
 	return false;
 }
 
+
 EstadoJugador* EstadoJugadorMuriendo::morir() {
 	if (!terminado()) {
-      framesTranscurridas++;
-      if (framesTranscurridas == 4) {
-        framesTranscurridas = 0;
-        cambiarFrame();
-       }
-      return (this);
+		framesTranscurridas++;
+		if (framesTranscurridas == 4) {
+			framesTranscurridas = 0;
+			cambiarFrame();
+		}
+		return (this);
 	} else {
-	      delete this;
-	      return (new EstadoJugadorParado(arma));
-	    }
+		delete this;
+		return (new EstadoJugadorParado(arma));
+	}
 }
+
+
+EstadoJugador* EstadoJugadorMuriendo::agacharse() {
+	return morir();
+}
+
+
+EstadoJugador* EstadoJugadorMuriendo::acuchillar() {
+	return morir();
+}
+
+
+EstadoJugador* EstadoJugadorMuriendo::apalear() {
+	return morir();
+}
+
+
+EstadoJugador* EstadoJugadorMuriendo::saltar() {
+	return morir();
+}
+
+
+EstadoJugador* EstadoJugadorMuriendo::congelarse() {
+	delete this;
+	return (new EstadoJugadorCongelado(arma));
+}
+
 
 bool EstadoJugadorMuriendo::terminado() {
 	int framesLimite=3;
@@ -58,7 +84,6 @@ void EstadoJugadorMuriendo::cambiarFrame(){
         numeroDeFrame++;
     }
     frameActual.modificar((ancho * numeroDeFrame) + 35, 910, ancho, alto);
-
 }
 
 EstadoJugadorMuriendo::~EstadoJugadorMuriendo() {

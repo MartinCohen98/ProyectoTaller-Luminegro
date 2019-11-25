@@ -1,7 +1,3 @@
-//
-// Created by julio on 10/11/19.
-//
-
 #ifndef PROYECTOTALLER_LUMINEGRO_ESTADOJUGADORMURIENDO_H
 #define PROYECTOTALLER_LUMINEGRO_ESTADOJUGADORMURIENDO_H
 
@@ -18,6 +14,11 @@ public:
     EstadoJugador* avanzar();
     EstadoJugador* parar();
     EstadoJugador* pegar();
+	EstadoJugador* agacharse();
+    EstadoJugador* acuchillar();
+    EstadoJugador* apalear();
+	EstadoJugador* saltar();
+    EstadoJugador* congelarse();
     bool estaAtacando();
     bool terminado();
     virtual ~EstadoJugadorMuriendo();
