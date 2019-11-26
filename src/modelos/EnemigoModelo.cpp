@@ -187,11 +187,11 @@ void EnemigoModelo::trasladarse(int destinoX,int destinoY) {
         avanzarDiagArriba(destinoY);
 
     if (atras & alineado){
-    	if (subiendo)
+    	/*if (subiendo)
     	  retrocederDiagAbajo(destinoY);
     	else
-    	  retrocederDiagArriba(destinoY);
-    	//retroceder();
+    	  retrocederDiagArriba(destinoY);*/
+    	retroceder();
     }
     if (!atras & alineado)
        avanzar();
@@ -298,12 +298,12 @@ void EnemigoModelo::esquivar() {
 		}
 	}
 
-/*
-	switch(tiempoDeEsquivada){
+
+/*	switch(tiempoDeEsquivada){
 	    case 0:{
 	    	modoAnterior = modo;
 	    	modo = Esquivando;
-			if (avanzando)
+			if (yendoAdelante)
 			  retroceder();
 			else
 			  avanzar();
@@ -311,7 +311,7 @@ void EnemigoModelo::esquivar() {
 			break;
 		    }
 	    case 1:{
-	    	if (avanzando)
+	    	if (yendoAdelante)
 	    	  avanzar();
 	    	else
 	    	  retroceder();
@@ -339,7 +339,7 @@ void EnemigoModelo::esquivar() {
 	       break;
 	    	}
 	    case 9:{
-	    	if (!avanzando)
+	    	if (!yendoAdelante)
 	    	  avanzar();
 	    	else
 	    	  retroceder();
@@ -494,7 +494,7 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 			break;
 		}
 		case Esquivando:{
-			//esquivar();
+			esquivar();
 			break;
 		}
 		case Atacando:{
