@@ -23,6 +23,7 @@ EnemigoJefeModelo::EnemigoJefeModelo(int posXinicial, int posYinicial,FondoModel
 	activado = false;
 	estadoOriginal = new EstadoEnemigoParado(tipo);
 	actualizarInsercion();
+	delayDeGolpe = 0;
 }
 
 
