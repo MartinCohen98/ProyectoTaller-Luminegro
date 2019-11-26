@@ -378,6 +378,7 @@ bool EnemigoModelo::estaAtacando() {
 	return estado->estaAtacando();
 }
 
+
 bool EnemigoModelo::consultarSubiendo(){
     return subiendo;
 }
@@ -394,13 +395,18 @@ void EnemigoModelo::guardarPosicionesActuales() {
 
 int EnemigoModelo::recibirDanioDe(Colisionable* colisionable) {
 	int puntos = 0;
-	if (!estado->estaMuerto()) {
-		energia -= colisionable->obtenerDanio();
-		puntos = colisionable->obtenerPuntosDeGolpe();
-		serGolpeado();
-		if (energia <= 0) {
-			morir();
-			puntos += 500;
+	if ((colisionable->obtenerTipo() == Jugador1) ||
+			(colisionable->obtenerTipo() == Jugador2) ||
+			(colisionable->obtenerTipo() == Jugador3) ||
+			(colisionable->obtenerTipo() == Jugador4)) {
+		if (!estado->estaMuerto()) {
+			energia -= colisionable->obtenerDanio();
+			puntos = colisionable->obtenerPuntosDeGolpe();
+			serGolpeado();
+			if (energia <= 0) {
+				morir();
+				puntos += 500;
+			}
 		}
 	}
 	return puntos;
@@ -495,7 +501,6 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 	actualizarInsercion();
 	tipoDeSprite tipoColision;
 	if (colisionador->colisiona(this, &tipoColision)) {
-
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
         switch(tipoColision){

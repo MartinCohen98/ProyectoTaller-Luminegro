@@ -21,6 +21,7 @@ public:
 	virtual void sumarPuntos(int puntos);
 	virtual tipoDeArma obtenerTipoDeArma();
 	virtual void desaparecer();
+	virtual tipoDeSprite obtenerTipo();
 	tipoDeSprite consultarTipo();
 	virtual ~Colisionable();
 };

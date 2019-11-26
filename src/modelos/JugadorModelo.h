@@ -79,6 +79,7 @@ public:
 										Colisionador* colisionador);
 	bool llegoAlFin(FondoModelo *fondo);
 	void movidaDePantalla(FondoModelo* fondo);
+	bool puedeAtacarA(tipoDeSprite tipo);
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual,
 							int numeroSprite);
 	virtual ~JugadorModelo();

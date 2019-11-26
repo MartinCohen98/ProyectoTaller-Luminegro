@@ -182,18 +182,23 @@ tipoDeArma JugadorModelo::consultarArma(){
 }
 
 int JugadorModelo::recibirDanioDe(Colisionable* colisionable) {
-	if(!inmortal)
-		energia -= colisionable->obtenerDanio();
-	serGolpeado();
-	if (energia <= 0){
-		morir();
-		vidas--;
-		if (vidas>0)
-			energia = 100;
-		else {
-			derrotado = true;
-			congelarse();
-			desaparecer();
+	if ((colisionable->obtenerTipo() != Jugador1) &&
+				(colisionable->obtenerTipo() != Jugador2) &&
+				(colisionable->obtenerTipo() != Jugador3) &&
+				(colisionable->obtenerTipo() != Jugador4)) {
+		if(!inmortal)
+			energia -= colisionable->obtenerDanio();
+		serGolpeado();
+		if (energia <= 0){
+			morir();
+			vidas--;
+			if (vidas>0) {
+				energia = 100;
+			} else {
+				derrotado = true;
+				congelarse();
+				desaparecer();
+			}
 		}
 	}
 	return 0;
@@ -337,6 +342,15 @@ void JugadorModelo::movidaDePantalla(FondoModelo* fondo) {
 		if (posicionX < 0)
 			posicionX = 0;
 	}
+}
+
+
+bool JugadorModelo::puedeAtacarA(tipoDeSprite tipoSprite) {
+	if ((tipo == Jugador1) || (tipo == Jugador2) || (tipo == Jugador3)
+			|| (tipo == Jugador4)) {
+		return false;
+	}
+	return true;
 }
 
 
