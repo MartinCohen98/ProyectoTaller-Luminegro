@@ -63,6 +63,13 @@ EstadoJugador* EstadoJugadorSaltando::apalear(){
 		return nuevoEstado;
 }
 
+
+EstadoJugador* EstadoJugadorSaltando::serGolpeado() {
+	delete this;
+	return (new EstadoJugadorGolpeado(arma));
+}
+
+
 EstadoJugador* EstadoJugadorSaltando::congelarse() {
     delete this;
     return (new EstadoJugadorCongelado(arma));

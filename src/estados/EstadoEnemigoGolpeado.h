@@ -11,11 +11,11 @@ private:
 	bool palizaTerminada;
 public:
 	EstadoEnemigoGolpeado(tipoDeSprite tipo);
-	EstadoJugador* avanzar();
 	EstadoJugador* parar();
+	EstadoJugador* avanzar();
+	EstadoJugador* pegar();
 	EstadoJugador* serGolpeado();
 	EstadoJugador* morir();
-	EstadoJugador* pegar();
 	bool puedeMoverse();
 	virtual ~EstadoEnemigoGolpeado();
 };

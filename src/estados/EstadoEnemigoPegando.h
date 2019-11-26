@@ -14,11 +14,11 @@ private:
 
 public:
     EstadoEnemigoPegando(tipoDeSprite tipo);
-    EstadoJugador* avanzar();
     EstadoJugador* parar();
+    EstadoJugador* avanzar();
     EstadoJugador* pegar();
-    EstadoJugador* morir();
     EstadoJugador* serGolpeado();
+    EstadoJugador* morir();
     bool puedeMoverse();
     bool terminado();
     bool estaAtacando();

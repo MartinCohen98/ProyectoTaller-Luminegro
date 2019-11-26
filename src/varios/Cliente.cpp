@@ -4,6 +4,8 @@
 
 Cliente::Cliente() {
 	cantidadDeReceives = 0;
+	archiConfig = NULL;
+	sonidos = NULL;
 }
 
 int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig) {
@@ -407,6 +409,10 @@ void Cliente::recibirMensajes(GestorThreadsCliente* gestorThreads) {
 
 Cliente::~Cliente() {
 	socket.cerrar();
+	if ((sonidos != NULL) && sonidos->joinable()) {
+		sonidos->~thread();
+		delete sonidos;
+	}
 }
 
 

@@ -17,12 +17,12 @@ public:
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();
 	EstadoJugador* agacharse();
-	EstadoJugador* pegar();
 	EstadoJugador* saltar();
-    EstadoJugador* morir();
+	EstadoJugador* pegar();
     EstadoJugador* acuchillar();
     EstadoJugador* apalear();
     EstadoJugador* serGolpeado();
+    EstadoJugador* morir();
     EstadoJugador* congelarse();
     bool estaAtacando();
 	virtual ~EstadoJugadorAvanzando();

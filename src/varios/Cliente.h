@@ -32,26 +32,29 @@ private:
 	Imagen imagenDesconectado;
 	Imagen imagenEspera;
 	Textura texturaTransiciones;
-    std::thread* sonidos;
-    bool musicaFondoActiva = true;
-    bool ejecutarSonidoGolpeTiro = false;
-    bool ejecutarSonidoGolpeImpacto = false;
-    bool ejecutarSonidoSalto = false;
-    bool ejecutarSonidoCaida = false;
-    bool ejecutarSonidoDestruccion = false;
-    pugi::xml_document* archiConfig;
-
-    void renderizarFondo(VistaFondo* fondo, GestorThreadsCliente* gestorThreads);
-    void enviarInput(GestorThreadsCliente* gestorThreads);
-    void recibirCantidadDeReceives(GestorThreadsCliente* gestorThreads);
-    bool getTerminoElNivel(GestorThreadsCliente* gestorThreads);
-    void recibirMensajes(GestorThreadsCliente* gestorThreads);
+	std::thread* sonidos;
+	bool musicaFondoActiva = true;
+	bool ejecutarSonidoGolpeTiro = false;
+	bool ejecutarSonidoGolpeImpacto = false;
+	bool ejecutarSonidoSalto = false;
+	bool ejecutarSonidoCaida = false;
+	bool ejecutarSonidoDestruccion = false;
+	pugi::xml_document* archiConfig;
 
 public:
-	 Cliente();
-	 int inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig);
-	 int conectar(char* direccionIP, char* puerto);
-	 virtual ~Cliente();
+	Cliente();
+	int inicializar(char* direccionIP, char* puerto,
+			pugi::xml_document* archiConfig);
+	int conectar(char* direccionIP, char* puerto);
+	virtual ~Cliente();
+
+private:
+	void renderizarFondo(VistaFondo* fondo,
+			GestorThreadsCliente* gestorThreads);
+	void enviarInput(GestorThreadsCliente* gestorThreads);
+	void recibirCantidadDeReceives(GestorThreadsCliente* gestorThreads);
+	bool getTerminoElNivel(GestorThreadsCliente* gestorThreads);
+	void recibirMensajes(GestorThreadsCliente* gestorThreads);
 };
 
 #endif /* SRC_CLIENTE_H_ */

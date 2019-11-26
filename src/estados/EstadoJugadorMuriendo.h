@@ -10,16 +10,16 @@ private:
     bool caidaTerminada;
 public:
     EstadoJugadorMuriendo(tipoDeArma arma);
-    EstadoJugador* morir();
     EstadoJugador* avanzar();
     EstadoJugador* parar();
-    EstadoJugador* pegar();
 	EstadoJugador* agacharse();
+	EstadoJugador* saltar();
+    EstadoJugador* pegar();
     EstadoJugador* acuchillar();
     EstadoJugador* apalear();
-	EstadoJugador* saltar();
-    EstadoJugador* congelarse();
     EstadoJugador* serGolpeado();
+    EstadoJugador* morir();
+    EstadoJugador* congelarse();
     bool estaAtacando();
     bool terminado();
     virtual ~EstadoJugadorMuriendo();
