@@ -1,17 +1,15 @@
 #include "EnemigoJefeModelo.h"
 
-EnemigoJefeModelo::EnemigoJefeModelo() {}
-
 EnemigoJefeModelo::EnemigoJefeModelo(int posXinicial, int posYinicial,FondoModelo* fondoNuevo){
 	posicionX = posXinicial;
 	posicionY = posYinicial;
 	ancho = 180;
 	alto = 360;
-	escaladoDeSprite = 2.3;
+	escaladoDeSprite = 3;
 	energia = 500;
 	fondo = fondoNuevo;
-	bordeSuperior = 160;
-	bordeInferior = 300;
+	bordeSuperior = 60;
+	bordeInferior = 200;
 	limiteInicial = 0;
 	limiteFinal = fondo->obtenerAncho();
 	tipo = EnemigoJefe;
