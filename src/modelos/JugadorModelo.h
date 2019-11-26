@@ -73,6 +73,7 @@ public:
 	void activarModoTest();
 	void desactivarModoTest();
 	tipoDeArma consultarArma();
+	bool consultarDerrotado();
 	int recibirDanioDe(Colisionable* colisionable);
 	void realizarMovimientos(FondoModelo* fondo, bool rezagado,
 										Colisionador* colisionador);

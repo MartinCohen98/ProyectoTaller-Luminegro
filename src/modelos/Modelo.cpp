@@ -48,6 +48,7 @@ void Modelo::realzarMovimientos() {
 		protagonistas->dejarDeGolpear();
 	}
 	protagonistas->realizarMovimientos(fondo, colisionador);
+	enemigos->buscarObjetivos(protagonistas);
 	enemigos->realizarMovimientos(protagonistas, colisionador);
 	objetos->actualizarPosiciones();
 	objetos->actualizar();

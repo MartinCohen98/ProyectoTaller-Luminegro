@@ -199,6 +199,10 @@ int JugadorModelo::recibirDanioDe(Colisionable* colisionable) {
 	return 0;
 }
 
+bool JugadorModelo::consultarDerrotado(){
+	return derrotado;
+}
+
 bool JugadorModelo::moverEnY() {
 	bool seMovio = false;
 	int movimiento = movimientoEnY;
