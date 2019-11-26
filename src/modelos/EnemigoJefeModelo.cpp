@@ -10,8 +10,8 @@ EnemigoJefeModelo::EnemigoJefeModelo(int posXinicial, int posYinicial,FondoModel
 	escaladoDeSprite = 2.7;
 	energia = 500;
 	fondo = fondoNuevo;
-	bordeSuperior = 100;
-	bordeInferior = 240;
+	bordeSuperior = 60;
+	bordeInferior = 200;
 	limiteInicial = 0;
 	limiteFinal = fondo->obtenerAncho();
 	tipo = EnemigoJefe;

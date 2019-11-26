@@ -186,8 +186,13 @@ void EnemigoModelo::trasladarse(int destinoX,int destinoY) {
     if (!atras & !abajo & !alineado)
         avanzarDiagArriba(destinoY);
 
-    if (atras & alineado)
-       retroceder();
+    if (atras & alineado){
+    	if (subiendo)
+    	  retrocederDiagAbajo(destinoY);
+    	else
+    	  retrocederDiagArriba(destinoY);
+    	//retroceder();
+    }
     if (!atras & alineado)
        avanzar();
 
@@ -226,7 +231,7 @@ void EnemigoModelo::patrullar(){
 		}
 		if (esAtacante){
 			tiempoDeGolpe++;
-			if(tiempoDeGolpe == 40){
+			if(tiempoDeGolpe == 20){
 				cambiarModo(Atacando);
 				tiempoDeGolpe = 0;
 			}
@@ -278,8 +283,18 @@ void EnemigoModelo::esquivar() {
 		}
 		if (yendoAdelante) {
 			retroceder();
+			if (subiendo){
+			   bajar();
+			} else {
+			   subir();
+			  }
 		} else {
 		    avanzar();
+		    if (subiendo){
+		       bajar();
+		    } else {
+		       subir();
+		      }
 		}
 	}
 

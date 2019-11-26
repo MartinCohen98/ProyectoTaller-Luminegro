@@ -1,3 +1,4 @@
+
 #include "EstadoEnemigoPegando.h"
 
 EstadoEnemigoPegando::EstadoEnemigoPegando(tipoDeSprite tipoNuevo) {
@@ -114,4 +115,3 @@ void EstadoEnemigoPegando::cambiarFrame() {
 
 
 EstadoEnemigoPegando::~EstadoEnemigoPegando() {}
-
