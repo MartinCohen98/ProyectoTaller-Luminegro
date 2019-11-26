@@ -409,10 +409,8 @@ void Cliente::recibirMensajes(GestorThreadsCliente* gestorThreads) {
 
 Cliente::~Cliente() {
 	socket.cerrar();
-	if ((sonidos != NULL) && sonidos->joinable()) {
-		sonidos->~thread();
+	if (sonidos != NULL)
 		delete sonidos;
-	}
 }
 
 

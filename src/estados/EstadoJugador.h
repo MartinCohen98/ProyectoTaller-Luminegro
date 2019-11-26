@@ -39,7 +39,7 @@ public:
 	virtual int obtenerPuntosDeGolpe();
 	virtual bool estaMuerto();
 	void asignarArma(tipoDeArma tipoDeArma);
-	int obtenerAlto();
+	virtual int obtenerAlto();
 	int obtenerAncho();
 	virtual ~EstadoJugador();
 };

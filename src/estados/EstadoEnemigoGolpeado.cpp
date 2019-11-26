@@ -32,7 +32,7 @@ EstadoJugador* EstadoEnemigoGolpeado::pegar() {
 
 
 EstadoJugador* EstadoEnemigoGolpeado::serGolpeado() {
-	int framesLimite = 20;
+	int framesLimite = 15;
     if (framesTranscurridas < framesLimite) {
         framesTranscurridas++;
         return (this);

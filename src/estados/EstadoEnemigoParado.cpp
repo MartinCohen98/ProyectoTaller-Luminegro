@@ -6,7 +6,7 @@ EstadoEnemigoParado::EstadoEnemigoParado(tipoDeSprite tipoNuevo) {
 	alto = 78;
 	if (tipo == EnemigoJefe) {
 		ancho = 90;
-		alto = 150;
+		alto = 130;
 	}
 	frameActual.modificar(0, 0, ancho, alto);
 }

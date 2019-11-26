@@ -6,9 +6,9 @@ EstadoEnemigoPegando::EstadoEnemigoPegando(tipoDeSprite tipoNuevo) {
 	alto = 80;
 	frameActual.modificar(0, alto, ancho, alto);
 	if (tipo == EnemigoJefe) {
-		ancho = 115;
-		alto = 125;
-		frameActual.modificar(0, 140, ancho, alto);
+		ancho = 120;
+		alto = 110;
+		frameActual.modificar(0, 135, ancho, alto);
 	}
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;
@@ -29,6 +29,8 @@ EstadoJugador* EstadoEnemigoPegando::avanzar() {
 
 EstadoJugador* EstadoEnemigoPegando::pegar() {
 	int framesLimite = 5;
+	if (tipo == EnemigoJefe)
+		framesLimite = 3;
 	if (!terminado()) {
 		framesTranscurridas++;
 		if (framesTranscurridas == framesLimite) {
@@ -63,7 +65,7 @@ bool EstadoEnemigoPegando::puedeMoverse() {
 bool EstadoEnemigoPegando::terminado() {
 	int framesLimite = 1;
 	if (tipo == EnemigoJefe) {
-		framesLimite = 3;
+		framesLimite = 2;
 	}
 	return ((numeroDeFrame == 0) && (framesTranscurridas == framesLimite)
 			&& golpeTerminado);
@@ -79,6 +81,14 @@ bool EstadoEnemigoPegando::estaAtacando() {
 
 int EstadoEnemigoPegando::obtenerDanio() {
 	return 20;
+}
+
+
+int EstadoEnemigoPegando::obtenerAlto() {
+	int diferenciaDeY = 0;
+	if (tipo == EnemigoJefe)
+		diferenciaDeY = 20;
+	return (alto + diferenciaDeY);
 }
 
 
@@ -98,6 +108,9 @@ void EstadoEnemigoPegando::cambiarFrame() {
 		frameActual.modificar((ancho * numeroDeFrame), 140, ancho, alto);
 	}
 }
+
+
+
 
 
 EstadoEnemigoPegando::~EstadoEnemigoPegando() {}

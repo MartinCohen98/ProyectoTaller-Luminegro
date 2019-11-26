@@ -7,7 +7,7 @@ EnemigoJefeModelo::EnemigoJefeModelo(int posXinicial, int posYinicial,FondoModel
 	posicionY = posYinicial;
 	ancho = 180;
 	alto = 360;
-	escaladoDeSprite=2.7;
+	escaladoDeSprite = 2.7;
 	energia = 500;
 	fondo = fondoNuevo;
 	bordeSuperior = 100;
@@ -18,11 +18,11 @@ EnemigoJefeModelo::EnemigoJefeModelo(int posXinicial, int posYinicial,FondoModel
 	estado = new EstadoEnemigoParado(tipo);
 	dadoVuelta = false;
 	subiendo = false;
-	tiempoDeGolpe=0;
-	tiempoDeEsquivada=0;
-	vivo=true;
-	esAtacante=true;
-	activado=false;
+	tiempoDeGolpe = 0;
+	tiempoDeEsquivada = 0;
+	vivo = true;
+	esAtacante = true;
+	activado = false;
 	estadoOriginal = new EstadoEnemigoParado(tipo);
 	actualizarInsercion();
 }

@@ -23,6 +23,7 @@ public:
     bool terminado();
     bool estaAtacando();
     int obtenerDanio();
+    int obtenerAlto();
     virtual ~EstadoEnemigoPegando();
 
 private:
