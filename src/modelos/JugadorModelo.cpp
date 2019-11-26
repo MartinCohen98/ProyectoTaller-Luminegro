@@ -192,6 +192,7 @@ int JugadorModelo::recibirDanioDe(Colisionable* colisionable) {
 			energia = 100;
 		else {
 			derrotado = true;
+			congelarse();
 			desaparecer();
 		}
 	}
