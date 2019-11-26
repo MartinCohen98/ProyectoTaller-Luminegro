@@ -7,6 +7,7 @@ EstadoJugador::EstadoJugador() {
 	arma = desarmado;
 }
 
+
 EstadoJugador::EstadoJugador(int ancho,int alto){
 	this->alto = alto;
 	this->ancho = ancho;
@@ -14,45 +15,56 @@ EstadoJugador::EstadoJugador(int ancho,int alto){
 	arma = desarmado;
 }
 
+
 Encuadre EstadoJugador::obtenerSprite() {
 	return frameActual;
 }
+
 
 EstadoJugador* EstadoJugador::avanzar() {
 	return NULL;
 }
 
+
 EstadoJugador* EstadoJugador::parar() {
 	return NULL;
 }
+
 
 EstadoJugador* EstadoJugador::agacharse() {
 	return NULL;
 }
 
+
 EstadoJugador* EstadoJugador::pegar() {
 	return NULL;
 }
+
 
 EstadoJugador* EstadoJugador::saltar() {
 	return NULL;
 }
 
+
 EstadoJugador* EstadoJugador::congelarse() {
     return NULL;
 }
+
 
 EstadoJugador* EstadoJugador::morir(){
     return NULL;
 }
 
+
 EstadoJugador* EstadoJugador::acuchillar(){
     return NULL;
 }
 
+
 EstadoJugador* EstadoJugador::apalear(){
     return NULL;
 }
+
 
 EstadoJugador* EstadoJugador::serGolpeado(){
     return NULL;
@@ -73,9 +85,11 @@ bool EstadoJugador::estaPateando() {
 	return false;
 }
 
+
 bool EstadoJugador::terminado() {
 	return false;
 }
+
 
 int EstadoJugador::obtenerElevacion() {
 	return 0;
@@ -106,9 +120,11 @@ int EstadoJugador::obtenerPuntosDeGolpe() {
 	return 0;
 }
 
+
 bool EstadoJugador::estaMuerto(){
 	return false;
 }
+
 
 void EstadoJugador::asignarArma(tipoDeArma tipoDeArma) {
 	arma = tipoDeArma;
@@ -116,3 +132,4 @@ void EstadoJugador::asignarArma(tipoDeArma tipoDeArma) {
 
 
 EstadoJugador::~EstadoJugador() {}
+

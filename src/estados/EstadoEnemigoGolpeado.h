@@ -5,10 +5,12 @@
 #include "EstadoEnemigoMuriendo.h"
 
 class EstadoEnemigoGolpeado: public EstadoJugador  {
+
 private:
 	int framesTranscurridas;
 	int numeroDeFrame;
 	bool palizaTerminada;
+
 public:
 	EstadoEnemigoGolpeado(tipoDeSprite tipo);
 	EstadoJugador* parar();

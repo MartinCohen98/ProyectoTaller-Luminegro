@@ -10,6 +10,7 @@
 #include "../comunicacion/MensajeServidor.h"
 
 class EstadoEnemigoParado: public EstadoJugador {
+
 public:
     EstadoEnemigoParado(tipoDeSprite tipo);
 	EstadoJugador* parar();

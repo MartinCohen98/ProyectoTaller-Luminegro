@@ -4,10 +4,12 @@
 #include "EstadoJugadorParado.h"
 
 class EstadoEnemigoMuriendo: public EstadoJugador {
+
 private:
     int framesTranscurridas;
     int numeroDeFrame;
     bool caidaTerminada;
+
 public:
     EstadoEnemigoMuriendo(tipoDeSprite tipo);
     EstadoJugador* parar();
