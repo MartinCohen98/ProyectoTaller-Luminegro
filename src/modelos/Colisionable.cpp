@@ -18,6 +18,11 @@ int Colisionable::obtenerDanio() {
 }
 
 
+tipoDeSprite Colisionable::obtenerTipo() {
+	return tipo;
+}
+
+
 int Colisionable::obtenerPuntosDeGolpe() {
 	return 0;
 }

@@ -30,7 +30,7 @@ bool Colisionador::colisiona(Colisionable* colisionable, tipoDeSprite* tipoColis
 							(*it)->obtenerInsercion())) {
 				colisiona = true;
 				*tipoColision = (*it)->consultarTipo();
-				if (estaAtacando){
+				if (estaAtacando) {
 					puntos = (*it)->recibirDanioDe(colisionable);
 				    colisionable->sumarPuntos(puntos);
 				}

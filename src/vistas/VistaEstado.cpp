@@ -4,7 +4,8 @@
 VistaEstado::VistaEstado(Renderizador *renderizador, pugi::xml_document *archiConfig, int maxVida, std::string nombreJugador, int numeroJugador) {
     this->renderizador = renderizador;
     this->maxVida = maxVida;
-
+    superficieTxt = NULL;
+    fuenteRelleno = NULL;
     if(9 > nombreJugador.size())
         nombreJugador.append(9 - nombreJugador.size(), ' ');
     this->nombreJugador = nombreJugador;
