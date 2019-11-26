@@ -186,15 +186,17 @@ void EnemigoModelo::trasladarse(int destinoX,int destinoY) {
     if (!atras & !abajo & !alineado)
         avanzarDiagArriba(destinoY);
 
-    if (atras & alineado){
-    	/*if (subiendo)
-    	  retrocederDiagAbajo(destinoY);
-    	else
-    	  retrocederDiagArriba(destinoY);*/
-    	retroceder();
-    }
-    if (!atras & alineado)
-       avanzar();
+    if (alineado){
+    	if (!atras)
+           avanzar();
+    	else{
+    		dadoVuelta = true;
+    		estado = estado->avanzar();
+    		moverEnX(-5);
+    		yendoAdelante = false;
+    		actualizarInsercion();
+    	}
+      }
 
     if (posicionY == bordeSuperior)
        bajar();

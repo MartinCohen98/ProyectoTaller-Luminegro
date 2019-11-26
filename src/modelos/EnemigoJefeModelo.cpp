@@ -7,11 +7,11 @@ EnemigoJefeModelo::EnemigoJefeModelo(int posXinicial, int posYinicial,FondoModel
 	posicionY = posYinicial;
 	ancho = 180;
 	alto = 360;
-	escaladoDeSprite = 2.7;
+	escaladoDeSprite = 2.3;
 	energia = 500;
 	fondo = fondoNuevo;
-	bordeSuperior = 60;
-	bordeInferior = 200;
+	bordeSuperior = 160;
+	bordeInferior = 300;
 	limiteInicial = 0;
 	limiteFinal = fondo->obtenerAncho();
 	tipo = EnemigoJefe;
