@@ -10,6 +10,7 @@ class ControlEnemigosModelo {
 private:
 	EnemigoModelo **enemigos;
 	int enemigosCantidad;
+	int ciclosDeBusqueda;
 
 public:
 	ControlEnemigosModelo(int nivel,FondoModelo* fondo);

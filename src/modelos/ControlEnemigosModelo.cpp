@@ -26,6 +26,8 @@ ControlEnemigosModelo::ControlEnemigosModelo(int nivel, FondoModelo* fondo) {
 		enemigos[6] = new EnemigoModelo(3500, 280, Enemigo2, fondo);
 		enemigos[7] = new EnemigoJefeModelo(4000, 220, fondo);
 	}
+
+	ciclosDeBusqueda = 0;
 }
 
 int ControlEnemigosModelo::obtenerCantidad() {
@@ -85,7 +87,12 @@ void ControlEnemigosModelo::buscarObjetivos(ControlJugadoresModelo *jugadores){
    int distancia, distAux;
    int i,j;
 
-   if (jugadores->consultarCantidadJugadores()>1){
+
+   if (ciclosDeBusqueda==20)
+	   ciclosDeBusqueda = 0;
+
+
+   if (jugadores->consultarCantidadJugadores()>1 & ciclosDeBusqueda==0){
 
    for(i = 0; i < enemigosCantidad; i++){
 	distAux = 0;
@@ -109,12 +116,14 @@ void ControlEnemigosModelo::buscarObjetivos(ControlJugadoresModelo *jugadores){
 
    }
 
-   if (jugadores->consultarCantidadJugadores()==1){
+   if (jugadores->consultarCantidadJugadores()==1 & ciclosDeBusqueda==0){
    for (i=0;i<enemigosCantidad;i++){
        enemigo = darEnemigo(i);
        enemigo->asignarObjetivo(jugadores->darJugador(0));
      }
    }
+
+   ciclosDeBusqueda++;
 }
 
 void ControlEnemigosModelo::matar(){

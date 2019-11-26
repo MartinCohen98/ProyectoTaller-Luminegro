@@ -7,8 +7,8 @@ EstadoEnemigoPegando::EstadoEnemigoPegando(tipoDeSprite tipoNuevo) {
 	switch (tipo) {
 	case EnemigoJefe: {
 		ancho = 115;
-		alto = 125;
-		frameActual.modificar(0, 140, ancho, alto);
+		alto = 130;
+		frameActual.modificar(0, alto, ancho, alto);
 	}
 	case Enemigo1:
 	case Enemigo2:
@@ -110,7 +110,7 @@ void EstadoEnemigoPegando::cambiarFrame() {
 
 	switch (tipo) {
 		case EnemigoJefe: {
-			frameActual.modificar((ancho * numeroDeFrame), 140, ancho, alto);
+			frameActual.modificar((ancho * numeroDeFrame), alto, ancho, alto);
 			break;
 		}
 		case Enemigo1:

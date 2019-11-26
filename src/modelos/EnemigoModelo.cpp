@@ -275,8 +275,18 @@ void EnemigoModelo::esquivar() {
 		}
 		if (yendoAdelante) {
 			retroceder();
+			if (subiendo){
+			   bajar();
+			} else {
+			   subir();
+			  }
 		} else {
 		    avanzar();
+		    if (subiendo){
+		       bajar();
+		    } else {
+		       subir();
+		      }
 		}
 	}
 
