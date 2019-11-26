@@ -7,29 +7,34 @@ EstadoEnemigoMuriendo::EstadoEnemigoMuriendo(tipoDeSprite tipoNuevo) {
 	frameActual.modificar(0, 170, ancho, alto);
     if (tipo == EnemigoJefe) {
        	  ancho = 135;
-       	  alto = 100;
-       	  frameActual.modificar(0, 300, ancho, alto);
+       	  alto = 130;
+       	  frameActual.modificar(0, 270, ancho, alto);
 	}
     framesTranscurridas = 0;
     numeroDeFrame = 0;
     caidaTerminada = false;
 }
 
-EstadoJugador* EstadoEnemigoMuriendo::avanzar() {
-    return (morir());
-}
 
 EstadoJugador* EstadoEnemigoMuriendo::parar() {
     return (morir());
 }
 
+
+EstadoJugador* EstadoEnemigoMuriendo::avanzar() {
+    return (morir());
+}
+
+
 EstadoJugador* EstadoEnemigoMuriendo::pegar() {
     return (morir());
 }
 
+
 EstadoJugador* EstadoEnemigoMuriendo::serGolpeado() {
 	return (morir());
 }
+
 
 EstadoJugador* EstadoEnemigoMuriendo::morir() {
 	int framesLimite = 4;
@@ -56,7 +61,8 @@ bool EstadoEnemigoMuriendo::terminado() {
 	return caidaTerminada;
 }
 
-void EstadoEnemigoMuriendo::cambiarFrame(){
+
+void EstadoEnemigoMuriendo::cambiarFrame() {
 	int framesLimite = 3;
 	if (tipo == EnemigoJefe) {
 		framesLimite = 5;
@@ -69,7 +75,7 @@ void EstadoEnemigoMuriendo::cambiarFrame(){
     }
 	frameActual.modificar((ancho * numeroDeFrame), 170, ancho, alto);
     if (tipo == EnemigoJefe) {
-    	int posY = 300;
+    	int posY = 270;
     	int corrimiento = 0;
     	if (framesLimite == 3) {
     		posY = 400;
@@ -80,10 +86,11 @@ void EstadoEnemigoMuriendo::cambiarFrame(){
 	}
 }
 
+
 bool EstadoEnemigoMuriendo::estaMuerto(){
 	return true;
 }
 
-EstadoEnemigoMuriendo::~EstadoEnemigoMuriendo() {
 
-}
+EstadoEnemigoMuriendo::~EstadoEnemigoMuriendo() {}
+

@@ -1,32 +1,20 @@
+
 #include "EstadoEnemigoPegando.h"
 
 EstadoEnemigoPegando::EstadoEnemigoPegando(tipoDeSprite tipoNuevo) {
-
 	tipo = tipoNuevo;
-
-	switch (tipo) {
-	case EnemigoJefe: {
-		ancho = 115;
-		alto = 130;
-		frameActual.modificar(0, alto, ancho, alto);
+	ancho = 70;
+	alto = 80;
+	frameActual.modificar(0, alto, ancho, alto);
+	if (tipo == EnemigoJefe) {
+		ancho = 120;
+		alto = 110;
+		frameActual.modificar(0, 135, ancho, alto);
 	}
-	case Enemigo1:
-	case Enemigo2:
-	case Enemigo3: {
-		ancho = 70;
-		alto = 80;
-		frameActual.modificar(0, alto, ancho, alto);
-	}
-	}
-
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;
 	golpeTerminado = false;
 	frameDeDanio = true;
-}
-
-EstadoJugador* EstadoEnemigoPegando::avanzar() {
-	return (pegar());
 }
 
 
@@ -35,8 +23,15 @@ EstadoJugador* EstadoEnemigoPegando::parar() {
 }
 
 
+EstadoJugador* EstadoEnemigoPegando::avanzar() {
+	return (pegar());
+}
+
+
 EstadoJugador* EstadoEnemigoPegando::pegar() {
 	int framesLimite = 5;
+	if (tipo == EnemigoJefe)
+		framesLimite = 3;
 	if (!terminado()) {
 		framesTranscurridas++;
 		if (framesTranscurridas == framesLimite) {
@@ -69,57 +64,14 @@ bool EstadoEnemigoPegando::puedeMoverse() {
 
 
 bool EstadoEnemigoPegando::terminado() {
-	int framesLimite;
-	switch (tipo) {
-	case EnemigoJefe: {
-		framesLimite = 3;
-		break;
-	}
-	case Enemigo1:
-	case Enemigo2:
-	case Enemigo3: {
-		framesLimite = 1;
-		break;
-	}
+	int framesLimite = 1;
+	if (tipo == EnemigoJefe) {
+		framesLimite = 2;
 	}
 	return ((numeroDeFrame == 0) && (framesTranscurridas == framesLimite)
 			&& golpeTerminado);
 }
 
-
-void EstadoEnemigoPegando::cambiarFrame() {
-	int framesLimite = 1;
-	switch (tipo) {
-	case EnemigoJefe: {
-		framesLimite = 3;
-		break;
-	}
-	case Enemigo1:
-	case Enemigo2:
-	case Enemigo3: {
-		framesLimite = 1;
-		break;
-	}
-	}
-	if (numeroDeFrame == framesLimite) {
-		golpeTerminado = true;
-		numeroDeFrame = 0;
-	} else {
-		numeroDeFrame++;
-	}
-
-	switch (tipo) {
-		case EnemigoJefe: {
-			frameActual.modificar((ancho * numeroDeFrame), alto, ancho, alto);
-			break;
-		}
-		case Enemigo1:
-		case Enemigo2:
-		case Enemigo3: {
-			frameActual.modificar((ancho * numeroDeFrame), alto, ancho, alto);
-		}
-	}
-}
 
 bool EstadoEnemigoPegando::estaAtacando() {
 	bool retorno = frameDeDanio;
@@ -127,8 +79,39 @@ bool EstadoEnemigoPegando::estaAtacando() {
 	return retorno;
 }
 
+
 int EstadoEnemigoPegando::obtenerDanio() {
 	return 20;
 }
+
+
+int EstadoEnemigoPegando::obtenerAlto() {
+	int diferenciaDeY = 0;
+	if (tipo == EnemigoJefe)
+		diferenciaDeY = 20;
+	return (alto + diferenciaDeY);
+}
+
+
+void EstadoEnemigoPegando::cambiarFrame() {
+	int framesLimite = 1;
+	if (tipo == EnemigoJefe) {
+		framesLimite = 3;
+	}
+	if (numeroDeFrame == framesLimite) {
+		golpeTerminado = true;
+		numeroDeFrame = 0;
+	} else {
+		numeroDeFrame++;
+	}
+	frameActual.modificar((ancho * numeroDeFrame), alto, ancho, alto);
+	if (tipo == EnemigoJefe) {
+		frameActual.modificar((ancho * numeroDeFrame), 140, ancho, alto);
+	}
+}
+
+
+
+
 
 EstadoEnemigoPegando::~EstadoEnemigoPegando() {}

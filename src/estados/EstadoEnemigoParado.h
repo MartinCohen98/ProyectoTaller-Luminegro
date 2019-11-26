@@ -10,13 +10,14 @@
 #include "../comunicacion/MensajeServidor.h"
 
 class EstadoEnemigoParado: public EstadoJugador {
+
 public:
     EstadoEnemigoParado(tipoDeSprite tipo);
 	EstadoJugador* parar();
 	EstadoJugador* avanzar();
     EstadoJugador* pegar();
-    EstadoJugador* morir();
     EstadoJugador* serGolpeado();
+    EstadoJugador* morir();
     bool puedeMoverse();
 	virtual ~EstadoEnemigoParado();
 };

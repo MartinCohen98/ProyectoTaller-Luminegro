@@ -186,8 +186,13 @@ void EnemigoModelo::trasladarse(int destinoX,int destinoY) {
     if (!atras & !abajo & !alineado)
         avanzarDiagArriba(destinoY);
 
-    if (atras & alineado)
-       retroceder();
+    if (atras & alineado){
+    	if (subiendo)
+    	  retrocederDiagAbajo(destinoY);
+    	else
+    	  retrocederDiagArriba(destinoY);
+    	//retroceder();
+    }
     if (!atras & alineado)
        avanzar();
 
@@ -226,7 +231,7 @@ void EnemigoModelo::patrullar(){
 		}
 		if (esAtacante){
 			tiempoDeGolpe++;
-			if(tiempoDeGolpe == 40){
+			if(tiempoDeGolpe == 20){
 				cambiarModo(Atacando);
 				tiempoDeGolpe = 0;
 			}
@@ -246,6 +251,9 @@ int EnemigoModelo::consultarJugadorObjetivo(){
 
 void EnemigoModelo::atacar() {
 	if (modo == Atacando){
+		int diferenciaDeY = 20;
+		if (tipo == EnemigoJefe)
+			diferenciaDeY = -80;
 		esAtacante = true;
 		int x, y;
 		x = objetivo->darPosicionX();
@@ -259,9 +267,9 @@ void EnemigoModelo::atacar() {
 	     pegando = false;
 	}*/
 		if (yendoAdelante) {
-			trasladarse(x - 110, y + 20);
+			trasladarse(x - 110, y + diferenciaDeY);
 		} else {
-			trasladarse(x + 110, y + 20);
+			trasladarse(x + 110, y + diferenciaDeY);
 		}
 	}
 }

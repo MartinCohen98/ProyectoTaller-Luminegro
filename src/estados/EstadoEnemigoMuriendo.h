@@ -4,17 +4,19 @@
 #include "EstadoJugadorParado.h"
 
 class EstadoEnemigoMuriendo: public EstadoJugador {
+
 private:
     int framesTranscurridas;
     int numeroDeFrame;
     bool caidaTerminada;
+
 public:
     EstadoEnemigoMuriendo(tipoDeSprite tipo);
-    EstadoJugador* avanzar();
     EstadoJugador* parar();
+    EstadoJugador* avanzar();
     EstadoJugador* pegar();
-    EstadoJugador* morir();
     EstadoJugador* serGolpeado();
+    EstadoJugador* morir();
     bool puedeMoverse();
     bool terminado();
     bool estaMuerto();

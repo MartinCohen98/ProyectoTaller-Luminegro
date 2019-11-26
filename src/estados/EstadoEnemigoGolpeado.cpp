@@ -1,40 +1,38 @@
 #include "EstadoEnemigoGolpeado.h"
 
-EstadoEnemigoGolpeado::EstadoEnemigoGolpeado(tipoDeSprite tipoNuevo){
-
+EstadoEnemigoGolpeado::EstadoEnemigoGolpeado(tipoDeSprite tipoNuevo) {
 	tipo = tipoNuevo;
-
-	switch (tipo){
-	case EnemigoJefe:{
+	ancho = 50;
+	alto = 80;
+	frameActual.modificar(60, 170, ancho, alto);
+	if (tipo == EnemigoJefe) {
     	ancho = 90;
     	alto = 130;
     	frameActual.modificar(50, 270, ancho, alto);
-    	break;
-	}
-	case Enemigo1:
-	case Enemigo2:
-	case Enemigo3:{
-		ancho = 50;
-		alto = 80;
-		frameActual.modificar(60, 170, ancho, alto);
-		break;
-	}
 	}
 	framesTranscurridas = 0;
 	numeroDeFrame = 0;
 	palizaTerminada = false;
 }
 
-EstadoJugador* EstadoEnemigoGolpeado::avanzar() {
-    return (serGolpeado());
-}
 
 EstadoJugador* EstadoEnemigoGolpeado::parar() {
     return (serGolpeado());
 }
 
+
+EstadoJugador* EstadoEnemigoGolpeado::avanzar() {
+    return (serGolpeado());
+}
+
+
+EstadoJugador* EstadoEnemigoGolpeado::pegar() {
+	return (serGolpeado());
+}
+
+
 EstadoJugador* EstadoEnemigoGolpeado::serGolpeado() {
-	int framesLimite = 20;
+	int framesLimite = 15;
     if (framesTranscurridas < framesLimite) {
         framesTranscurridas++;
         return (this);
@@ -44,14 +42,10 @@ EstadoJugador* EstadoEnemigoGolpeado::serGolpeado() {
     }
 }
 
+
 EstadoJugador* EstadoEnemigoGolpeado::morir() {
     delete this;
     return (new EstadoEnemigoMuriendo(tipo));
-}
-
-
-EstadoJugador* EstadoEnemigoGolpeado::pegar() {
-	return (serGolpeado());
 }
 
 

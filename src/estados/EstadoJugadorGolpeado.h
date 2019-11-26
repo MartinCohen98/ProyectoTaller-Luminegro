@@ -12,15 +12,15 @@ private:
 
 public:
 	EstadoJugadorGolpeado(tipoDeArma arma);
-	EstadoJugador* avanzar();
 	EstadoJugador* parar();
-	EstadoJugador* serGolpeado();
-	EstadoJugador* morir();
+	EstadoJugador* avanzar();
 	EstadoJugador* agacharse();
+	EstadoJugador* saltar();
 	EstadoJugador* pegar();
     EstadoJugador* acuchillar();
     EstadoJugador* apalear();
-	EstadoJugador* saltar();
+	EstadoJugador* serGolpeado();
+	EstadoJugador* morir();
     EstadoJugador* congelarse();
 	bool estaAtacando();
 	bool puedeMoverse();
