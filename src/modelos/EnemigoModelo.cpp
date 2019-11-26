@@ -492,9 +492,7 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
 	actualizarInsercion();
 	tipoDeSprite tipoColision;
 	if (colisionador->colisiona(this, &tipoColision)) {
-        if (ejecutarSonidoGolpeTiro) {
-            ejecutarSonidoGolpeImpacto = true;
-        }
+
 		posicionX = posicionXAnterior;
 		posicionY = posicionYAnterior;
         switch(tipoColision){
@@ -514,9 +512,10 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
         			delayDeGolpe++;
         			if (tiempoDeGolpe == 0 && delayDeGolpe >= 10){
         				pegar();
-        				delayDeGolpe = 0;
-        				cambiarModo(Patrullando);
-        		    }
+        				if (ejecutarSonidoGolpeTiro)  ejecutarSonidoGolpeImpacto = true;
+                        delayDeGolpe = 0;
+                        cambiarModo(Patrullando);
+                    }
         			tiempoDeGolpe++;
         			if (tiempoDeGolpe == 4)
         				tiempoDeGolpe = 0;
