@@ -193,6 +193,16 @@ void ControlJugadoresModelo::desconectar(int jugador) {
 	jugadores[jugador]->congelarse();
 }
 
+bool ControlJugadoresModelo::consultarTodosMuertos(){
+	bool todosMuertos = false;
+	int j=0;
+	for (int i = 0; i < cantidadJugadores; i++)
+		if (jugadores[i]->consultarDerrotado())
+			j++;
+	if (j==cantidadJugadores)
+        todosMuertos = true;
+	return todosMuertos;
+}
 
 void ControlJugadoresModelo::conectar(int jugador) {
 	jugadores[jugador]->descongelarse();
