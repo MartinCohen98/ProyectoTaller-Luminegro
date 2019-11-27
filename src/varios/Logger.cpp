@@ -74,13 +74,12 @@ void Log::escribirLog(const string& mensaje, const string& severidad) {
 
     //Carga en buffer la fecha y luego los milisegundos, luego la severidad, el id de ejecución y por último el mensaje
     time_t hoy = time(0);
-    strftime (buffer,MAX_LENGTH_BUFFER_FECHA,"%Y-%m-%d %R.",localtime(&hoy));
+    strftime (buffer,MAX_LENGTH_BUFFER_FECHA,"%Y-%m-%d %H:%M:%S.",localtime(&hoy));
     string milisegundos = to_string(hoy % 1000);
     archivoLog << buffer << string(3 - milisegundos.length(), '0').append(milisegundos);
-    archivoLog << this->caracterSeparador<< this->idSesion;
-    archivoLog << this->caracterSeparador << severidad;
-    archivoLog << this->caracterSeparador << this->modoInicio;
-    archivoLog << this->caracterSeparador <<
+    archivoLog << this->caracterSeparador << " " << this->idSesion;
+    archivoLog << this->caracterSeparador << " " << severidad;
+    archivoLog << this->caracterSeparador << " " << this->modoInicio;
     std::this_thread::get_id();
     archivoLog << this->caracterSeparador << mensaje << endl;
     //Se asegura de enviar al archivo lo que cargó en el buffer
