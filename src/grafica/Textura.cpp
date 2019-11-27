@@ -49,3 +49,7 @@ Textura::~Textura() {
         SDL_DestroyTexture(textura);
 }
 
+bool Textura::estaInicializada() {
+    return textura != NULL;
+}
+

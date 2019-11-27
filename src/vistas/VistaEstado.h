@@ -12,6 +12,9 @@ private:
     Renderizador* renderizador;
     Textura texturaIcono;
     Textura texturaNombreJugador;
+    Textura texturaNombreRelleno;
+    Textura texturaPuntaje;
+    Textura texturaBarraVida;
     Encuadre encuadreIcono;
     Encuadre encuadreNombre;
     Encuadre encuadreBarraVida;
