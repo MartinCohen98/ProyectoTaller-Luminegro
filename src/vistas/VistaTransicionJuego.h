@@ -17,5 +17,10 @@ public:
                   MensajeInicioPartida mensajeInicio);
 };
 
+struct PuntajeJugador{
+    uint puntaje;
+    std::string nombre;
+};
+
 
 #endif //PROYECTOTALLER_LUMINEGRO_VISTATRANSICIONJUEGO_H

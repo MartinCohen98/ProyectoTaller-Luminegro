@@ -1,7 +1,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "../grafica/Textura.h"
 #include "VistaTransicionJuego.h"
-
+#include <list>
 
 void VistaTransicionJuego::CambioDeNivel(int nivel, Renderizador *renderizador, InfoJugador *infoJugadores,
                                          MensajeInicioPartida mensajeInicio) {
@@ -50,8 +50,18 @@ void VistaTransicionJuego::CambioDeNivel(int nivel, Renderizador *renderizador, 
     textura.texturizar(renderizador, superficieTxt);
     textura.copiarseEn(renderizador, encuadreNombre);
 
+    std::list<PuntajeJugador> listaPuntajes;
+
+    for(int i = 0; i < mensajeInicio.getCantidadJugadoresPartida(); i++){
+        listaPuntajes.push_front({infoJugadores[i].getPuntaje(),mensajeInicio.getNombreJugador(i)});
+    }
+    listaPuntajes.sort([] (PuntajeJugador a, PuntajeJugador b){ return a.puntaje > b.puntaje;} );
+
+    PuntajeJugador puntajeJugador;
     int distanciaY;
     for(int i = 0; i < mensajeInicio.getCantidadJugadoresPartida(); i++){
+        puntajeJugador = listaPuntajes.front();
+        listaPuntajes.pop_front();
         distanciaY = 280 + i * 50;
         texto = "No." + std::to_string(i + 1);
 
@@ -61,12 +71,12 @@ void VistaTransicionJuego::CambioDeNivel(int nivel, Renderizador *renderizador, 
         textura.texturizar(renderizador, superficieTxt);
         textura.copiarseEn(renderizador, encuadreRanking);
 
-        superficieTxt = TTF_RenderText_Solid(fuente, std::to_string(infoJugadores[i].getPuntaje()).c_str(), colorPetroleo);
+        superficieTxt = TTF_RenderText_Solid(fuente, std::to_string(puntajeJugador.puntaje).c_str(), colorPetroleo);
         encuadrePuntaje.modificar(encuadrePuntaje.getX(), distanciaY, superficieTxt->w, superficieTxt->h );
         textura.texturizar(renderizador, superficieTxt);
         textura.copiarseEn(renderizador, encuadrePuntaje);
 
-        superficieTxt = TTF_RenderText_Solid(fuente, mensajeInicio.getNombreJugador(i).c_str(),  colorPetroleo);
+        superficieTxt = TTF_RenderText_Solid(fuente, puntajeJugador.nombre.c_str(),  colorPetroleo);
         encuadreNombre.modificar(encuadreNombre.getX(), distanciaY, superficieTxt->w, superficieTxt->h );
         textura.texturizar(renderizador, superficieTxt);
         textura.copiarseEn(renderizador, encuadreNombre);
