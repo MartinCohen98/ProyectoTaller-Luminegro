@@ -73,7 +73,7 @@ void VistaEstado::renderizar(InfoJugador estadoJugador) {
     CargarNombreYVidas(&estadoJugador);
     //Cargar puntaje
     CargarPuntaje(&estadoJugador);
-j
+
     if(!estadoJugador.getVidas() && !estadoJugador.getEnergia()){
         //Le mando el gameover sobre la barra de vida
         if(!texturaBarraVida.estaInicializada()) {

@@ -1,4 +1,4 @@
-#include <vistas/VistaTransicionJuego.h>
+#include "../vistas/VistaTransicionJuego.h"
 #include "../vistas/VistaEstado.h"
 #include "Cliente.h"
 #include "../comunicacion/MensajeInicioPartida.h"
@@ -245,8 +245,9 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 	        	}
 	        	listaOrdenada.pop_front();
 	        }
-            for(auto i = 0; i < mensajeInicio.getCantidadJugadoresPartida(); i++)
+            for(auto i = 0; i < mensajeInicio.getCantidadJugadoresPartida(); i++) {
                 vistasEstado[i]->renderizar(infoJugadorees[i]);
+            }
 	        renderizador.renderizar();
 
 

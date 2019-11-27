@@ -1,5 +1,5 @@
-#include <SDL_ttf.h>
-#include <grafica/Textura.h>
+#include <SDL2/SDL_ttf.h>
+#include "../grafica/Textura.h"
 #include "VistaTransicionJuego.h"
 
 
