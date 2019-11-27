@@ -93,10 +93,11 @@ void VistaEstado::CargarBarraDeVida(InfoJugador *estadoJugador){
     SDL_RenderFillRect(renderizador->get(), &rectangulo);
     //Calcular cuanto en amarillo y dibujarlo
     color = (estadoJugador->estaConectado())? SDL_Color{0xFF,0xFF,0,0xFF}: colorDesconexion;
-    if(estadoJugador->getEnergia() < 0)
+    if (estadoJugador->getEnergia() < 0) {
         rectangulo.w = 0;
-    else
+    } else {
         rectangulo.w = rectangulo.w * estadoJugador->getEnergia() / maxVida;
+    }
     SDL_SetRenderDrawColor(renderizador->get(),color.r, color.g, color.b, color.a);
     SDL_RenderFillRect(renderizador->get(),&rectangulo);
 }
