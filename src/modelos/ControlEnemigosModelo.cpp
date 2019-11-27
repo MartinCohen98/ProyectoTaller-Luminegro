@@ -6,7 +6,7 @@ ControlEnemigosModelo::ControlEnemigosModelo(int nivel, FondoModelo* fondo) {
 	enemigos = new EnemigoModelo*[enemigosCantidad];
 
 	if (nivel == 1){
-		enemigos[0] = new EnemigoModelo(2100, 250, Enemigo3, fondo);
+		enemigos[0] = new EnemigoModelo(1900, 250, Enemigo3, fondo);
 		enemigos[1] = new EnemigoModelo(1000, 320, Enemigo2, fondo);
 		enemigos[2] = new EnemigoModelo(2700, 220, Enemigo1, fondo);
 		enemigos[3] = new EnemigoModelo(-400, 300, Enemigo3, fondo);
@@ -19,9 +19,9 @@ ControlEnemigosModelo::ControlEnemigosModelo(int nivel, FondoModelo* fondo) {
 		enemigos[0] = new EnemigoModelo(1000, 250, Enemigo3, fondo);
 		enemigos[1] = new EnemigoModelo(1500, 320, Enemigo2, fondo);
 		enemigos[2] = new EnemigoModelo(2000, 220, Enemigo1, fondo);
-		enemigos[3] = new EnemigoModelo(-300, 320, Enemigo3, fondo);
+		enemigos[3] = new EnemigoModelo(-400, 320, Enemigo1, fondo);
 		enemigos[4] = new EnemigoModelo(2500, 250, Enemigo2, fondo);
-		enemigos[5] = new EnemigoModelo(3000, 320, Enemigo1, fondo);
+		enemigos[5] = new EnemigoModelo(3000, 320, Enemigo3, fondo);
 		enemigos[6] = new EnemigoModelo(3500, 280, Enemigo2, fondo);
 		enemigos[7] = new EnemigoJefeModelo(4000, 220, fondo);
 	}
@@ -55,13 +55,15 @@ EnemigoModelo* ControlEnemigosModelo::darEnemigo(int j) {
 void ControlEnemigosModelo::realizarMovimientos(
 		ControlJugadoresModelo *jugadores, Colisionador* colisionador) {
 
-	/*	JugadorModelo* jugador;
-	 jugador = &(enemigos[0]->consultarObjetivo);
-	 int distancia = calcularDistancia(enemigos[0], jugador);
-	 if (distancia<200)
-	 enemigos[0]->cambiarModo(Atacando);*/
-	//enemigos[0]->retroceder();
+	JugadorModelo* jugador;
 	for (int i = 0; i < enemigosCantidad; i++) {
+		jugador = enemigos[i]->consultarObjetivo();
+	    int distancia = calcularDistancia(jugador, enemigos[i]);
+	    accionDeEnemigo modo=enemigos[i]->consultarModo();
+	    if (distancia<200 & (modo==Patrullando) & !(enemigos[i]->consultarEsAtacante())){
+	      enemigos[i]->cambiarModo(Atacando);
+	      enemigos[i]->ponerAtacante();
+	    }
 		enemigos[i]->verificarMuerte();
 		enemigos[i]->guardarPosicionesActuales();
 		enemigos[i]->realizarMovimientos(colisionador);

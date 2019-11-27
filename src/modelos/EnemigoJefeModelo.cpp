@@ -19,7 +19,7 @@ EnemigoJefeModelo::EnemigoJefeModelo(int posXinicial, int posYinicial,FondoModel
 	tiempoDeGolpe = 0;
 	tiempoDeEsquivada = 0;
 	vivo = true;
-	esAtacante = true;
+	esAtacante = false;
 	activado = false;
 	estadoOriginal = new EstadoEnemigoParado(tipo);
 	actualizarInsercion();

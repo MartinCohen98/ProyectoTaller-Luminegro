@@ -20,7 +20,7 @@ EnemigoModelo::EnemigoModelo(int posXinicial, int posYinicial, tipoDeSprite tipo
 	tiempoDeGolpe = 0;
 	tiempoDeEsquivada = 0;
 	vivo = true;
-	esAtacante = true;
+	esAtacante = false;
 	activado = false;
 	estadoOriginal = new EstadoEnemigoParado(tipo);
 	actualizarInsercion();
@@ -270,77 +270,46 @@ void EnemigoModelo::atacar() {
 }
 
 void EnemigoModelo::esquivar() {
-//	cambiarModo(Esquivando);
-	if (estado->puedeMoverse()) {
-		if (yendoAdelante)
-			retrocederDiagAbajo(posicionY+1);
-		 else
-		    avanzarDiagArriba(posicionY-1);
-	}
 
-
-
-		/*tiempoDeEsquivada++;
-		if (tiempoDeEsquivada == 10){
-			cambiarModo(Atacando);
-			tiempoDeEsquivada=0;
-		}
-	}*/
-
-
-/*	switch(tiempoDeEsquivada){
-	    case 0:{
-	    	modoAnterior = modo;
-	    	modo = Esquivando;
-			if (yendoAdelante)
-			  retroceder();
-			else
-			  avanzar();
-			tiempoDeEsquivada++;
-			break;
-		    }
-	    case 1:{
-	    	if (yendoAdelante)
-	    	  avanzar();
-	    	else
-	    	  retroceder();
-	    	  tiempoDeEsquivada++;
-	    	break;
-	    	}
-	    case 2:{
-    	   if (subiendo)
-		     bajar();
-		   else
-		     subir();
-    	   tiempoDeEsquivada++;
-    	   break;
+			if (yendoAdelante) {
+				switch (tiempoDeEsquivada){
+				case 0:
+				   retrocederDiagAbajo(posicionY+5);
+				   break;
+				case 1:
+			       retrocederDiagArriba(posicionY-5);
+			       break;
+				}
 			}
-	    case 3:
-	    case 4:
-	    case 5:
-	    case 7:
-	    case 8:{
-	       if (subiendo)
-	    	 subir();
-	       else
-	         bajar();
-	        tiempoDeEsquivada++;
-	       break;
-	    	}
-	    case 9:{
-	    	if (!yendoAdelante)
-	    	  avanzar();
-	    	else
-	    	  retroceder();
-	    	tiempoDeEsquivada=0;
-	    	modo = modoAnterior;
-	    	break;
-	       }
-	  }*/
+			 else {
+				switch (tiempoDeEsquivada){
+				case 0:
+			       avanzarDiagArriba(posicionY-5);
+			       break;
+				case 1:
+			       avanzarDiagAbajo(posicionY+5);
+			       break;
+			    }
+			 }
+			tiempoDeEsquivada++;
+			if (tiempoDeEsquivada==2)
+				tiempoDeEsquivada=0;
 }
 
 void EnemigoModelo::cambiarModo(accionDeEnemigo nuevoModo){
 	modo = nuevoModo;
+}
+
+accionDeEnemigo EnemigoModelo::consultarModo(){
+	return modo;
+}
+
+bool EnemigoModelo::consultarEsAtacante(){
+	return esAtacante;
+}
+
+void EnemigoModelo::ponerAtacante(){
+	esAtacante = true;
 }
 
 void EnemigoModelo::asignarObjetivo(JugadorModelo *jugador){
@@ -472,11 +441,9 @@ void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 
 	if (!activado)
 
-	  if (((fondo->darInicioTerreno()*2.7)) > (posicionX-200)){
+	  if (((fondo->darInicioTerreno()*2.7)) > (posicionX)){
 	    activado = true;
-	    if (esAtacante)
-		  cambiarModo(Atacando);
-	    else
+	    if (!esAtacante)
 		  cambiarModo(Patrullando);
 	  }
 
@@ -512,6 +479,7 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
         	case Enemigo1:
         	case Enemigo2:
         	case Enemigo3:
+        	case EnemigoJefe:
         	case Barril:
         	case Caja:
         		esquivar();
@@ -537,9 +505,6 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
         			esquivar();
         			break;
         		break;
-        		/*case Esquivando:
-        		     esquivar();
-        		     break;*/
         		}
         	}
         }
