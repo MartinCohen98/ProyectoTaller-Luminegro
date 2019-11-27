@@ -111,11 +111,11 @@ int Socket::esperarYAceptarCliente(Socket *socketConectado) {
         logueador->Error(mensajeError);
         return EXIT_FAILURE;
     }
-/*
+
     int timeout = 4000;  // timeout en millisegundos [ms]
     setsockopt(socketConectado->obtenerNumero(),
     			SOL_TCP, TCP_USER_TIMEOUT, (char*) &timeout, sizeof (timeout));
-*/
+
     return EXIT_SUCCESS;
 }
 
@@ -160,11 +160,11 @@ int Socket::conectarAUnServidor(char* direccionIP, char* puerto) {
         } else {
 
             // Si el cliente se desconecta (por ejemplo físicamente) el receive no debe esperar hasta el infinito
-/*            struct timeval tv;
+            struct timeval tv;
             tv.tv_sec = 4;
             tv.tv_usec = 0;
             setsockopt(numero, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
-*/
+
             resultadoAccion = connect(numero, ptr->ai_addr, ptr->ai_addrlen);
             if (resultadoAccion == -1) {
                 std::string mensajeError = "Clase Socket - Método conectarAUnServidor - Error en connect(): ";
@@ -188,10 +188,10 @@ int Socket::conectarAUnServidor(char* direccionIP, char* puerto) {
         logueador->Error(error);
         return EXIT_FAILURE;
     }
-/*
+
     int timeout = 4000;  // timeout en millisegundos [ms]
     setsockopt(numero, SOL_TCP, TCP_USER_TIMEOUT, (char*) &timeout, sizeof (timeout));
-*/
+
     return EXIT_SUCCESS;
 }
 

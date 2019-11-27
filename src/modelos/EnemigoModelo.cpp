@@ -205,7 +205,7 @@ void EnemigoModelo::trasladarse(int destinoX,int destinoY) {
 }
 
 void EnemigoModelo::patrullar(){
-	if (modo == Patrullando && estado->puedeMoverse()){
+	if (modo == Patrullando && estado->puedeMoverse() & tiempoDeGolpe>0){
 		if (posicionY == bordeSuperior)
 			subiendo = false;
 		if (posicionY == bordeInferior)
@@ -501,9 +501,9 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
         			if (tiempoDeGolpe == 4)
         				tiempoDeGolpe = 0;
         			break;
-        		case Patrullando:
+        		/*case Patrullando:
         			esquivar();
-        			break;
+        			break;*/
         		break;
         		}
         	}
