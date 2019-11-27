@@ -27,7 +27,7 @@ public:
 	void agregarJugador(Socket* socket, int numero);
 	void recibirMensajeDeCliente(MensajeCliente* mensaje, int cliente);
 	void enviarMensaje(MensajeServidor* mensaje);
-	void checkearConecciones(int cantiadDeRecieves, Modelo* modelo);
+	void checkearConecciones(int cantidadDeRecieves, Modelo* modelo);
 	bool estaConectado(int jugador);
     int enviarMensajeInicioPartida(MensajeInicioPartida *mensajeInicio);
 

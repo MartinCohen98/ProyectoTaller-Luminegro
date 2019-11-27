@@ -257,7 +257,6 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 		logueador->Info("Fin de nivel: " +  nivelNodeName);
         //TODO Loguear como corresponde
         logueador->Debug("puntajes: " + to_string(infoJugadorees[0].getPuntaje()));
-        cout << "puntajes: " << infoJugadorees[0].getPuntaje() << endl;
 	}
 
 	socket.cerrar();

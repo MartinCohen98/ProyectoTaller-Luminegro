@@ -40,10 +40,12 @@ MensajeServidor GestorThreadsCliente::recibirMensaje() {
 }
 
 
-GestorThreadsCliente::~GestorThreadsCliente() {}
-
 MensajeInicioPartida GestorThreadsCliente::recibirMensajeDeInicio() {
     MensajeInicioPartida mensajeInicio;
     socket->recibir((char *) &mensajeInicio, sizeof(MensajeInicioPartida));
     return mensajeInicio;
 }
+
+
+GestorThreadsCliente::~GestorThreadsCliente() {}
+
