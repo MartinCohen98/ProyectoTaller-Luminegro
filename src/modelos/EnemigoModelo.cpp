@@ -260,14 +260,7 @@ void EnemigoModelo::atacar() {
 		int x, y;
 		x = objetivo->darPosicionX();
 		y = objetivo->darPosicionY();
-	  /*	if (posicionY==y){
-	//  if (tiempoDeGolpe==0)
-	     pegar();
-//	  tiempoDeGolpe++;
-	//  if (tiempoDeGolpe==4)
-//		  tiempoDeGolpe==0;
-	     pegando = false;
-	}*/
+
 		if (yendoAdelante) {
 			trasladarse(x - 110, y + diferenciaDeY);
 		} else {
@@ -277,28 +270,22 @@ void EnemigoModelo::atacar() {
 }
 
 void EnemigoModelo::esquivar() {
+//	cambiarModo(Esquivando);
 	if (estado->puedeMoverse()) {
-		if (subiendo){
-			bajar();
-		} else {
-			subir();
-		}
-		if (yendoAdelante) {
-			retroceder();
-			if (subiendo){
-			   bajar();
-			} else {
-			   subir();
-			  }
-		} else {
-		    avanzar();
-		    if (subiendo){
-		       bajar();
-		    } else {
-		       subir();
-		      }
-		}
+		if (yendoAdelante)
+			retrocederDiagAbajo(posicionY+1);
+		 else
+		    avanzarDiagArriba(posicionY-1);
 	}
+
+
+
+		/*tiempoDeEsquivada++;
+		if (tiempoDeEsquivada == 10){
+			cambiarModo(Atacando);
+			tiempoDeEsquivada=0;
+		}
+	}*/
 
 
 /*	switch(tiempoDeEsquivada){
@@ -482,6 +469,7 @@ void EnemigoModelo::moverEnY(int movimiento) {
 void EnemigoModelo::realizarMovimientos(Colisionador* colisionador) {
 	verificarMuerte();
 	limiteInicial = (fondo->darInicioTerreno());
+
 	if (!activado)
 
 	  if (((fondo->darInicioTerreno()*2.7)) > (posicionX-200)){
@@ -549,6 +537,9 @@ void EnemigoModelo::checkearColisiones(Colisionador* colisionador) {
         			esquivar();
         			break;
         		break;
+        		/*case Esquivando:
+        		     esquivar();
+        		     break;*/
         		}
         	}
         }
