@@ -17,7 +17,6 @@ private:
     Encuadre encuadreBarraVida;
     Encuadre encuadrePuntaje;
     TTF_Font *fuente;
-    TTF_Font *fuenteRelleno;
     SDL_Surface * superficieTxt;
     SDL_Color colorRellenoLetras;
     SDL_Color colorLetrasNombre;
@@ -25,6 +24,8 @@ private:
     SDL_Color colorDesconexion;
     int maxVida;
     std::string nombreJugador;
+    std::string nombreYVidas;
+    uint8_t cantidadDeVidas;
 public:
     VistaEstado(Renderizador *renderizador, pugi::xml_document *archiConfig, int maxVida, std::string nombreJugador, int numeroJugador);
     void renderizar(InfoJugador estadoJugador);

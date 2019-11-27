@@ -82,7 +82,7 @@ void Modelo::pasarNivel() {
 	//colisionador->vaciar();
 	delete colisionador;
 	delete fondo;
-	delete protagonistas;
+	//delete protagonistas;
 	delete enemigos;
 	delete objetos;
 
@@ -91,8 +91,8 @@ void Modelo::pasarNivel() {
 	nivelActual++;
 	fondo = new FondoModelo(archivoConfiguracion, nivelActual);
 
-	protagonistas = new ControlJugadoresModelo(archivoConfiguracion, cantidadJugadores);
-
+	//protagonistas = new ControlJugadoresModelo(archivoConfiguracion, cantidadJugadores);
+    protagonistas->asignarPosicionesInicioNivel();
 	logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
 	enemigos = new ControlEnemigosModelo(nivelActual, fondo);
 

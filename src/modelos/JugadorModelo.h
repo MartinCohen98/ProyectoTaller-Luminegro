@@ -82,6 +82,7 @@ public:
 	bool puedeAtacarA(tipoDeSprite tipo);
 	void generarMensaje(MensajeServidor* mensajes, int* mensajeActual,
 							int numeroSprite);
+	void reasignarPosicion(int x, int y); //Para arrancar el nivel 2 sin boletearlo
 	virtual ~JugadorModelo();
 };
 

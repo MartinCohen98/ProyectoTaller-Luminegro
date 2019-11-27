@@ -50,30 +50,30 @@ void VistaTransicionJuego::CambioDeNivel(int nivel, Renderizador *renderizador, 
     textura.texturizar(renderizador, superficieTxt);
     textura.copiarseEn(renderizador, encuadreNombre);
 
-    int ejeY;
+    int distanciaY;
     for(int i = 0; i < mensajeInicio.getCantidadJugadoresPartida(); i++){
-        ejeY = 280 + i * 50;
+        distanciaY = 280 + i * 50;
         texto = "No." + std::to_string(i + 1);
 
         //superficieTxt = TTF_RenderText_Solid(fuente, mensajeInicio.getNombreJugador(0).c_str(), colorPetroleo);
         superficieTxt = TTF_RenderText_Solid(fuente, texto.c_str(), colorPetroleo);
-        encuadreRanking.modificar(encuadreRanking.getX(), ejeY, superficieTxt->w, superficieTxt->h );
+        encuadreRanking.modificar(encuadreRanking.getX(), distanciaY, superficieTxt->w, superficieTxt->h );
         textura.texturizar(renderizador, superficieTxt);
         textura.copiarseEn(renderizador, encuadreRanking);
 
         superficieTxt = TTF_RenderText_Solid(fuente, std::to_string(infoJugadores[i].getPuntaje()).c_str(), colorPetroleo);
-        encuadrePuntaje.modificar(encuadrePuntaje.getX(), ejeY, superficieTxt->w, superficieTxt->h );
+        encuadrePuntaje.modificar(encuadrePuntaje.getX(), distanciaY, superficieTxt->w, superficieTxt->h );
         textura.texturizar(renderizador, superficieTxt);
         textura.copiarseEn(renderizador, encuadrePuntaje);
 
         superficieTxt = TTF_RenderText_Solid(fuente, mensajeInicio.getNombreJugador(i).c_str(),  colorPetroleo);
-        encuadreNombre.modificar(encuadreNombre.getX(), ejeY, superficieTxt->w, superficieTxt->h );
+        encuadreNombre.modificar(encuadreNombre.getX(), distanciaY, superficieTxt->w, superficieTxt->h );
         textura.texturizar(renderizador, superficieTxt);
         textura.copiarseEn(renderizador, encuadreNombre);
     }
 
     renderizador->renderizar();
-    //Tiempo de muestra de la pantalla
+    //Tiempo de muestra de la pantalla. También poner esto en el servidor
     SDL_Delay(5000);
 
     //Liberar recursos

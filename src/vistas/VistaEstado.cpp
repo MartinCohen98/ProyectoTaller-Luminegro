@@ -6,9 +6,10 @@ VistaEstado::VistaEstado(Renderizador *renderizador, pugi::xml_document *archiCo
     this->maxVida = maxVida;
     superficieTxt = NULL;
     fuenteRelleno = NULL;
-    if(9 > nombreJugador.size())
-        nombreJugador.append(9 - nombreJugador.size(), ' ');
+    cantidadDeVidas = 0;
     this->nombreJugador = nombreJugador;
+    //nombreYVidas = nombreJugador.append(1,':').append(std::to_string(cantidadDeVidas));
+
 
     std::string pathIcono;
 
@@ -98,7 +99,11 @@ void VistaEstado::CargarBarraDeVida(InfoJugador *estadoJugador){
 
 void VistaEstado::CargarNombreYVidas(InfoJugador *estadoJugador){
     //std::string nombreYVidas = nombreJugador + ":" + std::to_string(estadoJugador->getVidas());
-    std::string nombreYVidas = nombreJugador;
+    if(this->cantidadDeVidas != estadoJugador->getVidas()) {
+        nombreYVidas = nombreJugador + ":" + std::to_string(estadoJugador->getVidas());
+        if(nombreYVidas.length() < 12)
+            nombreYVidas = nombreYVidas.append(12 - nombreYVidas.length(), ' ');
+    }
     //Agrega contorno a las letras
     TTF_SetFontOutline(fuente, 1);
     //Pone nombre y vidas
@@ -132,4 +137,5 @@ void VistaEstado::CargarPuntaje(InfoJugador *estadoJugador){
 
 VistaEstado::~VistaEstado() {
     SDL_FreeSurface(superficieTxt);
+    TTF_CloseFont( fuente );
 }

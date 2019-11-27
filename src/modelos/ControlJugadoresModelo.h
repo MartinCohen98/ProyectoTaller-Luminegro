@@ -31,6 +31,7 @@ public:
 	int consultarCantidadJugadores();
 	JugadorModelo* darJugador(int i);
 	void agregarJugadoresEnColisionador(Colisionador* colisionador);
+	void asignarPosicionesInicioNivel();
 	virtual ~ControlJugadoresModelo();
 };
 

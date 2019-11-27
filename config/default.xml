@@ -2,11 +2,11 @@
     <log>
         <level>DEBUG</level>
     </log>
-    <jugadoresCantidad>2</jugadoresCantidad>
+    <jugadoresCantidad>4</jugadoresCantidad>
     <claves>
-        <mariano>cognitiva</mariano>
-        <julio>conductual</julio>
-        <martin>gestalt</martin>
+        <mariano>1234</mariano>
+        <julio>1234</julio>
+        <martin>1234</martin>
         <nicolas>freud</nicolas>
     </claves>
     <escenario>

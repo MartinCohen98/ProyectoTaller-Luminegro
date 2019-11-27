@@ -252,3 +252,11 @@ ControlJugadoresModelo::~ControlJugadoresModelo() {
 	delete[] jugadores;
 }
 
+void ControlJugadoresModelo::asignarPosicionesInicioNivel() {
+    int posXinic[4] = {100,100,0,200};
+    int posYinic[4] = {175,275,225,225};
+    for (int i = 0; i < cantidadJugadores; i++) {
+        jugadores[i]->reasignarPosicion(posXinic[i], posYinic[i]);
+    }
+}
+

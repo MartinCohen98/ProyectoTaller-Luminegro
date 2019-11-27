@@ -14,6 +14,10 @@ class Encuadre {
 	       int getAncho();
 	       int getAlto() const;
 	       int modificar(int desplazamientoX, int desplazamientoY, int resolucionX, int resolucioY);
+	       void setX(int x);
+	       void setY(int y);
+	       void setAncho(int w);
+	       void setAlto(int h);
 	       virtual ~Encuadre();
 };
 

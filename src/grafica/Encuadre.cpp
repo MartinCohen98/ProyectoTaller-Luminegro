@@ -34,3 +34,19 @@ int Encuadre::modificar(int desplazamientoX, int desplazamientoY,
 }
 
 Encuadre::~Encuadre() {}
+
+void Encuadre::setX(int x) {
+    encuadre.x = x;
+}
+
+void Encuadre::setY(int y) {
+    encuadre.y = y;
+}
+
+void Encuadre::setAncho(int w) {
+    encuadre.w = w;
+}
+
+void Encuadre::setAlto(int h) {
+    encuadre.h = h;
+}

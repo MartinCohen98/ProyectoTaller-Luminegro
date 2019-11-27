@@ -410,3 +410,8 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
 
 JugadorModelo::~JugadorModelo() {}
 
+void JugadorModelo::reasignarPosicion(int x, int y) {
+    posicionX = x;
+    posicionY = y;
+}
+
