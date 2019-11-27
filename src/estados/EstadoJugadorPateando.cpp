@@ -107,7 +107,7 @@ bool EstadoJugadorPateando::estaSaltando() {
 
 
 bool EstadoJugadorPateando::estaAtacando() {
-	return (elevacion == 120);
+	return (elevacion == 180);
 }
 
 
