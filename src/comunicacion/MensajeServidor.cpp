@@ -46,6 +46,11 @@ tipoDeSprite MensajeServidor::obtenerTipoDeSprite() {
 }
 
 
+int MensajeServidor::obtenerPosicionY() {
+	return posicionY;
+}
+
+
 bool MensajeServidor::estaDadoVuelta() {
 	return dadoVuelta;
 }

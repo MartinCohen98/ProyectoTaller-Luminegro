@@ -97,6 +97,9 @@ void Servidor::enviarMensajeDeNivelTerminado(bool nivelTerminado) {
 	if (nivelTerminado) {
 		mensaje.darVuelta();
 	}
+	if (modelo->estanTodosMuertos()) {
+		mensaje.agregarPosicionY(1); //Significa que murieron todos re cabeza
+	}
 	gestorThreads->enviarMensaje(&mensaje);
 }
 

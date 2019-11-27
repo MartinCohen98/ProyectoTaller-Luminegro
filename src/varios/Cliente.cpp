@@ -7,6 +7,7 @@ Cliente::Cliente() {
 	cantidadDeReceives = 0;
 	archiConfig = NULL;
 	sonidos = NULL;
+	perdieron = false;
 }
 
 int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* archiConfig) {
@@ -112,158 +113,182 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
     for (int nivel = mensajeInicio.getNivelInicial(); nivel <= 2; nivel++) {
 
-        string nivelNodeName = "nivel";
-		nivelNodeName.append( to_string(nivel) );
+    	if (!perdieron) {
+			string nivelNodeName = "nivel";
+			nivelNodeName.append(to_string(nivel));
 
-		logueador->Info("Iniciando nivel: "+ nivelNodeName);
-		logueador->Debug("Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
+			logueador->Info("Iniciando nivel: " + nivelNodeName);
+			logueador->Debug(
+					"Leyendo del XML la ubicación de los BMPs de los fondos y el ancho del terreno");
 
-		VistaFondo fondo(&renderizador, archiConfig, nivelNodeName);
+			VistaFondo fondo(&renderizador, archiConfig, nivelNodeName);
 
-		VistaJugador jugador1(&renderizador, archiConfig, Jugador1, &ejecutarSonidoGolpeTiro,
-		        &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
+			VistaJugador jugador1(&renderizador, archiConfig, Jugador1,
+					&ejecutarSonidoGolpeTiro, &ejecutarSonidoGolpeImpacto,
+					&ejecutarSonidoSalto, &ejecutarSonidoCaida);
 
-		VistaJugador jugador2(&renderizador, archiConfig, Jugador2, &ejecutarSonidoGolpeTiro,
-		        &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
+			VistaJugador jugador2(&renderizador, archiConfig, Jugador2,
+					&ejecutarSonidoGolpeTiro, &ejecutarSonidoGolpeImpacto,
+					&ejecutarSonidoSalto, &ejecutarSonidoCaida);
 
-		VistaJugador jugador3(&renderizador, archiConfig, Jugador3, &ejecutarSonidoGolpeTiro,
-		        &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
-		        ;
-		VistaJugador jugador4(&renderizador, archiConfig, Jugador4, &ejecutarSonidoGolpeTiro,
-		        &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
+			VistaJugador jugador3(&renderizador, archiConfig, Jugador3,
+					&ejecutarSonidoGolpeTiro, &ejecutarSonidoGolpeImpacto,
+					&ejecutarSonidoSalto, &ejecutarSonidoCaida);
+			;
+			VistaJugador jugador4(&renderizador, archiConfig, Jugador4,
+					&ejecutarSonidoGolpeTiro, &ejecutarSonidoGolpeImpacto,
+					&ejecutarSonidoSalto, &ejecutarSonidoCaida);
 
-		logueador->Debug("Creando enemigos y asignándoles su comportamiento básico");
-		VistaEnemigo enemigo1(&renderizador, archiConfig, Enemigo1, &ejecutarSonidoGolpeTiro,
-                              &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
+			logueador->Debug(
+					"Creando enemigos y asignándoles su comportamiento básico");
+			VistaEnemigo enemigo1(&renderizador, archiConfig, Enemigo1,
+					&ejecutarSonidoGolpeTiro, &ejecutarSonidoGolpeImpacto,
+					&ejecutarSonidoSalto, &ejecutarSonidoCaida);
 
-		VistaEnemigo enemigo2(&renderizador, archiConfig, Enemigo2, &ejecutarSonidoGolpeTiro,
-                              &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
+			VistaEnemigo enemigo2(&renderizador, archiConfig, Enemigo2,
+					&ejecutarSonidoGolpeTiro, &ejecutarSonidoGolpeImpacto,
+					&ejecutarSonidoSalto, &ejecutarSonidoCaida);
 
-		VistaEnemigo enemigo3(&renderizador, archiConfig, Enemigo3, &ejecutarSonidoGolpeTiro,
-                              &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
+			VistaEnemigo enemigo3(&renderizador, archiConfig, Enemigo3,
+					&ejecutarSonidoGolpeTiro, &ejecutarSonidoGolpeImpacto,
+					&ejecutarSonidoSalto, &ejecutarSonidoCaida);
 
-		VistaEnemigo enemigo4(&renderizador, archiConfig, EnemigoJefe, &ejecutarSonidoGolpeTiro,
-                              &ejecutarSonidoGolpeImpacto, &ejecutarSonidoSalto, &ejecutarSonidoCaida);
+			VistaEnemigo enemigo4(&renderizador, archiConfig, EnemigoJefe,
+					&ejecutarSonidoGolpeTiro, &ejecutarSonidoGolpeImpacto,
+					&ejecutarSonidoSalto, &ejecutarSonidoCaida);
 
-		logueador->Debug("Creando controlador de objetos y asignándoles su posición inicial");
+			logueador->Debug(
+					"Creando controlador de objetos y asignándoles su posición inicial");
 
-		VistaObjeto barril(&renderizador, archiConfig, Barril, &ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
-		VistaObjeto caja(&renderizador, archiConfig, Caja, &ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
-		VistaObjeto cuchillo(&renderizador, archiConfig, Cuchillo, &ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
-		VistaObjeto tubo(&renderizador, archiConfig, Tubo, &ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
+			VistaObjeto barril(&renderizador, archiConfig, Barril,
+					&ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
+			VistaObjeto caja(&renderizador, archiConfig, Caja,
+					&ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
+			VistaObjeto cuchillo(&renderizador, archiConfig, Cuchillo,
+					&ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
+			VistaObjeto tubo(&renderizador, archiConfig, Tubo,
+					&ejecutarSonidoGolpeImpacto, &ejecutarSonidoDestruccion);
 
-		for(int i = 0; i < mensajeInicio.getCantidadJugadoresPartida(); i++){
-		    vistasEstado[i] = new VistaEstado(&renderizador, archiConfig, mensajeInicio.getVidaMax(),
-		            mensajeInicio.getNombreJugador(i), i);
+			for (int i = 0; i < mensajeInicio.getCantidadJugadoresPartida();
+					i++) {
+				vistasEstado[i] = new VistaEstado(&renderizador, archiConfig,
+						mensajeInicio.getVidaMax(),
+						mensajeInicio.getNombreJugador(i), i);
+			}
+
+			recibirCantidadDeReceives(&gestorThreads);
+
+			if (sonidos == NULL) {
+				sonidos = new std::thread(
+						Sonidos(archiConfig, &musicaFondoActiva,
+								&ejecutarSonidoGolpeTiro,
+								&ejecutarSonidoGolpeImpacto,
+								&ejecutarSonidoSalto, &ejecutarSonidoCaida,
+								&ejecutarSonidoDestruccion));
+			}
+
+			terminoElNivel = false;
+
+			while (!terminoElNivel) {
+				enviarInput(&gestorThreads);
+				if (mensajeCliente.get() == Exit) {
+					SDL_Delay(200);
+					return 0;
+				}
+				if (gestorThreads.seDesconecto()) {
+					Logger::Log::ObtenerInstancia()->Error(
+							"Se desconectó el servidor. Cerrando cliente.");
+
+					imagenDesconectado.cargar(
+							"assets/images/general/cerrandoJuego.bmp", 4);
+					Encuadre encuadreDesconectado = { 0, 0, 800, 600 };
+					Encuadre encuadreFijoDesconectado = { 0, 0, 800, 600 };
+					texturaTransiciones.texturizar(&renderizador,
+							imagenDesconectado);
+					texturaTransiciones.copiarseEn(&renderizador,
+							encuadreDesconectado, encuadreFijoDesconectado);
+					renderizador.renderizar();
+					SDL_Delay(5000);
+					return 0;
+				}
+				renderizarFondo(&fondo, &gestorThreads);
+				recibirMensajes(&gestorThreads);
+
+				while (!listaOrdenada.empty()) {
+
+					MensajeServidor mensaje;
+					mensaje = listaOrdenada.front();
+
+					switch (mensaje.obtenerTipoDeSprite()) {
+					case Jugador1:
+						infoJugadorees[0] = mensaje.getInfoJugador();
+						jugador1.renderizarConElMensaje(&mensaje);
+						break;
+					case Jugador2:
+						infoJugadorees[1] = mensaje.getInfoJugador();
+						jugador2.renderizarConElMensaje(&mensaje);
+						break;
+					case Jugador3:
+						infoJugadorees[2] = mensaje.getInfoJugador();
+						jugador3.renderizarConElMensaje(&mensaje);
+						break;
+					case Jugador4:
+						infoJugadorees[3] = mensaje.getInfoJugador();
+						jugador4.renderizarConElMensaje(&mensaje);
+						break;
+					case Enemigo1:
+						enemigo1.renderizarConElMensaje(&mensaje);
+						break;
+					case Enemigo2:
+						enemigo2.renderizarConElMensaje(&mensaje);
+						break;
+					case Enemigo3:
+						enemigo3.renderizarConElMensaje(&mensaje);
+						break;
+					case EnemigoJefe:
+						enemigo4.renderizarConElMensaje(&mensaje);
+						break;
+					case Barril:
+						barril.renderizarConElMensaje(&mensaje);
+						break;
+					case Caja:
+						caja.renderizarConElMensaje(&mensaje);
+						break;
+					case Cuchillo:
+						cuchillo.renderizarConElMensaje(&mensaje);
+						break;
+					case Tubo:
+						tubo.renderizarConElMensaje(&mensaje);
+						break;
+					}
+					listaOrdenada.pop_front();
+				}
+				for (auto i = 0;
+						i < mensajeInicio.getCantidadJugadoresPartida(); i++) {
+					vistasEstado[i]->renderizar(infoJugadorees[i]);
+				}
+				renderizador.renderizar();
+
+				terminoElNivel = getTerminoElNivel(&gestorThreads);
+			}
+			if (!perdieron) {
+				VistaTransicionJuego::CambioDeNivel(nivel, &renderizador,
+						infoJugadorees, mensajeInicio);
+			} else {
+				VistaTransicionJuego::CambioDeNivel(0, &renderizador,
+						infoJugadorees, mensajeInicio);
+			}
+			logueador->Info("Fin de nivel: " + nivelNodeName);
+			//TODO Loguear como corresponde
+			logueador->Debug(
+					"puntajes: " + to_string(infoJugadorees[0].getPuntaje()));
 		}
-
-		recibirCantidadDeReceives(&gestorThreads);
-
-		if (sonidos == NULL) {
-		    sonidos = new std::thread( Sonidos(archiConfig,&musicaFondoActiva,
-		                                    &ejecutarSonidoGolpeTiro,
-		                                    &ejecutarSonidoGolpeImpacto,
-		                                    &ejecutarSonidoSalto,
-		                                    &ejecutarSonidoCaida,
-		                                    &ejecutarSonidoDestruccion)
-		                              );
-        }
-
-        terminoElNivel = false;
-
-		//BORRAR
-        //VistaTransicionJuego::CambioDeNivel(nivel, &renderizador,infoJugadorees, mensajeInicio);
-
-
-        while (!terminoElNivel) {
-	    	enviarInput(&gestorThreads);
-	    	if (mensajeCliente.get() == Exit) {
-	    		SDL_Delay(200);
-	    		return 0;
-	    	}
-	    	if (gestorThreads.seDesconecto()) {
-                Logger::Log::ObtenerInstancia()->Error("Se desconectó el servidor. Cerrando cliente.");
-
-	    		imagenDesconectado.cargar("assets/images/general/cerrandoJuego.bmp",4);
-	    		Encuadre encuadreDesconectado={0,0,800,600};
-	    		Encuadre encuadreFijoDesconectado={0,0,800,600};
-	    		texturaTransiciones.texturizar(&renderizador,imagenDesconectado);
-	    		texturaTransiciones.copiarseEn(&renderizador,encuadreDesconectado,encuadreFijoDesconectado);
-	    		renderizador.renderizar();
-	    		SDL_Delay(5000);
-	    		return 0;
-	    	}
-	    	renderizarFondo(&fondo, &gestorThreads);
-	    	recibirMensajes(&gestorThreads);
-
-	        while (!listaOrdenada.empty()) {
-
-	        	MensajeServidor mensaje;
-	        	mensaje = listaOrdenada.front();
-
-	        	switch(mensaje.obtenerTipoDeSprite()) {
-	        		case Jugador1:
-	        		    infoJugadorees[0] = mensaje.getInfoJugador();
-	        			jugador1.renderizarConElMensaje(&mensaje);
-	        			break;
-	        		case Jugador2:
-                        infoJugadorees[1] = mensaje.getInfoJugador();
-	        			jugador2.renderizarConElMensaje(&mensaje);
-	        			break;
-	        		case Jugador3:
-                        infoJugadorees[2] = mensaje.getInfoJugador();
-	        			jugador3.renderizarConElMensaje(&mensaje);
-	        			break;
-	        		case Jugador4:
-                        infoJugadorees[3] = mensaje.getInfoJugador();
-	        			jugador4.renderizarConElMensaje(&mensaje);
-	        			break;
-	        		case Enemigo1:
-	        			enemigo1.renderizarConElMensaje(&mensaje);
-	        			break;
-	        		case Enemigo2:
-	        			enemigo2.renderizarConElMensaje(&mensaje);
-	        			break;
-	        		case Enemigo3:
-	        			enemigo3.renderizarConElMensaje(&mensaje);
-	        			break;
-	        		case EnemigoJefe:
-	        			enemigo4.renderizarConElMensaje(&mensaje);
-	        			break;
-	        		case Barril:
-	        			barril.renderizarConElMensaje(&mensaje);
-	        			break;
-	        		case Caja:
-	        			caja.renderizarConElMensaje(&mensaje);
-	        			break;
-	        		case Cuchillo:
-	        			cuchillo.renderizarConElMensaje(&mensaje);
-	        			break;
-	        		case Tubo:
-	        			tubo.renderizarConElMensaje(&mensaje);
-	        			break;
-	        	}
-	        	listaOrdenada.pop_front();
-	        }
-            for(auto i = 0; i < mensajeInicio.getCantidadJugadoresPartida(); i++) {
-                vistasEstado[i]->renderizar(infoJugadorees[i]);
-            }
-	        renderizador.renderizar();
-
-
-	        terminoElNivel = getTerminoElNivel(&gestorThreads);
-		}
-        VistaTransicionJuego::CambioDeNivel(nivel, &renderizador,infoJugadorees, mensajeInicio);
-		logueador->Info("Fin de nivel: " +  nivelNodeName);
-        //TODO Loguear como corresponde
-        logueador->Debug("puntajes: " + to_string(infoJugadorees[0].getPuntaje()));
 	}
 
 	socket.cerrar();
     //libero memoria de vistas de estado
     for(auto i = 0; i < mensajeInicio.getCantidadJugadoresPartida(); i++)
         delete vistasEstado[i];
-
     return 0;
 }
 
@@ -399,6 +424,8 @@ void Cliente::recibirCantidadDeReceives(GestorThreadsCliente* gestorThreads) {
 
 bool Cliente::getTerminoElNivel(GestorThreadsCliente* gestorThreads) {
 	mensajeServidor = gestorThreads->recibirMensaje();
+	if (mensajeServidor.obtenerPosicionY() == 1)
+		perdieron = true;
 	return (mensajeServidor.estaDadoVuelta());
 }
 

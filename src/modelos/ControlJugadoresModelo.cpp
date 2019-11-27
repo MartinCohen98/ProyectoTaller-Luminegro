@@ -167,13 +167,13 @@ void ControlJugadoresModelo::generarMensajes(MensajeServidor* mensajes,
 
 bool ControlJugadoresModelo::llegaronAlFin(FondoModelo* fondo) {
 	bool retorno = false;
-	int i,j=0;
+	int i, j = 0;
 	for (i = 0; i < cantidadJugadores; i++) {
 		if (jugadores[i]->estaDesconectado() || jugadores[i]->llegoAlFin(fondo))
-		    j++;
+			j++;
 	}
-	if (j==cantidadJugadores)
-        retorno = true;
+	if (j == cantidadJugadores)
+		retorno = true;
 	return retorno;
 }
 
@@ -193,14 +193,14 @@ void ControlJugadoresModelo::desconectar(int jugador) {
 	jugadores[jugador]->congelarse();
 }
 
-bool ControlJugadoresModelo::consultarTodosMuertos(){
+bool ControlJugadoresModelo::consultarTodosMuertos() {
 	bool todosMuertos = false;
-	int j=0;
+	int j = 0;
 	for (int i = 0; i < cantidadJugadores; i++)
 		if (jugadores[i]->consultarDerrotado())
 			j++;
-	if (j==cantidadJugadores)
-        todosMuertos = true;
+	if (j == cantidadJugadores)
+		todosMuertos = true;
 	return todosMuertos;
 }
 

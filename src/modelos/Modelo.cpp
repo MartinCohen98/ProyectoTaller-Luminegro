@@ -122,6 +122,11 @@ void Modelo::conectarJugador(int jugador) {
 }
 
 
+bool Modelo::estanTodosMuertos() {
+	return protagonistas->consultarTodosMuertos();
+}
+
+
 void Modelo::llenarColisionador() {
 	protagonistas->agregarJugadoresEnColisionador(colisionador);
 	enemigos->agregarEnemigosEnColisionador(colisionador);

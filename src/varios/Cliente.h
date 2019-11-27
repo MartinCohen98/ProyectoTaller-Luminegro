@@ -32,6 +32,7 @@ private:
 	Imagen imagenDesconectado;
 	Imagen imagenEspera;
 	Textura texturaTransiciones;
+	bool perdieron;
 	std::thread* sonidos;
 	bool musicaFondoActiva = true;
 	bool ejecutarSonidoGolpeTiro = false;

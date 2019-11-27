@@ -29,6 +29,7 @@ public:
 	void desaparecerJugador(int jugador);
 	void desconectarJugador(int jugador);
 	void conectarJugador(int jugador);
+	bool estanTodosMuertos();
 	virtual ~Modelo();
 
 private:

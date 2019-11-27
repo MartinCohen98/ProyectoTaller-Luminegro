@@ -34,6 +34,7 @@ public:
 	Encuadre* obtenerInsercion();
 	bool estaDadoVuelta();
 	tipoDeSprite obtenerTipoDeSprite();
+	int obtenerPosicionY();
 	bool operator <(const MensajeServidor & mensaje) const;
     void setSonidoEjecutarGolpeTiro(bool valor);
     bool getSonidoEjecutarGolpeTiro();

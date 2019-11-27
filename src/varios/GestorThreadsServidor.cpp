@@ -87,6 +87,15 @@ void GestorThreadsServidor::comenzarAAceptar(Socket* socketAceptador, MensajeCre
 }
 
 
+int GestorThreadsServidor::enviarMensajeInicioPartida(MensajeInicioPartida *mensajeInicio) {
+    int bytesEnviados = 0;
+    for(int i = 0; i < jugadores; i++){
+        bytesEnviados += sockets[i]->enviar((char *) mensajeInicio, sizeof(MensajeInicioPartida));
+    }
+    return bytesEnviados;
+}
+
+
 GestorThreadsServidor::~GestorThreadsServidor() {
 	for (int i = 0; i < jugadores; i++) {
 		if (threadsEnviadoras[i] != NULL) {
@@ -104,13 +113,4 @@ GestorThreadsServidor::~GestorThreadsServidor() {
 	delete[] colasRecibidoras;
 	delete[] colasEnviadoras;
 }
-
-int GestorThreadsServidor::enviarMensajeInicioPartida(MensajeInicioPartida *mensajeInicio) {
-    int bytesEnviados = 0;
-    for(int i = 0; i < jugadores; i++){
-        bytesEnviados += sockets[i]->enviar((char *) mensajeInicio, sizeof(MensajeInicioPartida));
-    }
-    return bytesEnviados;
-}
-
 
