@@ -283,16 +283,20 @@ void JugadorModelo::checkearColisiones(Colisionador* colisionador) {
 
 void JugadorModelo::actualizarInsercion(bool conElevacion) {
 	int elevacion = 0;
+	int diferenciaEnX = 0;
 	if (estado->estaSaltando() && !estado->estaPateando())
 		elevacion = 30;
+	if (estado->estaSaltando() && estado->estaPateando() && !conElevacion)
+		diferenciaEnX = 40;
 	if (conElevacion)
 		elevacion = estado->obtenerElevacion();
 	if (!dadoVuelta) {
 		insercion.modificar(posicionX, posicionY - elevacion,
-				escalar(estado->obtenerAncho()), escalar(estado->obtenerAlto()));
+				escalar(estado->obtenerAncho()) - diferenciaEnX,
+				escalar(estado->obtenerAlto()));
 	} else {
 		insercion.modificar(posicionX - escalar(estado->obtenerAncho()) +
-				escalar(estadoOriginal->obtenerAncho()),
+				escalar(estadoOriginal->obtenerAncho()) - diferenciaEnX,
 				posicionY - elevacion, escalar(estado->obtenerAncho()),
 				escalar(estado->obtenerAlto()));
 	}
