@@ -23,6 +23,7 @@ public:
 	void golpear();
 	void movidaDePantalla();
 	int calcularDistancia(JugadorModelo *protagonista,EnemigoModelo *enemigo);
+	bool consultarTodosMuertos();
 	EnemigoModelo* darEnemigo(int j);
 	void generarMensajes(MensajeServidor* mensajes, int* mensajeActual);
 	void agregarEnemigosEnColisionador(Colisionador* colisionador);
