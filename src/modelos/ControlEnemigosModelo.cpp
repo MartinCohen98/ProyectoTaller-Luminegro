@@ -48,6 +48,17 @@ int ControlEnemigosModelo::calcularDistancia(JugadorModelo *protagonista,
 	return sqrt(((x1 - x2) ^ 2) + ((y1 - y2) ^ 2));
 }
 
+bool ControlEnemigosModelo::consultarTodosMuertos() {
+	bool todosMuertos = false;
+	int j = 0;
+	for (int i = 0; i < enemigosCantidad; i++)
+		if (!enemigos[i]->estaVivo())
+			j++;
+	if (j == enemigosCantidad)
+		todosMuertos = true;
+	return todosMuertos;
+}
+
 EnemigoModelo* ControlEnemigosModelo::darEnemigo(int j) {
 	return enemigos[j];
 }
