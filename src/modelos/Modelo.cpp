@@ -79,10 +79,8 @@ bool Modelo::nivelTerminado() {
 void Modelo::pasarNivel() {
 	Logger::Log *logueador  =  Logger::Log::ObtenerInstancia();
 
-	//colisionador->vaciar();
 	delete colisionador;
 	delete fondo;
-	//delete protagonistas;
 	delete enemigos;
 	delete objetos;
 

@@ -267,6 +267,8 @@ void ControlJugadoresModelo::asignarPosicionesInicioNivel() {
     int posYinic[4] = {175,275,225,225};
     for (int i = 0; i < cantidadJugadores; i++) {
         jugadores[i]->reasignarPosicion(posXinic[i], posYinic[i]);
+        if (jugadores[i]->estaDesconectado())
+        	jugadores[i]->desaparecer();
     }
 }
 

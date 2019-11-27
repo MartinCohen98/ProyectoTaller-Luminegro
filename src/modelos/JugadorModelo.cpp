@@ -117,7 +117,7 @@ void JugadorModelo::serGolpeado(){
 }
 
 void JugadorModelo::desaparecer() {
-	if (!salio)
+	if (!salio || posicionY < 600)
 		posicionY += 600;
 	salio = true;
 }
@@ -393,9 +393,9 @@ void JugadorModelo::generarMensaje(MensajeServidor* mensajes, int* mensajeActual
     mensajes[*mensajeActual].setSonidoEjecutarSalto(ejecutarSonidoSalto);
     mensajes[*mensajeActual].setSonidoEjecutarCaida(ejecutarSonidoCaida);
 
-
-    mensajes[*mensajeActual].setInfoJugador(InfoJugador(energia, vidas, puntaje, (!salio && !desconectado)));
-    //Si no está ni desconectado ni salió, está conectado
+	mensajes[*mensajeActual].setInfoJugador(
+			InfoJugador(energia, vidas, puntaje, (!salio && !desconectado)));
+	//Si no está ni desconectado ni salió, está conectado
 
     ejecutarSonidoGolpeTiro = false;
     ejecutarSonidoGolpeImpacto = false;
