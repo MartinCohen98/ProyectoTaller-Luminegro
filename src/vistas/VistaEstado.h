@@ -29,7 +29,7 @@ public:
     VistaEstado(Renderizador *renderizador, pugi::xml_document *archiConfig, int maxVida, std::string nombreJugador, int numeroJugador);
     void renderizar(InfoJugador estadoJugador);
     void CargarBarraDeVida(InfoJugador *estadoJugador);
-    void CargarNombreYPuntaje(InfoJugador *estadoJugador);
+    void CargarNombreYVidas(InfoJugador *estadoJugador);
     void CargarPuntaje(InfoJugador *estadoJugador);
     ~VistaEstado();
 };

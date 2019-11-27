@@ -1,3 +1,4 @@
+#include <vistas/VistaTransicionJuego.h>
 #include "../vistas/VistaEstado.h"
 #include "Cliente.h"
 #include "../comunicacion/MensajeInicioPartida.h"
@@ -170,6 +171,10 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
         terminoElNivel = false;
 
+		//BORRAR
+        //VistaTransicionJuego::CambioDeNivel(nivel, &renderizador,infoJugadorees, mensajeInicio);
+
+
         while (!terminoElNivel) {
 	    	enviarInput(&gestorThreads);
 	    	if (mensajeCliente.get() == Exit) {
@@ -247,7 +252,7 @@ int Cliente::inicializar(char* direccionIP, char* puerto, pugi::xml_document* ar
 
 	        terminoElNivel = getTerminoElNivel(&gestorThreads);
 		}
-
+        VistaTransicionJuego::CambioDeNivel(nivel, &renderizador,infoJugadorees, mensajeInicio);
 		logueador->Info("Fin de nivel: " +  nivelNodeName);
         //TODO Loguear como corresponde
         logueador->Debug("puntajes: " + to_string(infoJugadorees[0].getPuntaje()));

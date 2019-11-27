@@ -70,7 +70,7 @@ void VistaEstado::renderizar(InfoJugador estadoJugador) {
     //Carga barra de vida
     CargarBarraDeVida(&estadoJugador);
     //Cargar nombre y vidas
-    CargarNombreYPuntaje(&estadoJugador);
+    CargarNombreYVidas(&estadoJugador);
     //Cargar puntaje
     CargarPuntaje(&estadoJugador);
 
@@ -96,8 +96,9 @@ void VistaEstado::CargarBarraDeVida(InfoJugador *estadoJugador){
     SDL_RenderFillRect(renderizador->get(),&rectangulo);
 }
 
-void VistaEstado::CargarNombreYPuntaje(InfoJugador *estadoJugador){
-    std::string nombreYVidas = nombreJugador + ":" + std::to_string(estadoJugador->getVidas());
+void VistaEstado::CargarNombreYVidas(InfoJugador *estadoJugador){
+    //std::string nombreYVidas = nombreJugador + ":" + std::to_string(estadoJugador->getVidas());
+    std::string nombreYVidas = nombreJugador;
     //Agrega contorno a las letras
     TTF_SetFontOutline(fuente, 1);
     //Pone nombre y vidas
