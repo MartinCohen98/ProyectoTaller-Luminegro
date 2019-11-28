@@ -33,7 +33,7 @@ void Servidor::correr() {
 
 	for (nivelActual = 1; nivelActual <= 2; nivelActual++) {
 		jugarNivel();
-		sleep(5);
+		sleep(3);
 	}
 }
 
