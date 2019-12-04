@@ -38,13 +38,13 @@ ControlObjetosModelo::ControlObjetosModelo(pugi::xml_document *archiConfig,
 
 	for(i = 0; i < barrilesCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 90;
-		int distrY = i * 1 + 250;
+		int distrY = i * 1 + 150;
 	    barriles[i] = new BarrilModelo(distrX, distrY);
 	}
 
 	for(i = 0; i < cajasCantidad; i++) {
 		int distrX = rand() % (terrenoWidth * 3) - 96;
-		int distrY = i * 5 + 270;
+		int distrY = i * 5 + 170;
 		cajas[i] = new CajaModelo(distrX, distrY);
 	}
 
