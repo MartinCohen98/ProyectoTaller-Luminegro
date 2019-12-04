@@ -31,7 +31,7 @@ void VistaTransicionJuego::CambioDeNivel(int nivel, Renderizador *renderizador, 
     textura.texturizar(renderizador, superficieTxt);
     rectangulo = {320 - (superficieTxt->w / 2), 100, superficieTxt->w, superficieTxt->h};
     textura.copiarseEn(renderizador, rectangulo);
-
+    SDL_FreeSurface(superficieTxt);
     //Ahora las otras cosas
     fuente = TTF_OpenFont("assets/fonts/Ubuntu-M.ttf", 30);
     Encuadre encuadreRanking = {40, 180, 200, 50};
@@ -41,14 +41,17 @@ void VistaTransicionJuego::CambioDeNivel(int nivel, Renderizador *renderizador, 
     superficieTxt = TTF_RenderText_Solid(fuente, "Ranking" , colorRojoOscuro);
     textura.texturizar(renderizador, superficieTxt);
     textura.copiarseEn(renderizador, encuadreRanking);
+    SDL_FreeSurface(superficieTxt);
 
     superficieTxt = TTF_RenderText_Solid(fuente, "Puntaje" , colorRojoOscuro);
     textura.texturizar(renderizador, superficieTxt);
     textura.copiarseEn(renderizador, encuadrePuntaje);
+    SDL_FreeSurface(superficieTxt);
 
     superficieTxt = TTF_RenderText_Solid(fuente, "Nombre" , colorRojoOscuro);
     textura.texturizar(renderizador, superficieTxt);
     textura.copiarseEn(renderizador, encuadreNombre);
+    SDL_FreeSurface(superficieTxt);
 
     std::list<PuntajeJugador> listaPuntajes;
 
@@ -65,21 +68,23 @@ void VistaTransicionJuego::CambioDeNivel(int nivel, Renderizador *renderizador, 
         distanciaY = 280 + i * 50;
         texto = "No." + std::to_string(i + 1);
 
-        //superficieTxt = TTF_RenderText_Solid(fuente, mensajeInicio.getNombreJugador(0).c_str(), colorPetroleo);
         superficieTxt = TTF_RenderText_Solid(fuente, texto.c_str(), colorPetroleo);
         encuadreRanking.modificar(encuadreRanking.getX(), distanciaY, superficieTxt->w, superficieTxt->h );
         textura.texturizar(renderizador, superficieTxt);
         textura.copiarseEn(renderizador, encuadreRanking);
+        SDL_FreeSurface(superficieTxt);
 
         superficieTxt = TTF_RenderText_Solid(fuente, std::to_string(puntajeJugador.puntaje).c_str(), colorPetroleo);
         encuadrePuntaje.modificar(encuadrePuntaje.getX(), distanciaY, superficieTxt->w, superficieTxt->h );
         textura.texturizar(renderizador, superficieTxt);
         textura.copiarseEn(renderizador, encuadrePuntaje);
+        SDL_FreeSurface(superficieTxt);
 
         superficieTxt = TTF_RenderText_Solid(fuente, puntajeJugador.nombre.c_str(),  colorPetroleo);
         encuadreNombre.modificar(encuadreNombre.getX(), distanciaY, superficieTxt->w, superficieTxt->h );
         textura.texturizar(renderizador, superficieTxt);
         textura.copiarseEn(renderizador, encuadreNombre);
+        SDL_FreeSurface(superficieTxt);
     }
 
     renderizador->renderizar();
@@ -88,5 +93,4 @@ void VistaTransicionJuego::CambioDeNivel(int nivel, Renderizador *renderizador, 
 
     //Liberar recursos
     TTF_CloseFont( fuente );
-    SDL_FreeSurface(superficieTxt);
 }

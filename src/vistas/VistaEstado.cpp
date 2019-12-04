@@ -79,9 +79,11 @@ void VistaEstado::renderizar(InfoJugador estadoJugador) {
         if(!texturaBarraVida.estaInicializada()) {
             superficieTxt = TTF_RenderText_Solid(fuente, "GAME OVER", colorRellenoLetras);
             texturaBarraVida.texturizar(renderizador, superficieTxt);
+            SDL_FreeSurface(superficieTxt);
         }
         texturaBarraVida.copiarseEn(renderizador, encuadreBarraVida);
     }
+
 
 }
 
@@ -114,11 +116,13 @@ void VistaEstado::CargarNombreYVidas(InfoJugador *estadoJugador){
         //Pone nombre y vidas
         superficieTxt = TTF_RenderText_Solid(fuente, nombreYVidas.c_str(), colorLetrasNombre);
         texturaNombreJugador.texturizar(renderizador, superficieTxt);
+        SDL_FreeSurface(superficieTxt);
         //Saca contorno, y rellena nombres y puntajes
         TTF_SetFontOutline(fuente, 0);
         //Rellena nombre y vidas
         superficieTxt = TTF_RenderText_Solid(fuente, nombreYVidas.c_str(), colorRellenoLetras);
         texturaNombreRelleno.texturizar(renderizador, superficieTxt);
+        SDL_FreeSurface(superficieTxt);
     }
     texturaNombreJugador.copiarseEn(renderizador, encuadreNombre);
     texturaNombreRelleno.copiarseEn(renderizador, encuadreNombre);
@@ -134,11 +138,13 @@ void VistaEstado::CargarPuntaje(InfoJugador *estadoJugador){
     superficieTxt = TTF_RenderText_Solid(fuente, puntaje.c_str(), colorPuntaje);
     texturaPuntaje.texturizar(renderizador, superficieTxt);
     texturaPuntaje.copiarseEn(renderizador, encuadrePuntaje);
+    SDL_FreeSurface(superficieTxt);
     //Rellena puntajes
     TTF_SetFontOutline(fuente, 0);
     superficieTxt = TTF_RenderText_Solid(fuente, puntaje.c_str(), colorRellenoLetras);
     texturaPuntaje.texturizar(renderizador, superficieTxt);
     texturaPuntaje.copiarseEn(renderizador, encuadrePuntaje);
+    SDL_FreeSurface(superficieTxt);
 }
 
 VistaEstado::~VistaEstado() {
