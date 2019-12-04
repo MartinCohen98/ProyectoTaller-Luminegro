@@ -84,7 +84,7 @@ void VistaTransicionJuego::CambioDeNivel(int nivel, Renderizador *renderizador, 
 
     renderizador->renderizar();
     //Tiempo de muestra de la pantalla. También poner esto en el servidor
-    SDL_Delay(5000);
+    SDL_Delay(3000);
 
     //Liberar recursos
     TTF_CloseFont( fuente );
