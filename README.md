@@ -1,6 +1,6 @@
 # ProyectoTaller-Luminegro
 
-Para poder correr el proyecto se requiere tener instalado SDL2. 
+Para poder correr el proyecto se requiere tener instalado SDL2, SDL2 TTF y SDL2 MIXER.
 
 ¿Cómo instalar dichas bibliotecas? Ejecutando la siguiente línea en una terminal:
 
@@ -14,6 +14,9 @@ En **CLion** (y puede que en otros IDEs) no encuentra la biblioteca de SDL2_ttf.
 Y una vez aquí, ejecutar:
 
 `sudo cp libSDL2_ttf-2.0.so libSDL_ttf.so`
+
+Luego
+sudo apt-get install libsdl2-mixer-dev
 
 ---
 Para la conexión cableada, una vez conectadas las máquinas configurar la conexión:
